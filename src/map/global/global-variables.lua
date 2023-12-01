@@ -64,7 +64,7 @@ end
 
 function initUnits()
     all_units = {
-        { id = 'h00C', parentId = 'hfoo', level = 1},
+        { id = 'h00C', parentId = 'FFFGGGFGFG', level = 1},
         { id = 'h002', parentId = 'hkni', level = 1},
         { id = 'h003', parentId = 'hrif', level = 1},
         { id = 'h004', parentId = 'hmtm', level = 1},
