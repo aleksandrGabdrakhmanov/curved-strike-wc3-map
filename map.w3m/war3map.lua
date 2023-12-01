@@ -30,6 +30,8 @@ gg_rct_spawn_region_p8 = nil
 gg_rct_spawn_region_p9 = nil
 gg_rct_attack_region_center_left = nil
 gg_rct_attack_region_center_right = nil
+gg_rct_visibility_team_right = nil
+gg_rct_visibility_team_left = nil
 function InitGlobals()
 end
 
@@ -183,7 +185,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("ofrt"), -3520.0, 640.0, 270.000, FourCC("ofrt"))
+u = BlzCreateUnitWithSkin(p, FourCC("ofrt"), 3968.0, 704.0, 270.000, FourCC("ofrt"))
 u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1280.0, 640.0, 270.000, FourCC("o001"))
 end
 
@@ -246,6 +248,8 @@ gg_rct_spawn_region_p8 = Rect(-5184.0, 3072.0, -4032.0, 4736.0)
 gg_rct_spawn_region_p9 = Rect(-5184.0, -1920.0, -4032.0, -256.0)
 gg_rct_attack_region_center_left = Rect(-1792.0, -256.0, -640.0, 1408.0)
 gg_rct_attack_region_center_right = Rect(1600.0, -256.0, 2752.0, 1408.0)
+gg_rct_visibility_team_right = Rect(448.0, -4704.0, 8800.0, 5888.0)
+gg_rct_visibility_team_left = Rect(-7872.0, -4704.0, 480.0, 5888.0)
 end
 
 --CUSTOM_CODE
@@ -822,6 +826,7 @@ end
 function initTriggers()
     spawnTrigger()
     moveByPointsTrigger()
+    winLoseTrigger()
     debugTrigger()
 end
 function moveByPointsTrigger()
@@ -859,10 +864,8 @@ function containsValue(value, array)
 end
 function spawnTrigger()
     local trig = CreateTrigger()
-    TriggerRegisterTimerEventPeriodic(trig, 30.00)
+    TriggerRegisterTimerEventPeriodic(trig, 5.00)
     TriggerAddAction(trig, function()
-        print('start')
-
         for _, team in ipairs(all_teams) do
 
             for _, player in ipairs(team.players) do
@@ -898,6 +901,31 @@ function getRandomSpawnPlayer(spawnPlayers)
     local randomIndex = math.random(#spawnPlayers)
     return spawnPlayers[randomIndex]
 end
+function winLoseTrigger()
+    for _, team in ipairs(all_teams) do
+
+        local group = GetUnitsOfPlayerAll(team.base.player)
+        ForGroup(group, function()
+            local unit = GetEnumUnit()
+            local unitId = ('>I4'):pack(GetUnitTypeId(unit))
+            if unitId == team.base.unitId then
+                print("add triger win lose")
+                local trig = CreateTrigger()
+                TriggerRegisterUnitEvent(trig, unit, EVENT_UNIT_DEATH)
+                TriggerAddAction(trig, function()
+                    for _, player in ipairs(team.players) do
+                        CustomDefeatBJ(player.id, "lose")
+                    end
+                    for _, player in ipairs(all_teams[team.base.winTeam].players) do
+                        CustomVictoryBJ(player.id, true, true)
+                    end
+                end)
+            end
+        end)
+
+    end
+end
+
 function initGlobalVariables()
     initAllTeamsAndPlayers()
     initUnits()
@@ -914,7 +942,8 @@ function initAllTeamsAndPlayers()
                 { id = Player(5), spawnPlayer = Player(14),rect = gg_rct_build_region_p6, spawnRect = gg_rct_spawn_region_p6, attackPointRect = { gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } }
             },
             spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
-            playerWithoutControl = Player(20),
+            visibility = gg_rct_visibility_team_right,
+            base = { player = Player(12), unitId = "ofrt", winTeam = 2 }
         },
         {
             players = {
@@ -925,7 +954,8 @@ function initAllTeamsAndPlayers()
                 { id = Player(9), spawnPlayer = Player(19),rect = gg_rct_build_region_p10, spawnRect = gg_rct_spawn_region_p10, attackPointRect = { gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } }
             },
             spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
-            playerWithoutControl = Player(21),
+            visibility = gg_rct_visibility_team_left,
+            base = { player = Player(16), unitId = "ofrt", winTeam = 1 }
         }
     }
 
@@ -949,9 +979,6 @@ function initAllTeamsAndPlayers()
         end
     end
 
-
-
-
     all_players = {}
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -960,7 +987,6 @@ function initAllTeamsAndPlayers()
     end
 
 end
-
 
 function initUnits()
     all_units = {
@@ -978,11 +1004,27 @@ function initUnits()
     }
 end
 OnInit(function()
+    print("1")
     math.randomseed(os.time())
     initGlobalVariables()
+    initialMap()
     initTriggers()
     changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
 end)
+
+function initialMap()
+    UseTimeOfDayBJ(false)
+    SetTimeOfDay(12)
+    setVisibility()
+end
+
+function setVisibility()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            CreateFogModifierRect(player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect(), TRUE, TRUE)
+        end
+    end
+end
 
 --CUSTOM_CODE
 function InitCustomPlayerSlots()

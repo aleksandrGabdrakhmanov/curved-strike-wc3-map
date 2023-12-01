@@ -1,9 +1,7 @@
 function spawnTrigger()
     local trig = CreateTrigger()
-    TriggerRegisterTimerEventPeriodic(trig, 30.00)
+    TriggerRegisterTimerEventPeriodic(trig, 5.00)
     TriggerAddAction(trig, function()
-        print('start')
-
         for _, team in ipairs(all_teams) do
 
             for _, player in ipairs(team.players) do

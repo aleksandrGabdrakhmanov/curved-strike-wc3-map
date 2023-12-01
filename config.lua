@@ -3,7 +3,7 @@ require 'build' {
     project = '/home/gabik/projects/curved-strike-wc3-map',
     map = 'map.w3m',
     src = 'src',
-    run = nil,
+    run = 'launch_nothing',
     syntaxCheck = false,
     options = {
         language = "ru",

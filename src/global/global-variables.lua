@@ -14,7 +14,8 @@ function initAllTeamsAndPlayers()
                 { id = Player(5), spawnPlayer = Player(14),rect = gg_rct_build_region_p6, spawnRect = gg_rct_spawn_region_p6, attackPointRect = { gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } }
             },
             spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
-            playerWithoutControl = Player(20),
+            visibility = gg_rct_visibility_team_right,
+            base = { player = Player(12), unitId = "ofrt", winTeam = 2 }
         },
         {
             players = {
@@ -25,7 +26,8 @@ function initAllTeamsAndPlayers()
                 { id = Player(9), spawnPlayer = Player(19),rect = gg_rct_build_region_p10, spawnRect = gg_rct_spawn_region_p10, attackPointRect = { gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } }
             },
             spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
-            playerWithoutControl = Player(21),
+            visibility = gg_rct_visibility_team_left,
+            base = { player = Player(16), unitId = "ofrt", winTeam = 1 }
         }
     }
 
@@ -49,9 +51,6 @@ function initAllTeamsAndPlayers()
         end
     end
 
-
-
-
     all_players = {}
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -60,7 +59,6 @@ function initAllTeamsAndPlayers()
     end
 
 end
-
 
 function initUnits()
     all_units = {
