@@ -64,16 +64,16 @@ end
 
 function initUnits()
     all_units = {
-        { id = 'h00C', parentId = 'hfoo', level = 1},
-        { id = 'h002', parentId = 'hkni', level = 1},
-        { id = 'h004', parentId = 'hrif', level = 1},
-        { id = 'h003', parentId = 'hmtm', level = 1},
-        { id = 'h000', parentId = 'hgyr', level = 2},
-        { id = 'h001', parentId = 'hgry', level = 2},
-        { id = 'h007', parentId = 'hmpr', level = 2},
-        { id = 'h008', parentId = 'hsor', level = 2},
-        { id = 'h005', parentId = 'hmtt', level = 3},
-        { id = 'h006', parentId = 'hspt', level = 3},
-        { id = 'h009', parentId = 'hdhw', level = 3},
+        { id = 'h00C', parentId = 'h00A', level = 1},
+        { id = 'h002', parentId = 'h00B', level = 1},
+        { id = 'h004', parentId = 'h00D', level = 1},
+        { id = 'h003', parentId = 'h00E', level = 1},
+        { id = 'h000', parentId = 'h00F', level = 2},
+        { id = 'h001', parentId = 'h00G', level = 2},
+        { id = 'h007', parentId = 'h00H', level = 2},
+        { id = 'h008', parentId = 'h00I', level = 2},
+        { id = 'h005', parentId = 'h00J', level = 3},
+        { id = 'h006', parentId = 'h00K', level = 3},
+        { id = 'h009', parentId = 'h00L', level = 3},
     }
 end

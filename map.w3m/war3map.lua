@@ -33,6 +33,38 @@ gg_rct_attack_region_center_right = nil
 function InitGlobals()
 end
 
+function CreateBuildingsForPlayer0()
+local p = Player(0)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 6816.0, 672.0, 270.000, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("htow"), 8128.0, 960.0, 270.000, FourCC("htow"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 6816.0, 608.0, 270.000, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 6816.0, 544.0, 270.000, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), 6912.0, 640.0, 270.000, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), 6912.0, 512.0, 270.000, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h003"), 7040.0, 640.0, 270.000, FourCC("h003"))
+u = BlzCreateUnitWithSkin(p, FourCC("h003"), 7040.0, 512.0, 270.000, FourCC("h003"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), 7136.0, 672.0, 270.000, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), 7136.0, 608.0, 270.000, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), 7136.0, 544.0, 270.000, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), 7136.0, 480.0, 270.000, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), 7264.0, 672.0, 270.000, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), 7264.0, 480.0, 270.000, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h006"), 7424.0, 448.0, 270.000, FourCC("h006"))
+u = BlzCreateUnitWithSkin(p, FourCC("h006"), 7424.0, 576.0, 270.000, FourCC("h006"))
+u = BlzCreateUnitWithSkin(p, FourCC("h007"), 7520.0, 608.0, 270.000, FourCC("h007"))
+u = BlzCreateUnitWithSkin(p, FourCC("h007"), 7520.0, 480.0, 270.000, FourCC("h007"))
+u = BlzCreateUnitWithSkin(p, FourCC("h008"), 7584.0, 608.0, 270.000, FourCC("h008"))
+u = BlzCreateUnitWithSkin(p, FourCC("h008"), 7584.0, 544.0, 270.000, FourCC("h008"))
+u = BlzCreateUnitWithSkin(p, FourCC("h008"), 7584.0, 416.0, 270.000, FourCC("h008"))
+u = BlzCreateUnitWithSkin(p, FourCC("h009"), 7680.0, 512.0, 270.000, FourCC("h009"))
+u = BlzCreateUnitWithSkin(p, FourCC("h009"), 7680.0, 320.0, 270.000, FourCC("h009"))
+end
+
 function CreateUnitsForPlayer0()
 local p = Player(0)
 local u
@@ -140,8 +172,8 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("ogre"), 4544.0, 640.0, 270.000, FourCC("ogre"))
-u = BlzCreateUnitWithSkin(p, FourCC("owtw"), 2176.0, 576.0, 270.000, FourCC("owtw"))
+u = BlzCreateUnitWithSkin(p, FourCC("o001"), 2176.0, 640.0, 270.000, FourCC("o001"))
+u = BlzCreateUnitWithSkin(p, FourCC("ofrt"), 4608.0, 640.0, 270.000, FourCC("ofrt"))
 end
 
 function CreateBuildingsForPlayer16()
@@ -151,11 +183,12 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("owtw"), -1216.0, 576.0, 270.000, FourCC("owtw"))
-u = BlzCreateUnitWithSkin(p, FourCC("ogre"), -3456.0, 640.0, 270.000, FourCC("ogre"))
+u = BlzCreateUnitWithSkin(p, FourCC("ofrt"), -3520.0, 640.0, 270.000, FourCC("ofrt"))
+u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1280.0, 640.0, 270.000, FourCC("o001"))
 end
 
 function CreatePlayerBuildings()
+CreateBuildingsForPlayer0()
 CreateBuildingsForPlayer12()
 CreateBuildingsForPlayer16()
 end
@@ -841,9 +874,6 @@ function spawnTrigger()
                     if parentId ~= nil then
                         local x, y = calculateDif(player.rect, player.spawnRect, GetEnumUnit())
                         local unit = CreateUnit(getRandomSpawnPlayer(team.spawnPlayers), FourCC(parentId), x, y, 270)
-
-                        local current = BlzGetUnitMaxHP(unit)
-                        BlzSetUnitMaxHP(unit, calculatePercentage(current, 20))
                         SetUnitColor(unit, GetPlayerColor(player.id))
                         GroupAddUnit(group, unit)
                     end
@@ -867,10 +897,6 @@ end
 function getRandomSpawnPlayer(spawnPlayers)
     local randomIndex = math.random(#spawnPlayers)
     return spawnPlayers[randomIndex]
-end
-
-function calculatePercentage(number, percent)
-    return (number * percent) / 100
 end
 function initGlobalVariables()
     initAllTeamsAndPlayers()
@@ -938,17 +964,17 @@ end
 
 function initUnits()
     all_units = {
-        { id = 'h00C', parentId = 'hfoo', level = 1},
-        { id = 'h002', parentId = 'hkni', level = 1},
-        { id = 'h004', parentId = 'hrif', level = 1},
-        { id = 'h003', parentId = 'hmtm', level = 1},
-        { id = 'h000', parentId = 'hgyr', level = 2},
-        { id = 'h001', parentId = 'hgry', level = 2},
-        { id = 'h007', parentId = 'hmpr', level = 2},
-        { id = 'h008', parentId = 'hsor', level = 2},
-        { id = 'h005', parentId = 'hmtt', level = 3},
-        { id = 'h006', parentId = 'hspt', level = 3},
-        { id = 'h009', parentId = 'hdhw', level = 3},
+        { id = 'h00C', parentId = 'h00A', level = 1},
+        { id = 'h002', parentId = 'h00B', level = 1},
+        { id = 'h004', parentId = 'h00D', level = 1},
+        { id = 'h003', parentId = 'h00E', level = 1},
+        { id = 'h000', parentId = 'h00F', level = 2},
+        { id = 'h001', parentId = 'h00G', level = 2},
+        { id = 'h007', parentId = 'h00H', level = 2},
+        { id = 'h008', parentId = 'h00I', level = 2},
+        { id = 'h005', parentId = 'h00J', level = 3},
+        { id = 'h006', parentId = 'h00K', level = 3},
+        { id = 'h009', parentId = 'h00L', level = 3},
     }
 end
 OnInit(function()

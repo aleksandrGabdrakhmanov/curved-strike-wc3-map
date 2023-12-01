@@ -15,9 +15,6 @@ function spawnTrigger()
                     if parentId ~= nil then
                         local x, y = calculateDif(player.rect, player.spawnRect, GetEnumUnit())
                         local unit = CreateUnit(getRandomSpawnPlayer(team.spawnPlayers), FourCC(parentId), x, y, 270)
-
-                        local current = BlzGetUnitMaxHP(unit)
-                        BlzSetUnitMaxHP(unit, calculatePercentage(current, 20))
                         SetUnitColor(unit, GetPlayerColor(player.id))
                         GroupAddUnit(group, unit)
                     end
@@ -41,8 +38,4 @@ end
 function getRandomSpawnPlayer(spawnPlayers)
     local randomIndex = math.random(#spawnPlayers)
     return spawnPlayers[randomIndex]
-end
-
-function calculatePercentage(number, percent)
-    return (number * percent) / 100
 end
