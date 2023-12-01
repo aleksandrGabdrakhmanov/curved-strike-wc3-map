@@ -708,6 +708,19 @@ do
     initEverything()
 end
 if Debug then Debug.endFile() end
+function calculateDif(buidRect, spawnRect, unit)
+
+    local buidRectX = GetRectCenterX(buidRect)
+    local buidRectY = GetRectCenterY(buidRect)
+
+    local spawnRectX = GetRectCenterX(spawnRect)
+    local spawnRectY = GetRectCenterY(spawnRect)
+
+    local unitX = GetUnitX(unit)
+    local unitY = GetUnitY(unit)
+    return spawnRectX - (buidRectX - unitX), spawnRectY - (buidRectY - unitY)
+end
+
 function changeAvailableUnitsForPlayers(players, units, isAvailable)
     for _, player in ipairs(players) do
         for _, unit in ipairs(units) do
@@ -716,13 +729,91 @@ function changeAvailableUnitsForPlayers(players, units, isAvailable)
     end
 end
 
-function initTriggers()
-    spawnTrigger()
-    moveByPointsTrigger3()
-    --debugTriggers()
+function getUnitsByLevel(level)
+    local filtered_ids = {}
+    for _, unit in ipairs(all_units_t1) do
+        if unit.level == level then
+            table.insert(filtered_ids, unit.id)
+        end
+    end
+    return filtered_ids
 end
 
+function getParentId(searchId)
+    for _, unit in pairs(all_units) do
+        if unit.id == searchId then
+            return unit.parentId
+        end
+    end
+    return nil
+end
+function debugTrigger()
 
+    local trig = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(trig, Player(0),"debug", true)
+
+    TriggerAddAction(trig, function()
+        SetPlayerAllianceStateBJ(Player(1), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(2), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(3), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(4), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(5), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(6), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(7), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(8), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(9), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+
+        SetPlayerAlliance(Player(10), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(11), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(12), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(13), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(14), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(15), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(16), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(17), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(18), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(19), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        SetPlayerAlliance(Player(20), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+    end)
+end
+function initTriggers()
+    spawnTrigger()
+    moveByPointsTrigger()
+    debugTrigger()
+end
+function moveByPointsTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+
+            for i = 1, #player.attackPointRect - 1 do
+                local trig = CreateTrigger()
+                TriggerRegisterTimerEventPeriodic(trig, 1.00)
+                TriggerAddAction(trig, function()
+                    local group = GetUnitsInRectAll(player.attackPointRect[i])
+                    ForGroup(group, function ()
+                        local unit = GetEnumUnit()
+                        local owner = GetOwningPlayer(unit)
+                        if containsValue(owner, team.spawnPlayers) then
+                            if (GetUnitCurrentOrder(unit) == 0) then
+                                local attackPointX, attackPointY = calculateDif(player.attackPointRect[i], player.attackPointRect[i+1], unit)
+                                IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
+                            end
+                        end
+                    end)
+                end)
+            end
+        end
+    end
+end
+
+function containsValue(value, array)
+    for _, v in ipairs(array) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
 function spawnTrigger()
     local trig = CreateTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 30.00)
@@ -768,107 +859,8 @@ function getRandomSpawnPlayer(spawnPlayers)
     return spawnPlayers[randomIndex]
 end
 
-function moveByPointsTrigger3()
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-
-            for i = 1, #player.attackPointRect - 1 do
-                local trig = CreateTrigger()
-                TriggerRegisterTimerEventPeriodic(trig, 1.00)
-                TriggerAddAction(trig, function()
-                    local group = GetUnitsInRectAll(player.attackPointRect[i])
-                    ForGroup(group, function ()
-                        local unit = GetEnumUnit()
-                        local owner = GetOwningPlayer(unit)
-                        if containsValue(owner, team.spawnPlayers) then
-                            if (GetUnitCurrentOrder(unit) == 0) then
-                                local attackPointX, attackPointY = calculateDif(player.attackPointRect[i], player.attackPointRect[i+1], unit)
-                                IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
-                            end
-                        end
-                    end)
-                end)
-            end
-        end
-    end
-end
-
-function containsValue(value, array)
-    for _, v in ipairs(array) do
-        if v == value then
-            return true
-        end
-    end
-    return false
-end
-
-function getRandomDecimal()
-    local min = 1
-    local max = 20
-    local randomNumber = math.random(min, max)
-    return randomNumber / 10
-end
-
-
 function calculatePercentage(number, percent)
     return (number * percent) / 100
-end
-
-function calculateDif(buidRect, spawnRect, unit)
-
-    local buidRectX = GetRectCenterX(buidRect)
-    local buidRectY = GetRectCenterY(buidRect)
-
-    local spawnRectX = GetRectCenterX(spawnRect)
-    local spawnRectY = GetRectCenterY(spawnRect)
-
-    local unitX = GetUnitX(unit)
-    local unitY = GetUnitY(unit)
-    return spawnRectX - (buidRectX - unitX), spawnRectY - (buidRectY - unitY)
-
-end
-
-
-function debugTriggers()
-    SetPlayerAllianceStateBJ(Player(1), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-    SetPlayerAllianceStateBJ(Player(2), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-    SetPlayerAllianceStateBJ(Player(3), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-    SetPlayerAllianceStateBJ(Player(4), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-    SetPlayerAllianceStateBJ(Player(5), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-    SetPlayerAllianceStateBJ(Player(6), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-    SetPlayerAllianceStateBJ(Player(7), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-    SetPlayerAllianceStateBJ(Player(8), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-    SetPlayerAllianceStateBJ(Player(9), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-
-    SetPlayerAlliance(Player(10), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(11), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(12), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(13), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(14), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(15), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(16), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(17), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(18), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(19), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-    SetPlayerAlliance(Player(20), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-end
-function getUnitsByLevel(level)
-    local filtered_ids = {}
-    for _, unit in ipairs(all_units_t1) do
-        if unit.level == level then
-            table.insert(filtered_ids, unit.id)
-        end
-    end
-    return filtered_ids
-end
-
-function getParentId(searchId)
-    for _, unit in pairs(all_units) do
-        if unit.id == searchId then
-            return unit.parentId
-        end
-    end
-    return nil
 end
 function initGlobalVariables()
     initAllTeamsAndPlayers()
@@ -951,7 +943,6 @@ function initUnits()
 end
 OnInit(function()
     math.randomseed(os.time())
-    print("all ok")
     initGlobalVariables()
     initTriggers()
     changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
