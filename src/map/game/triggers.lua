@@ -1,7 +1,7 @@
 function initTriggers()
     spawnTrigger()
     moveByPointsTrigger3()
-    debugTriggers()
+    --debugTriggers()
 end
 
 
@@ -68,7 +68,7 @@ function moveByPointsTrigger3()
                                 IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
                             end
                         end
-                        end)
+                    end)
                 end)
             end
         end

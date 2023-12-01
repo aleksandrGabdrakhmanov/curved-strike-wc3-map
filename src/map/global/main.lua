@@ -1,6 +1,7 @@
 OnInit(function()
     math.randomseed(os.time())
+    print("ХоХоХо-222222222222")
     initGlobalVariables()
     initTriggers()
-    --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
+    changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
 end)
