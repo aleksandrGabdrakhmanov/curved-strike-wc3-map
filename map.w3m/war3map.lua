@@ -753,6 +753,16 @@ function debugTrigger()
     TriggerRegisterPlayerChatEvent(trig, Player(0),"debug", true)
 
     TriggerAddAction(trig, function()
+        SetPlayerState(Player(0),PLAYER_STATE_RESOURCE_GOLD, 30000)
+        SetPlayerState(Player(1),PLAYER_STATE_RESOURCE_GOLD, 30000)
+        SetPlayerState(Player(2),PLAYER_STATE_RESOURCE_GOLD, 30000)
+        SetPlayerState(Player(3),PLAYER_STATE_RESOURCE_GOLD, 30000)
+        SetPlayerState(Player(4),PLAYER_STATE_RESOURCE_GOLD, 30000)
+        SetPlayerState(Player(5),PLAYER_STATE_RESOURCE_GOLD, 30000)
+        SetPlayerState(Player(6),PLAYER_STATE_RESOURCE_GOLD, 30000)
+        SetPlayerState(Player(7),PLAYER_STATE_RESOURCE_GOLD, 30000)
+        SetPlayerState(Player(8),PLAYER_STATE_RESOURCE_GOLD, 30000)
+        SetPlayerState(Player(9),PLAYER_STATE_RESOURCE_GOLD, 30000)
         SetPlayerAllianceStateBJ(Player(1), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
         SetPlayerAllianceStateBJ(Player(2), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
         SetPlayerAllianceStateBJ(Player(3), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
@@ -930,15 +940,15 @@ function initUnits()
     all_units = {
         { id = 'h00C', parentId = 'hfoo', level = 1},
         { id = 'h002', parentId = 'hkni', level = 1},
-        { id = 'h003', parentId = 'hrif', level = 1},
-        { id = 'h004', parentId = 'hmtm', level = 1},
-        { id = 'h005', parentId = 'hgyr', level = 2},
-        { id = 'h006', parentId = 'hgry', level = 2},
+        { id = 'h004', parentId = 'hrif', level = 1},
+        { id = 'h003', parentId = 'hmtm', level = 1},
+        { id = 'h000', parentId = 'hgyr', level = 2},
+        { id = 'h001', parentId = 'hgry', level = 2},
         { id = 'h007', parentId = 'hmpr', level = 2},
         { id = 'h008', parentId = 'hsor', level = 2},
-        { id = 'h009', parentId = 'hmtt', level = 3},
-        { id = 'h00A', parentId = 'hspt', level = 3},
-        { id = 'h00B', parentId = 'hdhw', level = 3},
+        { id = 'h005', parentId = 'hmtt', level = 3},
+        { id = 'h006', parentId = 'hspt', level = 3},
+        { id = 'h009', parentId = 'hdhw', level = 3},
     }
 end
 OnInit(function()

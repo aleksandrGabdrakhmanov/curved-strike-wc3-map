@@ -66,14 +66,14 @@ function initUnits()
     all_units = {
         { id = 'h00C', parentId = 'hfoo', level = 1},
         { id = 'h002', parentId = 'hkni', level = 1},
-        { id = 'h003', parentId = 'hrif', level = 1},
-        { id = 'h004', parentId = 'hmtm', level = 1},
-        { id = 'h005', parentId = 'hgyr', level = 2},
-        { id = 'h006', parentId = 'hgry', level = 2},
+        { id = 'h004', parentId = 'hrif', level = 1},
+        { id = 'h003', parentId = 'hmtm', level = 1},
+        { id = 'h000', parentId = 'hgyr', level = 2},
+        { id = 'h001', parentId = 'hgry', level = 2},
         { id = 'h007', parentId = 'hmpr', level = 2},
         { id = 'h008', parentId = 'hsor', level = 2},
-        { id = 'h009', parentId = 'hmtt', level = 3},
-        { id = 'h00A', parentId = 'hspt', level = 3},
-        { id = 'h00B', parentId = 'hdhw', level = 3},
+        { id = 'h005', parentId = 'hmtt', level = 3},
+        { id = 'h006', parentId = 'hspt', level = 3},
+        { id = 'h009', parentId = 'hdhw', level = 3},
     }
 end

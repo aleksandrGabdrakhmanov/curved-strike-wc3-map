@@ -96,3 +96,225 @@ STRING 21
 Team 1
 }
 
+STRING 22
+// Units: h002 (Knight), Name (Name)
+{
+Knight
+}
+
+STRING 23
+// Units: h004 (Rifleman), Name (Name)
+{
+Rifleman
+}
+
+STRING 24
+// Units: h003 (Mortar Team), Name (Name)
+{
+Mortar Team
+}
+
+STRING 25
+// Units: h000 (Flying Machine), Name (Name)
+{
+Flying Machine
+}
+
+STRING 26
+// Units: h001 (Gryphon Rider), Name (Name)
+{
+Gryphon Rider
+}
+
+STRING 29
+// Units: h005 (Siege Engine), Name (Name)
+{
+Siege Engine
+}
+
+STRING 30
+// Units: h006 (Spellbreaker), Name (Name)
+{
+Spellbreaker
+}
+
+STRING 32
+// Units: h000 (Flying Machine), Ubertip (Tooltip - Extended)
+{
+Health: <hgyr,HP>|nDamage: <hgyr,mindmg1> - <hgyr,maxdmg1>|nAttack Speed: 1.30|nAttack Type: |cff0064ffPierce|r|nRange: 500|nArmor: <hgyr,def>, |cffff3200Heavy|r|nPassive Ability: |cff00ff00True Sight|r|nUpgrades: |cff00ff00Flying Machine Bombs, Flak Cannons|r|n|n|cffffcc00Attacks air units.|r
+}
+
+STRING 33
+// Units: h000 (Flying Machine), Tip (Tooltip - Basic)
+{
+Build Flying Machine
+}
+
+STRING 34
+// Units: h000 (Flying Machine), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 35
+// Units: h001 (Gryphon Rider), Ubertip (Tooltip - Extended)
+{
+Health: <hgry,HP>|nDamage: <hgry,mindmg1> - <hgry,maxdmg1>|nAttack Speed: 1.43|nAttack Type: |cff963296Magic|r|nRange: 500|nArmor: <hgyr,def>, |cff00ff00Light|r|nUpgrades: |cff00ff00Animal War Training, Storm Hammers|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 36
+// Units: h001 (Gryphon Rider), Tip (Tooltip - Basic)
+{
+Build Gryphon Rider
+}
+
+STRING 37
+// Units: h001 (Gryphon Rider), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 38
+// Units: h002 (Knight), Ubertip (Tooltip - Extended)
+{
+Health: <hkni,HP>|nDamage: <hkni,mindmg1> - <hkni,maxdmg1>|nAttack Speed: 0.98|nAttack Type: |cffffc800Normal|r|nRange: Melee|nArmor: <hkni,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Animal War Training|r, |cff00ff00Sundering Blades|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 39
+// Units: h002 (Knight), Tip (Tooltip - Basic)
+{
+Build Knight
+}
+
+STRING 40
+// Units: h002 (Knight), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 41
+// Units: h003 (Mortar Team), Ubertip (Tooltip - Extended)
+{
+Health: <hmtm,HP>|nDamage: 32 - 35|nAttack Speed: 3.25|nAttack Type: |cffd45e19Siege|r, Splash|nRange: 800|nArmor: <hmtm,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Fragmentation Shards, Flare|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 42
+// Units: h003 (Mortar Team), Tip (Tooltip - Basic)
+{
+Build Mortar Team
+}
+
+STRING 43
+// Units: h003 (Mortar Team), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 44
+// Units: h004 (Rifleman), Tip (Tooltip - Basic)
+{
+Build Rifleman
+}
+
+STRING 45
+// Units: h004 (Rifleman), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 46
+// Units: h004 (Rifleman), Ubertip (Tooltip - Extended)
+{
+Health: <hrif,HP>|nDamage: <hrif,mindmg1> - <hrif,maxdmg1>|nAttack Speed: 1.17|nAttack Type: |cff0064ffPierce|r|nRange: 400|nArmor: <hrif,def>, |cffffc819Medium|r|nUpgrades: |cff00ff00Long Rifles|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 47
+// Units: h005 (Siege Engine), Ubertip (Tooltip - Extended)
+{
+Health: <hmtt,HP>|nDamage: <hmtt,mindmg1> - <hmtt,maxdmg1>|nAttack Speed: 1.37|nAttack Type: |cffd45e19Siege|r|nRange: 192|nArmor: <hmtt,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Barrage|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 48
+// Units: h005 (Siege Engine), Tip (Tooltip - Basic)
+{
+Build Siege Engine
+}
+
+STRING 49
+// Units: h005 (Siege Engine), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 50
+// Units: h006 (Spellbreaker), Ubertip (Tooltip - Extended)
+{
+Health: <hspt,HP>|nDamage: <hspt,mindmg1> - <hspt,maxdmg1>|nAttack Speed: 1.24|nAttack Type: |cffffc800Normal|r|nRange: 250|nArmor: <hspt,def>, |cffffc800Medium|r|nAbilities: |cff00ff00Spellsteal, Spell Immunity, Feedback|r|nUpgrades: |cff00ff00Control Magic|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 51
+// Units: h006 (Spellbreaker), Tip (Tooltip - Basic)
+{
+Build Spellbreaker
+}
+
+STRING 52
+// Units: h006 (Spellbreaker), Hotkey (Hotkey)
+{
+S
+}
+
+STRING 53
+// Units: h007 (Priest), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 54
+// Units: h007 (Priest), Tip (Tooltip - Basic)
+{
+Build Priest
+}
+
+STRING 55
+// Units: h007 (Priest), Ubertip (Tooltip - Extended)
+{
+Health: <hmpr,HP>|nDamage: <hmpr,mindmg1> - <hmpr,maxdmg1>|nAttack Speed: 1.30|nAttack Type: |cff963296Magic|r|nRange: 600|nArmor: <hmpr,def>, |cff00ffffUnarmored|r|nAbility: |cff00ff00Heal|r|nUpgrades: |cff00ff00Priest Adept Training|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 56
+// Units: h008 (Sorceress), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 57
+// Units: h008 (Sorceress), Tip (Tooltip - Basic)
+{
+Build Sorceress
+}
+
+STRING 58
+// Units: h008 (Sorceress), Ubertip (Tooltip - Extended)
+{
+Health: <hsor,HP>|nDamage: <hsor,mindmg1> - <hsor,maxdmg1>|nAttack Speed: 1.14|nType: |cff963296Magic|r|nRange: 600|nArmor: <hsor,def>, |cff00ffffUnarmored|r|nAbility: |cff00ff00Slow|r|nUpgrades: |cff00ff00Sorceress Adept Training|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 59
+// Units: h009 (Dragonhawk Rider), Hotkey (Hotkey)
+{
+F
+}
+
+STRING 60
+// Units: h009 (Dragonhawk Rider), Tip (Tooltip - Basic)
+{
+Build Dragonhawk Rider
+}
+
+STRING 61
+// Units: h009 (Dragonhawk Rider), Ubertip (Tooltip - Extended)
+{
+Health: <hdhw,HP>|nDamage: <hdhw,mindmg1> - <hdhw,maxdmg1>|nAttack Speed: 1.14|nAttack Type: |cff0064ffPierce|r|nRange: 500|nArmor: <hdhw,def>, |cff00ff00Light|r|nAbility: |cff00ff00Aerial Shackles|r|nUpgrades: |cff00ff00Animal War Training|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
