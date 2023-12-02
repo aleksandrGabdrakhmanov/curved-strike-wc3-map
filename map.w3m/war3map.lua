@@ -8,30 +8,30 @@ gg_rct_attack_region_p6 = nil
 gg_rct_attack_region_p7 = nil
 gg_rct_attack_region_p8 = nil
 gg_rct_attack_region_p9 = nil
-gg_rct_build_region_p1 = nil
-gg_rct_build_region_p10 = nil
-gg_rct_build_region_p2 = nil
-gg_rct_build_region_p3 = nil
-gg_rct_build_region_p4 = nil
-gg_rct_build_region_p5 = nil
-gg_rct_build_region_p6 = nil
-gg_rct_build_region_p7 = nil
-gg_rct_build_region_p8 = nil
-gg_rct_build_region_p9 = nil
-gg_rct_spawn_region_p1 = nil
-gg_rct_spawn_region_p10 = nil
-gg_rct_spawn_region_p2 = nil
-gg_rct_spawn_region_p3 = nil
-gg_rct_spawn_region_p4 = nil
-gg_rct_spawn_region_p5 = nil
-gg_rct_spawn_region_p6 = nil
-gg_rct_spawn_region_p7 = nil
-gg_rct_spawn_region_p8 = nil
-gg_rct_spawn_region_p9 = nil
+gg_rct_build_right_middle = nil
+gg_rct_build_left_down = nil
+gg_rct_build_left_middle = nil
+gg_rct_build_right_middle_up = nil
+gg_rct_build_right_up = nil
+gg_rct_build_right_middle_down = nil
+gg_rct_build_right_down = nil
+gg_rct_build_left_middle_up = nil
+gg_rct_build_left_up = nil
+gg_rct_build_left_middle_down = nil
+gg_rct_spawn_right_middle = nil
+gg_rct_spawn_left_down = nil
+gg_rct_spawn_left_middle = nil
+gg_rct_spawn_right_middle_up = nil
+gg_rct_spawn_right_up = nil
+gg_rct_spawn_right_middle_down = nil
+gg_rct_spawn_right_down = nil
+gg_rct_spawn_left_middle_up = nil
+gg_rct_spawn_left_middle_down = nil
 gg_rct_attack_region_center_left = nil
 gg_rct_attack_region_center_right = nil
 gg_rct_visibility_team_right = nil
 gg_rct_visibility_team_left = nil
+gg_rct_spawn_left_up = nil
 function InitGlobals()
 end
 
@@ -193,30 +193,30 @@ gg_rct_attack_region_p6 = Rect(-1792.0, -3584.0, -640.0, -1920.0)
 gg_rct_attack_region_p7 = Rect(1600.0, 1408.0, 2752.0, 3072.0)
 gg_rct_attack_region_p8 = Rect(1600.0, 3072.0, 2752.0, 4736.0)
 gg_rct_attack_region_p9 = Rect(1600.0, -1920.0, 2752.0, -256.0)
-gg_rct_build_region_p1 = Rect(6720.0, -256.0, 7872.0, 1408.0)
-gg_rct_build_region_p10 = Rect(-6912.0, -3968.0, -5760.0, -2304.0)
-gg_rct_build_region_p2 = Rect(-6912.0, -256.0, -5760.0, 1408.0)
-gg_rct_build_region_p3 = Rect(6720.0, 1600.0, 7872.0, 3264.0)
-gg_rct_build_region_p4 = Rect(6720.0, 3456.0, 7872.0, 5120.0)
-gg_rct_build_region_p5 = Rect(6720.0, -2112.0, 7872.0, -448.0)
-gg_rct_build_region_p6 = Rect(6720.0, -3968.0, 7872.0, -2304.0)
-gg_rct_build_region_p7 = Rect(-6912.0, 1600.0, -5760.0, 3264.0)
-gg_rct_build_region_p8 = Rect(-6912.0, 3456.0, -5760.0, 5120.0)
-gg_rct_build_region_p9 = Rect(-6912.0, -2112.0, -5760.0, -448.0)
-gg_rct_spawn_region_p1 = Rect(4992.0, -256.0, 6144.0, 1408.0)
-gg_rct_spawn_region_p10 = Rect(-5184.0, -3584.0, -4032.0, -1920.0)
-gg_rct_spawn_region_p2 = Rect(-5184.0, -256.0, -4032.0, 1408.0)
-gg_rct_spawn_region_p3 = Rect(4992.0, 1408.0, 6144.0, 3072.0)
-gg_rct_spawn_region_p4 = Rect(4992.0, 3072.0, 6144.0, 4736.0)
-gg_rct_spawn_region_p5 = Rect(4992.0, -1920.0, 6144.0, -256.0)
-gg_rct_spawn_region_p6 = Rect(4992.0, -3584.0, 6144.0, -1920.0)
-gg_rct_spawn_region_p7 = Rect(-5184.0, 1408.0, -4032.0, 3072.0)
-gg_rct_spawn_region_p8 = Rect(-5184.0, 3072.0, -4032.0, 4736.0)
-gg_rct_spawn_region_p9 = Rect(-5184.0, -1920.0, -4032.0, -256.0)
+gg_rct_build_right_middle = Rect(6720.0, -256.0, 7872.0, 1408.0)
+gg_rct_build_left_down = Rect(-6912.0, -3968.0, -5760.0, -2304.0)
+gg_rct_build_left_middle = Rect(-6912.0, -256.0, -5760.0, 1408.0)
+gg_rct_build_right_middle_up = Rect(6720.0, 1600.0, 7872.0, 3264.0)
+gg_rct_build_right_up = Rect(6720.0, 3456.0, 7872.0, 5120.0)
+gg_rct_build_right_middle_down = Rect(6720.0, -2112.0, 7872.0, -448.0)
+gg_rct_build_right_down = Rect(6720.0, -3968.0, 7872.0, -2304.0)
+gg_rct_build_left_middle_up = Rect(-6912.0, 1600.0, -5760.0, 3264.0)
+gg_rct_build_left_up = Rect(-6912.0, 3456.0, -5760.0, 5120.0)
+gg_rct_build_left_middle_down = Rect(-6912.0, -2112.0, -5760.0, -448.0)
+gg_rct_spawn_right_middle = Rect(4992.0, -256.0, 6144.0, 1408.0)
+gg_rct_spawn_left_down = Rect(-5184.0, -3584.0, -4032.0, -1920.0)
+gg_rct_spawn_left_middle = Rect(-5184.0, -256.0, -4032.0, 1408.0)
+gg_rct_spawn_right_middle_up = Rect(4992.0, 1408.0, 6144.0, 3072.0)
+gg_rct_spawn_right_up = Rect(4992.0, 3072.0, 6144.0, 4736.0)
+gg_rct_spawn_right_middle_down = Rect(4992.0, -1920.0, 6144.0, -256.0)
+gg_rct_spawn_right_down = Rect(4992.0, -3584.0, 6144.0, -1920.0)
+gg_rct_spawn_left_middle_up = Rect(-5184.0, 1408.0, -4032.0, 3072.0)
+gg_rct_spawn_left_middle_down = Rect(-5184.0, -1920.0, -4032.0, -256.0)
 gg_rct_attack_region_center_left = Rect(-1792.0, -256.0, -640.0, 1408.0)
 gg_rct_attack_region_center_right = Rect(1600.0, -256.0, 2752.0, 1408.0)
 gg_rct_visibility_team_right = Rect(448.0, -4704.0, 8800.0, 5888.0)
 gg_rct_visibility_team_left = Rect(-7872.0, -4704.0, 480.0, 5888.0)
+gg_rct_spawn_left_up = Rect(-5184.0, 3072.0, -4032.0, 4736.0)
 end
 
 --CUSTOM_CODE
@@ -887,30 +887,30 @@ function initGlobalVariables()
 end
 
 function initAllTeamsAndPlayers()
-    all_teams = {
+    all_teams = SyncedTable {
         {
-            players = {
-                { id = Player(0), spawnPlayer = Player(10),rect = gg_rct_build_region_p1, spawnRect = gg_rct_spawn_region_p1, attackPointRect = { gg_rct_attack_region_p1 }},
-                { id = Player(2), spawnPlayer = Player(11),rect = gg_rct_build_region_p3, spawnRect = gg_rct_spawn_region_p3, attackPointRect = { gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(3), spawnPlayer = Player(12),rect = gg_rct_build_region_p4, spawnRect = gg_rct_spawn_region_p4, attackPointRect = { gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(4), spawnPlayer = Player(13),rect = gg_rct_build_region_p5, spawnRect = gg_rct_spawn_region_p5, attackPointRect = { gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(5), spawnPlayer = Player(14),rect = gg_rct_build_region_p6, spawnRect = gg_rct_spawn_region_p6, attackPointRect = { gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } }
+            players = SyncedTable {
+                { id = Player(4), rect = gg_rct_build_left_up, spawnRect = gg_rct_spawn_left_up, attackPointRect = SyncedTable { gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
+                { id = Player(2), rect = gg_rct_build_left_middle_up, spawnRect = gg_rct_spawn_left_middle_up, attackPointRect = SyncedTable { gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
+                { id = Player(0), rect = gg_rct_build_left_middle, spawnRect = gg_rct_spawn_left_middle, attackPointRect = SyncedTable { gg_rct_attack_region_p2 }},
+                { id = Player(3), rect = gg_rct_build_left_middle_down, spawnRect = gg_rct_spawn_left_middle_down, attackPointRect = SyncedTable { gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
+                { id = Player(5), rect = gg_rct_build_left_down, spawnRect = gg_rct_spawn_left_down, attackPointRect = SyncedTable { gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } }
             },
-            spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
-            visibility = gg_rct_visibility_team_right,
-            base = { player = Player(12), unitId = "ofrt", winTeam = 2 }
+            spawnPlayers = SyncedTable { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
+            visibility = gg_rct_visibility_team_left,
+            base = { player = Player(16), unitId = "ofrt", winTeam = 2 }
         },
         {
-            players = {
-                { id = Player(1), spawnPlayer = Player(15),rect = gg_rct_build_region_p2, spawnRect = gg_rct_spawn_region_p2, attackPointRect = { gg_rct_attack_region_p2 } },
-                { id = Player(6), spawnPlayer = Player(16),rect = gg_rct_build_region_p7, spawnRect = gg_rct_spawn_region_p7, attackPointRect = { gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(7), spawnPlayer = Player(17),rect = gg_rct_build_region_p8, spawnRect = gg_rct_spawn_region_p8, attackPointRect = { gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(8), spawnPlayer = Player(18),rect = gg_rct_build_region_p9, spawnRect = gg_rct_spawn_region_p9, attackPointRect = { gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(9), spawnPlayer = Player(19),rect = gg_rct_build_region_p10, spawnRect = gg_rct_spawn_region_p10, attackPointRect = { gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } }
+            players = SyncedTable {
+                { id = Player(8), rect = gg_rct_build_right_up, spawnRect = gg_rct_spawn_right_up, attackPointRect = SyncedTable { gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
+                { id = Player(6), rect = gg_rct_build_right_middle_up, spawnRect = gg_rct_spawn_right_middle_up, attackPointRect = SyncedTable { gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
+                { id = Player(1), rect = gg_rct_build_right_middle, spawnRect = gg_rct_spawn_right_middle, attackPointRect = SyncedTable { gg_rct_attack_region_p1 } },
+                { id = Player(7), rect = gg_rct_build_right_middle_down, spawnRect = gg_rct_spawn_right_middle_down, attackPointRect = SyncedTable { gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
+                { id = Player(9), rect = gg_rct_build_right_down, spawnRect = gg_rct_spawn_right_down, attackPointRect = SyncedTable { gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } }
             },
-            spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
-            visibility = gg_rct_visibility_team_left,
-            base = { player = Player(16), unitId = "ofrt", winTeam = 1 }
+            spawnPlayers = SyncedTable { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
+            visibility = gg_rct_visibility_team_right,
+            base = { player = Player(12), unitId = "ofrt", winTeam = 1 }
         }
     }
 

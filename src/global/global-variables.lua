@@ -7,27 +7,27 @@ function initAllTeamsAndPlayers()
     all_teams = SyncedTable {
         {
             players = SyncedTable {
-                { id = Player(0), spawnPlayer = Player(10),rect = gg_rct_build_region_p1, spawnRect = gg_rct_spawn_region_p1, attackPointRect = SyncedTable { gg_rct_attack_region_p1 }},
-                { id = Player(2), spawnPlayer = Player(11),rect = gg_rct_build_region_p3, spawnRect = gg_rct_spawn_region_p3, attackPointRect = SyncedTable { gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(3), spawnPlayer = Player(12),rect = gg_rct_build_region_p4, spawnRect = gg_rct_spawn_region_p4, attackPointRect = SyncedTable { gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(4), spawnPlayer = Player(13),rect = gg_rct_build_region_p5, spawnRect = gg_rct_spawn_region_p5, attackPointRect = SyncedTable { gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(5), spawnPlayer = Player(14),rect = gg_rct_build_region_p6, spawnRect = gg_rct_spawn_region_p6, attackPointRect = SyncedTable { gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } }
-            },
-            spawnPlayers = SyncedTable { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
-            visibility = gg_rct_visibility_team_right,
-            base = { player = Player(12), unitId = "ofrt", winTeam = 2 }
-        },
-        {
-            players = SyncedTable {
-                { id = Player(1), spawnPlayer = Player(15),rect = gg_rct_build_region_p2, spawnRect = gg_rct_spawn_region_p2, attackPointRect = SyncedTable { gg_rct_attack_region_p2 } },
-                { id = Player(6), spawnPlayer = Player(16),rect = gg_rct_build_region_p7, spawnRect = gg_rct_spawn_region_p7, attackPointRect = SyncedTable { gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(7), spawnPlayer = Player(17),rect = gg_rct_build_region_p8, spawnRect = gg_rct_spawn_region_p8, attackPointRect = SyncedTable { gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(8), spawnPlayer = Player(18),rect = gg_rct_build_region_p9, spawnRect = gg_rct_spawn_region_p9, attackPointRect = SyncedTable { gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(9), spawnPlayer = Player(19),rect = gg_rct_build_region_p10, spawnRect = gg_rct_spawn_region_p10, attackPointRect = SyncedTable { gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } }
+                { id = Player(4), rect = gg_rct_build_left_up, spawnRect = gg_rct_spawn_left_up, attackPointRect = SyncedTable { gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
+                { id = Player(2), rect = gg_rct_build_left_middle_up, spawnRect = gg_rct_spawn_left_middle_up, attackPointRect = SyncedTable { gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
+                { id = Player(0), rect = gg_rct_build_left_middle, spawnRect = gg_rct_spawn_left_middle, attackPointRect = SyncedTable { gg_rct_attack_region_p2 }},
+                { id = Player(3), rect = gg_rct_build_left_middle_down, spawnRect = gg_rct_spawn_left_middle_down, attackPointRect = SyncedTable { gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
+                { id = Player(5), rect = gg_rct_build_left_down, spawnRect = gg_rct_spawn_left_down, attackPointRect = SyncedTable { gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } }
             },
             spawnPlayers = SyncedTable { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
             visibility = gg_rct_visibility_team_left,
-            base = { player = Player(16), unitId = "ofrt", winTeam = 1 }
+            base = { player = Player(16), unitId = "ofrt", winTeam = 2 }
+        },
+        {
+            players = SyncedTable {
+                { id = Player(8), rect = gg_rct_build_right_up, spawnRect = gg_rct_spawn_right_up, attackPointRect = SyncedTable { gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
+                { id = Player(6), rect = gg_rct_build_right_middle_up, spawnRect = gg_rct_spawn_right_middle_up, attackPointRect = SyncedTable { gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
+                { id = Player(1), rect = gg_rct_build_right_middle, spawnRect = gg_rct_spawn_right_middle, attackPointRect = SyncedTable { gg_rct_attack_region_p1 } },
+                { id = Player(7), rect = gg_rct_build_right_middle_down, spawnRect = gg_rct_spawn_right_middle_down, attackPointRect = SyncedTable { gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
+                { id = Player(9), rect = gg_rct_build_right_down, spawnRect = gg_rct_spawn_right_down, attackPointRect = SyncedTable { gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } }
+            },
+            spawnPlayers = SyncedTable { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
+            visibility = gg_rct_visibility_team_right,
+            base = { player = Player(12), unitId = "ofrt", winTeam = 1 }
         }
     }
 
