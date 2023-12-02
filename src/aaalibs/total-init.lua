@@ -49,7 +49,7 @@ OnInit = {}
 ---@overload async fun(reqName: string, source?: table): string
 Require = {}
 do
-    local library = {} --You can change this to false if you don't use `Require` nor the `OnInit.library` API.
+    local library = SyncedTable {} --You can change this to false if you don't use `Require` nor the `OnInit.library` API.
 
     --CONFIGURABLE LEGACY API FUNCTION:
     ---@param _ENV table
@@ -65,7 +65,7 @@ do
     local _G, rawget, insert =
     _G, rawget, table.insert
 
-    local initFuncQueue = {}
+    local initFuncQueue = SyncedTable {}
 
     ---@param name string
     ---@param continue? function
@@ -247,10 +247,10 @@ do
         OnInit.main    = createInit 'main'   -- Runs when `main` is called. Idea from @Tasyen: https://www.hiveworkshop.com/threads/global-initialization.317099/post-3374063
     end
     if library then
-        library.queuedInitializerList = {}
-        library.customDeclarationList = {}
-        library.yieldedModuleMatrix   = {}
-        library.moduleValueMatrix     = {}
+        library.queuedInitializerList = SyncedTable {}
+        library.customDeclarationList = SyncedTable {}
+        library.yieldedModuleMatrix   = SyncedTable {}
+        library.moduleValueMatrix     = SyncedTable {}
 
         function library:pack(name, ...)
             self.moduleValueMatrix[name] = table.pack(...)

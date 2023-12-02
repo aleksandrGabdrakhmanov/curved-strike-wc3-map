@@ -1,6 +1,6 @@
 function spawnTrigger()
     local trig = CreateTrigger()
-    TriggerRegisterTimerEventPeriodic(trig, 5.00)
+    TriggerRegisterTimerEventPeriodic(trig, 30.00)
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
 
