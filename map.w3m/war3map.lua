@@ -42,7 +42,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7304.0, 743.0, 115.843, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6328.0, 743.0, 115.843, FourCC("o000"))
 end
 
 function CreateUnitsForPlayer1()
@@ -52,7 +52,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6067.5, 470.8, 15.986, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7564.5, 470.8, 15.986, FourCC("o000"))
 end
 
 function CreateUnitsForPlayer2()
@@ -62,7 +62,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7332.4, 2485.3, 357.451, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6299.6, 2485.3, 357.451, FourCC("o000"))
 end
 
 function CreateUnitsForPlayer3()
@@ -72,7 +72,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7328.3, -1418.5, 89.223, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6303.7, -1418.5, 89.223, FourCC("o000"))
 end
 
 function CreateUnitsForPlayer4()
@@ -82,7 +82,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7445.6, 4039.7, 205.813, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6186.4, 4039.7, 205.813, FourCC("o000"))
 end
 
 function CreateUnitsForPlayer5()
@@ -92,7 +92,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7356.5, -3171.3, 272.909, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6275.5, -3171.3, 272.909, FourCC("o000"))
 end
 
 function CreateUnitsForPlayer6()
@@ -102,7 +102,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6316.9, 2407.8, 3.241, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7315.1, 2407.8, 3.241, FourCC("o000"))
 end
 
 function CreateUnitsForPlayer7()
@@ -112,7 +112,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6262.0, -1218.6, 297.560, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7370.0, -1218.6, 297.560, FourCC("o000"))
 end
 
 function CreateUnitsForPlayer8()
@@ -122,7 +122,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6621.8, 4187.2, 185.982, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7010.2, 4187.2, 185.982, FourCC("o000"))
 end
 
 function CreateUnitsForPlayer9()
@@ -132,7 +132,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6241.6, -3150.0, 130.203, FourCC("o000"))
+u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7390.4, -3150.0, 130.203, FourCC("o000"))
 end
 
 function CreateBuildingsForPlayer12()
@@ -1163,56 +1163,56 @@ SetPlayerController(Player(9), MAP_CONTROL_USER)
 end
 
 function InitCustomTeams()
-SetPlayerTeam(Player(1), 0)
-SetPlayerTeam(Player(6), 0)
-SetPlayerTeam(Player(7), 0)
-SetPlayerTeam(Player(8), 0)
-SetPlayerTeam(Player(9), 0)
-SetPlayerTeam(Player(0), 1)
-SetPlayerTeam(Player(2), 1)
-SetPlayerTeam(Player(3), 1)
-SetPlayerTeam(Player(4), 1)
-SetPlayerTeam(Player(5), 1)
-SetPlayerAllianceStateAllyBJ(Player(0), Player(2), true)
-SetPlayerAllianceStateAllyBJ(Player(0), Player(3), true)
-SetPlayerAllianceStateAllyBJ(Player(0), Player(4), true)
-SetPlayerAllianceStateAllyBJ(Player(0), Player(5), true)
-SetPlayerAllianceStateAllyBJ(Player(2), Player(0), true)
-SetPlayerAllianceStateAllyBJ(Player(2), Player(3), true)
-SetPlayerAllianceStateAllyBJ(Player(2), Player(4), true)
-SetPlayerAllianceStateAllyBJ(Player(2), Player(5), true)
-SetPlayerAllianceStateAllyBJ(Player(3), Player(0), true)
-SetPlayerAllianceStateAllyBJ(Player(3), Player(2), true)
-SetPlayerAllianceStateAllyBJ(Player(3), Player(4), true)
-SetPlayerAllianceStateAllyBJ(Player(3), Player(5), true)
-SetPlayerAllianceStateAllyBJ(Player(4), Player(0), true)
-SetPlayerAllianceStateAllyBJ(Player(4), Player(2), true)
-SetPlayerAllianceStateAllyBJ(Player(4), Player(3), true)
-SetPlayerAllianceStateAllyBJ(Player(4), Player(5), true)
-SetPlayerAllianceStateAllyBJ(Player(5), Player(0), true)
-SetPlayerAllianceStateAllyBJ(Player(5), Player(2), true)
-SetPlayerAllianceStateAllyBJ(Player(5), Player(3), true)
-SetPlayerAllianceStateAllyBJ(Player(5), Player(4), true)
-SetPlayerAllianceStateVisionBJ(Player(0), Player(2), true)
-SetPlayerAllianceStateVisionBJ(Player(0), Player(3), true)
-SetPlayerAllianceStateVisionBJ(Player(0), Player(4), true)
-SetPlayerAllianceStateVisionBJ(Player(0), Player(5), true)
-SetPlayerAllianceStateVisionBJ(Player(2), Player(0), true)
-SetPlayerAllianceStateVisionBJ(Player(2), Player(3), true)
-SetPlayerAllianceStateVisionBJ(Player(2), Player(4), true)
-SetPlayerAllianceStateVisionBJ(Player(2), Player(5), true)
-SetPlayerAllianceStateVisionBJ(Player(3), Player(0), true)
-SetPlayerAllianceStateVisionBJ(Player(3), Player(2), true)
-SetPlayerAllianceStateVisionBJ(Player(3), Player(4), true)
-SetPlayerAllianceStateVisionBJ(Player(3), Player(5), true)
-SetPlayerAllianceStateVisionBJ(Player(4), Player(0), true)
-SetPlayerAllianceStateVisionBJ(Player(4), Player(2), true)
-SetPlayerAllianceStateVisionBJ(Player(4), Player(3), true)
-SetPlayerAllianceStateVisionBJ(Player(4), Player(5), true)
-SetPlayerAllianceStateVisionBJ(Player(5), Player(0), true)
-SetPlayerAllianceStateVisionBJ(Player(5), Player(2), true)
-SetPlayerAllianceStateVisionBJ(Player(5), Player(3), true)
-SetPlayerAllianceStateVisionBJ(Player(5), Player(4), true)
+SetPlayerTeam(Player(0), 0)
+SetPlayerTeam(Player(2), 0)
+SetPlayerTeam(Player(3), 0)
+SetPlayerTeam(Player(4), 0)
+SetPlayerTeam(Player(5), 0)
+SetPlayerTeam(Player(1), 1)
+SetPlayerTeam(Player(6), 1)
+SetPlayerTeam(Player(7), 1)
+SetPlayerTeam(Player(8), 1)
+SetPlayerTeam(Player(9), 1)
+SetPlayerAllianceStateAllyBJ(Player(1), Player(6), true)
+SetPlayerAllianceStateAllyBJ(Player(1), Player(7), true)
+SetPlayerAllianceStateAllyBJ(Player(1), Player(8), true)
+SetPlayerAllianceStateAllyBJ(Player(1), Player(9), true)
+SetPlayerAllianceStateAllyBJ(Player(6), Player(1), true)
+SetPlayerAllianceStateAllyBJ(Player(6), Player(7), true)
+SetPlayerAllianceStateAllyBJ(Player(6), Player(8), true)
+SetPlayerAllianceStateAllyBJ(Player(6), Player(9), true)
+SetPlayerAllianceStateAllyBJ(Player(7), Player(1), true)
+SetPlayerAllianceStateAllyBJ(Player(7), Player(6), true)
+SetPlayerAllianceStateAllyBJ(Player(7), Player(8), true)
+SetPlayerAllianceStateAllyBJ(Player(7), Player(9), true)
+SetPlayerAllianceStateAllyBJ(Player(8), Player(1), true)
+SetPlayerAllianceStateAllyBJ(Player(8), Player(6), true)
+SetPlayerAllianceStateAllyBJ(Player(8), Player(7), true)
+SetPlayerAllianceStateAllyBJ(Player(8), Player(9), true)
+SetPlayerAllianceStateAllyBJ(Player(9), Player(1), true)
+SetPlayerAllianceStateAllyBJ(Player(9), Player(6), true)
+SetPlayerAllianceStateAllyBJ(Player(9), Player(7), true)
+SetPlayerAllianceStateAllyBJ(Player(9), Player(8), true)
+SetPlayerAllianceStateVisionBJ(Player(1), Player(6), true)
+SetPlayerAllianceStateVisionBJ(Player(1), Player(7), true)
+SetPlayerAllianceStateVisionBJ(Player(1), Player(8), true)
+SetPlayerAllianceStateVisionBJ(Player(1), Player(9), true)
+SetPlayerAllianceStateVisionBJ(Player(6), Player(1), true)
+SetPlayerAllianceStateVisionBJ(Player(6), Player(7), true)
+SetPlayerAllianceStateVisionBJ(Player(6), Player(8), true)
+SetPlayerAllianceStateVisionBJ(Player(6), Player(9), true)
+SetPlayerAllianceStateVisionBJ(Player(7), Player(1), true)
+SetPlayerAllianceStateVisionBJ(Player(7), Player(6), true)
+SetPlayerAllianceStateVisionBJ(Player(7), Player(8), true)
+SetPlayerAllianceStateVisionBJ(Player(7), Player(9), true)
+SetPlayerAllianceStateVisionBJ(Player(8), Player(1), true)
+SetPlayerAllianceStateVisionBJ(Player(8), Player(6), true)
+SetPlayerAllianceStateVisionBJ(Player(8), Player(7), true)
+SetPlayerAllianceStateVisionBJ(Player(8), Player(9), true)
+SetPlayerAllianceStateVisionBJ(Player(9), Player(1), true)
+SetPlayerAllianceStateVisionBJ(Player(9), Player(6), true)
+SetPlayerAllianceStateVisionBJ(Player(9), Player(7), true)
+SetPlayerAllianceStateVisionBJ(Player(9), Player(8), true)
 end
 
 function InitAllyPriorities()
@@ -1263,16 +1263,16 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(10)
 SetTeams(10)
 SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
-DefineStartLocation(0, 7296.0, 448.0)
-DefineStartLocation(1, -6272.0, 512.0)
-DefineStartLocation(2, 7296.0, 2368.0)
-DefineStartLocation(3, 7296.0, -1472.0)
-DefineStartLocation(4, 7296.0, 4224.0)
-DefineStartLocation(5, 7296.0, -3200.0)
-DefineStartLocation(6, -6336.0, 2368.0)
-DefineStartLocation(7, -6336.0, -1280.0)
-DefineStartLocation(8, -6400.0, 4160.0)
-DefineStartLocation(9, -6336.0, -3200.0)
+DefineStartLocation(0, -6336.0, 448.0)
+DefineStartLocation(1, 7360.0, 512.0)
+DefineStartLocation(2, -6336.0, 2368.0)
+DefineStartLocation(3, -6336.0, -1472.0)
+DefineStartLocation(4, -6336.0, 4224.0)
+DefineStartLocation(5, -6336.0, -3200.0)
+DefineStartLocation(6, 7296.0, 2368.0)
+DefineStartLocation(7, 7296.0, -1280.0)
+DefineStartLocation(8, 7232.0, 4160.0)
+DefineStartLocation(9, 7296.0, -3200.0)
 InitCustomPlayerSlots()
 InitCustomTeams()
 InitAllyPriorities()
