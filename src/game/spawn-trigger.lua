@@ -19,6 +19,7 @@ function spawnTrigger()
                 DestroyGroup(group)
                 DestroyGroup(groupForBuild)
             end
+            my_func = 30
 
         end
     end)

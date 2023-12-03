@@ -1,32 +1,44 @@
 OnInit(function()
-    print("4")
+    print("6")
     math.randomseed(os.time())
     initGlobalVariables()
-    initialMap()
+    initialGame()
+    initialPlayers()
+    initialUI()
     initTriggers()
     changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
-    SetPlayerState(Player(0),PLAYER_STATE_RESOURCE_GOLD, 30000)
-    SetPlayerState(Player(1),PLAYER_STATE_RESOURCE_GOLD, 30000)
-    SetPlayerState(Player(2),PLAYER_STATE_RESOURCE_GOLD, 30000)
-    SetPlayerState(Player(3),PLAYER_STATE_RESOURCE_GOLD, 30000)
-    SetPlayerState(Player(4),PLAYER_STATE_RESOURCE_GOLD, 30000)
-    SetPlayerState(Player(5),PLAYER_STATE_RESOURCE_GOLD, 30000)
-    SetPlayerState(Player(6),PLAYER_STATE_RESOURCE_GOLD, 30000)
-    SetPlayerState(Player(7),PLAYER_STATE_RESOURCE_GOLD, 30000)
-    SetPlayerState(Player(8),PLAYER_STATE_RESOURCE_GOLD, 30000)
-    SetPlayerState(Player(9),PLAYER_STATE_RESOURCE_GOLD, 30000)
+
+    local timer = CreateTimer()
+    my_func = 30
+    TimerStart(timer,1,true, function()
+        BlzFrameSetText(frame, "Next wave:  |cffFF0303" .. my_func .. "|r")
+        my_func = my_func - 1
+    end)
 end)
 
-function initialMap()
+function initialGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
-    setVisibility()
 end
 
-function setVisibility()
+function initialPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             CreateFogModifierRect(player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect(), TRUE, TRUE)
+            SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, game_config.startGold)
         end
     end
+end
+
+function initialUI()
+    -- create a TEXT Frame
+    local fm = BlzGetFrameByName("ConsoleUIBackdrop",0)
+    frame = BlzCreateFrameByType("TEXT", "MyTextFrame", fm, "", 0)
+    -- Set the current Text, you can use the Warcraft 3 Color Code
+    -- pos the frame
+    BlzFrameSetAbsPoint(frame, FRAMEPOINT_CENTER, 0.85, 0.5)
+    -- stop this frame from taking control of the mouse input, Might have sideeffects if the TEXT-Frame has an enable Color (but this does not have such).
+    BlzFrameSetEnable(frame, false)
+    BlzFrameSetScale(frame, 2)
+    -- the text is kinda small, but one can not use the FontNative onto TEXT-Frames (nether in V1.31 nor V1.32). Therefore one could scale it.
 end

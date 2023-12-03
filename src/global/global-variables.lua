@@ -4,6 +4,10 @@ function initGlobalVariables()
 end
 
 function initAllTeamsAndPlayers()
+    game_config = {
+        startGold = 500,
+        startIncomePerSec = 10
+    }
     all_teams = SyncedTable {
         {
             players = SyncedTable {
@@ -28,8 +32,6 @@ function initAllTeamsAndPlayers()
             base = { player = Player(12), unitId = "ofrt", winTeam = 1 }
         }
     }
-
-    GetPlayerController()
 
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.spawnPlayers) do

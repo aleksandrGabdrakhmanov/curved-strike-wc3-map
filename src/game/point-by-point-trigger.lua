@@ -1,7 +1,6 @@
 function moveByPointsTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            print(#player.attackPointRect)
             for i = 1, #player.attackPointRect - 1 do
                 local trig = CreateTrigger()
                 TriggerRegisterTimerEventPeriodic(trig, 1.00)
