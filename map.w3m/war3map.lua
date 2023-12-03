@@ -29,8 +29,6 @@ gg_rct_spawn_left_middle_up = nil
 gg_rct_spawn_left_middle_down = nil
 gg_rct_attack_region_center_left = nil
 gg_rct_attack_region_center_right = nil
-gg_rct_visibility_team_right = nil
-gg_rct_visibility_team_left = nil
 gg_rct_spawn_left_up = nil
 function InitGlobals()
 end
@@ -214,8 +212,6 @@ gg_rct_spawn_left_middle_up = Rect(-5184.0, 1408.0, -4032.0, 3072.0)
 gg_rct_spawn_left_middle_down = Rect(-5184.0, -1920.0, -4032.0, -256.0)
 gg_rct_attack_region_center_left = Rect(-1792.0, -256.0, -640.0, 1408.0)
 gg_rct_attack_region_center_right = Rect(1600.0, -256.0, 2752.0, 1408.0)
-gg_rct_visibility_team_right = Rect(448.0, -4704.0, 8800.0, 5888.0)
-gg_rct_visibility_team_left = Rect(-7872.0, -4704.0, 480.0, 5888.0)
 gg_rct_spawn_left_up = Rect(-5184.0, 3072.0, -4032.0, 4736.0)
 end
 
@@ -789,7 +785,7 @@ end
 function moveByPointsTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-
+            print(#player.attackPointRect)
             for i = 1, #player.attackPointRect - 1 do
                 local trig = CreateTrigger()
                 TriggerRegisterTimerEventPeriodic(trig, 1.00)
@@ -805,6 +801,7 @@ function moveByPointsTrigger()
                             end
                         end
                     end)
+                    DestroyGroup(group)
                 end)
             end
         end
@@ -824,7 +821,6 @@ function spawnTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 30.00)
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
-
             for _, player in ipairs(team.players) do
                 local groupForBuild = GetUnitsInRectAll(player.rect)
                 local group = CreateGroup()
@@ -838,14 +834,6 @@ function spawnTrigger()
                         GroupAddUnit(group, unit)
                     end
                 end)
-
-                ForGroup(group, function ()
-
-                    local attackPointX, attackPointY = calculateDif(player.spawnRect, player.attackPointRect[1], GetEnumUnit())
-
-                    IssuePointOrderLoc(GetEnumUnit(), "attack", Location(attackPointX, attackPointY))
-                end)
-
                 DestroyGroup(group)
                 DestroyGroup(groupForBuild)
             end
@@ -890,29 +878,29 @@ function initAllTeamsAndPlayers()
     all_teams = SyncedTable {
         {
             players = SyncedTable {
-                { id = Player(4), rect = gg_rct_build_left_up, spawnRect = gg_rct_spawn_left_up, attackPointRect = SyncedTable { gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(2), rect = gg_rct_build_left_middle_up, spawnRect = gg_rct_spawn_left_middle_up, attackPointRect = SyncedTable { gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(0), rect = gg_rct_build_left_middle, spawnRect = gg_rct_spawn_left_middle, attackPointRect = SyncedTable { gg_rct_attack_region_p2 }},
-                { id = Player(3), rect = gg_rct_build_left_middle_down, spawnRect = gg_rct_spawn_left_middle_down, attackPointRect = SyncedTable { gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(5), rect = gg_rct_build_left_down, spawnRect = gg_rct_spawn_left_down, attackPointRect = SyncedTable { gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } }
+                { id = Player(4), rect = gg_rct_build_left_up, spawnRect = gg_rct_spawn_left_up, attackPointRect = { gg_rct_spawn_left_up, gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
+                { id = Player(2), rect = gg_rct_build_left_middle_up, spawnRect = gg_rct_spawn_left_middle_up, attackPointRect = { gg_rct_spawn_left_middle_up, gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
+                { id = Player(0), rect = gg_rct_build_left_middle, spawnRect = gg_rct_spawn_left_middle, attackPointRect = { gg_rct_spawn_left_middle, gg_rct_attack_region_p2 }},
+                { id = Player(3), rect = gg_rct_build_left_middle_down, spawnRect = gg_rct_spawn_left_middle_down, attackPointRect = { gg_rct_spawn_left_middle_down, gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
+                { id = Player(5), rect = gg_rct_build_left_down, spawnRect = gg_rct_spawn_left_down, attackPointRect = { gg_rct_spawn_left_down, gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } }
             },
             spawnPlayers = SyncedTable { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
-            visibility = gg_rct_visibility_team_left,
             base = { player = Player(16), unitId = "ofrt", winTeam = 2 }
         },
         {
             players = SyncedTable {
-                { id = Player(8), rect = gg_rct_build_right_up, spawnRect = gg_rct_spawn_right_up, attackPointRect = SyncedTable { gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(6), rect = gg_rct_build_right_middle_up, spawnRect = gg_rct_spawn_right_middle_up, attackPointRect = SyncedTable { gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(1), rect = gg_rct_build_right_middle, spawnRect = gg_rct_spawn_right_middle, attackPointRect = SyncedTable { gg_rct_attack_region_p1 } },
-                { id = Player(7), rect = gg_rct_build_right_middle_down, spawnRect = gg_rct_spawn_right_middle_down, attackPointRect = SyncedTable { gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(9), rect = gg_rct_build_right_down, spawnRect = gg_rct_spawn_right_down, attackPointRect = SyncedTable { gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } }
+                { id = Player(8), rect = gg_rct_build_right_up, spawnRect = gg_rct_spawn_right_up, attackPointRect = { gg_rct_spawn_right_up, gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
+                { id = Player(6), rect = gg_rct_build_right_middle_up, spawnRect = gg_rct_spawn_right_middle_up, attackPointRect = { gg_rct_spawn_right_middle_up, gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
+                { id = Player(1), rect = gg_rct_build_right_middle, spawnRect = gg_rct_spawn_right_middle, attackPointRect = { gg_rct_spawn_right_middle, gg_rct_attack_region_p1 } },
+                { id = Player(7), rect = gg_rct_build_right_middle_down, spawnRect = gg_rct_spawn_right_middle_down, attackPointRect = { gg_rct_spawn_right_middle_down, gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
+                { id = Player(9), rect = gg_rct_build_right_down, spawnRect = gg_rct_spawn_right_down, attackPointRect = { gg_rct_spawn_right_down, gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } }
             },
             spawnPlayers = SyncedTable { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
-            visibility = gg_rct_visibility_team_right,
             base = { player = Player(12), unitId = "ofrt", winTeam = 1 }
         }
     }
+
+    GetPlayerController()
 
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.spawnPlayers) do
@@ -920,6 +908,18 @@ function initAllTeamsAndPlayers()
                 if player ~= anotherPlayer then
                     SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_ALLIED_VISION)
                     SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_ALLIED_VISION)
+                end
+            end
+
+        end
+    end
+
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            for _, anotherPlayer in ipairs(team.players) do
+                if player ~= anotherPlayer then
+                    SetPlayerAllianceStateBJ(player.id, anotherPlayer.id, bj_ALLIANCE_ALLIED_VISION)
+                    SetPlayerAllianceStateBJ(anotherPlayer.id, player.id, bj_ALLIANCE_ALLIED_VISION)
                 end
             end
 
@@ -959,11 +959,12 @@ function initUnits()
     }
 end
 OnInit(function()
-    print("1")
+    print("4")
     math.randomseed(os.time())
     initGlobalVariables()
     initialMap()
     initTriggers()
+    StartTimer()
     changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
     SetPlayerState(Player(0),PLAYER_STATE_RESOURCE_GOLD, 30000)
     SetPlayerState(Player(1),PLAYER_STATE_RESOURCE_GOLD, 30000)
@@ -989,6 +990,34 @@ function setVisibility()
             CreateFogModifierRect(player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect(), TRUE, TRUE)
         end
     end
+end
+
+-- Инициализация переменных таймера
+local timer
+local timeLeft = 300 -- Установка времени таймера (в секундах, например 300 секунд = 5 минут)
+
+-- Функция обновления таймера
+function TimerTick()
+    timeLeft = timeLeft - 1
+    if timeLeft <= 0 then
+        -- Действия по истечении времени
+        BlzFrameSetText(BlzGetFrameByName("TimerDialog", 0), "Время истекло!")
+        DestroyTimer(timer)
+        timer = nil
+    else
+        -- Обновление отображаемого времени
+        local minutes = math.floor(timeLeft / 60)
+        local seconds = timeLeft % 60
+        BlzFrameSetText(BlzGetFrameByName("TimerDialog", 0), string.format("%02d:%02d", minutes, seconds))
+    end
+end
+
+-- Функция запуска таймера
+function StartTimer()
+    timer = CreateTimer()
+    TimerStart(timer, 1.0, true, TimerTick)
+    local timerDialog = BlzCreateSimpleFrame("TimerDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0)
+    BlzFrameSetAbsPoint(timerDialog, FRAMEPOINT_CENTER, 200, 200)
 end
 
 --SyncedTable v1.0 by Eikonium. https://www.hiveworkshop.com/threads/lua-syncedtable.332894/

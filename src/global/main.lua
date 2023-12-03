@@ -1,5 +1,5 @@
 OnInit(function()
-    print("1")
+    print("4")
     math.randomseed(os.time())
     initGlobalVariables()
     initialMap()

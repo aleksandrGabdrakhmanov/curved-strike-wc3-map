@@ -3,7 +3,6 @@ function spawnTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 30.00)
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
-
             for _, player in ipairs(team.players) do
                 local groupForBuild = GetUnitsInRectAll(player.rect)
                 local group = CreateGroup()
@@ -17,14 +16,6 @@ function spawnTrigger()
                         GroupAddUnit(group, unit)
                     end
                 end)
-
-                ForGroup(group, function ()
-
-                    local attackPointX, attackPointY = calculateDif(player.spawnRect, player.attackPointRect[1], GetEnumUnit())
-
-                    IssuePointOrderLoc(GetEnumUnit(), "attack", Location(attackPointX, attackPointY))
-                end)
-
                 DestroyGroup(group)
                 DestroyGroup(groupForBuild)
             end
