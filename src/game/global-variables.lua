@@ -6,7 +6,8 @@ end
 function initAllTeamsAndPlayers()
     game_config = {
         startGold = 500,
-        startIncomePerSec = 10
+        startIncomePerSec = 10,
+        spawnInterval = 30
     }
     all_teams = SyncedTable {
         {
