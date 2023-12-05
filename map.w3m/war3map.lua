@@ -974,8 +974,7 @@ function initUnits()
     }
 end
 OnInit(function()
-    print("6")
-    math.randomseed(os.time())
+    print("106")
     initGlobalVariables()
     initialGame()
     initialPlayers()
