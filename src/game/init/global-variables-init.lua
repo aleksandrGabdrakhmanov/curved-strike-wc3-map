@@ -97,46 +97,6 @@ function initAllTeamsAndPlayers()
             base = { player = Player(12), unitId = "ofrt", winTeam = 1 }
         }
     }
-
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.spawnPlayers) do
-            for _, anotherPlayer in ipairs(team.spawnPlayers) do
-                if player ~= anotherPlayer then
-                    SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_ALLIED_VISION)
-                    SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_ALLIED_VISION)
-                end
-            end
-        end
-    end
-
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            for _, anotherPlayer in ipairs(team.players) do
-                if player ~= anotherPlayer then
-                    SetPlayerAllianceStateBJ(player.id, anotherPlayer.id, bj_ALLIANCE_ALLIED_VISION)
-                    SetPlayerAllianceStateBJ(anotherPlayer.id, player.id, bj_ALLIANCE_ALLIED_VISION)
-                end
-            end
-        end
-    end
-
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            for _, spawnPlayer in ipairs(team.spawnPlayers) do
-                SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
-                SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
-                SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
-            end
-        end
-    end
-
-    all_players = {}
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            table.insert(all_players, player)
-        end
-    end
-
 end
 
 function initUnits()

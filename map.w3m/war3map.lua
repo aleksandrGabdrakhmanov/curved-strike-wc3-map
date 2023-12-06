@@ -748,13 +748,13 @@ function calculateDif(buidRect, spawnRect, unit)
     return spawnRectX - (buidRectX - unitX), spawnRectY - (buidRectY - unitY)
 end
 
-function changeAvailableUnitsForPlayers(players, units, isAvailable)
+--[[function changeAvailableUnitsForPlayers(players, units, isAvailable)
     for _, player in ipairs(players) do
         for _, unit in ipairs(units) do
             SetPlayerUnitAvailableBJ(FourCC(unit.id), isAvailable, player.id)
         end
     end
-end
+end]]
 
 function getUnitsByLevel(level)
     local filtered_ids = {}
@@ -773,6 +773,10 @@ function getParentId(searchId)
         end
     end
     return nil
+end
+function initGame()
+    UseTimeOfDayBJ(false)
+    SetTimeOfDay(12)
 end
 function initGlobalVariables()
     initAllTeamsAndPlayers()
@@ -873,46 +877,6 @@ function initAllTeamsAndPlayers()
             base = { player = Player(12), unitId = "ofrt", winTeam = 1 }
         }
     }
-
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.spawnPlayers) do
-            for _, anotherPlayer in ipairs(team.spawnPlayers) do
-                if player ~= anotherPlayer then
-                    SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_ALLIED_VISION)
-                    SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_ALLIED_VISION)
-                end
-            end
-        end
-    end
-
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            for _, anotherPlayer in ipairs(team.players) do
-                if player ~= anotherPlayer then
-                    SetPlayerAllianceStateBJ(player.id, anotherPlayer.id, bj_ALLIANCE_ALLIED_VISION)
-                    SetPlayerAllianceStateBJ(anotherPlayer.id, player.id, bj_ALLIANCE_ALLIED_VISION)
-                end
-            end
-        end
-    end
-
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            for _, spawnPlayer in ipairs(team.spawnPlayers) do
-                SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
-                SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
-                SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
-            end
-        end
-    end
-
-    all_players = {}
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            table.insert(all_players, player)
-        end
-    end
-
 end
 
 function initUnits()
@@ -930,30 +894,64 @@ function initUnits()
         { id = 'h009', parentId = 'h00L', level = 3},
     }
 end
-OnInit(function()
-    print("1")
+function initMain()
     initGlobalVariables()
-    initialGame()
-    initialPlayers()
-    initialUI()
-    initTimers()
-    initTriggers()
-    changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
-end)
-
-function initialGame()
-    UseTimeOfDayBJ(false)
-    SetTimeOfDay(12)
+    initGame()
+    initPlayers()
+end
+function initPlayers()
+    setAllianceBetweenSpawnPlayers()
+    setAllianceBetweenPlayers()
+    setAllianceBetweenPlayersAndSpawnPlayers()
 end
 
-function initialPlayers()
+function setAllianceBetweenSpawnPlayers()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.spawnPlayers) do
+            for _, anotherPlayer in ipairs(team.spawnPlayers) do
+                if player ~= anotherPlayer then
+                    SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_ALLIED_VISION)
+                    SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_ALLIED_VISION)
+                end
+            end
+        end
+    end
+end
+
+function setAllianceBetweenPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             CreateFogModifierRect(player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect(), TRUE, TRUE)
             SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, game_config.economy.startGold)
+            for _, anotherPlayer in ipairs(team.players) do
+                if player ~= anotherPlayer then
+                    SetPlayerAllianceStateBJ(player.id, anotherPlayer.id, bj_ALLIANCE_ALLIED_VISION)
+                    SetPlayerAllianceStateBJ(anotherPlayer.id, player.id, bj_ALLIANCE_ALLIED_VISION)
+                end
+            end
         end
     end
 end
+
+function setAllianceBetweenPlayersAndSpawnPlayers()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            for _, spawnPlayer in ipairs(team.spawnPlayers) do
+                SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
+                SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
+                SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
+            end
+        end
+    end
+end
+OnInit(function()
+    print("2")
+    initMain()
+    initialUI()
+    initTimers()
+    initTriggers()
+    --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
+end)
 
 --SyncedTable v1.0 by Eikonium. https://www.hiveworkshop.com/threads/lua-syncedtable.332894/
 

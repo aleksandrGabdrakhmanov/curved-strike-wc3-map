@@ -11,13 +11,13 @@ function calculateDif(buidRect, spawnRect, unit)
     return spawnRectX - (buidRectX - unitX), spawnRectY - (buidRectY - unitY)
 end
 
-function changeAvailableUnitsForPlayers(players, units, isAvailable)
+--[[function changeAvailableUnitsForPlayers(players, units, isAvailable)
     for _, player in ipairs(players) do
         for _, unit in ipairs(units) do
             SetPlayerUnitAvailableBJ(FourCC(unit.id), isAvailable, player.id)
         end
     end
-end
+end]]
 
 function getUnitsByLevel(level)
     local filtered_ids = {}
