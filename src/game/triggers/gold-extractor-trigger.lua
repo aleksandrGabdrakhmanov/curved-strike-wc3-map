@@ -4,19 +4,16 @@ function goldExtractorTrigger()
             local trig = CreateTrigger()
             TriggerRegisterPlayerUnitEvent(trig, player.id, EVENT_PLAYER_UNIT_SPELL_EFFECT)
             TriggerAddCondition(trig, Condition(function()
-                return GetSpellAbilityId() == FourCC('A000')
+                return GetSpellAbilityId() == FourCC(abilities.mine)
             end))
             TriggerAddAction(trig, function()
                 local triggerUnit = GetTriggerUnit()
                 RemoveUnit(triggerUnit)
-                CreateUnit(player.id, FourCC('u000'), GetUnitX(triggerUnit), GetUnitY(triggerUnit),100)
+                CreateUnit(player.id, FourCC(units_special.mineUp), GetUnitX(triggerUnit), GetUnitY(triggerUnit),100)
                 player.income = player.income + 1
 
-                local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC('h00M'))
-                print("test")
-                print(player.minePrice)
+                local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.mine))
                 player.minePrice = player.minePrice + game_config.economy.nextMineDiffPrice
-                print(player.income)
                 ForGroup(group, function()
 
                     local abilityIntegerId = GetSpellAbilityId()
@@ -27,9 +24,4 @@ function goldExtractorTrigger()
             end)
         end
     end
-end
-
-
-function getCurrentGoldExtractors(player)
-    GetUnitsOfPlayerAndTypeId(player, FourCC('h00M'))
 end

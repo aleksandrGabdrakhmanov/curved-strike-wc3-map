@@ -124,8 +124,13 @@ function initUnits()
         { id = 'h009', parentId = 'h00L', level = 3},
     }
     units_special = {
-        builder = "o000",
-        tower = "o001",
-        base = "o002"
+        builder = 'o000',
+        tower = 'o001',
+        base = 'o002',
+        mine = 'h00M',
+        mineUp = 'u000'
+    }
+    abilities = {
+        mine = 'A000'
     }
 end
