@@ -779,7 +779,7 @@ function initAllTeamsAndPlayers()
         economy = {
             startGold = 500,
             startIncomePerSec = 10,
-            firstMinePrice = 300,
+            firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
         },
         spawnInterval = 30
@@ -792,7 +792,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_left_up,
-                    spawnRect = gg_rct_spawn_left_up,
                     attackPointRect = { gg_rct_spawn_left_up, gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
@@ -800,7 +799,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_left_middle_up,
-                    spawnRect = gg_rct_spawn_left_middle_up,
                     attackPointRect = { gg_rct_spawn_left_middle_up, gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
@@ -808,7 +806,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_left_middle,
-                    spawnRect = gg_rct_spawn_left_middle,
                     attackPointRect = { gg_rct_spawn_left_middle, gg_rct_attack_region_p2 }
                 },
                 {
@@ -816,7 +813,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_left_middle_down,
-                    spawnRect = gg_rct_spawn_left_middle_down,
                     attackPointRect = { gg_rct_spawn_left_middle_down, gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
@@ -824,7 +820,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_left_down,
-                    spawnRect = gg_rct_spawn_left_down,
                     attackPointRect = { gg_rct_spawn_left_down, gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 }
             },
@@ -838,7 +833,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_right_up,
-                    spawnRect = gg_rct_spawn_right_up,
                     attackPointRect = { gg_rct_spawn_right_up, gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
@@ -846,7 +840,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_right_middle_up,
-                    spawnRect = gg_rct_spawn_right_middle_up,
                     attackPointRect = { gg_rct_spawn_right_middle_up, gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
@@ -854,7 +847,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_right_middle,
-                    spawnRect = gg_rct_spawn_right_middle,
                     attackPointRect = { gg_rct_spawn_right_middle, gg_rct_attack_region_p1 }
                 },
                 {
@@ -862,7 +854,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_right_middle_down,
-                    spawnRect = gg_rct_spawn_right_middle_down,
                     attackPointRect = { gg_rct_spawn_right_middle_down, gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
@@ -870,7 +861,6 @@ function initAllTeamsAndPlayers()
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
                     rect = gg_rct_build_right_down,
-                    spawnRect = gg_rct_spawn_right_down,
                     attackPointRect = { gg_rct_spawn_right_down, gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 }
             },
@@ -887,7 +877,6 @@ function initAllTeamsAndPlayers()
                     SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_ALLIED_VISION)
                 end
             end
-
         end
     end
 
@@ -899,7 +888,6 @@ function initAllTeamsAndPlayers()
                     SetPlayerAllianceStateBJ(anotherPlayer.id, player.id, bj_ALLIANCE_ALLIED_VISION)
                 end
             end
-
         end
     end
 
@@ -907,6 +895,8 @@ function initAllTeamsAndPlayers()
         for _, player in ipairs(team.players) do
             for _, spawnPlayer in ipairs(team.spawnPlayers) do
                 SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
+                SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
+                SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
             end
         end
     end
@@ -1204,7 +1194,7 @@ function spawnTrigger()
                     local id = GetUnitTypeId(GetEnumUnit())
                     local parentId = getParentId(('>I4'):pack(id))
                     if parentId ~= nil then
-                        local x, y = calculateDif(player.rect, player.spawnRect, GetEnumUnit())
+                        local x, y = calculateDif(player.rect, player.attackPointRect[1], GetEnumUnit())
                         local unit = CreateUnit(getRandomSpawnPlayer(team.spawnPlayers), FourCC(parentId), x, y, 270)
                         SetUnitColor(unit, GetPlayerColor(player.id))
                         GroupAddUnit(group, unit)
