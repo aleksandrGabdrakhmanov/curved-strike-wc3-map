@@ -34,28 +34,17 @@ gg_rct_base_left = nil
 gg_rct_base_right = nil
 gg_rct_tower_left = nil
 gg_rct_tower_right = nil
+gg_rct_mine_left_middle = nil
+gg_rct_mine_left_middle_down = nil
+gg_rct_mine_left_down = nil
+gg_rct_mine_left_middle_up = nil
+gg_rct_mine_left_up = nil
+gg_rct_mine_right_up = nil
+gg_rct_mine_right_middle_up = nil
+gg_rct_mine_right_middle = nil
+gg_rct_mine_right_middle_down = nil
+gg_rct_mine_right_down = nil
 function InitGlobals()
-end
-
-function CreateBuildingsForPlayer0()
-local p = Player(0)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7040.0, -128.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7040.0, 64.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7040.0, 256.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7040.0, 448.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7040.0, 640.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7040.0, 832.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7232.0, -128.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7232.0, 64.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7232.0, 256.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7232.0, 448.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7232.0, 640.0, 270.000, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00M"), -7232.0, 832.0, 270.000, FourCC("h00M"))
 end
 
 function CreateUnitsForPlayer0()
@@ -109,7 +98,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6623.5, -7406.3, 182.049, FourCC("
 end
 
 function CreatePlayerBuildings()
-CreateBuildingsForPlayer0()
 end
 
 function CreatePlayerUnits()
@@ -164,6 +152,16 @@ gg_rct_base_left = Rect(-4000.0, 320.0, -3392.0, 960.0)
 gg_rct_base_right = Rect(4352.0, 320.0, 4960.0, 960.0)
 gg_rct_tower_left = Rect(-1568.0, 320.0, -960.0, 960.0)
 gg_rct_tower_right = Rect(1888.0, 320.0, 2496.0, 960.0)
+gg_rct_mine_left_middle = Rect(-7264.0, -256.0, -6912.0, 64.0)
+gg_rct_mine_left_middle_down = Rect(-7264.0, -2112.0, -6912.0, -1792.0)
+gg_rct_mine_left_down = Rect(-7264.0, -3968.0, -6912.0, -3648.0)
+gg_rct_mine_left_middle_up = Rect(-7264.0, 1600.0, -6912.0, 1920.0)
+gg_rct_mine_left_up = Rect(-7264.0, 3456.0, -6912.0, 3776.0)
+gg_rct_mine_right_up = Rect(7872.0, 3456.0, 8224.0, 3776.0)
+gg_rct_mine_right_middle_up = Rect(7872.0, 1600.0, 8224.0, 1920.0)
+gg_rct_mine_right_middle = Rect(7872.0, -256.0, 8224.0, 64.0)
+gg_rct_mine_right_middle_down = Rect(7872.0, -2112.0, 8224.0, -1792.0)
+gg_rct_mine_right_down = Rect(7872.0, -3968.0, 8224.0, -3648.0)
 end
 
 --CUSTOM_CODE
@@ -691,10 +689,11 @@ end
 function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
-    buildBaseAndTower()
+    createBaseAndTower()
+    createMines()
 end
 
-function buildBaseAndTower()
+function createBaseAndTower()
     for _, team in ipairs(all_teams) do
         CreateUnit(
                 team.base.player,
@@ -712,6 +711,21 @@ function buildBaseAndTower()
         )
     end
 end
+
+function createMines()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local unit = CreateUnit(
+                    player.id,
+                    FourCC(units_special.mine),
+                    GetRectCenterX(player.mineRect),
+                    GetRectCenterY(player.mineRect),
+                    0
+            )
+            player.mineTextTag = CreateTextTagUnitBJ("level: " .. player.mineLevel, unit, 0, 10, 204, 204, 0, 0)
+        end
+    end
+end
 function initGlobalVariables()
     initAllTeamsAndPlayers()
     initUnits()
@@ -722,8 +736,8 @@ function initAllTeamsAndPlayers()
         economy = {
             startGold = 500,
             startIncomePerSec = 10,
-            firstMinePrice = 300, -- need init. now get from map
-            nextMineDiffPrice = 300
+            firstMinePrice = 10, -- need init. now get from map
+            nextMineDiffPrice = 20
         },
         spawnInterval = 30
     }
@@ -734,35 +748,50 @@ function initAllTeamsAndPlayers()
                     id = Player(4),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_up,
+                    mineRect = gg_rct_mine_left_up,
                     attackPointRect = { gg_rct_spawn_left_up, gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(2),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_middle_up,
+                    mineRect = gg_rct_mine_left_middle_up,
                     attackPointRect = { gg_rct_spawn_left_middle_up, gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(0),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_middle,
+                    mineRect = gg_rct_mine_left_middle,
                     attackPointRect = { gg_rct_spawn_left_middle, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(3),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_middle_down,
+                    mineRect = gg_rct_mine_left_middle_down,
                     attackPointRect = { gg_rct_spawn_left_middle_down, gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(5),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_down,
+                    mineRect = gg_rct_mine_left_down,
                     attackPointRect = { gg_rct_spawn_left_down, gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 }
             },
@@ -780,35 +809,50 @@ function initAllTeamsAndPlayers()
                     id = Player(8),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_up,
+                    mineRect = gg_rct_mine_right_up,
                     attackPointRect = { gg_rct_spawn_right_up, gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(6),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_middle_up,
+                    mineRect = gg_rct_mine_right_middle_up,
                     attackPointRect = { gg_rct_spawn_right_middle_up, gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(1),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_middle,
+                    mineRect = gg_rct_mine_right_middle,
                     attackPointRect = { gg_rct_spawn_right_middle, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(7),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_middle_down,
+                    mineRect = gg_rct_mine_right_middle_down,
                     attackPointRect = { gg_rct_spawn_right_middle_down, gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(9),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_down,
+                    mineRect = gg_rct_mine_right_down,
                     attackPointRect = { gg_rct_spawn_right_down, gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 }
             },
@@ -841,8 +885,7 @@ function initUnits()
         builder = 'o000',
         tower = 'o001',
         base = 'o002',
-        mine = 'h00M',
-        mineUp = 'u000'
+        mine = 'h00M'
     }
     abilities = {
         mine = 'A000'
@@ -969,20 +1012,15 @@ function goldExtractorTrigger()
                 return GetSpellAbilityId() == FourCC(abilities.mine)
             end))
             TriggerAddAction(trig, function()
-                local triggerUnit = GetTriggerUnit()
-                RemoveUnit(triggerUnit)
-                CreateUnit(player.id, FourCC(units_special.mineUp), GetUnitX(triggerUnit), GetUnitY(triggerUnit),100)
-                player.income = player.income + 1
-
-                local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.mine))
+                local abilityIntegerId = GetSpellAbilityId()
+                local ability = BlzGetUnitAbility(GetTriggerUnit(), abilityIntegerId)
                 player.minePrice = player.minePrice + game_config.economy.nextMineDiffPrice
-                ForGroup(group, function()
+                player.income = player.income + 1
+                player.mineLevel = player.mineLevel + 1
+                BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.minePrice)
 
-                    local abilityIntegerId = GetSpellAbilityId()
-                    local ability = BlzGetUnitAbility(GetEnumUnit(), abilityIntegerId)
-                    BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.minePrice)
-                end)
-                DestroyGroup(group)
+                DestroyTextTag(player.mineTextTag)
+                player.mineTextTag = CreateTextTagUnitBJ("level: " .. player.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
             end)
         end
     end

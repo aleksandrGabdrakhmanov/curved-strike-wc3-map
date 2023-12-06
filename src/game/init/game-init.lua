@@ -1,10 +1,11 @@
 function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
-    buildBaseAndTower()
+    createBaseAndTower()
+    createMines()
 end
 
-function buildBaseAndTower()
+function createBaseAndTower()
     for _, team in ipairs(all_teams) do
         CreateUnit(
                 team.base.player,
@@ -20,5 +21,20 @@ function buildBaseAndTower()
                 GetRectCenterY(team.base.towerRect),
                 0
         )
+    end
+end
+
+function createMines()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local unit = CreateUnit(
+                    player.id,
+                    FourCC(units_special.mine),
+                    GetRectCenterX(player.mineRect),
+                    GetRectCenterY(player.mineRect),
+                    0
+            )
+            player.mineTextTag = CreateTextTagUnitBJ("level: " .. player.mineLevel, unit, 0, 10, 204, 204, 0, 0)
+        end
     end
 end

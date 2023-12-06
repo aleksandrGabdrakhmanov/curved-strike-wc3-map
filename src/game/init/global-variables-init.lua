@@ -8,8 +8,8 @@ function initAllTeamsAndPlayers()
         economy = {
             startGold = 500,
             startIncomePerSec = 10,
-            firstMinePrice = 300, -- need init. now get from map
-            nextMineDiffPrice = 300
+            firstMinePrice = 10, -- need init. now get from map
+            nextMineDiffPrice = 20
         },
         spawnInterval = 30
     }
@@ -20,35 +20,50 @@ function initAllTeamsAndPlayers()
                     id = Player(4),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_up,
+                    mineRect = gg_rct_mine_left_up,
                     attackPointRect = { gg_rct_spawn_left_up, gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(2),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_middle_up,
+                    mineRect = gg_rct_mine_left_middle_up,
                     attackPointRect = { gg_rct_spawn_left_middle_up, gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(0),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_middle,
+                    mineRect = gg_rct_mine_left_middle,
                     attackPointRect = { gg_rct_spawn_left_middle, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(3),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_middle_down,
+                    mineRect = gg_rct_mine_left_middle_down,
                     attackPointRect = { gg_rct_spawn_left_middle_down, gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(5),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_left_down,
+                    mineRect = gg_rct_mine_left_down,
                     attackPointRect = { gg_rct_spawn_left_down, gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 }
             },
@@ -66,35 +81,50 @@ function initAllTeamsAndPlayers()
                     id = Player(8),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_up,
+                    mineRect = gg_rct_mine_right_up,
                     attackPointRect = { gg_rct_spawn_right_up, gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(6),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_middle_up,
+                    mineRect = gg_rct_mine_right_middle_up,
                     attackPointRect = { gg_rct_spawn_right_middle_up, gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(1),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_middle,
+                    mineRect = gg_rct_mine_right_middle,
                     attackPointRect = { gg_rct_spawn_right_middle, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(7),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_middle_down,
+                    mineRect = gg_rct_mine_right_middle_down,
                     attackPointRect = { gg_rct_spawn_right_middle_down, gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(9),
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
                     buildRect = gg_rct_build_right_down,
+                    mineRect = gg_rct_mine_right_down,
                     attackPointRect = { gg_rct_spawn_right_down, gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 }
             },
@@ -127,8 +157,7 @@ function initUnits()
         builder = 'o000',
         tower = 'o001',
         base = 'o002',
-        mine = 'h00M',
-        mineUp = 'u000'
+        mine = 'h00M'
     }
     abilities = {
         mine = 'A000'

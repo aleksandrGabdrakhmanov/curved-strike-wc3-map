@@ -7,20 +7,15 @@ function goldExtractorTrigger()
                 return GetSpellAbilityId() == FourCC(abilities.mine)
             end))
             TriggerAddAction(trig, function()
-                local triggerUnit = GetTriggerUnit()
-                RemoveUnit(triggerUnit)
-                CreateUnit(player.id, FourCC(units_special.mineUp), GetUnitX(triggerUnit), GetUnitY(triggerUnit),100)
-                player.income = player.income + 1
-
-                local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.mine))
+                local abilityIntegerId = GetSpellAbilityId()
+                local ability = BlzGetUnitAbility(GetTriggerUnit(), abilityIntegerId)
                 player.minePrice = player.minePrice + game_config.economy.nextMineDiffPrice
-                ForGroup(group, function()
+                player.income = player.income + 1
+                player.mineLevel = player.mineLevel + 1
+                BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.minePrice)
 
-                    local abilityIntegerId = GetSpellAbilityId()
-                    local ability = BlzGetUnitAbility(GetEnumUnit(), abilityIntegerId)
-                    BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.minePrice)
-                end)
-                DestroyGroup(group)
+                DestroyTextTag(player.mineTextTag)
+                player.mineTextTag = CreateTextTagUnitBJ("level: " .. player.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
             end)
         end
     end
