@@ -722,7 +722,7 @@ function createMines()
                     GetRectCenterY(player.mineRect),
                     0
             )
-            player.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.mineLevel, unit, 0, 10, 204, 204, 0, 0)
+            player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, unit, 0, 10, 204, 204, 0, 0)
         end
     end
 end
@@ -746,50 +746,60 @@ function initAllTeamsAndPlayers()
             players = {
                 {
                     id = Player(4),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_left_up,
                     mineRect = gg_rct_mine_left_up,
                     attackPointRect = { gg_rct_spawn_left_up, gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(2),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_left_middle_up,
                     mineRect = gg_rct_mine_left_middle_up,
                     attackPointRect = { gg_rct_spawn_left_middle_up, gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(0),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_left_middle,
                     mineRect = gg_rct_mine_left_middle,
                     attackPointRect = { gg_rct_spawn_left_middle, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(3),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_left_middle_down,
                     mineRect = gg_rct_mine_left_middle_down,
                     attackPointRect = { gg_rct_spawn_left_middle_down, gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
                 },
                 {
                     id = Player(5),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_left_down,
                     mineRect = gg_rct_mine_left_down,
                     attackPointRect = { gg_rct_spawn_left_down, gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
@@ -807,50 +817,60 @@ function initAllTeamsAndPlayers()
             players = {
                 {
                     id = Player(8),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_right_up,
                     mineRect = gg_rct_mine_right_up,
                     attackPointRect = { gg_rct_spawn_right_up, gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(6),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_right_middle_up,
                     mineRect = gg_rct_mine_right_middle_up,
                     attackPointRect = { gg_rct_spawn_right_middle_up, gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(1),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_right_middle,
                     mineRect = gg_rct_mine_right_middle,
                     attackPointRect = { gg_rct_spawn_right_middle, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(7),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_right_middle_down,
                     mineRect = gg_rct_mine_right_middle_down,
                     attackPointRect = { gg_rct_spawn_right_middle_down, gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
                 },
                 {
                     id = Player(9),
-                    income = game_config.economy.startIncomePerSec,
-                    minePrice = game_config.economy.firstMinePrice,
-                    mineLevel = 0,
-                    mineTextTag = nil,
+                    economy = {
+                        income = game_config.economy.startIncomePerSec,
+                        minePrice = game_config.economy.firstMinePrice,
+                        mineLevel = 0,
+                        mineTextTag = nil,
+                    },
                     buildRect = gg_rct_build_right_down,
                     mineRect = gg_rct_mine_right_down,
                     attackPointRect = { gg_rct_spawn_right_down, gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
@@ -1018,13 +1038,13 @@ function goldExtractorTrigger()
             TriggerAddAction(trig, function()
                 local abilityIntegerId = GetSpellAbilityId()
                 local ability = BlzGetUnitAbility(GetTriggerUnit(), abilityIntegerId)
-                player.minePrice = player.minePrice + game_config.economy.nextMineDiffPrice
-                player.income = player.income + 1
-                player.mineLevel = player.mineLevel + 1
-                BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.minePrice)
+                player.economy.minePrice = player.economy.minePrice + game_config.economy.nextMineDiffPrice
+                player.economy.income = player.economy.income + 1
+                player.economy.mineLevel = player.economy.mineLevel + 1
+                BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.economy.minePrice)
 
-                DestroyTextTag(player.mineTextTag)
-                player.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
+                DestroyTextTag(player.economy.mineTextTag)
+                player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
             end)
         end
     end

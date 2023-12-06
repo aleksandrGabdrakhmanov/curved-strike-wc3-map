@@ -9,13 +9,13 @@ function goldExtractorTrigger()
             TriggerAddAction(trig, function()
                 local abilityIntegerId = GetSpellAbilityId()
                 local ability = BlzGetUnitAbility(GetTriggerUnit(), abilityIntegerId)
-                player.minePrice = player.minePrice + game_config.economy.nextMineDiffPrice
-                player.income = player.income + 1
-                player.mineLevel = player.mineLevel + 1
-                BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.minePrice)
+                player.economy.minePrice = player.economy.minePrice + game_config.economy.nextMineDiffPrice
+                player.economy.income = player.economy.income + 1
+                player.economy.mineLevel = player.economy.mineLevel + 1
+                BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.economy.minePrice)
 
-                DestroyTextTag(player.mineTextTag)
-                player.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
+                DestroyTextTag(player.economy.mineTextTag)
+                player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
             end)
         end
     end

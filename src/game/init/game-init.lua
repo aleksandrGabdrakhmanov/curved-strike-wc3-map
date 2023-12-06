@@ -34,7 +34,7 @@ function createMines()
                     GetRectCenterY(player.mineRect),
                     0
             )
-            player.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.mineLevel, unit, 0, 10, 204, 204, 0, 0)
+            player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, unit, 0, 10, 204, 204, 0, 0)
         end
     end
 end
