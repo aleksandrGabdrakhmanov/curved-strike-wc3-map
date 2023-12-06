@@ -100,7 +100,7 @@ function initAllTeamsAndPlayers()
 end
 
 function initUnits()
-    all_units = {
+    units_for_build = {
         { id = 'h00C', parentId = 'h00A', level = 1},
         { id = 'h002', parentId = 'h00B', level = 1},
         { id = 'h004', parentId = 'h00D', level = 1},
@@ -112,5 +112,8 @@ function initUnits()
         { id = 'h005', parentId = 'h00J', level = 3},
         { id = 'h006', parentId = 'h00K', level = 3},
         { id = 'h009', parentId = 'h00L', level = 3},
+    }
+    units_special = {
+        builder = "o000"
     }
 end

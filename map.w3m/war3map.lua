@@ -61,7 +61,6 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6328.0, 743.0, 115.843, FourCC("o000"))
 u = BlzCreateUnitWithSkin(p, FourCC("o000"), -5952.8, -6236.0, 232.643, FourCC("o000"))
 end
 
@@ -72,7 +71,6 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7564.5, 470.8, 15.986, FourCC("o000"))
 u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6418.4, -5501.0, 350.782, FourCC("o000"))
 end
 
@@ -83,7 +81,6 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6299.6, 2485.3, 357.451, FourCC("o000"))
 u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6844.0, -5171.5, 118.282, FourCC("o000"))
 end
 
@@ -94,7 +91,6 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6303.7, -1418.5, 89.223, FourCC("o000"))
 u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6391.8, -6863.8, 330.039, FourCC("o000"))
 end
 
@@ -105,58 +101,7 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6186.4, 4039.7, 205.813, FourCC("o000"))
 u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6623.5, -7406.3, 182.049, FourCC("o000"))
-end
-
-function CreateUnitsForPlayer5()
-local p = Player(5)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6275.5, -3171.3, 272.909, FourCC("o000"))
-end
-
-function CreateUnitsForPlayer6()
-local p = Player(6)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7315.1, 2407.8, 3.241, FourCC("o000"))
-end
-
-function CreateUnitsForPlayer7()
-local p = Player(7)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7370.0, -1218.6, 297.560, FourCC("o000"))
-end
-
-function CreateUnitsForPlayer8()
-local p = Player(8)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7010.2, 4187.2, 185.982, FourCC("o000"))
-end
-
-function CreateUnitsForPlayer9()
-local p = Player(9)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), 7390.4, -3150.0, 130.203, FourCC("o000"))
 end
 
 function CreateBuildingsForPlayer12()
@@ -193,11 +138,6 @@ CreateUnitsForPlayer1()
 CreateUnitsForPlayer2()
 CreateUnitsForPlayer3()
 CreateUnitsForPlayer4()
-CreateUnitsForPlayer5()
-CreateUnitsForPlayer6()
-CreateUnitsForPlayer7()
-CreateUnitsForPlayer8()
-CreateUnitsForPlayer9()
 end
 
 function CreateAllUnits()
@@ -756,18 +696,8 @@ end
     end
 end]]
 
-function getUnitsByLevel(level)
-    local filtered_ids = {}
-    for _, unit in ipairs(all_units_t1) do
-        if unit.level == level then
-            table.insert(filtered_ids, unit.id)
-        end
-    end
-    return filtered_ids
-end
-
 function getParentId(searchId)
-    for _, unit in pairs(all_units) do
+    for _, unit in pairs(units_for_build) do
         if unit.id == searchId then
             return unit.parentId
         end
@@ -880,7 +810,7 @@ function initAllTeamsAndPlayers()
 end
 
 function initUnits()
-    all_units = {
+    units_for_build = {
         { id = 'h00C', parentId = 'h00A', level = 1},
         { id = 'h002', parentId = 'h00B', level = 1},
         { id = 'h004', parentId = 'h00D', level = 1},
@@ -893,6 +823,9 @@ function initUnits()
         { id = 'h006', parentId = 'h00K', level = 3},
         { id = 'h009', parentId = 'h00L', level = 3},
     }
+    units_special = {
+        builder = "o000"
+    }
 end
 function initMain()
     initGlobalVariables()
@@ -903,6 +836,7 @@ function initPlayers()
     setAllianceBetweenSpawnPlayers()
     setAllianceBetweenPlayers()
     setAllianceBetweenPlayersAndSpawnPlayers()
+    addBuilders()
 end
 
 function setAllianceBetweenSpawnPlayers()
@@ -941,6 +875,21 @@ function setAllianceBetweenPlayersAndSpawnPlayers()
                 SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
                 SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
             end
+        end
+    end
+end
+
+function addBuilders()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            GetRectCenterX(player.buildRect)
+            CreateUnit(
+                    player.id,
+                    FourCC(units_special.builder),
+                    GetRectCenterX(player.buildRect),
+                    GetRectCenterY(player.buildRect),
+                    0
+            )
         end
     end
 end

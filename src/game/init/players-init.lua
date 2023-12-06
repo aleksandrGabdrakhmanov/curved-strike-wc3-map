@@ -2,6 +2,7 @@ function initPlayers()
     setAllianceBetweenSpawnPlayers()
     setAllianceBetweenPlayers()
     setAllianceBetweenPlayersAndSpawnPlayers()
+    addBuilders()
 end
 
 function setAllianceBetweenSpawnPlayers()
@@ -40,6 +41,21 @@ function setAllianceBetweenPlayersAndSpawnPlayers()
                 SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
                 SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
             end
+        end
+    end
+end
+
+function addBuilders()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            GetRectCenterX(player.buildRect)
+            CreateUnit(
+                    player.id,
+                    FourCC(units_special.builder),
+                    GetRectCenterX(player.buildRect),
+                    GetRectCenterY(player.buildRect),
+                    0
+            )
         end
     end
 end
