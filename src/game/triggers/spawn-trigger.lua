@@ -4,13 +4,13 @@ function spawnTrigger()
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                local groupForBuild = GetUnitsInRectAll(player.rect)
+                local groupForBuild = GetUnitsInRectAll(player.buildRect)
                 local group = CreateGroup()
                 ForGroup(groupForBuild, function ()
                     local id = GetUnitTypeId(GetEnumUnit())
                     local parentId = getParentId(('>I4'):pack(id))
                     if parentId ~= nil then
-                        local x, y = calculateDif(player.rect, player.attackPointRect[1], GetEnumUnit())
+                        local x, y = calculateDif(player.buildRect, player.attackPointRect[1], GetEnumUnit())
                         local unit = CreateUnit(getRandomSpawnPlayer(team.spawnPlayers), FourCC(parentId), x, y, 270)
                         SetUnitColor(unit, GetPlayerColor(player.id))
                         GroupAddUnit(group, unit)

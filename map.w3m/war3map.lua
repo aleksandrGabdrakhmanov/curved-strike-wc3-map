@@ -781,29 +781,93 @@ end
 
 function initAllTeamsAndPlayers()
     game_config = {
-        startGold = 500,
-        startIncomePerSec = 10,
+        economy = {
+            startGold = 500,
+            startIncomePerSec = 10,
+            firstMinePrice = 300, -- need init. now get from map
+            nextMineDiffPrice = 300
+        },
         spawnInterval = 30
     }
     all_teams = SyncedTable {
         {
             players = SyncedTable {
-                { id = Player(4), income = game_config.startIncomePerSec, rect = gg_rct_build_left_up, spawnRect = gg_rct_spawn_left_up, attackPointRect = { gg_rct_spawn_left_up, gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(2), income = game_config.startIncomePerSec, rect = gg_rct_build_left_middle_up, spawnRect = gg_rct_spawn_left_middle_up, attackPointRect = { gg_rct_spawn_left_middle_up, gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(0), income = game_config.startIncomePerSec, rect = gg_rct_build_left_middle, spawnRect = gg_rct_spawn_left_middle, attackPointRect = { gg_rct_spawn_left_middle, gg_rct_attack_region_p2 }},
-                { id = Player(3), income = game_config.startIncomePerSec, rect = gg_rct_build_left_middle_down, spawnRect = gg_rct_spawn_left_middle_down, attackPointRect = { gg_rct_spawn_left_middle_down, gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } },
-                { id = Player(5), income = game_config.startIncomePerSec, rect = gg_rct_build_left_down, spawnRect = gg_rct_spawn_left_down, attackPointRect = { gg_rct_spawn_left_down, gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 } }
+                {
+                    id = Player(4),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_left_up,
+                    attackPointRect = { gg_rct_spawn_left_up, gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                },
+                {
+                    id = Player(2),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_left_middle_up,
+                    attackPointRect = { gg_rct_spawn_left_middle_up, gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                },
+                {
+                    id = Player(0),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_left_middle,
+                    attackPointRect = { gg_rct_spawn_left_middle, gg_rct_attack_region_p2 }
+                },
+                {
+                    id = Player(3),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_left_middle_down,
+                    attackPointRect = { gg_rct_spawn_left_middle_down, gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                },
+                {
+                    id = Player(5),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_left_down,
+                    attackPointRect = { gg_rct_spawn_left_down, gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                }
             },
             spawnPlayers = SyncedTable { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
             base = { player = Player(16), unitId = "ofrt", winTeam = 2 }
         },
         {
             players = SyncedTable {
-                { id = Player(8), income = game_config.startIncomePerSec, rect = gg_rct_build_right_up, spawnRect = gg_rct_spawn_right_up, attackPointRect = { gg_rct_spawn_right_up, gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(6), income = game_config.startIncomePerSec, rect = gg_rct_build_right_middle_up, spawnRect = gg_rct_spawn_right_middle_up, attackPointRect = { gg_rct_spawn_right_middle_up, gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(1), income = game_config.startIncomePerSec, rect = gg_rct_build_right_middle, spawnRect = gg_rct_spawn_right_middle, attackPointRect = { gg_rct_spawn_right_middle, gg_rct_attack_region_p1 } },
-                { id = Player(7), income = game_config.startIncomePerSec, rect = gg_rct_build_right_middle_down, spawnRect = gg_rct_spawn_right_middle_down, attackPointRect = { gg_rct_spawn_right_middle_down, gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } },
-                { id = Player(9), income = game_config.startIncomePerSec, rect = gg_rct_build_right_down, spawnRect = gg_rct_spawn_right_down, attackPointRect = { gg_rct_spawn_right_down, gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 } }
+                {
+                    id = Player(8),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_right_up,
+                    attackPointRect = { gg_rct_spawn_right_up, gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                },
+                {
+                    id = Player(6),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_right_middle_up,
+                    attackPointRect = { gg_rct_spawn_right_middle_up, gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                },
+                {
+                    id = Player(1),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_right_middle,
+                    attackPointRect = { gg_rct_spawn_right_middle, gg_rct_attack_region_p1 }
+                },
+                {
+                    id = Player(7),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_right_middle_down,
+                    attackPointRect = { gg_rct_spawn_right_middle_down, gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                },
+                {
+                    id = Player(9),
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    buildRect = gg_rct_build_right_down,
+                    attackPointRect = { gg_rct_spawn_right_down, gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                }
             },
             spawnPlayers = SyncedTable { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
             base = { player = Player(12), unitId = "ofrt", winTeam = 1 }
@@ -818,7 +882,6 @@ function initAllTeamsAndPlayers()
                     SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_ALLIED_VISION)
                 end
             end
-
         end
     end
 
@@ -830,7 +893,6 @@ function initAllTeamsAndPlayers()
                     SetPlayerAllianceStateBJ(anotherPlayer.id, player.id, bj_ALLIANCE_ALLIED_VISION)
                 end
             end
-
         end
     end
 
@@ -838,6 +900,8 @@ function initAllTeamsAndPlayers()
         for _, player in ipairs(team.players) do
             for _, spawnPlayer in ipairs(team.spawnPlayers) do
                 SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
+                SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
+                SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
             end
         end
     end
@@ -867,7 +931,7 @@ function initUnits()
     }
 end
 OnInit(function()
-    print("109")
+    print("1")
     initGlobalVariables()
     initialGame()
     initialPlayers()
@@ -886,7 +950,7 @@ function initialPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             CreateFogModifierRect(player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect(), TRUE, TRUE)
-            SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, game_config.startGold)
+            SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, game_config.economy.startGold)
         end
     end
 end
@@ -1049,16 +1113,16 @@ function goldExtractorTrigger()
                 CreateUnit(player.id, FourCC('u000'), GetUnitX(triggerUnit), GetUnitY(triggerUnit),100)
                 player.income = player.income + 1
 
-                local ability = GetSpellAbility()
-                print(ability)
-                BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, 500)
-                print('get it')
-
                 local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC('h00M'))
-                GetUnitsOfPlayerAndTypeId()
-                print(group)
+                print("test")
+                print(player.minePrice)
+                player.minePrice = player.minePrice + game_config.economy.nextMineDiffPrice
+                print(player.income)
                 ForGroup(group, function()
-                    IncUnitAbilityLevel(GetEnumUnit(), FourCC('A000'))
+
+                    local abilityIntegerId = GetSpellAbilityId()
+                    local ability = BlzGetUnitAbility(GetEnumUnit(), abilityIntegerId)
+                    BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.minePrice)
                 end)
                 DestroyGroup(group)
             end)
@@ -1129,13 +1193,13 @@ function spawnTrigger()
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                local groupForBuild = GetUnitsInRectAll(player.rect)
+                local groupForBuild = GetUnitsInRectAll(player.buildRect)
                 local group = CreateGroup()
                 ForGroup(groupForBuild, function ()
                     local id = GetUnitTypeId(GetEnumUnit())
                     local parentId = getParentId(('>I4'):pack(id))
                     if parentId ~= nil then
-                        local x, y = calculateDif(player.rect, player.spawnRect, GetEnumUnit())
+                        local x, y = calculateDif(player.buildRect, player.attackPointRect[1], GetEnumUnit())
                         local unit = CreateUnit(getRandomSpawnPlayer(team.spawnPlayers), FourCC(parentId), x, y, 270)
                         SetUnitColor(unit, GetPlayerColor(player.id))
                         GroupAddUnit(group, unit)
