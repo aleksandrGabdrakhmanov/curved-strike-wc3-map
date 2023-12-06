@@ -318,3 +318,63 @@ STRING 61
 Health: <hdhw,HP>|nDamage: <hdhw,mindmg1> - <hdhw,maxdmg1>|nAttack Speed: 1.14|nAttack Type: |cff0064ffPierce|r|nRange: 500|nArmor: <hdhw,def>, |cff00ff00Light|r|nAbility: |cff00ff00Aerial Shackles|r|nUpgrades: |cff00ff00Animal War Training|r|n|n|cffffcc00Attacks land and air units.|r
 }
 
+STRING 62
+// Units: h00M (Gold Mine), Tip (Tooltip - Basic)
+{
+Build Footman
+}
+
+STRING 63
+// Units: h00M (Gold Mine), Name (Name)
+{
+Gold Mine
+}
+
+STRING 64
+// Units: u000 (Gold Extractor), Tip (Tooltip - Basic)
+{
+Build Gold Extractor
+}
+
+STRING 65
+// Abilities: A000 (Build Gold Extractor), Name (Name)
+{
+Build Gold Extractor
+}
+
+STRING 67
+// Abilities: A000 (Build Gold Extractor), EditorSuffix (Editor Suffix)
+{
+(Level 1)
+}
+
+STRING 68
+// Units: u000 (Gold Extractor), Name (Name)
+{
+Gold Extractor
+}
+
+STRING 69
+// Units: u000 (Gold Extractor), Ubertip (Tooltip - Extended)
+{
+Increases income.|n|n|cffff9696Building your first freezes your income for 25 seconds, the second for 50 seconds, the third for 75 seconds etc.|r
+}
+
+STRING 70
+// Units: u000 (Gold Extractor), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 71
+// Abilities: A000 (Build Gold Extractor), Tip (Tooltip - Normal)
+{
+Build Gold Extractor
+}
+
+STRING 72
+// Abilities: A000 (Build Gold Extractor), Ubertip (Tooltip - Normal - Extended)
+{
+Grants an additional |cffffff001 gold|r every second.
+}
+

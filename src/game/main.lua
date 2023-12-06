@@ -1,5 +1,5 @@
 OnInit(function()
-    print("106")
+    print("1")
     initGlobalVariables()
     initialGame()
     initialPlayers()
@@ -18,7 +18,7 @@ function initialPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             CreateFogModifierRect(player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect(), TRUE, TRUE)
-            SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, game_config.startGold)
+            SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, game_config.economy.startGold)
         end
     end
 end

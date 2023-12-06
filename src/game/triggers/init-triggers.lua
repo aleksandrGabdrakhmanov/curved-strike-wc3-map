@@ -3,5 +3,6 @@ function initTriggers()
     spawnTrigger()
     moveByPointsTrigger()
     winLoseTrigger()
+    goldExtractorTrigger()
     debugTrigger()
 end
