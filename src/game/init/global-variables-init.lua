@@ -53,7 +53,12 @@ function initAllTeamsAndPlayers()
                 }
             },
             spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
-            base = { player = Player(16), unitId = "ofrt", winTeam = 2 }
+            base = {
+                player = Player(16),
+                winTeam = 2,
+                baseRect = gg_rct_base_left,
+                towerRect = gg_rct_tower_left
+            }
         },
         {
             players = {
@@ -94,7 +99,12 @@ function initAllTeamsAndPlayers()
                 }
             },
             spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
-            base = { player = Player(12), unitId = "ofrt", winTeam = 1 }
+            base = {
+                player = Player(12),
+                winTeam = 1,
+                baseRect = gg_rct_base_right,
+                towerRect = gg_rct_tower_right
+            }
         }
     }
 end
@@ -114,6 +124,8 @@ function initUnits()
         { id = 'h009', parentId = 'h00L', level = 3},
     }
     units_special = {
-        builder = "o000"
+        builder = "o000",
+        tower = "o001",
+        base = "o002"
     }
 end

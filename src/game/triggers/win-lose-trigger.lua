@@ -4,7 +4,7 @@ function winLoseTrigger()
         ForGroup(group, function()
             local unit = GetEnumUnit()
             local unitId = ('>I4'):pack(GetUnitTypeId(unit))
-            if unitId == team.base.unitId then
+            if unitId == units_special.base then
                 local trig = CreateTrigger()
                 TriggerRegisterUnitEvent(trig, unit, EVENT_UNIT_DEATH)
                 TriggerAddAction(trig, function()

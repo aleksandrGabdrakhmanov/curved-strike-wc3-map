@@ -30,6 +30,10 @@ gg_rct_spawn_left_middle_down = nil
 gg_rct_attack_region_center_left = nil
 gg_rct_attack_region_center_right = nil
 gg_rct_spawn_left_up = nil
+gg_rct_base_left = nil
+gg_rct_base_right = nil
+gg_rct_tower_left = nil
+gg_rct_tower_right = nil
 function InitGlobals()
 end
 
@@ -104,32 +108,8 @@ local life
 u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6623.5, -7406.3, 182.049, FourCC("o000"))
 end
 
-function CreateBuildingsForPlayer12()
-local p = Player(12)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o001"), 2176.0, 640.0, 270.000, FourCC("o001"))
-u = BlzCreateUnitWithSkin(p, FourCC("o002"), 4672.0, 640.0, 270.000, FourCC("o002"))
-end
-
-function CreateBuildingsForPlayer16()
-local p = Player(16)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1280.0, 640.0, 270.000, FourCC("o001"))
-u = BlzCreateUnitWithSkin(p, FourCC("o002"), -3584.0, 640.0, 270.000, FourCC("o002"))
-end
-
 function CreatePlayerBuildings()
 CreateBuildingsForPlayer0()
-CreateBuildingsForPlayer12()
-CreateBuildingsForPlayer16()
 end
 
 function CreatePlayerUnits()
@@ -180,6 +160,10 @@ gg_rct_spawn_left_middle_down = Rect(-5184.0, -1920.0, -4032.0, -256.0)
 gg_rct_attack_region_center_left = Rect(-1792.0, -256.0, -640.0, 1408.0)
 gg_rct_attack_region_center_right = Rect(1600.0, -256.0, 2752.0, 1408.0)
 gg_rct_spawn_left_up = Rect(-5184.0, 3072.0, -4032.0, 4736.0)
+gg_rct_base_left = Rect(-4000.0, 320.0, -3392.0, 960.0)
+gg_rct_base_right = Rect(4352.0, 320.0, 4960.0, 960.0)
+gg_rct_tower_left = Rect(-1568.0, 320.0, -960.0, 960.0)
+gg_rct_tower_right = Rect(1888.0, 320.0, 2496.0, 960.0)
 end
 
 --CUSTOM_CODE
@@ -707,6 +691,26 @@ end
 function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
+    buildBaseAndTower()
+end
+
+function buildBaseAndTower()
+    for _, team in ipairs(all_teams) do
+        CreateUnit(
+                team.base.player,
+                FourCC(units_special.base),
+                GetRectCenterX(team.base.baseRect),
+                GetRectCenterY(team.base.baseRect),
+                0
+        )
+        CreateUnit(
+                team.base.player,
+                FourCC(units_special.tower),
+                GetRectCenterX(team.base.towerRect),
+                GetRectCenterY(team.base.towerRect),
+                0
+        )
+    end
 end
 function initGlobalVariables()
     initAllTeamsAndPlayers()
@@ -763,7 +767,12 @@ function initAllTeamsAndPlayers()
                 }
             },
             spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
-            base = { player = Player(16), unitId = "ofrt", winTeam = 2 }
+            base = {
+                player = Player(16),
+                winTeam = 2,
+                baseRect = gg_rct_base_left,
+                towerRect = gg_rct_tower_left
+            }
         },
         {
             players = {
@@ -804,7 +813,12 @@ function initAllTeamsAndPlayers()
                 }
             },
             spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
-            base = { player = Player(12), unitId = "ofrt", winTeam = 1 }
+            base = {
+                player = Player(12),
+                winTeam = 1,
+                baseRect = gg_rct_base_right,
+                towerRect = gg_rct_tower_right
+            }
         }
     }
 end
@@ -824,7 +838,9 @@ function initUnits()
         { id = 'h009', parentId = 'h00L', level = 3},
     }
     units_special = {
-        builder = "o000"
+        builder = "o000",
+        tower = "o001",
+        base = "o002"
     }
 end
 function initMain()
@@ -1064,7 +1080,7 @@ function winLoseTrigger()
         ForGroup(group, function()
             local unit = GetEnumUnit()
             local unitId = ('>I4'):pack(GetUnitTypeId(unit))
-            if unitId == team.base.unitId then
+            if unitId == units_special.base then
                 local trig = CreateTrigger()
                 TriggerRegisterUnitEvent(trig, unit, EVENT_UNIT_DEATH)
                 TriggerAddAction(trig, function()
