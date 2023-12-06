@@ -162,4 +162,8 @@ function initUnits()
     abilities = {
         mine = 'A000'
     }
+
+    text = {
+        mineLevel = "Level: "
+    }
 end

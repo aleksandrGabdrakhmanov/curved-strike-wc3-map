@@ -15,7 +15,7 @@ function goldExtractorTrigger()
                 BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.minePrice)
 
                 DestroyTextTag(player.mineTextTag)
-                player.mineTextTag = CreateTextTagUnitBJ("level: " .. player.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
+                player.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
             end)
         end
     end
