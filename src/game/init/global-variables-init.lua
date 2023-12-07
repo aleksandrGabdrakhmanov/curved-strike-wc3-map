@@ -29,6 +29,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 },
@@ -42,6 +43,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 },
@@ -55,6 +57,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 },
@@ -68,6 +71,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 },
@@ -81,6 +85,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 }
@@ -106,6 +111,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 },
@@ -119,6 +125,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 },
@@ -132,6 +139,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 },
@@ -145,6 +153,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 },
@@ -158,6 +167,7 @@ function initDefaultVariables()
                         mineTextTag = nil,
                     },
                     buildRect = nil,
+                    workerRect = nil,
                     mineRect = nil,
                     attackPointRect = {}
                 }

@@ -2,7 +2,7 @@ function initPlayers()
     setAllianceBetweenSpawnPlayers()
     setAllianceBetweenPlayers()
     setAllianceBetweenPlayersAndSpawnPlayers()
-    addBuilders()
+    addWorkers()
 end
 
 function setAllianceBetweenSpawnPlayers()
@@ -45,15 +45,14 @@ function setAllianceBetweenPlayersAndSpawnPlayers()
     end
 end
 
-function addBuilders()
+function addWorkers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            GetRectCenterX(player.buildRect)
             CreateUnit(
                     player.id,
                     FourCC(units_special.builder),
-                    GetRectCenterX(player.buildRect),
-                    GetRectCenterY(player.buildRect),
+                    GetRectCenterX(player.workerRect),
+                    GetRectCenterY(player.workerRect),
                     0
             )
         end

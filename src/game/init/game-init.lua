@@ -1,7 +1,8 @@
 function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
-    initRect('curved')
+    --initRect('curved')
+    initRect('united')
     createBaseAndTower()
     createMines()
 end
@@ -11,6 +12,7 @@ function initRect(mode)
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             player.buildRect = regions[mode][team.i][player.i]['build']
+            player.workerRect = regions[mode][team.i][player.i]['worker']
             player.mineRect = regions[mode][team.i][player.i]['mine']
         end
         team.base.baseRect = regions[mode]['team'][team.i]['base']
@@ -37,6 +39,16 @@ function initRect(mode)
         end
     end
 
+    if mode == 'united' then
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                player.attackPointRect = {
+                    regions[mode][team.i][player.i]['spawn'],
+                    regions[mode][team.i][player.i]['attack'],
+                }
+            end
+        end
+    end
 end
 
 function createBaseAndTower()
