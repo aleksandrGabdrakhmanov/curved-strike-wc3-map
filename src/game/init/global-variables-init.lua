@@ -1,159 +1,173 @@
 function initGlobalVariables()
-    initAllTeamsAndPlayers()
+    initRegions()
+    initDefaultVariables()
     initUnits()
 end
 
-function initAllTeamsAndPlayers()
+function initDefaultVariables()
     game_config = {
         economy = {
             startGold = 500,
             startIncomePerSec = 10,
-            firstMinePrice = 10, -- need init. now get from map
-            nextMineDiffPrice = 20
+            firstMinePrice = 300, -- need init. now get from map
+            nextMineDiffPrice = 300
         },
         spawnInterval = 30
     }
+
     all_teams = {
         {
+            i = 1,
             players = {
                 {
                     id = Player(4),
+                    i = 1,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_up,
-                    mineRect = gg_rct_mine_left_up,
-                    attackPointRect = { gg_rct_spawn_left_up, gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(2),
+                    i = 2,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_middle_up,
-                    mineRect = gg_rct_mine_left_middle_up,
-                    attackPointRect = { gg_rct_spawn_left_middle_up, gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(0),
+                    i = 3,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_middle,
-                    mineRect = gg_rct_mine_left_middle,
-                    attackPointRect = { gg_rct_spawn_left_middle, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(3),
+                    i = 4,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_middle_down,
-                    mineRect = gg_rct_mine_left_middle_down,
-                    attackPointRect = { gg_rct_spawn_left_middle_down, gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(5),
+                    i = 5,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_down,
-                    mineRect = gg_rct_mine_left_down,
-                    attackPointRect = { gg_rct_spawn_left_down, gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 }
             },
             spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
             base = {
                 player = Player(16),
                 winTeam = 2,
-                baseRect = gg_rct_base_left,
-                towerRect = gg_rct_tower_left
+                baseRect = nil,
+                towerRect = nil
             }
         },
         {
+            i = 2,
             players = {
                 {
                     id = Player(8),
+                    i = 1,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_up,
-                    mineRect = gg_rct_mine_right_up,
-                    attackPointRect = { gg_rct_spawn_right_up, gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(6),
+                    i = 2,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_middle_up,
-                    mineRect = gg_rct_mine_right_middle_up,
-                    attackPointRect = { gg_rct_spawn_right_middle_up, gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(1),
+                    i = 3,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_middle,
-                    mineRect = gg_rct_mine_right_middle,
-                    attackPointRect = { gg_rct_spawn_right_middle, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(7),
+                    i = 4,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_middle_down,
-                    mineRect = gg_rct_mine_right_middle_down,
-                    attackPointRect = { gg_rct_spawn_right_middle_down, gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(9),
+                    i = 5,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_down,
-                    mineRect = gg_rct_mine_right_down,
-                    attackPointRect = { gg_rct_spawn_right_down, gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 }
             },
             spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
             base = {
                 player = Player(12),
                 winTeam = 1,
-                baseRect = gg_rct_base_right,
-                towerRect = gg_rct_tower_right
+                baseRect = nil,
+                towerRect = nil
             }
         }
     }

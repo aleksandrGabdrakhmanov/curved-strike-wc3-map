@@ -1,167 +1,101 @@
-gg_rct_attack_region_p1 = nil
-gg_rct_attack_region_p10 = nil
-gg_rct_attack_region_p2 = nil
-gg_rct_attack_region_p3 = nil
-gg_rct_attack_region_p4 = nil
-gg_rct_attack_region_p5 = nil
-gg_rct_attack_region_p6 = nil
-gg_rct_attack_region_p7 = nil
-gg_rct_attack_region_p8 = nil
-gg_rct_attack_region_p9 = nil
-gg_rct_build_right_middle = nil
-gg_rct_build_left_down = nil
-gg_rct_build_left_middle = nil
-gg_rct_build_right_middle_up = nil
-gg_rct_build_right_up = nil
-gg_rct_build_right_middle_down = nil
-gg_rct_build_right_down = nil
-gg_rct_build_left_middle_up = nil
-gg_rct_build_left_up = nil
-gg_rct_build_left_middle_down = nil
-gg_rct_spawn_right_middle = nil
-gg_rct_spawn_left_down = nil
-gg_rct_spawn_left_middle = nil
-gg_rct_spawn_right_middle_up = nil
-gg_rct_spawn_right_up = nil
-gg_rct_spawn_right_middle_down = nil
-gg_rct_spawn_right_down = nil
-gg_rct_spawn_left_middle_up = nil
-gg_rct_spawn_left_middle_down = nil
-gg_rct_attack_region_center_left = nil
-gg_rct_attack_region_center_right = nil
-gg_rct_spawn_left_up = nil
-gg_rct_base_left = nil
-gg_rct_base_right = nil
-gg_rct_tower_left = nil
-gg_rct_tower_right = nil
-gg_rct_mine_left_middle = nil
-gg_rct_mine_left_middle_down = nil
-gg_rct_mine_left_down = nil
-gg_rct_mine_left_middle_up = nil
-gg_rct_mine_left_up = nil
-gg_rct_mine_right_up = nil
-gg_rct_mine_right_middle_up = nil
-gg_rct_mine_right_middle = nil
-gg_rct_mine_right_middle_down = nil
-gg_rct_mine_right_down = nil
+gg_rct_curved_team_2_attack_2 = nil
+gg_rct_curved_1_5_attack_1 = nil
+gg_rct_curved_team_1_attack_2 = nil
+gg_rct_curved_2_2_attack_1 = nil
+gg_rct_curved_2_1_attack_1 = nil
+gg_rct_curved_2_4_attack_1 = nil
+gg_rct_curved_2_5_attack_1 = nil
+gg_rct_curved_1_2_attack_1 = nil
+gg_rct_curved_1_1_attack_1 = nil
+gg_rct_curved_1_4_attack_1 = nil
+gg_rct_curved_2_3_build = nil
+gg_rct_curved_1_5_build = nil
+gg_rct_curved_1_3_build = nil
+gg_rct_curved_2_2_build = nil
+gg_rct_curved_2_1_build = nil
+gg_rct_curved_2_4_build = nil
+gg_rct_curved_2_5_build = nil
+gg_rct_curved_1_2_build = nil
+gg_rct_curved_1_1_build = nil
+gg_rct_curved_1_4_build = nil
+gg_rct_curved_2_3_spawn = nil
+gg_rct_curved_1_5_spawn = nil
+gg_rct_curved_1_3_spawn = nil
+gg_rct_curved_2_2_spawn = nil
+gg_rct_curved_2_1_spawn = nil
+gg_rct_curved_2_4_spawn = nil
+gg_rct_curved_2_5_spawn = nil
+gg_rct_curved_1_2_spawn = nil
+gg_rct_curved_1_4_spawn = nil
+gg_rct_curved_team_2_attack_1 = nil
+gg_rct_curved_team_1_attack_1 = nil
+gg_rct_curved_1_1_spawn = nil
+gg_rct_curved_team_1_base = nil
+gg_rct_curved_team_2_base = nil
+gg_rct_curved_team_1_tower = nil
+gg_rct_curved_team_2_tower = nil
+gg_rct_curved_1_3_mine = nil
+gg_rct_curved_1_4_mine = nil
+gg_rct_curved_1_5_mine = nil
+gg_rct_curved_1_2_mine = nil
+gg_rct_curved_1_1_mine = nil
+gg_rct_curved_2_1_mine = nil
+gg_rct_curved_2_2_mine = nil
+gg_rct_curved_2_3_mine = nil
+gg_rct_curved_2_4_mine = nil
+gg_rct_curved_2_5_mine = nil
 function InitGlobals()
-end
-
-function CreateUnitsForPlayer0()
-local p = Player(0)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -5952.8, -6236.0, 232.643, FourCC("o000"))
-end
-
-function CreateUnitsForPlayer1()
-local p = Player(1)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6418.4, -5501.0, 350.782, FourCC("o000"))
-end
-
-function CreateUnitsForPlayer2()
-local p = Player(2)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6844.0, -5171.5, 118.282, FourCC("o000"))
-end
-
-function CreateUnitsForPlayer3()
-local p = Player(3)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6391.8, -6863.8, 330.039, FourCC("o000"))
-end
-
-function CreateUnitsForPlayer4()
-local p = Player(4)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("o000"), -6623.5, -7406.3, 182.049, FourCC("o000"))
-end
-
-function CreatePlayerBuildings()
-end
-
-function CreatePlayerUnits()
-CreateUnitsForPlayer0()
-CreateUnitsForPlayer1()
-CreateUnitsForPlayer2()
-CreateUnitsForPlayer3()
-CreateUnitsForPlayer4()
-end
-
-function CreateAllUnits()
-CreatePlayerBuildings()
-CreatePlayerUnits()
 end
 
 function CreateRegions()
 local we
 
-gg_rct_attack_region_p1 = Rect(-4032.0, -256.0, -2880.0, 1408.0)
-gg_rct_attack_region_p10 = Rect(1600.0, -3584.0, 2752.0, -1920.0)
-gg_rct_attack_region_p2 = Rect(3840.0, -256.0, 4992.0, 1408.0)
-gg_rct_attack_region_p3 = Rect(-1792.0, 1408.0, -640.0, 3072.0)
-gg_rct_attack_region_p4 = Rect(-1792.0, 3072.0, -640.0, 4736.0)
-gg_rct_attack_region_p5 = Rect(-1792.0, -1920.0, -640.0, -256.0)
-gg_rct_attack_region_p6 = Rect(-1792.0, -3584.0, -640.0, -1920.0)
-gg_rct_attack_region_p7 = Rect(1600.0, 1408.0, 2752.0, 3072.0)
-gg_rct_attack_region_p8 = Rect(1600.0, 3072.0, 2752.0, 4736.0)
-gg_rct_attack_region_p9 = Rect(1600.0, -1920.0, 2752.0, -256.0)
-gg_rct_build_right_middle = Rect(6720.0, -256.0, 7872.0, 1408.0)
-gg_rct_build_left_down = Rect(-6912.0, -3968.0, -5760.0, -2304.0)
-gg_rct_build_left_middle = Rect(-6912.0, -256.0, -5760.0, 1408.0)
-gg_rct_build_right_middle_up = Rect(6720.0, 1600.0, 7872.0, 3264.0)
-gg_rct_build_right_up = Rect(6720.0, 3456.0, 7872.0, 5120.0)
-gg_rct_build_right_middle_down = Rect(6720.0, -2112.0, 7872.0, -448.0)
-gg_rct_build_right_down = Rect(6720.0, -3968.0, 7872.0, -2304.0)
-gg_rct_build_left_middle_up = Rect(-6912.0, 1600.0, -5760.0, 3264.0)
-gg_rct_build_left_up = Rect(-6912.0, 3456.0, -5760.0, 5120.0)
-gg_rct_build_left_middle_down = Rect(-6912.0, -2112.0, -5760.0, -448.0)
-gg_rct_spawn_right_middle = Rect(4992.0, -256.0, 6144.0, 1408.0)
-gg_rct_spawn_left_down = Rect(-5184.0, -3584.0, -4032.0, -1920.0)
-gg_rct_spawn_left_middle = Rect(-5184.0, -256.0, -4032.0, 1408.0)
-gg_rct_spawn_right_middle_up = Rect(4992.0, 1408.0, 6144.0, 3072.0)
-gg_rct_spawn_right_up = Rect(4992.0, 3072.0, 6144.0, 4736.0)
-gg_rct_spawn_right_middle_down = Rect(4992.0, -1920.0, 6144.0, -256.0)
-gg_rct_spawn_right_down = Rect(4992.0, -3584.0, 6144.0, -1920.0)
-gg_rct_spawn_left_middle_up = Rect(-5184.0, 1408.0, -4032.0, 3072.0)
-gg_rct_spawn_left_middle_down = Rect(-5184.0, -1920.0, -4032.0, -256.0)
-gg_rct_attack_region_center_left = Rect(-1792.0, -256.0, -640.0, 1408.0)
-gg_rct_attack_region_center_right = Rect(1600.0, -256.0, 2752.0, 1408.0)
-gg_rct_spawn_left_up = Rect(-5184.0, 3072.0, -4032.0, 4736.0)
-gg_rct_base_left = Rect(-4000.0, 320.0, -3392.0, 960.0)
-gg_rct_base_right = Rect(4352.0, 320.0, 4960.0, 960.0)
-gg_rct_tower_left = Rect(-1568.0, 320.0, -960.0, 960.0)
-gg_rct_tower_right = Rect(1888.0, 320.0, 2496.0, 960.0)
-gg_rct_mine_left_middle = Rect(-7264.0, -256.0, -6912.0, 64.0)
-gg_rct_mine_left_middle_down = Rect(-7264.0, -2112.0, -6912.0, -1792.0)
-gg_rct_mine_left_down = Rect(-7264.0, -3968.0, -6912.0, -3648.0)
-gg_rct_mine_left_middle_up = Rect(-7264.0, 1600.0, -6912.0, 1920.0)
-gg_rct_mine_left_up = Rect(-7264.0, 3456.0, -6912.0, 3776.0)
-gg_rct_mine_right_up = Rect(7872.0, 3456.0, 8224.0, 3776.0)
-gg_rct_mine_right_middle_up = Rect(7872.0, 1600.0, 8224.0, 1920.0)
-gg_rct_mine_right_middle = Rect(7872.0, -256.0, 8224.0, 64.0)
-gg_rct_mine_right_middle_down = Rect(7872.0, -2112.0, 8224.0, -1792.0)
-gg_rct_mine_right_down = Rect(7872.0, -3968.0, 8224.0, -3648.0)
+gg_rct_curved_1_1_attack_1 = Rect(1600.0, 3072.0, 2752.0, 4736.0)
+gg_rct_curved_1_1_build = Rect(-6912.0, 3456.0, -5760.0, 5120.0)
+gg_rct_curved_1_1_mine = Rect(-7264.0, 3456.0, -6912.0, 3776.0)
+gg_rct_curved_1_1_spawn = Rect(-5184.0, 3072.0, -4032.0, 4736.0)
+gg_rct_curved_1_2_attack_1 = Rect(1600.0, 1408.0, 2752.0, 3072.0)
+gg_rct_curved_1_2_build = Rect(-6912.0, 1600.0, -5760.0, 3264.0)
+gg_rct_curved_1_2_mine = Rect(-7264.0, 1600.0, -6912.0, 1920.0)
+gg_rct_curved_1_2_spawn = Rect(-5184.0, 1408.0, -4032.0, 3072.0)
+gg_rct_curved_1_3_build = Rect(-6912.0, -256.0, -5760.0, 1408.0)
+gg_rct_curved_1_3_mine = Rect(-7264.0, -256.0, -6912.0, 64.0)
+gg_rct_curved_1_3_spawn = Rect(-5184.0, -256.0, -4032.0, 1408.0)
+gg_rct_curved_1_4_attack_1 = Rect(1600.0, -1920.0, 2752.0, -256.0)
+gg_rct_curved_1_4_build = Rect(-6912.0, -2112.0, -5760.0, -448.0)
+gg_rct_curved_1_4_mine = Rect(-7264.0, -2112.0, -6912.0, -1792.0)
+gg_rct_curved_1_4_spawn = Rect(-5184.0, -1920.0, -4032.0, -256.0)
+gg_rct_curved_1_5_attack_1 = Rect(1600.0, -3584.0, 2752.0, -1920.0)
+gg_rct_curved_1_5_build = Rect(-6912.0, -3968.0, -5760.0, -2304.0)
+gg_rct_curved_1_5_mine = Rect(-7264.0, -3968.0, -6912.0, -3648.0)
+gg_rct_curved_1_5_spawn = Rect(-5184.0, -3584.0, -4032.0, -1920.0)
+gg_rct_curved_2_1_attack_1 = Rect(-1792.0, 3072.0, -640.0, 4736.0)
+gg_rct_curved_2_1_build = Rect(6720.0, 3456.0, 7872.0, 5120.0)
+gg_rct_curved_2_1_mine = Rect(7872.0, 3456.0, 8224.0, 3776.0)
+gg_rct_curved_2_1_spawn = Rect(4992.0, 3072.0, 6144.0, 4736.0)
+gg_rct_curved_2_2_attack_1 = Rect(-1792.0, 1408.0, -640.0, 3072.0)
+gg_rct_curved_2_2_build = Rect(6720.0, 1600.0, 7872.0, 3264.0)
+gg_rct_curved_2_2_mine = Rect(7872.0, 1600.0, 8224.0, 1920.0)
+gg_rct_curved_2_2_spawn = Rect(4992.0, 1408.0, 6144.0, 3072.0)
+gg_rct_curved_2_3_build = Rect(6720.0, -256.0, 7872.0, 1408.0)
+gg_rct_curved_2_3_mine = Rect(7872.0, -256.0, 8224.0, 64.0)
+gg_rct_curved_2_3_spawn = Rect(4992.0, -256.0, 6144.0, 1408.0)
+gg_rct_curved_2_4_attack_1 = Rect(-1792.0, -1920.0, -640.0, -256.0)
+gg_rct_curved_2_4_build = Rect(6720.0, -2112.0, 7872.0, -448.0)
+gg_rct_curved_2_4_mine = Rect(7872.0, -2112.0, 8224.0, -1792.0)
+gg_rct_curved_2_4_spawn = Rect(4992.0, -1920.0, 6144.0, -256.0)
+gg_rct_curved_2_5_attack_1 = Rect(-1792.0, -3584.0, -640.0, -1920.0)
+gg_rct_curved_2_5_build = Rect(6720.0, -3968.0, 7872.0, -2304.0)
+gg_rct_curved_2_5_mine = Rect(7872.0, -3968.0, 8224.0, -3648.0)
+gg_rct_curved_2_5_spawn = Rect(4992.0, -3584.0, 6144.0, -1920.0)
+gg_rct_curved_team_1_attack_1 = Rect(1600.0, -256.0, 2752.0, 1408.0)
+gg_rct_curved_team_1_attack_2 = Rect(3840.0, -256.0, 4992.0, 1408.0)
+gg_rct_curved_team_1_base = Rect(-4000.0, 320.0, -3392.0, 960.0)
+gg_rct_curved_team_1_tower = Rect(-1568.0, 320.0, -960.0, 960.0)
+gg_rct_curved_team_2_attack_1 = Rect(-1792.0, -256.0, -640.0, 1408.0)
+gg_rct_curved_team_2_attack_2 = Rect(-4032.0, -256.0, -2880.0, 1408.0)
+gg_rct_curved_team_2_base = Rect(4352.0, 320.0, 4960.0, 960.0)
+gg_rct_curved_team_2_tower = Rect(1888.0, 320.0, 2496.0, 960.0)
 end
 
 --CUSTOM_CODE
@@ -689,8 +623,42 @@ end
 function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
+    initRect('curved')
     createBaseAndTower()
     createMines()
+end
+
+function initRect(mode)
+
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            player.buildRect = regions[mode][team.i][player.i]['build']
+            player.mineRect = regions[mode][team.i][player.i]['mine']
+        end
+        team.base.baseRect = regions[mode]['team'][team.i]['base']
+        team.base.towerRect = regions[mode]['team'][team.i]['tower']
+    end
+
+    if mode == 'curved' then
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                if player.i ~= 3 then
+                    player.attackPointRect = {
+                        regions[mode][team.i][player.i]['spawn'],
+                        regions[mode][team.i][player.i]['attack'][1],
+                        regions[mode]['team'][team.i]['attack'][1],
+                        regions[mode]['team'][team.i]['attack'][2]
+                    }
+                else
+                    player.attackPointRect = {
+                        regions[mode][team.i][player.i]['spawn'],
+                        regions[mode]['team'][team.i]['attack'][2]
+                    }
+                end
+            end
+        end
+    end
+
 end
 
 function createBaseAndTower()
@@ -727,161 +695,182 @@ function createMines()
     end
 end
 function initGlobalVariables()
-    initAllTeamsAndPlayers()
+    local status, errmsg = pcall(initRegions)
+    if not status then
+        print("Ошибка:", errmsg)
+    end
+    initDefaultVariables(
+            "curved"
+    )
     initUnits()
+    print("region:")
+    --print(regions['build']['left']['up'])
 end
 
-function initAllTeamsAndPlayers()
+function initDefaultVariables(mode)
     game_config = {
         economy = {
             startGold = 500,
             startIncomePerSec = 10,
-            firstMinePrice = 10, -- need init. now get from map
-            nextMineDiffPrice = 20
+            firstMinePrice = 300, -- need init. now get from map
+            nextMineDiffPrice = 300
         },
         spawnInterval = 30
     }
+
     all_teams = {
         {
+            i = 1,
             players = {
                 {
                     id = Player(4),
+                    i = 1,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_up,
-                    mineRect = gg_rct_mine_left_up,
-                    attackPointRect = { gg_rct_spawn_left_up, gg_rct_attack_region_p8, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(2),
+                    i = 2,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_middle_up,
-                    mineRect = gg_rct_mine_left_middle_up,
-                    attackPointRect = { gg_rct_spawn_left_middle_up, gg_rct_attack_region_p7, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(0),
+                    i = 3,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_middle,
-                    mineRect = gg_rct_mine_left_middle,
-                    attackPointRect = { gg_rct_spawn_left_middle, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(3),
+                    i = 4,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_middle_down,
-                    mineRect = gg_rct_mine_left_middle_down,
-                    attackPointRect = { gg_rct_spawn_left_middle_down, gg_rct_attack_region_p9, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(5),
+                    i = 5,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_left_down,
-                    mineRect = gg_rct_mine_left_down,
-                    attackPointRect = { gg_rct_spawn_left_down, gg_rct_attack_region_p10, gg_rct_attack_region_center_right, gg_rct_attack_region_p2 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 }
             },
             spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
             base = {
                 player = Player(16),
                 winTeam = 2,
-                baseRect = gg_rct_base_left,
-                towerRect = gg_rct_tower_left
+                baseRect = nil,
+                towerRect = nil
             }
         },
         {
+            i = 2,
             players = {
                 {
                     id = Player(8),
+                    i = 1,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_up,
-                    mineRect = gg_rct_mine_right_up,
-                    attackPointRect = { gg_rct_spawn_right_up, gg_rct_attack_region_p4, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(6),
+                    i = 2,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_middle_up,
-                    mineRect = gg_rct_mine_right_middle_up,
-                    attackPointRect = { gg_rct_spawn_right_middle_up, gg_rct_attack_region_p3, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(1),
+                    i = 3,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_middle,
-                    mineRect = gg_rct_mine_right_middle,
-                    attackPointRect = { gg_rct_spawn_right_middle, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(7),
+                    i = 4,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_middle_down,
-                    mineRect = gg_rct_mine_right_middle_down,
-                    attackPointRect = { gg_rct_spawn_right_middle_down, gg_rct_attack_region_p5, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 },
                 {
                     id = Player(9),
+                    i = 5,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
                         minePrice = game_config.economy.firstMinePrice,
                         mineLevel = 0,
                         mineTextTag = nil,
                     },
-                    buildRect = gg_rct_build_right_down,
-                    mineRect = gg_rct_mine_right_down,
-                    attackPointRect = { gg_rct_spawn_right_down, gg_rct_attack_region_p6, gg_rct_attack_region_center_left, gg_rct_attack_region_p1 }
+                    buildRect = nil,
+                    mineRect = nil,
+                    attackPointRect = {}
                 }
             },
             spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
             base = {
                 player = Player(12),
                 winTeam = 1,
-                baseRect = gg_rct_base_right,
-                towerRect = gg_rct_tower_right
+                baseRect = nil,
+                towerRect = nil
             }
         }
     }
@@ -981,8 +970,38 @@ function addBuilders()
         end
     end
 end
+regions = {}
+function initRegions()
+    for name, value in pairs(_G) do
+        if string.sub(name, 1, 7) == "gg_rct_" then
+            local parts = split(string.sub(name, 8), "_")
+
+            local currentTable = regions
+            for i, part in ipairs(parts) do
+                if i == #parts then
+                    currentTable[part] = value
+                else
+                    currentTable[part] = currentTable[part] or {}
+                    currentTable = currentTable[part]
+                end
+            end
+        end
+    end
+end
+
+function split(str, delimiter)
+    local result = {}
+    for match in (str..delimiter):gmatch("(.-)"..delimiter) do
+        if tonumber(match) then
+            table.insert(result, tonumber(match))
+        else
+            table.insert(result, match)
+        end
+    end
+    return result
+end
 OnInit(function()
-    print("2")
+    print("3")
     initMain()
     initialUI()
     initTimers()
@@ -1056,7 +1075,7 @@ function incomeTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 local currentGold = GetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD)
-                SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + player.income)
+                SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + player.economy.income)
             end
         end
     end)
@@ -1317,7 +1336,6 @@ SetAmbientDaySound("LordaeronSummerDay")
 SetAmbientNightSound("LordaeronSummerNight")
 SetMapMusic("Music", true, 0)
 CreateRegions()
-CreateAllUnits()
 InitBlizzard()
 InitGlobals()
 end

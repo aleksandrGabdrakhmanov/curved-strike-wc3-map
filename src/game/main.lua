@@ -1,5 +1,5 @@
 OnInit(function()
-    print("2")
+    print("3")
     initMain()
     initialUI()
     initTimers()
