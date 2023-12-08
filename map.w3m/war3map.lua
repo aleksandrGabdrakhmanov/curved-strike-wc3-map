@@ -111,6 +111,29 @@ gg_rct_united_2_5_attack = nil
 function InitGlobals()
 end
 
+function CreateBuildingsForPlayer0()
+local p = Player(0)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("htow"), -7168.0, 448.0, 270.000, FourCC("htow"))
+u = BlzCreateUnitWithSkin(p, FourCC("nmgv"), -7552.0, 576.0, 270.000, FourCC("nmgv"))
+end
+
+function CreatePlayerBuildings()
+CreateBuildingsForPlayer0()
+end
+
+function CreatePlayerUnits()
+end
+
+function CreateAllUnits()
+CreatePlayerBuildings()
+CreatePlayerUnits()
+end
+
 function CreateRegions()
 local we
 
@@ -1478,6 +1501,7 @@ SetAmbientDaySound("LordaeronSummerDay")
 SetAmbientNightSound("LordaeronSummerNight")
 SetMapMusic("Music", true, 0)
 CreateRegions()
+CreateAllUnits()
 InitBlizzard()
 InitGlobals()
 end
