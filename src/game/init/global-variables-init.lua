@@ -1,10 +1,11 @@
-function initGlobalVariables()
+function initGlobalVariables(mode)
     initRegions()
-    initDefaultVariables()
+    initDefaultVariables(mode)
     initUnits()
 end
 
-function initDefaultVariables()
+function initDefaultVariables(mode)
+    game_mode = mode
     game_config = {
         economy = {
             startGold = 500,

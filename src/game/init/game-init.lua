@@ -1,50 +1,49 @@
 function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
-    --initRect('curved')
-    initRect('united')
+    initRect()
     createBaseAndTower()
     createMines()
 end
 
-function initRect(mode)
+function initRect()
 
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            player.buildRect = regions[mode][team.i][player.i]['build']
-            player.workerRect = regions[mode][team.i][player.i]['worker']
-            player.mineRect = regions[mode][team.i][player.i]['mine']
+            player.buildRect = regions[game_mode][team.i][player.i]['build']
+            player.workerRect = regions[game_mode][team.i][player.i]['worker']
+            player.mineRect = regions[game_mode][team.i][player.i]['mine']
         end
-        team.base.baseRect = regions[mode]['team'][team.i]['base']
-        team.base.towerRect = regions[mode]['team'][team.i]['tower']
+        team.base.baseRect = regions[game_mode]['team'][team.i]['base']
+        team.base.towerRect = regions[game_mode]['team'][team.i]['tower']
     end
 
-    if mode == 'curved' then
+    if game_mode == 'curved' then
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if player.i ~= 3 then
                     player.attackPointRect = {
-                        regions[mode][team.i][player.i]['spawn'],
-                        regions[mode][team.i][player.i]['attack'][1],
-                        regions[mode]['team'][team.i]['attack'][1],
-                        regions[mode]['team'][team.i]['attack'][2]
+                        regions[game_mode][team.i][player.i]['spawn'],
+                        regions[game_mode][team.i][player.i]['attack'][1],
+                        regions[game_mode]['team'][team.i]['attack'][1],
+                        regions[game_mode]['team'][team.i]['attack'][2]
                     }
                 else
                     player.attackPointRect = {
-                        regions[mode][team.i][player.i]['spawn'],
-                        regions[mode]['team'][team.i]['attack'][2]
+                        regions[game_mode][team.i][player.i]['spawn'],
+                        regions[game_mode]['team'][team.i]['attack'][2]
                     }
                 end
             end
         end
     end
 
-    if mode == 'united' then
+    if game_mode == 'united' then
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 player.attackPointRect = {
-                    regions[mode][team.i][player.i]['spawn'],
-                    regions[mode][team.i][player.i]['attack'],
+                    regions[game_mode][team.i][player.i]['spawn'],
+                    regions[game_mode][team.i][player.i]['attack'],
                 }
             end
         end

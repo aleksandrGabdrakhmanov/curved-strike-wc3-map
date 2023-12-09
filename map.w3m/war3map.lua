@@ -775,49 +775,49 @@ function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
     --initRect('curved')
-    initRect('united')
+    initRect()
     createBaseAndTower()
     createMines()
 end
 
-function initRect(mode)
+function initRect()
 
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            player.buildRect = regions[mode][team.i][player.i]['build']
-            player.workerRect = regions[mode][team.i][player.i]['worker']
-            player.mineRect = regions[mode][team.i][player.i]['mine']
+            player.buildRect = regions[game_mode][team.i][player.i]['build']
+            player.workerRect = regions[game_mode][team.i][player.i]['worker']
+            player.mineRect = regions[game_mode][team.i][player.i]['mine']
         end
-        team.base.baseRect = regions[mode]['team'][team.i]['base']
-        team.base.towerRect = regions[mode]['team'][team.i]['tower']
+        team.base.baseRect = regions[game_mode]['team'][team.i]['base']
+        team.base.towerRect = regions[game_mode]['team'][team.i]['tower']
     end
 
-    if mode == 'curved' then
+    if game_mode == 'curved' then
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if player.i ~= 3 then
                     player.attackPointRect = {
-                        regions[mode][team.i][player.i]['spawn'],
-                        regions[mode][team.i][player.i]['attack'][1],
-                        regions[mode]['team'][team.i]['attack'][1],
-                        regions[mode]['team'][team.i]['attack'][2]
+                        regions[game_mode][team.i][player.i]['spawn'],
+                        regions[game_mode][team.i][player.i]['attack'][1],
+                        regions[game_mode]['team'][team.i]['attack'][1],
+                        regions[game_mode]['team'][team.i]['attack'][2]
                     }
                 else
                     player.attackPointRect = {
-                        regions[mode][team.i][player.i]['spawn'],
-                        regions[mode]['team'][team.i]['attack'][2]
+                        regions[game_mode][team.i][player.i]['spawn'],
+                        regions[game_mode]['team'][team.i]['attack'][2]
                     }
                 end
             end
         end
     end
 
-    if mode == 'united' then
+    if game_mode == 'united' then
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 player.attackPointRect = {
-                    regions[mode][team.i][player.i]['spawn'],
-                    regions[mode][team.i][player.i]['attack'],
+                    regions[game_mode][team.i][player.i]['spawn'],
+                    regions[game_mode][team.i][player.i]['attack'],
                 }
             end
         end
@@ -857,13 +857,14 @@ function createMines()
         end
     end
 end
-function initGlobalVariables()
+function initGlobalVariables(mode)
     initRegions()
-    initDefaultVariables()
+    initDefaultVariables(mode)
     initUnits()
 end
 
-function initDefaultVariables()
+function initDefaultVariables(mode)
+    game_mode = mode
     game_config = {
         economy = {
             startGold = 500,
@@ -1070,8 +1071,8 @@ function initUnits()
         mineLevel = "Level: "
     }
 end
-function initMain()
-    initGlobalVariables()
+function initMain(mode)
+    initGlobalVariables(mode)
     initGame()
     initPlayers()
 end
@@ -1166,12 +1167,50 @@ function split(str, delimiter)
     return result
 end
 OnInit(function()
-    print("5")
-    initMain()
-    initialUI()
-    initTimers()
-    initTriggers()
-    --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
+
+    local main = BlzCreateFrame("EscMenuBackdrop", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
+    BlzFrameSetAbsPoint(main, FRAMEPOINT_CENTER, 0.4, 0.35)
+    BlzFrameSetSize(main, 0.3, 0.35)
+    BlzFrameSetVisible(frame, GetLocalPlayer() == Player(0))
+
+    local buttonCurved = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
+    BlzFrameSetPoint(buttonCurved, FRAMEPOINT_CENTER, main, FRAMEPOINT_CENTER, 0, -0.02)
+    BlzFrameSetText(buttonCurved, "CURVED")
+    BlzFrameSetVisible(buttonCurved, GetLocalPlayer() == Player(0))
+
+    local buttonUnion = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
+    BlzFrameSetPoint(buttonUnion, FRAMEPOINT_CENTER, main, FRAMEPOINT_CENTER, 0, 0.02)
+    BlzFrameSetText(buttonUnion, "UNITED")
+    BlzFrameSetVisible(buttonUnion, GetLocalPlayer() == Player(0))
+
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, buttonCurved, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        BlzFrameSetVisible(main, FALSE)
+        BlzFrameSetVisible(buttonCurved, FALSE)
+        BlzFrameSetVisible(buttonUnion, FALSE)
+        print("7")
+        initMain('curved')
+        initialUI()
+        initTimers()
+        initTriggers()
+        --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
+    end)
+
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, buttonUnion, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        BlzFrameSetVisible(main, FALSE)
+        BlzFrameSetVisible(buttonCurved, FALSE)
+        BlzFrameSetVisible(buttonUnion, FALSE)
+        print("7")
+        initMain('united')
+        initialUI()
+        initTimers()
+        initTriggers()
+        --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
+    end)
+
 end)
 
 function initTimers()
