@@ -4,5 +4,6 @@ function initTriggers()
     moveByPointsTrigger()
     winLoseTrigger()
     goldExtractorTrigger()
+    finishResearchTrigger()
     debugTrigger()
 end

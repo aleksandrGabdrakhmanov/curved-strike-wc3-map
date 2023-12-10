@@ -1,41 +1,61 @@
 gg_rct_curved_1_1_attack_1 = nil
 gg_rct_curved_1_1_build = nil
+gg_rct_curved_1_1_main = nil
 gg_rct_curved_1_1_mine = nil
 gg_rct_curved_1_1_spawn = nil
+gg_rct_curved_1_1_worker = nil
 gg_rct_curved_1_2_attack_1 = nil
 gg_rct_curved_1_2_build = nil
+gg_rct_curved_1_2_main = nil
 gg_rct_curved_1_2_mine = nil
 gg_rct_curved_1_2_spawn = nil
+gg_rct_curved_1_2_worker = nil
 gg_rct_curved_1_3_build = nil
+gg_rct_curved_1_3_main = nil
 gg_rct_curved_1_3_mine = nil
 gg_rct_curved_1_3_spawn = nil
+gg_rct_curved_1_3_worker = nil
 gg_rct_curved_1_4_attack_1 = nil
 gg_rct_curved_1_4_build = nil
+gg_rct_curved_1_4_main = nil
 gg_rct_curved_1_4_mine = nil
 gg_rct_curved_1_4_spawn = nil
+gg_rct_curved_1_4_worker = nil
 gg_rct_curved_1_5_attack_1 = nil
 gg_rct_curved_1_5_build = nil
+gg_rct_curved_1_5_main = nil
 gg_rct_curved_1_5_mine = nil
 gg_rct_curved_1_5_spawn = nil
+gg_rct_curved_1_5_worker = nil
 gg_rct_curved_2_1_attack_1 = nil
 gg_rct_curved_2_1_build = nil
+gg_rct_curved_2_1_main = nil
 gg_rct_curved_2_1_mine = nil
 gg_rct_curved_2_1_spawn = nil
+gg_rct_curved_2_1_worker = nil
 gg_rct_curved_2_2_attack_1 = nil
 gg_rct_curved_2_2_build = nil
+gg_rct_curved_2_2_main = nil
 gg_rct_curved_2_2_mine = nil
 gg_rct_curved_2_2_spawn = nil
+gg_rct_curved_2_2_worker = nil
 gg_rct_curved_2_3_build = nil
+gg_rct_curved_2_3_main = nil
 gg_rct_curved_2_3_mine = nil
 gg_rct_curved_2_3_spawn = nil
+gg_rct_curved_2_3_worker = nil
 gg_rct_curved_2_4_attack_1 = nil
 gg_rct_curved_2_4_build = nil
+gg_rct_curved_2_4_main = nil
 gg_rct_curved_2_4_mine = nil
 gg_rct_curved_2_4_spawn = nil
+gg_rct_curved_2_4_worker = nil
 gg_rct_curved_2_5_attack_1 = nil
 gg_rct_curved_2_5_build = nil
+gg_rct_curved_2_5_main = nil
 gg_rct_curved_2_5_mine = nil
 gg_rct_curved_2_5_spawn = nil
+gg_rct_curved_2_5_worker = nil
 gg_rct_curved_team_1_attack_1 = nil
 gg_rct_curved_team_1_attack_2 = nil
 gg_rct_curved_team_1_base = nil
@@ -44,94 +64,81 @@ gg_rct_curved_team_2_attack_1 = nil
 gg_rct_curved_team_2_attack_2 = nil
 gg_rct_curved_team_2_base = nil
 gg_rct_curved_team_2_tower = nil
-gg_rct_united_1_3_build = nil
-gg_rct_united_1_2_build = nil
-gg_rct_united_1_4_build = nil
+gg_rct_united_1_1_attack_1 = nil
+gg_rct_united_1_1_attack_2 = nil
 gg_rct_united_1_1_build = nil
-gg_rct_united_1_5_build = nil
-gg_rct_united_1_3_worker = nil
-gg_rct_united_1_2_worker = nil
-gg_rct_united_1_1_worker = nil
-gg_rct_united_1_4_worker = nil
-gg_rct_united_1_5_worker = nil
-gg_rct_curved_1_1_worker = nil
-gg_rct_curved_1_2_worker = nil
-gg_rct_curved_1_3_worker = nil
-gg_rct_curved_1_4_worker = nil
-gg_rct_curved_1_5_worker = nil
-gg_rct_curved_2_1_worker = nil
-gg_rct_curved_2_2_worker = nil
-gg_rct_curved_2_3_worker = nil
-gg_rct_curved_2_4_worker = nil
-gg_rct_curved_2_5_worker = nil
-gg_rct_united_1_5_mine = nil
-gg_rct_united_1_4_mine = nil
-gg_rct_united_1_3_mine = nil
-gg_rct_united_1_2_mine = nil
+gg_rct_united_1_1_main = nil
 gg_rct_united_1_1_mine = nil
-gg_rct_united_1_3_spawn = nil
-gg_rct_united_1_2_spawn = nil
-gg_rct_united_1_4_spawn = nil
 gg_rct_united_1_1_spawn = nil
+gg_rct_united_1_1_worker = nil
+gg_rct_united_1_2_attack_1 = nil
+gg_rct_united_1_2_attack_2 = nil
+gg_rct_united_1_2_build = nil
+gg_rct_united_1_2_main = nil
+gg_rct_united_1_2_mine = nil
+gg_rct_united_1_2_spawn = nil
+gg_rct_united_1_2_worker = nil
+gg_rct_united_1_3_attack_1 = nil
+gg_rct_united_1_3_attack_2 = nil
+gg_rct_united_1_3_build = nil
+gg_rct_united_1_3_main = nil
+gg_rct_united_1_3_mine = nil
+gg_rct_united_1_3_spawn = nil
+gg_rct_united_1_3_worker = nil
+gg_rct_united_1_4_attack_1 = nil
+gg_rct_united_1_4_attack_2 = nil
+gg_rct_united_1_4_build = nil
+gg_rct_united_1_4_main = nil
+gg_rct_united_1_4_mine = nil
+gg_rct_united_1_4_spawn = nil
+gg_rct_united_1_4_worker = nil
+gg_rct_united_1_5_attack_1 = nil
+gg_rct_united_1_5_attack_2 = nil
+gg_rct_united_1_5_build = nil
+gg_rct_united_1_5_main = nil
+gg_rct_united_1_5_mine = nil
 gg_rct_united_1_5_spawn = nil
-gg_rct_united_2_3_build = nil
-gg_rct_united_2_2_build = nil
-gg_rct_united_2_4_build = nil
+gg_rct_united_1_5_worker = nil
+gg_rct_united_2_1_attack_1 = nil
+gg_rct_united_2_1_attack_2 = nil
 gg_rct_united_2_1_build = nil
-gg_rct_united_2_5_build = nil
-gg_rct_united_2_3_worker = nil
-gg_rct_united_2_2_worker = nil
-gg_rct_united_2_1_worker = nil
-gg_rct_united_2_4_worker = nil
-gg_rct_united_2_5_worker = nil
-gg_rct_united_2_5_mine = nil
-gg_rct_united_2_4_mine = nil
-gg_rct_united_2_3_mine = nil
-gg_rct_united_2_2_mine = nil
+gg_rct_united_2_1_main = nil
 gg_rct_united_2_1_mine = nil
-gg_rct_united_2_3_spawn = nil
-gg_rct_united_2_2_spawn = nil
-gg_rct_united_2_4_spawn = nil
 gg_rct_united_2_1_spawn = nil
+gg_rct_united_2_1_worker = nil
+gg_rct_united_2_2_attack_1 = nil
+gg_rct_united_2_2_attack_2 = nil
+gg_rct_united_2_2_build = nil
+gg_rct_united_2_2_main = nil
+gg_rct_united_2_2_mine = nil
+gg_rct_united_2_2_spawn = nil
+gg_rct_united_2_2_worker = nil
+gg_rct_united_2_3_attack_1 = nil
+gg_rct_united_2_3_attack_2 = nil
+gg_rct_united_2_3_build = nil
+gg_rct_united_2_3_main = nil
+gg_rct_united_2_3_mine = nil
+gg_rct_united_2_3_spawn = nil
+gg_rct_united_2_3_worker = nil
+gg_rct_united_2_4_attack_1 = nil
+gg_rct_united_2_4_attack_2 = nil
+gg_rct_united_2_4_build = nil
+gg_rct_united_2_4_main = nil
+gg_rct_united_2_4_mine = nil
+gg_rct_united_2_4_spawn = nil
+gg_rct_united_2_4_worker = nil
+gg_rct_united_2_5_attack_1 = nil
+gg_rct_united_2_5_attack_2 = nil
+gg_rct_united_2_5_build = nil
+gg_rct_united_2_5_main = nil
+gg_rct_united_2_5_mine = nil
 gg_rct_united_2_5_spawn = nil
+gg_rct_united_2_5_worker = nil
 gg_rct_united_team_1_base = nil
 gg_rct_united_team_1_tower = nil
-gg_rct_united_team_2_tower = nil
 gg_rct_united_team_2_base = nil
-gg_rct_united_1_3_attack = nil
-gg_rct_united_1_2_attack = nil
-gg_rct_united_1_4_attack = nil
-gg_rct_united_1_1_attack = nil
-gg_rct_united_1_5_attack = nil
-gg_rct_united_2_3_attack = nil
-gg_rct_united_2_2_attack = nil
-gg_rct_united_2_4_attack = nil
-gg_rct_united_2_1_attack = nil
-gg_rct_united_2_5_attack = nil
+gg_rct_united_team_2_tower = nil
 function InitGlobals()
-end
-
-function CreateBuildingsForPlayer0()
-local p = Player(0)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("htow"), -7168.0, 448.0, 270.000, FourCC("htow"))
-u = BlzCreateUnitWithSkin(p, FourCC("nmgv"), -7552.0, 576.0, 270.000, FourCC("nmgv"))
-end
-
-function CreatePlayerBuildings()
-CreateBuildingsForPlayer0()
-end
-
-function CreatePlayerUnits()
-end
-
-function CreateAllUnits()
-CreatePlayerBuildings()
-CreatePlayerUnits()
 end
 
 function CreateRegions()
@@ -139,42 +146,62 @@ local we
 
 gg_rct_curved_1_1_attack_1 = Rect(1600.0, 3072.0, 2752.0, 4736.0)
 gg_rct_curved_1_1_build = Rect(-6912.0, 3456.0, -5760.0, 5120.0)
-gg_rct_curved_1_1_mine = Rect(-7264.0, 3456.0, -6912.0, 3776.0)
+gg_rct_curved_1_1_main = Rect(-7296.0, 3776.0, -6944.0, 4096.0)
+gg_rct_curved_1_1_mine = Rect(-7296.0, 3456.0, -6944.0, 3776.0)
 gg_rct_curved_1_1_spawn = Rect(-5184.0, 3072.0, -4032.0, 4736.0)
+gg_rct_curved_1_1_worker = Rect(-6912.0, 3456.0, -5760.0, 5120.0)
 gg_rct_curved_1_2_attack_1 = Rect(1600.0, 1408.0, 2752.0, 3072.0)
 gg_rct_curved_1_2_build = Rect(-6912.0, 1600.0, -5760.0, 3264.0)
-gg_rct_curved_1_2_mine = Rect(-7264.0, 1600.0, -6912.0, 1920.0)
+gg_rct_curved_1_2_main = Rect(-7296.0, 1920.0, -6944.0, 2240.0)
+gg_rct_curved_1_2_mine = Rect(-7296.0, 1600.0, -6944.0, 1920.0)
 gg_rct_curved_1_2_spawn = Rect(-5184.0, 1408.0, -4032.0, 3072.0)
+gg_rct_curved_1_2_worker = Rect(-6912.0, 1600.0, -5760.0, 3264.0)
 gg_rct_curved_1_3_build = Rect(-6912.0, -256.0, -5760.0, 1408.0)
-gg_rct_curved_1_3_mine = Rect(-7264.0, -256.0, -6912.0, 64.0)
+gg_rct_curved_1_3_main = Rect(-7296.0, 64.0, -6944.0, 384.0)
+gg_rct_curved_1_3_mine = Rect(-7296.0, -256.0, -6944.0, 64.0)
 gg_rct_curved_1_3_spawn = Rect(-5184.0, -256.0, -4032.0, 1408.0)
+gg_rct_curved_1_3_worker = Rect(-6912.0, -256.0, -5760.0, 1408.0)
 gg_rct_curved_1_4_attack_1 = Rect(1600.0, -1920.0, 2752.0, -256.0)
 gg_rct_curved_1_4_build = Rect(-6912.0, -2112.0, -5760.0, -448.0)
-gg_rct_curved_1_4_mine = Rect(-7264.0, -2112.0, -6912.0, -1792.0)
+gg_rct_curved_1_4_main = Rect(-7296.0, -1792.0, -6944.0, -1472.0)
+gg_rct_curved_1_4_mine = Rect(-7296.0, -2112.0, -6944.0, -1792.0)
 gg_rct_curved_1_4_spawn = Rect(-5184.0, -1920.0, -4032.0, -256.0)
+gg_rct_curved_1_4_worker = Rect(-6912.0, -2112.0, -5760.0, -448.0)
 gg_rct_curved_1_5_attack_1 = Rect(1600.0, -3584.0, 2752.0, -1920.0)
 gg_rct_curved_1_5_build = Rect(-6912.0, -3968.0, -5760.0, -2304.0)
-gg_rct_curved_1_5_mine = Rect(-7264.0, -3968.0, -6912.0, -3648.0)
+gg_rct_curved_1_5_main = Rect(-7296.0, -3648.0, -6944.0, -3328.0)
+gg_rct_curved_1_5_mine = Rect(-7296.0, -3968.0, -6944.0, -3648.0)
 gg_rct_curved_1_5_spawn = Rect(-5184.0, -3584.0, -4032.0, -1920.0)
+gg_rct_curved_1_5_worker = Rect(-6912.0, -3968.0, -5760.0, -2304.0)
 gg_rct_curved_2_1_attack_1 = Rect(-1792.0, 3072.0, -640.0, 4736.0)
 gg_rct_curved_2_1_build = Rect(6720.0, 3456.0, 7872.0, 5120.0)
-gg_rct_curved_2_1_mine = Rect(7872.0, 3456.0, 8224.0, 3776.0)
+gg_rct_curved_2_1_main = Rect(7904.0, 3776.0, 8256.0, 4096.0)
+gg_rct_curved_2_1_mine = Rect(7904.0, 3456.0, 8256.0, 3776.0)
 gg_rct_curved_2_1_spawn = Rect(4992.0, 3072.0, 6144.0, 4736.0)
+gg_rct_curved_2_1_worker = Rect(6720.0, 3456.0, 7872.0, 5120.0)
 gg_rct_curved_2_2_attack_1 = Rect(-1792.0, 1408.0, -640.0, 3072.0)
 gg_rct_curved_2_2_build = Rect(6720.0, 1600.0, 7872.0, 3264.0)
-gg_rct_curved_2_2_mine = Rect(7872.0, 1600.0, 8224.0, 1920.0)
+gg_rct_curved_2_2_main = Rect(7904.0, 1920.0, 8256.0, 2240.0)
+gg_rct_curved_2_2_mine = Rect(7904.0, 1600.0, 8256.0, 1920.0)
 gg_rct_curved_2_2_spawn = Rect(4992.0, 1408.0, 6144.0, 3072.0)
+gg_rct_curved_2_2_worker = Rect(6720.0, 1600.0, 7872.0, 3264.0)
 gg_rct_curved_2_3_build = Rect(6720.0, -256.0, 7872.0, 1408.0)
-gg_rct_curved_2_3_mine = Rect(7872.0, -256.0, 8224.0, 64.0)
+gg_rct_curved_2_3_main = Rect(7904.0, 64.0, 8256.0, 384.0)
+gg_rct_curved_2_3_mine = Rect(7904.0, -256.0, 8256.0, 64.0)
 gg_rct_curved_2_3_spawn = Rect(4992.0, -256.0, 6144.0, 1408.0)
+gg_rct_curved_2_3_worker = Rect(6720.0, -256.0, 7872.0, 1408.0)
 gg_rct_curved_2_4_attack_1 = Rect(-1792.0, -1920.0, -640.0, -256.0)
 gg_rct_curved_2_4_build = Rect(6720.0, -2112.0, 7872.0, -448.0)
-gg_rct_curved_2_4_mine = Rect(7872.0, -2112.0, 8224.0, -1792.0)
+gg_rct_curved_2_4_main = Rect(7904.0, -1792.0, 8256.0, -1472.0)
+gg_rct_curved_2_4_mine = Rect(7904.0, -2112.0, 8256.0, -1792.0)
 gg_rct_curved_2_4_spawn = Rect(4992.0, -1920.0, 6144.0, -256.0)
+gg_rct_curved_2_4_worker = Rect(6720.0, -2112.0, 7872.0, -448.0)
 gg_rct_curved_2_5_attack_1 = Rect(-1792.0, -3584.0, -640.0, -1920.0)
 gg_rct_curved_2_5_build = Rect(6720.0, -3968.0, 7872.0, -2304.0)
-gg_rct_curved_2_5_mine = Rect(7872.0, -3968.0, 8224.0, -3648.0)
+gg_rct_curved_2_5_main = Rect(7904.0, -3648.0, 8256.0, -3328.0)
+gg_rct_curved_2_5_mine = Rect(7904.0, -3968.0, 8256.0, -3648.0)
 gg_rct_curved_2_5_spawn = Rect(4992.0, -3584.0, 6144.0, -1920.0)
+gg_rct_curved_2_5_worker = Rect(6720.0, -3968.0, 7872.0, -2304.0)
 gg_rct_curved_team_1_attack_1 = Rect(1600.0, -256.0, 2752.0, 1408.0)
 gg_rct_curved_team_1_attack_2 = Rect(3840.0, -256.0, 4992.0, 1408.0)
 gg_rct_curved_team_1_base = Rect(-4000.0, 320.0, -3392.0, 960.0)
@@ -183,70 +210,80 @@ gg_rct_curved_team_2_attack_1 = Rect(-1792.0, -256.0, -640.0, 1408.0)
 gg_rct_curved_team_2_attack_2 = Rect(-4032.0, -256.0, -2880.0, 1408.0)
 gg_rct_curved_team_2_base = Rect(4352.0, 320.0, 4960.0, 960.0)
 gg_rct_curved_team_2_tower = Rect(1888.0, 320.0, 2496.0, 960.0)
-gg_rct_united_1_3_build = Rect(-6528.0, -8800.0, -5632.0, -7680.0)
-gg_rct_united_1_2_build = Rect(-6976.0, -8256.0, -5632.0, -7168.0)
-gg_rct_united_1_4_build = Rect(-6976.0, -9280.0, -5632.0, -8192.0)
-gg_rct_united_1_1_build = Rect(-7296.0, -8256.0, -5632.0, -6720.0)
-gg_rct_united_1_5_build = Rect(-7296.0, -9728.0, -5632.0, -8192.0)
-gg_rct_united_1_3_worker = Rect(-6144.0, -8288.0, -6016.0, -8160.0)
-gg_rct_united_1_2_worker = Rect(-6656.0, -7552.0, -6560.0, -7456.0)
-gg_rct_united_1_1_worker = Rect(-7104.0, -7008.0, -7008.0, -6912.0)
-gg_rct_united_1_4_worker = Rect(-6688.0, -9024.0, -6592.0, -8928.0)
-gg_rct_united_1_5_worker = Rect(-7104.0, -9536.0, -7008.0, -9440.0)
-gg_rct_curved_1_1_worker = Rect(-6912.0, 3456.0, -5760.0, 5120.0)
-gg_rct_curved_1_2_worker = Rect(-6912.0, 1600.0, -5760.0, 3264.0)
-gg_rct_curved_1_3_worker = Rect(-6912.0, -256.0, -5760.0, 1408.0)
-gg_rct_curved_1_4_worker = Rect(-6912.0, -2112.0, -5760.0, -448.0)
-gg_rct_curved_1_5_worker = Rect(-6912.0, -3968.0, -5760.0, -2304.0)
-gg_rct_curved_2_1_worker = Rect(6720.0, 3456.0, 7872.0, 5120.0)
-gg_rct_curved_2_2_worker = Rect(6720.0, 1568.0, 7872.0, 3232.0)
-gg_rct_curved_2_3_worker = Rect(6720.0, -256.0, 7872.0, 1408.0)
-gg_rct_curved_2_4_worker = Rect(6720.0, -2112.0, 7872.0, -448.0)
-gg_rct_curved_2_5_worker = Rect(6720.0, -3968.0, 7872.0, -2304.0)
-gg_rct_united_1_5_mine = Rect(-7648.0, -9728.0, -7296.0, -9408.0)
-gg_rct_united_1_4_mine = Rect(-7648.0, -9088.0, -7296.0, -8768.0)
-gg_rct_united_1_3_mine = Rect(-7648.0, -8416.0, -7296.0, -8096.0)
-gg_rct_united_1_2_mine = Rect(-7648.0, -7712.0, -7296.0, -7392.0)
-gg_rct_united_1_1_mine = Rect(-7648.0, -7040.0, -7296.0, -6720.0)
-gg_rct_united_1_3_spawn = Rect(-4512.0, -8800.0, -3616.0, -7680.0)
-gg_rct_united_1_2_spawn = Rect(-4960.0, -8256.0, -3616.0, -7168.0)
-gg_rct_united_1_4_spawn = Rect(-4960.0, -9280.0, -3616.0, -8192.0)
-gg_rct_united_1_1_spawn = Rect(-5280.0, -8256.0, -3616.0, -6720.0)
-gg_rct_united_1_5_spawn = Rect(-5280.0, -9728.0, -3616.0, -8192.0)
-gg_rct_united_2_3_build = Rect(6400.0, -8768.0, 7296.0, -7648.0)
-gg_rct_united_2_2_build = Rect(6400.0, -9280.0, 7744.0, -8192.0)
-gg_rct_united_2_4_build = Rect(6400.0, -8256.0, 7744.0, -7168.0)
-gg_rct_united_2_1_build = Rect(6400.0, -9728.0, 8064.0, -8192.0)
-gg_rct_united_2_5_build = Rect(6400.0, -8256.0, 8064.0, -6720.0)
-gg_rct_united_2_3_worker = Rect(6784.0, -8288.0, 6912.0, -8160.0)
-gg_rct_united_2_2_worker = Rect(7328.0, -8992.0, 7424.0, -8896.0)
-gg_rct_united_2_1_worker = Rect(7776.0, -9536.0, 7872.0, -9440.0)
-gg_rct_united_2_4_worker = Rect(7360.0, -7520.0, 7456.0, -7424.0)
-gg_rct_united_2_5_worker = Rect(7776.0, -7008.0, 7872.0, -6912.0)
-gg_rct_united_2_5_mine = Rect(8064.0, -7040.0, 8416.0, -6720.0)
-gg_rct_united_2_4_mine = Rect(8064.0, -7680.0, 8416.0, -7360.0)
-gg_rct_united_2_3_mine = Rect(8064.0, -8352.0, 8416.0, -8032.0)
-gg_rct_united_2_2_mine = Rect(8064.0, -9056.0, 8416.0, -8736.0)
-gg_rct_united_2_1_mine = Rect(8064.0, -9728.0, 8416.0, -9408.0)
-gg_rct_united_2_3_spawn = Rect(4384.0, -8768.0, 5280.0, -7648.0)
-gg_rct_united_2_2_spawn = Rect(4384.0, -9280.0, 5728.0, -8192.0)
-gg_rct_united_2_4_spawn = Rect(4384.0, -8256.0, 5728.0, -7168.0)
-gg_rct_united_2_1_spawn = Rect(4384.0, -9728.0, 6048.0, -8192.0)
-gg_rct_united_2_5_spawn = Rect(4384.0, -8256.0, 6048.0, -6720.0)
-gg_rct_united_team_1_base = Rect(-3616.0, -8544.0, -3008.0, -7904.0)
-gg_rct_united_team_1_tower = Rect(-1472.0, -8576.0, -864.0, -7936.0)
-gg_rct_united_team_2_tower = Rect(1568.0, -8576.0, 2176.0, -7936.0)
-gg_rct_united_team_2_base = Rect(3776.0, -8576.0, 4384.0, -7936.0)
-gg_rct_united_1_3_attack = Rect(5152.0, -8800.0, 6048.0, -7680.0)
-gg_rct_united_1_2_attack = Rect(4704.0, -8256.0, 6048.0, -7168.0)
-gg_rct_united_1_4_attack = Rect(4704.0, -9280.0, 6048.0, -8192.0)
-gg_rct_united_1_1_attack = Rect(4384.0, -8256.0, 6048.0, -6720.0)
-gg_rct_united_1_5_attack = Rect(4384.0, -9728.0, 6048.0, -8192.0)
-gg_rct_united_2_3_attack = Rect(-5280.0, -8768.0, -4384.0, -7648.0)
-gg_rct_united_2_2_attack = Rect(-5280.0, -9280.0, -3936.0, -8192.0)
-gg_rct_united_2_4_attack = Rect(-5280.0, -8256.0, -3936.0, -7168.0)
-gg_rct_united_2_1_attack = Rect(-5280.0, -9728.0, -3616.0, -8192.0)
-gg_rct_united_2_5_attack = Rect(-5280.0, -8256.0, -3616.0, -6720.0)
+gg_rct_united_1_1_attack_1 = Rect(1824.0, -9184.0, 3488.0, -7648.0)
+gg_rct_united_1_1_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
+gg_rct_united_1_1_build = Rect(-9344.0, -8256.0, -7680.0, -6720.0)
+gg_rct_united_1_1_main = Rect(-9888.0, -7232.0, -9344.0, -6720.0)
+gg_rct_united_1_1_mine = Rect(-10368.0, -7200.0, -9888.0, -6752.0)
+gg_rct_united_1_1_spawn = Rect(-7328.0, -8256.0, -5664.0, -6720.0)
+gg_rct_united_1_1_worker = Rect(-9152.0, -7008.0, -9056.0, -6912.0)
+gg_rct_united_1_2_attack_1 = Rect(2144.0, -8960.0, 3488.0, -7872.0)
+gg_rct_united_1_2_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
+gg_rct_united_1_2_build = Rect(-9024.0, -8256.0, -7680.0, -7168.0)
+gg_rct_united_1_2_main = Rect(-9888.0, -7872.0, -9344.0, -7360.0)
+gg_rct_united_1_2_mine = Rect(-10368.0, -7840.0, -9888.0, -7392.0)
+gg_rct_united_1_2_spawn = Rect(-7008.0, -8256.0, -5664.0, -7168.0)
+gg_rct_united_1_2_worker = Rect(-8704.0, -7552.0, -8608.0, -7456.0)
+gg_rct_united_1_3_attack_1 = Rect(2592.0, -8992.0, 3488.0, -7872.0)
+gg_rct_united_1_3_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
+gg_rct_united_1_3_build = Rect(-8576.0, -8800.0, -7680.0, -7680.0)
+gg_rct_united_1_3_main = Rect(-9888.0, -8512.0, -9344.0, -7968.0)
+gg_rct_united_1_3_mine = Rect(-10368.0, -8480.0, -9888.0, -8000.0)
+gg_rct_united_1_3_spawn = Rect(-6560.0, -8800.0, -5664.0, -7680.0)
+gg_rct_united_1_3_worker = Rect(-8192.0, -8288.0, -8064.0, -8160.0)
+gg_rct_united_1_4_attack_1 = Rect(2144.0, -8960.0, 3488.0, -7872.0)
+gg_rct_united_1_4_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
+gg_rct_united_1_4_build = Rect(-9024.0, -9280.0, -7680.0, -8192.0)
+gg_rct_united_1_4_main = Rect(-9888.0, -9120.0, -9344.0, -8608.0)
+gg_rct_united_1_4_mine = Rect(-10368.0, -9088.0, -9888.0, -8640.0)
+gg_rct_united_1_4_spawn = Rect(-7008.0, -9280.0, -5664.0, -8192.0)
+gg_rct_united_1_4_worker = Rect(-8736.0, -9024.0, -8640.0, -8928.0)
+gg_rct_united_1_5_attack_1 = Rect(1824.0, -9184.0, 3488.0, -7648.0)
+gg_rct_united_1_5_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
+gg_rct_united_1_5_build = Rect(-9344.0, -9728.0, -7680.0, -8192.0)
+gg_rct_united_1_5_main = Rect(-9888.0, -9728.0, -9344.0, -9216.0)
+gg_rct_united_1_5_mine = Rect(-10368.0, -9696.0, -9888.0, -9248.0)
+gg_rct_united_1_5_spawn = Rect(-7328.0, -9728.0, -5664.0, -8192.0)
+gg_rct_united_1_5_worker = Rect(-9152.0, -9536.0, -9056.0, -9440.0)
+gg_rct_united_2_1_attack_1 = Rect(-2976.0, -9056.0, -1312.0, -7520.0)
+gg_rct_united_2_1_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
+gg_rct_united_2_1_build = Rect(8448.0, -9728.0, 10112.0, -8192.0)
+gg_rct_united_2_1_main = Rect(10112.0, -9728.0, 10624.0, -9216.0)
+gg_rct_united_2_1_mine = Rect(10624.0, -9696.0, 11168.0, -9248.0)
+gg_rct_united_2_1_spawn = Rect(6432.0, -9728.0, 8096.0, -8192.0)
+gg_rct_united_2_1_worker = Rect(9824.0, -9536.0, 9920.0, -9440.0)
+gg_rct_united_2_2_attack_1 = Rect(-2976.0, -8800.0, -1632.0, -7712.0)
+gg_rct_united_2_2_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
+gg_rct_united_2_2_build = Rect(8448.0, -9280.0, 9792.0, -8192.0)
+gg_rct_united_2_2_main = Rect(10112.0, -9120.0, 10624.0, -8608.0)
+gg_rct_united_2_2_mine = Rect(10624.0, -9088.0, 11168.0, -8640.0)
+gg_rct_united_2_2_spawn = Rect(6432.0, -9280.0, 7776.0, -8192.0)
+gg_rct_united_2_2_worker = Rect(9376.0, -8992.0, 9472.0, -8896.0)
+gg_rct_united_2_3_attack_1 = Rect(-2976.0, -8864.0, -2080.0, -7744.0)
+gg_rct_united_2_3_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
+gg_rct_united_2_3_build = Rect(8448.0, -8768.0, 9344.0, -7648.0)
+gg_rct_united_2_3_main = Rect(10112.0, -8448.0, 10624.0, -7936.0)
+gg_rct_united_2_3_mine = Rect(10624.0, -8416.0, 11168.0, -7968.0)
+gg_rct_united_2_3_spawn = Rect(6432.0, -8768.0, 7328.0, -7648.0)
+gg_rct_united_2_3_worker = Rect(8832.0, -8288.0, 8960.0, -8160.0)
+gg_rct_united_2_4_attack_1 = Rect(-2976.0, -8832.0, -1632.0, -7744.0)
+gg_rct_united_2_4_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
+gg_rct_united_2_4_build = Rect(8448.0, -8256.0, 9792.0, -7168.0)
+gg_rct_united_2_4_main = Rect(10112.0, -7808.0, 10624.0, -7296.0)
+gg_rct_united_2_4_mine = Rect(10624.0, -7776.0, 11168.0, -7328.0)
+gg_rct_united_2_4_spawn = Rect(6432.0, -8256.0, 7776.0, -7168.0)
+gg_rct_united_2_4_worker = Rect(9408.0, -7520.0, 9504.0, -7424.0)
+gg_rct_united_2_5_attack_1 = Rect(-2976.0, -9056.0, -1312.0, -7520.0)
+gg_rct_united_2_5_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
+gg_rct_united_2_5_build = Rect(8448.0, -8256.0, 10112.0, -6720.0)
+gg_rct_united_2_5_main = Rect(10112.0, -7232.0, 10624.0, -6720.0)
+gg_rct_united_2_5_mine = Rect(10624.0, -7168.0, 11168.0, -6752.0)
+gg_rct_united_2_5_spawn = Rect(6432.0, -8256.0, 8096.0, -6720.0)
+gg_rct_united_2_5_worker = Rect(9824.0, -7008.0, 9920.0, -6912.0)
+gg_rct_united_team_1_base = Rect(-5664.0, -8544.0, -5056.0, -7904.0)
+gg_rct_united_team_1_tower = Rect(-3584.0, -8512.0, -2976.0, -7872.0)
+gg_rct_united_team_2_base = Rect(5824.0, -8608.0, 6432.0, -7968.0)
+gg_rct_united_team_2_tower = Rect(3488.0, -8576.0, 4096.0, -7936.0)
 end
 
 --CUSTOM_CODE
@@ -776,7 +813,7 @@ function initGame()
     SetTimeOfDay(12)
     initRect()
     createBaseAndTower()
-    createMines()
+    createBuildingsForPlayers()
 end
 
 function initRect()
@@ -786,6 +823,7 @@ function initRect()
             player.buildRect = regions[game_config.mode][team.i][player.i]['build']
             player.workerRect = regions[game_config.mode][team.i][player.i]['worker']
             player.mineRect = regions[game_config.mode][team.i][player.i]['mine']
+            player.mainRect = regions[game_config.mode][team.i][player.i]['main']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
@@ -816,7 +854,8 @@ function initRect()
             for _, player in ipairs(team.players) do
                 player.attackPointRect = {
                     regions[game_config.mode][team.i][player.i]['spawn'],
-                    regions[game_config.mode][team.i][player.i]['attack'],
+                    regions[game_config.mode][team.i][player.i]['attack'][1],
+                    regions[game_config.mode][team.i][player.i]['attack'][2]
                 }
             end
         end
@@ -842,7 +881,7 @@ function createBaseAndTower()
     end
 end
 
-function createMines()
+function createBuildingsForPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             local unit = CreateUnit(
@@ -853,6 +892,14 @@ function createMines()
                     0
             )
             player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, unit, 0, 10, 204, 204, 0, 0)
+
+            CreateUnit(
+                    player.id,
+                    FourCC(units_special.main),
+                    GetRectCenterX(player.mainRect),
+                    GetRectCenterY(player.mainRect),
+                    0
+            )
         end
     end
 end
@@ -866,7 +913,7 @@ function initDefaultVariables(mode)
     game_config = {
         mode = mode,
         economy = {
-            startGold = 5000,
+            startGold = 500,
             startIncomePerSec = 10,
             firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
@@ -891,6 +938,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -906,6 +954,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -921,6 +970,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -936,6 +986,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -951,6 +1002,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 }
             },
@@ -978,6 +1030,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -993,6 +1046,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -1008,6 +1062,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -1023,6 +1078,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -1038,6 +1094,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 }
             },
@@ -1070,7 +1127,8 @@ function initUnits()
         builder = 'o000',
         tower = 'o001',
         base = 'o002',
-        mine = 'h00M'
+        mine = 'ugol',
+        main = 'htow'
     }
     abilities = {
         mine = 'A000'
@@ -1212,6 +1270,8 @@ function debugTrigger()
         SetPlayerAllianceStateBJ(Player(8), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
         SetPlayerAllianceStateBJ(Player(9), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
 
+        SetPlayerAllianceStateBJ(Player(17), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+
         SetPlayerAlliance(Player(10), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(11), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(12), Player(0), ALLIANCE_SHARED_VISION, TRUE)
@@ -1224,6 +1284,17 @@ function debugTrigger()
         SetPlayerAlliance(Player(19), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(20), Player(0), ALLIANCE_SHARED_VISION, TRUE)
     end)
+end
+function finishResearchTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_RESEARCH_FINISH )
+            TriggerAddAction(trig, function()
+                SetPlayerTechResearchedSwap(GetResearched(), GetPlayerTechCountSimple(GetResearched(), player.id), player.spawnPlayerId)
+            end)
+        end
+    end
 end
 function goldExtractorTrigger()
     for _, team in ipairs(all_teams) do
@@ -1265,6 +1336,7 @@ function initTriggers()
     moveByPointsTrigger()
     winLoseTrigger()
     goldExtractorTrigger()
+    finishResearchTrigger()
     debugTrigger()
 end
 function moveByPointsTrigger()
@@ -1278,7 +1350,7 @@ function moveByPointsTrigger()
                     ForGroup(group, function ()
                         local unit = GetEnumUnit()
                         local owner = GetOwningPlayer(unit)
-                        if containsValue(owner, team.spawnPlayers) then
+                        if owner == player.spawnPlayerId then
                             if (GetUnitCurrentOrder(unit) == 0) then
                                 local attackPointX, attackPointY = calculateDif(player.attackPointRect[i], player.attackPointRect[i+1], unit)
                                 IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
@@ -1556,7 +1628,6 @@ SetAmbientDaySound("LordaeronSummerDay")
 SetAmbientNightSound("LordaeronSummerNight")
 SetMapMusic("Music", true, 0)
 CreateRegions()
-CreateAllUnits()
 InitBlizzard()
 InitGlobals()
 end

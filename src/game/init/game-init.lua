@@ -3,7 +3,7 @@ function initGame()
     SetTimeOfDay(12)
     initRect()
     createBaseAndTower()
-    createMines()
+    createBuildingsForPlayers()
 end
 
 function initRect()
@@ -13,6 +13,7 @@ function initRect()
             player.buildRect = regions[game_config.mode][team.i][player.i]['build']
             player.workerRect = regions[game_config.mode][team.i][player.i]['worker']
             player.mineRect = regions[game_config.mode][team.i][player.i]['mine']
+            player.mainRect = regions[game_config.mode][team.i][player.i]['main']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
@@ -43,7 +44,8 @@ function initRect()
             for _, player in ipairs(team.players) do
                 player.attackPointRect = {
                     regions[game_config.mode][team.i][player.i]['spawn'],
-                    regions[game_config.mode][team.i][player.i]['attack'],
+                    regions[game_config.mode][team.i][player.i]['attack'][1],
+                    regions[game_config.mode][team.i][player.i]['attack'][2]
                 }
             end
         end
@@ -69,7 +71,7 @@ function createBaseAndTower()
     end
 end
 
-function createMines()
+function createBuildingsForPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             local unit = CreateUnit(
@@ -80,6 +82,14 @@ function createMines()
                     0
             )
             player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, unit, 0, 10, 204, 204, 0, 0)
+
+            CreateUnit(
+                    player.id,
+                    FourCC(units_special.main),
+                    GetRectCenterX(player.mainRect),
+                    GetRectCenterY(player.mainRect),
+                    0
+            )
         end
     end
 end

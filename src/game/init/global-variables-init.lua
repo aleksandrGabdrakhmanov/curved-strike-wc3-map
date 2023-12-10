@@ -8,7 +8,7 @@ function initDefaultVariables(mode)
     game_config = {
         mode = mode,
         economy = {
-            startGold = 5000,
+            startGold = 500,
             startIncomePerSec = 10,
             firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
@@ -33,6 +33,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -48,6 +49,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -63,6 +65,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -78,6 +81,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -93,6 +97,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 }
             },
@@ -120,6 +125,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -135,6 +141,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -150,6 +157,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -165,6 +173,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -180,6 +189,7 @@ function initDefaultVariables(mode)
                     buildRect = nil,
                     workerRect = nil,
                     mineRect = nil,
+                    mainRect = nil,
                     attackPointRect = {}
                 }
             },
@@ -212,7 +222,8 @@ function initUnits()
         builder = 'o000',
         tower = 'o001',
         base = 'o002',
-        mine = 'h00M'
+        mine = 'ugol',
+        main = 'htow'
     }
     abilities = {
         mine = 'A000'

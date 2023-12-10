@@ -378,3 +378,13 @@ STRING 72
 Grants an additional |cffffff001 gold|r every second.
 }
 
+STRING 84
+{
+AI 1
+}
+
+STRING 85
+{
+AI 2
+}
+

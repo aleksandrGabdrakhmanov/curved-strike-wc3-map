@@ -9,7 +9,7 @@ function moveByPointsTrigger()
                     ForGroup(group, function ()
                         local unit = GetEnumUnit()
                         local owner = GetOwningPlayer(unit)
-                        if containsValue(owner, team.spawnPlayers) then
+                        if owner == player.spawnPlayerId then
                             if (GetUnitCurrentOrder(unit) == 0) then
                                 local attackPointX, attackPointY = calculateDif(player.attackPointRect[i], player.attackPointRect[i+1], unit)
                                 IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))

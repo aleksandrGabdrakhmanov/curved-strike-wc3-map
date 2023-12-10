@@ -14,6 +14,8 @@ function debugTrigger()
         SetPlayerAllianceStateBJ(Player(8), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
         SetPlayerAllianceStateBJ(Player(9), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
 
+        SetPlayerAllianceStateBJ(Player(17), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+
         SetPlayerAlliance(Player(10), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(11), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(12), Player(0), ALLIANCE_SHARED_VISION, TRUE)
