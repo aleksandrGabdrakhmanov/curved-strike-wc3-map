@@ -8,12 +8,15 @@ function spawnTrigger()
                 local group = CreateGroup()
                 ForGroup(groupForBuild, function ()
                     local id = GetUnitTypeId(GetEnumUnit())
-                    local parentId = getParentId(('>I4'):pack(id))
-                    if parentId ~= nil then
-                        local x, y = calculateDif(player.buildRect, player.attackPointRect[1], GetEnumUnit())
-                        local unit = CreateUnit(getRandomSpawnPlayer(team.spawnPlayers), FourCC(parentId), x, y, 270)
-                        SetUnitColor(unit, GetPlayerColor(player.id))
-                        GroupAddUnit(group, unit)
+                    local owner = GetOwningPlayer(GetEnumUnit())
+                    if owner == player.id then
+                        local parentId = getParentId(('>I4'):pack(id))
+                        if parentId ~= nil then
+                            local x, y = calculateDif(player.buildRect, player.attackPointRect[1], GetEnumUnit())
+                            local unit = CreateUnit(getRandomSpawnPlayer(team.spawnPlayers), FourCC(parentId), x, y, 270)
+                            SetUnitColor(unit, GetPlayerColor(player.id))
+                            GroupAddUnit(group, unit)
+                        end
                     end
                 end)
                 DestroyGroup(group)
