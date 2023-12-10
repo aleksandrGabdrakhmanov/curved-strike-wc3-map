@@ -8,7 +8,7 @@ function initDefaultVariables(mode)
     game_config = {
         mode = mode,
         economy = {
-            startGold = 500,
+            startGold = 5000,
             startIncomePerSec = 10,
             firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
@@ -22,6 +22,7 @@ function initDefaultVariables(mode)
             players = {
                 {
                     id = Player(4),
+                    spawnPlayerId = Player(19),
                     i = 1,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
@@ -36,6 +37,7 @@ function initDefaultVariables(mode)
                 },
                 {
                     id = Player(2),
+                    spawnPlayerId = Player(18),
                     i = 2,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
@@ -50,6 +52,7 @@ function initDefaultVariables(mode)
                 },
                 {
                     id = Player(0),
+                    spawnPlayerId = Player(17),
                     i = 3,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
@@ -64,6 +67,7 @@ function initDefaultVariables(mode)
                 },
                 {
                     id = Player(3),
+                    spawnPlayerId = Player(16),
                     i = 4,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
@@ -78,6 +82,7 @@ function initDefaultVariables(mode)
                 },
                 {
                     id = Player(5),
+                    spawnPlayerId = Player(15),
                     i = 5,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
@@ -104,6 +109,7 @@ function initDefaultVariables(mode)
             players = {
                 {
                     id = Player(8),
+                    spawnPlayerId = Player(14),
                     i = 1,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
@@ -118,6 +124,7 @@ function initDefaultVariables(mode)
                 },
                 {
                     id = Player(6),
+                    spawnPlayerId = Player(13),
                     i = 2,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
@@ -132,6 +139,7 @@ function initDefaultVariables(mode)
                 },
                 {
                     id = Player(1),
+                    spawnPlayerId = Player(12),
                     i = 3,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
@@ -146,6 +154,7 @@ function initDefaultVariables(mode)
                 },
                 {
                     id = Player(7),
+                    spawnPlayerId = Player(11),
                     i = 4,
                     economy = {
                         income = game_config.economy.startIncomePerSec,
@@ -160,6 +169,7 @@ function initDefaultVariables(mode)
                 },
                 {
                     id = Player(9),
+                    spawnPlayerId = Player(10),
                     i = 5,
                     economy = {
                         income = game_config.economy.startIncomePerSec,

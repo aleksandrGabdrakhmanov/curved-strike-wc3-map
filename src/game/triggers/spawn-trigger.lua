@@ -13,7 +13,7 @@ function spawnTrigger()
                         local parentId = getParentId(('>I4'):pack(id))
                         if parentId ~= nil then
                             local x, y = calculateDif(player.buildRect, player.attackPointRect[1], GetEnumUnit())
-                            local unit = CreateUnit(getRandomSpawnPlayer(team.spawnPlayers), FourCC(parentId), x, y, 270)
+                            local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
                             SetUnitColor(unit, GetPlayerColor(player.id))
                             GroupAddUnit(group, unit)
                         end
