@@ -783,40 +783,40 @@ function initRect()
 
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            player.buildRect = regions[game_mode][team.i][player.i]['build']
-            player.workerRect = regions[game_mode][team.i][player.i]['worker']
-            player.mineRect = regions[game_mode][team.i][player.i]['mine']
+            player.buildRect = regions[game_config.mode][team.i][player.i]['build']
+            player.workerRect = regions[game_config.mode][team.i][player.i]['worker']
+            player.mineRect = regions[game_config.mode][team.i][player.i]['mine']
         end
-        team.base.baseRect = regions[game_mode]['team'][team.i]['base']
-        team.base.towerRect = regions[game_mode]['team'][team.i]['tower']
+        team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
+        team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
     end
 
-    if game_mode == 'curved' then
+    if game_config.mode == 'curved' then
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if player.i ~= 3 then
                     player.attackPointRect = {
-                        regions[game_mode][team.i][player.i]['spawn'],
-                        regions[game_mode][team.i][player.i]['attack'][1],
-                        regions[game_mode]['team'][team.i]['attack'][1],
-                        regions[game_mode]['team'][team.i]['attack'][2]
+                        regions[game_config.mode][team.i][player.i]['spawn'],
+                        regions[game_config.mode][team.i][player.i]['attack'][1],
+                        regions[game_config.mode]['team'][team.i]['attack'][1],
+                        regions[game_config.mode]['team'][team.i]['attack'][2]
                     }
                 else
                     player.attackPointRect = {
-                        regions[game_mode][team.i][player.i]['spawn'],
-                        regions[game_mode]['team'][team.i]['attack'][2]
+                        regions[game_config.mode][team.i][player.i]['spawn'],
+                        regions[game_config.mode]['team'][team.i]['attack'][2]
                     }
                 end
             end
         end
     end
 
-    if game_mode == 'united' then
+    if game_config.mode == 'united' then
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 player.attackPointRect = {
-                    regions[game_mode][team.i][player.i]['spawn'],
-                    regions[game_mode][team.i][player.i]['attack'],
+                    regions[game_config.mode][team.i][player.i]['spawn'],
+                    regions[game_config.mode][team.i][player.i]['attack'],
                 }
             end
         end
@@ -863,8 +863,8 @@ function initGlobalVariables(mode)
 end
 
 function initDefaultVariables(mode)
-    game_mode = mode
     game_config = {
+        mode = mode,
         economy = {
             startGold = 500,
             startIncomePerSec = 10,
@@ -1377,12 +1377,12 @@ function createModeUI()
     BlzFrameSetVisible(modeMainFrame, GetLocalPlayer() == Player(0))
 
     buttonCurvedFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
-    BlzFrameSetPoint(buttonCurvedFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, -0.02)
+    BlzFrameSetPoint(buttonCurvedFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, 0.02)
     BlzFrameSetText(buttonCurvedFrame, "CURVED")
     BlzFrameSetVisible(buttonCurvedFrame, GetLocalPlayer() == Player(0))
 
     buttonUnionFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
-    BlzFrameSetPoint(buttonUnionFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, 0.02)
+    BlzFrameSetPoint(buttonUnionFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, -0.02)
     BlzFrameSetText(buttonUnionFrame, "UNITED")
     BlzFrameSetVisible(buttonUnionFrame, GetLocalPlayer() == Player(0))
 end

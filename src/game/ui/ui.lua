@@ -13,12 +13,12 @@ function createModeUI()
     BlzFrameSetVisible(modeMainFrame, GetLocalPlayer() == Player(0))
 
     buttonCurvedFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
-    BlzFrameSetPoint(buttonCurvedFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, -0.02)
+    BlzFrameSetPoint(buttonCurvedFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, 0.02)
     BlzFrameSetText(buttonCurvedFrame, "CURVED")
     BlzFrameSetVisible(buttonCurvedFrame, GetLocalPlayer() == Player(0))
 
     buttonUnionFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
-    BlzFrameSetPoint(buttonUnionFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, 0.02)
+    BlzFrameSetPoint(buttonUnionFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, -0.02)
     BlzFrameSetText(buttonUnionFrame, "UNITED")
     BlzFrameSetVisible(buttonUnionFrame, GetLocalPlayer() == Player(0))
 end

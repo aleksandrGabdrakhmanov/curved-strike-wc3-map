@@ -5,8 +5,8 @@ function initGlobalVariables(mode)
 end
 
 function initDefaultVariables(mode)
-    game_mode = mode
     game_config = {
+        mode = mode,
         economy = {
             startGold = 500,
             startIncomePerSec = 10,
