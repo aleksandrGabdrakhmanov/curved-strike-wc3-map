@@ -774,7 +774,6 @@ end
 function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
-    --initRect('curved')
     initRect()
     createBaseAndTower()
     createMines()
@@ -1167,52 +1166,18 @@ function split(str, delimiter)
     return result
 end
 OnInit(function()
-
-    local main = BlzCreateFrame("EscMenuBackdrop", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
-    BlzFrameSetAbsPoint(main, FRAMEPOINT_CENTER, 0.4, 0.35)
-    BlzFrameSetSize(main, 0.3, 0.35)
-    BlzFrameSetVisible(frame, GetLocalPlayer() == Player(0))
-
-    local buttonCurved = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
-    BlzFrameSetPoint(buttonCurved, FRAMEPOINT_CENTER, main, FRAMEPOINT_CENTER, 0, -0.02)
-    BlzFrameSetText(buttonCurved, "CURVED")
-    BlzFrameSetVisible(buttonCurved, GetLocalPlayer() == Player(0))
-
-    local buttonUnion = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
-    BlzFrameSetPoint(buttonUnion, FRAMEPOINT_CENTER, main, FRAMEPOINT_CENTER, 0, 0.02)
-    BlzFrameSetText(buttonUnion, "UNITED")
-    BlzFrameSetVisible(buttonUnion, GetLocalPlayer() == Player(0))
-
-    local trig = CreateTrigger()
-    BlzTriggerRegisterFrameEvent(trig, buttonCurved, FRAMEEVENT_CONTROL_CLICK)
-    TriggerAddAction(trig, function()
-        BlzFrameSetVisible(main, FALSE)
-        BlzFrameSetVisible(buttonCurved, FALSE)
-        BlzFrameSetVisible(buttonUnion, FALSE)
-        print("7")
-        initMain('curved')
-        initialUI()
-        initTimers()
-        initTriggers()
-        --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
-    end)
-
-    local trig = CreateTrigger()
-    BlzTriggerRegisterFrameEvent(trig, buttonUnion, FRAMEEVENT_CONTROL_CLICK)
-    TriggerAddAction(trig, function()
-        BlzFrameSetVisible(main, FALSE)
-        BlzFrameSetVisible(buttonCurved, FALSE)
-        BlzFrameSetVisible(buttonUnion, FALSE)
-        print("7")
-        initMain('united')
-        initialUI()
-        initTimers()
-        initTriggers()
-        --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
-    end)
-
+    createModeUI()
+    startGameUITrigger()
 end)
 
+function startGame(mode)
+    print("7")
+    initMain(mode)
+    initialUI()
+    initTimers()
+    initTriggers()
+    --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
+end
 function initTimers()
     local timer = CreateTimer()
     my_func = 30
@@ -1356,6 +1321,21 @@ function getRandomSpawnPlayer(spawnPlayers)
     local randomIndex = math.random(#spawnPlayers)
     return spawnPlayers[randomIndex]
 end
+function startGameUITrigger()
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, buttonCurvedFrame, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        hideModeUI()
+        startGame('curved')
+    end)
+
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, buttonUnionFrame, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        hideModeUI()
+        startGame('united')
+    end)
+end
 function winLoseTrigger()
     for _, team in ipairs(all_teams) do
         local group = GetUnitsOfPlayerAll(team.base.player)
@@ -1385,6 +1365,29 @@ function initialUI()
     BlzFrameSetAbsPoint(frame, FRAMEPOINT_CENTER, 0.85, 0.5)
     BlzFrameSetEnable(frame, false)
     BlzFrameSetScale(frame, 2)
+end
+
+function createModeUI()
+    modeMainFrame = BlzCreateFrame("EscMenuBackdrop", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
+    BlzFrameSetAbsPoint(modeMainFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
+    BlzFrameSetSize(modeMainFrame, 0.3, 0.35)
+    BlzFrameSetVisible(modeMainFrame, GetLocalPlayer() == Player(0))
+
+    buttonCurvedFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
+    BlzFrameSetPoint(buttonCurvedFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, -0.02)
+    BlzFrameSetText(buttonCurvedFrame, "CURVED")
+    BlzFrameSetVisible(buttonCurvedFrame, GetLocalPlayer() == Player(0))
+
+    buttonUnionFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
+    BlzFrameSetPoint(buttonUnionFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, 0.02)
+    BlzFrameSetText(buttonUnionFrame, "UNITED")
+    BlzFrameSetVisible(buttonUnionFrame, GetLocalPlayer() == Player(0))
+end
+
+function hideModeUI()
+    BlzFrameSetVisible(modeMainFrame, FALSE)
+    BlzFrameSetVisible(buttonCurvedFrame, FALSE)
+    BlzFrameSetVisible(buttonUnionFrame, FALSE)
 end
 --CUSTOM_CODE
 function InitCustomPlayerSlots()

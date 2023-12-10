@@ -1,0 +1,15 @@
+function startGameUITrigger()
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, buttonCurvedFrame, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        hideModeUI()
+        startGame('curved')
+    end)
+
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, buttonUnionFrame, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        hideModeUI()
+        startGame('united')
+    end)
+end
