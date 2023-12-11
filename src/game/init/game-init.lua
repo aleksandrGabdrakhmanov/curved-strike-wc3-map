@@ -14,6 +14,7 @@ function initRect()
             player.workerRect = regions[game_config.mode][team.i][player.i]['worker']
             player.mineRect = regions[game_config.mode][team.i][player.i]['mine']
             player.mainRect = regions[game_config.mode][team.i][player.i]['main']
+            player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
@@ -90,6 +91,14 @@ function createBuildingsForPlayers()
                     GetRectCenterY(player.mainRect),
                     0
             )
+            CreateUnit(
+                    player.id,
+                    FourCC(units_special.laboratory),
+                    GetRectCenterX(player.laboratoryRect),
+                    GetRectCenterY(player.laboratoryRect),
+                    0
+            )
+
         end
     end
 end

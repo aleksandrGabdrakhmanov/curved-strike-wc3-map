@@ -48,6 +48,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -64,6 +65,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -80,6 +82,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -96,6 +99,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -112,6 +116,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 }
             },
@@ -140,6 +145,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -156,6 +162,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -172,6 +179,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -188,6 +196,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 },
                 {
@@ -204,6 +213,7 @@ function initDefaultVariables(mode)
                     workerRect = nil,
                     mineRect = nil,
                     mainRect = nil,
+                    laboratoryRect = nil,
                     attackPointRect = {}
                 }
             },
@@ -237,7 +247,8 @@ function initUnits()
         tower = 'o001',
         base = 'o002',
         mine = 'ugol',
-        main = 'htow'
+        main = 'htow',
+        laboratory = 'nmgv'
     }
     abilities = {
         mine = 'A000'
