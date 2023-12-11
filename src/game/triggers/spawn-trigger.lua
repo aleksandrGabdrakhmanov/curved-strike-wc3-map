@@ -5,7 +5,6 @@ function spawnTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 local groupForBuild = GetUnitsInRectAll(player.buildRect)
-                local group = CreateGroup()
                 ForGroup(groupForBuild, function ()
                     local id = GetUnitTypeId(GetEnumUnit())
                     local owner = GetOwningPlayer(GetEnumUnit())
@@ -15,11 +14,11 @@ function spawnTrigger()
                             local x, y = calculateDif(player.buildRect, player.attackPointRect[1], GetEnumUnit())
                             local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
                             SetUnitColor(unit, GetPlayerColor(player.id))
-                            GroupAddUnit(group, unit)
+                            RemoveGuardPosition(unit)
+                            SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
                         end
                     end
                 end)
-                DestroyGroup(group)
                 DestroyGroup(groupForBuild)
             end
             my_func = 30

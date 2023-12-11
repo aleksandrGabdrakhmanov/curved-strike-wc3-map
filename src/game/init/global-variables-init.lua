@@ -5,6 +5,17 @@ function initGlobalVariables(mode)
 end
 
 function initDefaultVariables(mode)
+
+    game_modes = {
+        curved = {
+            unitRange = 1 -- 100%
+        },
+        united = {
+            unitRange = 1.5 -- 150%
+        }
+    }
+
+
     game_config = {
         mode = mode,
         economy = {
@@ -12,6 +23,9 @@ function initDefaultVariables(mode)
             startIncomePerSec = 10,
             firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
+        },
+        units = {
+            range = game_modes[mode].unitRange
         },
         spawnInterval = 30
     }

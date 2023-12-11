@@ -910,6 +910,17 @@ function initGlobalVariables(mode)
 end
 
 function initDefaultVariables(mode)
+
+    game_modes = {
+        curved = {
+            unitRange = 1 -- 100%
+        },
+        united = {
+            unitRange = 1.5 -- 150%
+        }
+    }
+
+
     game_config = {
         mode = mode,
         economy = {
@@ -917,6 +928,9 @@ function initDefaultVariables(mode)
             startIncomePerSec = 10,
             firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
+        },
+        units = {
+            range = game_modes[mode].unitRange
         },
         spawnInterval = 30
     }
@@ -1239,12 +1253,21 @@ OnInit(function()
 end)
 
 function startGame(mode)
-    print("7")
+    print("8")
     initMain(mode)
     initialUI()
     initTimers()
     initTriggers()
+    setStartCameraPosition()
     --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
+end
+
+function setStartCameraPosition()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect))
+        end
+    end
 end
 function initTimers()
     local timer = CreateTimer()
@@ -1354,6 +1377,7 @@ function moveByPointsTrigger()
                             if (GetUnitCurrentOrder(unit) == 0) then
                                 local attackPointX, attackPointY = calculateDif(player.attackPointRect[i], player.attackPointRect[i+1], unit)
                                 IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
+                                IssueInstantPointOrder()
                             end
                         end
                     end)
@@ -1379,7 +1403,6 @@ function spawnTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 local groupForBuild = GetUnitsInRectAll(player.buildRect)
-                local group = CreateGroup()
                 ForGroup(groupForBuild, function ()
                     local id = GetUnitTypeId(GetEnumUnit())
                     local owner = GetOwningPlayer(GetEnumUnit())
@@ -1389,11 +1412,11 @@ function spawnTrigger()
                             local x, y = calculateDif(player.buildRect, player.attackPointRect[1], GetEnumUnit())
                             local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
                             SetUnitColor(unit, GetPlayerColor(player.id))
-                            GroupAddUnit(group, unit)
+                            RemoveGuardPosition(unit)
+                            SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
                         end
                     end
                 end)
-                DestroyGroup(group)
                 DestroyGroup(groupForBuild)
             end
             my_func = 30
@@ -1536,6 +1559,56 @@ SetPlayerColor(Player(9), ConvertPlayerColor(9))
 SetPlayerRacePreference(Player(9), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(9), false)
 SetPlayerController(Player(9), MAP_CONTROL_USER)
+SetPlayerStartLocation(Player(10), 10)
+SetPlayerColor(Player(10), ConvertPlayerColor(10))
+SetPlayerRacePreference(Player(10), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(10), true)
+SetPlayerController(Player(10), MAP_CONTROL_COMPUTER)
+SetPlayerStartLocation(Player(11), 11)
+SetPlayerColor(Player(11), ConvertPlayerColor(11))
+SetPlayerRacePreference(Player(11), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(11), true)
+SetPlayerController(Player(11), MAP_CONTROL_COMPUTER)
+SetPlayerStartLocation(Player(12), 12)
+SetPlayerColor(Player(12), ConvertPlayerColor(12))
+SetPlayerRacePreference(Player(12), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(12), true)
+SetPlayerController(Player(12), MAP_CONTROL_COMPUTER)
+SetPlayerStartLocation(Player(13), 13)
+SetPlayerColor(Player(13), ConvertPlayerColor(13))
+SetPlayerRacePreference(Player(13), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(13), true)
+SetPlayerController(Player(13), MAP_CONTROL_COMPUTER)
+SetPlayerStartLocation(Player(14), 14)
+SetPlayerColor(Player(14), ConvertPlayerColor(14))
+SetPlayerRacePreference(Player(14), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(14), true)
+SetPlayerController(Player(14), MAP_CONTROL_COMPUTER)
+SetPlayerStartLocation(Player(15), 15)
+SetPlayerColor(Player(15), ConvertPlayerColor(15))
+SetPlayerRacePreference(Player(15), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(15), true)
+SetPlayerController(Player(15), MAP_CONTROL_COMPUTER)
+SetPlayerStartLocation(Player(16), 16)
+SetPlayerColor(Player(16), ConvertPlayerColor(16))
+SetPlayerRacePreference(Player(16), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(16), true)
+SetPlayerController(Player(16), MAP_CONTROL_COMPUTER)
+SetPlayerStartLocation(Player(17), 17)
+SetPlayerColor(Player(17), ConvertPlayerColor(17))
+SetPlayerRacePreference(Player(17), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(17), true)
+SetPlayerController(Player(17), MAP_CONTROL_COMPUTER)
+SetPlayerStartLocation(Player(18), 18)
+SetPlayerColor(Player(18), ConvertPlayerColor(18))
+SetPlayerRacePreference(Player(18), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(18), true)
+SetPlayerController(Player(18), MAP_CONTROL_COMPUTER)
+SetPlayerStartLocation(Player(19), 19)
+SetPlayerColor(Player(19), ConvertPlayerColor(19))
+SetPlayerRacePreference(Player(19), RACE_PREF_RANDOM)
+SetPlayerRaceSelectable(Player(19), true)
+SetPlayerController(Player(19), MAP_CONTROL_COMPUTER)
 end
 
 function InitCustomTeams()
@@ -1544,6 +1617,16 @@ SetPlayerTeam(Player(2), 0)
 SetPlayerTeam(Player(3), 0)
 SetPlayerTeam(Player(4), 0)
 SetPlayerTeam(Player(5), 0)
+SetPlayerTeam(Player(10), 0)
+SetPlayerTeam(Player(11), 0)
+SetPlayerTeam(Player(12), 0)
+SetPlayerTeam(Player(13), 0)
+SetPlayerTeam(Player(14), 0)
+SetPlayerTeam(Player(15), 0)
+SetPlayerTeam(Player(16), 0)
+SetPlayerTeam(Player(17), 0)
+SetPlayerTeam(Player(18), 0)
+SetPlayerTeam(Player(19), 0)
 SetPlayerTeam(Player(1), 1)
 SetPlayerTeam(Player(6), 1)
 SetPlayerTeam(Player(7), 1)
@@ -1618,6 +1701,55 @@ SetStartLocPrioCount(8, 1)
 SetStartLocPrio(8, 0, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(9, 1)
 SetStartLocPrio(9, 0, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(10, 2)
+SetStartLocPrio(10, 0, 17, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(10, 1, 19, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrioCount(10, 1)
+SetEnemyStartLocPrio(10, 0, 18, MAP_LOC_PRIO_LOW)
+SetStartLocPrioCount(11, 2)
+SetStartLocPrio(11, 0, 18, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(11, 1, 19, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(11, 2)
+SetEnemyStartLocPrio(11, 0, 17, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(11, 1, 19, MAP_LOC_PRIO_LOW)
+SetStartLocPrioCount(12, 3)
+SetStartLocPrio(12, 0, 17, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(12, 1, 18, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(12, 2, 19, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(12, 2)
+SetEnemyStartLocPrio(12, 0, 18, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrio(12, 1, 19, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrioCount(13, 1)
+SetEnemyStartLocPrio(13, 0, 18, MAP_LOC_PRIO_LOW)
+SetStartLocPrioCount(14, 4)
+SetStartLocPrio(14, 0, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(14, 1, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(14, 2, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(14, 3, 9, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrioCount(14, 1)
+SetEnemyStartLocPrio(14, 0, 19, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(15, 1)
+SetStartLocPrio(15, 0, 17, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrioCount(15, 2)
+SetEnemyStartLocPrio(15, 0, 18, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(15, 1, 19, MAP_LOC_PRIO_LOW)
+SetStartLocPrioCount(16, 1)
+SetStartLocPrio(16, 0, 19, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(16, 2)
+SetEnemyStartLocPrio(16, 0, 18, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(16, 1, 19, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(17, 2)
+SetStartLocPrio(17, 0, 18, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(17, 1, 19, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(17, 2)
+SetEnemyStartLocPrio(17, 0, 18, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(18, 1)
+SetStartLocPrio(18, 0, 17, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrioCount(18, 1)
+SetStartLocPrioCount(19, 1)
+SetStartLocPrio(19, 0, 18, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(19, 1)
+SetEnemyStartLocPrio(19, 0, 18, MAP_LOC_PRIO_LOW)
 end
 
 function main()
@@ -1635,8 +1767,8 @@ end
 function config()
 SetMapName("TRIGSTR_001")
 SetMapDescription("TRIGSTR_003")
-SetPlayers(10)
-SetTeams(10)
+SetPlayers(20)
+SetTeams(20)
 SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
 DefineStartLocation(0, -6336.0, 448.0)
 DefineStartLocation(1, 7360.0, 512.0)
@@ -1648,6 +1780,16 @@ DefineStartLocation(6, 7296.0, 2368.0)
 DefineStartLocation(7, 7296.0, -1280.0)
 DefineStartLocation(8, 7232.0, 4160.0)
 DefineStartLocation(9, 7296.0, -3200.0)
+DefineStartLocation(10, 1536.0, 2816.0)
+DefineStartLocation(11, -7936.0, 10240.0)
+DefineStartLocation(12, 6144.0, 2880.0)
+DefineStartLocation(13, -8384.0, 6464.0)
+DefineStartLocation(14, 9536.0, -6400.0)
+DefineStartLocation(15, -2432.0, 1792.0)
+DefineStartLocation(16, 4544.0, 64.0)
+DefineStartLocation(17, -9408.0, -10112.0)
+DefineStartLocation(18, 4224.0, -9792.0)
+DefineStartLocation(19, 3392.0, 9728.0)
 InitCustomPlayerSlots()
 InitCustomTeams()
 InitAllyPriorities()
