@@ -14,6 +14,8 @@ function goldExtractorTrigger()
                 player.economy.mineLevel = player.economy.mineLevel + 1
                 BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.economy.minePrice)
 
+                SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, GetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD) + game_config.economy.nextMineDiffPrice)
+
                 DestroyTextTag(player.economy.mineTextTag)
                 player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
             end)
