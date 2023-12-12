@@ -19,8 +19,8 @@ function initDefaultVariables(mode)
     game_config = {
         mode = mode,
         economy = {
-            startGold = 500,
-            startIncomePerSec = 10,
+            startGold = 5000,
+            startIncomePerSec = 5,
             firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
         },
@@ -49,7 +49,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(2),
@@ -66,7 +67,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(0),
@@ -83,7 +85,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(3),
@@ -100,7 +103,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(5),
@@ -117,7 +121,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 }
             },
             spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
@@ -146,7 +151,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(6),
@@ -163,7 +169,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(1),
@@ -180,7 +187,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(7),
@@ -197,7 +205,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(9),
@@ -214,7 +223,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 }
             },
             spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },

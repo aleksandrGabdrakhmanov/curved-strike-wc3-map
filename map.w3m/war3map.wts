@@ -331,13 +331,13 @@ Gold Mine
 }
 
 STRING 64
-// Units: u000 (Gold Extractor), Tip (Tooltip - Basic)
+// Abilities: A000 (Build Gold Extractor), Name (Name)
 {
 Build Gold Extractor
 }
 
 STRING 65
-// Abilities: A000 (Build Gold Extractor), Name (Name)
+// Abilities: A000 (Build Gold Extractor), Tip (Tooltip - Normal)
 {
 Build Gold Extractor
 }
@@ -348,44 +348,10 @@ STRING 67
 (Level 1)
 }
 
-STRING 68
-// Units: u000 (Gold Extractor), Name (Name)
-{
-Gold Extractor
-}
-
-STRING 69
-// Units: u000 (Gold Extractor), Ubertip (Tooltip - Extended)
-{
-Increases income.|n|n|cffff9696Building your first freezes your income for 25 seconds, the second for 50 seconds, the third for 75 seconds etc.|r
-}
-
-STRING 70
-// Units: u000 (Gold Extractor), Hotkey (Hotkey)
-{
-Q
-}
-
-STRING 71
-// Abilities: A000 (Build Gold Extractor), Tip (Tooltip - Normal)
-{
-Build Gold Extractor
-}
-
 STRING 72
 // Abilities: A000 (Build Gold Extractor), Ubertip (Tooltip - Normal - Extended)
 {
 Grants an additional |cffffff001 gold|r every second.
-}
-
-STRING 84
-{
-AI 1
-}
-
-STRING 85
-{
-AI 2
 }
 
 STRING 86
@@ -436,5 +402,21 @@ Player 19
 STRING 95
 {
 Player 20
+}
+
+STRING 97
+// Abilities: Aivs (Invisibility), Ubertip (Tooltip - Normal - Extended)
+{
+Makes a unit invisible. If the unit attacks, uses an ability or casts a spell, it will become visible. |nLasts 2 seconds.
+}
+
+STRING 98
+{
+Computer 1
+}
+
+STRING 99
+{
+Computer 2
 }
 

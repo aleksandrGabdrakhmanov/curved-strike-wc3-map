@@ -11,7 +11,7 @@ function spawnTrigger()
                     if owner == player.id then
                         local parentId = getParentId(('>I4'):pack(id))
                         if parentId ~= nil then
-                            local x, y = calculateDif(player.buildRect, player.attackPointRect[1], GetEnumUnit())
+                            local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
                             local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
                             SetUnitColor(unit, GetPlayerColor(player.id))
                             RemoveGuardPosition(unit)

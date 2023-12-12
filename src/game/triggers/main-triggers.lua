@@ -5,5 +5,6 @@ function initTriggers()
     winLoseTrigger()
     goldExtractorTrigger()
     finishResearchTrigger()
+    idleTrigger()
     debugTrigger()
 end

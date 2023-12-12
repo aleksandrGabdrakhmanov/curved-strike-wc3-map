@@ -1,10 +1,9 @@
-gg_rct_curved_1_1_attack_1 = nil
+gg_rct_curved_team_1_attack_1_right = nil
 gg_rct_curved_1_1_build = nil
 gg_rct_curved_1_1_main = nil
 gg_rct_curved_1_1_mine = nil
 gg_rct_curved_1_1_spawn = nil
 gg_rct_curved_1_1_worker = nil
-gg_rct_curved_1_2_attack_1 = nil
 gg_rct_curved_1_2_build = nil
 gg_rct_curved_1_2_main = nil
 gg_rct_curved_1_2_mine = nil
@@ -15,25 +14,21 @@ gg_rct_curved_1_3_main = nil
 gg_rct_curved_1_3_mine = nil
 gg_rct_curved_1_3_spawn = nil
 gg_rct_curved_1_3_worker = nil
-gg_rct_curved_1_4_attack_1 = nil
 gg_rct_curved_1_4_build = nil
 gg_rct_curved_1_4_main = nil
 gg_rct_curved_1_4_mine = nil
 gg_rct_curved_1_4_spawn = nil
 gg_rct_curved_1_4_worker = nil
-gg_rct_curved_1_5_attack_1 = nil
 gg_rct_curved_1_5_build = nil
 gg_rct_curved_1_5_main = nil
 gg_rct_curved_1_5_mine = nil
 gg_rct_curved_1_5_spawn = nil
 gg_rct_curved_1_5_worker = nil
-gg_rct_curved_2_1_attack_1 = nil
 gg_rct_curved_2_1_build = nil
 gg_rct_curved_2_1_main = nil
 gg_rct_curved_2_1_mine = nil
 gg_rct_curved_2_1_spawn = nil
 gg_rct_curved_2_1_worker = nil
-gg_rct_curved_2_2_attack_1 = nil
 gg_rct_curved_2_2_build = nil
 gg_rct_curved_2_2_main = nil
 gg_rct_curved_2_2_mine = nil
@@ -44,91 +39,65 @@ gg_rct_curved_2_3_main = nil
 gg_rct_curved_2_3_mine = nil
 gg_rct_curved_2_3_spawn = nil
 gg_rct_curved_2_3_worker = nil
-gg_rct_curved_2_4_attack_1 = nil
 gg_rct_curved_2_4_build = nil
 gg_rct_curved_2_4_main = nil
 gg_rct_curved_2_4_mine = nil
 gg_rct_curved_2_4_spawn = nil
 gg_rct_curved_2_4_worker = nil
-gg_rct_curved_2_5_attack_1 = nil
 gg_rct_curved_2_5_build = nil
 gg_rct_curved_2_5_main = nil
 gg_rct_curved_2_5_mine = nil
 gg_rct_curved_2_5_spawn = nil
 gg_rct_curved_2_5_worker = nil
-gg_rct_curved_team_1_attack_1 = nil
-gg_rct_curved_team_1_attack_2 = nil
 gg_rct_curved_team_1_base = nil
 gg_rct_curved_team_1_tower = nil
-gg_rct_curved_team_2_attack_1 = nil
-gg_rct_curved_team_2_attack_2 = nil
 gg_rct_curved_team_2_base = nil
 gg_rct_curved_team_2_tower = nil
-gg_rct_united_1_1_attack_1 = nil
-gg_rct_united_1_1_attack_2 = nil
 gg_rct_united_1_1_build = nil
 gg_rct_united_1_1_main = nil
 gg_rct_united_1_1_mine = nil
 gg_rct_united_1_1_spawn = nil
 gg_rct_united_1_1_worker = nil
-gg_rct_united_1_2_attack_1 = nil
-gg_rct_united_1_2_attack_2 = nil
 gg_rct_united_1_2_build = nil
 gg_rct_united_1_2_main = nil
 gg_rct_united_1_2_mine = nil
 gg_rct_united_1_2_spawn = nil
 gg_rct_united_1_2_worker = nil
-gg_rct_united_1_3_attack_1 = nil
-gg_rct_united_1_3_attack_2 = nil
 gg_rct_united_1_3_build = nil
 gg_rct_united_1_3_main = nil
 gg_rct_united_1_3_mine = nil
 gg_rct_united_1_3_spawn = nil
 gg_rct_united_1_3_worker = nil
-gg_rct_united_1_4_attack_1 = nil
-gg_rct_united_1_4_attack_2 = nil
 gg_rct_united_1_4_build = nil
 gg_rct_united_1_4_main = nil
 gg_rct_united_1_4_mine = nil
 gg_rct_united_1_4_spawn = nil
 gg_rct_united_1_4_worker = nil
-gg_rct_united_1_5_attack_1 = nil
-gg_rct_united_1_5_attack_2 = nil
 gg_rct_united_1_5_build = nil
 gg_rct_united_1_5_main = nil
 gg_rct_united_1_5_mine = nil
 gg_rct_united_1_5_spawn = nil
 gg_rct_united_1_5_worker = nil
-gg_rct_united_2_1_attack_1 = nil
-gg_rct_united_2_1_attack_2 = nil
 gg_rct_united_2_1_build = nil
 gg_rct_united_2_1_main = nil
 gg_rct_united_2_1_mine = nil
 gg_rct_united_2_1_spawn = nil
 gg_rct_united_2_1_worker = nil
-gg_rct_united_2_2_attack_1 = nil
-gg_rct_united_2_2_attack_2 = nil
 gg_rct_united_2_2_build = nil
 gg_rct_united_2_2_main = nil
 gg_rct_united_2_2_mine = nil
 gg_rct_united_2_2_spawn = nil
 gg_rct_united_2_2_worker = nil
-gg_rct_united_2_3_attack_1 = nil
-gg_rct_united_2_3_attack_2 = nil
 gg_rct_united_2_3_build = nil
 gg_rct_united_2_3_main = nil
 gg_rct_united_2_3_mine = nil
 gg_rct_united_2_3_spawn = nil
 gg_rct_united_2_3_worker = nil
-gg_rct_united_2_4_attack_1 = nil
-gg_rct_united_2_4_attack_2 = nil
 gg_rct_united_2_4_build = nil
 gg_rct_united_2_4_main = nil
 gg_rct_united_2_4_mine = nil
 gg_rct_united_2_4_spawn = nil
 gg_rct_united_2_4_worker = nil
-gg_rct_united_2_5_attack_1 = nil
-gg_rct_united_2_5_attack_2 = nil
 gg_rct_united_2_5_build = nil
 gg_rct_united_2_5_main = nil
 gg_rct_united_2_5_mine = nil
@@ -158,19 +127,33 @@ gg_rct_united_2_4_laboratory = nil
 gg_rct_united_2_3_laboratory = nil
 gg_rct_united_2_2_laboratory = nil
 gg_rct_united_2_1_laboratory = nil
+gg_rct_curved_team_1_attack_2_down = nil
+gg_rct_curved_team_1_attack_4_right = nil
+gg_rct_curved_team_1_attack_3_up = nil
+gg_rct_curved_team_2_attack_1_left = nil
+gg_rct_curved_team_2_attack_2_down = nil
+gg_rct_curved_team_2_attack_4_left = nil
+gg_rct_curved_team_2_attack_3_up = nil
+gg_rct_united_team_1_attack_1_right = nil
+gg_rct_united_team_1_attack_2_down = nil
+gg_rct_united_team_1_attack_3_up = nil
+gg_rct_united_team_1_attack_4_right = nil
+gg_rct_united_team_2_attack_1_left = nil
+gg_rct_united_team_2_attack_2_down = nil
+gg_rct_united_team_2_attack_3_up = nil
+gg_rct_united_team_2_attack_4_left = nil
 function InitGlobals()
 end
 
 function CreateRegions()
 local we
 
-gg_rct_curved_1_1_attack_1 = Rect(1600.0, 3072.0, 2752.0, 4736.0)
+gg_rct_curved_team_1_attack_1_right = Rect(-5184.0, -4544.0, 1600.0, 5792.0)
 gg_rct_curved_1_1_build = Rect(-6912.0, 3456.0, -5760.0, 5120.0)
 gg_rct_curved_1_1_main = Rect(-7424.0, 3968.0, -6912.0, 4480.0)
 gg_rct_curved_1_1_mine = Rect(-7424.0, 3456.0, -6912.0, 3968.0)
 gg_rct_curved_1_1_spawn = Rect(-5184.0, 3072.0, -4032.0, 4736.0)
 gg_rct_curved_1_1_worker = Rect(-6912.0, 3456.0, -5760.0, 5120.0)
-gg_rct_curved_1_2_attack_1 = Rect(1600.0, 1408.0, 2752.0, 3072.0)
 gg_rct_curved_1_2_build = Rect(-6912.0, 1600.0, -5760.0, 3264.0)
 gg_rct_curved_1_2_main = Rect(-7424.0, 2112.0, -6912.0, 2624.0)
 gg_rct_curved_1_2_mine = Rect(-7424.0, 1600.0, -6912.0, 2112.0)
@@ -181,25 +164,21 @@ gg_rct_curved_1_3_main = Rect(-7424.0, 256.0, -6912.0, 768.0)
 gg_rct_curved_1_3_mine = Rect(-7424.0, -256.0, -6912.0, 256.0)
 gg_rct_curved_1_3_spawn = Rect(-5184.0, -256.0, -4032.0, 1408.0)
 gg_rct_curved_1_3_worker = Rect(-6912.0, -256.0, -5760.0, 1408.0)
-gg_rct_curved_1_4_attack_1 = Rect(1600.0, -1920.0, 2752.0, -256.0)
 gg_rct_curved_1_4_build = Rect(-6912.0, -2112.0, -5760.0, -448.0)
 gg_rct_curved_1_4_main = Rect(-7424.0, -1600.0, -6912.0, -1088.0)
 gg_rct_curved_1_4_mine = Rect(-7424.0, -2112.0, -6912.0, -1600.0)
 gg_rct_curved_1_4_spawn = Rect(-5184.0, -1920.0, -4032.0, -256.0)
 gg_rct_curved_1_4_worker = Rect(-6912.0, -2112.0, -5760.0, -448.0)
-gg_rct_curved_1_5_attack_1 = Rect(1600.0, -3584.0, 2752.0, -1920.0)
 gg_rct_curved_1_5_build = Rect(-6912.0, -3968.0, -5760.0, -2304.0)
 gg_rct_curved_1_5_main = Rect(-7424.0, -3456.0, -6912.0, -2944.0)
 gg_rct_curved_1_5_mine = Rect(-7424.0, -3968.0, -6912.0, -3456.0)
 gg_rct_curved_1_5_spawn = Rect(-5184.0, -3584.0, -4032.0, -1920.0)
 gg_rct_curved_1_5_worker = Rect(-6912.0, -3968.0, -5760.0, -2304.0)
-gg_rct_curved_2_1_attack_1 = Rect(-1792.0, 3072.0, -640.0, 4736.0)
 gg_rct_curved_2_1_build = Rect(6720.0, 3456.0, 7872.0, 5120.0)
 gg_rct_curved_2_1_main = Rect(7872.0, 3968.0, 8384.0, 4480.0)
 gg_rct_curved_2_1_mine = Rect(7872.0, 3456.0, 8384.0, 3968.0)
 gg_rct_curved_2_1_spawn = Rect(4992.0, 3072.0, 6144.0, 4736.0)
 gg_rct_curved_2_1_worker = Rect(6720.0, 3456.0, 7872.0, 5120.0)
-gg_rct_curved_2_2_attack_1 = Rect(-1792.0, 1408.0, -640.0, 3072.0)
 gg_rct_curved_2_2_build = Rect(6720.0, 1600.0, 7872.0, 3264.0)
 gg_rct_curved_2_2_main = Rect(7872.0, 2112.0, 8384.0, 2624.0)
 gg_rct_curved_2_2_mine = Rect(7872.0, 1600.0, 8384.0, 2112.0)
@@ -210,91 +189,65 @@ gg_rct_curved_2_3_main = Rect(7872.0, 256.0, 8384.0, 768.0)
 gg_rct_curved_2_3_mine = Rect(7872.0, -256.0, 8384.0, 256.0)
 gg_rct_curved_2_3_spawn = Rect(4992.0, -256.0, 6144.0, 1408.0)
 gg_rct_curved_2_3_worker = Rect(6720.0, -256.0, 7872.0, 1408.0)
-gg_rct_curved_2_4_attack_1 = Rect(-1792.0, -1920.0, -640.0, -256.0)
 gg_rct_curved_2_4_build = Rect(6720.0, -2112.0, 7872.0, -448.0)
 gg_rct_curved_2_4_main = Rect(7872.0, -1600.0, 8384.0, -1088.0)
 gg_rct_curved_2_4_mine = Rect(7872.0, -2112.0, 8384.0, -1600.0)
 gg_rct_curved_2_4_spawn = Rect(4992.0, -1920.0, 6144.0, -256.0)
 gg_rct_curved_2_4_worker = Rect(6720.0, -2112.0, 7872.0, -448.0)
-gg_rct_curved_2_5_attack_1 = Rect(-1792.0, -3584.0, -640.0, -1920.0)
 gg_rct_curved_2_5_build = Rect(6720.0, -3968.0, 7872.0, -2304.0)
 gg_rct_curved_2_5_main = Rect(7872.0, -3456.0, 8384.0, -2944.0)
 gg_rct_curved_2_5_mine = Rect(7872.0, -3968.0, 8384.0, -3456.0)
 gg_rct_curved_2_5_spawn = Rect(4992.0, -3584.0, 6144.0, -1920.0)
 gg_rct_curved_2_5_worker = Rect(6720.0, -3968.0, 7872.0, -2304.0)
-gg_rct_curved_team_1_attack_1 = Rect(1600.0, -256.0, 2752.0, 1408.0)
-gg_rct_curved_team_1_attack_2 = Rect(3840.0, -256.0, 4992.0, 1408.0)
 gg_rct_curved_team_1_base = Rect(-4000.0, 320.0, -3392.0, 960.0)
 gg_rct_curved_team_1_tower = Rect(-1568.0, 320.0, -960.0, 960.0)
-gg_rct_curved_team_2_attack_1 = Rect(-1792.0, -256.0, -640.0, 1408.0)
-gg_rct_curved_team_2_attack_2 = Rect(-4032.0, -256.0, -2880.0, 1408.0)
 gg_rct_curved_team_2_base = Rect(4352.0, 320.0, 4960.0, 960.0)
 gg_rct_curved_team_2_tower = Rect(1888.0, 320.0, 2496.0, 960.0)
-gg_rct_united_1_1_attack_1 = Rect(1824.0, -9184.0, 3488.0, -7648.0)
-gg_rct_united_1_1_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
 gg_rct_united_1_1_build = Rect(-9344.0, -8256.0, -7680.0, -6720.0)
 gg_rct_united_1_1_main = Rect(-9856.0, -7232.0, -9344.0, -6720.0)
 gg_rct_united_1_1_mine = Rect(-10880.0, -7232.0, -10368.0, -6720.0)
 gg_rct_united_1_1_spawn = Rect(-7328.0, -8256.0, -5664.0, -6720.0)
 gg_rct_united_1_1_worker = Rect(-9152.0, -7008.0, -9056.0, -6912.0)
-gg_rct_united_1_2_attack_1 = Rect(2144.0, -8960.0, 3488.0, -7872.0)
-gg_rct_united_1_2_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
 gg_rct_united_1_2_build = Rect(-9024.0, -8256.0, -7680.0, -7168.0)
 gg_rct_united_1_2_main = Rect(-9856.0, -7840.0, -9344.0, -7328.0)
 gg_rct_united_1_2_mine = Rect(-10880.0, -7840.0, -10368.0, -7328.0)
 gg_rct_united_1_2_spawn = Rect(-7008.0, -8256.0, -5664.0, -7168.0)
 gg_rct_united_1_2_worker = Rect(-8704.0, -7552.0, -8608.0, -7456.0)
-gg_rct_united_1_3_attack_1 = Rect(2592.0, -8992.0, 3488.0, -7872.0)
-gg_rct_united_1_3_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
 gg_rct_united_1_3_build = Rect(-8576.0, -8800.0, -7680.0, -7680.0)
 gg_rct_united_1_3_main = Rect(-9856.0, -8512.0, -9344.0, -8000.0)
 gg_rct_united_1_3_mine = Rect(-10880.0, -8512.0, -10368.0, -8000.0)
 gg_rct_united_1_3_spawn = Rect(-6560.0, -8800.0, -5664.0, -7680.0)
 gg_rct_united_1_3_worker = Rect(-8192.0, -8288.0, -8064.0, -8160.0)
-gg_rct_united_1_4_attack_1 = Rect(2144.0, -8960.0, 3488.0, -7872.0)
-gg_rct_united_1_4_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
 gg_rct_united_1_4_build = Rect(-9024.0, -9280.0, -7680.0, -8192.0)
 gg_rct_united_1_4_main = Rect(-9856.0, -9152.0, -9344.0, -8640.0)
 gg_rct_united_1_4_mine = Rect(-10880.0, -9152.0, -10368.0, -8640.0)
 gg_rct_united_1_4_spawn = Rect(-7008.0, -9280.0, -5664.0, -8192.0)
 gg_rct_united_1_4_worker = Rect(-8736.0, -9024.0, -8640.0, -8928.0)
-gg_rct_united_1_5_attack_1 = Rect(1824.0, -9184.0, 3488.0, -7648.0)
-gg_rct_united_1_5_attack_2 = Rect(5248.0, -9024.0, 6944.0, -7456.0)
 gg_rct_united_1_5_build = Rect(-9344.0, -9728.0, -7680.0, -8192.0)
 gg_rct_united_1_5_main = Rect(-9856.0, -9728.0, -9344.0, -9216.0)
 gg_rct_united_1_5_mine = Rect(-10880.0, -9728.0, -10368.0, -9216.0)
 gg_rct_united_1_5_spawn = Rect(-7328.0, -9728.0, -5664.0, -8192.0)
 gg_rct_united_1_5_worker = Rect(-9152.0, -9536.0, -9056.0, -9440.0)
-gg_rct_united_2_1_attack_1 = Rect(-2976.0, -9056.0, -1312.0, -7520.0)
-gg_rct_united_2_1_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
 gg_rct_united_2_1_build = Rect(8448.0, -9728.0, 10112.0, -8192.0)
 gg_rct_united_2_1_main = Rect(10112.0, -9728.0, 10624.0, -9216.0)
 gg_rct_united_2_1_mine = Rect(11136.0, -9728.0, 11648.0, -9216.0)
 gg_rct_united_2_1_spawn = Rect(6432.0, -9728.0, 8096.0, -8192.0)
 gg_rct_united_2_1_worker = Rect(9824.0, -9536.0, 9920.0, -9440.0)
-gg_rct_united_2_2_attack_1 = Rect(-2976.0, -8800.0, -1632.0, -7712.0)
-gg_rct_united_2_2_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
 gg_rct_united_2_2_build = Rect(8448.0, -9280.0, 9792.0, -8192.0)
 gg_rct_united_2_2_main = Rect(10112.0, -9120.0, 10624.0, -8608.0)
 gg_rct_united_2_2_mine = Rect(11136.0, -9120.0, 11648.0, -8608.0)
 gg_rct_united_2_2_spawn = Rect(6432.0, -9280.0, 7776.0, -8192.0)
 gg_rct_united_2_2_worker = Rect(9376.0, -8992.0, 9472.0, -8896.0)
-gg_rct_united_2_3_attack_1 = Rect(-2976.0, -8864.0, -2080.0, -7744.0)
-gg_rct_united_2_3_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
 gg_rct_united_2_3_build = Rect(8448.0, -8768.0, 9344.0, -7648.0)
 gg_rct_united_2_3_main = Rect(10112.0, -8480.0, 10624.0, -7968.0)
 gg_rct_united_2_3_mine = Rect(11136.0, -8480.0, 11648.0, -7968.0)
 gg_rct_united_2_3_spawn = Rect(6432.0, -8768.0, 7328.0, -7648.0)
 gg_rct_united_2_3_worker = Rect(8832.0, -8288.0, 8960.0, -8160.0)
-gg_rct_united_2_4_attack_1 = Rect(-2976.0, -8832.0, -1632.0, -7744.0)
-gg_rct_united_2_4_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
 gg_rct_united_2_4_build = Rect(8448.0, -8256.0, 9792.0, -7168.0)
 gg_rct_united_2_4_main = Rect(10112.0, -7840.0, 10624.0, -7328.0)
 gg_rct_united_2_4_mine = Rect(11136.0, -7840.0, 11648.0, -7328.0)
 gg_rct_united_2_4_spawn = Rect(6432.0, -8256.0, 7776.0, -7168.0)
 gg_rct_united_2_4_worker = Rect(9408.0, -7520.0, 9504.0, -7424.0)
-gg_rct_united_2_5_attack_1 = Rect(-2976.0, -9056.0, -1312.0, -7520.0)
-gg_rct_united_2_5_attack_2 = Rect(-6176.0, -8960.0, -4512.0, -7456.0)
 gg_rct_united_2_5_build = Rect(8448.0, -8256.0, 10112.0, -6720.0)
 gg_rct_united_2_5_main = Rect(10112.0, -7232.0, 10624.0, -6720.0)
 gg_rct_united_2_5_mine = Rect(11136.0, -7232.0, 11648.0, -6720.0)
@@ -324,6 +277,21 @@ gg_rct_united_2_4_laboratory = Rect(10624.0, -7840.0, 11136.0, -7328.0)
 gg_rct_united_2_3_laboratory = Rect(10624.0, -8480.0, 11136.0, -7968.0)
 gg_rct_united_2_2_laboratory = Rect(10624.0, -9120.0, 11136.0, -8608.0)
 gg_rct_united_2_1_laboratory = Rect(10624.0, -9728.0, 11136.0, -9216.0)
+gg_rct_curved_team_1_attack_2_down = Rect(1600.0, 1088.0, 4992.0, 5792.0)
+gg_rct_curved_team_1_attack_4_right = Rect(1600.0, 160.0, 4992.0, 1088.0)
+gg_rct_curved_team_1_attack_3_up = Rect(1600.0, -4544.0, 4992.0, 160.0)
+gg_rct_curved_team_2_attack_1_left = Rect(-608.0, -4544.0, 6176.0, 5792.0)
+gg_rct_curved_team_2_attack_2_down = Rect(-4000.0, 1088.0, -608.0, 5792.0)
+gg_rct_curved_team_2_attack_4_left = Rect(-4000.0, 160.0, -608.0, 1088.0)
+gg_rct_curved_team_2_attack_3_up = Rect(-4000.0, -4544.0, -608.0, 160.0)
+gg_rct_united_team_1_attack_1_right = Rect(-7456.0, -11104.0, 3488.0, -6016.0)
+gg_rct_united_team_1_attack_2_down = Rect(3488.0, -7712.0, 4608.0, -5920.0)
+gg_rct_united_team_1_attack_3_up = Rect(3456.0, -11104.0, 4640.0, -8896.0)
+gg_rct_united_team_1_attack_4_right = Rect(3488.0, -8896.0, 6400.0, -7712.0)
+gg_rct_united_team_2_attack_1_left = Rect(-2784.0, -11136.0, 8160.0, -6048.0)
+gg_rct_united_team_2_attack_2_down = Rect(-3904.0, -7840.0, -2784.0, -6048.0)
+gg_rct_united_team_2_attack_3_up = Rect(-3968.0, -11136.0, -2784.0, -8928.0)
+gg_rct_united_team_2_attack_4_left = Rect(-5664.0, -8992.0, -2752.0, -7808.0)
 end
 
 --CUSTOM_CODE
@@ -865,39 +833,27 @@ function initRect()
             player.mineRect = regions[game_config.mode][team.i][player.i]['mine']
             player.mainRect = regions[game_config.mode][team.i][player.i]['main']
             player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
+            player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
     end
 
-    if game_config.mode == 'curved' then
-        for _, team in ipairs(all_teams) do
-            for _, player in ipairs(team.players) do
-                if player.i ~= 3 then
-                    player.attackPointRect = {
-                        regions[game_config.mode][team.i][player.i]['spawn'],
-                        regions[game_config.mode][team.i][player.i]['attack'][1],
-                        regions[game_config.mode]['team'][team.i]['attack'][1],
-                        regions[game_config.mode]['team'][team.i]['attack'][2]
-                    }
-                else
-                    player.attackPointRect = {
-                        regions[game_config.mode][team.i][player.i]['spawn'],
-                        regions[game_config.mode]['team'][team.i]['attack'][2]
-                    }
-                end
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local attackData = regions[game_config.mode][team.i][player.i]['attack']
+            if not attackData then
+                attackData = regions[game_config.mode]['team'][team.i]['attack']
             end
-        end
-    end
 
-    if game_config.mode == 'united' then
-        for _, team in ipairs(all_teams) do
-            for _, player in ipairs(team.players) do
-                player.attackPointRect = {
-                    regions[game_config.mode][team.i][player.i]['spawn'],
-                    regions[game_config.mode][team.i][player.i]['attack'][1],
-                    regions[game_config.mode][team.i][player.i]['attack'][2]
-                }
+            local directions = {'right', 'left', 'up', 'down'}
+            for i, data in ipairs(attackData) do
+                for _, dir in ipairs(directions) do
+                    if data[dir] then
+                        player.attackPointRect[i] = {rect = data[dir], direction = dir}
+                        break
+                    end
+                end
             end
         end
     end
@@ -973,8 +929,8 @@ function initDefaultVariables(mode)
     game_config = {
         mode = mode,
         economy = {
-            startGold = 500,
-            startIncomePerSec = 10,
+            startGold = 5000,
+            startIncomePerSec = 5,
             firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
         },
@@ -1003,7 +959,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(2),
@@ -1020,7 +977,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(0),
@@ -1037,7 +995,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(3),
@@ -1054,7 +1013,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(5),
@@ -1071,7 +1031,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 }
             },
             spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
@@ -1100,7 +1061,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(6),
@@ -1117,7 +1079,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(1),
@@ -1134,7 +1097,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(7),
@@ -1151,7 +1115,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 },
                 {
                     id = Player(9),
@@ -1168,7 +1133,8 @@ function initDefaultVariables(mode)
                     mineRect = nil,
                     mainRect = nil,
                     laboratoryRect = nil,
-                    attackPointRect = {}
+                    attackPointRect = {},
+                    spawnRect = nil
                 }
             },
             spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
@@ -1366,6 +1332,12 @@ function debugTrigger()
         SetPlayerAlliance(Player(18), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(19), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(20), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, 99999)
+            end
+        end
     end)
 end
 function finishResearchTrigger()
@@ -1401,6 +1373,46 @@ function goldExtractorTrigger()
         end
     end
 end
+function idleTrigger()
+
+--[[    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_FINISH)
+    TriggerAddAction(trig, function()
+        local unit = GetTriggerUnit()
+        print('spell_finish')
+        local attackPointX, attackPointY = extractNumbers(BlzGetUnitStringField(unit, UNIT_SF_GROUND_TEXTURE))
+        print('x:' .. attackPointY .. " y:" .. attackPointY)
+
+        IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
+    end)]]
+
+
+--[[    local trig = CreateTrigger()
+    TriggerRegisterTimerEventPeriodic(trig,1.00)
+    TriggerAddAction(trig, function()
+        local group = GetUnitsInRectMatching(GetPlayableMapRect(), Condition(function()
+            return GetUnitCurrentOrder(GetFilterUnit()) == String2OrderIdBJ("stand down")
+        end))
+
+        ForGroup(group, function()
+            local unit = GetEnumUnit()
+            print("new command")
+            local attackPointX, attackPointY = extractNumbers(BlzGetUnitStringField(unit, UNIT_SF_GROUND_TEXTURE))
+            IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
+        end)
+        DestroyGroup(group)
+
+    end)]]
+
+end
+
+function extractNumbers(str)
+    local numbers = {}
+    for num in string.gmatch(str, "%d+%.?%d*") do
+        table.insert(numbers, tonumber(num))
+    end
+    return numbers[1], numbers[2]
+end
 function incomeTrigger()
     local trig = CreateTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 1.00)
@@ -1420,23 +1432,39 @@ function initTriggers()
     winLoseTrigger()
     goldExtractorTrigger()
     finishResearchTrigger()
+    idleTrigger()
     debugTrigger()
 end
+additionalDir = 500
 function moveByPointsTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            for i = 1, #player.attackPointRect - 1 do
+            for i = 1, #player.attackPointRect do
                 local trig = CreateTrigger()
-                TriggerRegisterTimerEventPeriodic(trig, 1.00)
+                TriggerRegisterTimerEventPeriodic(trig, 2.00)
                 TriggerAddAction(trig, function()
-                    local group = GetUnitsInRectAll(player.attackPointRect[i])
+                    local group = GetUnitsInRectAll(player.attackPointRect[i].rect)
                     ForGroup(group, function ()
                         local unit = GetEnumUnit()
                         local owner = GetOwningPlayer(unit)
                         if owner == player.spawnPlayerId then
-                            if (GetUnitCurrentOrder(unit) == 0) then
-                                local attackPointX, attackPointY = calculateDif(player.attackPointRect[i], player.attackPointRect[i+1], unit)
-                                IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
+                            if GetUnitCurrentOrder(unit) == 0 or
+                                    GetUnitCurrentOrder(unit) == 851983 then
+                                local x, y
+                                if player.attackPointRect[i].direction == 'right' then
+                                    x = GetRectMaxX(player.attackPointRect[i].rect) + additionalDir
+                                    y = GetUnitY(unit)
+                                elseif player.attackPointRect[i].direction == 'down' then
+                                    x = GetUnitX(unit)
+                                    y = GetRectMinY(player.attackPointRect[i].rect) - additionalDir
+                                elseif player.attackPointRect[i].direction == 'left' then
+                                    x = GetRectMinX(player.attackPointRect[i].rect) - additionalDir
+                                    y = GetUnitY(unit)
+                                elseif player.attackPointRect[i].direction == 'up' then
+                                    x = GetUnitX(unit)
+                                    y = GetRectMaxY(player.attackPointRect[i].rect) + additionalDir
+                                end
+                                IssuePointOrderLoc(unit, "attack", Location(x, y))
                             end
                         end
                     end)
@@ -1468,7 +1496,7 @@ function spawnTrigger()
                     if owner == player.id then
                         local parentId = getParentId(('>I4'):pack(id))
                         if parentId ~= nil then
-                            local x, y = calculateDif(player.buildRect, player.attackPointRect[1], GetEnumUnit())
+                            local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
                             local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
                             SetUnitColor(unit, GetPlayerColor(player.id))
                             RemoveGuardPosition(unit)
@@ -1676,16 +1704,6 @@ SetPlayerTeam(Player(2), 0)
 SetPlayerTeam(Player(3), 0)
 SetPlayerTeam(Player(4), 0)
 SetPlayerTeam(Player(5), 0)
-SetPlayerTeam(Player(10), 0)
-SetPlayerTeam(Player(11), 0)
-SetPlayerTeam(Player(12), 0)
-SetPlayerTeam(Player(13), 0)
-SetPlayerTeam(Player(14), 0)
-SetPlayerTeam(Player(15), 0)
-SetPlayerTeam(Player(16), 0)
-SetPlayerTeam(Player(17), 0)
-SetPlayerTeam(Player(18), 0)
-SetPlayerTeam(Player(19), 0)
 SetPlayerTeam(Player(1), 1)
 SetPlayerTeam(Player(6), 1)
 SetPlayerTeam(Player(7), 1)
@@ -1731,6 +1749,96 @@ SetPlayerAllianceStateVisionBJ(Player(9), Player(1), true)
 SetPlayerAllianceStateVisionBJ(Player(9), Player(6), true)
 SetPlayerAllianceStateVisionBJ(Player(9), Player(7), true)
 SetPlayerAllianceStateVisionBJ(Player(9), Player(8), true)
+SetPlayerTeam(Player(10), 2)
+SetPlayerTeam(Player(11), 2)
+SetPlayerTeam(Player(12), 2)
+SetPlayerTeam(Player(13), 2)
+SetPlayerTeam(Player(14), 2)
+SetPlayerAllianceStateAllyBJ(Player(10), Player(11), true)
+SetPlayerAllianceStateAllyBJ(Player(10), Player(12), true)
+SetPlayerAllianceStateAllyBJ(Player(10), Player(13), true)
+SetPlayerAllianceStateAllyBJ(Player(10), Player(14), true)
+SetPlayerAllianceStateAllyBJ(Player(11), Player(10), true)
+SetPlayerAllianceStateAllyBJ(Player(11), Player(12), true)
+SetPlayerAllianceStateAllyBJ(Player(11), Player(13), true)
+SetPlayerAllianceStateAllyBJ(Player(11), Player(14), true)
+SetPlayerAllianceStateAllyBJ(Player(12), Player(10), true)
+SetPlayerAllianceStateAllyBJ(Player(12), Player(11), true)
+SetPlayerAllianceStateAllyBJ(Player(12), Player(13), true)
+SetPlayerAllianceStateAllyBJ(Player(12), Player(14), true)
+SetPlayerAllianceStateAllyBJ(Player(13), Player(10), true)
+SetPlayerAllianceStateAllyBJ(Player(13), Player(11), true)
+SetPlayerAllianceStateAllyBJ(Player(13), Player(12), true)
+SetPlayerAllianceStateAllyBJ(Player(13), Player(14), true)
+SetPlayerAllianceStateAllyBJ(Player(14), Player(10), true)
+SetPlayerAllianceStateAllyBJ(Player(14), Player(11), true)
+SetPlayerAllianceStateAllyBJ(Player(14), Player(12), true)
+SetPlayerAllianceStateAllyBJ(Player(14), Player(13), true)
+SetPlayerAllianceStateVisionBJ(Player(10), Player(11), true)
+SetPlayerAllianceStateVisionBJ(Player(10), Player(12), true)
+SetPlayerAllianceStateVisionBJ(Player(10), Player(13), true)
+SetPlayerAllianceStateVisionBJ(Player(10), Player(14), true)
+SetPlayerAllianceStateVisionBJ(Player(11), Player(10), true)
+SetPlayerAllianceStateVisionBJ(Player(11), Player(12), true)
+SetPlayerAllianceStateVisionBJ(Player(11), Player(13), true)
+SetPlayerAllianceStateVisionBJ(Player(11), Player(14), true)
+SetPlayerAllianceStateVisionBJ(Player(12), Player(10), true)
+SetPlayerAllianceStateVisionBJ(Player(12), Player(11), true)
+SetPlayerAllianceStateVisionBJ(Player(12), Player(13), true)
+SetPlayerAllianceStateVisionBJ(Player(12), Player(14), true)
+SetPlayerAllianceStateVisionBJ(Player(13), Player(10), true)
+SetPlayerAllianceStateVisionBJ(Player(13), Player(11), true)
+SetPlayerAllianceStateVisionBJ(Player(13), Player(12), true)
+SetPlayerAllianceStateVisionBJ(Player(13), Player(14), true)
+SetPlayerAllianceStateVisionBJ(Player(14), Player(10), true)
+SetPlayerAllianceStateVisionBJ(Player(14), Player(11), true)
+SetPlayerAllianceStateVisionBJ(Player(14), Player(12), true)
+SetPlayerAllianceStateVisionBJ(Player(14), Player(13), true)
+SetPlayerTeam(Player(15), 3)
+SetPlayerTeam(Player(16), 3)
+SetPlayerTeam(Player(17), 3)
+SetPlayerTeam(Player(18), 3)
+SetPlayerTeam(Player(19), 3)
+SetPlayerAllianceStateAllyBJ(Player(15), Player(16), true)
+SetPlayerAllianceStateAllyBJ(Player(15), Player(17), true)
+SetPlayerAllianceStateAllyBJ(Player(15), Player(18), true)
+SetPlayerAllianceStateAllyBJ(Player(15), Player(19), true)
+SetPlayerAllianceStateAllyBJ(Player(16), Player(15), true)
+SetPlayerAllianceStateAllyBJ(Player(16), Player(17), true)
+SetPlayerAllianceStateAllyBJ(Player(16), Player(18), true)
+SetPlayerAllianceStateAllyBJ(Player(16), Player(19), true)
+SetPlayerAllianceStateAllyBJ(Player(17), Player(15), true)
+SetPlayerAllianceStateAllyBJ(Player(17), Player(16), true)
+SetPlayerAllianceStateAllyBJ(Player(17), Player(18), true)
+SetPlayerAllianceStateAllyBJ(Player(17), Player(19), true)
+SetPlayerAllianceStateAllyBJ(Player(18), Player(15), true)
+SetPlayerAllianceStateAllyBJ(Player(18), Player(16), true)
+SetPlayerAllianceStateAllyBJ(Player(18), Player(17), true)
+SetPlayerAllianceStateAllyBJ(Player(18), Player(19), true)
+SetPlayerAllianceStateAllyBJ(Player(19), Player(15), true)
+SetPlayerAllianceStateAllyBJ(Player(19), Player(16), true)
+SetPlayerAllianceStateAllyBJ(Player(19), Player(17), true)
+SetPlayerAllianceStateAllyBJ(Player(19), Player(18), true)
+SetPlayerAllianceStateVisionBJ(Player(15), Player(16), true)
+SetPlayerAllianceStateVisionBJ(Player(15), Player(17), true)
+SetPlayerAllianceStateVisionBJ(Player(15), Player(18), true)
+SetPlayerAllianceStateVisionBJ(Player(15), Player(19), true)
+SetPlayerAllianceStateVisionBJ(Player(16), Player(15), true)
+SetPlayerAllianceStateVisionBJ(Player(16), Player(17), true)
+SetPlayerAllianceStateVisionBJ(Player(16), Player(18), true)
+SetPlayerAllianceStateVisionBJ(Player(16), Player(19), true)
+SetPlayerAllianceStateVisionBJ(Player(17), Player(15), true)
+SetPlayerAllianceStateVisionBJ(Player(17), Player(16), true)
+SetPlayerAllianceStateVisionBJ(Player(17), Player(18), true)
+SetPlayerAllianceStateVisionBJ(Player(17), Player(19), true)
+SetPlayerAllianceStateVisionBJ(Player(18), Player(15), true)
+SetPlayerAllianceStateVisionBJ(Player(18), Player(16), true)
+SetPlayerAllianceStateVisionBJ(Player(18), Player(17), true)
+SetPlayerAllianceStateVisionBJ(Player(18), Player(19), true)
+SetPlayerAllianceStateVisionBJ(Player(19), Player(15), true)
+SetPlayerAllianceStateVisionBJ(Player(19), Player(16), true)
+SetPlayerAllianceStateVisionBJ(Player(19), Player(17), true)
+SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
@@ -1839,16 +1947,16 @@ DefineStartLocation(6, 7296.0, 2368.0)
 DefineStartLocation(7, 7296.0, -1280.0)
 DefineStartLocation(8, 7232.0, 4160.0)
 DefineStartLocation(9, 7296.0, -3200.0)
-DefineStartLocation(10, 1536.0, 2816.0)
-DefineStartLocation(11, -7936.0, 10240.0)
-DefineStartLocation(12, 6144.0, 2880.0)
-DefineStartLocation(13, -8384.0, 6464.0)
-DefineStartLocation(14, 9536.0, -6400.0)
-DefineStartLocation(15, -2432.0, 1792.0)
-DefineStartLocation(16, 4544.0, 64.0)
-DefineStartLocation(17, -9408.0, -10112.0)
-DefineStartLocation(18, 4224.0, -9792.0)
-DefineStartLocation(19, 3392.0, 9728.0)
+DefineStartLocation(10, 1792.0, 512.0)
+DefineStartLocation(11, -960.0, -8384.0)
+DefineStartLocation(12, 6336.0, -8832.0)
+DefineStartLocation(13, -9472.0, 2944.0)
+DefineStartLocation(14, 5888.0, -7552.0)
+DefineStartLocation(15, -5440.0, 10432.0)
+DefineStartLocation(16, -5568.0, -6848.0)
+DefineStartLocation(17, 896.0, -6592.0)
+DefineStartLocation(18, 9088.0, 9536.0)
+DefineStartLocation(19, -9920.0, 7296.0)
 InitCustomPlayerSlots()
 InitCustomTeams()
 InitAllyPriorities()

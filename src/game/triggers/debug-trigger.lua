@@ -27,5 +27,11 @@ function debugTrigger()
         SetPlayerAlliance(Player(18), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(19), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(20), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, 99999)
+            end
+        end
     end)
 end

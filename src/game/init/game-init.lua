@@ -15,39 +15,27 @@ function initRect()
             player.mineRect = regions[game_config.mode][team.i][player.i]['mine']
             player.mainRect = regions[game_config.mode][team.i][player.i]['main']
             player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
+            player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
     end
 
-    if game_config.mode == 'curved' then
-        for _, team in ipairs(all_teams) do
-            for _, player in ipairs(team.players) do
-                if player.i ~= 3 then
-                    player.attackPointRect = {
-                        regions[game_config.mode][team.i][player.i]['spawn'],
-                        regions[game_config.mode][team.i][player.i]['attack'][1],
-                        regions[game_config.mode]['team'][team.i]['attack'][1],
-                        regions[game_config.mode]['team'][team.i]['attack'][2]
-                    }
-                else
-                    player.attackPointRect = {
-                        regions[game_config.mode][team.i][player.i]['spawn'],
-                        regions[game_config.mode]['team'][team.i]['attack'][2]
-                    }
-                end
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local attackData = regions[game_config.mode][team.i][player.i]['attack']
+            if not attackData then
+                attackData = regions[game_config.mode]['team'][team.i]['attack']
             end
-        end
-    end
 
-    if game_config.mode == 'united' then
-        for _, team in ipairs(all_teams) do
-            for _, player in ipairs(team.players) do
-                player.attackPointRect = {
-                    regions[game_config.mode][team.i][player.i]['spawn'],
-                    regions[game_config.mode][team.i][player.i]['attack'][1],
-                    regions[game_config.mode][team.i][player.i]['attack'][2]
-                }
+            local directions = {'right', 'left', 'up', 'down'}
+            for i, data in ipairs(attackData) do
+                for _, dir in ipairs(directions) do
+                    if data[dir] then
+                        player.attackPointRect[i] = {rect = data[dir], direction = dir}
+                        break
+                    end
+                end
             end
         end
     end
