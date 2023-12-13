@@ -240,17 +240,30 @@ end
 
 function initUnits()
     units_for_build = {
-        { id = 'h00C', parentId = 'h00A', level = 1},
-        { id = 'h002', parentId = 'h00B', level = 1},
-        { id = 'h004', parentId = 'h00D', level = 1},
-        { id = 'h003', parentId = 'h00E', level = 1},
-        { id = 'h000', parentId = 'h00F', level = 2},
-        { id = 'h001', parentId = 'h00G', level = 2},
-        { id = 'h007', parentId = 'h00H', level = 2},
-        { id = 'h008', parentId = 'h00I', level = 2},
-        { id = 'h005', parentId = 'h00J', level = 3},
-        { id = 'h006', parentId = 'h00K', level = 3},
-        { id = 'h009', parentId = 'h00L', level = 3},
+        { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', name = 'Footman'},
+        { id = 'h004', parentId = 'h00D', tier = 1, race = 'human', name = 'Rifleman'},
+        { id = 'h008', parentId = 'h00I', tier = 1, race = 'human', name = 'Sorceress'},
+        { id = 'h003', parentId = 'h00E', tier = 2, race = 'human', name = 'Mortar Team'},
+        { id = 'h007', parentId = 'h00H', tier = 2, race = 'human', name = 'Priest'},
+        { id = 'h006', parentId = 'h00K', tier = 2, race = 'human', name = 'Spellbreaker'},
+        { id = 'h000', parentId = 'h00F', tier = 2, race = 'human', name = 'Flying Machine'},
+        { id = 'h001', parentId = 'h00G', tier = 2, race = 'human', name = 'Gryphon Rider'},
+        { id = 'h002', parentId = 'h00B', tier = 3, race = 'human', name = 'Knight'},
+        { id = 'h005', parentId = 'h00J', tier = 3, race = 'human', name = 'Siege Engine'},
+        { id = 'h009', parentId = 'h00L', tier = 3, race = 'human', name = 'Dragonhawk Rider'},
+
+        { id = 'h00P', parentId = 'o003', tier = 1, race = 'orc', name = 'Grunt'},
+        { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', name = 'Headhunter'},
+        { id = 'h00T', parentId = 'o00C', tier = 1, race = 'orc', name = 'Shaman'},
+        { id = 'h00S', parentId = 'o004', tier = 2, race = 'orc', name = 'Raider'},
+        { id = 'h00X', parentId = 'o00B', tier = 2, race = 'orc', name = 'Witch Doctor'},
+        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', name = 'Spirit Walker'},
+        { id = 'h00R', parentId = 'o008', tier = 2, race = 'orc', name = 'Kodo Beast'},
+        { id = 'h00N', parentId = 'o00A', tier = 2, race = 'orc', name = 'Batrider'},
+        { id = 'h00V', parentId = 'o005', tier = 3, race = 'orc', name = 'Tauren'},
+        { id = 'h00O', parentId = 'o007', tier = 3, race = 'orc', name = 'Demolisher'},
+        { id = 'h00W', parentId = 'o009', tier = 3, race = 'orc', name = 'Wind Rider'},
+
     }
     units_special = {
         builder = 'o000',

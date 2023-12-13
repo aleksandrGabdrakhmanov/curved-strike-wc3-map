@@ -420,3 +420,267 @@ STRING 99
 Computer 2
 }
 
+STRING 100
+// Units: h00C (Footman), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 101
+// Units: h00N (Batrider), Ubertip (Tooltip - Extended)
+{
+Health: <otbr,HP>|nDamage: <otbr,mindmg1> - <otbr,maxdmg1>|nAttack Speed 1.17|nAttack type: |cffd45e19Siege|r|nRange: 500|nArmor: <otbr,def>, |cff00ff00Light|r|nAbility: |cff00ff00Unstable Concoction|r|nUpgrades: |cff00ff00Troll Regeneration|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 102
+// Units: h00N (Batrider), Tip (Tooltip - Basic)
+{
+Build Batrider
+}
+
+STRING 103
+// Units: h00N (Batrider), Name (Name)
+{
+Batrider
+}
+
+STRING 104
+// Units: h00N (Batrider), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 105
+// Units: h00O (Demolisher), Ubertip (Tooltip - Extended)
+{
+Health: <ocat,HP>|nDamage: 49 - 53|nAttack Speed 4.16|nAttack Type: |cffd45e19Siege|r, Splash|nRange: 800|nArmor: <ocat,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Burning Oil|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 106
+// Units: h00O (Demolisher), Tip (Tooltip - Basic)
+{
+Build Demolisher
+}
+
+STRING 107
+// Units: h00O (Demolisher), Name (Name)
+{
+Demolisher
+}
+
+STRING 108
+// Units: h00O (Demolisher), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 109
+// Units: h00P (Grunt), Ubertip (Tooltip - Extended)
+{
+Health: <ogru,HP>|nDamage: <ogru,mindmg1> - <ogru,maxdmg1>|nAttack Speed: 1.04|nAttack Type: |cffffc800Normal|r|nRange: Melee|nArmor: <ogru,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Brute Strength|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 110
+// Units: h00P (Grunt), Tip (Tooltip - Basic)
+{
+Build Grunt
+}
+
+STRING 111
+// Units: h00P (Grunt), Name (Name)
+{
+Grunt
+}
+
+STRING 112
+// Units: h00P (Grunt), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 113
+// Units: h00Q (Headhunter), Ubertip (Tooltip - Extended)
+{
+Health: <ohun,HP>|nDamage: <ohun,mindmg1> - <ohun,maxdmg1>|nAttack Speed: 1.50|nAttack Type: |cff0064ffPierce|r|nRange: 450|nArmor: <ohun,def>, |cffffc819Medium|r|nUpgrades: |cff00ff00Troll Regeneration, Berserk|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 114
+// Units: h00Q (Headhunter), Tip (Tooltip - Basic)
+{
+Build Headhunter
+}
+
+STRING 115
+// Units: h00Q (Headhunter), Name (Name)
+{
+Headhunter
+}
+
+STRING 116
+// Units: h00Q (Headhunter), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 117
+// Units: h00R (Kodo Beast), Tip (Tooltip - Basic)
+{
+Build Kodo Beast
+}
+
+STRING 118
+// Units: h00R (Kodo Beast), Name (Name)
+{
+Kodo Beast
+}
+
+STRING 119
+// Units: h00R (Kodo Beast), Ubertip (Tooltip - Extended)
+{
+Health: <okod,HP>|nDamage: <okod,mindmg1> - <okod,maxdmg1>|nAttack Speed 0.94|nAttack Type: |cff0064ffPierce|r|nRange: 500|nArmor: <okod,def>, |cff00ffffUnarmored|r|nAbilities: |cff00ff00Devour, War Drums|r|nUpgrades: |cff00ff00War Drums|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 120
+// Units: h00S (Raider), Ubertip (Tooltip - Extended)
+{
+Health: <orai,HP>|nDamage: <orai,mindmg1> - <orai,maxdmg1>|nAttack Speed: 1.20|nAttack Type: |cffd45e19Siege|r|nRange: Melee|nArmor: <orai,def>, |cffffc819Medium|r|nUpgrades: |cff00ff00Ensnare|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 121
+// Units: h00S (Raider), Tip (Tooltip - Basic)
+{
+Build Raider
+}
+
+STRING 122
+// Units: h00S (Raider), Name (Name)
+{
+Raider
+}
+
+STRING 123
+// Units: h00S (Raider), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 124
+// Units: h00T (Shaman), Ubertip (Tooltip - Extended)
+{
+Health: <oshm,HP>|nDamage: <oshm,mindmg1> - <oshm,maxdmg1>|nAttack Speed 1.37|nAttack Type: |cff963296Magic|r|nRange: 600|nArmor: <oshm,def>, |cff00ffffUnarmored|r|nAbility:|cff00ff00 Purge|r|nUpgrades: |cff00ff00Shaman Adept Training|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 125
+// Units: h00T (Shaman), Tip (Tooltip - Basic)
+{
+Build Shaman
+}
+
+STRING 126
+// Units: h00T (Shaman), Name (Name)
+{
+Shaman
+}
+
+STRING 127
+// Units: h00T (Shaman), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 128
+// Units: h00U (Spirit Walker), Ubertip (Tooltip - Extended)
+{
+Health: <ospw,HP>|nDamage: <ospw,mindmg1> - <ospw,maxdmg1>|nAttack Speed 1.13|nAttack Type: |cff963296Magic|r|nRange: 600|nArmor: <ospw,def>, |cff00ffffUnarmored|r|nAbility:|cff00ff00 Spirit Link|r|nUpgrades: |cff00ff00Spirit Walker Adept Training|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 129
+// Units: h00U (Spirit Walker), Tip (Tooltip - Basic)
+{
+Build Spirit Walker
+}
+
+STRING 130
+// Units: h00U (Spirit Walker), Name (Name)
+{
+Spirit Walker
+}
+
+STRING 131
+// Units: h00U (Spirit Walker), Hotkey (Hotkey)
+{
+S
+}
+
+STRING 132
+// Units: h00V (Tauren), Ubertip (Tooltip - Extended)
+{
+Health: <otau,HP>|nDamage: <otau,mindmg1> - <otau,maxdmg1>|nAttack Speed 1.24|nAttack Type: |cffffc800Normal|r|nRange: Melee|nArmor: <otau,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Pulverize|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 133
+// Units: h00V (Tauren), Tip (Tooltip - Basic)
+{
+Build Tauren
+}
+
+STRING 134
+// Units: h00V (Tauren), Name (Name)
+{
+Tauren
+}
+
+STRING 135
+// Units: h00V (Tauren), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 136
+// Units: h00W (Wind Rider), Ubertip (Tooltip - Extended)
+{
+Health: <owyv,HP>|nDamage: <owyv,mindmg1> - <owyv,maxdmg1>|nAttack Speed: 1.43|nAttack Type: |cff0064ffPierce|r|nRange: 550|nArmor: <owyv,def>, |cff00ff00Light|r|nUpgrades: |cff00ff00Envenomed Spears|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 137
+// Units: h00W (Wind Rider), Tip (Tooltip - Basic)
+{
+Build Wind Rider
+}
+
+STRING 138
+// Units: h00W (Wind Rider), Name (Name)
+{
+Wind Rider
+}
+
+STRING 139
+// Units: h00W (Wind Rider), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 140
+// Units: h00X (Witch Doctor), Ubertip (Tooltip - Extended)
+{
+Health: <odoc,HP>|nDamage: <odoc,mindmg1> - <odoc,maxdmg1>|nAttack Speed: 1.13|nAttack Type: |cff963296Magic|r|nRange: 600|nArmor: <odoc,def>, |cff00ffffUnarmored|r|nAbilities:|cff00ff00 Sentry Ward, Stasis Trap|r|nUpgrades: |cff00ff00Witch Doctor Master Training|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 141
+// Units: h00X (Witch Doctor), Tip (Tooltip - Basic)
+{
+Build Witch Doctor
+}
+
+STRING 142
+// Units: h00X (Witch Doctor), Name (Name)
+{
+Witch Doctor
+}
+
+STRING 143
+// Units: h00X (Witch Doctor), Hotkey (Hotkey)
+{
+A
+}
+
