@@ -800,14 +800,6 @@ function calculateDif(buidRect, spawnRect, unit)
     return spawnRectX - (buidRectX - unitX), spawnRectY - (buidRectY - unitY)
 end
 
---[[function changeAvailableUnitsForPlayers(players, units, isAvailable)
-    for _, player in ipairs(players) do
-        for _, unit in ipairs(units) do
-            SetPlayerUnitAvailableBJ(FourCC(unit.id), isAvailable, player.id)
-        end
-    end
-end]]
-
 function getParentId(searchId)
     for _, unit in pairs(units_for_build) do
         if unit.id == searchId then
@@ -1150,17 +1142,29 @@ end
 
 function initUnits()
     units_for_build = {
-        { id = 'h00C', parentId = 'h00A', level = 1},
-        { id = 'h002', parentId = 'h00B', level = 1},
-        { id = 'h004', parentId = 'h00D', level = 1},
-        { id = 'h003', parentId = 'h00E', level = 1},
-        { id = 'h000', parentId = 'h00F', level = 2},
-        { id = 'h001', parentId = 'h00G', level = 2},
-        { id = 'h007', parentId = 'h00H', level = 2},
-        { id = 'h008', parentId = 'h00I', level = 2},
-        { id = 'h005', parentId = 'h00J', level = 3},
-        { id = 'h006', parentId = 'h00K', level = 3},
-        { id = 'h009', parentId = 'h00L', level = 3},
+        { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', position = 1, name = 'Footman'},
+        { id = 'h004', parentId = 'h00D', tier = 1, race = 'human', position = 2, name = 'Rifleman'},
+        { id = 'h008', parentId = 'h00I', tier = 1, race = 'human', position = 3, name = 'Sorceress'},
+        { id = 'h003', parentId = 'h00E', tier = 2, race = 'human', position = 4, name = 'Mortar Team'},
+        { id = 'h007', parentId = 'h00H', tier = 2, race = 'human', position = 5,  name = 'Priest'},
+        { id = 'h006', parentId = 'h00K', tier = 2, race = 'human', position = 6,  name = 'Spellbreaker'},
+        { id = 'h000', parentId = 'h00F', tier = 2, race = 'human', position = 7,  name = 'Flying Machine'},
+        { id = 'h001', parentId = 'h00G', tier = 2, race = 'human', position = 8,  name = 'Gryphon Rider'},
+        { id = 'h002', parentId = 'h00B', tier = 3, race = 'human', position = 9,  name = 'Knight'},
+        { id = 'h005', parentId = 'h00J', tier = 3, race = 'human', position = 10,  name = 'Siege Engine'},
+        { id = 'h009', parentId = 'h00L', tier = 3, race = 'human', position = 11,  name = 'Dragonhawk Rider'},
+
+        { id = 'h00P', parentId = 'o003', tier = 1, race = 'orc', position = 1,  name = 'Grunt'},
+        { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', position = 2,  name = 'Headhunter'},
+        { id = 'h00T', parentId = 'o00C', tier = 1, race = 'orc', position = 3,  name = 'Shaman'},
+        { id = 'h00S', parentId = 'o004', tier = 2, race = 'orc', position = 4,  name = 'Raider'},
+        { id = 'h00X', parentId = 'o00B', tier = 2, race = 'orc', position = 5,  name = 'Witch Doctor'},
+        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', position = 6,  name = 'Spirit Walker'},
+        { id = 'h00R', parentId = 'o008', tier = 2, race = 'orc', position = 7,  name = 'Kodo Beast'},
+        { id = 'h00N', parentId = 'o00A', tier = 2, race = 'orc', position = 8,  name = 'Batrider'},
+        { id = 'h00V', parentId = 'o005', tier = 3, race = 'orc', position = 9,  name = 'Tauren'},
+        { id = 'h00O', parentId = 'o007', tier = 3, race = 'orc', position = 10,  name = 'Demolisher'},
+        { id = 'h00W', parentId = 'o009', tier = 3, race = 'orc', position = 11,  name = 'Wind Rider'},
     }
     units_special = {
         builder = 'o000',
@@ -1188,6 +1192,8 @@ function initPlayers()
     setAllianceBetweenPlayers()
     setAllianceBetweenPlayersAndSpawnPlayers()
     addWorkers()
+    changeAvailableUnitsForPlayers()
+    setStartCameraPosition()
 end
 
 function setAllianceBetweenSpawnPlayers()
@@ -1243,6 +1249,48 @@ function addWorkers()
         end
     end
 end
+
+function changeAvailableUnitsForPlayers()
+
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            for _, unit in ipairs(units_for_build) do
+                SetPlayerUnitAvailableBJ(FourCC(unit.id), FALSE, player.id)
+            end
+            local randomUnits = getRandomUnits(units_for_build)
+            for _, unit in ipairs(randomUnits) do
+                SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
+            end
+        end
+    end
+end
+
+function getRandomUnits(units)
+    local groupedUnits = {}
+    local randomUnits = {}
+
+    for _, unit in ipairs(units) do
+        if not groupedUnits[unit.position] then
+            groupedUnits[unit.position] = {}
+        end
+        table.insert(groupedUnits[unit.position], unit)
+    end
+
+    for _, groupedUnit in ipairs(groupedUnits) do
+        local randomIndex = GetRandomInt(1, #groupedUnit)
+        table.insert(randomUnits, groupedUnit[randomIndex])
+    end
+
+    return randomUnits
+end
+
+function setStartCameraPosition()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect))
+        end
+    end
+end
 regions = {}
 function initRegions()
     for name, value in pairs(_G) do
@@ -1284,16 +1332,6 @@ function startGame(mode)
     initialUI()
     initTimers()
     initTriggers()
-    setStartCameraPosition()
-    --changeAvailableUnitsForPlayers(all_players, all_units, TRUE)
-end
-
-function setStartCameraPosition()
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect))
-        end
-    end
 end
 function initTimers()
     local timer = CreateTimer()

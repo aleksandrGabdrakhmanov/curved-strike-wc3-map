@@ -3,6 +3,8 @@ function initPlayers()
     setAllianceBetweenPlayers()
     setAllianceBetweenPlayersAndSpawnPlayers()
     addWorkers()
+    changeAvailableUnitsForPlayers()
+    setStartCameraPosition()
 end
 
 function setAllianceBetweenSpawnPlayers()
@@ -55,6 +57,47 @@ function addWorkers()
                     GetRectCenterY(player.workerRect),
                     0
             )
+        end
+    end
+end
+
+function changeAvailableUnitsForPlayers()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            for _, unit in ipairs(units_for_build) do
+                SetPlayerUnitAvailableBJ(FourCC(unit.id), FALSE, player.id)
+            end
+            local randomUnits = getRandomUnits(units_for_build)
+            for _, unit in ipairs(randomUnits) do
+                SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
+            end
+        end
+    end
+end
+
+function getRandomUnits(units)
+    local groupedUnits = {}
+    local randomUnits = {}
+
+    for _, unit in ipairs(units) do
+        if not groupedUnits[unit.position] then
+            groupedUnits[unit.position] = {}
+        end
+        table.insert(groupedUnits[unit.position], unit)
+    end
+
+    for _, groupedUnit in ipairs(groupedUnits) do
+        local randomIndex = GetRandomInt(1, #groupedUnit)
+        table.insert(randomUnits, groupedUnit[randomIndex])
+    end
+
+    return randomUnits
+end
+
+function setStartCameraPosition()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect))
         end
     end
 end

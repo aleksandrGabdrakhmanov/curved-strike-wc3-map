@@ -11,14 +11,6 @@ function calculateDif(buidRect, spawnRect, unit)
     return spawnRectX - (buidRectX - unitX), spawnRectY - (buidRectY - unitY)
 end
 
---[[function changeAvailableUnitsForPlayers(players, units, isAvailable)
-    for _, player in ipairs(players) do
-        for _, unit in ipairs(units) do
-            SetPlayerUnitAvailableBJ(FourCC(unit.id), isAvailable, player.id)
-        end
-    end
-end]]
-
 function getParentId(searchId)
     for _, unit in pairs(units_for_build) do
         if unit.id == searchId then
