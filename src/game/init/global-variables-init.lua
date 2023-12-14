@@ -19,7 +19,7 @@ function initDefaultVariables(mode)
     game_config = {
         mode = mode,
         economy = {
-            startGold = 5000,
+            startGold = 300,
             startIncomePerSec = 5,
             firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
