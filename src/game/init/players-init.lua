@@ -66,10 +66,16 @@ function changeAvailableUnitsForPlayers()
         for _, player in ipairs(team.players) do
             for _, unit in ipairs(units_for_build) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), FALSE, player.id)
+                for _, upgrade in ipairs(unit.upgrades) do
+                    SetPlayerTechMaxAllowed(player.id, FourCC(upgrade), 0)
+                end
             end
             local randomUnits = getRandomUnits(units_for_build)
             for _, unit in ipairs(randomUnits) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
+                for _, upgrade in ipairs(unit.upgrades) do
+                    --SetPlayerTechMaxAllowed(player.id, FourCC(upgrade), 3)
+                end
             end
         end
     end

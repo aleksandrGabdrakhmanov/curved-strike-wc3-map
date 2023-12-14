@@ -1142,29 +1142,29 @@ end
 
 function initUnits()
     units_for_build = {
-        { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', position = 1, name = 'Footman'},
-        { id = 'h004', parentId = 'h00D', tier = 1, race = 'human', position = 2, name = 'Rifleman'},
-        { id = 'h008', parentId = 'h00I', tier = 1, race = 'human', position = 3, name = 'Sorceress'},
-        { id = 'h003', parentId = 'h00E', tier = 2, race = 'human', position = 4, name = 'Mortar Team'},
-        { id = 'h007', parentId = 'h00H', tier = 2, race = 'human', position = 5,  name = 'Priest'},
-        { id = 'h006', parentId = 'h00K', tier = 2, race = 'human', position = 6,  name = 'Spellbreaker'},
-        { id = 'h000', parentId = 'h00F', tier = 2, race = 'human', position = 7,  name = 'Flying Machine'},
-        { id = 'h009', parentId = 'h00L', tier = 3, race = 'human', position = 8,  name = 'Dragonhawk Rider'},
-        { id = 'h002', parentId = 'h00B', tier = 3, race = 'human', position = 9,  name = 'Knight'},
-        { id = 'h005', parentId = 'h00J', tier = 3, race = 'human', position = 10,  name = 'Siege Engine'},
-        { id = 'h001', parentId = 'h00G', tier = 2, race = 'human', position = 11,  name = 'Gryphon Rider'},
+        { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', position = 1, name = 'Footman', upgrades = {'Rhde'}},
+        { id = 'h004', parentId = 'h00D', tier = 1, race = 'human', position = 2, name = 'Rifleman', upgrades = {'Rhri'}},
+        { id = 'h008', parentId = 'h00I', tier = 1, race = 'human', position = 3, name = 'Sorceress', upgrades = {'Rhst'}},
+        { id = 'h003', parentId = 'h00E', tier = 2, race = 'human', position = 4, name = 'Mortar Team', upgrades = {'Rhfl', 'Rhfs'}},
+        { id = 'h007', parentId = 'h00H', tier = 2, race = 'human', position = 5,  name = 'Priest', upgrades = {'Rhpt'}},
+        { id = 'h006', parentId = 'h00K', tier = 2, race = 'human', position = 6,  name = 'Spellbreaker', upgrades = {'Rhss'}},
+        { id = 'h000', parentId = 'h00F', tier = 2, race = 'human', position = 7,  name = 'Flying Machine', upgrades = {'Rhgb', 'Rhfc'}},
+        { id = 'h009', parentId = 'h00L', tier = 3, race = 'human', position = 8,  name = 'Dragonhawk Rider', upgrades = {'Rhan'}},
+        { id = 'h002', parentId = 'h00B', tier = 3, race = 'human', position = 9,  name = 'Knight', upgrades = {'Rhan'}},
+        { id = 'h005', parentId = 'h00J', tier = 3, race = 'human', position = 10,  name = 'Siege Engine', upgrades = {'Rhrt'}},
+        { id = 'h001', parentId = 'h00G', tier = 2, race = 'human', position = 11,  name = 'Gryphon Rider', upgrades = {'Rhhb'}},
 
-        { id = 'h00P', parentId = 'o003', tier = 1, race = 'orc', position = 1,  name = 'Grunt'},
-        { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', position = 2,  name = 'Headhunter'},
-        { id = 'h00T', parentId = 'o00C', tier = 1, race = 'orc', position = 3,  name = 'Shaman'},
-        { id = 'h00S', parentId = 'o004', tier = 2, race = 'orc', position = 4,  name = 'Raider'},
-        { id = 'h00X', parentId = 'o00B', tier = 2, race = 'orc', position = 5,  name = 'Witch Doctor'},
-        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', position = 6,  name = 'Spirit Walker'},
-        { id = 'h00N', parentId = 'o00A', tier = 2, race = 'orc', position = 7,  name = 'Batrider'},
-        { id = 'h00R', parentId = 'o008', tier = 2, race = 'orc', position = 8,  name = 'Kodo Beast'},
-        { id = 'h00V', parentId = 'o005', tier = 3, race = 'orc', position = 9,  name = 'Tauren'},
-        { id = 'h00O', parentId = 'o007', tier = 3, race = 'orc', position = 10,  name = 'Demolisher'},
-        { id = 'h00W', parentId = 'o009', tier = 3, race = 'orc', position = 11,  name = 'Wind Rider'},
+        { id = 'h00P', parentId = 'o003', tier = 1, race = 'orc', position = 1,  name = 'Grunt', upgrades = {'Robs'}},
+        { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', position = 2,  name = 'Headhunter', upgrades = {'Robk', 'Rotr'}},
+        { id = 'h00T', parentId = 'o00C', tier = 1, race = 'orc', position = 3,  name = 'Shaman', upgrades = {'Rost'}},
+        { id = 'h00S', parentId = 'o004', tier = 2, race = 'orc', position = 4,  name = 'Raider', upgrades = {'Roen', 'Ropg'}},
+        { id = 'h00X', parentId = 'o00B', tier = 2, race = 'orc', position = 5,  name = 'Witch Doctor', upgrades = {'Rowd', 'Rotr'}},
+        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', position = 6,  name = 'Spirit Walker', upgrades = {'Rowt'}},
+        { id = 'h00N', parentId = 'o00A', tier = 2, race = 'orc', position = 7,  name = 'Batrider', upgrades = {'Rotr'}},
+        { id = 'h00R', parentId = 'o008', tier = 2, race = 'orc', position = 8,  name = 'Kodo Beast', upgrades = {'Rwdm'}},
+        { id = 'h00V', parentId = 'o005', tier = 3, race = 'orc', position = 9,  name = 'Tauren', upgrades = {'Rows'}},
+        { id = 'h00O', parentId = 'o007', tier = 3, race = 'orc', position = 10,  name = 'Demolisher', upgrades = {'Robf'}},
+        { id = 'h00W', parentId = 'o009', tier = 3, race = 'orc', position = 11,  name = 'Wind Rider', upgrades = {'Rovs'}},
     }
     units_special = {
         builder = 'o000',
@@ -1255,10 +1255,16 @@ function changeAvailableUnitsForPlayers()
         for _, player in ipairs(team.players) do
             for _, unit in ipairs(units_for_build) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), FALSE, player.id)
+                for _, upgrade in ipairs(unit.upgrades) do
+                    SetPlayerTechMaxAllowed(player.id, FourCC(upgrade), 0)
+                end
             end
             local randomUnits = getRandomUnits(units_for_build)
             for _, unit in ipairs(randomUnits) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
+                for _, upgrade in ipairs(unit.upgrades) do
+                    --SetPlayerTechMaxAllowed(player.id, FourCC(upgrade), 3)
+                end
             end
         end
     end
@@ -1377,6 +1383,33 @@ function debugTrigger()
         end
     end)
 end
+function enableUpdateTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterPlayerUnitEvent(trig, player.id, EVENT_PLAYER_UNIT_CONSTRUCT_FINISH, nil)
+            TriggerAddAction(trig, function()
+
+                local unit = GetTriggerUnit()
+                local id = GetUnitTypeId(unit)
+                local upgrades = getUpgradesById(('>I4'):pack(id))
+
+                for _, upgrade in ipairs(upgrades) do
+                    SetPlayerTechMaxAllowed(GetTriggerPlayer(), FourCC(upgrade), 3)
+                end
+            end)
+        end
+    end
+end
+
+function getUpgradesById(id)
+    for _, unit in ipairs(units_for_build) do
+        if unit.id == id then
+            return unit.upgrades
+        end
+    end
+    return nil -- Return nil if no unit with the given id is found
+end
 function finishResearchTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -1412,46 +1445,6 @@ function goldExtractorTrigger()
         end
     end
 end
-function idleTrigger()
-
---[[    local trig = CreateTrigger()
-    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_FINISH)
-    TriggerAddAction(trig, function()
-        local unit = GetTriggerUnit()
-        print('spell_finish')
-        local attackPointX, attackPointY = extractNumbers(BlzGetUnitStringField(unit, UNIT_SF_GROUND_TEXTURE))
-        print('x:' .. attackPointY .. " y:" .. attackPointY)
-
-        IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
-    end)]]
-
-
---[[    local trig = CreateTrigger()
-    TriggerRegisterTimerEventPeriodic(trig,1.00)
-    TriggerAddAction(trig, function()
-        local group = GetUnitsInRectMatching(GetPlayableMapRect(), Condition(function()
-            return GetUnitCurrentOrder(GetFilterUnit()) == String2OrderIdBJ("stand down")
-        end))
-
-        ForGroup(group, function()
-            local unit = GetEnumUnit()
-            print("new command")
-            local attackPointX, attackPointY = extractNumbers(BlzGetUnitStringField(unit, UNIT_SF_GROUND_TEXTURE))
-            IssuePointOrderLoc(unit, "attack", Location(attackPointX, attackPointY))
-        end)
-        DestroyGroup(group)
-
-    end)]]
-
-end
-
-function extractNumbers(str)
-    local numbers = {}
-    for num in string.gmatch(str, "%d+%.?%d*") do
-        table.insert(numbers, tonumber(num))
-    end
-    return numbers[1], numbers[2]
-end
 function incomeTrigger()
     local trig = CreateTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 1.00)
@@ -1471,7 +1464,7 @@ function initTriggers()
     winLoseTrigger()
     goldExtractorTrigger()
     finishResearchTrigger()
-    idleTrigger()
+    enableUpdateTrigger()
     debugTrigger()
 end
 additionalDir = 500

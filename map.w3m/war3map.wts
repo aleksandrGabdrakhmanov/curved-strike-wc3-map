@@ -684,3 +684,9 @@ STRING 143
 A
 }
 
+STRING 144
+// Upgrades: Ropg (Pillage), Ubertip (Tooltip - Extended)
+{
+Causes Raiders' attacks to gain resources when hitting enemy buildings.
+}
+
