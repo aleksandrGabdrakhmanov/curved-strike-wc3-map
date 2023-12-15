@@ -13,21 +13,7 @@ function moveByPointsTrigger()
                         if owner == player.spawnPlayerId then
                             if GetUnitCurrentOrder(unit) == 0 or
                                     GetUnitCurrentOrder(unit) == 851983 then
-                                local x, y
-                                if player.attackPointRect[i].direction == 'right' then
-                                    x = GetRectMaxX(player.attackPointRect[i].rect) + additionalDir
-                                    y = GetUnitY(unit)
-                                elseif player.attackPointRect[i].direction == 'down' then
-                                    x = GetUnitX(unit)
-                                    y = GetRectMinY(player.attackPointRect[i].rect) - additionalDir
-                                elseif player.attackPointRect[i].direction == 'left' then
-                                    x = GetRectMinX(player.attackPointRect[i].rect) - additionalDir
-                                    y = GetUnitY(unit)
-                                elseif player.attackPointRect[i].direction == 'up' then
-                                    x = GetUnitX(unit)
-                                    y = GetRectMaxY(player.attackPointRect[i].rect) + additionalDir
-                                end
-                                IssuePointOrderLoc(unit, "attack", Location(x, y))
+                                moveByLocation(player.attackPointRect[i], unit)
                             end
                         end
                     end)
@@ -36,6 +22,24 @@ function moveByPointsTrigger()
             end
         end
     end
+end
+
+function moveByLocation(rect, unit)
+    local x, y
+    if rect.direction == 'right' then
+        x = GetRectMaxX(rect.rect) + additionalDir
+        y = GetUnitY(unit)
+    elseif rect.direction == 'down' then
+        x = GetUnitX(unit)
+        y = GetRectMinY(rect.rect) - additionalDir
+    elseif rect.direction == 'left' then
+        x = GetRectMinX(rect.rect) - additionalDir
+        y = GetUnitY(unit)
+    elseif rect.direction == 'up' then
+        x = GetUnitX(unit)
+        y = GetRectMaxY(rect.rect) + additionalDir
+    end
+    IssuePointOrderLoc(unit, "attack", Location(x, y))
 end
 
 function containsValue(value, array)

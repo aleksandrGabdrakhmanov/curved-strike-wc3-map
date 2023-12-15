@@ -1496,6 +1496,8 @@ function initTriggers()
     goldExtractorTrigger()
     finishResearchTrigger()
     enableUpdateTrigger()
+    spellCastTrigger()
+    spellFinishTrigger()
     debugTrigger()
 end
 additionalDir = 500
@@ -1513,21 +1515,7 @@ function moveByPointsTrigger()
                         if owner == player.spawnPlayerId then
                             if GetUnitCurrentOrder(unit) == 0 or
                                     GetUnitCurrentOrder(unit) == 851983 then
-                                local x, y
-                                if player.attackPointRect[i].direction == 'right' then
-                                    x = GetRectMaxX(player.attackPointRect[i].rect) + additionalDir
-                                    y = GetUnitY(unit)
-                                elseif player.attackPointRect[i].direction == 'down' then
-                                    x = GetUnitX(unit)
-                                    y = GetRectMinY(player.attackPointRect[i].rect) - additionalDir
-                                elseif player.attackPointRect[i].direction == 'left' then
-                                    x = GetRectMinX(player.attackPointRect[i].rect) - additionalDir
-                                    y = GetUnitY(unit)
-                                elseif player.attackPointRect[i].direction == 'up' then
-                                    x = GetUnitX(unit)
-                                    y = GetRectMaxY(player.attackPointRect[i].rect) + additionalDir
-                                end
-                                IssuePointOrderLoc(unit, "attack", Location(x, y))
+                                moveByLocation(player.attackPointRect[i], unit)
                             end
                         end
                     end)
@@ -1536,6 +1524,24 @@ function moveByPointsTrigger()
             end
         end
     end
+end
+
+function moveByLocation(rect, unit)
+    local x, y
+    if rect.direction == 'right' then
+        x = GetRectMaxX(rect.rect) + additionalDir
+        y = GetUnitY(unit)
+    elseif rect.direction == 'down' then
+        x = GetUnitX(unit)
+        y = GetRectMinY(rect.rect) - additionalDir
+    elseif rect.direction == 'left' then
+        x = GetRectMinX(rect.rect) - additionalDir
+        y = GetUnitY(unit)
+    elseif rect.direction == 'up' then
+        x = GetUnitX(unit)
+        y = GetRectMaxY(rect.rect) + additionalDir
+    end
+    IssuePointOrderLoc(unit, "attack", Location(x, y))
 end
 
 function containsValue(value, array)
@@ -1578,6 +1584,71 @@ end
 function getRandomSpawnPlayer(spawnPlayers)
     local randomIndex = math.random(#spawnPlayers)
     return spawnPlayers[randomIndex]
+end
+function spellCastTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterTimerEventPeriodic(trig, 2.00)
+    TriggerAddAction(trig, function()
+        local group = GetUnitsOfTypeIdAll(FourCC('u006'))
+        ForGroup(group, function()
+            local randomUnit = GroupPickRandomUnit(
+                    GetUnitsInRangeOfLocMatching(
+                            500,
+                            GetUnitLoc(GetEnumUnit()),
+                            Filter(function()
+                                local filterUnit = GetFilterUnit()
+                                local ownerFilterUnit = GetOwningPlayer(filterUnit)
+                                return getSpawnPlayerIds(GetOwningPlayer(GetEnumUnit()), ownerFilterUnit)
+                            end)
+                    )
+            )
+            IssueTargetOrderBJ(GetEnumUnit(), "antimagicshell", randomUnit)
+        end)
+    end)
+end
+
+function getSpawnPlayerIds(player, checkPlayer)
+    for _, team in ipairs(all_teams) do
+        for _, p in ipairs(team.players) do
+            if p.spawnPlayerId == player then
+                for _, spawnP in ipairs(team.spawnPlayers) do
+                    if spawnP == checkPlayer then
+                        return true
+                    end
+                end
+            end
+        end
+    end
+    return false
+end
+function spellFinishTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_FINISH)
+    TriggerAddAction(trig, function()
+
+        local attackPointRect = getAttackPointRect(GetOwningPlayer(GetTriggerUnit()))
+        for _, atPointRect in ipairs(attackPointRect) do
+            if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) then
+                moveByLocation(atPointRect, GetTriggerUnit())
+                return
+            end
+        end
+    end)
+end
+
+function IsUnitInRect(r, u)
+    return GetUnitX(u) > GetRectMinX(r)-32 and GetUnitX(u) < GetRectMaxX(r)+32 and GetUnitY(u) > GetRectMinY(r)-32 and GetUnitY(u) < GetRectMaxY(r)+32
+end
+
+
+function getAttackPointRect(castPlayer)
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            if player.spawnPlayerId == castPlayer then
+                return player.attackPointRect
+            end
+        end
+    end
 end
 function startGameUITrigger()
     local trig = CreateTrigger()
