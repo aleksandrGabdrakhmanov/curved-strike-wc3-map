@@ -1,8 +1,21 @@
-function spellCastTrigger()
+custom_cast_ai_params = {
+    {
+        unitId = 'u006',
+        order = 'antimagicshell',
+        timeout = 2.00
+    }
+}
+function customCastAITrigger()
+    for _, castParam in ipairs(custom_cast_ai_params) do
+        createTriggerByCastParam(castParam)
+    end
+end
+
+function createTriggerByCastParam(castParam)
     local trig = CreateTrigger()
-    TriggerRegisterTimerEventPeriodic(trig, 2.00)
+    TriggerRegisterTimerEventPeriodic(trig, castParam.timeout)
     TriggerAddAction(trig, function()
-        local group = GetUnitsOfTypeIdAll(FourCC('u006'))
+        local group = GetUnitsOfTypeIdAll(FourCC(castParam.unitId))
         ForGroup(group, function()
             local randomUnit = GroupPickRandomUnit(
                     GetUnitsInRangeOfLocMatching(
@@ -15,7 +28,7 @@ function spellCastTrigger()
                             end)
                     )
             )
-            IssueTargetOrderBJ(GetEnumUnit(), "antimagicshell", randomUnit)
+            IssueTargetOrderBJ(GetEnumUnit(), castParam.order, randomUnit)
         end)
     end)
 end

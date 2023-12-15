@@ -6,7 +6,7 @@ function initTriggers()
     goldExtractorTrigger()
     finishResearchTrigger()
     enableUpdateTrigger()
-    spellCastTrigger()
+    customCastAITrigger()
     spellFinishTrigger()
     debugTrigger()
 end
