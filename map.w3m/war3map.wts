@@ -690,3 +690,525 @@ STRING 144
 Causes Raiders' attacks to gain resources when hitting enemy buildings.
 }
 
+STRING 145
+// Units: h00Y (Abomination), Ubertip (Tooltip - Extended)
+{
+Health: <uabo,HP>|nDamage: <uabo,mindmg1> - <uabo,maxdmg1>|nAttack Speed: 1.24|nAttack Type: |cffffc800Normal|r|nRange: Melee|nArmor: <uabo,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Disease Cloud|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 146
+// Units: h00Y (Abomination), Tip (Tooltip - Basic)
+{
+Build Abomination
+}
+
+STRING 147
+// Units: h00Y (Abomination), Name (Name)
+{
+Abomination
+}
+
+STRING 148
+// Units: h00Y (Abomination), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 149
+// Units: h00Z (Banshee), Ubertip (Tooltip - Extended)
+{
+Health: <uban,HP>|nDamage: <uban,mindmg1> - <uban,maxdmg1>|nAttack Speed: 0.98|nAttack Type: |cff963296Magic|r|nRange: 500|nArmor: <uban,def>, |cff00ffffUnarmored|r|nAbility: |cff00ff00Curse|r|nUpgrades: |cff00ff00Banshee Adept Training|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 150
+// Units: h00Z (Banshee), Tip (Tooltip - Basic)
+{
+Build Banshee
+}
+
+STRING 151
+// Units: h00Z (Banshee), Name (Name)
+{
+Banshee
+}
+
+STRING 152
+// Units: h00Z (Banshee), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 153
+// Units: h010 (Crypt Fiend), Ubertip (Tooltip - Extended)
+{
+Health: <ucry,HP>|nDamage: <ucry,mindmg1> - <ucry,maxdmg1>|nAttack Speed: 1.30|nAttack Type: |cff0064ffPierce|r|nRange: 400|nArmor: <ucry,def>, |cffffc819Medium|r|nUpgrades: |cff00ff00Web|r, |cff00ff00Burrow|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 154
+// Units: h010 (Crypt Fiend), Tip (Tooltip - Basic)
+{
+Build Crypt Fiend
+}
+
+STRING 155
+// Units: h010 (Crypt Fiend), Name (Name)
+{
+Crypt Fiend
+}
+
+STRING 156
+// Units: h010 (Crypt Fiend), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 157
+// Units: h019 (Destroyer), Ubertip (Tooltip - Extended)
+{
+Health: <ubsp,HP>|nDamage: <ubsp,mindmg1> - <ubsp,maxdmg1>|nAttack Speed 0.88|nAttack Type: |cff963296Magic|r|nRange: 500|nArmor: <ubsp,def>, |cff00ff00Light|r|nAbilities: |cff00ff00Devour Magic, Orb of Annihilation, Absorb Mana, Spell Immunity|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 158
+// Units: h019 (Destroyer), Tip (Tooltip - Basic)
+{
+Build Destroyer
+}
+
+STRING 159
+// Units: h019 (Destroyer), Name (Name)
+{
+Destroyer
+}
+
+STRING 160
+// Units: e001 (Chimaera), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 161
+// Units: h012 (Frost Wyrm), Ubertip (Tooltip - Extended)
+{
+Health: <ufro,HP>|nDamage: <ufro,mindmg1> - <ufro,maxdmg1>|nAttack Speed 1.95|nAttack Type: |cff963296Magic|r|nRange: 500|nArmor: <ufro,def>, |cff00ff00Light|r|nUpgrades: |cff00ff00Freezing Breath|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 162
+// Units: h012 (Frost Wyrm), Tip (Tooltip - Basic)
+{
+Build Frost Wyrm
+}
+
+STRING 163
+// Units: h012 (Frost Wyrm), Name (Name)
+{
+Frost Wyrm
+}
+
+STRING 164
+// Units: h012 (Frost Wyrm), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 165
+// Units: h013 (Gargoyle), Ubertip (Tooltip - Extended)
+{
+Health: <ugar,HP>|n--- Air ---|nDamage: 61 - 64|nAttack Speed: 1.43|nAttack Type:  |cffffc800Normal|r|nRange: Melee|n--- Ground ---|nDamage: 18 - 21|nAttack Speed: 1.43|nAttack Type: |cff0064ffPierce|r|nRange: 500|n---|nArmor: <ugar,def>, |cff00ffffUnarmored|r|nUpgrades: |cff00ff00Stone Form|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 166
+// Units: h013 (Gargoyle), Tip (Tooltip - Basic)
+{
+Build Gargoyle
+}
+
+STRING 167
+// Units: h013 (Gargoyle), Name (Name)
+{
+Gargoyle
+}
+
+STRING 168
+// Units: h013 (Gargoyle), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 169
+// Units: h014 (Ghoul), Ubertip (Tooltip - Extended)
+{
+Health: <ugho,HP>|nDamage: <ugho,mindmg1> - <ugho,maxdmg1>|nAttack Speed 0.85|nAttack Type: |cffffc800Normal|r|nRange: Melee|nArmor: <ugho,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Ghoul Frenzy|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 170
+// Units: h014 (Ghoul), Tip (Tooltip - Basic)
+{
+Build Ghoul
+}
+
+STRING 171
+// Units: h014 (Ghoul), Name (Name)
+{
+Ghoul
+}
+
+STRING 172
+// Units: h014 (Ghoul), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 173
+// Units: h015 (Meat Wagon), Ubertip (Tooltip - Extended)
+{
+Health: <umtw,HP>|nDamage: 43 - 46|nAttack Speed 3.50|nAttack Type: |cffd45e19Siege|r, Splash|nRange: 800|nArmor: <umtw,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Disease Cloud, Exhume Corpses|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 174
+// Units: h015 (Meat Wagon), Tip (Tooltip - Basic)
+{
+Build Meat Wagon
+}
+
+STRING 175
+// Units: h015 (Meat Wagon), Name (Name)
+{
+Meat Wagon
+}
+
+STRING 176
+// Units: h015 (Meat Wagon), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 177
+// Units: h016 (Necromancer), Ubertip (Tooltip - Extended)
+{
+Health: <unec,HP>|nDamage: <unec,mindmg1> - <unec,maxdmg1>|nAttack Speed 1.17|nAttack Type: |cff963296Magic|r|nRange: 600|nArmor: <unec,def>, |cff00ffffUnarmored|r|nAbility: |cff00ff00Raise Dead|r|nUpgrades: |cff00ff00Necromancer Adept Training|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 178
+// Units: h016 (Necromancer), Tip (Tooltip - Basic)
+{
+Build Necromancer
+}
+
+STRING 179
+// Units: h016 (Necromancer), Name (Name)
+{
+Necromancer
+}
+
+STRING 180
+// Units: h016 (Necromancer), Hotkey (Hotkey)
+{
+S
+}
+
+STRING 181
+// Units: h017 (Obsidian Statue), Ubertip (Tooltip - Extended)
+{
+Health: <uobs,HP>|nDamage: <uobs,mindmg1> - <uobs,maxdmg1>|nAttack Speed 1.37|nAttack Type: |cff963296Magic|r|nRange: 575|nArmor: <uobs,def>, |cffff3200Heavy|r|nAbilities: |cff00ff00Spirit Touch, Essence of Blight|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 182
+// Units: h017 (Obsidian Statue), Tip (Tooltip - Basic)
+{
+Build Obsidian Statue
+}
+
+STRING 183
+// Units: h017 (Obsidian Statue), Name (Name)
+{
+Obsidian Statue
+}
+
+STRING 184
+// Units: h017 (Obsidian Statue), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 185
+// Units: h018 (Shade), Ubertip (Tooltip - Extended)
+{
+|cffffcc00Detects invisible units.|r
+}
+
+STRING 186
+// Units: h018 (Shade), Tip (Tooltip - Basic)
+{
+Build Shade
+}
+
+STRING 187
+// Units: h018 (Shade), Name (Name)
+{
+Shade
+}
+
+STRING 188
+// Units: e000 (Archer), Name (Name)
+{
+Archer
+}
+
+STRING 189
+// Units: e000 (Archer), Tip (Tooltip - Basic)
+{
+Build Archer
+}
+
+STRING 190
+// Units: e000 (Archer), Ubertip (Tooltip - Extended)
+{
+Health: <earc,HP>|nDamage: <earc,mindmg1> - <earc,maxdmg1>|nAttack Speed: 0.98|nAttack Type: |cff0064ffPierce|r|nRange: 500|nArmor: <earc,def>, |cffffc819Medium|r|nUpgrades: |cff00ff00Marksmanship, Improved Bows|r|nSPECIAL: Can mount Hippogryphs.|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 191
+// Units: e000 (Archer), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 192
+// Units: e001 (Chimaera), Name (Name)
+{
+Chimaera
+}
+
+STRING 193
+// Units: e001 (Chimaera), Tip (Tooltip - Basic)
+{
+Build Chimaera
+}
+
+STRING 194
+// Units: e001 (Chimaera), Ubertip (Tooltip - Extended)
+{
+Health: <echm,HP>|nDamage: <echm,mindmg2> - <echm,maxdmg2>|nAttack Speed 1.63|nAttack Type: |cff963296Magic|r, Splash|nRange: 450|nArmor: <echm,def>, |cff00ff00Light|r|nUpgrades: |cff00ff00Corrosive Breath|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 195
+// Units: h019 (Destroyer), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 196
+// Units: e002 (Druid of the Claw), Name (Name)
+{
+Druid of the Claw
+}
+
+STRING 197
+// Units: e002 (Druid of the Claw), Tip (Tooltip - Basic)
+{
+Build Druid of the Claw
+}
+
+STRING 198
+// Units: e002 (Druid of the Claw), Ubertip (Tooltip - Extended)
+{
+Health: <edoc,HP>|nDamage: <edoc,mindmg1> - <edoc,maxdmg1>|nAttack Speed 0.98|nAttack Type: |cffffc800Normal|r|nRange: Melee|nArmor: <edoc,def>, |cffff3200Heavy|r|nAbility: |cff00ff00Roar|r|nUpgrades: |cff00ff00Druid of the Claw Adept Training|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 199
+// Units: e002 (Druid of the Claw), Hotkey (Hotkey)
+{
+S
+}
+
+STRING 200
+// Units: e003 (Druid of the Talon), Name (Name)
+{
+Druid of the Talon
+}
+
+STRING 201
+// Units: e003 (Druid of the Talon), Tip (Tooltip - Basic)
+{
+Build Druid of the Talon
+}
+
+STRING 202
+// Units: e003 (Druid of the Talon), Ubertip (Tooltip - Extended)
+{
+Health: <edot,HP>|nDamage: <edot,mindmg1> - <edot,maxdmg1>|nAttack Speed 1.04|nAttack Type: |cff963296Magic|r|nRange: 600|nArmor: <edot,def>, |cff00ffffUnarmored|r|nAbility: |cff00ff00Faerie Fire|r|nUpgrades: |cff00ff00Druid of the Talon Adept Training|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 203
+// Units: e003 (Druid of the Talon), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 204
+// Units: e004 (Dryad), Name (Name)
+{
+Dryad
+}
+
+STRING 205
+// Units: e004 (Dryad), Tip (Tooltip - Basic)
+{
+Build Dryad
+}
+
+STRING 206
+// Units: e004 (Dryad), Ubertip (Tooltip - Extended)
+{
+Health: <edry,HP>|nDamage: <edry,mindmg1> - <edry,maxdmg1>|nAttack Speed 1.56|nAttack Type: |cff0064ffPierce|r|nRange: 500|nArmor: <edry,def>, |cff00ffffUnarmored|r|nAbility: |cff00ff00Slow Poison, Spell Immunity|r|nUpgrades: |cff00ff00Abolish Magic|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 207
+// Units: e004 (Dryad), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 208
+// Units: e005 (Faerie Dragon), Name (Name)
+{
+Faerie Dragon
+}
+
+STRING 209
+// Units: e005 (Faerie Dragon), Tip (Tooltip - Basic)
+{
+Build Faerie Dragon
+}
+
+STRING 210
+// Units: e005 (Faerie Dragon), Ubertip (Tooltip - Extended)
+{
+Health: <efdr,HP>|nDamage: <efdr,mindmg1> - <efdr,maxdmg1>|nAttack Speed 1.14|nAttack Type: |cff0064ffPierce|r|nRange: 300|nArmor: <efdr,def>, |cff00ff00Light|r|nAbility: |cff00ff00Has Spell Immunity, Phase Shift, Mana Flare|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 211
+// Units: e005 (Faerie Dragon), Hotkey (Hotkey)
+{
+F
+}
+
+STRING 212
+// Units: e006 (Glaive Thrower), Name (Name)
+{
+Glaive Thrower
+}
+
+STRING 213
+// Units: e006 (Glaive Thrower), Tip (Tooltip - Basic)
+{
+Build Glaive Thrower
+}
+
+STRING 214
+// Units: e006 (Glaive Thrower), Ubertip (Tooltip - Extended)
+{
+Health: <ebal,HP>|nDamage: 30 - 32|nAttack Speed 3.25|nAttack Type: |cffd45e19Siege|r|nRange: 800|nArmor: <ebal,def>, |cffff3200Heavy|r|nUpgrades: |cff00ff00Vorpal Blades|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 215
+// Units: e006 (Glaive Thrower), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 216
+// Units: e007 (Hippogryph), Name (Name)
+{
+Hippogryph
+}
+
+STRING 217
+// Units: e007 (Hippogryph), Tip (Tooltip - Basic)
+{
+Build Hippogryph
+}
+
+STRING 218
+// Units: e007 (Hippogryph), Ubertip (Tooltip - Extended)
+{
+Health: <ehip,HP>|nDamage: 18 - 20|nAttack Speed 0.70|nAttack Type: |cffffc800Normal|r|nRange: Melee|nArmor: <ehip,def>, |cff00ffffUnarmored|r|n|n|cffffcc00Attacks air units.|r
+}
+
+STRING 219
+// Units: e007 (Hippogryph), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 220
+// Units: e008 (Hippogryph Rider), Name (Name)
+{
+Hippogryph Rider
+}
+
+STRING 221
+// Units: e008 (Hippogryph Rider), Tip (Tooltip - Basic)
+{
+Build Hippogryph Rider
+}
+
+STRING 222
+// Units: e008 (Hippogryph Rider), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 223
+// Units: e008 (Hippogryph Rider), Ubertip (Tooltip - Extended)
+{
+Health: <ehpr,HP>|nDamage: <ehpr,mindmg1> - <ehpr,maxdmg1>|nAttack Speed 0.72|nAttack Type: |cff0064ffPierce|r|nRange: 400|nArmor: <ehpr,def>, |cff00ff00Light|r|nUpgrades: |cff00ff00Marksmanship, Improved Bows|r|n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 224
+// Units: e009 (Huntress), Name (Name)
+{
+Huntress
+}
+
+STRING 225
+// Units: e009 (Huntress), Tip (Tooltip - Basic)
+{
+Build Huntress
+}
+
+STRING 226
+// Units: e009 (Huntress), Ubertip (Tooltip - Extended)
+{
+Health: <esen,HP>|nDamage: <esen,mindmg1> - <esen,maxdmg1>|nAttack Speed 1.17|nAttack Type: |cffffc800Normal|r|nRange: 225|nArmor: <esen,def>, |cff00ffffUnarmored|r|nUpgrades: |cff00ff00Sentinel, Moon Glaive|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 227
+// Units: e009 (Huntress), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 228
+// Units: e00A (Mountain Giant), Name (Name)
+{
+Mountain Giant
+}
+
+STRING 229
+// Units: e00A (Mountain Giant), Tip (Tooltip - Basic)
+{
+Build Mountain Giant
+}
+
+STRING 230
+// Units: e00A (Mountain Giant), Ubertip (Tooltip - Extended)
+{
+Health: <emtg,HP>|nDamage: <emtg,mindmg1> - <emtg,maxdmg1>|nAttack Speed 1.63|nAttack Type: |cffffc800Normal|r|nRange: Melee|nArmor: <emtg,def>, |cffffc819Medium|r|nAbility: |cff00ff00Taunt|r|nUpgrades: |cff00ff00Hardened Skin, Resistant Skin|r|n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 231
+// Units: e00A (Mountain Giant), Hotkey (Hotkey)
+{
+Z
+}
+

@@ -23,5 +23,5 @@ function getUpgradesById(id)
             return unit.upgrades
         end
     end
-    return nil -- Return nil if no unit with the given id is found
+    return {}
 end

@@ -921,7 +921,7 @@ function initDefaultVariables(mode)
     game_config = {
         mode = mode,
         economy = {
-            startGold = 5000,
+            startGold = 300,
             startIncomePerSec = 5,
             firstMinePrice = 300, -- need init. now get from map
             nextMineDiffPrice = 300
@@ -1165,6 +1165,30 @@ function initUnits()
         { id = 'h00V', parentId = 'o005', tier = 3, race = 'orc', position = 9,  name = 'Tauren', upgrades = {'Rows'}},
         { id = 'h00O', parentId = 'o007', tier = 3, race = 'orc', position = 10,  name = 'Demolisher', upgrades = {'Robf'}},
         { id = 'h00W', parentId = 'o009', tier = 3, race = 'orc', position = 11,  name = 'Wind Rider', upgrades = {'Rovs'}},
+
+        { id = 'h014', parentId = 'u001', tier = 1, race = 'undead', position = 1,  name = 'Ghoul', upgrades = {'Rugf'}},
+        { id = 'h010', parentId = 'u004', tier = 1, race = 'undead', position = 2,  name = 'Crypt Fiend', upgrades = {'Ruwb', 'Rubu'}},
+        { id = 'h00Z', parentId = 'u006', tier = 1, race = 'undead', position = 3,  name = 'Banshee', upgrades = {'Ruba'}},
+        { id = 'h017', parentId = 'u008', tier = 2, race = 'undead', position = 4,  name = 'Obsidian Statue', upgrades = {}},
+        { id = 'h013', parentId = 'u005', tier = 2, race = 'undead', position = 5,  name = 'Gargoyle', upgrades = {'Rusf'}},
+        { id = 'h016', parentId = 'u007', tier = 2, race = 'undead', position = 6,  name = 'Necromancer', upgrades = {'Rusl', 'Rune', 'Rusm'}},
+        { id = 'h015', parentId = 'u003', tier = 2, race = 'undead', position = 7,  name = 'Meat Wagon', upgrades = {'Rupc'}},
+        { id = 'h018', parentId = 'u000', tier = 2, race = 'undead', position = 8,  name = 'Shade', upgrades = {}},
+        { id = 'h00Y', parentId = 'u002', tier = 3, race = 'undead', position = 9,  name = 'Abomination', upgrades = {'Rupc'}},
+        { id = 'h019', parentId = 'u00A', tier = 3, race = 'undead', position = 10,  name = 'Destroyer', upgrades = {}},
+        { id = 'h012', parentId = 'u009', tier = 3, race = 'undead', position = 11,  name = 'Frost Wyrm', upgrades = {'Rufb'}},
+
+        { id = 'e009', parentId = 'e00C', tier = 1, race = 'elf', position = 1,  name = 'Huntress', upgrades = {'Remg', 'Resc'}},
+        { id = 'e000', parentId = 'e00B', tier = 1, race = 'elf', position = 2,  name = 'Archer', upgrades = {'Reib', 'Remk'}},
+        { id = 'e004', parentId = 'e00D', tier = 1, race = 'elf', position = 3,  name = 'Dryad', upgrades = {'Resi'}},
+        { id = 'e006', parentId = 'e00E', tier = 2, race = 'elf', position = 4,  name = 'Glaive Thower', upgrades = {}},
+        { id = 'e007', parentId = 'e00F', tier = 2, race = 'elf', position = 5,  name = 'Hippogryph', upgrades = {}},
+        { id = 'e002', parentId = 'e00J', tier = 2, race = 'elf', position = 6,  name = 'Druid of the Claw', upgrades = {'Redc'}},
+        { id = 'e003', parentId = 'e00I', tier = 2, race = 'elf', position = 7,  name = 'Druid of the Talon', upgrades = {'Redt'}},
+        { id = 'e005', parentId = 'e00L', tier = 2, race = 'elf', position = 8,  name = 'Faerie Dragon', upgrades = {}},
+        { id = 'e00A', parentId = 'e00K', tier = 3, race = 'elf', position = 9,  name = 'Mountain Giant', upgrades = {'Rers', 'Rehs'}},
+        { id = 'e008', parentId = 'e00G', tier = 3, race = 'elf', position = 10,  name = 'Hippogryph Rider', upgrades = {}},
+        { id = 'e001', parentId = 'e00H', tier = 3, race = 'elf', position = 11,  name = 'Chimaera', upgrades = {'Recb'}},
     }
     units_special = {
         builder = 'o000',
@@ -1329,7 +1353,7 @@ OnInit(function()
 end)
 
 function startGame(mode)
-    print("8")
+    print("9")
     initMain(mode)
     initialUI()
     initTimers()
@@ -1359,7 +1383,17 @@ function debugTrigger()
         SetPlayerAllianceStateBJ(Player(8), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
         SetPlayerAllianceStateBJ(Player(9), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
 
+        SetPlayerAllianceStateBJ(Player(10), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(11), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(12), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(13), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(14), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(15), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(16), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
         SetPlayerAllianceStateBJ(Player(17), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(18), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(19), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        SetPlayerAllianceStateBJ(Player(20), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
 
         SetPlayerAlliance(Player(10), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(11), Player(0), ALLIANCE_SHARED_VISION, TRUE)
@@ -1405,7 +1439,7 @@ function getUpgradesById(id)
             return unit.upgrades
         end
     end
-    return nil -- Return nil if no unit with the given id is found
+    return {}
 end
 function finishResearchTrigger()
     for _, team in ipairs(all_teams) do
