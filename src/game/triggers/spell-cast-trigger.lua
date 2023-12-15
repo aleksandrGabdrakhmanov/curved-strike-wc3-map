@@ -3,6 +3,11 @@ custom_cast_ai_params = {
         unitId = 'u006',
         order = 'antimagicshell',
         timeout = 2.00
+    },
+    {
+        unitId = 'h00H',
+        order = 'innerfire',
+        timeout = 5.00
     }
 }
 function customCastAITrigger()

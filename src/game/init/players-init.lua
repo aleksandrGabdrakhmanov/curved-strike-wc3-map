@@ -91,7 +91,7 @@ function getRandomUnits(units)
 
     for _, groupedUnit in ipairs(groupedUnits) do
         local randomIndex = GetRandomInt(1, #groupedUnit)
-        table.insert(randomUnits, groupedUnit[randomIndex])
+        table.insert(randomUnits, groupedUnit[1])
     end
 
     return randomUnits
