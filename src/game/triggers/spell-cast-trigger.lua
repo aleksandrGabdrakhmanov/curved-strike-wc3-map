@@ -42,7 +42,7 @@ function getSpawnPlayerIds(player, checkPlayer)
     for _, team in ipairs(all_teams) do
         for _, p in ipairs(team.players) do
             if p.spawnPlayerId == player then
-                for _, spawnP in ipairs(team.spawnPlayers) do
+                for _, spawnP in ipairs(getAllSpawnPlayers(team)) do
                     if spawnP == checkPlayer then
                         return true
                     end

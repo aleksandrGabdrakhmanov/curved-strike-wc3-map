@@ -1,5 +1,5 @@
 function startGame(mode)
-    print("9")
+    print("10")
     initMain(mode)
     initialUI()
     initTimers()

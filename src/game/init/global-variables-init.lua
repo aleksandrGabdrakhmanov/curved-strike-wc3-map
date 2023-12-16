@@ -125,7 +125,6 @@ function initDefaultVariables(mode)
                     spawnRect = nil
                 }
             },
-            spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
             base = {
                 player = Player(16),
                 winTeam = 2,
@@ -227,7 +226,6 @@ function initDefaultVariables(mode)
                     spawnRect = nil
                 }
             },
-            spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
             base = {
                 player = Player(12),
                 winTeam = 1,
@@ -237,6 +235,16 @@ function initDefaultVariables(mode)
         }
     }
 end
+
+function getAllSpawnPlayers(team)
+    local spawnPlayer = {}
+    for _, player in ipairs(team.players) do
+        table.insert(spawnPlayer, player.spawnPlayerId)
+    end
+    return spawnPlayer
+end
+
+
 
 function initUnits()
     units_for_build = {

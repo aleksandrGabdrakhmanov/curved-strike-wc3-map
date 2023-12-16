@@ -9,8 +9,8 @@ end
 
 function setAllianceBetweenSpawnPlayers()
     for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.spawnPlayers) do
-            for _, anotherPlayer in ipairs(team.spawnPlayers) do
+        for _, player in ipairs(getAllSpawnPlayers(team)) do
+            for _, anotherPlayer in ipairs(getAllSpawnPlayers(team)) do
                 if player ~= anotherPlayer then
                     SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_ALLIED_VISION)
                     SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_ALLIED_VISION)
@@ -38,7 +38,7 @@ end
 function setAllianceBetweenPlayersAndSpawnPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            for _, spawnPlayer in ipairs(team.spawnPlayers) do
+            for _, spawnPlayer in ipairs(getAllSpawnPlayers(team)) do
                 SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
                 SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
                 SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)

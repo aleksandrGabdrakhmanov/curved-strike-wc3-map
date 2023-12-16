@@ -1027,7 +1027,6 @@ function initDefaultVariables(mode)
                     spawnRect = nil
                 }
             },
-            spawnPlayers = { Player(15), Player(16), Player(17), Player(18), Player(19), Player(21), Player(23) },
             base = {
                 player = Player(16),
                 winTeam = 2,
@@ -1129,7 +1128,6 @@ function initDefaultVariables(mode)
                     spawnRect = nil
                 }
             },
-            spawnPlayers = { Player(10), Player(11), Player(12), Player(13), Player(14), Player(20), Player(22) },
             base = {
                 player = Player(12),
                 winTeam = 1,
@@ -1139,6 +1137,16 @@ function initDefaultVariables(mode)
         }
     }
 end
+
+function getAllSpawnPlayers(team)
+    local spawnPlayer = {}
+    for _, player in ipairs(team.players) do
+        table.insert(spawnPlayer, player.spawnPlayerId)
+    end
+    return spawnPlayer
+end
+
+
 
 function initUnits()
     units_for_build = {
@@ -1222,8 +1230,8 @@ end
 
 function setAllianceBetweenSpawnPlayers()
     for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.spawnPlayers) do
-            for _, anotherPlayer in ipairs(team.spawnPlayers) do
+        for _, player in ipairs(getAllSpawnPlayers(team)) do
+            for _, anotherPlayer in ipairs(getAllSpawnPlayers(team)) do
                 if player ~= anotherPlayer then
                     SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_ALLIED_VISION)
                     SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_ALLIED_VISION)
@@ -1251,7 +1259,7 @@ end
 function setAllianceBetweenPlayersAndSpawnPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            for _, spawnPlayer in ipairs(team.spawnPlayers) do
+            for _, spawnPlayer in ipairs(getAllSpawnPlayers(team)) do
                 SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
                 SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
                 SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
@@ -1353,7 +1361,7 @@ OnInit(function()
 end)
 
 function startGame(mode)
-    print("9")
+    print("10")
     initMain(mode)
     initialUI()
     initTimers()
@@ -1580,11 +1588,6 @@ function spawnTrigger()
         end
     end)
 end
-
-function getRandomSpawnPlayer(spawnPlayers)
-    local randomIndex = math.random(#spawnPlayers)
-    return spawnPlayers[randomIndex]
-end
 custom_cast_ai_params = {
     {
         unitId = 'u006',
@@ -1594,7 +1597,7 @@ custom_cast_ai_params = {
     {
         unitId = 'h00H',
         order = 'innerfire',
-        timeout = 2.00
+        timeout = 5.00
     }
 }
 function customCastAITrigger()
@@ -1629,7 +1632,7 @@ function getSpawnPlayerIds(player, checkPlayer)
     for _, team in ipairs(all_teams) do
         for _, p in ipairs(team.players) do
             if p.spawnPlayerId == player then
-                for _, spawnP in ipairs(team.spawnPlayers) do
+                for _, spawnP in ipairs(getAllSpawnPlayers(team)) do
                     if spawnP == checkPlayer then
                         return true
                     end

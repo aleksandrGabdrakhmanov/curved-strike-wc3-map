@@ -26,8 +26,3 @@ function spawnTrigger()
         end
     end)
 end
-
-function getRandomSpawnPlayer(spawnPlayers)
-    local randomIndex = math.random(#spawnPlayers)
-    return spawnPlayers[randomIndex]
-end
