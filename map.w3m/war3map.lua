@@ -811,9 +811,80 @@ end
 function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
+    initTeams()
     initRect()
     createBaseAndTower()
     createBuildingsForPlayers()
+end
+
+function initTeams()
+    players_team_left = {
+        { id = Player(0), spawnId = Player(17), team = 1 },
+        { id = Player(2), spawnId = Player(18), team = 1 },
+        { id = Player(3), spawnId = Player(16), team = 1 },
+        { id = Player(4), spawnId = Player(19), team = 1 },
+        { id = Player(5), spawnId = Player(15), team = 1 }
+    }
+    players_team_right = {
+        { id = Player(1), spawnId = Player(12), team = 2 },
+        { id = Player(6), spawnId = Player(13), team = 2 },
+        { id = Player(7), spawnId = Player(11), team = 2 },
+        { id = Player(8), spawnId = Player(14), team = 2 },
+        { id = Player(9), spawnId = Player(10), team = 2 }
+    }
+
+    all_teams = {}
+    all_teams[1] = {
+        i = 1,
+        players = addPlayersInTeam(players_team_left),
+        base = {
+            player = Player(16),
+            winTeam = 2,
+            baseRect = nil,
+            towerRect = nil
+        }
+    }
+    all_teams[2] = {
+        i = 2,
+        players = addPlayersInTeam(players_team_right),
+        base = {
+            player = Player(12),
+            winTeam = 1,
+            baseRect = nil,
+            towerRect = nil
+        }
+    }
+end
+
+function addPlayersInTeam(players)
+    local position = { 3, 4, 2, 1, 5 }
+    local nextPosition = 1
+    local initialPlayers = {}
+    for _, player in ipairs(players) do
+        if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
+            print("playing!")
+            table.insert(initialPlayers, {
+                id = player.id,
+                spawnPlayerId = player.spawnId,
+                i = position[nextPosition],
+                economy = {
+                    income = game_config.economy.startIncomePerSec,
+                    minePrice = game_config.economy.firstMinePrice,
+                    mineLevel = 0,
+                    mineTextTag = nil,
+                },
+                buildRect = nil,
+                workerRect = nil,
+                mineRect = nil,
+                mainRect = nil,
+                laboratoryRect = nil,
+                attackPointRect = {},
+                spawnRect = nil
+            })
+            nextPosition = nextPosition + 1
+        end
+    end
+    return initialPlayers
 end
 
 function initRect()
@@ -930,211 +1001,6 @@ function initDefaultVariables(mode)
             range = game_modes[mode].unitRange
         },
         spawnInterval = 30
-    }
-
-    all_teams = {
-        {
-            i = 1,
-            players = {
-                {
-                    id = Player(4),
-                    spawnPlayerId = Player(19),
-                    i = 1,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                },
-                {
-                    id = Player(2),
-                    spawnPlayerId = Player(18),
-                    i = 2,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                },
-                {
-                    id = Player(0),
-                    spawnPlayerId = Player(17),
-                    i = 3,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                },
-                {
-                    id = Player(3),
-                    spawnPlayerId = Player(16),
-                    i = 4,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                },
-                {
-                    id = Player(5),
-                    spawnPlayerId = Player(15),
-                    i = 5,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                }
-            },
-            base = {
-                player = Player(16),
-                winTeam = 2,
-                baseRect = nil,
-                towerRect = nil
-            }
-        },
-        {
-            i = 2,
-            players = {
-                {
-                    id = Player(8),
-                    spawnPlayerId = Player(14),
-                    i = 1,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                },
-                {
-                    id = Player(6),
-                    spawnPlayerId = Player(13),
-                    i = 2,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                },
-                {
-                    id = Player(1),
-                    spawnPlayerId = Player(12),
-                    i = 3,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                },
-                {
-                    id = Player(7),
-                    spawnPlayerId = Player(11),
-                    i = 4,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                },
-                {
-                    id = Player(9),
-                    spawnPlayerId = Player(10),
-                    i = 5,
-                    economy = {
-                        income = game_config.economy.startIncomePerSec,
-                        minePrice = game_config.economy.firstMinePrice,
-                        mineLevel = 0,
-                        mineTextTag = nil,
-                    },
-                    buildRect = nil,
-                    workerRect = nil,
-                    mineRect = nil,
-                    mainRect = nil,
-                    laboratoryRect = nil,
-                    attackPointRect = {},
-                    spawnRect = nil
-                }
-            },
-            base = {
-                player = Player(12),
-                winTeam = 1,
-                baseRect = nil,
-                towerRect = nil
-            }
-        }
     }
 end
 
@@ -1752,55 +1618,55 @@ ForcePlayerStartLocation(Player(1), 1)
 SetPlayerColor(Player(1), ConvertPlayerColor(1))
 SetPlayerRacePreference(Player(1), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(1), false)
-SetPlayerController(Player(1), MAP_CONTROL_USER)
+SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(2), 2)
 ForcePlayerStartLocation(Player(2), 2)
 SetPlayerColor(Player(2), ConvertPlayerColor(2))
 SetPlayerRacePreference(Player(2), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(2), false)
-SetPlayerController(Player(2), MAP_CONTROL_USER)
+SetPlayerController(Player(2), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(3), 3)
 ForcePlayerStartLocation(Player(3), 3)
 SetPlayerColor(Player(3), ConvertPlayerColor(3))
 SetPlayerRacePreference(Player(3), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(3), false)
-SetPlayerController(Player(3), MAP_CONTROL_USER)
+SetPlayerController(Player(3), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(4), 4)
 ForcePlayerStartLocation(Player(4), 4)
 SetPlayerColor(Player(4), ConvertPlayerColor(4))
 SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(4), false)
-SetPlayerController(Player(4), MAP_CONTROL_USER)
+SetPlayerController(Player(4), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(5), 5)
 ForcePlayerStartLocation(Player(5), 5)
 SetPlayerColor(Player(5), ConvertPlayerColor(5))
 SetPlayerRacePreference(Player(5), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(5), false)
-SetPlayerController(Player(5), MAP_CONTROL_USER)
+SetPlayerController(Player(5), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(6), 6)
 ForcePlayerStartLocation(Player(6), 6)
 SetPlayerColor(Player(6), ConvertPlayerColor(6))
 SetPlayerRacePreference(Player(6), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(6), false)
-SetPlayerController(Player(6), MAP_CONTROL_USER)
+SetPlayerController(Player(6), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(7), 7)
 ForcePlayerStartLocation(Player(7), 7)
 SetPlayerColor(Player(7), ConvertPlayerColor(7))
 SetPlayerRacePreference(Player(7), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(7), false)
-SetPlayerController(Player(7), MAP_CONTROL_USER)
+SetPlayerController(Player(7), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(8), 8)
 ForcePlayerStartLocation(Player(8), 8)
 SetPlayerColor(Player(8), ConvertPlayerColor(8))
 SetPlayerRacePreference(Player(8), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(8), false)
-SetPlayerController(Player(8), MAP_CONTROL_USER)
+SetPlayerController(Player(8), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(9), 9)
 ForcePlayerStartLocation(Player(9), 9)
 SetPlayerColor(Player(9), ConvertPlayerColor(9))
 SetPlayerRacePreference(Player(9), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(9), false)
-SetPlayerController(Player(9), MAP_CONTROL_USER)
+SetPlayerController(Player(9), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(10), 10)
 SetPlayerColor(Player(10), ConvertPlayerColor(10))
 SetPlayerRacePreference(Player(10), RACE_PREF_RANDOM)
@@ -1997,18 +1863,12 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(0, 2)
-SetStartLocPrio(0, 0, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 1, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(1, 2)
-SetStartLocPrio(1, 0, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 1, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(2, 2)
+SetStartLocPrioCount(1, 1)
+SetStartLocPrio(1, 0, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(2, 1)
 SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 1, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(3, 2)
+SetStartLocPrioCount(3, 1)
 SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 1, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(4, 1)
 SetStartLocPrio(4, 0, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(5, 1)
@@ -2019,8 +1879,9 @@ SetStartLocPrio(6, 1, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(7, 2)
 SetStartLocPrio(7, 0, 1, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(7, 1, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(8, 1)
-SetStartLocPrio(8, 0, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(8, 2)
+SetStartLocPrio(8, 0, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 1, 7, MAP_LOC_PRIO_LOW)
 SetStartLocPrioCount(9, 1)
 SetStartLocPrio(9, 0, 7, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(10, 2)
@@ -2091,7 +1952,7 @@ SetMapName("TRIGSTR_001")
 SetMapDescription("TRIGSTR_003")
 SetPlayers(20)
 SetTeams(20)
-SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
+SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
 DefineStartLocation(0, -6400.0, 448.0)
 DefineStartLocation(1, 7360.0, 512.0)
 DefineStartLocation(2, -6336.0, 2368.0)
