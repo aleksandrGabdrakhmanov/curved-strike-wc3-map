@@ -52,7 +52,6 @@ function addPlayersInTeam(players)
     local initialPlayers = {}
     for _, player in ipairs(players) do
         if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
-            print("playing!")
             table.insert(initialPlayers, {
                 id = player.id,
                 spawnPlayerId = player.spawnId,

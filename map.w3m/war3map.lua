@@ -862,7 +862,6 @@ function addPlayersInTeam(players)
     local initialPlayers = {}
     for _, player in ipairs(players) do
         if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
-            print("playing!")
             table.insert(initialPlayers, {
                 id = player.id,
                 spawnPlayerId = player.spawnId,
@@ -981,13 +980,20 @@ function initDefaultVariables(mode)
 
     game_modes = {
         curved = {
-            unitRange = 1 -- 100%
+            unitRange = 1, -- 100%
+            spawnPolicy = {
+                interval = 35.00,
+                firstDelay = 0
+            }
         },
         united = {
-            unitRange = 1.5 -- 150%
+            unitRange = 1.5, -- 150%
+            spawnPolicy = {
+                interval = 40.00,
+                firstDelay = 0
+            }
         }
     }
-
 
     game_config = {
         mode = mode,
@@ -1000,6 +1006,7 @@ function initDefaultVariables(mode)
         units = {
             range = game_modes[mode].unitRange
         },
+        spawnPolicy = game_modes[mode].spawnPolicy,
         spawnInterval = 30
     }
 end
@@ -1233,9 +1240,29 @@ function startGame(mode)
     initTimers()
     initTriggers()
 end
-function initTimers()
+--[[function initTimers()
     local timer = CreateTimer()
-    my_func = 30
+    my_func = game_config.spawnPolicy.interval
+    TimerStart(timer,1,true, function()
+        BlzFrameSetText(frame, "Next wave:  |cffFF0303" .. my_func .. "|r")
+        my_func = my_func - 1
+    end)
+end]]
+
+function initTimers()
+
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local timer = CreateTimer()
+            TimerStart(timer, player.i * game_config.spawnPolicy.firstDelay, false, function()
+                spawnTrigger(player)
+            end)
+        end
+    end
+
+
+    local timer = CreateTimer()
+    my_func = game_config.spawnPolicy.interval
     TimerStart(timer,1,true, function()
         BlzFrameSetText(frame, "Next wave:  |cffFF0303" .. my_func .. "|r")
         my_func = my_func - 1
@@ -1364,7 +1391,6 @@ function incomeTrigger()
 end
 function initTriggers()
     incomeTrigger()
-    spawnTrigger()
     moveByPointsTrigger()
     winLoseTrigger()
     goldExtractorTrigger()
@@ -1426,32 +1452,26 @@ function containsValue(value, array)
     end
     return false
 end
-function spawnTrigger()
+function spawnTrigger(player)
     local trig = CreateTrigger()
-    TriggerRegisterTimerEventPeriodic(trig, 30.00)
+    TriggerRegisterTimerEventPeriodic(trig, game_config.spawnPolicy.interval)
     TriggerAddAction(trig, function()
-        for _, team in ipairs(all_teams) do
-            for _, player in ipairs(team.players) do
-                local groupForBuild = GetUnitsInRectAll(player.buildRect)
-                ForGroup(groupForBuild, function ()
-                    local id = GetUnitTypeId(GetEnumUnit())
-                    local owner = GetOwningPlayer(GetEnumUnit())
-                    if owner == player.id then
-                        local parentId = getParentId(('>I4'):pack(id))
-                        if parentId ~= nil then
-                            local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                            local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                            SetUnitColor(unit, GetPlayerColor(player.id))
-                            RemoveGuardPosition(unit)
-                            SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
-                        end
-                    end
-                end)
-                DestroyGroup(groupForBuild)
+        local groupForBuild = GetUnitsInRectAll(player.buildRect)
+        ForGroup(groupForBuild, function ()
+            local id = GetUnitTypeId(GetEnumUnit())
+            local owner = GetOwningPlayer(GetEnumUnit())
+            if owner == player.id then
+                local parentId = getParentId(('>I4'):pack(id))
+                if parentId ~= nil then
+                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
+                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+                    SetUnitColor(unit, GetPlayerColor(player.id))
+                    RemoveGuardPosition(unit)
+                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                end
             end
-            my_func = 30
-
-        end
+        end)
+        DestroyGroup(groupForBuild)
     end)
 end
 custom_cast_ai_params = {

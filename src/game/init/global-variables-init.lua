@@ -8,13 +8,20 @@ function initDefaultVariables(mode)
 
     game_modes = {
         curved = {
-            unitRange = 1 -- 100%
+            unitRange = 1, -- 100%
+            spawnPolicy = {
+                interval = 35.00,
+                firstDelay = 2
+            }
         },
         united = {
-            unitRange = 1.5 -- 150%
+            unitRange = 1.5, -- 150%
+            spawnPolicy = {
+                interval = 40.00,
+                firstDelay = 0
+            }
         }
     }
-
 
     game_config = {
         mode = mode,
@@ -27,6 +34,7 @@ function initDefaultVariables(mode)
         units = {
             range = game_modes[mode].unitRange
         },
+        spawnPolicy = game_modes[mode].spawnPolicy,
         spawnInterval = 30
     }
 end
