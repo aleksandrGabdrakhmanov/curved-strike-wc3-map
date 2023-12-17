@@ -1,5 +1,6 @@
 IncludeFile "UI\FrameDef\ui\scriptdialog.fdf",
 IncludeFile "UI\FrameDef\ui\escmenumainpanel.fdf",
+IncludeFile "UI\FrameDef\ui\questdialog.fdf",
 Frame "BACKDROP" "StartGameMenu" {
     Width 0.3,
     Height 0.35,
@@ -12,18 +13,29 @@ Frame "BACKDROP" "StartGameMenu" {
     BackdropBackgroundInsets 0.01 0.01 0.01 0.01,
     BackdropEdgeFile  "EscMenuBorder",
     BackdropBlendAll,
-    Frame "GLUETEXTBUTTON" "CurvedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
-        SetPoint CENTER, "StartGameMenu", CENTER, 0, 0.02,
-        ButtonText "GameplayButtonText",
-        Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
-            Text "CURVED",
+    Frame "BACKDROP" "StartGameMenuMode" INHERITS "QuestButtonBaseTemplate" {
+        Width 0.28,
+        Height 0.06,
+        SetPoint TOPLEFT, "StartGameMenu", TOPLEFT, 0.01, -0.01,
+        Frame "TEXT" "StartGameMenuModeText" INHERITS "EscMenuTitleTextTemplate" {
+            SetPoint LEFT, "StartGameMenuMode", LEFT, 0.02, 0.0,
+            Text "Mode:",
         }
-    }
-    Frame "GLUETEXTBUTTON" "UnitedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
-        SetPoint CENTER, "StartGameMenu", CENTER, 0, -0.02,
-        ButtonText "GameplayButtonText",
-        Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
-            Text "UNITED",
+        Frame "GLUETEXTBUTTON" "CurvedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
+            Width 0.08,
+            SetPoint LEFT, "StartGameMenuModeText", RIGHT, 0.01, 0,
+            ButtonText "GameplayButtonText",
+            Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
+                Text "CURVED",
+            }
+        }
+        Frame "GLUETEXTBUTTON" "UnitedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
+            Width 0.08,
+            SetPoint LEFT, "CurvedButton", RIGHT, 0.01, 0,
+            ButtonText "GameplayButtonText",
+            Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
+                Text "UNITED",
+            }
         }
     }
 }

@@ -1616,8 +1616,6 @@ end
 
 function hideModeUI()
     BlzFrameSetVisible(popupFrame, FALSE)
---[[    BlzFrameSetVisible(buttonCurvedFrame, FALSE)
-    BlzFrameSetVisible(buttonUnionFrame, FALSE)]]
 end
 --CUSTOM_CODE
 function InitCustomPlayerSlots()
