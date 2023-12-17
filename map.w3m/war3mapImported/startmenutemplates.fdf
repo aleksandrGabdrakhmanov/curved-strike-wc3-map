@@ -1,0 +1,29 @@
+IncludeFile "UI\FrameDef\ui\scriptdialog.fdf",
+IncludeFile "UI\FrameDef\ui\escmenumainpanel.fdf",
+Frame "BACKDROP" "StartGameMenu" {
+    Width 0.3,
+    Height 0.35,
+    DecorateFileNames,
+    BackdropTileBackground,
+    BackdropBackground  "EscMenuBackground",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.048,
+    BackdropBackgroundSize  0.256,
+    BackdropBackgroundInsets 0.01 0.01 0.01 0.01,
+    BackdropEdgeFile  "EscMenuBorder",
+    BackdropBlendAll,
+    Frame "GLUETEXTBUTTON" "CurvedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
+        SetPoint CENTER, "StartGameMenu", CENTER, 0, 0.02,
+        ButtonText "GameplayButtonText",
+        Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
+            Text "CURVED",
+        }
+    }
+    Frame "GLUETEXTBUTTON" "UnitedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
+        SetPoint CENTER, "StartGameMenu", CENTER, 0, -0.02,
+        ButtonText "GameplayButtonText",
+        Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
+            Text "UNITED",
+        }
+    }
+}

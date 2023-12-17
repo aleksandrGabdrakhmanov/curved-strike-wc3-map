@@ -983,7 +983,7 @@ function initDefaultVariables(mode)
             unitRange = 1, -- 100%
             spawnPolicy = {
                 interval = 35.00,
-                firstDelay = 0
+                firstDelay = 2
             }
         },
         united = {
@@ -1234,7 +1234,7 @@ OnInit(function()
 end)
 
 function startGame(mode)
-    print("10")
+    print("11")
     initMain(mode)
     initialUI()
     initTimers()
@@ -1604,26 +1604,20 @@ function initialUI()
 end
 
 function createModeUI()
-    modeMainFrame = BlzCreateFrame("EscMenuBackdrop", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
-    BlzFrameSetAbsPoint(modeMainFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
-    BlzFrameSetSize(modeMainFrame, 0.3, 0.35)
-    BlzFrameSetVisible(modeMainFrame, GetLocalPlayer() == Player(0))
+    print("11")
+    BlzLoadTOCFile("war3mapimported\\templates.toc")
+    popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI,0), 0, 0 )
+    BlzFrameSetAbsPoint(popupFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
+    BlzFrameSetVisible(popupFrame, GetLocalPlayer() == Player(0))
 
-    buttonCurvedFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
-    BlzFrameSetPoint(buttonCurvedFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, 0.02)
-    BlzFrameSetText(buttonCurvedFrame, "CURVED")
-    BlzFrameSetVisible(buttonCurvedFrame, GetLocalPlayer() == Player(0))
-
-    buttonUnionFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
-    BlzFrameSetPoint(buttonUnionFrame, FRAMEPOINT_CENTER, modeMainFrame, FRAMEPOINT_CENTER, 0, -0.02)
-    BlzFrameSetText(buttonUnionFrame, "UNITED")
-    BlzFrameSetVisible(buttonUnionFrame, GetLocalPlayer() == Player(0))
+    buttonCurvedFrame = BlzGetFrameByName("CurvedButton", 0)
+    buttonUnionFrame = BlzGetFrameByName("UnitedButton", 0)
 end
 
 function hideModeUI()
-    BlzFrameSetVisible(modeMainFrame, FALSE)
-    BlzFrameSetVisible(buttonCurvedFrame, FALSE)
-    BlzFrameSetVisible(buttonUnionFrame, FALSE)
+    BlzFrameSetVisible(popupFrame, FALSE)
+--[[    BlzFrameSetVisible(buttonCurvedFrame, FALSE)
+    BlzFrameSetVisible(buttonUnionFrame, FALSE)]]
 end
 --CUSTOM_CODE
 function InitCustomPlayerSlots()
