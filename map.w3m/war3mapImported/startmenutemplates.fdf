@@ -35,7 +35,7 @@ Frame "BACKDROP" "StartGameMenu" {
             SetPoint LEFT, "StartGameMenuModeText", RIGHT, 0.01, 0,
             ButtonText "GameplayButtonText",
             Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
-                Text "CURVED",
+                Text "DIRECT",
             }
         }
         Frame "GLUETEXTBUTTON" "UnitedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
