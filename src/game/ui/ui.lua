@@ -6,30 +6,39 @@ function initialUI()
     BlzFrameSetScale(frame, 2)
 end
 
-function createModeUI()
-    print("12")
+function startGameUI()
+    print("2")
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
     BlzFrameSetAbsPoint(popupFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
     BlzFrameSetVisible(popupFrame, GetLocalPlayer() == Player(0))
 
-    buttonCurvedFrame = BlzGetFrameByName("CurvedButton", 0)
-    buttonUnionFrame = BlzGetFrameByName("UnitedButton", 0)
-    createUnitButtons()
+    initModeButton("CurvedButton", 'curved')
+    initModeButton("UnitedButton", 'united')
+    initUnitsAvailableButtons()
 end
 
-function createUnitButtons()
+function initModeButton(buttonName, mode)
+    local button = BlzGetFrameByName(buttonName, 0)
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        BlzFrameSetVisible(popupFrame, FALSE)
+        startGame(mode)
+    end)
+end
 
+function initUnitsAvailableButtons()
     for i, mainUnit in ipairs(main_race) do
-        createRaceButton(mainUnit, i)
+        initRaceAvailableButton(mainUnit, i)
     end
 
     for i, unit in ipairs(units_for_build) do
-        createButtonForUnit(unit, i)
+        initUnitAvailableButton(unit, i)
     end
 end
 
-function createRaceButton(race, position)
+function initRaceAvailableButton(race, position)
     local button = BlzCreateFrame("IconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
     BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.005, -(0.01 + (BlzFrameGetHeight(button) * position)))
 
@@ -62,9 +71,7 @@ function createRaceButton(race, position)
     end)
 end
 
-
-
-function createButtonForUnit(unit)
+function initUnitAvailableButton(unit)
     local button = BlzCreateFrame("IconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
     BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.01 + (BlzFrameGetWidth(button) * unit.position), -(0.01 + (BlzFrameGetHeight(button) * unit.line)))
 
@@ -89,8 +96,4 @@ end
 function replaceTexture(inputString)
     local replacedString = inputString:gsub("ReplaceableTextures\\CommandButtons\\(.-)%.blp", "ReplaceableTextures\\CommandButtonsDisabled\\DIS%1.blp")
     return replacedString
-end
-
-function hideModeUI()
-    BlzFrameSetVisible(popupFrame, FALSE)
 end

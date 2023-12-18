@@ -1,7 +1,6 @@
 OnInit(function()
     initUnits()
-    createModeUI()
-    startGameUITrigger()
+    startGameUI()
 end)
 
 function initUnits()
