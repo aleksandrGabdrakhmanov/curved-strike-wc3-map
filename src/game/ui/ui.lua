@@ -11,7 +11,8 @@ function startGameUI()
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
     BlzFrameSetAbsPoint(popupFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
-    BlzFrameSetVisible(popupFrame, GetLocalPlayer() == Player(0))
+    local selectingText = BlzGetFrameByName("StartGameMenuModeSelecting", 0)
+    BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
 
     initModeButton("CurvedButton", 'curved')
     initModeButton("UnitedButton", 'united')
@@ -23,8 +24,10 @@ function initModeButton(buttonName, mode)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
-        BlzFrameSetVisible(popupFrame, FALSE)
-        startGame(mode)
+        if GetLocalPlayer() == getMainPlayer() then
+            BlzFrameSetVisible(popupFrame, FALSE)
+            startGame(mode)
+        end
     end)
 end
 
@@ -49,6 +52,9 @@ function initRaceAvailableButton(race, position)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
+        if GetLocalPlayer() ~= getMainPlayer() then
+            return
+        end
         if race.active == true then
             race.active = false
             BlzFrameSetTexture(buttonTexture, replaceTexture(BlzGetAbilityIcon(FourCC(race.id))), 0, true)
@@ -83,6 +89,9 @@ function initUnitAvailableButton(unit)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
+        if GetLocalPlayer() ~= getMainPlayer() then
+            return
+        end
         if unit.active == true then
             unit.active = false
             BlzFrameSetTexture(buttonTexture, replaceTexture(BlzGetAbilityIcon(FourCC(unit.parentId))), 0, true)

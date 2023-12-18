@@ -47,6 +47,11 @@ Frame "BACKDROP" "StartGameMenu" {
             }
         }
     }
+     Frame "TEXT" "StartGameMenuModeSelecting" INHERITS "EscMenuTitleTextTemplate" {
+        SetPoint TOP, "StartGameMenuMode", BOTTOM, 0, -0.015,
+        FontColor 0.0 1.0 0.0 1.0,
+        Text "are selecting",
+     }
 }
 
 Frame "GLUETEXTBUTTON" "IconButtonTemplate"{

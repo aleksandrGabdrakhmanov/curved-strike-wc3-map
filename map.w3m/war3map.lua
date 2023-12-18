@@ -843,6 +843,20 @@ function initGameConfig(mode)
 end
 
 function initGlobalVariables()
+    players_team_left = {
+        { id = Player(0), spawnId = Player(17), team = 1 },
+        { id = Player(2), spawnId = Player(18), team = 1 },
+        { id = Player(3), spawnId = Player(16), team = 1 },
+        { id = Player(4), spawnId = Player(19), team = 1 },
+        { id = Player(5), spawnId = Player(15), team = 1 }
+    }
+    players_team_right = {
+        { id = Player(1), spawnId = Player(12), team = 2 },
+        { id = Player(6), spawnId = Player(13), team = 2 },
+        { id = Player(7), spawnId = Player(11), team = 2 },
+        { id = Player(8), spawnId = Player(14), team = 2 },
+        { id = Player(9), spawnId = Player(10), team = 2 }
+    }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
         { id = 'h004', parentId = 'h00D', tier = 1, race = 'human', line = 1, position = 2, name = 'Rifleman', upgrades = {'Rhri'}},
@@ -925,21 +939,6 @@ function initGame()
 end
 
 function initTeams()
-    players_team_left = {
-        { id = Player(0), spawnId = Player(17), team = 1 },
-        { id = Player(2), spawnId = Player(18), team = 1 },
-        { id = Player(3), spawnId = Player(16), team = 1 },
-        { id = Player(4), spawnId = Player(19), team = 1 },
-        { id = Player(5), spawnId = Player(15), team = 1 }
-    }
-    players_team_right = {
-        { id = Player(1), spawnId = Player(12), team = 2 },
-        { id = Player(6), spawnId = Player(13), team = 2 },
-        { id = Player(7), spawnId = Player(11), team = 2 },
-        { id = Player(8), spawnId = Player(14), team = 2 },
-        { id = Player(9), spawnId = Player(10), team = 2 }
-    }
-
     all_teams = {}
     all_teams[1] = {
         i = 1,
@@ -961,6 +960,19 @@ function initTeams()
             towerRect = nil
         }
     }
+end
+
+function getMainPlayer()
+    for _, player in ipairs(players_team_left) do
+        if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
+            return player.id
+        end
+    end
+    for _, player in ipairs(players_team_right) do
+        if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
+            return player.id
+        end
+    end
 end
 
 function addPlayersInTeam(players)
@@ -1593,7 +1605,8 @@ function startGameUI()
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
     BlzFrameSetAbsPoint(popupFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
-    BlzFrameSetVisible(popupFrame, GetLocalPlayer() == Player(0))
+    local selectingText = BlzGetFrameByName("StartGameMenuModeSelecting", 0)
+    BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
 
     initModeButton("CurvedButton", 'curved')
     initModeButton("UnitedButton", 'united')
@@ -1605,8 +1618,10 @@ function initModeButton(buttonName, mode)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
-        BlzFrameSetVisible(popupFrame, FALSE)
-        startGame(mode)
+        if GetLocalPlayer() == getMainPlayer() then
+            BlzFrameSetVisible(popupFrame, FALSE)
+            startGame(mode)
+        end
     end)
 end
 
@@ -1631,6 +1646,9 @@ function initRaceAvailableButton(race, position)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
+        if GetLocalPlayer() ~= getMainPlayer() then
+            return
+        end
         if race.active == true then
             race.active = false
             BlzFrameSetTexture(buttonTexture, replaceTexture(BlzGetAbilityIcon(FourCC(race.id))), 0, true)
@@ -1665,6 +1683,9 @@ function initUnitAvailableButton(unit)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
+        if GetLocalPlayer() ~= getMainPlayer() then
+            return
+        end
         if unit.active == true then
             unit.active = false
             BlzFrameSetTexture(buttonTexture, replaceTexture(BlzGetAbilityIcon(FourCC(unit.parentId))), 0, true)
@@ -1692,55 +1713,55 @@ ForcePlayerStartLocation(Player(1), 1)
 SetPlayerColor(Player(1), ConvertPlayerColor(1))
 SetPlayerRacePreference(Player(1), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(1), false)
-SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(1), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(2), 2)
 ForcePlayerStartLocation(Player(2), 2)
 SetPlayerColor(Player(2), ConvertPlayerColor(2))
 SetPlayerRacePreference(Player(2), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(2), false)
-SetPlayerController(Player(2), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(2), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(3), 3)
 ForcePlayerStartLocation(Player(3), 3)
 SetPlayerColor(Player(3), ConvertPlayerColor(3))
 SetPlayerRacePreference(Player(3), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(3), false)
-SetPlayerController(Player(3), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(3), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(4), 4)
 ForcePlayerStartLocation(Player(4), 4)
 SetPlayerColor(Player(4), ConvertPlayerColor(4))
 SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(4), false)
-SetPlayerController(Player(4), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(4), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(5), 5)
 ForcePlayerStartLocation(Player(5), 5)
 SetPlayerColor(Player(5), ConvertPlayerColor(5))
 SetPlayerRacePreference(Player(5), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(5), false)
-SetPlayerController(Player(5), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(5), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(6), 6)
 ForcePlayerStartLocation(Player(6), 6)
 SetPlayerColor(Player(6), ConvertPlayerColor(6))
 SetPlayerRacePreference(Player(6), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(6), false)
-SetPlayerController(Player(6), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(6), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(7), 7)
 ForcePlayerStartLocation(Player(7), 7)
 SetPlayerColor(Player(7), ConvertPlayerColor(7))
 SetPlayerRacePreference(Player(7), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(7), false)
-SetPlayerController(Player(7), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(7), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(8), 8)
 ForcePlayerStartLocation(Player(8), 8)
 SetPlayerColor(Player(8), ConvertPlayerColor(8))
 SetPlayerRacePreference(Player(8), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(8), false)
-SetPlayerController(Player(8), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(8), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(9), 9)
 ForcePlayerStartLocation(Player(9), 9)
 SetPlayerColor(Player(9), ConvertPlayerColor(9))
 SetPlayerRacePreference(Player(9), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(9), false)
-SetPlayerController(Player(9), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(9), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(10), 10)
 SetPlayerColor(Player(10), ConvertPlayerColor(10))
 SetPlayerRacePreference(Player(10), RACE_PREF_RANDOM)
@@ -1937,12 +1958,18 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(1, 1)
-SetStartLocPrio(1, 0, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(2, 1)
+SetStartLocPrioCount(0, 2)
+SetStartLocPrio(0, 0, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 1, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(1, 2)
+SetStartLocPrio(1, 0, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(1, 1, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(2, 2)
 SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(3, 1)
+SetStartLocPrio(2, 1, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(3, 2)
 SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 1, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(4, 1)
 SetStartLocPrio(4, 0, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(5, 1)
@@ -1953,14 +1980,14 @@ SetStartLocPrio(6, 1, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(7, 2)
 SetStartLocPrio(7, 0, 1, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(7, 1, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(8, 2)
-SetStartLocPrio(8, 0, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 1, 7, MAP_LOC_PRIO_LOW)
+SetStartLocPrioCount(8, 1)
+SetStartLocPrio(8, 0, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(9, 1)
 SetStartLocPrio(9, 0, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(10, 2)
-SetStartLocPrio(10, 0, 17, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(10, 1, 19, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(10, 3)
+SetStartLocPrio(10, 0, 0, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(10, 1, 17, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(10, 2, 19, MAP_LOC_PRIO_HIGH)
 SetEnemyStartLocPrioCount(10, 1)
 SetEnemyStartLocPrio(10, 0, 18, MAP_LOC_PRIO_LOW)
 SetStartLocPrioCount(11, 2)
@@ -1969,13 +1996,15 @@ SetStartLocPrio(11, 1, 19, MAP_LOC_PRIO_LOW)
 SetEnemyStartLocPrioCount(11, 2)
 SetEnemyStartLocPrio(11, 0, 17, MAP_LOC_PRIO_LOW)
 SetEnemyStartLocPrio(11, 1, 19, MAP_LOC_PRIO_LOW)
-SetStartLocPrioCount(12, 3)
-SetStartLocPrio(12, 0, 17, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(12, 1, 18, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(12, 2, 19, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrioCount(12, 2)
-SetEnemyStartLocPrio(12, 0, 18, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrio(12, 1, 19, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(12, 4)
+SetStartLocPrio(12, 0, 0, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(12, 1, 17, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(12, 2, 18, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(12, 3, 19, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(12, 3)
+SetEnemyStartLocPrio(12, 0, 0, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(12, 1, 18, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrio(12, 2, 19, MAP_LOC_PRIO_HIGH)
 SetEnemyStartLocPrioCount(13, 1)
 SetEnemyStartLocPrio(13, 0, 18, MAP_LOC_PRIO_LOW)
 SetStartLocPrioCount(14, 4)
@@ -2000,8 +2029,9 @@ SetStartLocPrio(17, 0, 18, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(17, 1, 19, MAP_LOC_PRIO_LOW)
 SetEnemyStartLocPrioCount(17, 2)
 SetEnemyStartLocPrio(17, 0, 18, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(18, 1)
-SetStartLocPrio(18, 0, 17, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(18, 2)
+SetStartLocPrio(18, 0, 0, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(18, 1, 17, MAP_LOC_PRIO_HIGH)
 SetEnemyStartLocPrioCount(18, 1)
 SetStartLocPrioCount(19, 1)
 SetStartLocPrio(19, 0, 18, MAP_LOC_PRIO_LOW)
@@ -2026,7 +2056,7 @@ SetMapName("TRIGSTR_001")
 SetMapDescription("TRIGSTR_003")
 SetPlayers(20)
 SetTeams(20)
-SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
 DefineStartLocation(0, -6400.0, 448.0)
 DefineStartLocation(1, 7360.0, 512.0)
 DefineStartLocation(2, -6336.0, 2368.0)

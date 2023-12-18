@@ -8,21 +8,6 @@ function initGame()
 end
 
 function initTeams()
-    players_team_left = {
-        { id = Player(0), spawnId = Player(17), team = 1 },
-        { id = Player(2), spawnId = Player(18), team = 1 },
-        { id = Player(3), spawnId = Player(16), team = 1 },
-        { id = Player(4), spawnId = Player(19), team = 1 },
-        { id = Player(5), spawnId = Player(15), team = 1 }
-    }
-    players_team_right = {
-        { id = Player(1), spawnId = Player(12), team = 2 },
-        { id = Player(6), spawnId = Player(13), team = 2 },
-        { id = Player(7), spawnId = Player(11), team = 2 },
-        { id = Player(8), spawnId = Player(14), team = 2 },
-        { id = Player(9), spawnId = Player(10), team = 2 }
-    }
-
     all_teams = {}
     all_teams[1] = {
         i = 1,
@@ -44,6 +29,19 @@ function initTeams()
             towerRect = nil
         }
     }
+end
+
+function getMainPlayer()
+    for _, player in ipairs(players_team_left) do
+        if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
+            return player.id
+        end
+    end
+    for _, player in ipairs(players_team_right) do
+        if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
+            return player.id
+        end
+    end
 end
 
 function addPlayersInTeam(players)

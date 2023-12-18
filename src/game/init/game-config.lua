@@ -33,6 +33,20 @@ function initGameConfig(mode)
 end
 
 function initGlobalVariables()
+    players_team_left = {
+        { id = Player(0), spawnId = Player(17), team = 1 },
+        { id = Player(2), spawnId = Player(18), team = 1 },
+        { id = Player(3), spawnId = Player(16), team = 1 },
+        { id = Player(4), spawnId = Player(19), team = 1 },
+        { id = Player(5), spawnId = Player(15), team = 1 }
+    }
+    players_team_right = {
+        { id = Player(1), spawnId = Player(12), team = 2 },
+        { id = Player(6), spawnId = Player(13), team = 2 },
+        { id = Player(7), spawnId = Player(11), team = 2 },
+        { id = Player(8), spawnId = Player(14), team = 2 },
+        { id = Player(9), spawnId = Player(10), team = 2 }
+    }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
         { id = 'h004', parentId = 'h00D', tier = 1, race = 'human', line = 1, position = 2, name = 'Rifleman', upgrades = {'Rhri'}},
