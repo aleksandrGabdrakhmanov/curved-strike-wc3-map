@@ -20,6 +20,14 @@ function setAllianceBetweenSpawnPlayers()
     end
 end
 
+function getAllSpawnPlayers(team)
+    local spawnPlayer = {}
+    for _, player in ipairs(team.players) do
+        table.insert(spawnPlayer, player.spawnPlayerId)
+    end
+    return spawnPlayer
+end
+
 function setAllianceBetweenPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do

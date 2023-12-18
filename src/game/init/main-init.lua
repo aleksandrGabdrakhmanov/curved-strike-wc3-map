@@ -1,5 +1,6 @@
 function initMain(mode)
-    initGlobalVariables(mode)
+    initRegions()
+    initGameConfig(mode)
     initGame()
     initPlayers()
 end
