@@ -5,6 +5,7 @@ function initPlayers()
     addWorkers()
     changeAvailableUnitsForPlayers()
     setStartCameraPosition()
+    initPanelForAllPlayers()
 end
 
 function setAllianceBetweenSpawnPlayers()

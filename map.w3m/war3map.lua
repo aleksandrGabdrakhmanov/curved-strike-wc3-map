@@ -813,16 +813,18 @@ function initGameConfig(mode)
         curved = {
             unitRange = 1, -- 100%
             spawnPolicy = {
-                interval = 35.00,
-                firstDelay = 2
-            }
+                interval = 35,
+                dif = 0
+            },
+            playerPosition = { 1, 2, 3, 4, 5 }
         },
         united = {
             unitRange = 1.5, -- 150%
             spawnPolicy = {
-                interval = 40.00,
-                firstDelay = 0
-            }
+                interval = 0,
+                dif = 35
+            },
+            playerPosition = { 3, 4, 2, 1, 5 }
         }
     }
 
@@ -838,7 +840,7 @@ function initGameConfig(mode)
             range = game_modes[mode].unitRange
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
-        spawnInterval = 30
+        playerPosition = game_modes[mode].playerPosition
     }
 end
 
@@ -976,7 +978,6 @@ function getMainPlayer()
 end
 
 function addPlayersInTeam(players)
-    local position = { 3, 4, 2, 1, 5 }
     local nextPosition = 1
     local initialPlayers = {}
     for _, player in ipairs(players) do
@@ -984,7 +985,7 @@ function addPlayersInTeam(players)
             table.insert(initialPlayers, {
                 id = player.id,
                 spawnPlayerId = player.spawnId,
-                i = position[nextPosition],
+                i = game_config.playerPosition[nextPosition],
                 economy = {
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
@@ -997,7 +998,8 @@ function addPlayersInTeam(players)
                 mainRect = nil,
                 laboratoryRect = nil,
                 attackPointRect = {},
-                spawnRect = nil
+                spawnRect = nil,
+                spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif
             })
             nextPosition = nextPosition + 1
         end
@@ -1102,6 +1104,7 @@ function initPlayers()
     addWorkers()
     changeAvailableUnitsForPlayers()
     setStartCameraPosition()
+    initPanelForAllPlayers()
 end
 
 function setAllianceBetweenSpawnPlayers()
@@ -1252,33 +1255,22 @@ function startGame(mode)
     initTimers()
     initTriggers()
 end
---[[function initTimers()
-    local timer = CreateTimer()
-    my_func = game_config.spawnPolicy.interval
-    TimerStart(timer,1,true, function()
-        BlzFrameSetText(frame, "Next wave:  |cffFF0303" .. my_func .. "|r")
-        my_func = my_func - 1
-    end)
-end]]
 
 function initTimers()
 
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            local timer = CreateTimer()
-            TimerStart(timer, player.i * game_config.spawnPolicy.firstDelay, false, function()
-                spawnTrigger(player)
-            end)
-        end
-    end
-
-
-    local timer = CreateTimer()
-    my_func = game_config.spawnPolicy.interval
+--[[    local timer = CreateTimer()
     TimerStart(timer,1,true, function()
-        BlzFrameSetText(frame, "Next wave:  |cffFF0303" .. my_func .. "|r")
-        my_func = my_func - 1
-    end)
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                local text = BlzFrameGetChild(player.statePanel, 0)
+                BlzFrameSetText(text, "Next wave: " .. player.spawnTimer)
+                if team.i == 1 then
+                    print('Team: ' .. team.i .. ' Player: ' .. player.i .. '; delay: ' .. player.spawnTimer)
+                end
+                player.spawnTimer = player.spawnTimer - 1
+            end
+        end
+    end)]]
 end
 function debugTrigger()
 
@@ -1410,6 +1402,7 @@ function initTriggers()
     enableUpdateTrigger()
     customCastAITrigger()
     spellFinishTrigger()
+    spawnTrigger()
     debugTrigger()
 end
 additionalDir = 500
@@ -1464,26 +1457,36 @@ function containsValue(value, array)
     end
     return false
 end
-function spawnTrigger(player)
+function spawnTrigger()
     local trig = CreateTrigger()
-    TriggerRegisterTimerEventPeriodic(trig, game_config.spawnPolicy.interval)
+    TriggerRegisterTimerEventPeriodic(trig, 1)
     TriggerAddAction(trig, function()
-        local groupForBuild = GetUnitsInRectAll(player.buildRect)
-        ForGroup(groupForBuild, function ()
-            local id = GetUnitTypeId(GetEnumUnit())
-            local owner = GetOwningPlayer(GetEnumUnit())
-            if owner == player.id then
-                local parentId = getParentId(('>I4'):pack(id))
-                if parentId ~= nil then
-                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                    SetUnitColor(unit, GetPlayerColor(player.id))
-                    RemoveGuardPosition(unit)
-                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                if player.spawnTimer <= 0 then
+                    local groupForBuild = GetUnitsInRectAll(player.buildRect)
+                    ForGroup(groupForBuild, function ()
+                        local id = GetUnitTypeId(GetEnumUnit())
+                        local owner = GetOwningPlayer(GetEnumUnit())
+                        if owner == player.id then
+                            local parentId = getParentId(('>I4'):pack(id))
+                            if parentId ~= nil then
+                                local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
+                                local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+                                SetUnitColor(unit, GetPlayerColor(player.id))
+                                RemoveGuardPosition(unit)
+                                SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                            end
+                        end
+                    end)
+                    DestroyGroup(groupForBuild)
+                    player.spawnTimer = game_config.spawnPolicy.interval * #team.players + game_config.spawnPolicy.dif
                 end
+                player.spawnTimer = player.spawnTimer - 1
+                local text = BlzFrameGetChild(player.statePanel, 0)
+                BlzFrameSetText(text, "Next wave: " .. player.spawnTimer)
             end
-        end)
-        DestroyGroup(groupForBuild)
+        end
     end)
 end
 custom_cast_ai_params = {
@@ -1597,7 +1600,7 @@ function initialUI()
     frame = BlzCreateFrameByType("TEXT", "MyTextFrame", fm, "", 0)
     BlzFrameSetAbsPoint(frame, FRAMEPOINT_CENTER, 0.85, 0.5)
     BlzFrameSetEnable(frame, false)
-    BlzFrameSetScale(frame, 2)
+    BlzFrameSetScale(frame, 1)
 end
 
 function startGameUI()
@@ -1636,7 +1639,7 @@ function initUnitsAvailableButtons()
 end
 
 function initRaceAvailableButton(race, position)
-    local button = BlzCreateFrame("IconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
+    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
     BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.005, -(0.01 + (BlzFrameGetHeight(button) * position)))
 
     local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
@@ -1672,7 +1675,7 @@ function initRaceAvailableButton(race, position)
 end
 
 function initUnitAvailableButton(unit)
-    local button = BlzCreateFrame("IconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
+    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
     BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.01 + (BlzFrameGetWidth(button) * unit.position), -(0.01 + (BlzFrameGetHeight(button) * unit.line)))
 
     local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
@@ -1700,6 +1703,19 @@ function replaceTexture(inputString)
     local replacedString = inputString:gsub("ReplaceableTextures\\CommandButtons\\(.-)%.blp", "ReplaceableTextures\\CommandButtonsDisabled\\DIS%1.blp")
     return replacedString
 end
+function initPanelForAllPlayers()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local myPanel = BlzCreateFrame("CurvedStatusTemplate", BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
+            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.95, 0.56)
+            BlzFrameSetSize(myPanel, 0.2, 0.2)
+            BlzFrameSetVisible(myPanel, GetLocalPlayer() == player.id)
+            player.statePanel = myPanel
+        end
+    end
+end
+
+
 --CUSTOM_CODE
 function InitCustomPlayerSlots()
 SetPlayerStartLocation(Player(0), 0)
@@ -1711,7 +1727,7 @@ SetPlayerController(Player(0), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(1), 1)
 ForcePlayerStartLocation(Player(1), 1)
 SetPlayerColor(Player(1), ConvertPlayerColor(1))
-SetPlayerRacePreference(Player(1), RACE_PREF_HUMAN)
+SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
 SetPlayerRaceSelectable(Player(1), false)
 SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(2), 2)
@@ -1816,52 +1832,36 @@ end
 
 function InitCustomTeams()
 SetPlayerTeam(Player(0), 0)
+SetPlayerTeam(Player(1), 0)
 SetPlayerTeam(Player(2), 0)
 SetPlayerTeam(Player(3), 0)
 SetPlayerTeam(Player(4), 0)
 SetPlayerTeam(Player(5), 0)
-SetPlayerTeam(Player(1), 1)
 SetPlayerTeam(Player(6), 1)
 SetPlayerTeam(Player(7), 1)
 SetPlayerTeam(Player(8), 1)
 SetPlayerTeam(Player(9), 1)
-SetPlayerAllianceStateAllyBJ(Player(1), Player(6), true)
-SetPlayerAllianceStateAllyBJ(Player(1), Player(7), true)
-SetPlayerAllianceStateAllyBJ(Player(1), Player(8), true)
-SetPlayerAllianceStateAllyBJ(Player(1), Player(9), true)
-SetPlayerAllianceStateAllyBJ(Player(6), Player(1), true)
 SetPlayerAllianceStateAllyBJ(Player(6), Player(7), true)
 SetPlayerAllianceStateAllyBJ(Player(6), Player(8), true)
 SetPlayerAllianceStateAllyBJ(Player(6), Player(9), true)
-SetPlayerAllianceStateAllyBJ(Player(7), Player(1), true)
 SetPlayerAllianceStateAllyBJ(Player(7), Player(6), true)
 SetPlayerAllianceStateAllyBJ(Player(7), Player(8), true)
 SetPlayerAllianceStateAllyBJ(Player(7), Player(9), true)
-SetPlayerAllianceStateAllyBJ(Player(8), Player(1), true)
 SetPlayerAllianceStateAllyBJ(Player(8), Player(6), true)
 SetPlayerAllianceStateAllyBJ(Player(8), Player(7), true)
 SetPlayerAllianceStateAllyBJ(Player(8), Player(9), true)
-SetPlayerAllianceStateAllyBJ(Player(9), Player(1), true)
 SetPlayerAllianceStateAllyBJ(Player(9), Player(6), true)
 SetPlayerAllianceStateAllyBJ(Player(9), Player(7), true)
 SetPlayerAllianceStateAllyBJ(Player(9), Player(8), true)
-SetPlayerAllianceStateVisionBJ(Player(1), Player(6), true)
-SetPlayerAllianceStateVisionBJ(Player(1), Player(7), true)
-SetPlayerAllianceStateVisionBJ(Player(1), Player(8), true)
-SetPlayerAllianceStateVisionBJ(Player(1), Player(9), true)
-SetPlayerAllianceStateVisionBJ(Player(6), Player(1), true)
 SetPlayerAllianceStateVisionBJ(Player(6), Player(7), true)
 SetPlayerAllianceStateVisionBJ(Player(6), Player(8), true)
 SetPlayerAllianceStateVisionBJ(Player(6), Player(9), true)
-SetPlayerAllianceStateVisionBJ(Player(7), Player(1), true)
 SetPlayerAllianceStateVisionBJ(Player(7), Player(6), true)
 SetPlayerAllianceStateVisionBJ(Player(7), Player(8), true)
 SetPlayerAllianceStateVisionBJ(Player(7), Player(9), true)
-SetPlayerAllianceStateVisionBJ(Player(8), Player(1), true)
 SetPlayerAllianceStateVisionBJ(Player(8), Player(6), true)
 SetPlayerAllianceStateVisionBJ(Player(8), Player(7), true)
 SetPlayerAllianceStateVisionBJ(Player(8), Player(9), true)
-SetPlayerAllianceStateVisionBJ(Player(9), Player(1), true)
 SetPlayerAllianceStateVisionBJ(Player(9), Player(6), true)
 SetPlayerAllianceStateVisionBJ(Player(9), Player(7), true)
 SetPlayerAllianceStateVisionBJ(Player(9), Player(8), true)
@@ -1958,72 +1958,102 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(1, 2)
-SetStartLocPrio(1, 0, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 1, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(2, 2)
-SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 1, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(1, 4)
+SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(1, 2, 5, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(1, 3, 6, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(1, 2)
+SetEnemyStartLocPrio(1, 0, 5, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(1, 1, 8, MAP_LOC_PRIO_LOW)
+SetStartLocPrioCount(2, 1)
+SetStartLocPrio(2, 0, 1, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(3, 2)
-SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 0, 4, MAP_LOC_PRIO_LOW)
 SetStartLocPrio(3, 1, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(4, 1)
-SetStartLocPrio(4, 0, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(5, 1)
+SetEnemyStartLocPrioCount(3, 2)
+SetEnemyStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrio(3, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(4, 2)
+SetStartLocPrio(4, 0, 0, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 1, 1, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrioCount(4, 2)
+SetEnemyStartLocPrio(4, 0, 0, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrio(4, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(5, 2)
 SetStartLocPrio(5, 0, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 1, 4, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(5, 1)
+SetEnemyStartLocPrio(5, 0, 4, MAP_LOC_PRIO_LOW)
 SetStartLocPrioCount(6, 2)
 SetStartLocPrio(6, 0, 1, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(6, 1, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(7, 2)
-SetStartLocPrio(7, 0, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 1, 9, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrioCount(6, 1)
+SetEnemyStartLocPrio(6, 0, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(7, 3)
+SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(7, 1, 4, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(7, 2, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(8, 1)
 SetStartLocPrio(8, 0, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(9, 1)
-SetStartLocPrio(9, 0, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(9, 3)
+SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(9, 1, 1, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(9, 2, 7, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrioCount(9, 3)
+SetEnemyStartLocPrio(9, 0, 0, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(9, 1, 1, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(9, 2, 4, MAP_LOC_PRIO_LOW)
 SetStartLocPrioCount(10, 3)
-SetStartLocPrio(10, 0, 0, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(10, 0, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(10, 1, 17, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(10, 2, 19, MAP_LOC_PRIO_HIGH)
 SetEnemyStartLocPrioCount(10, 1)
 SetEnemyStartLocPrio(10, 0, 18, MAP_LOC_PRIO_LOW)
-SetStartLocPrioCount(11, 2)
-SetStartLocPrio(11, 0, 18, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(11, 1, 19, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrioCount(11, 2)
-SetEnemyStartLocPrio(11, 0, 17, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrio(11, 1, 19, MAP_LOC_PRIO_LOW)
-SetStartLocPrioCount(12, 4)
-SetStartLocPrio(12, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(12, 1, 17, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(12, 2, 18, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(12, 3, 19, MAP_LOC_PRIO_LOW)
+SetStartLocPrioCount(11, 4)
+SetStartLocPrio(11, 0, 0, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(11, 1, 4, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(11, 2, 18, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(11, 3, 19, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(11, 3)
+SetEnemyStartLocPrio(11, 0, 4, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(11, 1, 17, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(11, 2, 19, MAP_LOC_PRIO_LOW)
+SetStartLocPrioCount(12, 3)
+SetStartLocPrio(12, 0, 17, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(12, 1, 18, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(12, 2, 19, MAP_LOC_PRIO_LOW)
 SetEnemyStartLocPrioCount(12, 3)
-SetEnemyStartLocPrio(12, 0, 0, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(12, 0, 1, MAP_LOC_PRIO_HIGH)
 SetEnemyStartLocPrio(12, 1, 18, MAP_LOC_PRIO_HIGH)
 SetEnemyStartLocPrio(12, 2, 19, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrioCount(13, 1)
-SetEnemyStartLocPrio(13, 0, 18, MAP_LOC_PRIO_LOW)
-SetStartLocPrioCount(14, 4)
-SetStartLocPrio(14, 0, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(14, 1, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(14, 2, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(14, 3, 9, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrioCount(14, 1)
-SetEnemyStartLocPrio(14, 0, 19, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(13, 1)
+SetStartLocPrio(13, 0, 0, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(13, 2)
+SetEnemyStartLocPrio(13, 0, 4, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(13, 1, 18, MAP_LOC_PRIO_LOW)
+SetStartLocPrioCount(14, 2)
+SetStartLocPrio(14, 0, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(14, 1, 9, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrioCount(14, 2)
+SetEnemyStartLocPrio(14, 0, 4, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrio(14, 1, 19, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(15, 1)
 SetStartLocPrio(15, 0, 17, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrioCount(15, 2)
-SetEnemyStartLocPrio(15, 0, 18, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrio(15, 1, 19, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(15, 3)
+SetEnemyStartLocPrio(15, 0, 1, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(15, 1, 18, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(15, 2, 19, MAP_LOC_PRIO_LOW)
 SetStartLocPrioCount(16, 1)
 SetStartLocPrio(16, 0, 19, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrioCount(16, 2)
-SetEnemyStartLocPrio(16, 0, 18, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrio(16, 1, 19, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(17, 2)
-SetStartLocPrio(17, 0, 18, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(17, 1, 19, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrioCount(16, 3)
+SetEnemyStartLocPrio(16, 0, 4, MAP_LOC_PRIO_HIGH)
+SetEnemyStartLocPrio(16, 1, 18, MAP_LOC_PRIO_LOW)
+SetEnemyStartLocPrio(16, 2, 19, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(17, 3)
+SetStartLocPrio(17, 0, 4, MAP_LOC_PRIO_LOW)
+SetStartLocPrio(17, 1, 18, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(17, 2, 19, MAP_LOC_PRIO_LOW)
 SetEnemyStartLocPrioCount(17, 2)
 SetEnemyStartLocPrio(17, 0, 18, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(18, 2)

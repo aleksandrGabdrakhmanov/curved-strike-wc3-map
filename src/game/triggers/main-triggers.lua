@@ -7,5 +7,6 @@ function initTriggers()
     enableUpdateTrigger()
     customCastAITrigger()
     spellFinishTrigger()
+    spawnTrigger()
     debugTrigger()
 end

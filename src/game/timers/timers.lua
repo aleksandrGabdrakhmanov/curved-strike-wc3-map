@@ -1,28 +1,17 @@
---[[function initTimers()
-    local timer = CreateTimer()
-    my_func = game_config.spawnPolicy.interval
-    TimerStart(timer,1,true, function()
-        BlzFrameSetText(frame, "Next wave:  |cffFF0303" .. my_func .. "|r")
-        my_func = my_func - 1
-    end)
-end]]
 
 function initTimers()
 
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            local timer = CreateTimer()
-            TimerStart(timer, player.i * game_config.spawnPolicy.firstDelay, false, function()
-                spawnTrigger(player)
-            end)
-        end
-    end
-
-
-    local timer = CreateTimer()
-    my_func = game_config.spawnPolicy.interval
+--[[    local timer = CreateTimer()
     TimerStart(timer,1,true, function()
-        BlzFrameSetText(frame, "Next wave:  |cffFF0303" .. my_func .. "|r")
-        my_func = my_func - 1
-    end)
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                local text = BlzFrameGetChild(player.statePanel, 0)
+                BlzFrameSetText(text, "Next wave: " .. player.spawnTimer)
+                if team.i == 1 then
+                    print('Team: ' .. team.i .. ' Player: ' .. player.i .. '; delay: ' .. player.spawnTimer)
+                end
+                player.spawnTimer = player.spawnTimer - 1
+            end
+        end
+    end)]]
 end

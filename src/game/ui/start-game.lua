@@ -3,7 +3,7 @@ function initialUI()
     frame = BlzCreateFrameByType("TEXT", "MyTextFrame", fm, "", 0)
     BlzFrameSetAbsPoint(frame, FRAMEPOINT_CENTER, 0.85, 0.5)
     BlzFrameSetEnable(frame, false)
-    BlzFrameSetScale(frame, 2)
+    BlzFrameSetScale(frame, 1)
 end
 
 function startGameUI()
@@ -42,7 +42,7 @@ function initUnitsAvailableButtons()
 end
 
 function initRaceAvailableButton(race, position)
-    local button = BlzCreateFrame("IconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
+    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
     BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.005, -(0.01 + (BlzFrameGetHeight(button) * position)))
 
     local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
@@ -78,7 +78,7 @@ function initRaceAvailableButton(race, position)
 end
 
 function initUnitAvailableButton(unit)
-    local button = BlzCreateFrame("IconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
+    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
     BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.01 + (BlzFrameGetWidth(button) * unit.position), -(0.01 + (BlzFrameGetHeight(button) * unit.line)))
 
     local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)

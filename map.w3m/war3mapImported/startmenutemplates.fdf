@@ -1,6 +1,7 @@
 IncludeFile "UI\FrameDef\ui\scriptdialog.fdf",
 IncludeFile "UI\FrameDef\ui\escmenumainpanel.fdf",
 IncludeFile "UI\FrameDef\ui\questdialog.fdf",
+IncludeFile "UI\FrameDef\glue\battlenetprofilepanel.fdf",
 Frame "BACKDROP" "StartGameMenu" {
     Width 0.35,
     Height 0.35,
@@ -54,12 +55,22 @@ Frame "BACKDROP" "StartGameMenu" {
      }
 }
 
-Frame "GLUETEXTBUTTON" "IconButtonTemplate"{
+Frame "GLUETEXTBUTTON" "MyIconButtonTemplate"{
     UseActiveContext,
     Width 0.025,
     Height 0.025,
 
     ControlBackdrop "MyButtonBackdropTemplate",
     Frame "BACKDROP" "MyButtonBackdropTemplate" {
+    }
+}
+
+Frame "BACKDROP" "CurvedStatusTemplate" INHERITS "QuestButtonDisabledBackdropTemplate" {
+    UseActiveContext,
+    Width 0.025,
+    Height 0.0625,
+    Frame "TEXT" "CurvedStatusTemplateText" INHERITS "TeamLabelTextTemplate" {
+        SetPoint TOPLEFT, "CurvedStatusTemplate", TOPLEFT, 0.015, -0.015,
+        Text "Next wave",
     }
 }

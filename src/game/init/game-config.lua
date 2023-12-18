@@ -3,16 +3,18 @@ function initGameConfig(mode)
         curved = {
             unitRange = 1, -- 100%
             spawnPolicy = {
-                interval = 35.00,
-                firstDelay = 2
-            }
+                interval = 35,
+                dif = 0
+            },
+            playerPosition = { 1, 2, 3, 4, 5 }
         },
         united = {
             unitRange = 1.5, -- 150%
             spawnPolicy = {
-                interval = 40.00,
-                firstDelay = 0
-            }
+                interval = 0,
+                dif = 35
+            },
+            playerPosition = { 3, 4, 2, 1, 5 }
         }
     }
 
@@ -28,7 +30,7 @@ function initGameConfig(mode)
             range = game_modes[mode].unitRange
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
-        spawnInterval = 30
+        playerPosition = game_modes[mode].playerPosition
     }
 end
 

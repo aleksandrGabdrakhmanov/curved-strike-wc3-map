@@ -45,7 +45,6 @@ function getMainPlayer()
 end
 
 function addPlayersInTeam(players)
-    local position = { 3, 4, 2, 1, 5 }
     local nextPosition = 1
     local initialPlayers = {}
     for _, player in ipairs(players) do
@@ -53,7 +52,7 @@ function addPlayersInTeam(players)
             table.insert(initialPlayers, {
                 id = player.id,
                 spawnPlayerId = player.spawnId,
-                i = position[nextPosition],
+                i = game_config.playerPosition[nextPosition],
                 economy = {
                     income = game_config.economy.startIncomePerSec,
                     minePrice = game_config.economy.firstMinePrice,
@@ -66,7 +65,8 @@ function addPlayersInTeam(players)
                 mainRect = nil,
                 laboratoryRect = nil,
                 attackPointRect = {},
-                spawnRect = nil
+                spawnRect = nil,
+                spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif
             })
             nextPosition = nextPosition + 1
         end
