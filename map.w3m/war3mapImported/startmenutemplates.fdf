@@ -2,7 +2,7 @@ IncludeFile "UI\FrameDef\ui\scriptdialog.fdf",
 IncludeFile "UI\FrameDef\ui\escmenumainpanel.fdf",
 IncludeFile "UI\FrameDef\ui\questdialog.fdf",
 Frame "BACKDROP" "StartGameMenu" {
-    Width 0.3,
+    Width 0.35,
     Height 0.35,
     DecorateFileNames,
     BackdropTileBackground,
@@ -13,12 +13,21 @@ Frame "BACKDROP" "StartGameMenu" {
     BackdropBackgroundInsets 0.01 0.01 0.01 0.01,
     BackdropEdgeFile  "EscMenuBorder",
     BackdropBlendAll,
-    Frame "BACKDROP" "StartGameMenuMode" INHERITS "QuestButtonBaseTemplate" {
+    Frame "Frame" "StartGameMenuUnits" {
+        Width 0.28,
+        Height 0.2,
+        SetPoint TOPLEFT, "StartGameMenu", TOPLEFT, 0.02, -0.01,
+        Frame "TEXT" "StartGameMenuModeText" INHERITS "EscMenuTitleTextTemplate" {
+            SetPoint LEFT, "StartGameMenuUnits", LEFT, 0, 0,
+            Text "Available units:",
+        }
+    }
+    Frame "Frame" "StartGameMenuMode" {
         Width 0.28,
         Height 0.06,
-        SetPoint TOPLEFT, "StartGameMenu", TOPLEFT, 0.01, -0.01,
+        SetPoint BOTTOM, "StartGameMenu", BOTTOM, 0.03, 0,
         Frame "TEXT" "StartGameMenuModeText" INHERITS "EscMenuTitleTextTemplate" {
-            SetPoint LEFT, "StartGameMenuMode", LEFT, 0.02, 0.0,
+            SetPoint LEFT, "StartGameMenuMode", LEFT, 0, 0.015,
             Text "Mode:",
         }
         Frame "GLUETEXTBUTTON" "CurvedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
@@ -37,5 +46,15 @@ Frame "BACKDROP" "StartGameMenu" {
                 Text "UNITED",
             }
         }
+    }
+}
+
+Frame "GLUETEXTBUTTON" "IconButtonTemplate"{
+    UseActiveContext,
+    Width 0.025,
+    Height 0.025,
+
+    ControlBackdrop "MyButtonBackdropTemplate",
+    Frame "BACKDROP" "MyButtonBackdropTemplate" {
     }
 }

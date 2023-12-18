@@ -86,12 +86,14 @@ function getRandomUnits(units)
         if not groupedUnits[unit.position] then
             groupedUnits[unit.position] = {}
         end
-        table.insert(groupedUnits[unit.position], unit)
+        if (unit.active == true) then
+            table.insert(groupedUnits[unit.position], unit)
+        end
     end
 
     for _, groupedUnit in ipairs(groupedUnits) do
         local randomIndex = GetRandomInt(1, #groupedUnit)
-        table.insert(randomUnits, groupedUnit[1])
+        table.insert(randomUnits, groupedUnit[randomIndex])
     end
 
     return randomUnits
