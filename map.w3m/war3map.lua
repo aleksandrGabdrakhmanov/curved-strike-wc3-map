@@ -1604,7 +1604,7 @@ function initialUI()
 end
 
 function startGameUI()
-    print("2")
+    print("new version2")
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
     BlzFrameSetAbsPoint(popupFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
@@ -1621,7 +1621,7 @@ function initModeButton(buttonName, mode)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
-        if GetLocalPlayer() == getMainPlayer() then
+        if GetTriggerPlayer() == getMainPlayer() then
             BlzFrameSetVisible(popupFrame, FALSE)
             startGame(mode)
         end
@@ -1649,7 +1649,7 @@ function initRaceAvailableButton(race, position)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
-        if GetLocalPlayer() ~= getMainPlayer() then
+        if GetTriggerPlayer() ~= getMainPlayer() then
             return
         end
         if race.active == true then
@@ -1686,7 +1686,7 @@ function initUnitAvailableButton(unit)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
-        if GetLocalPlayer() ~= getMainPlayer() then
+        if GetTriggerPlayer() ~= getMainPlayer() then
             return
         end
         if unit.active == true then
