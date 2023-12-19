@@ -799,15 +799,6 @@ function calculateDif(buidRect, spawnRect, unit)
     local unitY = GetUnitY(unit)
     return spawnRectX - (buidRectX - unitX), spawnRectY - (buidRectY - unitY)
 end
-
-function getParentId(searchId)
-    for _, unit in pairs(units_for_build) do
-        if unit.id == searchId then
-            return unit.parentId
-        end
-    end
-    return nil
-end
 function initGameConfig(mode)
     game_modes = {
         curved = {
@@ -858,6 +849,9 @@ function initGlobalVariables()
         { id = Player(7), spawnId = Player(11), team = 2 },
         { id = Player(8), spawnId = Player(14), team = 2 },
         { id = Player(9), spawnId = Player(10), team = 2 }
+    }
+    heroes_for_build = {
+        { id = 'H011', parentId = 'Hpal', race = 'human' }
     }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
@@ -914,10 +908,16 @@ function initGlobalVariables()
         base = 'o002',
         mine = 'ugol',
         main = 'htow',
-        laboratory = 'nmgv'
+        laboratory = 'nmgv',
+        heroBuilder = 'e00M',
+        randomHero = 'ncop'
     }
     abilities = {
         mine = 'A000'
+    }
+
+    upgrades_special = {
+        summonHeroBuilder = 'R000'
     }
 
     text = {
@@ -1381,6 +1381,36 @@ function goldExtractorTrigger()
         end
     end
 end
+function heroConstructTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_CONSTRUCT_FINISH)
+            TriggerAddAction(trig, function()
+                if GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.randomHero) then
+                    local x = GetUnitX(GetTriggerUnit())
+                    local y = GetUnitY(GetTriggerUnit())
+                    KillUnit(GetTriggerUnit())
+                    CreateUnit(player.id, FourCC(heroes_for_build[1].id), x, y, 270)
+                    print("create unit")
+                end
+            end)
+        end
+    end
+end
+function heroResearchTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_RESEARCH_FINISH)
+            TriggerAddAction(trig, function()
+                if (GetResearched() == FourCC(upgrades_special.summonHeroBuilder)) then
+                    CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(player.buildRect), GetRectCenterY(player.buildRect), 270)
+                end
+            end)
+        end
+    end
+end
 function incomeTrigger()
     local trig = CreateTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 1.00)
@@ -1403,6 +1433,8 @@ function initTriggers()
     customCastAITrigger()
     spellFinishTrigger()
     spawnTrigger()
+    heroResearchTrigger()
+    heroConstructTrigger()
     debugTrigger()
 end
 additionalDir = 500
@@ -1469,13 +1501,22 @@ function spawnTrigger()
                         local id = GetUnitTypeId(GetEnumUnit())
                         local owner = GetOwningPlayer(GetEnumUnit())
                         if owner == player.id then
-                            local parentId = getParentId(('>I4'):pack(id))
-                            if parentId ~= nil then
-                                local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                                local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                                SetUnitColor(unit, GetPlayerColor(player.id))
-                                RemoveGuardPosition(unit)
-                                SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                            if isHero(('>I4'):pack(id)) then
+                                local parentId = getHeroUnitId(('>I4'):pack(id))
+                                if parentId ~= nil then
+                                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
+                                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+                                    SetUnitColor(unit, GetPlayerColor(player.id))
+                                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                                end
+                            else
+                                local parentId = getParentUnitId(('>I4'):pack(id))
+                                if parentId ~= nil then
+                                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
+                                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+                                    SetUnitColor(unit, GetPlayerColor(player.id))
+                                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                                end
                             end
                         end
                     end)
@@ -1488,6 +1529,33 @@ function spawnTrigger()
             end
         end
     end)
+end
+
+function getParentUnitId(searchId)
+    for _, unit in pairs(units_for_build) do
+        if unit.id == searchId then
+            return unit.parentId
+        end
+    end
+    return nil
+end
+
+function getHeroUnitId(searchId)
+    for _, unit in pairs(heroes_for_build) do
+        if unit.id == searchId then
+            return unit.parentId
+        end
+    end
+    return nil
+end
+
+function isHero(id)
+    for _, hero in ipairs(heroes_for_build) do
+        if hero.id == id then
+            return true
+        end
+    end
+    return false
 end
 custom_cast_ai_params = {
     {
@@ -1604,7 +1672,6 @@ function initialUI()
 end
 
 function startGameUI()
-    print("new version2")
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
     BlzFrameSetAbsPoint(popupFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
@@ -1729,7 +1796,7 @@ ForcePlayerStartLocation(Player(1), 1)
 SetPlayerColor(Player(1), ConvertPlayerColor(1))
 SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
 SetPlayerRaceSelectable(Player(1), false)
-SetPlayerController(Player(1), MAP_CONTROL_USER)
+SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(2), 2)
 ForcePlayerStartLocation(Player(2), 2)
 SetPlayerColor(Player(2), ConvertPlayerColor(2))
@@ -1990,12 +2057,10 @@ SetStartLocPrioCount(4, 1)
 SetStartLocPrio(4, 0, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(5, 1)
 SetStartLocPrio(5, 0, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(6, 2)
-SetStartLocPrio(6, 0, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 1, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(7, 2)
-SetStartLocPrio(7, 0, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 1, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(6, 1)
+SetStartLocPrio(6, 0, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(7, 1)
+SetStartLocPrio(7, 0, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(8, 1)
 SetStartLocPrio(8, 0, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(9, 1)

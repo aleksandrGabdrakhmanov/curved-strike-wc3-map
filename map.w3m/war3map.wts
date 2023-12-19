@@ -1212,3 +1212,69 @@ STRING 231
 Z
 }
 
+STRING 232
+// Upgrades: R000 (Sorceress Adept Training,Sorceress Master Training), Hotkey (Hotkey)
+{
+H
+}
+
+STRING 233
+// Upgrades: R000 (Sorceress Adept Training,Sorceress Master Training), Hotkey (Hotkey)
+{
+H
+}
+
+STRING 234
+// Upgrades: R000 (Sorceress Adept Training,Sorceress Master Training), Name (Name)
+{
+Summon Hero Builder
+}
+
+STRING 235
+// Upgrades: R000 (Sorceress Adept Training,Sorceress Master Training), Hotkey (Hotkey)
+{
+H
+}
+
+STRING 236
+// Upgrades: R000 (Sorceress Adept Training,Sorceress Master Training), Name (Name)
+{
+Summon Hero Builder
+}
+
+STRING 237
+// Upgrades: R000 (Sorceress Adept Training,Sorceress Master Training), Name (Name)
+{
+Summon Hero Builder
+}
+
+STRING 238
+// Upgrades: R000 (Sorceress Adept Training,Sorceress Master Training), Tip (Tooltip)
+{
+Summon Hero Builder
+}
+
+STRING 239
+// Upgrades: R000 (Sorceress Adept Training,Sorceress Master Training), Tip (Tooltip)
+{
+Summon Hero Builder
+}
+
+STRING 240
+// Upgrades: R000 (Sorceress Adept Training,Sorceress Master Training), Tip (Tooltip)
+{
+Summon Hero Builder
+}
+
+STRING 244
+// Units: e00M (Hero Builder), Name (Name)
+{
+Hero Builder
+}
+
+STRING 245
+// Units: H011 (Paladin), Hotkey (Hotkey)
+{
+Q
+}
+

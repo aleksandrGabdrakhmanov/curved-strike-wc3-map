@@ -3653,7 +3653,7 @@ function TriggerClearConditions(whichTrigger) end	-- (native)
 ---@param whichTrigger trigger
 ---@param actionFunc function
 ---@return triggeraction
-function TriggerAddAction(whichTrigger, actionFunc) end	-- (native)
+function  TriggerAddAction(whichTrigger, actionFunc) end	-- (native)
 
 ---@param whichTrigger trigger
 ---@param whichAction triggeraction

@@ -8,5 +8,7 @@ function initTriggers()
     customCastAITrigger()
     spellFinishTrigger()
     spawnTrigger()
+    heroResearchTrigger()
+    heroConstructTrigger()
     debugTrigger()
 end

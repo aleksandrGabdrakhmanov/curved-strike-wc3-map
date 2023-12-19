@@ -10,13 +10,22 @@ function spawnTrigger()
                         local id = GetUnitTypeId(GetEnumUnit())
                         local owner = GetOwningPlayer(GetEnumUnit())
                         if owner == player.id then
-                            local parentId = getParentId(('>I4'):pack(id))
-                            if parentId ~= nil then
-                                local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                                local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                                SetUnitColor(unit, GetPlayerColor(player.id))
-                                RemoveGuardPosition(unit)
-                                SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                            if isHero(('>I4'):pack(id)) then
+                                local parentId = getHeroUnitId(('>I4'):pack(id))
+                                if parentId ~= nil then
+                                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
+                                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+                                    SetUnitColor(unit, GetPlayerColor(player.id))
+                                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                                end
+                            else
+                                local parentId = getParentUnitId(('>I4'):pack(id))
+                                if parentId ~= nil then
+                                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
+                                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+                                    SetUnitColor(unit, GetPlayerColor(player.id))
+                                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                                end
                             end
                         end
                     end)
@@ -29,4 +38,31 @@ function spawnTrigger()
             end
         end
     end)
+end
+
+function getParentUnitId(searchId)
+    for _, unit in pairs(units_for_build) do
+        if unit.id == searchId then
+            return unit.parentId
+        end
+    end
+    return nil
+end
+
+function getHeroUnitId(searchId)
+    for _, unit in pairs(heroes_for_build) do
+        if unit.id == searchId then
+            return unit.parentId
+        end
+    end
+    return nil
+end
+
+function isHero(id)
+    for _, hero in ipairs(heroes_for_build) do
+        if hero.id == id then
+            return true
+        end
+    end
+    return false
 end

@@ -49,6 +49,9 @@ function initGlobalVariables()
         { id = Player(8), spawnId = Player(14), team = 2 },
         { id = Player(9), spawnId = Player(10), team = 2 }
     }
+    heroes_for_build = {
+        { id = 'H011', parentId = 'Hpal', race = 'human' }
+    }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
         { id = 'h004', parentId = 'h00D', tier = 1, race = 'human', line = 1, position = 2, name = 'Rifleman', upgrades = {'Rhri'}},
@@ -104,10 +107,16 @@ function initGlobalVariables()
         base = 'o002',
         mine = 'ugol',
         main = 'htow',
-        laboratory = 'nmgv'
+        laboratory = 'nmgv',
+        heroBuilder = 'e00M',
+        randomHero = 'ncop'
     }
     abilities = {
         mine = 'A000'
+    }
+
+    upgrades_special = {
+        summonHeroBuilder = 'R000'
     }
 
     text = {
