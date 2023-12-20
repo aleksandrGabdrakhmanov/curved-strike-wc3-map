@@ -1463,6 +1463,14 @@ function heroLearnAbility()
         end
     end
 end
+function initHeroTriggers()
+    heroResearchTrigger()
+    heroConstructTrigger()
+    heroDeadTrigger()
+    heroTransferExp()
+    heroLearnAbility()
+    heroNewSkill()
+end
 function heroNewSkill()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -1533,12 +1541,7 @@ function initTriggers()
     customCastAITrigger()
     spellFinishTrigger()
     spawnTrigger()
-    heroResearchTrigger()
-    heroConstructTrigger()
-    heroDeadTrigger()
-    heroTransferExp()
-    heroLearnAbility()
-    heroNewSkill()
+    initHeroTriggers()
     debugTrigger()
     debugTriggerGold()
 end
