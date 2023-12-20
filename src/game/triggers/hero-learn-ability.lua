@@ -2,10 +2,15 @@ function heroLearnAbility()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             local trig = CreateTrigger()
-            TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_HERO_SKILL )
+            TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_HERO_SKILL)
             TriggerAddAction(trig, function()
-                if GetTriggerUnit() == player.heroes[1].building then
-                    table.insert(player.heroes[1].newSkills, GetLearnedSkill())
+                local learnedUnit = GetTriggerUnit()
+                local learnedSkill = GetLearnedSkill()
+                for _, hero in ipairs(player.heroes) do
+                    if learnedUnit == hero.building then
+                        table.insert(hero.newSkills, learnedSkill)
+                        break
+                    end
                 end
             end)
         end

@@ -5,39 +5,7 @@ function spawnTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if player.spawnTimer <= 0 then
-                    local groupForBuild = GetUnitsInRectAll(player.buildRect)
-                    ForGroup(groupForBuild, function ()
-                        local id = GetUnitTypeId(GetEnumUnit())
-                        local owner = GetOwningPlayer(GetEnumUnit())
-                        if owner == player.id then
-                            if isHero(('>I4'):pack(id)) then
-                                local parentId = getHeroUnitId(('>I4'):pack(id))
-                                if parentId ~= nil then
-                                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                                    if player.heroes[1].status == "new" then
-                                        local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                                        SetUnitColor(unit, GetPlayerColor(player.id))
-                                        SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
-                                        player.heroes[1].status = "alive"
-                                        player.heroes[1].unit = unit
-                                    elseif player.heroes[1].status == "dead" then
-                                        print('ReviveHeroLoc')
-                                        player.heroes[1].status = "alive"
-                                        ReviveHeroLoc(player.heroes[1].unit, Location(x, y), false)
-                                    end
-                                end
-                            else
-                                local parentId = getParentUnitId(('>I4'):pack(id))
-                                if parentId ~= nil then
-                                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                                    SetUnitColor(unit, GetPlayerColor(player.id))
-                                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
-                                end
-                            end
-                        end
-                    end)
-                    DestroyGroup(groupForBuild)
+                    processGroupForSpawn(player)
                     player.spawnTimer = game_config.spawnPolicy.interval * #team.players + game_config.spawnPolicy.dif
                 end
                 player.spawnTimer = player.spawnTimer - 1
@@ -46,6 +14,48 @@ function spawnTrigger()
             end
         end
     end)
+end
+
+function handleUnitSpawn(player, id, x, y)
+    local parentId = getParentUnitId(('>I4'):pack(id))
+    if parentId then
+        local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+        SetUnitColor(unit, GetPlayerColor(player.id))
+        SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+    end
+end
+
+function handleHeroSpawn(player, unitId, x, y)
+    for _, hero in ipairs(player.heroes) do
+        if hero.status == "new" then
+            local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
+            SetUnitColor(unit, GetPlayerColor(player.id))
+            SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+            hero.status = "alive"
+            hero.unit = unit
+        elseif hero.status == "dead" then
+            hero.status = "alive"
+            ReviveHeroLoc(hero.unit, Location(x, y), false)
+        end
+    end
+end
+
+function processGroupForSpawn(player)
+    local groupForBuild = GetUnitsInRectAll(player.buildRect)
+    ForGroup(groupForBuild, function()
+        local unit = GetEnumUnit()
+        local id = GetUnitTypeId(unit)
+        local owner = GetOwningPlayer(unit)
+        if owner == player.id then
+            local x, y = calculateDif(player.buildRect, player.spawnRect, unit)
+            if isHero(('>I4'):pack(id)) then
+                handleHeroSpawn(player, id, x, y)
+            else
+                handleUnitSpawn(player, id, x, y)
+            end
+        end
+    end)
+    DestroyGroup(groupForBuild)
 end
 
 function getParentUnitId(searchId)

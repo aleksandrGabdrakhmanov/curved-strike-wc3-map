@@ -1320,6 +1320,20 @@ function debugTrigger()
         end
     end)
 end
+
+function debugTriggerGold()
+
+    local trig = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(trig, Player(0),"debug-gold", true)
+
+    TriggerAddAction(trig, function()
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, 99999)
+            end
+        end
+    end)
+end
 function enableUpdateTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -1405,15 +1419,18 @@ function heroConstructTrigger()
     end
 end
 function heroDeadTrigger()
-    print("dd")
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             local trig = CreateTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.spawnPlayerId, EVENT_PLAYER_UNIT_DEATH)
             TriggerAddAction(trig, function()
-
                 if isParentHero(('>I4'):pack(GetUnitTypeId(GetTriggerUnit()))) then
-                    player.heroes[1].status = "dead"
+                    for _, hero in ipairs(player.heroes) do
+                        if hero.unit == GetTriggerUnit() then
+                            hero.status = "dead"
+                            break
+                        end
+                    end
                 end
             end)
         end
@@ -1428,17 +1445,19 @@ function isParentHero(id)
     end
     return false
 end
-
-
-
 function heroLearnAbility()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             local trig = CreateTrigger()
-            TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_HERO_SKILL )
+            TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_HERO_SKILL)
             TriggerAddAction(trig, function()
-                if GetTriggerUnit() == player.heroes[1].building then
-                    table.insert(player.heroes[1].newSkills, GetLearnedSkill())
+                local learnedUnit = GetTriggerUnit()
+                local learnedSkill = GetLearnedSkill()
+                for _, hero in ipairs(player.heroes) do
+                    if learnedUnit == hero.building then
+                        table.insert(hero.newSkills, learnedSkill)
+                        break
+                    end
                 end
             end)
         end
@@ -1450,16 +1469,19 @@ function heroNewSkill()
             local trig = CreateTrigger()
             TriggerRegisterTimerEventPeriodic(trig, 1)
             TriggerAddAction(trig, function()
-                if player.heroes[1].status == 'alive' then
-                    for i = #player.heroes[1].newSkills, 1, -1 do
-                        SelectHeroSkill(player.heroes[1].unit, player.heroes[1].newSkills[i])
-                        table.remove(player.heroes[1].newSkills, i)
+                for _, hero in ipairs(player.heroes) do
+                    if hero.status == 'alive' then
+                        for i = #hero.newSkills, 1, -1 do
+                            SelectHeroSkill(hero.unit, hero.newSkills[i])
+                            table.remove(hero.newSkills, i)
+                        end
                     end
                 end
             end)
         end
     end
 end
+
 function heroResearchTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -1479,9 +1501,11 @@ function heroTransferExp()
             local trig = CreateTrigger()
             TriggerRegisterTimerEventPeriodic(trig, 1)
             TriggerAddAction(trig, function()
-                if player.heroes[1].status == 'alive' then
-                    local unit = GetHeroXP(player.heroes[1].unit)
-                    SetHeroXP(player.heroes[1].building, unit, true)
+                for _, hero in ipairs(player.heroes) do
+                    if hero.status == 'alive' then
+                        local unitExp = GetHeroXP(hero.unit)
+                        SetHeroXP(hero.building, unitExp, true)
+                    end
                 end
             end)
         end
@@ -1516,6 +1540,7 @@ function initTriggers()
     heroLearnAbility()
     heroNewSkill()
     debugTrigger()
+    debugTriggerGold()
 end
 additionalDir = 500
 function moveByPointsTrigger()
@@ -1576,39 +1601,7 @@ function spawnTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if player.spawnTimer <= 0 then
-                    local groupForBuild = GetUnitsInRectAll(player.buildRect)
-                    ForGroup(groupForBuild, function ()
-                        local id = GetUnitTypeId(GetEnumUnit())
-                        local owner = GetOwningPlayer(GetEnumUnit())
-                        if owner == player.id then
-                            if isHero(('>I4'):pack(id)) then
-                                local parentId = getHeroUnitId(('>I4'):pack(id))
-                                if parentId ~= nil then
-                                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                                    if player.heroes[1].status == "new" then
-                                        local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                                        SetUnitColor(unit, GetPlayerColor(player.id))
-                                        SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
-                                        player.heroes[1].status = "alive"
-                                        player.heroes[1].unit = unit
-                                    elseif player.heroes[1].status == "dead" then
-                                        print('ReviveHeroLoc')
-                                        player.heroes[1].status = "alive"
-                                        ReviveHeroLoc(player.heroes[1].unit, Location(x, y), false)
-                                    end
-                                end
-                            else
-                                local parentId = getParentUnitId(('>I4'):pack(id))
-                                if parentId ~= nil then
-                                    local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                                    SetUnitColor(unit, GetPlayerColor(player.id))
-                                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
-                                end
-                            end
-                        end
-                    end)
-                    DestroyGroup(groupForBuild)
+                    processGroupForSpawn(player)
                     player.spawnTimer = game_config.spawnPolicy.interval * #team.players + game_config.spawnPolicy.dif
                 end
                 player.spawnTimer = player.spawnTimer - 1
@@ -1617,6 +1610,48 @@ function spawnTrigger()
             end
         end
     end)
+end
+
+function handleUnitSpawn(player, id, x, y)
+    local parentId = getParentUnitId(('>I4'):pack(id))
+    if parentId then
+        local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+        SetUnitColor(unit, GetPlayerColor(player.id))
+        SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+    end
+end
+
+function handleHeroSpawn(player, unitId, x, y)
+    for _, hero in ipairs(player.heroes) do
+        if hero.status == "new" then
+            local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
+            SetUnitColor(unit, GetPlayerColor(player.id))
+            SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+            hero.status = "alive"
+            hero.unit = unit
+        elseif hero.status == "dead" then
+            hero.status = "alive"
+            ReviveHeroLoc(hero.unit, Location(x, y), false)
+        end
+    end
+end
+
+function processGroupForSpawn(player)
+    local groupForBuild = GetUnitsInRectAll(player.buildRect)
+    ForGroup(groupForBuild, function()
+        local unit = GetEnumUnit()
+        local id = GetUnitTypeId(unit)
+        local owner = GetOwningPlayer(unit)
+        if owner == player.id then
+            local x, y = calculateDif(player.buildRect, player.spawnRect, unit)
+            if isHero(('>I4'):pack(id)) then
+                handleHeroSpawn(player, id, x, y)
+            else
+                handleUnitSpawn(player, id, x, y)
+            end
+        end
+    end)
+    DestroyGroup(groupForBuild)
 end
 
 function getParentUnitId(searchId)

@@ -45,3 +45,17 @@ function debugTrigger()
         end
     end)
 end
+
+function debugTriggerGold()
+
+    local trig = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(trig, Player(0),"debug-gold", true)
+
+    TriggerAddAction(trig, function()
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, 99999)
+            end
+        end
+    end)
+end

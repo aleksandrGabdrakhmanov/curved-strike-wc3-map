@@ -15,4 +15,5 @@ function initTriggers()
     heroLearnAbility()
     heroNewSkill()
     debugTrigger()
+    debugTriggerGold()
 end

@@ -4,9 +4,11 @@ function heroTransferExp()
             local trig = CreateTrigger()
             TriggerRegisterTimerEventPeriodic(trig, 1)
             TriggerAddAction(trig, function()
-                if player.heroes[1].status == 'alive' then
-                    local unit = GetHeroXP(player.heroes[1].unit)
-                    SetHeroXP(player.heroes[1].building, unit, true)
+                for _, hero in ipairs(player.heroes) do
+                    if hero.status == 'alive' then
+                        local unitExp = GetHeroXP(hero.unit)
+                        SetHeroXP(hero.building, unitExp, true)
+                    end
                 end
             end)
         end

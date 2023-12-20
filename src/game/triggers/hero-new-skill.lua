@@ -4,10 +4,12 @@ function heroNewSkill()
             local trig = CreateTrigger()
             TriggerRegisterTimerEventPeriodic(trig, 1)
             TriggerAddAction(trig, function()
-                if player.heroes[1].status == 'alive' then
-                    for i = #player.heroes[1].newSkills, 1, -1 do
-                        SelectHeroSkill(player.heroes[1].unit, player.heroes[1].newSkills[i])
-                        table.remove(player.heroes[1].newSkills, i)
+                for _, hero in ipairs(player.heroes) do
+                    if hero.status == 'alive' then
+                        for i = #hero.newSkills, 1, -1 do
+                            SelectHeroSkill(hero.unit, hero.newSkills[i])
+                            table.remove(hero.newSkills, i)
+                        end
                     end
                 end
             end)
