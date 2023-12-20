@@ -11,5 +11,8 @@ function initTriggers()
     heroResearchTrigger()
     heroConstructTrigger()
     heroDeadTrigger()
+    heroTransferExp()
+    heroLearnAbility()
+    heroNewSkill()
     debugTrigger()
 end

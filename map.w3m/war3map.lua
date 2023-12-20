@@ -1395,7 +1395,9 @@ function heroConstructTrigger()
                     local unit = CreateUnit(player.id, FourCC(heroes_for_build[1].id), x, y, 270)
                     table.insert(player.heroes, {
                         status = "new",
-                        unit = unit
+                        building = unit,
+                        unit = nil,
+                        newSkills = {}
                     })
                 end
             end)
@@ -1429,6 +1431,35 @@ end
 
 
 
+function heroLearnAbility()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_HERO_SKILL )
+            TriggerAddAction(trig, function()
+                if GetTriggerUnit() == player.heroes[1].building then
+                    table.insert(player.heroes[1].newSkills, GetLearnedSkill())
+                end
+            end)
+        end
+    end
+end
+function heroNewSkill()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterTimerEventPeriodic(trig, 1)
+            TriggerAddAction(trig, function()
+                if player.heroes[1].status == 'alive' then
+                    for i = #player.heroes[1].newSkills, 1, -1 do
+                        SelectHeroSkill(player.heroes[1].unit, player.heroes[1].newSkills[i])
+                        table.remove(player.heroes[1].newSkills, i)
+                    end
+                end
+            end)
+        end
+    end
+end
 function heroResearchTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -1437,6 +1468,20 @@ function heroResearchTrigger()
             TriggerAddAction(trig, function()
                 if (GetResearched() == FourCC(upgrades_special.summonHeroBuilder)) then
                     CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(player.buildRect), GetRectCenterY(player.buildRect), 270)
+                end
+            end)
+        end
+    end
+end
+function heroTransferExp()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterTimerEventPeriodic(trig, 1)
+            TriggerAddAction(trig, function()
+                if player.heroes[1].status == 'alive' then
+                    local unit = GetHeroXP(player.heroes[1].unit)
+                    SetHeroXP(player.heroes[1].building, unit, true)
                 end
             end)
         end
@@ -1467,6 +1512,9 @@ function initTriggers()
     heroResearchTrigger()
     heroConstructTrigger()
     heroDeadTrigger()
+    heroTransferExp()
+    heroLearnAbility()
+    heroNewSkill()
     debugTrigger()
 end
 additionalDir = 500

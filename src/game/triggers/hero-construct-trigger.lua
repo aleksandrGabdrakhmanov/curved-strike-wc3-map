@@ -11,7 +11,9 @@ function heroConstructTrigger()
                     local unit = CreateUnit(player.id, FourCC(heroes_for_build[1].id), x, y, 270)
                     table.insert(player.heroes, {
                         status = "new",
-                        unit = unit
+                        building = unit,
+                        unit = nil,
+                        newSkills = {}
                     })
                 end
             end)
