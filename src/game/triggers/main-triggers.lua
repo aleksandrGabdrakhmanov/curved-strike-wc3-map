@@ -10,5 +10,6 @@ function initTriggers()
     spawnTrigger()
     heroResearchTrigger()
     heroConstructTrigger()
+    heroDeadTrigger()
     debugTrigger()
 end

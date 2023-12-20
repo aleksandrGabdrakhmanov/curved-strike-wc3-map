@@ -66,7 +66,8 @@ function addPlayersInTeam(players)
                 laboratoryRect = nil,
                 attackPointRect = {},
                 spawnRect = nil,
-                spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif
+                spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif,
+                heroes = {}
             })
             nextPosition = nextPosition + 1
         end

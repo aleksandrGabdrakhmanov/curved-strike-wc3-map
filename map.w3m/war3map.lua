@@ -999,7 +999,8 @@ function addPlayersInTeam(players)
                 laboratoryRect = nil,
                 attackPointRect = {},
                 spawnRect = nil,
-                spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif
+                spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif,
+                heroes = {}
             })
             nextPosition = nextPosition + 1
         end
@@ -1391,13 +1392,43 @@ function heroConstructTrigger()
                     local x = GetUnitX(GetTriggerUnit())
                     local y = GetUnitY(GetTriggerUnit())
                     KillUnit(GetTriggerUnit())
-                    CreateUnit(player.id, FourCC(heroes_for_build[1].id), x, y, 270)
-                    print("create unit")
+                    local unit = CreateUnit(player.id, FourCC(heroes_for_build[1].id), x, y, 270)
+                    table.insert(player.heroes, {
+                        status = "new",
+                        unit = unit
+                    })
                 end
             end)
         end
     end
 end
+function heroDeadTrigger()
+    print("dd")
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterPlayerUnitEventSimple(trig, player.spawnPlayerId, EVENT_PLAYER_UNIT_DEATH)
+            TriggerAddAction(trig, function()
+
+                if isParentHero(('>I4'):pack(GetUnitTypeId(GetTriggerUnit()))) then
+                    player.heroes[1].status = "dead"
+                end
+            end)
+        end
+    end
+end
+
+function isParentHero(id)
+    for _, hero in ipairs(heroes_for_build) do
+        if hero.parentId == id then
+            return true
+        end
+    end
+    return false
+end
+
+
+
 function heroResearchTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -1435,6 +1466,7 @@ function initTriggers()
     spawnTrigger()
     heroResearchTrigger()
     heroConstructTrigger()
+    heroDeadTrigger()
     debugTrigger()
 end
 additionalDir = 500
@@ -1505,9 +1537,17 @@ function spawnTrigger()
                                 local parentId = getHeroUnitId(('>I4'):pack(id))
                                 if parentId ~= nil then
                                     local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                                    SetUnitColor(unit, GetPlayerColor(player.id))
-                                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                                    if player.heroes[1].status == "new" then
+                                        local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+                                        SetUnitColor(unit, GetPlayerColor(player.id))
+                                        SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                                        player.heroes[1].status = "alive"
+                                        player.heroes[1].unit = unit
+                                    elseif player.heroes[1].status == "dead" then
+                                        print('ReviveHeroLoc')
+                                        player.heroes[1].status = "alive"
+                                        ReviveHeroLoc(player.heroes[1].unit, Location(x, y), false)
+                                    end
                                 end
                             else
                                 local parentId = getParentUnitId(('>I4'):pack(id))

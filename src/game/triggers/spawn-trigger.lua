@@ -14,9 +14,17 @@ function spawnTrigger()
                                 local parentId = getHeroUnitId(('>I4'):pack(id))
                                 if parentId ~= nil then
                                     local x, y = calculateDif(player.buildRect, player.spawnRect, GetEnumUnit())
-                                    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-                                    SetUnitColor(unit, GetPlayerColor(player.id))
-                                    SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                                    if player.heroes[1].status == "new" then
+                                        local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+                                        SetUnitColor(unit, GetPlayerColor(player.id))
+                                        SetUnitAcquireRangeBJ( unit, GetUnitAcquireRange(unit) * game_config.units.range )
+                                        player.heroes[1].status = "alive"
+                                        player.heroes[1].unit = unit
+                                    elseif player.heroes[1].status == "dead" then
+                                        print('ReviveHeroLoc')
+                                        player.heroes[1].status = "alive"
+                                        ReviveHeroLoc(player.heroes[1].unit, Location(x, y), false)
+                                    end
                                 end
                             else
                                 local parentId = getParentUnitId(('>I4'):pack(id))
