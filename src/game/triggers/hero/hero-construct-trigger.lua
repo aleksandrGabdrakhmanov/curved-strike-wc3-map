@@ -4,23 +4,17 @@ function heroConstructTrigger()
             local trig = CreateTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_CONSTRUCT_FINISH)
             TriggerAddAction(trig, function()
-                if GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.randomHero) then
-                    local x = GetUnitX(GetTriggerUnit())
-                    local y = GetUnitY(GetTriggerUnit())
-                    KillUnit(GetTriggerUnit())
-                    local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
-                    KillUnit(GroupPickRandomUnit(group))
-                    DestroyGroup(group)
-                    local randomIndex = GetRandomInt(1, #heroes_for_build)
-                    local unit = CreateUnit(player.id, FourCC(heroes_for_build[randomIndex].id), x, y, 270)
+                if isHero(('>I4'):pack(GetUnitTypeId(GetTriggerUnit()))) then
                     table.insert(player.heroes, {
                         status = "new",
-                        building = unit,
+                        building = GetTriggerUnit(),
                         unit = nil,
                         newSkills = {}
                     })
+                    reRollHeroes(player)
                 end
             end)
         end
     end
 end
+

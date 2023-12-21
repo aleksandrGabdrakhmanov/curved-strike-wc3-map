@@ -851,34 +851,34 @@ function initGlobalVariables()
         { id = Player(9), spawnId = Player(10), team = 2 }
     }
     heroes_for_build = {
---[[        { id = 'H011', parentId = 'Hpal', race = 'human', name = 'Paladin' },
-        { id = 'H01A', parentId = 'Hamg', race = 'human', name = 'Archmage' },]]
+        { id = 'H011', parentId = 'Hpal', race = 'human', name = 'Paladin' },
+        { id = 'H01A', parentId = 'Hamg', race = 'human', name = 'Archmage' },
         { id = 'H01B', parentId = 'Hmkg', race = 'human', name = 'Mountain King' },
-       --[[ { id = 'H01C', parentId = 'Hblm', race = 'human', name = 'Blood Mage' },
+        { id = 'H01C', parentId = 'Hblm', race = 'human', name = 'Blood Mage' },
 
         { id = 'O00E', parentId = 'Obla', race = 'orc', name = 'Blademaster' },
-        { id = 'O00F', parentId = 'Ofar', race = 'orc', name = 'Far Seer' },]]
+        { id = 'O00F', parentId = 'Ofar', race = 'orc', name = 'Far Seer' },
         { id = 'O00G', parentId = 'Otch', race = 'orc', name = 'Tauren Chieftain' },
---[[        { id = 'O00H', parentId = 'Oshd', race = 'orc', name = 'Shadow Hunter' },
+        { id = 'O00H', parentId = 'Oshd', race = 'orc', name = 'Shadow Hunter' },
 
-        { id = 'Udea', parentId = 'Udea', race = 'undead', name = 'Death Knight' },
-        { id = 'Ulic', parentId = 'Ulic', race = 'undead', name = 'Lich' },
-        { id = 'Udre', parentId = 'Udre', race = 'undead', name = 'Dreadlord' },
-        { id = 'Ucrl', parentId = 'Ucrl', race = 'undead', name = 'Crypt Lord' },
+        { id = 'U00B', parentId = 'Udea', race = 'undead', name = 'Death Knight' },
+        { id = 'U00C', parentId = 'Ulic', race = 'undead', name = 'Lich' },
+        { id = 'U00D', parentId = 'Udre', race = 'undead', name = 'Dreadlord' },
+        { id = 'U00E', parentId = 'Ucrl', race = 'undead', name = 'Crypt Lord' },
 
         { id = 'E00N', parentId = 'Ekee', race = 'elf', name = 'Keeper of the Grove' },
-        { id = 'E00O', parentId = 'Emoo', race = 'elf', name = 'Priestess of the Moon' },]]
+        { id = 'E00O', parentId = 'Emoo', race = 'elf', name = 'Priestess of the Moon' },
         { id = 'E00P', parentId = 'Edem', race = 'elf', name = 'Demon Hunter' },
---[[        { id = 'E00Q', parentId = 'Ewar', race = 'elf', name = 'Warden' },]]
+        { id = 'E00Q', parentId = 'Ewar', race = 'elf', name = 'Warden' },
 
         { id = 'N000', parentId = 'Nalc', race = 'other', name = 'Alchemist' },
---[[        { id = 'N001', parentId = 'Nngs', race = 'other', name = 'Sea Witch' },]]
+        { id = 'N001', parentId = 'Nngs', race = 'other', name = 'Sea Witch' },
         { id = 'N002', parentId = 'Ntin', race = 'other', name = 'Tinker' },
---[[        { id = 'N003', parentId = 'Nbst', race = 'other', name = 'Beastmaster' },
+        { id = 'N003', parentId = 'Nbst', race = 'other', name = 'Beastmaster' },
         { id = 'N004', parentId = 'Npbm', race = 'other', name = 'Brewmaster' },
         { id = 'N005', parentId = 'Nbrn', race = 'other', name = 'Dark Ranger' },
         { id = 'N006', parentId = 'Nfir', race = 'other', name = 'Firelord' },
-        { id = 'N007', parentId = 'Nplh', race = 'other', name = 'Pit Lord' }]]
+        { id = 'N007', parentId = 'Nplh', race = 'other', name = 'Pit Lord' }
     }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
@@ -1210,8 +1210,38 @@ function changeAvailableUnitsForPlayers()
             for _, unit in ipairs(randomUnits) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
             end
+
+
+            reRollHeroes(player)
         end
     end
+end
+
+function reRollHeroes(player)
+    for _, hero in ipairs(heroes_for_build) do
+        SetPlayerUnitAvailableBJ(FourCC(hero.id), FALSE, player.id)
+    end
+    local threeHeroes = getRandomHeroes(heroes_for_build, 3)
+    for _, hero in ipairs(threeHeroes) do
+        SetPlayerUnitAvailableBJ(FourCC(hero.id), TRUE, player.id)
+    end
+end
+
+function getRandomHeroes(heroes, count)
+    local selected = {}
+    local result = {}
+
+    count = math.min(count, #heroes)
+
+    while #result < count do
+        local index = GetRandomInt(1, #heroes)
+        if not selected[index] then
+            table.insert(result, heroes[index])
+            selected[index] = true
+        end
+    end
+
+    return result
 end
 
 function getRandomUnits(units)
@@ -1429,26 +1459,21 @@ function heroConstructTrigger()
             local trig = CreateTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_CONSTRUCT_FINISH)
             TriggerAddAction(trig, function()
-                if GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.randomHero) then
-                    local x = GetUnitX(GetTriggerUnit())
-                    local y = GetUnitY(GetTriggerUnit())
-                    KillUnit(GetTriggerUnit())
-                    local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
-                    KillUnit(GroupPickRandomUnit(group))
-                    DestroyGroup(group)
-                    local randomIndex = GetRandomInt(1, #heroes_for_build)
-                    local unit = CreateUnit(player.id, FourCC(heroes_for_build[randomIndex].id), x, y, 270)
+                if isHero(('>I4'):pack(GetUnitTypeId(GetTriggerUnit()))) then
                     table.insert(player.heroes, {
                         status = "new",
-                        building = unit,
+                        building = GetTriggerUnit(),
                         unit = nil,
                         newSkills = {}
                     })
+                    reRollHeroes(player)
                 end
             end)
         end
     end
 end
+
+
 function heroDeadTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -1456,8 +1481,7 @@ function heroDeadTrigger()
             TriggerRegisterTimerEventPeriodic(trig, 1)
             TriggerAddAction(trig, function()
                 for _, hero in ipairs(player.heroes) do
-                    if IsUnitDeadBJ(hero.unit) and hero.status ~= 'new' then
-                        print('set dead')
+                    if IsUnitDeadBJ(hero.unit) and hero.status == 'alive' then
                         hero.status = 'dead'
                     end
                 end

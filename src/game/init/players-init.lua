@@ -83,8 +83,38 @@ function changeAvailableUnitsForPlayers()
             for _, unit in ipairs(randomUnits) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
             end
+
+
+            reRollHeroes(player)
         end
     end
+end
+
+function reRollHeroes(player)
+    for _, hero in ipairs(heroes_for_build) do
+        SetPlayerUnitAvailableBJ(FourCC(hero.id), FALSE, player.id)
+    end
+    local threeHeroes = getRandomHeroes(heroes_for_build, 3)
+    for _, hero in ipairs(threeHeroes) do
+        SetPlayerUnitAvailableBJ(FourCC(hero.id), TRUE, player.id)
+    end
+end
+
+function getRandomHeroes(heroes, count)
+    local selected = {}
+    local result = {}
+
+    count = math.min(count, #heroes)
+
+    while #result < count do
+        local index = GetRandomInt(1, #heroes)
+        if not selected[index] then
+            table.insert(result, heroes[index])
+            selected[index] = true
+        end
+    end
+
+    return result
 end
 
 function getRandomUnits(units)

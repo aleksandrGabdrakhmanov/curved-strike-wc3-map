@@ -60,10 +60,10 @@ function initGlobalVariables()
         { id = 'O00G', parentId = 'Otch', race = 'orc', name = 'Tauren Chieftain' },
         { id = 'O00H', parentId = 'Oshd', race = 'orc', name = 'Shadow Hunter' },
 
-        { id = 'Udea', parentId = 'Udea', race = 'undead', name = 'Death Knight' },
-        { id = 'Ulic', parentId = 'Ulic', race = 'undead', name = 'Lich' },
-        { id = 'Udre', parentId = 'Udre', race = 'undead', name = 'Dreadlord' },
-        { id = 'Ucrl', parentId = 'Ucrl', race = 'undead', name = 'Crypt Lord' },
+        { id = 'U00B', parentId = 'Udea', race = 'undead', name = 'Death Knight' },
+        { id = 'U00C', parentId = 'Ulic', race = 'undead', name = 'Lich' },
+        { id = 'U00D', parentId = 'Udre', race = 'undead', name = 'Dreadlord' },
+        { id = 'U00E', parentId = 'Ucrl', race = 'undead', name = 'Crypt Lord' },
 
         { id = 'E00N', parentId = 'Ekee', race = 'elf', name = 'Keeper of the Grove' },
         { id = 'E00O', parentId = 'Emoo', race = 'elf', name = 'Priestess of the Moon' },
