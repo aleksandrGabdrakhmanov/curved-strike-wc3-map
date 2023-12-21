@@ -8,6 +8,9 @@ function heroConstructTrigger()
                     local x = GetUnitX(GetTriggerUnit())
                     local y = GetUnitY(GetTriggerUnit())
                     KillUnit(GetTriggerUnit())
+                    local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
+                    KillUnit(GroupPickRandomUnit(group))
+                    DestroyGroup(group)
                     local unit = CreateUnit(player.id, FourCC(heroes_for_build[1].id), x, y, 270)
                     table.insert(player.heroes, {
                         status = "new",
