@@ -50,7 +50,8 @@ function initGlobalVariables()
         { id = Player(9), spawnId = Player(10), team = 2 }
     }
     heroes_for_build = {
-        { id = 'H011', parentId = 'Hpal', race = 'human' }
+        { id = 'H011', parentId = 'Hpal', race = 'human' },
+        { id = 'H01A', parentId = 'Hamg', race = 'human' },
     }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},

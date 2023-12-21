@@ -851,7 +851,8 @@ function initGlobalVariables()
         { id = Player(9), spawnId = Player(10), team = 2 }
     }
     heroes_for_build = {
-        { id = 'H011', parentId = 'Hpal', race = 'human' }
+        { id = 'H011', parentId = 'Hpal', race = 'human' },
+        { id = 'H01A', parentId = 'Hamg', race = 'human' },
     }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
@@ -1409,7 +1410,8 @@ function heroConstructTrigger()
                     local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
                     KillUnit(GroupPickRandomUnit(group))
                     DestroyGroup(group)
-                    local unit = CreateUnit(player.id, FourCC(heroes_for_build[1].id), x, y, 270)
+                    local randomIndex = GetRandomInt(1, #heroes_for_build)
+                    local unit = CreateUnit(player.id, FourCC(heroes_for_build[randomIndex].id), x, y, 270)
                     table.insert(player.heroes, {
                         status = "new",
                         building = unit,
@@ -1627,19 +1629,32 @@ function handleUnitSpawn(player, id, x, y)
     end
 end
 
-function handleHeroSpawn(player, unitId, x, y)
-    for _, hero in ipairs(player.heroes) do
-        if hero.status == "new" then
-            local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
-            SetUnitColor(unit, GetPlayerColor(player.id))
-            SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
-            hero.status = "alive"
-            hero.unit = unit
-        elseif hero.status == "dead" then
-            hero.status = "alive"
-            ReviveHeroLoc(hero.unit, Location(x, y), false)
+function handleHeroSpawn(player, unit, x, y)
+    local unitId = GetUnitTypeId(unit)
+    local hero = getHero(player.heroes, unit)
+    if hero.status == "new" then
+        local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
+        SetUnitColor(unit, GetPlayerColor(player.id))
+        SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+        hero.status = "alive"
+        hero.unit = unit
+    elseif hero.status == "dead" then
+        hero.status = "alive"
+        ReviveHeroLoc(hero.unit, Location(x, y), false)
+    end
+end
+
+function getHero(heroes, unit)
+    for _, hero in ipairs(heroes) do
+        print('hero and unit:')
+        print(hero.unit)
+        print(unit)
+        if hero.building == unit then
+            print('return!')
+            return hero
         end
     end
+    return nil
 end
 
 function processGroupForSpawn(player)
@@ -1651,7 +1666,7 @@ function processGroupForSpawn(player)
         if owner == player.id then
             local x, y = calculateDif(player.buildRect, player.spawnRect, unit)
             if isHero(('>I4'):pack(id)) then
-                handleHeroSpawn(player, id, x, y)
+                handleHeroSpawn(player, unit, x, y)
             else
                 handleUnitSpawn(player, id, x, y)
             end

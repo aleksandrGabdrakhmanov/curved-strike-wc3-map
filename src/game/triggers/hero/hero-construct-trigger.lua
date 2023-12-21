@@ -11,7 +11,8 @@ function heroConstructTrigger()
                     local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
                     KillUnit(GroupPickRandomUnit(group))
                     DestroyGroup(group)
-                    local unit = CreateUnit(player.id, FourCC(heroes_for_build[1].id), x, y, 270)
+                    local randomIndex = GetRandomInt(1, #heroes_for_build)
+                    local unit = CreateUnit(player.id, FourCC(heroes_for_build[randomIndex].id), x, y, 270)
                     table.insert(player.heroes, {
                         status = "new",
                         building = unit,

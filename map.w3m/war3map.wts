@@ -1278,3 +1278,15 @@ STRING 245
 Q
 }
 
+STRING 246
+// Units: H01A (Archmage), Ubertip (Tooltip - Extended)
+{
+Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Tornado. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 247
+// Units: H01A (Archmage), Hotkey (Hotkey)
+{
+W
+}
+
