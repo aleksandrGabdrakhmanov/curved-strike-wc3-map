@@ -851,7 +851,34 @@ function initGlobalVariables()
         { id = Player(9), spawnId = Player(10), team = 2 }
     }
     heroes_for_build = {
-        { id = 'H011', parentId = 'Hpal', race = 'human' }
+--[[        { id = 'H011', parentId = 'Hpal', race = 'human', name = 'Paladin' },
+        { id = 'H01A', parentId = 'Hamg', race = 'human', name = 'Archmage' },]]
+        { id = 'H01B', parentId = 'Hmkg', race = 'human', name = 'Mountain King' },
+       --[[ { id = 'H01C', parentId = 'Hblm', race = 'human', name = 'Blood Mage' },
+
+        { id = 'O00E', parentId = 'Obla', race = 'orc', name = 'Blademaster' },
+        { id = 'O00F', parentId = 'Ofar', race = 'orc', name = 'Far Seer' },]]
+        { id = 'O00G', parentId = 'Otch', race = 'orc', name = 'Tauren Chieftain' },
+--[[        { id = 'O00H', parentId = 'Oshd', race = 'orc', name = 'Shadow Hunter' },
+
+        { id = 'Udea', parentId = 'Udea', race = 'undead', name = 'Death Knight' },
+        { id = 'Ulic', parentId = 'Ulic', race = 'undead', name = 'Lich' },
+        { id = 'Udre', parentId = 'Udre', race = 'undead', name = 'Dreadlord' },
+        { id = 'Ucrl', parentId = 'Ucrl', race = 'undead', name = 'Crypt Lord' },
+
+        { id = 'E00N', parentId = 'Ekee', race = 'elf', name = 'Keeper of the Grove' },
+        { id = 'E00O', parentId = 'Emoo', race = 'elf', name = 'Priestess of the Moon' },]]
+        { id = 'E00P', parentId = 'Edem', race = 'elf', name = 'Demon Hunter' },
+--[[        { id = 'E00Q', parentId = 'Ewar', race = 'elf', name = 'Warden' },]]
+
+        { id = 'N000', parentId = 'Nalc', race = 'other', name = 'Alchemist' },
+--[[        { id = 'N001', parentId = 'Nngs', race = 'other', name = 'Sea Witch' },]]
+        { id = 'N002', parentId = 'Ntin', race = 'other', name = 'Tinker' },
+--[[        { id = 'N003', parentId = 'Nbst', race = 'other', name = 'Beastmaster' },
+        { id = 'N004', parentId = 'Npbm', race = 'other', name = 'Brewmaster' },
+        { id = 'N005', parentId = 'Nbrn', race = 'other', name = 'Dark Ranger' },
+        { id = 'N006', parentId = 'Nfir', race = 'other', name = 'Firelord' },
+        { id = 'N007', parentId = 'Nplh', race = 'other', name = 'Pit Lord' }]]
     }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
@@ -1409,7 +1436,8 @@ function heroConstructTrigger()
                     local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
                     KillUnit(GroupPickRandomUnit(group))
                     DestroyGroup(group)
-                    local unit = CreateUnit(player.id, FourCC(heroes_for_build[1].id), x, y, 270)
+                    local randomIndex = GetRandomInt(1, #heroes_for_build)
+                    local unit = CreateUnit(player.id, FourCC(heroes_for_build[randomIndex].id), x, y, 270)
                     table.insert(player.heroes, {
                         status = "new",
                         building = unit,
@@ -1425,28 +1453,17 @@ function heroDeadTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             local trig = CreateTrigger()
-            TriggerRegisterPlayerUnitEventSimple(trig, player.spawnPlayerId, EVENT_PLAYER_UNIT_DEATH)
+            TriggerRegisterTimerEventPeriodic(trig, 1)
             TriggerAddAction(trig, function()
-                if isParentHero(('>I4'):pack(GetUnitTypeId(GetTriggerUnit()))) then
-                    for _, hero in ipairs(player.heroes) do
-                        if hero.unit == GetTriggerUnit() then
-                            hero.status = "dead"
-                            break
-                        end
+                for _, hero in ipairs(player.heroes) do
+                    if IsUnitDeadBJ(hero.unit) and hero.status ~= 'new' then
+                        print('set dead')
+                        hero.status = 'dead'
                     end
                 end
             end)
         end
     end
-end
-
-function isParentHero(id)
-    for _, hero in ipairs(heroes_for_build) do
-        if hero.parentId == id then
-            return true
-        end
-    end
-    return false
 end
 function heroLearnAbility()
     for _, team in ipairs(all_teams) do
@@ -1627,19 +1644,28 @@ function handleUnitSpawn(player, id, x, y)
     end
 end
 
-function handleHeroSpawn(player, unitId, x, y)
-    for _, hero in ipairs(player.heroes) do
-        if hero.status == "new" then
-            local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
-            SetUnitColor(unit, GetPlayerColor(player.id))
-            SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
-            hero.status = "alive"
-            hero.unit = unit
-        elseif hero.status == "dead" then
-            hero.status = "alive"
-            ReviveHeroLoc(hero.unit, Location(x, y), false)
+function handleHeroSpawn(player, unit, x, y)
+    local unitId = GetUnitTypeId(unit)
+    local hero = getHero(player.heroes, unit)
+    if hero.status == "new" then
+        local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
+        SetUnitColor(unit, GetPlayerColor(player.id))
+        SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+        hero.status = "alive"
+        hero.unit = unit
+    elseif hero.status == "dead" then
+        hero.status = "alive"
+        ReviveHeroLoc(hero.unit, Location(x, y), false)
+    end
+end
+
+function getHero(heroes, unit)
+    for _, hero in ipairs(heroes) do
+        if hero.building == unit then
+            return hero
         end
     end
+    return nil
 end
 
 function processGroupForSpawn(player)
@@ -1651,7 +1677,7 @@ function processGroupForSpawn(player)
         if owner == player.id then
             local x, y = calculateDif(player.buildRect, player.spawnRect, unit)
             if isHero(('>I4'):pack(id)) then
-                handleHeroSpawn(player, id, x, y)
+                handleHeroSpawn(player, unit, x, y)
             else
                 handleUnitSpawn(player, id, x, y)
             end
