@@ -1290,3 +1290,435 @@ STRING 247
 W
 }
 
+STRING 248
+// Units: H01B (Mountain King), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 249
+// Units: H01C (Blood Mage), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 250
+// Units: O00E (Blademaster), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 251
+// Units: O00F (Far Seer), Ubertip (Tooltip - Extended)
+{
+Mystical Hero, effective at ranged attacks. Can learn Chain Lightning, Firebolt, Feral Spirit and Earthquake. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 252
+// Units: O00F (Far Seer), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 253
+// Units: O00G (Tauren Chieftain), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 254
+// Units: O00H (Shadow Hunter), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 255
+// Units: U00B (Death Knight), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 256
+// Units: U00C (Lich), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 257
+// Units: U00E (Crypt Lord), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 258
+// Units: E00N (Keeper of the Grove), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 259
+// Units: E00O (Priestess of the Moon), Ubertip (Tooltip - Extended)
+{
+Warrior Hero, adept at enhancing ranged attacks and slaying enemies from afar. Can learn Silence, Searing Arrows, Trueshot Aura, and Starfall. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 260
+// Units: E00O (Priestess of the Moon), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 261
+// Units: E00P (Demon Hunter), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 262
+// Units: E00Q (Warden), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 263
+// Units: N000 (Alchemist), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 264
+// Units: N001 (Sea Witch), Hotkey (Hotkey)
+{
+S
+}
+
+STRING 265
+// Units: N002 (Tinker), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 266
+// Units: N003 (Beastmaster), Hotkey (Hotkey)
+{
+F
+}
+
+STRING 267
+// Units: N004 (Brewmaster), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 268
+// Units: N005 (Dark Ranger), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 269
+// Units: N006 (Firelord), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 270
+// Units: N007 (Pit Lord), Hotkey (Hotkey)
+{
+V
+}
+
+STRING 271
+// Abilities: A001 (Sleep), Name (Name)
+{
+Sleep
+}
+
+STRING 272
+// Abilities: A001 (Sleep), EditorSuffix (Editor Suffix)
+{
+(New)
+}
+
+STRING 273
+// Abilities: A001 (Sleep), Researchhotkey (Hotkey - Learn)
+{
+E
+}
+
+STRING 274
+// Abilities: A001 (Sleep), Hotkey (Hotkey - Normal)
+{
+E
+}
+
+STRING 275
+// Abilities: A001 (Sleep), Researchtip (Tooltip - Learn)
+{
+Learn Sleep - [|cffffcc00Level %d|r]
+}
+
+STRING 276
+// Abilities: A001 (Sleep), Researchubertip (Tooltip - Learn - Extended)
+{
+Puts a target enemy unit to sleep. |n|n|cffffcc00Level 1|r - <A01C,Dur1> second sleep for <A01C,Cost1> mana. |n|cffffcc00Level 2|r - <A01C,Dur2> second sleep for <A01C,Cost2> mana. |n|cffffcc00Level 3|r - <A01C,Dur3> second sleep for <A01C,Cost3> mana.
+}
+
+STRING 277
+// Abilities: A001 (Sleep), Ubertip (Tooltip - Normal - Extended)
+{
+Puts a target enemy unit to sleep for <A01C,Dur1> seconds.
+}
+
+STRING 278
+// Abilities: A001 (Sleep), Tip (Tooltip - Normal)
+{
+Sleep - [|cffffcc00Level 1|r]
+}
+
+STRING 279
+// Abilities: A001 (Sleep), Tip (Tooltip - Normal)
+{
+Sleep - [|cffffcc00Level 2|r]
+}
+
+STRING 280
+// Abilities: A001 (Sleep), Tip (Tooltip - Normal)
+{
+Sleep - [|cffffcc00Level 3|r]
+}
+
+STRING 281
+// Abilities: A001 (Sleep), Ubertip (Tooltip - Normal - Extended)
+{
+Puts a target enemy unit to sleep for <A01C,Dur2> seconds.
+}
+
+STRING 282
+// Abilities: A001 (Sleep), Ubertip (Tooltip - Normal - Extended)
+{
+Puts a target enemy unit to sleep for <A01C,Dur3> seconds.
+}
+
+STRING 283
+// Buffs/Effects: B000 (), Bufftip (Tooltip)
+{
+Ensnare
+}
+
+STRING 284
+// Buffs/Effects: B001 ((New Sleep)), EditorName (Name (Editor Only))
+{
+(New Sleep)
+}
+
+STRING 285
+// Buffs/Effects: B001 ((New Sleep)), Buffubertip (Tooltip - Extended)
+{
+This unit is sleeping; it cannot move, attack, or cast spells.
+}
+
+STRING 286
+// Buffs/Effects: B001 ((New Sleep)), Bufftip (Tooltip)
+{
+Sleep
+}
+
+STRING 287
+// Buffs/Effects: B002 (), Bufftip (Tooltip)
+{
+Ensnare
+}
+
+STRING 288
+// Abilities: Aast (Ancestral Spirit), Ubertip (Tooltip - Normal - Extended)
+{
+Raises a fallen non-Hero Tauren from the dead. The Tauren is revived with <Aast,DataA1,%>% of its hit points restored.|n|n|cffff9696Drains 50 mana from other nearby friendly Spirit Walkers.|r
+}
+
+STRING 289
+// Abilities: AOeq (Earthquake), Researchubertip (Tooltip - Learn - Extended)
+{
+Makes the ground tremble and break, causing <AOeq,DataB1> damage per second to buildings and slowing units by <AOeq,DataC1,%>% within the area of effect. Lasts <AOeq,Dur1> seconds.|n|nThis ability is only cast on buildings.
+}
+
+STRING 290
+// Abilities: AOeq (Earthquake), Ubertip (Tooltip - Normal - Extended)
+{
+Makes the ground tremble and break, causing <AOeq,DataB1> damage per second to buildings and slowing units by <AOeq,DataC1,%>% within the area of effect. |nLasts <AOeq,Dur1> seconds.|n|nThis ability is only cast on buildings.
+}
+
+STRING 291
+// Abilities: ANfb (Firebolt), Researchtip (Tooltip - Learn)
+{
+Learn Firebolt - [|cffffcc00Level %d|r]
+}
+
+STRING 292
+// Abilities: ANfb (Firebolt), Researchubertip (Tooltip - Learn - Extended)
+{
+Hurls a fiery bolt at a target enemy unit, dealing <ANfb,DataA1> damage and stunning the target for <ANfb,Dur1> seconds. |n|n|cffffcc00Level 1|r - <ANfb,DataA1> damage, <ANfb,Dur1> second stun. |n|cffffcc00Level 2|r - <ANfb,DataA2> damage, <ANfb,Dur2> second stun. |n|cffffcc00Level 3|r - <ANfb,DataA3> damage, <ANfb,Dur3> second stun.
+}
+
+STRING 293
+// Abilities: AUdd (Death And Decay), Researchubertip (Tooltip - Learn - Extended)
+{
+Damages all non-structure units in its area of effect by <AUdd,DataA1,%>% of its base hit points per second.
+}
+
+STRING 294
+// Abilities: AUdd (Death And Decay), Ubertip (Tooltip - Normal - Extended)
+{
+Damages all non-structure units in its area of effect by <AUdd,DataA1,%>% of its base hit points per second. |nLasts <AUdd,Dur1> seconds.
+}
+
+STRING 295
+// Abilities: AUdp (Death Pact), Researchubertip (Tooltip - Learn - Extended)
+{
+Kills a target friendly Undead unit, giving a percentage of its hit points to the Death Knight. Can only be used on weaker undead units. |n|n|cffffcc00Level 1|r - <AUdp,DataB1,%>% conversion. |n|cffffcc00Level 2|r - <AUdp,DataB2,%>% conversion. |n|cffffcc00Level 3|r - <AUdp,DataB3,%>% conversion.
+}
+
+STRING 296
+// Abilities: AUdp (Death Pact), Ubertip (Tooltip - Normal - Extended)
+{
+Kills a target friendly Undead unit, giving <AUdp,DataB1,%>% of its hit points to the Death Knight. Can only be used on weaker undead units.
+}
+
+STRING 297
+// Abilities: AUdp (Death Pact), Ubertip (Tooltip - Normal - Extended)
+{
+Kills a target friendly Undead unit, giving <AUdp,DataB1,%>% of its hit points to the Death Knight. Can only be used on weaker undead units.
+}
+
+STRING 298
+// Abilities: AUdp (Death Pact), Ubertip (Tooltip - Normal - Extended)
+{
+Kills a target friendly Undead unit, giving <AUdp,DataB1,%>% of its hit points to the Death Knight. Can only be used on weaker undead units.
+}
+
+STRING 299
+// Abilities: AEsh (Shadow Strike), Researchubertip (Tooltip - Learn - Extended)
+{
+Hurls a poisoned dagger which deals large initial damage, and then deals damage a second time. The poisoned unit has its movement speed slowed for a short duration. |n|n|cffffcc00Level 1|r - <AEsh,DataE1> strike damage, <AEsh,DataA1> second damage. |n|cffffcc00Level 2|r - <AEsh,DataE2> strike damage, <AEsh,DataA2> second damage. |n|cffffcc00Level 3|r - <AEsh,DataE3> strike damage, <AEsh,DataA3> second damage.
+}
+
+STRING 300
+// Abilities: ANcr (Chemical Rage), Researchubertip (Tooltip - Learn - Extended)
+{
+The Alchemist causes his Ogre to enter a chemically induced rage, increasing attack rate.|nLasts <ANcr,HeroDur1> seconds.|n|n|cffffcc00Level 1|r - <ANcr,DataF1,%>% attack rate increase.|n|cffffcc00Level 2|r - <ANcr,DataF2,%>% attack rate increase.|n|cffffcc00Level 3|r - <ANcr,DataF3,%>% attack rate increase.
+}
+
+STRING 301
+// Abilities: ANcr (Chemical Rage), Ubertip (Tooltip - Normal - Extended)
+{
+The Alchemist causes his Ogre to enter a chemically induced rage, increasing attack rate by <ANcr,DataF1,%>% for <ANcr,HeroDur1> seconds.
+}
+
+STRING 302
+// Abilities: ANcr (Chemical Rage), Ubertip (Tooltip - Normal - Extended)
+{
+The Alchemist causes his Ogre to enter a chemically induced rage, increasing attack rate by <ANcr,DataF1,%>% for <ANcr,HeroDur1> seconds.
+}
+
+STRING 303
+// Abilities: ANcr (Chemical Rage), Ubertip (Tooltip - Normal - Extended)
+{
+The Alchemist causes his Ogre to enter a chemically induced rage, increasing attack rate by <ANcr,DataF1,%>% for <ANcr,HeroDur1> seconds.
+}
+
+STRING 304
+// Abilities: ANeg (Engineering Upgrade), Researchubertip (Tooltip - Learn - Extended)
+{
+Enhances other Tinker abilities with each level learned:|n|n|cffffcc00Cluster Rockets|r - Larger Area.|n|cffffcc00Pocket Factory|r - Builds Clockwerk Goblins more quickly.|n|cffffcc00Robo-Goblin|r - Increases armor and Strength; enhances Demolish.|n|nAlso gives bonus damage and increases the Tinker's movement speed.|n|n|cffffcc00Level 1|r - +<ANeg,DataB1> damage.|n|cffffcc00Level 2|r - +<ANeg,DataB2> damage.|n|cffffcc00Level 3|r - +<ANeg,DataB3> damage.
+}
+
+STRING 305
+// Abilities: ANeg (Engineering Upgrade), Ubertip (Tooltip - Normal - Extended)
+{
+Improves other Tinker abilities, gives <ANeg,DataB1> attack damage.
+}
+
+STRING 306
+// Abilities: ANeg (Engineering Upgrade), Ubertip (Tooltip - Normal - Extended)
+{
+Improves other Tinker abilities, gives <ANeg,DataB1> attack damage.
+}
+
+STRING 307
+// Abilities: ANeg (Engineering Upgrade), Ubertip (Tooltip - Normal - Extended)
+{
+Improves other Tinker abilities, gives <ANeg,DataB1> attack damage.
+}
+
+STRING 308
+// Abilities: ANfl (Forked Lightning), Researchubertip (Tooltip - Learn - Extended)
+{
+Calls forth a cone of lightning to damage enemies. |n|n|cffffcc00Level 1|r - <ANfl,DataA1> damage per unit. Hits up to 3 targets. |n|cffffcc00Level 2|r - <ANfl,DataA2> damage per unit. Hits up to 4 targets. |n|cffffcc00Level 3|r - <ANfl,DataA3> damage per unit. Hits up to 5 targets.
+}
+
+STRING 309
+// Abilities: ANms (Mana Shield), Researchubertip (Tooltip - Learn - Extended)
+{
+Creates a shield that absorbs damage by using the Sea Witch's mana. |n|n|cffffcc00Level 1|r - <ANms,DataA1,.> damage per point of mana. |n|cffffcc00Level 2|r - <ANms,DataA2,.> damage per point of mana. |n|cffffcc00Level 3|r - <ANms,DataA3,.> damage per point of mana.
+}
+
+STRING 310
+// Abilities: ANsw (Summon Hawk), Researchubertip (Tooltip - Learn - Extended)
+{
+Summons a proud hawk to spy on your enemies. |nLasts <ANsw,Dur1> seconds. |n|n|cffffcc00Level 1|r - <nwe1,realHP> hit points, 21 to 22 damage. |n|cffffcc00Level 2|r - <nwe2,realHP> hit points, <nwe2,mindmg1> to <nwe2,maxdmg1> damage + splash, has True Sight. |n|cffffcc00Level 3|r - <nwe3,realHP> hit points, <nwe3,mindmg1> to <nwe3,maxdmg1> damage + splash, has True Sight and Invisibility.
+}
+
+STRING 311
+// Abilities: A002 (Force of Nature), Name (Name)
+{
+Force of Nature
+}
+
+STRING 312
+// Abilities: A002 (Force of Nature), Researchtip (Tooltip - Learn)
+{
+Learn Force of Nature - [|cffffcc00Level %d|r].
+}
+
+STRING 313
+// Abilities: A002 (Force of Nature), Tip (Tooltip - Normal)
+{
+Force of Nature - [|cffffcc00Level 1|r]
+}
+
+STRING 314
+// Abilities: A002 (Force of Nature), Tip (Tooltip - Normal)
+{
+Force of Nature - [|cffffcc00Level 2|r]
+}
+
+STRING 315
+// Abilities: A002 (Force of Nature), Tip (Tooltip - Normal)
+{
+Force of Nature - [|cffffcc00Level 3|r]
+}
+
+STRING 316
+// Abilities: A002 (Force of Nature), Ubertip (Tooltip - Normal - Extended)
+{
+Summons <A012,DataB1> Treants. Each Treant has <efon,realHP> hit points and deals <efon,mindmg1> - <efon,maxdmg1> damage. |nLasts <A012,Dur2> seconds. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 317
+// Abilities: A002 (Force of Nature), Ubertip (Tooltip - Normal - Extended)
+{
+Summons <A012,DataB2> Treants. Each Treant has <efon,realHP> hit points and deals <efon,mindmg1> - <efon,maxdmg1> damage. |nLasts <A012,Dur2> seconds. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 318
+// Abilities: A002 (Force of Nature), Ubertip (Tooltip - Normal - Extended)
+{
+Summons <A012,DataB3> Treants. Each Treant has <efon,realHP> hit points and deals <efon,mindmg1> - <efon,maxdmg1> damage. |nLasts <A012,Dur2> seconds. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 319
+// Abilities: A002 (Force of Nature), Researchubertip (Tooltip - Learn - Extended)
+{
+Summons Treants with <efon,realHP> hit points and <efon,mindmg1> - <efon,maxdmg1> damage to fight the Keeper of the Grove's enemies. |nLasts <A012,Dur1> seconds. |n|n|cffffcc00Level 1|r - 2 Treants |n|cffffcc00Level 2|r - 3 Treants |n|cffffcc00Level 3|r - 4 Treants
+}
+

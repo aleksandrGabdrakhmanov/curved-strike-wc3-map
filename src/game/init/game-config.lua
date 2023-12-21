@@ -50,8 +50,34 @@ function initGlobalVariables()
         { id = Player(9), spawnId = Player(10), team = 2 }
     }
     heroes_for_build = {
-        { id = 'H011', parentId = 'Hpal', race = 'human' },
-        { id = 'H01A', parentId = 'Hamg', race = 'human' },
+        { id = 'H011', parentId = 'Hpal', race = 'human', name = 'Paladin' },
+        { id = 'H01A', parentId = 'Hamg', race = 'human', name = 'Archmage' },
+        { id = 'H01B', parentId = 'Hmkg', race = 'human', name = 'Mountain King' },
+        { id = 'H01C', parentId = 'Hblm', race = 'human', name = 'Blood Mage' },
+
+        { id = 'O00E', parentId = 'Obla', race = 'orc', name = 'Blademaster' },
+        { id = 'O00F', parentId = 'Ofar', race = 'orc', name = 'Far Seer' },
+        { id = 'O00G', parentId = 'Otch', race = 'orc', name = 'Tauren Chieftain' },
+        { id = 'O00H', parentId = 'Oshd', race = 'orc', name = 'Shadow Hunter' },
+
+        { id = 'Udea', parentId = 'Udea', race = 'undead', name = 'Death Knight' },
+        { id = 'Ulic', parentId = 'Ulic', race = 'undead', name = 'Lich' },
+        { id = 'Udre', parentId = 'Udre', race = 'undead', name = 'Dreadlord' },
+        { id = 'Ucrl', parentId = 'Ucrl', race = 'undead', name = 'Crypt Lord' },
+
+        { id = 'E00N', parentId = 'Ekee', race = 'elf', name = 'Keeper of the Grove' },
+        { id = 'E00O', parentId = 'Emoo', race = 'elf', name = 'Priestess of the Moon' },
+        { id = 'E00P', parentId = 'Edem', race = 'elf', name = 'Demon Hunter' },
+        { id = 'E00Q', parentId = 'Ewar', race = 'elf', name = 'Warden' },
+
+        { id = 'N000', parentId = 'Nalc', race = 'other', name = 'Alchemist' },
+        { id = 'N001', parentId = 'Nngs', race = 'other', name = 'Sea Witch' },
+        { id = 'N002', parentId = 'Ntin', race = 'other', name = 'Tinker' },
+        { id = 'N003', parentId = 'Nbst', race = 'other', name = 'Beastmaster' },
+        { id = 'N004', parentId = 'Npbm', race = 'other', name = 'Brewmaster' },
+        { id = 'N005', parentId = 'Nbrn', race = 'other', name = 'Dark Ranger' },
+        { id = 'N006', parentId = 'Nfir', race = 'other', name = 'Firelord' },
+        { id = 'N007', parentId = 'Nplh', race = 'other', name = 'Pit Lord' }
     }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
