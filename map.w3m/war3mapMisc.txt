@@ -1,3 +1,6 @@
 [Misc]
 GlobalExperience=0
+HeroReviveManaFactor=1.0
+NeedHeroXP=1000
+NeedHeroXPFormulaB=500.0
 

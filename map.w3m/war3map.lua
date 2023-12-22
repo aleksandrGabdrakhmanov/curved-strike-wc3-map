@@ -127,13 +127,7 @@ gg_rct_united_2_4_laboratory = nil
 gg_rct_united_2_3_laboratory = nil
 gg_rct_united_2_2_laboratory = nil
 gg_rct_united_2_1_laboratory = nil
-gg_rct_curved_team_1_attack_2_down = nil
-gg_rct_curved_team_1_attack_4_right = nil
-gg_rct_curved_team_1_attack_3_up = nil
 gg_rct_curved_team_2_attack_1_left = nil
-gg_rct_curved_team_2_attack_2_down = nil
-gg_rct_curved_team_2_attack_4_left = nil
-gg_rct_curved_team_2_attack_3_up = nil
 gg_rct_united_team_1_attack_1_right = nil
 gg_rct_united_team_1_attack_2_down = nil
 gg_rct_united_team_1_attack_3_up = nil
@@ -148,7 +142,7 @@ end
 function CreateRegions()
 local we
 
-gg_rct_curved_team_1_attack_1_right = Rect(-5184.0, -4608.0, 1600.0, 5728.0)
+gg_rct_curved_team_1_attack_1_right = Rect(-5184.0, -2208.0, 5024.0, 3232.0)
 gg_rct_curved_1_1_build = Rect(-6912.0, 3392.0, -5760.0, 5056.0)
 gg_rct_curved_1_1_main = Rect(-7424.0, 3904.0, -6912.0, 4416.0)
 gg_rct_curved_1_1_mine = Rect(-7424.0, 3392.0, -6912.0, 3904.0)
@@ -277,21 +271,15 @@ gg_rct_united_2_4_laboratory = Rect(10624.0, -7840.0, 11136.0, -7328.0)
 gg_rct_united_2_3_laboratory = Rect(10624.0, -8480.0, 11136.0, -7968.0)
 gg_rct_united_2_2_laboratory = Rect(10624.0, -9120.0, 11136.0, -8608.0)
 gg_rct_united_2_1_laboratory = Rect(10624.0, -9728.0, 11136.0, -9216.0)
-gg_rct_curved_team_1_attack_2_down = Rect(1600.0, 1024.0, 4992.0, 5728.0)
-gg_rct_curved_team_1_attack_4_right = Rect(1600.0, 32.0, 4992.0, 1024.0)
-gg_rct_curved_team_1_attack_3_up = Rect(1600.0, -4608.0, 4992.0, 32.0)
-gg_rct_curved_team_2_attack_1_left = Rect(-608.0, -4608.0, 6176.0, 5728.0)
-gg_rct_curved_team_2_attack_2_down = Rect(-4000.0, 1024.0, -608.0, 5728.0)
-gg_rct_curved_team_2_attack_4_left = Rect(-4000.0, 0.0, -608.0, 1024.0)
-gg_rct_curved_team_2_attack_3_up = Rect(-4000.0, -4608.0, -608.0, 0.0)
-gg_rct_united_team_1_attack_1_right = Rect(-7456.0, -11104.0, 3488.0, -6016.0)
-gg_rct_united_team_1_attack_2_down = Rect(3488.0, -7712.0, 4608.0, -5920.0)
-gg_rct_united_team_1_attack_3_up = Rect(3456.0, -11104.0, 4640.0, -8896.0)
-gg_rct_united_team_1_attack_4_right = Rect(3488.0, -8896.0, 6400.0, -7712.0)
-gg_rct_united_team_2_attack_1_left = Rect(-2784.0, -11136.0, 8160.0, -6048.0)
-gg_rct_united_team_2_attack_2_down = Rect(-3904.0, -7840.0, -2784.0, -6048.0)
-gg_rct_united_team_2_attack_3_up = Rect(-3968.0, -11136.0, -2784.0, -8928.0)
-gg_rct_united_team_2_attack_4_left = Rect(-5664.0, -8992.0, -2752.0, -7808.0)
+gg_rct_curved_team_2_attack_1_left = Rect(-4064.0, -2208.0, 6144.0, 3232.0)
+gg_rct_united_team_1_attack_1_right = Rect(-7456.0, -11104.0, 3808.0, -6016.0)
+gg_rct_united_team_1_attack_2_down = Rect(3648.0, -7424.0, 6400.0, -5920.0)
+gg_rct_united_team_1_attack_3_up = Rect(3648.0, -11104.0, 6400.0, -8960.0)
+gg_rct_united_team_1_attack_4_right = Rect(3648.0, -9120.0, 6400.0, -7264.0)
+gg_rct_united_team_2_attack_1_left = Rect(-2912.0, -11136.0, 8160.0, -6048.0)
+gg_rct_united_team_2_attack_2_down = Rect(-5632.0, -7456.0, -2752.0, -6048.0)
+gg_rct_united_team_2_attack_3_up = Rect(-5632.0, -11104.0, -2784.0, -8928.0)
+gg_rct_united_team_2_attack_4_left = Rect(-5632.0, -9120.0, -2752.0, -7264.0)
 end
 
 --CUSTOM_CODE
@@ -1460,6 +1448,9 @@ function heroConstructTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_CONSTRUCT_FINISH)
             TriggerAddAction(trig, function()
                 if isHero(('>I4'):pack(GetUnitTypeId(GetTriggerUnit()))) then
+                    local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
+                    KillUnit(GroupPickRandomUnit(group))
+                    DestroyGroup(group)
                     table.insert(player.heroes, {
                         status = "new",
                         building = GetTriggerUnit(),
