@@ -31,18 +31,31 @@ function initModeButton(buttonName, mode)
 end
 
 function initUnitsAvailableButtons()
-    for i, mainUnit in ipairs(main_race) do
-        initRaceAvailableButton(mainUnit, i)
+
+
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, "StartGameMenuUnits", units_for_build, 5)
     end
 
-    for i, unit in ipairs(units_for_build) do
-        initUnitAvailableButton(unit, i)
+    for _, unit in ipairs(units_for_build) do
+        initUnitAvailableButton(unit, "StartGameMenuUnits")
+    end
+
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, "StartGameMenuHeroes", heroes_for_build, 6)
+    end
+
+    for _, hero in ipairs(heroes_for_build) do
+        initUnitAvailableButton(hero, "StartGameMenuHeroes")
     end
 end
 
-function initRaceAvailableButton(race, position)
-    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
-    BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.005, -(0.01 + (BlzFrameGetHeight(button) * position)))
+function initRaceAvailableButton(race, position, frameName, unitContainer, max)
+    if position >= max then
+        return
+    end
+    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName(frameName, 0), 0, 0)
+    BlzFrameSetPoint(button, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(frameName, 0), FRAMEPOINT_TOPLEFT, 0.005, -(0.01 + (BlzFrameGetHeight(button) * position)))
 
     local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
     BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(race.id)), 0, true)
@@ -57,7 +70,7 @@ function initRaceAvailableButton(race, position)
         if race.active == true then
             race.active = false
             BlzFrameSetTexture(buttonTexture, replaceTexture(BlzGetAbilityIcon(FourCC(race.id))), 0, true)
-            for _, unit in ipairs(units_for_build) do
+            for _, unit in ipairs(unitContainer) do
                 if unit.race == race.race then
                     unit.active = false
                     BlzFrameSetTexture(unit.buttonTexture, replaceTexture(BlzGetAbilityIcon(FourCC(unit.parentId))), 0, true)
@@ -66,7 +79,7 @@ function initRaceAvailableButton(race, position)
         else
             race.active = true
             BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(race.id)), 0, true)
-            for _, unit in ipairs(units_for_build) do
+            for _, unit in ipairs(unitContainer) do
                 if unit.race == race.race then
                     unit.active = true
                     BlzFrameSetTexture(unit.buttonTexture, BlzGetAbilityIcon(FourCC(unit.parentId)), 0, true)
@@ -76,9 +89,9 @@ function initRaceAvailableButton(race, position)
     end)
 end
 
-function initUnitAvailableButton(unit)
-    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
-    BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.01 + (BlzFrameGetWidth(button) * unit.position), -(0.01 + (BlzFrameGetHeight(button) * unit.line)))
+function initUnitAvailableButton(unit, containerFrame)
+    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName(containerFrame, 0), 0, 0)
+    BlzFrameSetPoint(button, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(containerFrame, 0), FRAMEPOINT_TOPLEFT, 0.01 + (BlzFrameGetWidth(button) * unit.position), -(0.01 + (BlzFrameGetHeight(button) * unit.line)))
 
     local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
     BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(unit.parentId)), 0, true)

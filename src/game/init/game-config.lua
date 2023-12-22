@@ -50,34 +50,34 @@ function initGlobalVariables()
         { id = Player(9), spawnId = Player(10), team = 2 }
     }
     heroes_for_build = {
-        { id = 'H011', parentId = 'Hpal', race = 'human', name = 'Paladin' },
-        { id = 'H01A', parentId = 'Hamg', race = 'human', name = 'Archmage' },
-        { id = 'H01B', parentId = 'Hmkg', race = 'human', name = 'Mountain King' },
-        { id = 'H01C', parentId = 'Hblm', race = 'human', name = 'Blood Mage' },
+        { id = 'H011', parentId = 'Hpal', race = 'human', line = 1, position = 1,  name = 'Paladin' },
+        { id = 'H01A', parentId = 'Hamg', race = 'human', line = 1, position = 2,  name = 'Archmage' },
+        { id = 'H01B', parentId = 'Hmkg', race = 'human', line = 1, position = 3,  name = 'Mountain King' },
+        { id = 'H01C', parentId = 'Hblm', race = 'human', line = 1, position = 4,  name = 'Blood Mage' },
 
-        { id = 'O00E', parentId = 'Obla', race = 'orc', name = 'Blademaster' },
-        { id = 'O00F', parentId = 'Ofar', race = 'orc', name = 'Far Seer' },
-        { id = 'O00G', parentId = 'Otch', race = 'orc', name = 'Tauren Chieftain' },
-        { id = 'O00H', parentId = 'Oshd', race = 'orc', name = 'Shadow Hunter' },
+        { id = 'O00E', parentId = 'Obla', race = 'orc', line = 2, position = 1, name = 'Blademaster' },
+        { id = 'O00F', parentId = 'Ofar', race = 'orc', line = 2, position = 2, name = 'Far Seer' },
+        { id = 'O00G', parentId = 'Otch', race = 'orc', line = 2, position = 3, name = 'Tauren Chieftain' },
+        { id = 'O00H', parentId = 'Oshd', race = 'orc', line = 2, position = 4, name = 'Shadow Hunter' },
 
-        { id = 'U00B', parentId = 'Udea', race = 'undead', name = 'Death Knight' },
-        { id = 'U00C', parentId = 'Ulic', race = 'undead', name = 'Lich' },
-        { id = 'U00D', parentId = 'Udre', race = 'undead', name = 'Dreadlord' },
-        { id = 'U00E', parentId = 'Ucrl', race = 'undead', name = 'Crypt Lord' },
+        { id = 'U00B', parentId = 'Udea', race = 'undead', line = 3, position = 1, name = 'Death Knight' },
+        { id = 'U00C', parentId = 'Ulic', race = 'undead', line = 3, position = 2, name = 'Lich' },
+        { id = 'U00D', parentId = 'Udre', race = 'undead', line = 3, position = 3, name = 'Dreadlord' },
+        { id = 'U00E', parentId = 'Ucrl', race = 'undead', line = 3, position = 4, name = 'Crypt Lord' },
 
-        { id = 'E00N', parentId = 'Ekee', race = 'elf', name = 'Keeper of the Grove' },
-        { id = 'E00O', parentId = 'Emoo', race = 'elf', name = 'Priestess of the Moon' },
-        { id = 'E00P', parentId = 'Edem', race = 'elf', name = 'Demon Hunter' },
-        { id = 'E00Q', parentId = 'Ewar', race = 'elf', name = 'Warden' },
+        { id = 'E00N', parentId = 'Ekee', race = 'elf', line = 4, position = 1, name = 'Keeper of the Grove' },
+        { id = 'E00O', parentId = 'Emoo', race = 'elf', line = 4, position = 2, name = 'Priestess of the Moon' },
+        { id = 'E00P', parentId = 'Edem', race = 'elf', line = 4, position = 3, name = 'Demon Hunter' },
+        { id = 'E00Q', parentId = 'Ewar', race = 'elf', line = 4, position = 4, name = 'Warden' },
 
-        { id = 'N000', parentId = 'Nalc', race = 'other', name = 'Alchemist' },
-        { id = 'N001', parentId = 'Nngs', race = 'other', name = 'Sea Witch' },
-        { id = 'N002', parentId = 'Ntin', race = 'other', name = 'Tinker' },
-        { id = 'N003', parentId = 'Nbst', race = 'other', name = 'Beastmaster' },
-        { id = 'N004', parentId = 'Npbm', race = 'other', name = 'Brewmaster' },
-        { id = 'N005', parentId = 'Nbrn', race = 'other', name = 'Dark Ranger' },
-        { id = 'N006', parentId = 'Nfir', race = 'other', name = 'Firelord' },
-        { id = 'N007', parentId = 'Nplh', race = 'other', name = 'Pit Lord' }
+        { id = 'N000', parentId = 'Nalc', race = 'other', line = 5, position = 1, name = 'Alchemist' },
+        { id = 'N001', parentId = 'Nngs', race = 'other', line = 5, position = 2,  name = 'Sea Witch' },
+        { id = 'N002', parentId = 'Ntin', race = 'other', line = 5, position = 3,  name = 'Tinker' },
+        { id = 'N003', parentId = 'Nbst', race = 'other', line = 5, position = 4,  name = 'Beastmaster' },
+        { id = 'N004', parentId = 'Npbm', race = 'other', line = 5, position = 5,  name = 'Brewmaster' },
+        { id = 'N005', parentId = 'Nbrn', race = 'other', line = 5, position = 6,  name = 'Dark Ranger' },
+        { id = 'N006', parentId = 'Nfir', race = 'other', line = 5, position = 7,  name = 'Firelord' },
+        { id = 'N007', parentId = 'Nplh', race = 'other', line = 5, position = 8,  name = 'Pit Lord' }
     }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
@@ -154,6 +154,7 @@ function initGlobalVariables()
         {id = 'hcas', race = 'human'},
         {id = 'ofrt', race = 'orc'},
         {id = 'unp2', race = 'undead'},
-        {id = 'etoe', race = 'elf'}
+        {id = 'etoe', race = 'elf'},
+        {id = 'ntav', race = 'other'}
     }
 end

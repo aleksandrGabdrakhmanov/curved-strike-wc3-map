@@ -839,34 +839,34 @@ function initGlobalVariables()
         { id = Player(9), spawnId = Player(10), team = 2 }
     }
     heroes_for_build = {
-        { id = 'H011', parentId = 'Hpal', race = 'human', name = 'Paladin' },
-        { id = 'H01A', parentId = 'Hamg', race = 'human', name = 'Archmage' },
-        { id = 'H01B', parentId = 'Hmkg', race = 'human', name = 'Mountain King' },
-        { id = 'H01C', parentId = 'Hblm', race = 'human', name = 'Blood Mage' },
+        { id = 'H011', parentId = 'Hpal', race = 'human', line = 1, position = 1,  name = 'Paladin' },
+        { id = 'H01A', parentId = 'Hamg', race = 'human', line = 1, position = 2,  name = 'Archmage' },
+        { id = 'H01B', parentId = 'Hmkg', race = 'human', line = 1, position = 3,  name = 'Mountain King' },
+        { id = 'H01C', parentId = 'Hblm', race = 'human', line = 1, position = 4,  name = 'Blood Mage' },
 
-        { id = 'O00E', parentId = 'Obla', race = 'orc', name = 'Blademaster' },
-        { id = 'O00F', parentId = 'Ofar', race = 'orc', name = 'Far Seer' },
-        { id = 'O00G', parentId = 'Otch', race = 'orc', name = 'Tauren Chieftain' },
-        { id = 'O00H', parentId = 'Oshd', race = 'orc', name = 'Shadow Hunter' },
+        { id = 'O00E', parentId = 'Obla', race = 'orc', line = 2, position = 1, name = 'Blademaster' },
+        { id = 'O00F', parentId = 'Ofar', race = 'orc', line = 2, position = 2, name = 'Far Seer' },
+        { id = 'O00G', parentId = 'Otch', race = 'orc', line = 2, position = 3, name = 'Tauren Chieftain' },
+        { id = 'O00H', parentId = 'Oshd', race = 'orc', line = 2, position = 4, name = 'Shadow Hunter' },
 
-        { id = 'U00B', parentId = 'Udea', race = 'undead', name = 'Death Knight' },
-        { id = 'U00C', parentId = 'Ulic', race = 'undead', name = 'Lich' },
-        { id = 'U00D', parentId = 'Udre', race = 'undead', name = 'Dreadlord' },
-        { id = 'U00E', parentId = 'Ucrl', race = 'undead', name = 'Crypt Lord' },
+        { id = 'U00B', parentId = 'Udea', race = 'undead', line = 3, position = 1, name = 'Death Knight' },
+        { id = 'U00C', parentId = 'Ulic', race = 'undead', line = 3, position = 2, name = 'Lich' },
+        { id = 'U00D', parentId = 'Udre', race = 'undead', line = 3, position = 3, name = 'Dreadlord' },
+        { id = 'U00E', parentId = 'Ucrl', race = 'undead', line = 3, position = 4, name = 'Crypt Lord' },
 
-        { id = 'E00N', parentId = 'Ekee', race = 'elf', name = 'Keeper of the Grove' },
-        { id = 'E00O', parentId = 'Emoo', race = 'elf', name = 'Priestess of the Moon' },
-        { id = 'E00P', parentId = 'Edem', race = 'elf', name = 'Demon Hunter' },
-        { id = 'E00Q', parentId = 'Ewar', race = 'elf', name = 'Warden' },
+        { id = 'E00N', parentId = 'Ekee', race = 'elf', line = 4, position = 1, name = 'Keeper of the Grove' },
+        { id = 'E00O', parentId = 'Emoo', race = 'elf', line = 4, position = 2, name = 'Priestess of the Moon' },
+        { id = 'E00P', parentId = 'Edem', race = 'elf', line = 4, position = 3, name = 'Demon Hunter' },
+        { id = 'E00Q', parentId = 'Ewar', race = 'elf', line = 4, position = 4, name = 'Warden' },
 
-        { id = 'N000', parentId = 'Nalc', race = 'other', name = 'Alchemist' },
-        { id = 'N001', parentId = 'Nngs', race = 'other', name = 'Sea Witch' },
-        { id = 'N002', parentId = 'Ntin', race = 'other', name = 'Tinker' },
-        { id = 'N003', parentId = 'Nbst', race = 'other', name = 'Beastmaster' },
-        { id = 'N004', parentId = 'Npbm', race = 'other', name = 'Brewmaster' },
-        { id = 'N005', parentId = 'Nbrn', race = 'other', name = 'Dark Ranger' },
-        { id = 'N006', parentId = 'Nfir', race = 'other', name = 'Firelord' },
-        { id = 'N007', parentId = 'Nplh', race = 'other', name = 'Pit Lord' }
+        { id = 'N000', parentId = 'Nalc', race = 'other', line = 5, position = 1, name = 'Alchemist' },
+        { id = 'N001', parentId = 'Nngs', race = 'other', line = 5, position = 2,  name = 'Sea Witch' },
+        { id = 'N002', parentId = 'Ntin', race = 'other', line = 5, position = 3,  name = 'Tinker' },
+        { id = 'N003', parentId = 'Nbst', race = 'other', line = 5, position = 4,  name = 'Beastmaster' },
+        { id = 'N004', parentId = 'Npbm', race = 'other', line = 5, position = 5,  name = 'Brewmaster' },
+        { id = 'N005', parentId = 'Nbrn', race = 'other', line = 5, position = 6,  name = 'Dark Ranger' },
+        { id = 'N006', parentId = 'Nfir', race = 'other', line = 5, position = 7,  name = 'Firelord' },
+        { id = 'N007', parentId = 'Nplh', race = 'other', line = 5, position = 8,  name = 'Pit Lord' }
     }
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
@@ -943,7 +943,8 @@ function initGlobalVariables()
         {id = 'hcas', race = 'human'},
         {id = 'ofrt', race = 'orc'},
         {id = 'unp2', race = 'undead'},
-        {id = 'etoe', race = 'elf'}
+        {id = 'etoe', race = 'elf'},
+        {id = 'ntav', race = 'other'}
     }
 end
 function initGame()
@@ -1216,15 +1217,24 @@ function reRollHeroes(player)
 end
 
 function getRandomHeroes(heroes, count)
+
+    local availableHeroes = {}
+    for _, hero in ipairs(heroes) do
+        if hero.active == true then
+            table.insert(availableHeroes, hero)
+        end
+    end
+
+
     local selected = {}
     local result = {}
 
-    count = math.min(count, #heroes)
+    count = math.min(count, #availableHeroes)
 
     while #result < count do
-        local index = GetRandomInt(1, #heroes)
+        local index = GetRandomInt(1, #availableHeroes)
         if not selected[index] then
-            table.insert(result, heroes[index])
+            table.insert(result, availableHeroes[index])
             selected[index] = true
         end
     end
@@ -1866,18 +1876,31 @@ function initModeButton(buttonName, mode)
 end
 
 function initUnitsAvailableButtons()
-    for i, mainUnit in ipairs(main_race) do
-        initRaceAvailableButton(mainUnit, i)
+
+
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, "StartGameMenuUnits", units_for_build, 5)
     end
 
-    for i, unit in ipairs(units_for_build) do
-        initUnitAvailableButton(unit, i)
+    for _, unit in ipairs(units_for_build) do
+        initUnitAvailableButton(unit, "StartGameMenuUnits")
+    end
+
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, "StartGameMenuHeroes", heroes_for_build, 6)
+    end
+
+    for _, hero in ipairs(heroes_for_build) do
+        initUnitAvailableButton(hero, "StartGameMenuHeroes")
     end
 end
 
-function initRaceAvailableButton(race, position)
-    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
-    BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.005, -(0.01 + (BlzFrameGetHeight(button) * position)))
+function initRaceAvailableButton(race, position, frameName, unitContainer, max)
+    if position >= max then
+        return
+    end
+    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName(frameName, 0), 0, 0)
+    BlzFrameSetPoint(button, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(frameName, 0), FRAMEPOINT_TOPLEFT, 0.005, -(0.01 + (BlzFrameGetHeight(button) * position)))
 
     local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
     BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(race.id)), 0, true)
@@ -1892,7 +1915,7 @@ function initRaceAvailableButton(race, position)
         if race.active == true then
             race.active = false
             BlzFrameSetTexture(buttonTexture, replaceTexture(BlzGetAbilityIcon(FourCC(race.id))), 0, true)
-            for _, unit in ipairs(units_for_build) do
+            for _, unit in ipairs(unitContainer) do
                 if unit.race == race.race then
                     unit.active = false
                     BlzFrameSetTexture(unit.buttonTexture, replaceTexture(BlzGetAbilityIcon(FourCC(unit.parentId))), 0, true)
@@ -1901,7 +1924,7 @@ function initRaceAvailableButton(race, position)
         else
             race.active = true
             BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(race.id)), 0, true)
-            for _, unit in ipairs(units_for_build) do
+            for _, unit in ipairs(unitContainer) do
                 if unit.race == race.race then
                     unit.active = true
                     BlzFrameSetTexture(unit.buttonTexture, BlzGetAbilityIcon(FourCC(unit.parentId)), 0, true)
@@ -1911,9 +1934,9 @@ function initRaceAvailableButton(race, position)
     end)
 end
 
-function initUnitAvailableButton(unit)
-    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName("StartGameMenuUnits", 0), 0, 0)
-    BlzFrameSetPoint(button, FRAMEPOINT_LEFT, BlzGetFrameByName("StartGameMenuUnits", 0), FRAMEPOINT_LEFT, 0.01 + (BlzFrameGetWidth(button) * unit.position), -(0.01 + (BlzFrameGetHeight(button) * unit.line)))
+function initUnitAvailableButton(unit, containerFrame)
+    local button = BlzCreateFrame("MyIconButtonTemplate", BlzGetFrameByName(containerFrame, 0), 0, 0)
+    BlzFrameSetPoint(button, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(containerFrame, 0), FRAMEPOINT_TOPLEFT, 0.01 + (BlzFrameGetWidth(button) * unit.position), -(0.01 + (BlzFrameGetHeight(button) * unit.line)))
 
     local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
     BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(unit.parentId)), 0, true)

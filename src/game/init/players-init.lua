@@ -101,15 +101,24 @@ function reRollHeroes(player)
 end
 
 function getRandomHeroes(heroes, count)
+
+    local availableHeroes = {}
+    for _, hero in ipairs(heroes) do
+        if hero.active == true then
+            table.insert(availableHeroes, hero)
+        end
+    end
+
+
     local selected = {}
     local result = {}
 
-    count = math.min(count, #heroes)
+    count = math.min(count, #availableHeroes)
 
     while #result < count do
-        local index = GetRandomInt(1, #heroes)
+        local index = GetRandomInt(1, #availableHeroes)
         if not selected[index] then
-            table.insert(result, heroes[index])
+            table.insert(result, availableHeroes[index])
             selected[index] = true
         end
     end
