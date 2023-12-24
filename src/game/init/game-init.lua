@@ -76,7 +76,6 @@ function addPlayersInTeam(players)
 end
 
 function initRect()
-
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             player.buildRect = regions[game_config.mode][team.i][player.i]['build']
@@ -95,6 +94,9 @@ function initRect()
             local attackData = regions[game_config.mode][team.i][player.i]['attack']
             if not attackData then
                 attackData = regions[game_config.mode]['team'][team.i]['attack']
+            end
+            if not attackData then
+                attackData = regions[game_config.mode]['global']['attack']
             end
 
             local directions = { 'right', 'left', 'up', 'down' }

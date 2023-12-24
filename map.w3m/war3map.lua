@@ -154,14 +154,26 @@ gg_rct_royal_2_1_spawn_2 = nil
 gg_rct_royal_team_2_base_1 = nil
 gg_rct_royal_team_2_base_2 = nil
 gg_rct_royal_2_1_laboratory = nil
-gg_rct_royal_team_2_attack_2_right_2 = nil
-gg_rct_royal_team_2_attack_1_left_1 = nil
-gg_rct_royal_team_1_attack_2_right_2 = nil
-gg_rct_royal_team_1_attack_1_down_1 = nil
+gg_rct_royal_global_attack_1_right_2 = nil
+gg_rct_royal_global_attack_9_down_1 = nil
 gg_rct_royal_1_1_worker_1 = nil
 gg_rct_royal_1_1_worker_2 = nil
 gg_rct_royal_2_1_worker_1 = nil
 gg_rct_royal_2_1_worker_2 = nil
+gg_rct_royal_global_attack_2_down_2 = nil
+gg_rct_royal_global_attack_3_down_2 = nil
+gg_rct_royal_global_attack_4_left_2 = nil
+gg_rct_royal_global_attack_5_left_2 = nil
+gg_rct_royal_global_attack_6_up_2 = nil
+gg_rct_royal_global_attack_7_up_2 = nil
+gg_rct_royal_global_attack_8_up_2 = nil
+gg_rct_royal_global_attack_10_right_1 = nil
+gg_rct_royal_global_attack_11_right_1 = nil
+gg_rct_royal_global_attack_12_up_1 = nil
+gg_rct_royal_global_attack_13_up_1 = nil
+gg_rct_royal_global_attack_14_left_1 = nil
+gg_rct_royal_global_attack_15_left_1 = nil
+gg_rct_royal_global_attack_16_down_1 = nil
 function InitGlobals()
 end
 
@@ -312,8 +324,8 @@ gg_rct_royal_1_1_main = Rect(11872.0, 6560.0, 12384.0, 7072.0)
 gg_rct_royal_1_1_mine = Rect(12416.0, 6560.0, 12928.0, 7072.0)
 gg_rct_royal_1_1_spawn_1 = Rect(9184.0, 6080.0, 10272.0, 7168.0)
 gg_rct_royal_1_1_spawn_2 = Rect(11776.0, 8672.0, 12864.0, 9824.0)
-gg_rct_royal_team_1_base_1 = Rect(12864.0, 8928.0, 13472.0, 9568.0)
-gg_rct_royal_team_1_base_2 = Rect(9440.0, 5440.0, 10048.0, 6080.0)
+gg_rct_royal_team_1_base_1 = Rect(9440.0, 5440.0, 10048.0, 6080.0)
+gg_rct_royal_team_1_base_2 = Rect(12864.0, 8928.0, 13472.0, 9568.0)
 gg_rct_royal_1_1_laboratory = Rect(11872.0, 6016.0, 12384.0, 6528.0)
 gg_rct_royal_2_1_build_1 = Rect(18272.0, 7104.0, 19392.0, 8256.0)
 gg_rct_royal_2_1_build_2 = Rect(19424.0, 7104.0, 20544.0, 8256.0)
@@ -321,17 +333,29 @@ gg_rct_royal_2_1_main = Rect(19168.0, 6560.0, 19680.0, 7072.0)
 gg_rct_royal_2_1_mine = Rect(19712.0, 6560.0, 20224.0, 7072.0)
 gg_rct_royal_2_1_spawn_1 = Rect(18272.0, 8640.0, 19424.0, 9792.0)
 gg_rct_royal_2_1_spawn_2 = Rect(19392.0, 8640.0, 20544.0, 9792.0)
-gg_rct_royal_team_2_base_1 = Rect(20544.0, 8928.0, 21152.0, 9568.0)
-gg_rct_royal_team_2_base_2 = Rect(17600.0, 8896.0, 18208.0, 9536.0)
+gg_rct_royal_team_2_base_1 = Rect(17664.0, 8896.0, 18272.0, 9536.0)
+gg_rct_royal_team_2_base_2 = Rect(20544.0, 8896.0, 21152.0, 9536.0)
 gg_rct_royal_2_1_laboratory = Rect(18624.0, 6560.0, 19136.0, 7072.0)
-gg_rct_royal_team_2_attack_2_right_2 = Rect(19392.0, 7104.0, 28704.0, 11200.0)
-gg_rct_royal_team_2_attack_1_left_1 = Rect(10080.0, 7104.0, 19392.0, 11200.0)
-gg_rct_royal_team_1_attack_2_right_2 = Rect(8096.0, 3584.0, 25344.0, 7680.0)
-gg_rct_royal_team_1_attack_1_down_1 = Rect(4128.0, -17376.0, 8000.0, 7456.0)
+gg_rct_royal_global_attack_1_right_2 = Rect(11584.0, 7840.0, 29184.0, 11168.0)
+gg_rct_royal_global_attack_9_down_1 = Rect(7776.0, -17824.0, 11712.0, 8000.0)
 gg_rct_royal_1_1_worker_1 = Rect(10688.0, 6080.0, 11776.0, 7168.0)
 gg_rct_royal_1_1_worker_2 = Rect(11776.0, 7168.0, 12864.0, 8256.0)
 gg_rct_royal_2_1_worker_1 = Rect(18272.0, 7104.0, 19392.0, 8256.0)
 gg_rct_royal_2_1_worker_2 = Rect(19424.0, 7104.0, 20544.0, 8256.0)
+gg_rct_royal_global_attack_2_down_2 = Rect(29024.0, 7840.0, 32256.0, 11168.0)
+gg_rct_royal_global_attack_3_down_2 = Rect(27712.0, -17984.0, 32224.0, 8032.0)
+gg_rct_royal_global_attack_4_left_2 = Rect(27712.0, -19168.0, 32192.0, -17856.0)
+gg_rct_royal_global_attack_5_left_2 = Rect(9920.0, -19136.0, 27872.0, -16096.0)
+gg_rct_royal_global_attack_6_up_2 = Rect(7936.0, -19136.0, 10432.0, -16032.0)
+gg_rct_royal_global_attack_7_up_2 = Rect(7776.0, -16320.0, 11712.0, 9152.0)
+gg_rct_royal_global_attack_8_up_2 = Rect(7776.0, 9024.0, 11712.0, 11168.0)
+gg_rct_royal_global_attack_10_right_1 = Rect(7840.0, -19136.0, 11712.0, -17664.0)
+gg_rct_royal_global_attack_11_right_1 = Rect(11552.0, -19136.0, 29248.0, -16096.0)
+gg_rct_royal_global_attack_12_up_1 = Rect(29088.0, -19136.0, 32256.0, -16096.0)
+gg_rct_royal_global_attack_13_up_1 = Rect(27712.0, -16224.0, 32192.0, 9248.0)
+gg_rct_royal_global_attack_14_left_1 = Rect(27712.0, 9088.0, 32256.0, 11136.0)
+gg_rct_royal_global_attack_15_left_1 = Rect(9888.0, 7840.0, 27872.0, 11136.0)
+gg_rct_royal_global_attack_16_down_1 = Rect(7776.0, 7840.0, 10016.0, 11200.0)
 end
 
 --CUSTOM_CODE
@@ -1104,6 +1128,9 @@ function initRect()
             local attackData = regions[game_config.mode][team.i][player.i]['attack']
             if not attackData then
                 attackData = regions[game_config.mode]['team'][team.i]['attack']
+            end
+            if not attackData then
+                attackData = regions[game_config.mode]['global']['attack']
             end
 
             local directions = { 'right', 'left', 'up', 'down' }
