@@ -59,13 +59,25 @@ end
 function addWorkers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            CreateUnit(
-                    player.id,
-                    FourCC(units_special.builder),
-                    GetRectCenterX(player.workerRect),
-                    GetRectCenterY(player.workerRect),
-                    0
-            )
+            if type(player.workerRect) == "table" then
+                for _, rect in ipairs(player.workerRect) do
+                    CreateUnit(
+                            player.id,
+                            FourCC(units_special.builder),
+                            GetRectCenterX(rect),
+                            GetRectCenterY(rect),
+                            0
+                    )
+                end
+            else
+                CreateUnit(
+                        player.id,
+                        FourCC(units_special.builder),
+                        GetRectCenterX(player.workerRect),
+                        GetRectCenterY(player.workerRect),
+                        0
+                )
+            end
         end
     end
 end
@@ -150,7 +162,7 @@ end
 function setStartCameraPosition()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect))
+            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.mainRect), GetRectCenterY(player.mainRect))
         end
     end
 end

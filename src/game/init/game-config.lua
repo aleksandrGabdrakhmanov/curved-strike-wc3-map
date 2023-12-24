@@ -15,6 +15,14 @@ function initGameConfig(mode)
                 dif = 35
             },
             playerPosition = { 3, 4, 2, 1, 5 }
+        },
+        royal = {
+            unitRange = 1, -- 150%
+            spawnPolicy = {
+                interval = 0,
+                dif = 35
+            },
+            playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
         }
     }
 

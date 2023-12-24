@@ -15,6 +15,7 @@ function startGameUI()
 
     initModeButton("CurvedButton", 'curved')
     initModeButton("UnitedButton", 'united')
+    initModeButton("RoyalButton", 'royal')
     initUnitsAvailableButtons()
 end
 

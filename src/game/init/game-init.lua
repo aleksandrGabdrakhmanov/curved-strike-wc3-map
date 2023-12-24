@@ -112,20 +112,38 @@ end
 
 function createBaseAndTower()
     for _, team in ipairs(all_teams) do
-        CreateUnit(
-                team.base.player,
-                FourCC(units_special.base),
-                GetRectCenterX(team.base.baseRect),
-                GetRectCenterY(team.base.baseRect),
-                0
-        )
-        CreateUnit(
-                team.base.player,
-                FourCC(units_special.tower),
-                GetRectCenterX(team.base.towerRect),
-                GetRectCenterY(team.base.towerRect),
-                0
-        )
+        if type(team.base.baseRect) == "table" then
+            for _, rect in ipairs(team.base.baseRect) do
+                print('create base for team ' .. team.i)
+                print(rect)
+                print(team.base.player)
+                CreateUnit(
+                        team.base.player,
+                        FourCC(units_special.base),
+                        GetRectCenterX(rect),
+                        GetRectCenterY(rect),
+                        0
+                )
+            end
+        else
+            CreateUnit(
+                    team.base.player,
+                    FourCC(units_special.base),
+                    GetRectCenterX(team.base.baseRect),
+                    GetRectCenterY(team.base.baseRect),
+                    0
+            )
+        end
+
+        if team.base.towerRect ~= nil then
+            CreateUnit(
+                    team.base.player,
+                    FourCC(units_special.tower),
+                    GetRectCenterX(team.base.towerRect),
+                    GetRectCenterY(team.base.towerRect),
+                    0
+            )
+        end
     end
 end
 

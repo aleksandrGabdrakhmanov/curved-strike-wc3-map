@@ -56,6 +56,14 @@ Frame "BACKDROP" "StartGameMenu" {
                 Text "UNITED",
             }
         }
+        Frame "GLUETEXTBUTTON" "RoyalButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
+            Width 0.08,
+            SetPoint LEFT, "UnitedButton", RIGHT, 0.01, 0,
+            ButtonText "GameplayButtonText",
+            Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
+                Text "BATTLE ROYAL",
+            }
+        }
     }
      Frame "TEXT" "StartGameMenuModeSelecting" INHERITS "EscMenuTitleTextTemplate" {
         SetPoint TOP, "StartGameMenuMode", BOTTOM, 0, -0.015,

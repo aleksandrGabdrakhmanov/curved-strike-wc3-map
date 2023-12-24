@@ -50,21 +50,31 @@ function getHero(heroes, unit)
 end
 
 function processGroupForSpawn(player)
-    local groupForBuild = GetUnitsInRectAll(player.buildRect)
-    ForGroup(groupForBuild, function()
-        local unit = GetEnumUnit()
-        local id = GetUnitTypeId(unit)
-        local owner = GetOwningPlayer(unit)
-        if owner == player.id then
-            local x, y = calculateDif(player.buildRect, player.spawnRect, unit)
-            if isHero(('>I4'):pack(id)) then
-                handleHeroSpawn(player, unit, x, y)
-            else
-                handleUnitSpawn(player, id, x, y)
+    local function processRect(buildRect, spawnRect)
+        local groupForBuild = GetUnitsInRectAll(buildRect)
+        ForGroup(groupForBuild, function()
+            local unit = GetEnumUnit()
+            local id = GetUnitTypeId(unit)
+            local owner = GetOwningPlayer(unit)
+            if owner == player.id then
+                local x, y = calculateDif(buildRect, spawnRect, unit)
+                if isHero(('>I4'):pack(id)) then
+                    handleHeroSpawn(player, unit, x, y)
+                else
+                    handleUnitSpawn(player, id, x, y)
+                end
             end
+        end)
+        DestroyGroup(groupForBuild)
+    end
+
+    if type(player.buildRect) == "table" then
+        for i in ipairs(player.buildRect) do
+            processRect(player.buildRect[i], player.spawnRect[i])
         end
-    end)
-    DestroyGroup(groupForBuild)
+    else
+        processRect(player.buildRect, player.spawnRect)
+    end
 end
 
 function getParentUnitId(searchId)

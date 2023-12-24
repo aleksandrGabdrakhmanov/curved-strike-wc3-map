@@ -158,6 +158,10 @@ gg_rct_royal_team_2_attack_2_right = nil
 gg_rct_royal_team_2_attack_1_left = nil
 gg_rct_royal_team_1_attack_2_right = nil
 gg_rct_royal_team_1_attack_1_down = nil
+gg_rct_royal_1_1_worker_1 = nil
+gg_rct_royal_1_1_worker_2 = nil
+gg_rct_royal_2_1_worker_1 = nil
+gg_rct_royal_2_1_worker_2 = nil
 function InitGlobals()
 end
 
@@ -306,8 +310,8 @@ gg_rct_royal_1_1_build_1 = Rect(10688.0, 6080.0, 11840.0, 7232.0)
 gg_rct_royal_1_1_build_2 = Rect(11712.0, 7104.0, 12864.0, 8256.0)
 gg_rct_royal_1_1_main = Rect(11872.0, 6560.0, 12384.0, 7072.0)
 gg_rct_royal_1_1_mine = Rect(12416.0, 6560.0, 12928.0, 7072.0)
-gg_rct_royal_1_1_spawn_1 = Rect(11712.0, 8640.0, 12864.0, 9792.0)
-gg_rct_royal_1_1_spawn_2 = Rect(9152.0, 6080.0, 10304.0, 7232.0)
+gg_rct_royal_1_1_spawn_1 = Rect(9184.0, 6080.0, 10336.0, 7232.0)
+gg_rct_royal_1_1_spawn_2 = Rect(11712.0, 8672.0, 12864.0, 9824.0)
 gg_rct_royal_team_1_base_1 = Rect(12864.0, 8928.0, 13472.0, 9568.0)
 gg_rct_royal_team_1_base_2 = Rect(9440.0, 5440.0, 10048.0, 6080.0)
 gg_rct_royal_1_1_laboratory = Rect(11872.0, 6016.0, 12384.0, 6528.0)
@@ -315,15 +319,19 @@ gg_rct_royal_2_1_build_1 = Rect(18272.0, 7104.0, 19424.0, 8256.0)
 gg_rct_royal_2_1_build_2 = Rect(19392.0, 7104.0, 20544.0, 8256.0)
 gg_rct_royal_2_1_main = Rect(19168.0, 6560.0, 19680.0, 7072.0)
 gg_rct_royal_2_1_mine = Rect(19712.0, 6560.0, 20224.0, 7072.0)
-gg_rct_royal_2_1_spawn_1 = Rect(19360.0, 8672.0, 20512.0, 9824.0)
-gg_rct_royal_2_1_spawn_2 = Rect(18240.0, 8672.0, 19392.0, 9824.0)
+gg_rct_royal_2_1_spawn_1 = Rect(18272.0, 8640.0, 19424.0, 9792.0)
+gg_rct_royal_2_1_spawn_2 = Rect(19392.0, 8640.0, 20544.0, 9792.0)
 gg_rct_royal_team_2_base_1 = Rect(20544.0, 8928.0, 21152.0, 9568.0)
 gg_rct_royal_team_2_base_2 = Rect(17600.0, 8896.0, 18208.0, 9536.0)
 gg_rct_royal_2_1_laboratory = Rect(18624.0, 6560.0, 19136.0, 7072.0)
 gg_rct_royal_team_2_attack_2_right = Rect(19392.0, 7104.0, 28704.0, 11200.0)
 gg_rct_royal_team_2_attack_1_left = Rect(10080.0, 7104.0, 19392.0, 11200.0)
-gg_rct_royal_team_1_attack_2_right = Rect(11712.0, 7104.0, 28704.0, 11200.0)
-gg_rct_royal_team_1_attack_1_down = Rect(7808.0, -17408.0, 11680.0, 7232.0)
+gg_rct_royal_team_1_attack_2_right = Rect(11456.0, 7104.0, 28704.0, 11200.0)
+gg_rct_royal_team_1_attack_1_down = Rect(7808.0, -17408.0, 11680.0, 7424.0)
+gg_rct_royal_1_1_worker_1 = Rect(10688.0, 6080.0, 11840.0, 7232.0)
+gg_rct_royal_1_1_worker_2 = Rect(11712.0, 7104.0, 12864.0, 8256.0)
+gg_rct_royal_2_1_worker_1 = Rect(18272.0, 7104.0, 19424.0, 8256.0)
+gg_rct_royal_2_1_worker_2 = Rect(19392.0, 7104.0, 20544.0, 8256.0)
 end
 
 --CUSTOM_CODE
@@ -848,6 +856,14 @@ function initGameConfig(mode)
                 dif = 35
             },
             playerPosition = { 3, 4, 2, 1, 5 }
+        },
+        royal = {
+            unitRange = 1, -- 150%
+            spawnPolicy = {
+                interval = 0,
+                dif = 35
+            },
+            playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
         }
     }
 
@@ -1105,20 +1121,38 @@ end
 
 function createBaseAndTower()
     for _, team in ipairs(all_teams) do
-        CreateUnit(
-                team.base.player,
-                FourCC(units_special.base),
-                GetRectCenterX(team.base.baseRect),
-                GetRectCenterY(team.base.baseRect),
-                0
-        )
-        CreateUnit(
-                team.base.player,
-                FourCC(units_special.tower),
-                GetRectCenterX(team.base.towerRect),
-                GetRectCenterY(team.base.towerRect),
-                0
-        )
+        if type(team.base.baseRect) == "table" then
+            for _, rect in ipairs(team.base.baseRect) do
+                print('create base for team ' .. team.i)
+                print(rect)
+                print(team.base.player)
+                CreateUnit(
+                        team.base.player,
+                        FourCC(units_special.base),
+                        GetRectCenterX(rect),
+                        GetRectCenterY(rect),
+                        0
+                )
+            end
+        else
+            CreateUnit(
+                    team.base.player,
+                    FourCC(units_special.base),
+                    GetRectCenterX(team.base.baseRect),
+                    GetRectCenterY(team.base.baseRect),
+                    0
+            )
+        end
+
+        if team.base.towerRect ~= nil then
+            CreateUnit(
+                    team.base.player,
+                    FourCC(units_special.tower),
+                    GetRectCenterX(team.base.towerRect),
+                    GetRectCenterY(team.base.towerRect),
+                    0
+            )
+        end
     end
 end
 
@@ -1219,13 +1253,25 @@ end
 function addWorkers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            CreateUnit(
-                    player.id,
-                    FourCC(units_special.builder),
-                    GetRectCenterX(player.workerRect),
-                    GetRectCenterY(player.workerRect),
-                    0
-            )
+            if type(player.workerRect) == "table" then
+                for _, rect in ipairs(player.workerRect) do
+                    CreateUnit(
+                            player.id,
+                            FourCC(units_special.builder),
+                            GetRectCenterX(rect),
+                            GetRectCenterY(rect),
+                            0
+                    )
+                end
+            else
+                CreateUnit(
+                        player.id,
+                        FourCC(units_special.builder),
+                        GetRectCenterX(player.workerRect),
+                        GetRectCenterY(player.workerRect),
+                        0
+                )
+            end
         end
     end
 end
@@ -1310,7 +1356,7 @@ end
 function setStartCameraPosition()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect))
+            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.mainRect), GetRectCenterY(player.mainRect))
         end
     end
 end
@@ -1352,25 +1398,7 @@ end)
 function startGame(mode)
     initMain(mode)
     initialUI()
-    initTimers()
     initTriggers()
-end
-
-function initTimers()
-
---[[    local timer = CreateTimer()
-    TimerStart(timer,1,true, function()
-        for _, team in ipairs(all_teams) do
-            for _, player in ipairs(team.players) do
-                local text = BlzFrameGetChild(player.statePanel, 0)
-                BlzFrameSetText(text, "Next wave: " .. player.spawnTimer)
-                if team.i == 1 then
-                    print('Team: ' .. team.i .. ' Player: ' .. player.i .. '; delay: ' .. player.spawnTimer)
-                end
-                player.spawnTimer = player.spawnTimer - 1
-            end
-        end
-    end)]]
 end
 function debugTrigger()
 
@@ -1586,7 +1614,13 @@ function heroResearchTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_RESEARCH_FINISH)
             TriggerAddAction(trig, function()
                 if (GetResearched() == FourCC(upgrades_special.summonHeroBuilder)) then
-                    CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(player.buildRect), GetRectCenterY(player.buildRect), 270)
+                    if type(player.workerRect) == "table" then
+                        for _, rect in ipairs(player.workerRect) do
+                            CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(rect), GetRectCenterY(rect), 270)
+                        end
+                    else
+                        CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect), 270)
+                    end
                 end
             end)
         end
@@ -1738,21 +1772,31 @@ function getHero(heroes, unit)
 end
 
 function processGroupForSpawn(player)
-    local groupForBuild = GetUnitsInRectAll(player.buildRect)
-    ForGroup(groupForBuild, function()
-        local unit = GetEnumUnit()
-        local id = GetUnitTypeId(unit)
-        local owner = GetOwningPlayer(unit)
-        if owner == player.id then
-            local x, y = calculateDif(player.buildRect, player.spawnRect, unit)
-            if isHero(('>I4'):pack(id)) then
-                handleHeroSpawn(player, unit, x, y)
-            else
-                handleUnitSpawn(player, id, x, y)
+    local function processRect(buildRect, spawnRect)
+        local groupForBuild = GetUnitsInRectAll(buildRect)
+        ForGroup(groupForBuild, function()
+            local unit = GetEnumUnit()
+            local id = GetUnitTypeId(unit)
+            local owner = GetOwningPlayer(unit)
+            if owner == player.id then
+                local x, y = calculateDif(buildRect, spawnRect, unit)
+                if isHero(('>I4'):pack(id)) then
+                    handleHeroSpawn(player, unit, x, y)
+                else
+                    handleUnitSpawn(player, id, x, y)
+                end
             end
+        end)
+        DestroyGroup(groupForBuild)
+    end
+
+    if type(player.buildRect) == "table" then
+        for i in ipairs(player.buildRect) do
+            processRect(player.buildRect[i], player.spawnRect[i])
         end
-    end)
-    DestroyGroup(groupForBuild)
+    else
+        processRect(player.buildRect, player.spawnRect)
+    end
 end
 
 function getParentUnitId(searchId)
@@ -1904,6 +1948,7 @@ function startGameUI()
 
     initModeButton("CurvedButton", 'curved')
     initModeButton("UnitedButton", 'united')
+    initModeButton("RoyalButton", 'royal')
     initUnitsAvailableButtons()
 end
 
