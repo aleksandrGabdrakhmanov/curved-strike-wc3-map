@@ -306,8 +306,8 @@ gg_rct_united_team_2_attack_1_left = Rect(-7136.0, -7360.0, 3936.0, -2272.0)
 gg_rct_united_team_2_attack_2_down = Rect(-9856.0, -3680.0, -6976.0, -2272.0)
 gg_rct_united_team_2_attack_3_up = Rect(-9856.0, -7328.0, -7008.0, -5152.0)
 gg_rct_united_team_2_attack_4_left = Rect(-9856.0, -5344.0, -6976.0, -3488.0)
-gg_rct_royal_1_1_build_1 = Rect(10688.0, 6080.0, 11840.0, 7232.0)
-gg_rct_royal_1_1_build_2 = Rect(11712.0, 7104.0, 12864.0, 8256.0)
+gg_rct_royal_1_1_build_1 = Rect(10688.0, 6080.0, 11776.0, 7168.0)
+gg_rct_royal_1_1_build_2 = Rect(11776.0, 7168.0, 12864.0, 8256.0)
 gg_rct_royal_1_1_main = Rect(11872.0, 6560.0, 12384.0, 7072.0)
 gg_rct_royal_1_1_mine = Rect(12416.0, 6560.0, 12928.0, 7072.0)
 gg_rct_royal_1_1_spawn_1 = Rect(9184.0, 6080.0, 10336.0, 7232.0)
@@ -315,8 +315,8 @@ gg_rct_royal_1_1_spawn_2 = Rect(11712.0, 8672.0, 12864.0, 9824.0)
 gg_rct_royal_team_1_base_1 = Rect(12864.0, 8928.0, 13472.0, 9568.0)
 gg_rct_royal_team_1_base_2 = Rect(9440.0, 5440.0, 10048.0, 6080.0)
 gg_rct_royal_1_1_laboratory = Rect(11872.0, 6016.0, 12384.0, 6528.0)
-gg_rct_royal_2_1_build_1 = Rect(18272.0, 7104.0, 19424.0, 8256.0)
-gg_rct_royal_2_1_build_2 = Rect(19392.0, 7104.0, 20544.0, 8256.0)
+gg_rct_royal_2_1_build_1 = Rect(18272.0, 7104.0, 19392.0, 8256.0)
+gg_rct_royal_2_1_build_2 = Rect(19424.0, 7104.0, 20544.0, 8256.0)
 gg_rct_royal_2_1_main = Rect(19168.0, 6560.0, 19680.0, 7072.0)
 gg_rct_royal_2_1_mine = Rect(19712.0, 6560.0, 20224.0, 7072.0)
 gg_rct_royal_2_1_spawn_1 = Rect(18272.0, 8640.0, 19424.0, 9792.0)
@@ -328,10 +328,10 @@ gg_rct_royal_team_2_attack_2_right = Rect(19392.0, 7104.0, 28704.0, 11200.0)
 gg_rct_royal_team_2_attack_1_left = Rect(10080.0, 7104.0, 19392.0, 11200.0)
 gg_rct_royal_team_1_attack_2_right = Rect(11456.0, 7104.0, 28704.0, 11200.0)
 gg_rct_royal_team_1_attack_1_down = Rect(7808.0, -17408.0, 11680.0, 7424.0)
-gg_rct_royal_1_1_worker_1 = Rect(10688.0, 6080.0, 11840.0, 7232.0)
+gg_rct_royal_1_1_worker_1 = Rect(10688.0, 6080.0, 11776.0, 7168.0)
 gg_rct_royal_1_1_worker_2 = Rect(11712.0, 7104.0, 12864.0, 8256.0)
-gg_rct_royal_2_1_worker_1 = Rect(18272.0, 7104.0, 19424.0, 8256.0)
-gg_rct_royal_2_1_worker_2 = Rect(19392.0, 7104.0, 20544.0, 8256.0)
+gg_rct_royal_2_1_worker_1 = Rect(18272.0, 7104.0, 19392.0, 8256.0)
+gg_rct_royal_2_1_worker_2 = Rect(19424.0, 7104.0, 20544.0, 8256.0)
 end
 
 --CUSTOM_CODE
@@ -1615,9 +1615,7 @@ function heroResearchTrigger()
             TriggerAddAction(trig, function()
                 if (GetResearched() == FourCC(upgrades_special.summonHeroBuilder)) then
                     if type(player.workerRect) == "table" then
-                        for _, rect in ipairs(player.workerRect) do
-                            CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(rect), GetRectCenterY(rect), 270)
-                        end
+                        CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(player.workerRect[1]), GetRectCenterY(player.workerRect[1]), 270)
                     else
                         CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect), 270)
                     end
