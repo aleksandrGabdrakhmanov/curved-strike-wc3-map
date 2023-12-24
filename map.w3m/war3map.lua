@@ -154,10 +154,10 @@ gg_rct_royal_2_1_spawn_2 = nil
 gg_rct_royal_team_2_base_1 = nil
 gg_rct_royal_team_2_base_2 = nil
 gg_rct_royal_2_1_laboratory = nil
-gg_rct_royal_team_2_attack_2_right = nil
-gg_rct_royal_team_2_attack_1_left = nil
-gg_rct_royal_team_1_attack_2_right = nil
-gg_rct_royal_team_1_attack_1_down = nil
+gg_rct_royal_team_2_attack_2_right_2 = nil
+gg_rct_royal_team_2_attack_1_left_1 = nil
+gg_rct_royal_team_1_attack_2_right_2 = nil
+gg_rct_royal_team_1_attack_1_down_1 = nil
 gg_rct_royal_1_1_worker_1 = nil
 gg_rct_royal_1_1_worker_2 = nil
 gg_rct_royal_2_1_worker_1 = nil
@@ -310,8 +310,8 @@ gg_rct_royal_1_1_build_1 = Rect(10688.0, 6080.0, 11776.0, 7168.0)
 gg_rct_royal_1_1_build_2 = Rect(11776.0, 7168.0, 12864.0, 8256.0)
 gg_rct_royal_1_1_main = Rect(11872.0, 6560.0, 12384.0, 7072.0)
 gg_rct_royal_1_1_mine = Rect(12416.0, 6560.0, 12928.0, 7072.0)
-gg_rct_royal_1_1_spawn_1 = Rect(9184.0, 6080.0, 10336.0, 7232.0)
-gg_rct_royal_1_1_spawn_2 = Rect(11712.0, 8672.0, 12864.0, 9824.0)
+gg_rct_royal_1_1_spawn_1 = Rect(9184.0, 6080.0, 10272.0, 7168.0)
+gg_rct_royal_1_1_spawn_2 = Rect(11776.0, 8672.0, 12864.0, 9824.0)
 gg_rct_royal_team_1_base_1 = Rect(12864.0, 8928.0, 13472.0, 9568.0)
 gg_rct_royal_team_1_base_2 = Rect(9440.0, 5440.0, 10048.0, 6080.0)
 gg_rct_royal_1_1_laboratory = Rect(11872.0, 6016.0, 12384.0, 6528.0)
@@ -324,12 +324,12 @@ gg_rct_royal_2_1_spawn_2 = Rect(19392.0, 8640.0, 20544.0, 9792.0)
 gg_rct_royal_team_2_base_1 = Rect(20544.0, 8928.0, 21152.0, 9568.0)
 gg_rct_royal_team_2_base_2 = Rect(17600.0, 8896.0, 18208.0, 9536.0)
 gg_rct_royal_2_1_laboratory = Rect(18624.0, 6560.0, 19136.0, 7072.0)
-gg_rct_royal_team_2_attack_2_right = Rect(19392.0, 7104.0, 28704.0, 11200.0)
-gg_rct_royal_team_2_attack_1_left = Rect(10080.0, 7104.0, 19392.0, 11200.0)
-gg_rct_royal_team_1_attack_2_right = Rect(11456.0, 7104.0, 28704.0, 11200.0)
-gg_rct_royal_team_1_attack_1_down = Rect(7808.0, -17408.0, 11680.0, 7424.0)
+gg_rct_royal_team_2_attack_2_right_2 = Rect(19392.0, 7104.0, 28704.0, 11200.0)
+gg_rct_royal_team_2_attack_1_left_1 = Rect(10080.0, 7104.0, 19392.0, 11200.0)
+gg_rct_royal_team_1_attack_2_right_2 = Rect(8096.0, 3584.0, 25344.0, 7680.0)
+gg_rct_royal_team_1_attack_1_down_1 = Rect(4128.0, -17376.0, 8000.0, 7456.0)
 gg_rct_royal_1_1_worker_1 = Rect(10688.0, 6080.0, 11776.0, 7168.0)
-gg_rct_royal_1_1_worker_2 = Rect(11712.0, 7104.0, 12864.0, 8256.0)
+gg_rct_royal_1_1_worker_2 = Rect(11776.0, 7168.0, 12864.0, 8256.0)
 gg_rct_royal_2_1_worker_1 = Rect(18272.0, 7104.0, 19392.0, 8256.0)
 gg_rct_royal_2_1_worker_2 = Rect(19424.0, 7104.0, 20544.0, 8256.0)
 end
@@ -1106,11 +1106,19 @@ function initRect()
                 attackData = regions[game_config.mode]['team'][team.i]['attack']
             end
 
-            local directions = {'right', 'left', 'up', 'down'}
+            local directions = { 'right', 'left', 'up', 'down' }
             for i, data in ipairs(attackData) do
                 for _, dir in ipairs(directions) do
                     if data[dir] then
-                        player.attackPointRect[i] = {rect = data[dir], direction = dir}
+                        if type(data[dir]) == 'table' then
+                            if data[dir][1] ~= nil then
+                                player.attackPointRect[i] = { rect = data[dir][1], direction = dir, label = 1 }
+                            elseif data[dir][2] ~= nil then
+                                player.attackPointRect[i] = { rect = data[dir][2], direction = dir, label = 2 }
+                            end
+                        else
+                            player.attackPointRect[i] = { rect = data[dir], direction = dir, label = nil }
+                        end
                         break
                     end
                 end
@@ -1123,9 +1131,6 @@ function createBaseAndTower()
     for _, team in ipairs(all_teams) do
         if type(team.base.baseRect) == "table" then
             for _, rect in ipairs(team.base.baseRect) do
-                print('create base for team ' .. team.i)
-                print(rect)
-                print(team.base.player)
                 CreateUnit(
                         team.base.player,
                         FourCC(units_special.base),
@@ -1677,8 +1682,9 @@ function moveByPointsTrigger()
                     local group = GetUnitsInRectAll(player.attackPointRect[i].rect)
                     ForGroup(group, function ()
                         local unit = GetEnumUnit()
+                        local label = GetUnitUserData(unit)
                         local owner = GetOwningPlayer(unit)
-                        if owner == player.spawnPlayerId then
+                        if owner == player.spawnPlayerId and label == player.attackPointRect[i].label then
                             if GetUnitCurrentOrder(unit) == 0 or
                                     GetUnitCurrentOrder(unit) == 851983 then
                                 moveByLocation(player.attackPointRect[i], unit)
@@ -1736,22 +1742,24 @@ function spawnTrigger()
     end)
 end
 
-function handleUnitSpawn(player, id, x, y)
+function handleUnitSpawn(player, id, x, y, label)
     local parentId = getParentUnitId(('>I4'):pack(id))
     if parentId then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
         SetUnitColor(unit, GetPlayerColor(player.id))
+        SetUnitUserData( unit, label)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
     end
 end
 
-function handleHeroSpawn(player, unit, x, y)
+function handleHeroSpawn(player, unit, x, y, label)
     local unitId = GetUnitTypeId(unit)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
         SetUnitColor(unit, GetPlayerColor(player.id))
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+        SetUnitUserData( unit, label)
         hero.status = "alive"
         hero.unit = unit
     elseif hero.status == "dead" then
@@ -1770,7 +1778,7 @@ function getHero(heroes, unit)
 end
 
 function processGroupForSpawn(player)
-    local function processRect(buildRect, spawnRect)
+    local function processRect(buildRect, spawnRect, label)
         local groupForBuild = GetUnitsInRectAll(buildRect)
         ForGroup(groupForBuild, function()
             local unit = GetEnumUnit()
@@ -1779,9 +1787,9 @@ function processGroupForSpawn(player)
             if owner == player.id then
                 local x, y = calculateDif(buildRect, spawnRect, unit)
                 if isHero(('>I4'):pack(id)) then
-                    handleHeroSpawn(player, unit, x, y)
+                    handleHeroSpawn(player, unit, x, y, label)
                 else
-                    handleUnitSpawn(player, id, x, y)
+                    handleUnitSpawn(player, id, x, y, label)
                 end
             end
         end)
@@ -1790,10 +1798,10 @@ function processGroupForSpawn(player)
 
     if type(player.buildRect) == "table" then
         for i in ipairs(player.buildRect) do
-            processRect(player.buildRect[i], player.spawnRect[i])
+            processRect(player.buildRect[i], player.spawnRect[i], i)
         end
     else
-        processRect(player.buildRect, player.spawnRect)
+        processRect(player.buildRect, player.spawnRect, nil)
     end
 end
 

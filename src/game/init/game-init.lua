@@ -97,11 +97,19 @@ function initRect()
                 attackData = regions[game_config.mode]['team'][team.i]['attack']
             end
 
-            local directions = {'right', 'left', 'up', 'down'}
+            local directions = { 'right', 'left', 'up', 'down' }
             for i, data in ipairs(attackData) do
                 for _, dir in ipairs(directions) do
                     if data[dir] then
-                        player.attackPointRect[i] = {rect = data[dir], direction = dir}
+                        if type(data[dir]) == 'table' then
+                            if data[dir][1] ~= nil then
+                                player.attackPointRect[i] = { rect = data[dir][1], direction = dir, label = 1 }
+                            elseif data[dir][2] ~= nil then
+                                player.attackPointRect[i] = { rect = data[dir][2], direction = dir, label = 2 }
+                            end
+                        else
+                            player.attackPointRect[i] = { rect = data[dir], direction = dir, label = nil }
+                        end
                         break
                     end
                 end
@@ -114,9 +122,6 @@ function createBaseAndTower()
     for _, team in ipairs(all_teams) do
         if type(team.base.baseRect) == "table" then
             for _, rect in ipairs(team.base.baseRect) do
-                print('create base for team ' .. team.i)
-                print(rect)
-                print(team.base.player)
                 CreateUnit(
                         team.base.player,
                         FourCC(units_special.base),

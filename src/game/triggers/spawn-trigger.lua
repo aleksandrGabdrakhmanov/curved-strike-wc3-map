@@ -16,22 +16,24 @@ function spawnTrigger()
     end)
 end
 
-function handleUnitSpawn(player, id, x, y)
+function handleUnitSpawn(player, id, x, y, label)
     local parentId = getParentUnitId(('>I4'):pack(id))
     if parentId then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
         SetUnitColor(unit, GetPlayerColor(player.id))
+        SetUnitUserData( unit, label)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
     end
 end
 
-function handleHeroSpawn(player, unit, x, y)
+function handleHeroSpawn(player, unit, x, y, label)
     local unitId = GetUnitTypeId(unit)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
         SetUnitColor(unit, GetPlayerColor(player.id))
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+        SetUnitUserData( unit, label)
         hero.status = "alive"
         hero.unit = unit
     elseif hero.status == "dead" then
@@ -50,7 +52,7 @@ function getHero(heroes, unit)
 end
 
 function processGroupForSpawn(player)
-    local function processRect(buildRect, spawnRect)
+    local function processRect(buildRect, spawnRect, label)
         local groupForBuild = GetUnitsInRectAll(buildRect)
         ForGroup(groupForBuild, function()
             local unit = GetEnumUnit()
@@ -59,9 +61,9 @@ function processGroupForSpawn(player)
             if owner == player.id then
                 local x, y = calculateDif(buildRect, spawnRect, unit)
                 if isHero(('>I4'):pack(id)) then
-                    handleHeroSpawn(player, unit, x, y)
+                    handleHeroSpawn(player, unit, x, y, label)
                 else
-                    handleUnitSpawn(player, id, x, y)
+                    handleUnitSpawn(player, id, x, y, label)
                 end
             end
         end)
@@ -70,10 +72,10 @@ function processGroupForSpawn(player)
 
     if type(player.buildRect) == "table" then
         for i in ipairs(player.buildRect) do
-            processRect(player.buildRect[i], player.spawnRect[i])
+            processRect(player.buildRect[i], player.spawnRect[i], i)
         end
     else
-        processRect(player.buildRect, player.spawnRect)
+        processRect(player.buildRect, player.spawnRect, nil)
     end
 end
 

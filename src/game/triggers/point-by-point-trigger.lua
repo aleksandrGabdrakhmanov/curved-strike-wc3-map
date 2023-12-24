@@ -9,8 +9,9 @@ function moveByPointsTrigger()
                     local group = GetUnitsInRectAll(player.attackPointRect[i].rect)
                     ForGroup(group, function ()
                         local unit = GetEnumUnit()
+                        local label = GetUnitUserData(unit)
                         local owner = GetOwningPlayer(unit)
-                        if owner == player.spawnPlayerId then
+                        if owner == player.spawnPlayerId and label == player.attackPointRect[i].label then
                             if GetUnitCurrentOrder(unit) == 0 or
                                     GetUnitCurrentOrder(unit) == 851983 then
                                 moveByLocation(player.attackPointRect[i], unit)
