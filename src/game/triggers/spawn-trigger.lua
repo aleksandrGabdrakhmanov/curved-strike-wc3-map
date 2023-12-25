@@ -37,6 +37,7 @@ function handleHeroSpawn(player, unit, x, y, label)
     elseif hero.status == "dead" then
         hero.status = "alive"
         ReviveHeroLoc(hero.unit, Location(x, y), false)
+        SetUnitManaPercentBJ(hero.unit, 100)
     end
 end
 
@@ -73,7 +74,7 @@ function processGroupForSpawn(player)
             processRect(player.buildRect[i], player.spawnRect[i], i)
         end
     else
-        processRect(player.buildRect, player.spawnRect, nil)
+        processRect(player.buildRect, player.spawnRect, 0)
     end
 end
 
