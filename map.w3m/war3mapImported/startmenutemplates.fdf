@@ -3,7 +3,7 @@ IncludeFile "UI\FrameDef\ui\escmenumainpanel.fdf",
 IncludeFile "UI\FrameDef\ui\questdialog.fdf",
 IncludeFile "UI\FrameDef\glue\battlenetprofilepanel.fdf",
 Frame "BACKDROP" "StartGameMenu" {
-    Width 0.35,
+    Width 0.4,
     Height 0.45,
     DecorateFileNames,
     BackdropTileBackground,
@@ -35,7 +35,7 @@ Frame "BACKDROP" "StartGameMenu" {
     Frame "Frame" "StartGameMenuMode" {
         Width 0.28,
         Height 0.06,
-        SetPoint BOTTOM, "StartGameMenu", BOTTOM, 0.03, 0,
+        SetPoint BOTTOMLEFT, "StartGameMenu", BOTTOMLEFT, 0.03, 0.03,
         Frame "TEXT" "StartGameMenuModeText" INHERITS "EscMenuTitleTextTemplate" {
             SetPoint LEFT, "StartGameMenuMode", LEFT, 0, 0.015,
             Text "Mode:",
