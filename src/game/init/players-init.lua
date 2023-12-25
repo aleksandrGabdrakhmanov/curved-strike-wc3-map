@@ -1,13 +1,3 @@
-function initPlayers()
-    setAllianceBetweenSpawnPlayers()
-    setAllianceBetweenPlayers()
-    setAllianceBetweenPlayersAndSpawnPlayers()
-    addWorkers()
-    changeAvailableUnitsForPlayers()
-    setStartCameraPosition()
-    initPanelForAllPlayers()
-end
-
 function setAllianceBetweenSpawnPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(getAllSpawnPlayers(team)) do
@@ -19,6 +9,23 @@ function setAllianceBetweenSpawnPlayers()
             end
         end
     end
+end
+
+function setEnemyBetweenPlayers()
+    local players = {}
+    ForForce(GetPlayersAll(), function()
+        table.insert(players, GetEnumPlayer())
+    end)
+
+    for _, player in ipairs(players) do
+        for _, anotherPlayer in ipairs(players) do
+            if player ~= anotherPlayer then
+                SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_UNALLIED)
+                SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_UNALLIED)
+            end
+        end
+    end
+
 end
 
 function getAllSpawnPlayers(team)
@@ -48,10 +55,21 @@ function setAllianceBetweenPlayersAndSpawnPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             for _, spawnPlayer in ipairs(getAllSpawnPlayers(team)) do
+                SetPlayerName(spawnPlayer, GetPlayerName(player.id))
+                SetPlayerColor(spawnPlayer, GetPlayerColor(player.id))
                 SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
                 SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
                 SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
             end
+        end
+    end
+end
+
+function changeColorAndNameSpawnPlayers()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            SetPlayerName(player.spawnPlayerId, GetPlayerName(player.id))
+            SetPlayerColor(player.spawnPlayerId, GetPlayerColor(player.id))
         end
     end
 end

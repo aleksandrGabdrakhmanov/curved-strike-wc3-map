@@ -9,6 +9,7 @@ function initTriggers()
     spellFinishTrigger()
     spawnTrigger()
     initHeroTriggers()
+    summonTrigger()
     debugTrigger()
     debugTriggerGold()
 end

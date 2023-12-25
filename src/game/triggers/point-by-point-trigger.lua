@@ -11,7 +11,7 @@ function moveByPointsTrigger()
                         local unit = GetEnumUnit()
                         local label = GetUnitUserData(unit)
                         local owner = GetOwningPlayer(unit)
-                        if owner == player.spawnPlayerId and label == player.attackPointRect[i].label then
+                        if owner == player.spawnPlayerId and (label == player.attackPointRect[i].label or label == 0) then
                             if GetUnitCurrentOrder(unit) == 0 or
                                     GetUnitCurrentOrder(unit) == 851983 then
                                 moveByLocation(player.attackPointRect[i], unit)

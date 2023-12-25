@@ -1212,8 +1212,19 @@ function initGame(mode)
     SetTimeOfDay(12)
     initTeams(mode)
     initRect()
+
+    setEnemyBetweenPlayers()
+    setAllianceBetweenSpawnPlayers()
+    setAllianceBetweenPlayers()
+    setAllianceBetweenPlayersAndSpawnPlayers()
+    changeColorAndNameSpawnPlayers()
+    changeAvailableUnitsForPlayers()
+
     createBaseAndTower()
+    addWorkers()
+    setStartCameraPosition()
     createBuildingsForPlayers()
+    initPanelForAllPlayers()
 end
 
 function initTeams(mode)
@@ -1224,7 +1235,7 @@ function initTeams(mode)
             i = 1,
             players = addPlayersInTeam(players_team_left),
             base = {
-                player = Player(16),
+                player = Player(17),
                 winTeam = 2,
                 baseRect = nil,
                 towerRect = nil
@@ -1244,7 +1255,6 @@ function initTeams(mode)
         local teamId = 1
         for _, player in ipairs(mergeSequences(players_team_left, players_team_right)) do
             if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
-                print('add team! ' .. teamId)
                 all_teams[teamId] = {
                     i = teamId,
                     players = addPlayersInTeam({ player }),
@@ -1429,18 +1439,7 @@ function initMain(mode)
     initRegions()
     initGameConfig(mode)
     initGame(mode)
-    initPlayers()
 end
-function initPlayers()
-    setAllianceBetweenSpawnPlayers()
-    setAllianceBetweenPlayers()
-    setAllianceBetweenPlayersAndSpawnPlayers()
-    addWorkers()
-    changeAvailableUnitsForPlayers()
-    setStartCameraPosition()
-    initPanelForAllPlayers()
-end
-
 function setAllianceBetweenSpawnPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(getAllSpawnPlayers(team)) do
@@ -1452,6 +1451,23 @@ function setAllianceBetweenSpawnPlayers()
             end
         end
     end
+end
+
+function setEnemyBetweenPlayers()
+    local players = {}
+    ForForce(GetPlayersAll(), function()
+        table.insert(players, GetEnumPlayer())
+    end)
+
+    for _, player in ipairs(players) do
+        for _, anotherPlayer in ipairs(players) do
+            if player ~= anotherPlayer then
+                SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_UNALLIED)
+                SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_UNALLIED)
+            end
+        end
+    end
+
 end
 
 function getAllSpawnPlayers(team)
@@ -1481,10 +1497,21 @@ function setAllianceBetweenPlayersAndSpawnPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             for _, spawnPlayer in ipairs(getAllSpawnPlayers(team)) do
+                SetPlayerName(spawnPlayer, GetPlayerName(player.id))
+                SetPlayerColor(spawnPlayer, GetPlayerColor(player.id))
                 SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
                 SetPlayerAllianceStateBJ(player.id, spawnPlayer, bj_ALLIANCE_ALLIED_VISION)
                 SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
             end
+        end
+    end
+end
+
+function changeColorAndNameSpawnPlayers()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            SetPlayerName(player.spawnPlayerId, GetPlayerName(player.id))
+            SetPlayerColor(player.spawnPlayerId, GetPlayerColor(player.id))
         end
     end
 end
@@ -1902,6 +1929,7 @@ function initTriggers()
     spellFinishTrigger()
     spawnTrigger()
     initHeroTriggers()
+    summonTrigger()
     debugTrigger()
     debugTriggerGold()
 end
@@ -1918,7 +1946,7 @@ function moveByPointsTrigger()
                         local unit = GetEnumUnit()
                         local label = GetUnitUserData(unit)
                         local owner = GetOwningPlayer(unit)
-                        if owner == player.spawnPlayerId and label == player.attackPointRect[i].label then
+                        if owner == player.spawnPlayerId and (label == player.attackPointRect[i].label or label == 0) then
                             if GetUnitCurrentOrder(unit) == 0 or
                                     GetUnitCurrentOrder(unit) == 851983 then
                                 moveByLocation(player.attackPointRect[i], unit)
@@ -1980,7 +2008,6 @@ function handleUnitSpawn(player, id, x, y, label)
     local parentId = getParentUnitId(('>I4'):pack(id))
     if parentId then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-        SetUnitColor(unit, GetPlayerColor(player.id))
         SetUnitUserData( unit, label)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
     end
@@ -1991,7 +2018,6 @@ function handleHeroSpawn(player, unit, x, y, label)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
-        SetUnitColor(unit, GetPlayerColor(player.id))
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         SetUnitUserData( unit, label)
         hero.status = "alive"
@@ -2147,6 +2173,13 @@ function getAttackPointRect(castPlayer)
             end
         end
     end
+end
+function summonTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SUMMON)
+    TriggerAddAction(trig, function()
+        SetUnitUserData(GetSummonedUnit(), GetUnitUserData(GetSummoningUnit()))
+    end)
 end
 function winLoseTrigger()
     for _, team in ipairs(all_teams) do

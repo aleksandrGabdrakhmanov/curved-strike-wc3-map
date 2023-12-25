@@ -3,8 +3,19 @@ function initGame(mode)
     SetTimeOfDay(12)
     initTeams(mode)
     initRect()
+
+    setEnemyBetweenPlayers()
+    setAllianceBetweenSpawnPlayers()
+    setAllianceBetweenPlayers()
+    setAllianceBetweenPlayersAndSpawnPlayers()
+    changeColorAndNameSpawnPlayers()
+    changeAvailableUnitsForPlayers()
+
     createBaseAndTower()
+    addWorkers()
+    setStartCameraPosition()
     createBuildingsForPlayers()
+    initPanelForAllPlayers()
 end
 
 function initTeams(mode)
@@ -15,7 +26,7 @@ function initTeams(mode)
             i = 1,
             players = addPlayersInTeam(players_team_left),
             base = {
-                player = Player(16),
+                player = Player(17),
                 winTeam = 2,
                 baseRect = nil,
                 towerRect = nil
@@ -35,7 +46,6 @@ function initTeams(mode)
         local teamId = 1
         for _, player in ipairs(mergeSequences(players_team_left, players_team_right)) do
             if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
-                print('add team! ' .. teamId)
                 all_teams[teamId] = {
                     i = teamId,
                     players = addPlayersInTeam({ player }),
