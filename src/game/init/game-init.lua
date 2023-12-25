@@ -1,34 +1,66 @@
-function initGame()
+function initGame(mode)
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
-    initTeams()
+    initTeams(mode)
     initRect()
     createBaseAndTower()
     createBuildingsForPlayers()
 end
 
-function initTeams()
+function initTeams(mode)
     all_teams = {}
-    all_teams[1] = {
-        i = 1,
-        players = addPlayersInTeam(players_team_left),
-        base = {
-            player = Player(16),
-            winTeam = 2,
-            baseRect = nil,
-            towerRect = nil
+
+    if mode == 'united' or mode == 'curved' then
+        all_teams[1] = {
+            i = 1,
+            players = addPlayersInTeam(players_team_left),
+            base = {
+                player = Player(16),
+                winTeam = 2,
+                baseRect = nil,
+                towerRect = nil
+            }
         }
-    }
-    all_teams[2] = {
-        i = 2,
-        players = addPlayersInTeam(players_team_right),
-        base = {
-            player = Player(12),
-            winTeam = 1,
-            baseRect = nil,
-            towerRect = nil
+        all_teams[2] = {
+            i = 2,
+            players = addPlayersInTeam(players_team_right),
+            base = {
+                player = Player(12),
+                winTeam = 1,
+                baseRect = nil,
+                towerRect = nil
+            }
         }
-    }
+    elseif mode == 'royal' then
+        local teamId = 1
+        for _, player in ipairs(mergeSequences(players_team_left, players_team_right)) do
+            if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
+                print('add team! ' .. teamId)
+                all_teams[teamId] = {
+                    i = teamId,
+                    players = addPlayersInTeam({ player }),
+                    base = {
+                        player = player.spawnId,
+                        winTeam = 2,
+                        baseRect = nil,
+                        towerRect = nil
+                    }
+                }
+                teamId = teamId + 1
+            end
+        end
+    end
+end
+
+function mergeSequences(t1, t2)
+    local result = {}
+    for i = 1, #t1 do
+        result[i] = t1[i]
+    end
+    for i = 1, #t2 do
+        result[#t1 + i] = t2[i]
+    end
+    return result
 end
 
 function getMainPlayer()

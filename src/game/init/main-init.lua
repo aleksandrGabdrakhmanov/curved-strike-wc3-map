@@ -1,6 +1,6 @@
 function initMain(mode)
     initRegions()
     initGameConfig(mode)
-    initGame()
+    initGame(mode)
     initPlayers()
 end

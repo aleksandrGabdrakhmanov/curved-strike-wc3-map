@@ -174,6 +174,94 @@ gg_rct_royal_global_attack_13_up_1 = nil
 gg_rct_royal_global_attack_14_left_1 = nil
 gg_rct_royal_global_attack_15_left_1 = nil
 gg_rct_royal_global_attack_16_down_1 = nil
+gg_rct_royal_3_1_build_1 = nil
+gg_rct_royal_3_1_build_2 = nil
+gg_rct_royal_3_1_main = nil
+gg_rct_royal_3_1_mine = nil
+gg_rct_royal_3_1_spawn_1 = nil
+gg_rct_royal_3_1_spawn_2 = nil
+gg_rct_royal_team_3_base_1 = nil
+gg_rct_royal_team_3_base_2 = nil
+gg_rct_royal_3_1_laboratory = nil
+gg_rct_royal_3_1_worker_1 = nil
+gg_rct_royal_3_1_worker_2 = nil
+gg_rct_royal_4_1_build_1 = nil
+gg_rct_royal_4_1_build_2 = nil
+gg_rct_royal_4_1_main = nil
+gg_rct_royal_4_1_mine = nil
+gg_rct_royal_4_1_spawn_1 = nil
+gg_rct_royal_4_1_spawn_2 = nil
+gg_rct_royal_team_4_base_2 = nil
+gg_rct_royal_4_1_laboratory = nil
+gg_rct_royal_4_1_worker_1 = nil
+gg_rct_royal_4_1_worker_2 = nil
+gg_rct_royal_team_4_base_1 = nil
+gg_rct_royal_5_1_build_1 = nil
+gg_rct_royal_5_1_build_2 = nil
+gg_rct_royal_5_1_main = nil
+gg_rct_royal_5_1_mine = nil
+gg_rct_royal_5_1_spawn_1 = nil
+gg_rct_royal_5_1_spawn_2 = nil
+gg_rct_royal_team_5_base_2 = nil
+gg_rct_royal_5_1_laboratory = nil
+gg_rct_royal_5_1_worker_1 = nil
+gg_rct_royal_5_1_worker_2 = nil
+gg_rct_royal_team_5_base_1 = nil
+gg_rct_royal_6_1_build_1 = nil
+gg_rct_royal_6_1_build_2 = nil
+gg_rct_royal_6_1_main = nil
+gg_rct_royal_6_1_mine = nil
+gg_rct_royal_6_1_spawn_1 = nil
+gg_rct_royal_6_1_spawn_2 = nil
+gg_rct_royal_team_6_base_1 = nil
+gg_rct_royal_team_6_base_2 = nil
+gg_rct_royal_6_1_laboratory = nil
+gg_rct_royal_6_1_worker_1 = nil
+gg_rct_royal_6_1_worker_2 = nil
+gg_rct_royal_7_1_build_1 = nil
+gg_rct_royal_7_1_build_2 = nil
+gg_rct_royal_7_1_main = nil
+gg_rct_royal_7_1_mine = nil
+gg_rct_royal_7_1_spawn_1 = nil
+gg_rct_royal_7_1_spawn_2 = nil
+gg_rct_royal_team_7_base_2 = nil
+gg_rct_royal_7_1_laboratory = nil
+gg_rct_royal_7_1_worker_1 = nil
+gg_rct_royal_7_1_worker_2 = nil
+gg_rct_royal_team_7_base_1 = nil
+gg_rct_royal_8_1_build_1 = nil
+gg_rct_royal_8_1_build_2 = nil
+gg_rct_royal_8_1_main = nil
+gg_rct_royal_8_1_mine = nil
+gg_rct_royal_8_1_spawn_1 = nil
+gg_rct_royal_8_1_spawn_2 = nil
+gg_rct_royal_team_8_base_1 = nil
+gg_rct_royal_team_8_base_2 = nil
+gg_rct_royal_8_1_laboratory = nil
+gg_rct_royal_8_1_worker_1 = nil
+gg_rct_royal_8_1_worker_2 = nil
+gg_rct_royal_9_1_build_1 = nil
+gg_rct_royal_9_1_build_2 = nil
+gg_rct_royal_9_1_main = nil
+gg_rct_royal_9_1_mine = nil
+gg_rct_royal_9_1_spawn_1 = nil
+gg_rct_royal_9_1_spawn_2 = nil
+gg_rct_royal_team_9_base_2 = nil
+gg_rct_royal_9_1_laboratory = nil
+gg_rct_royal_9_1_worker_1 = nil
+gg_rct_royal_9_1_worker_2 = nil
+gg_rct_royal_team_9_base_1 = nil
+gg_rct_royal_10_1_build_1 = nil
+gg_rct_royal_10_1_build_2 = nil
+gg_rct_royal_11_1_main = nil
+gg_rct_royal_10_1_mine = nil
+gg_rct_royal_10_1_spawn_1 = nil
+gg_rct_royal_10_1_spawn_2 = nil
+gg_rct_royal_team_10_base_2 = nil
+gg_rct_royal_10_1_laboratory = nil
+gg_rct_royal_10_1_worker_1 = nil
+gg_rct_royal_10_1_worker_2 = nil
+gg_rct_royal_team_10_base_1 = nil
 function InitGlobals()
 end
 
@@ -356,6 +444,94 @@ gg_rct_royal_global_attack_13_up_1 = Rect(27712.0, -16224.0, 32192.0, 9248.0)
 gg_rct_royal_global_attack_14_left_1 = Rect(27712.0, 9088.0, 32256.0, 11136.0)
 gg_rct_royal_global_attack_15_left_1 = Rect(9888.0, 7840.0, 27872.0, 11136.0)
 gg_rct_royal_global_attack_16_down_1 = Rect(7776.0, 7840.0, 10016.0, 11200.0)
+gg_rct_royal_3_1_build_1 = Rect(26048.0, 7168.0, 27136.0, 8256.0)
+gg_rct_royal_3_1_build_2 = Rect(27136.0, 6080.0, 28224.0, 7168.0)
+gg_rct_royal_3_1_main = Rect(26528.0, 6560.0, 27040.0, 7072.0)
+gg_rct_royal_3_1_mine = Rect(26528.0, 6016.0, 27040.0, 6528.0)
+gg_rct_royal_3_1_spawn_1 = Rect(26048.0, 8672.0, 27136.0, 9760.0)
+gg_rct_royal_3_1_spawn_2 = Rect(28640.0, 6080.0, 29792.0, 7168.0)
+gg_rct_royal_team_3_base_1 = Rect(25408.0, 8896.0, 26048.0, 9504.0)
+gg_rct_royal_team_3_base_2 = Rect(28896.0, 5472.0, 29536.0, 6080.0)
+gg_rct_royal_3_1_laboratory = Rect(25984.0, 6560.0, 26496.0, 7072.0)
+gg_rct_royal_3_1_worker_1 = Rect(26048.0, 7168.0, 27136.0, 8256.0)
+gg_rct_royal_3_1_worker_2 = Rect(27136.0, 6080.0, 28224.0, 7168.0)
+gg_rct_royal_4_1_build_1 = Rect(27072.0, -544.0, 28224.0, 576.0)
+gg_rct_royal_4_1_build_2 = Rect(27072.0, -1696.0, 28224.0, -576.0)
+gg_rct_royal_4_1_main = Rect(26528.0, -832.0, 27040.0, -320.0)
+gg_rct_royal_4_1_mine = Rect(26528.0, -1376.0, 27040.0, -864.0)
+gg_rct_royal_4_1_spawn_1 = Rect(28608.0, -576.0, 29760.0, 576.0)
+gg_rct_royal_4_1_spawn_2 = Rect(28608.0, -1696.0, 29760.0, -544.0)
+gg_rct_royal_team_4_base_2 = Rect(28864.0, -2304.0, 29504.0, -1696.0)
+gg_rct_royal_4_1_laboratory = Rect(26528.0, -288.0, 27040.0, 224.0)
+gg_rct_royal_4_1_worker_1 = Rect(27072.0, -544.0, 28224.0, 576.0)
+gg_rct_royal_4_1_worker_2 = Rect(27072.0, -1696.0, 28224.0, -576.0)
+gg_rct_royal_team_4_base_1 = Rect(28864.0, 576.0, 29504.0, 1184.0)
+gg_rct_royal_5_1_build_1 = Rect(27072.0, -8224.0, 28224.0, -7104.0)
+gg_rct_royal_5_1_build_2 = Rect(27072.0, -9376.0, 28224.0, -8256.0)
+gg_rct_royal_5_1_main = Rect(26528.0, -8512.0, 27040.0, -8000.0)
+gg_rct_royal_5_1_mine = Rect(26528.0, -9056.0, 27040.0, -8544.0)
+gg_rct_royal_5_1_spawn_1 = Rect(28608.0, -8256.0, 29760.0, -7104.0)
+gg_rct_royal_5_1_spawn_2 = Rect(28608.0, -9376.0, 29760.0, -8224.0)
+gg_rct_royal_team_5_base_2 = Rect(28864.0, -9984.0, 29504.0, -9376.0)
+gg_rct_royal_5_1_laboratory = Rect(26528.0, -7968.0, 27040.0, -7456.0)
+gg_rct_royal_5_1_worker_1 = Rect(27072.0, -8224.0, 28224.0, -7104.0)
+gg_rct_royal_5_1_worker_2 = Rect(27072.0, -9376.0, 28224.0, -8256.0)
+gg_rct_royal_team_5_base_1 = Rect(28864.0, -7104.0, 29504.0, -6496.0)
+gg_rct_royal_6_1_build_1 = Rect(27136.0, -15872.0, 28224.0, -14784.0)
+gg_rct_royal_6_1_build_2 = Rect(26048.0, -16960.0, 27136.0, -15872.0)
+gg_rct_royal_6_1_main = Rect(26528.0, -15776.0, 27040.0, -15264.0)
+gg_rct_royal_6_1_mine = Rect(25984.0, -15776.0, 26496.0, -15264.0)
+gg_rct_royal_6_1_spawn_1 = Rect(28640.0, -15872.0, 29728.0, -14784.0)
+gg_rct_royal_6_1_spawn_2 = Rect(26048.0, -18528.0, 27136.0, -17376.0)
+gg_rct_royal_team_6_base_1 = Rect(28864.0, -14784.0, 29472.0, -14144.0)
+gg_rct_royal_team_6_base_2 = Rect(25440.0, -18272.0, 26048.0, -17632.0)
+gg_rct_royal_6_1_laboratory = Rect(26528.0, -15232.0, 27040.0, -14720.0)
+gg_rct_royal_6_1_worker_1 = Rect(27136.0, -15872.0, 28224.0, -14784.0)
+gg_rct_royal_6_1_worker_2 = Rect(26048.0, -16960.0, 27136.0, -15872.0)
+gg_rct_royal_7_1_build_1 = Rect(19456.0, -16960.0, 20576.0, -15808.0)
+gg_rct_royal_7_1_build_2 = Rect(18304.0, -16960.0, 19424.0, -15808.0)
+gg_rct_royal_7_1_main = Rect(19168.0, -15776.0, 19680.0, -15264.0)
+gg_rct_royal_7_1_mine = Rect(18624.0, -15776.0, 19136.0, -15264.0)
+gg_rct_royal_7_1_spawn_1 = Rect(19424.0, -18496.0, 20576.0, -17344.0)
+gg_rct_royal_7_1_spawn_2 = Rect(18304.0, -18496.0, 19456.0, -17344.0)
+gg_rct_royal_team_7_base_2 = Rect(17696.0, -18240.0, 18304.0, -17600.0)
+gg_rct_royal_7_1_laboratory = Rect(19712.0, -15776.0, 20224.0, -15264.0)
+gg_rct_royal_7_1_worker_1 = Rect(19456.0, -16960.0, 20576.0, -15808.0)
+gg_rct_royal_7_1_worker_2 = Rect(18304.0, -16960.0, 19424.0, -15808.0)
+gg_rct_royal_team_7_base_1 = Rect(20576.0, -18240.0, 21184.0, -17600.0)
+gg_rct_royal_8_1_build_1 = Rect(11776.0, -16960.0, 12864.0, -15872.0)
+gg_rct_royal_8_1_build_2 = Rect(10688.0, -15872.0, 11776.0, -14784.0)
+gg_rct_royal_8_1_main = Rect(11872.0, -15776.0, 12384.0, -15264.0)
+gg_rct_royal_8_1_mine = Rect(11872.0, -15232.0, 12384.0, -14720.0)
+gg_rct_royal_8_1_spawn_1 = Rect(11776.0, -18464.0, 12864.0, -17376.0)
+gg_rct_royal_8_1_spawn_2 = Rect(9120.0, -15872.0, 10272.0, -14784.0)
+gg_rct_royal_team_8_base_1 = Rect(12864.0, -18208.0, 13504.0, -17600.0)
+gg_rct_royal_team_8_base_2 = Rect(9376.0, -14784.0, 10016.0, -14176.0)
+gg_rct_royal_8_1_laboratory = Rect(12416.0, -15776.0, 12928.0, -15264.0)
+gg_rct_royal_8_1_worker_1 = Rect(11776.0, -16960.0, 12864.0, -15872.0)
+gg_rct_royal_8_1_worker_2 = Rect(10688.0, -15872.0, 11776.0, -14784.0)
+gg_rct_royal_9_1_build_1 = Rect(10688.0, -9376.0, 11840.0, -8256.0)
+gg_rct_royal_9_1_build_2 = Rect(10688.0, -8224.0, 11840.0, -7104.0)
+gg_rct_royal_9_1_main = Rect(11872.0, -8480.0, 12384.0, -7968.0)
+gg_rct_royal_9_1_mine = Rect(11872.0, -7936.0, 12384.0, -7424.0)
+gg_rct_royal_9_1_spawn_1 = Rect(9152.0, -9376.0, 10304.0, -8224.0)
+gg_rct_royal_9_1_spawn_2 = Rect(9152.0, -8256.0, 10304.0, -7104.0)
+gg_rct_royal_team_9_base_2 = Rect(9408.0, -7104.0, 10048.0, -6496.0)
+gg_rct_royal_9_1_laboratory = Rect(11872.0, -9024.0, 12384.0, -8512.0)
+gg_rct_royal_9_1_worker_1 = Rect(10688.0, -9376.0, 11840.0, -8256.0)
+gg_rct_royal_9_1_worker_2 = Rect(10688.0, -8224.0, 11840.0, -7104.0)
+gg_rct_royal_team_9_base_1 = Rect(9408.0, -9984.0, 10048.0, -9376.0)
+gg_rct_royal_10_1_build_1 = Rect(10688.0, -1696.0, 11840.0, -576.0)
+gg_rct_royal_10_1_build_2 = Rect(10688.0, -544.0, 11840.0, 576.0)
+gg_rct_royal_11_1_main = Rect(11872.0, -800.0, 12384.0, -288.0)
+gg_rct_royal_10_1_mine = Rect(11872.0, -256.0, 12384.0, 256.0)
+gg_rct_royal_10_1_spawn_1 = Rect(9152.0, -1696.0, 10304.0, -544.0)
+gg_rct_royal_10_1_spawn_2 = Rect(9152.0, -576.0, 10304.0, 576.0)
+gg_rct_royal_team_10_base_2 = Rect(9408.0, 576.0, 10048.0, 1184.0)
+gg_rct_royal_10_1_laboratory = Rect(11872.0, -1344.0, 12384.0, -832.0)
+gg_rct_royal_10_1_worker_1 = Rect(10688.0, -1696.0, 11840.0, -576.0)
+gg_rct_royal_10_1_worker_2 = Rect(10688.0, -544.0, 11840.0, 576.0)
+gg_rct_royal_team_10_base_1 = Rect(9408.0, -2304.0, 10048.0, -1696.0)
 end
 
 --CUSTOM_CODE
@@ -1031,37 +1207,69 @@ function initGlobalVariables()
         {id = 'ntav', race = 'other'}
     }
 end
-function initGame()
+function initGame(mode)
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
-    initTeams()
+    initTeams(mode)
     initRect()
     createBaseAndTower()
     createBuildingsForPlayers()
 end
 
-function initTeams()
+function initTeams(mode)
     all_teams = {}
-    all_teams[1] = {
-        i = 1,
-        players = addPlayersInTeam(players_team_left),
-        base = {
-            player = Player(16),
-            winTeam = 2,
-            baseRect = nil,
-            towerRect = nil
+
+    if mode == 'united' or mode == 'curved' then
+        all_teams[1] = {
+            i = 1,
+            players = addPlayersInTeam(players_team_left),
+            base = {
+                player = Player(16),
+                winTeam = 2,
+                baseRect = nil,
+                towerRect = nil
+            }
         }
-    }
-    all_teams[2] = {
-        i = 2,
-        players = addPlayersInTeam(players_team_right),
-        base = {
-            player = Player(12),
-            winTeam = 1,
-            baseRect = nil,
-            towerRect = nil
+        all_teams[2] = {
+            i = 2,
+            players = addPlayersInTeam(players_team_right),
+            base = {
+                player = Player(12),
+                winTeam = 1,
+                baseRect = nil,
+                towerRect = nil
+            }
         }
-    }
+    elseif mode == 'royal' then
+        local teamId = 1
+        for _, player in ipairs(mergeSequences(players_team_left, players_team_right)) do
+            if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
+                print('add team! ' .. teamId)
+                all_teams[teamId] = {
+                    i = teamId,
+                    players = addPlayersInTeam({ player }),
+                    base = {
+                        player = player.spawnId,
+                        winTeam = 2,
+                        baseRect = nil,
+                        towerRect = nil
+                    }
+                }
+                teamId = teamId + 1
+            end
+        end
+    end
+end
+
+function mergeSequences(t1, t2)
+    local result = {}
+    for i = 1, #t1 do
+        result[i] = t1[i]
+    end
+    for i = 1, #t2 do
+        result[#t1 + i] = t2[i]
+    end
+    return result
 end
 
 function getMainPlayer()
@@ -1109,7 +1317,6 @@ function addPlayersInTeam(players)
 end
 
 function initRect()
-
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             player.buildRect = regions[game_config.mode][team.i][player.i]['build']
@@ -1221,7 +1428,7 @@ end
 function initMain(mode)
     initRegions()
     initGameConfig(mode)
-    initGame()
+    initGame(mode)
     initPlayers()
 end
 function initPlayers()
@@ -2153,7 +2360,7 @@ ForcePlayerStartLocation(Player(8), 8)
 SetPlayerColor(Player(8), ConvertPlayerColor(8))
 SetPlayerRacePreference(Player(8), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(8), false)
-SetPlayerController(Player(8), MAP_CONTROL_USER)
+SetPlayerController(Player(8), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(9), 9)
 ForcePlayerStartLocation(Player(9), 9)
 SetPlayerColor(Player(9), ConvertPlayerColor(9))
@@ -2356,72 +2563,65 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(0, 8)
+SetStartLocPrioCount(0, 7)
 SetStartLocPrio(0, 0, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(0, 1, 3, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(0, 2, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(0, 3, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(0, 4, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(0, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 6, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(1, 2)
 SetStartLocPrio(1, 0, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 1, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(2, 8)
+SetStartLocPrioCount(2, 7)
 SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(2, 1, 3, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(2, 2, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(2, 3, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(2, 4, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(2, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(3, 8)
+SetStartLocPrio(2, 6, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(3, 7)
 SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(3, 1, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(3, 2, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(3, 3, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(3, 4, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(3, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(4, 8)
+SetStartLocPrio(3, 6, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(4, 7)
 SetStartLocPrio(4, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(4, 1, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(4, 2, 3, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(4, 3, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(4, 4, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(4, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(5, 8)
+SetStartLocPrio(4, 6, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(5, 7)
 SetStartLocPrio(5, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(5, 1, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(5, 2, 3, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(5, 3, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(5, 4, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(5, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(6, 8)
+SetStartLocPrio(5, 6, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(6, 7)
 SetStartLocPrio(6, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(6, 1, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(6, 2, 3, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(6, 3, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(6, 4, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(6, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(7, 8)
+SetStartLocPrio(6, 6, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(7, 7)
 SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(7, 1, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(7, 2, 3, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(7, 3, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(7, 4, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(7, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 6, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(8, 8)
 SetStartLocPrio(8, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(8, 1, 2, MAP_LOC_PRIO_HIGH)
@@ -2431,7 +2631,7 @@ SetStartLocPrio(8, 4, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(8, 5, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(8, 6, 7, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(8, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(9, 8)
+SetStartLocPrioCount(9, 7)
 SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(9, 1, 2, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(9, 2, 3, MAP_LOC_PRIO_HIGH)
@@ -2439,7 +2639,6 @@ SetStartLocPrio(9, 3, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(9, 4, 5, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(9, 5, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(9, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 7, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(10, 3)
 SetStartLocPrio(10, 0, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(10, 1, 17, MAP_LOC_PRIO_HIGH)
