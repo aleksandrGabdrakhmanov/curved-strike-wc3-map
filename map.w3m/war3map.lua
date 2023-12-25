@@ -1943,6 +1943,32 @@ function incomeTrigger()
         end
     end)
 end
+function winLoseTrigger()
+    for _, team in ipairs(all_teams) do
+        local group = GetUnitsOfPlayerAll(team.base.player)
+        ForGroup(group, function()
+            local unit = GetEnumUnit()
+            local unitId = ('>I4'):pack(GetUnitTypeId(unit))
+            if unitId == units_special.base then
+                local trig = CreateTrigger()
+                TriggerRegisterUnitEvent(trig, unit, EVENT_UNIT_DEATH)
+                TriggerAddAction(trig, function()
+                    for _, player in ipairs(team.players) do
+                        local allUnits = GetUnitsOfPlayerAll(player.id)
+                        ForGroup(allUnits, function()
+                            KillUnit(GetEnumUnit())
+                        end)
+                        CustomDefeatBJ(player.id, "lose")
+                        DestroyGroup(allUnits)
+                    end
+                end)
+            end
+        end)
+        DestroyGroup(group)
+
+    end
+end
+
 function initTriggers()
     incomeTrigger()
     moveByPointsTrigger()
@@ -2207,29 +2233,6 @@ function summonTrigger()
         SetUnitUserData(GetSummonedUnit(), GetUnitUserData(GetSummoningUnit()))
     end)
 end
-function winLoseTrigger()
-    for _, team in ipairs(all_teams) do
-        local group = GetUnitsOfPlayerAll(team.base.player)
-        ForGroup(group, function()
-            local unit = GetEnumUnit()
-            local unitId = ('>I4'):pack(GetUnitTypeId(unit))
-            if unitId == units_special.base then
-                local trig = CreateTrigger()
-                TriggerRegisterUnitEvent(trig, unit, EVENT_UNIT_DEATH)
-                TriggerAddAction(trig, function()
-                    for _, player in ipairs(team.players) do
-                        CustomDefeatBJ(player.id, "lose")
-                    end
-                    for _, player in ipairs(all_teams[team.base.winTeam].players) do
-                        CustomVictoryBJ(player.id, true, true)
-                    end
-                end)
-            end
-        end)
-
-    end
-end
-
 function initialUI()
     local fm = BlzGetFrameByName("ConsoleUIBackdrop", 0)
     frame = BlzCreateFrameByType("TEXT", "MyTextFrame", fm, "", 0)

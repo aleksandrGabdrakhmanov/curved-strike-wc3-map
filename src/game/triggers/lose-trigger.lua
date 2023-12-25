@@ -1,4 +1,4 @@
-function winLoseTrigger()
+function loseTrigger()
     for _, team in ipairs(all_teams) do
         local group = GetUnitsOfPlayerAll(team.base.player)
         ForGroup(group, function()
@@ -9,14 +9,16 @@ function winLoseTrigger()
                 TriggerRegisterUnitEvent(trig, unit, EVENT_UNIT_DEATH)
                 TriggerAddAction(trig, function()
                     for _, player in ipairs(team.players) do
+                        local allUnits = GetUnitsOfPlayerAll(player.id)
+                        ForGroup(allUnits, function()
+                            KillUnit(GetEnumUnit())
+                        end)
                         CustomDefeatBJ(player.id, "lose")
-                    end
-                    for _, player in ipairs(all_teams[team.base.winTeam].players) do
-                        CustomVictoryBJ(player.id, true, true)
+                        DestroyGroup(allUnits)
                     end
                 end)
             end
         end)
-
+        DestroyGroup(group)
     end
 end

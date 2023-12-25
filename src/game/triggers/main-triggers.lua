@@ -1,7 +1,7 @@
 function initTriggers()
     incomeTrigger()
     moveByPointsTrigger()
-    winLoseTrigger()
+    loseTrigger()
     goldExtractorTrigger()
     finishResearchTrigger()
     enableUpdateTrigger()
