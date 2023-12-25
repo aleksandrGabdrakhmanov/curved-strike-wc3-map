@@ -13,8 +13,17 @@ function loseTrigger()
                         ForGroup(allUnits, function()
                             KillUnit(GetEnumUnit())
                         end)
-                        CustomDefeatBJ(player.id, "lose")
                         DestroyGroup(allUnits)
+
+                        local allUnitsSpawn = GetUnitsOfPlayerAll(player.spawnPlayerId)
+                        ForGroup(allUnitsSpawn, function()
+                            KillUnit(GetEnumUnit())
+                        end)
+                        DestroyGroup(allUnitsSpawn)
+
+                        CustomDefeatDialogBJ(player.id, "lose")
+                        team.lose = true
+                        CreateFogModifierRectBJ( true, player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect() )
                     end
                 end)
             end
