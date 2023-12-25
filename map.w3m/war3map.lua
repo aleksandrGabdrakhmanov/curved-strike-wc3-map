@@ -253,7 +253,7 @@ gg_rct_royal_9_1_worker_2 = nil
 gg_rct_royal_team_9_base_1 = nil
 gg_rct_royal_10_1_build_1 = nil
 gg_rct_royal_10_1_build_2 = nil
-gg_rct_royal_11_1_main = nil
+gg_rct_royal_10_1_main = nil
 gg_rct_royal_10_1_mine = nil
 gg_rct_royal_10_1_spawn_1 = nil
 gg_rct_royal_10_1_spawn_2 = nil
@@ -523,7 +523,7 @@ gg_rct_royal_9_1_worker_2 = Rect(10688.0, -8224.0, 11840.0, -7104.0)
 gg_rct_royal_team_9_base_1 = Rect(9408.0, -9984.0, 10048.0, -9376.0)
 gg_rct_royal_10_1_build_1 = Rect(10688.0, -1696.0, 11840.0, -576.0)
 gg_rct_royal_10_1_build_2 = Rect(10688.0, -544.0, 11840.0, 576.0)
-gg_rct_royal_11_1_main = Rect(11872.0, -800.0, 12384.0, -288.0)
+gg_rct_royal_10_1_main = Rect(11872.0, -800.0, 12384.0, -288.0)
 gg_rct_royal_10_1_mine = Rect(11872.0, -256.0, 12384.0, 256.0)
 gg_rct_royal_10_1_spawn_1 = Rect(9152.0, -1696.0, 10304.0, -544.0)
 gg_rct_royal_10_1_spawn_2 = Rect(9152.0, -576.0, 10304.0, 576.0)
@@ -1252,11 +1252,26 @@ function initTeams(mode)
             }
         }
     elseif mode == 'royal' then
-        local teamId = 1
+
+        local playersPosition = {
+            [1] = { 1 },
+            [2] = { 1, 6 },
+            [3] = { 2, 5, 9},
+            [4] = { 1, 3, 6, 8},
+            [5] = { 1, 3, 5, 7, 9 },
+            [6] = { 1, 2, 3, 5, 7, 9 },
+            [7] = { 1, 2, 3, 5, 7, 8, 9 },
+            [8] = { 1, 2, 3, 4, 5, 7, 8, 9 },
+            [9] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+            [10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+        }
+        local currentPosition = playersPosition[getCountPlayers()]
+
+        local positionId = 1
         for _, player in ipairs(mergeSequences(players_team_left, players_team_right)) do
             if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
-                all_teams[teamId] = {
-                    i = teamId,
+                all_teams[positionId] = {
+                    i = currentPosition[positionId],
                     players = addPlayersInTeam({ player }),
                     base = {
                         player = player.spawnId,
@@ -1265,10 +1280,20 @@ function initTeams(mode)
                         towerRect = nil
                     }
                 }
-                teamId = teamId + 1
+                positionId = positionId + 1
             end
         end
     end
+end
+
+function getCountPlayers()
+    local countActivePlayer = 0
+    for _, player in ipairs(mergeSequences(players_team_left, players_team_right)) do
+        if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
+            countActivePlayer = countActivePlayer + 1
+        end
+    end
+    return countActivePlayer
 end
 
 function mergeSequences(t1, t2)
@@ -2357,37 +2382,37 @@ ForcePlayerStartLocation(Player(2), 2)
 SetPlayerColor(Player(2), ConvertPlayerColor(2))
 SetPlayerRacePreference(Player(2), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(2), false)
-SetPlayerController(Player(2), MAP_CONTROL_USER)
+SetPlayerController(Player(2), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(3), 3)
 ForcePlayerStartLocation(Player(3), 3)
 SetPlayerColor(Player(3), ConvertPlayerColor(3))
 SetPlayerRacePreference(Player(3), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(3), false)
-SetPlayerController(Player(3), MAP_CONTROL_USER)
+SetPlayerController(Player(3), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(4), 4)
 ForcePlayerStartLocation(Player(4), 4)
 SetPlayerColor(Player(4), ConvertPlayerColor(4))
 SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(4), false)
-SetPlayerController(Player(4), MAP_CONTROL_USER)
+SetPlayerController(Player(4), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(5), 5)
 ForcePlayerStartLocation(Player(5), 5)
 SetPlayerColor(Player(5), ConvertPlayerColor(5))
 SetPlayerRacePreference(Player(5), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(5), false)
-SetPlayerController(Player(5), MAP_CONTROL_USER)
+SetPlayerController(Player(5), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(6), 6)
 ForcePlayerStartLocation(Player(6), 6)
 SetPlayerColor(Player(6), ConvertPlayerColor(6))
 SetPlayerRacePreference(Player(6), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(6), false)
-SetPlayerController(Player(6), MAP_CONTROL_USER)
+SetPlayerController(Player(6), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(7), 7)
 ForcePlayerStartLocation(Player(7), 7)
 SetPlayerColor(Player(7), ConvertPlayerColor(7))
 SetPlayerRacePreference(Player(7), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(7), false)
-SetPlayerController(Player(7), MAP_CONTROL_USER)
+SetPlayerController(Player(7), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(8), 8)
 ForcePlayerStartLocation(Player(8), 8)
 SetPlayerColor(Player(8), ConvertPlayerColor(8))
@@ -2399,7 +2424,7 @@ ForcePlayerStartLocation(Player(9), 9)
 SetPlayerColor(Player(9), ConvertPlayerColor(9))
 SetPlayerRacePreference(Player(9), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(9), false)
-SetPlayerController(Player(9), MAP_CONTROL_USER)
+SetPlayerController(Player(9), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(10), 10)
 SetPlayerColor(Player(10), ConvertPlayerColor(10))
 SetPlayerRacePreference(Player(10), RACE_PREF_RANDOM)
@@ -2596,14 +2621,6 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(0, 7)
-SetStartLocPrio(0, 0, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 1, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 2, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 3, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 4, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 6, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(1, 2)
 SetStartLocPrio(1, 0, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 1, 7, MAP_LOC_PRIO_HIGH)
@@ -2617,61 +2634,44 @@ SetStartLocPrio(2, 5, 7, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(2, 6, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(3, 7)
 SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 2, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 3, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 4, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 5, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 1, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 2, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 3, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 4, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 5, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(3, 6, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(4, 7)
 SetStartLocPrio(4, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 3, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 4, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 5, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 1, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 2, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 3, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 4, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 5, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(4, 6, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(5, 7)
+SetStartLocPrioCount(5, 5)
 SetStartLocPrio(5, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 4, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 6, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(6, 7)
+SetStartLocPrio(5, 1, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 2, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 3, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 4, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(6, 5)
 SetStartLocPrio(6, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 6, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(7, 7)
+SetStartLocPrio(6, 1, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 2, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 3, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 4, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(7, 3)
 SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 6, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(8, 8)
+SetStartLocPrio(7, 1, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 2, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(8, 3)
 SetStartLocPrio(8, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(9, 7)
+SetStartLocPrio(8, 1, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 2, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(9, 3)
 SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 1, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 2, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(10, 3)
 SetStartLocPrio(10, 0, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(10, 1, 17, MAP_LOC_PRIO_HIGH)
@@ -2751,7 +2751,7 @@ SetMapName("TRIGSTR_001")
 SetMapDescription("TRIGSTR_003")
 SetPlayers(20)
 SetTeams(20)
-SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
+SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
 DefineStartLocation(0, -15872.0, 11008.0)
 DefineStartLocation(1, -15872.0, 11008.0)
 DefineStartLocation(2, -15872.0, 11008.0)
