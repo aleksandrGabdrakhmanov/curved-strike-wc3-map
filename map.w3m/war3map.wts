@@ -1722,3 +1722,51 @@ STRING 319
 Summons Treants with <efon,realHP> hit points and <efon,mindmg1> - <efon,maxdmg1> damage to fight the Keeper of the Grove's enemies. |nLasts <A012,Dur1> seconds. |n|n|cffffcc00Level 1|r - 2 Treants |n|cffffcc00Level 2|r - 3 Treants |n|cffffcc00Level 3|r - 4 Treants
 }
 
+STRING 320
+// Abilities: A003 (Sell), Name (Name)
+{
+Sell
+}
+
+STRING 321
+// Abilities: A003 (Sell), Tip (Tooltip - Normal)
+{
+Sell
+}
+
+STRING 322
+// Abilities: A003 (Sell), Ubertip (Tooltip - Normal - Extended)
+{
+This unit has not yet entered the battlefield and refunds |cffffc800100%|r of its cost.
+}
+
+STRING 323
+// Abilities: A003 (Sell), EditorSuffix (Editor Suffix)
+{
+(100%)
+}
+
+STRING 324
+// Abilities: A004 (Sell), Name (Name)
+{
+Sell
+}
+
+STRING 325
+// Abilities: A004 (Sell), Tip (Tooltip - Normal)
+{
+Sell
+}
+
+STRING 326
+// Abilities: A004 (Sell), Ubertip (Tooltip - Normal - Extended)
+{
+Refunds 75% of its cost.
+}
+
+STRING 327
+// Abilities: A004 (Sell), EditorSuffix (Editor Suffix)
+{
+(75%)
+}
+

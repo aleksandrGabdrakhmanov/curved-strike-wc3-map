@@ -147,7 +147,9 @@ function initGlobalVariables()
         randomHero = 'ncop'
     }
     abilities = {
-        mine = 'A000'
+        mine = 'A000',
+        sell100 = 'A003',
+        sell75 = 'A004'
     }
 
     upgrades_special = {

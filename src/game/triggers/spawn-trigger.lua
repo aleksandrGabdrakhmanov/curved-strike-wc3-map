@@ -7,6 +7,7 @@ function spawnTrigger()
                 if player.spawnTimer <= 0 then
                     processGroupForSpawn(player)
                     player.spawnTimer = game_config.spawnPolicy.interval * #team.players + game_config.spawnPolicy.dif
+                    replaceCell(player)
                 end
                 player.spawnTimer = player.spawnTimer - 1
                 local text = BlzFrameGetChild(player.statePanel, 0)
