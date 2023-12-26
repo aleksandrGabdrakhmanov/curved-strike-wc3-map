@@ -1188,7 +1188,12 @@ function initGlobalVariables()
         randomHero = 'ncop'
     }
     abilities = {
-        mine = 'A000'
+        mine = 'A000',
+        sell100 = 'A003',
+        sell75 = 'A004',
+        moveLarge = 'A007',
+        moveMedium = 'A006',
+        moveSmall = 'A005'
     }
 
     upgrades_special = {
@@ -1691,6 +1696,54 @@ function startGame(mode)
     initialUI()
     initTriggers()
 end
+function cellTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterPlayerUnitEvent(trig, player.id, EVENT_PLAYER_UNIT_SPELL_EFFECT)
+            TriggerAddCondition(trig, Condition(function()
+                return GetSpellAbilityId() == FourCC(abilities.sell100) or GetSpellAbilityId() == FourCC(abilities.sell75)
+            end))
+            TriggerAddAction(trig, function()
+                local unit = GetSpellAbilityUnit()
+                local cost = GetUnitGoldCost(GetUnitTypeId(unit))
+                TriggerSleepAction(0.1)
+                RemoveUnit(unit)
+                local currentGold = GetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD)
+
+                if GetSpellAbilityId() == FourCC(abilities.sell100) then
+                    SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + cost)
+                else
+                    SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + math.floor(cost * 0.75))
+                end
+            end)
+        end
+    end
+end
+
+function replaceCell(player)
+    if type(player.buildRect) == "table" then
+        for i in ipairs(player.buildRect) do
+            local group = GetUnitsInRectAll(player.buildRect[i])
+            replaceGroupCell(group)
+        end
+    else
+        local group = GetUnitsInRectAll(player.buildRect)
+        replaceGroupCell(group)
+    end
+end
+
+function replaceGroupCell(group)
+    ForGroup(group, function()
+        local unit = GetEnumUnit()
+        local ability = BlzGetUnitAbility(unit, FourCC(abilities.sell100))
+        if ability ~= nil then
+            UnitAddAbility(unit, FourCC(abilities.sell75))
+            UnitRemoveAbilityBJ(FourCC(abilities.sell100), unit)
+        end
+    end)
+    DestroyGroup(group)
+end
 function debugTrigger()
 
     local trig = CreateTrigger()
@@ -1989,9 +2042,77 @@ function initTriggers()
     spellFinishTrigger()
     spawnTrigger()
     initHeroTriggers()
+    cellTrigger()
+    moveTrigger()
     summonTrigger()
     debugTrigger()
     debugTriggerGold()
+end
+function moveTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterPlayerUnitEvent(trig, player.id, EVENT_PLAYER_UNIT_SPELL_EFFECT)
+            TriggerAddCondition(trig, Condition(function()
+                return GetSpellAbilityId() == FourCC(abilities.moveLarge) or
+                        GetSpellAbilityId() == FourCC(abilities.moveMedium) or
+                        GetSpellAbilityId() == FourCC(abilities.moveSmall)
+            end))
+            TriggerAddAction(trig, function()
+                local location = GetSpellTargetLoc()
+
+                if type(player.buildRect) == "table" then
+                    for i in ipairs(player.buildRect) do
+                        if isLocationInRectangle(location, player.buildRect[i]) then
+                            local unit = GetSpellAbilityUnit()
+                            SetUnitPositionLoc(unit, location)
+                        end
+                    end
+                else
+                    if isLocationInRectangle(location, player.buildRect) then
+                        local unit = GetSpellAbilityUnit()
+                        SetUnitPositionLoc(unit, location)
+                    end
+                end
+            end)
+        end
+    end
+end
+
+function isLocationInRectangle(location, rect)
+    rectMinX = GetRectMinX(rect)
+    rectMinY = GetRectMinY(rect)
+    rectMaxX = GetRectMaxX(rect)
+    rectMaxY = GetRectMaxY(rect)
+
+    local locX = GetLocationX(location)
+    local locY = GetLocationY(location)
+
+    return locX >= rectMinX and locX <= rectMaxX and locY >= rectMinY and locY <= rectMaxY
+end
+
+function replaceCell(player)
+    if type(player.buildRect) == "table" then
+        for i in ipairs(player.buildRect) do
+            local group = GetUnitsInRectAll(player.buildRect[i])
+            replaceGroupCell(group)
+        end
+    else
+        local group = GetUnitsInRectAll(player.buildRect)
+        replaceGroupCell(group)
+    end
+end
+
+function replaceGroupCell(group)
+    ForGroup(group, function()
+        local unit = GetEnumUnit()
+        local ability = BlzGetUnitAbility(unit, FourCC(abilities.sell100))
+        if ability ~= nil then
+            UnitAddAbility(unit, FourCC(abilities.sell75))
+            UnitRemoveAbilityBJ(FourCC(abilities.sell100), unit)
+        end
+    end)
+    DestroyGroup(group)
 end
 additionalDir = 500
 function moveByPointsTrigger()
@@ -2055,6 +2176,7 @@ function spawnTrigger()
                 if player.spawnTimer <= 0 then
                     processGroupForSpawn(player)
                     player.spawnTimer = game_config.spawnPolicy.interval * #team.players + game_config.spawnPolicy.dif
+                    replaceCell(player)
                 end
                 player.spawnTimer = player.spawnTimer - 1
                 local text = BlzFrameGetChild(player.statePanel, 0)

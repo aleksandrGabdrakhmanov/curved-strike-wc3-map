@@ -149,7 +149,10 @@ function initGlobalVariables()
     abilities = {
         mine = 'A000',
         sell100 = 'A003',
-        sell75 = 'A004'
+        sell75 = 'A004',
+        moveLarge = 'A007',
+        moveMedium = 'A006',
+        moveSmall = 'A005'
     }
 
     upgrades_special = {
