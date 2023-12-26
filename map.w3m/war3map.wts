@@ -1770,3 +1770,147 @@ STRING 327
 (75%)
 }
 
+STRING 328
+// Units: h01D (Move Unit (Large)), Tip (Tooltip - Basic)
+{
+Build Footman
+}
+
+STRING 329
+// Units: h01D (Move Unit (Large)), Name (Name)
+{
+Move Unit (Large)
+}
+
+STRING 330
+// Units: h01D (Move Unit (Large)), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 331
+// Units: h01E (Move Unit (Medium)), Tip (Tooltip - Basic)
+{
+Build Footman
+}
+
+STRING 332
+// Units: h01E (Move Unit (Medium)), Name (Name)
+{
+Move Unit (Medium)
+}
+
+STRING 333
+// Units: h01E (Move Unit (Medium)), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 334
+// Units: h01F (Move Unit (Small)), Tip (Tooltip - Basic)
+{
+Build Footman
+}
+
+STRING 335
+// Units: h01F (Move Unit (Small)), Name (Name)
+{
+Move Unit (Small)
+}
+
+STRING 336
+// Units: h01F (Move Unit (Small)), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 337
+// Abilities: A005 (Move), Name (Name)
+{
+Move
+}
+
+STRING 338
+// Abilities: A005 (Move), Hotkey (Hotkey - Normal)
+{
+T
+}
+
+STRING 339
+// Abilities: A005 (Move), Tip (Tooltip - Normal)
+{
+Move
+}
+
+STRING 340
+// Abilities: A005 (Move), Ubertip (Tooltip - Normal - Extended)
+{
+Move the unit to a different location.
+}
+
+STRING 341
+// Abilities: A005 (Move), EditorSuffix (Editor Suffix)
+{
+(Small)
+}
+
+STRING 342
+// Abilities: A006 (Move), Name (Name)
+{
+Move
+}
+
+STRING 343
+// Abilities: A006 (Move), Hotkey (Hotkey - Normal)
+{
+T
+}
+
+STRING 344
+// Abilities: A006 (Move), Tip (Tooltip - Normal)
+{
+Move
+}
+
+STRING 345
+// Abilities: A006 (Move), Ubertip (Tooltip - Normal - Extended)
+{
+Move the unit to a different location.
+}
+
+STRING 346
+// Abilities: A006 (Move), EditorSuffix (Editor Suffix)
+{
+(Medium)
+}
+
+STRING 347
+// Abilities: A007 (Move), Name (Name)
+{
+Move
+}
+
+STRING 348
+// Abilities: A007 (Move), Hotkey (Hotkey - Normal)
+{
+T
+}
+
+STRING 349
+// Abilities: A007 (Move), Tip (Tooltip - Normal)
+{
+Move
+}
+
+STRING 350
+// Abilities: A007 (Move), Ubertip (Tooltip - Normal - Extended)
+{
+Move the unit to a different location.
+}
+
+STRING 351
+// Abilities: A007 (Move), EditorSuffix (Editor Suffix)
+{
+(Large)
+}
+

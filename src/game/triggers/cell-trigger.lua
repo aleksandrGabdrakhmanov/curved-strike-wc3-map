@@ -27,21 +27,22 @@ function replaceCell(player)
     if type(player.buildRect) == "table" then
         for i in ipairs(player.buildRect) do
             local group = GetUnitsInRectAll(player.buildRect[i])
-            ForGroup(group, function()
-                local unit = GetEnumUnit()
-
-                local ability = BlzGetUnitAbility(unit, FourCC(abilities.sell100))
-                print(ability)
-                if ability ~= nil then
-                    print('delete')
-                    UnitAddAbility(unit, FourCC(abilities.sell75))
-                    UnitRemoveAbilityBJ(FourCC(abilities.sell100), unit)
-                end
-            end)
-            DestroyGroup(group)
+            replaceGroupCell(group)
         end
     else
         local group = GetUnitsInRectAll(player.buildRect)
+        replaceGroupCell(group)
     end
+end
 
+function replaceGroupCell(group)
+    ForGroup(group, function()
+        local unit = GetEnumUnit()
+        local ability = BlzGetUnitAbility(unit, FourCC(abilities.sell100))
+        if ability ~= nil then
+            UnitAddAbility(unit, FourCC(abilities.sell75))
+            UnitRemoveAbilityBJ(FourCC(abilities.sell100), unit)
+        end
+    end)
+    DestroyGroup(group)
 end
