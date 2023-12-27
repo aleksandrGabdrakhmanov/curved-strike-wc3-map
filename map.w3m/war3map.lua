@@ -1332,6 +1332,7 @@ function addPlayersInTeam(players)
         if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
             table.insert(initialPlayers, {
                 id = player.id,
+                color = getColorById(GetPlayerId(player.id)),
                 spawnPlayerId = player.spawnId,
                 i = game_config.playerPosition[nextPosition],
                 economy = {
@@ -1339,6 +1340,7 @@ function addPlayersInTeam(players)
                     minePrice = game_config.economy.firstMinePrice,
                     mineLevel = 0,
                     mineTextTag = nil,
+                    totalGold = game_config.economy.startGold,
                 },
                 buildRect = nil,
                 workerRect = nil,
@@ -1348,13 +1350,50 @@ function addPlayersInTeam(players)
                 attackPointRect = {},
                 spawnRect = nil,
                 spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif,
-                heroes = {}
+                heroes = {},
+                totalDamage = 0,
+                totalKills = 0
             })
             nextPosition = nextPosition + 1
         end
     end
     return initialPlayers
 end
+
+
+function getColorById(playerId)
+    if (playerId == 0) then
+        return BlzConvertColor(255, 255, 2, 2)
+    end
+    if (playerId == 1) then
+        return BlzConvertColor(255, 0, 65, 255)
+    end
+    if (playerId == 2) then
+        return BlzConvertColor(255, 27, 229, 184)
+    end
+    if (playerId == 3) then
+        return BlzConvertColor(255, 83, 0, 128)
+    end
+    if (playerId == 4) then
+        return BlzConvertColor(255, 255, 255, 0)
+    end
+    if (playerId == 5) then
+        return BlzConvertColor(255, 254, 137, 13)
+    end
+    if (playerId == 6) then
+        return BlzConvertColor(255, 31, 191, 0)
+    end
+    if (playerId == 7) then
+        return BlzConvertColor(255, 228, 90, 170)
+    end
+    if (playerId == 8) then
+        return BlzConvertColor(255, 148, 149, 150)
+    end
+    if (playerId == 9) then
+        return BlzConvertColor(255, 125, 190, 241)
+    end
+end
+
 
 function initRect()
     for _, team in ipairs(all_teams) do
@@ -1744,6 +1783,44 @@ function replaceGroupCell(group)
     end)
     DestroyGroup(group)
 end
+function damageDetectTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DAMAGED)
+    TriggerAddAction(trig, function()
+        local source = GetEventDamageSource()
+        if GetUnitTypeId(source) == FourCC(units_special.tower) or GetUnitTypeId(source) == FourCC(units_special.base) then
+            return
+        end
+        local sourcePlayer = GetOwningPlayer(source)
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                if sourcePlayer == player.spawnPlayerId then
+                    player.totalDamage = math.floor(player.totalDamage + GetEventDamage())
+                    return
+                end
+            end
+        end
+    end)
+end
+function deadDetectTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DEATH)
+    TriggerAddAction(trig, function()
+        local source = GetKillingUnit()
+        if GetUnitTypeId(source) == FourCC(units_special.tower) or GetUnitTypeId(source) == FourCC(units_special.base) then
+            return
+        end
+        local sourcePlayer = GetOwningPlayer(source)
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                if sourcePlayer == player.spawnPlayerId then
+                    player.totalKills = math.floor(player.totalKills + 1)
+                    return
+                end
+            end
+        end
+    end)
+end
 function debugTrigger()
 
     local trig = CreateTrigger()
@@ -1991,6 +2068,7 @@ function incomeTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 local currentGold = GetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD)
+                player.economy.totalGold = player.economy.totalGold + player.economy.income
                 SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + player.economy.income)
             end
         end
@@ -2045,6 +2123,9 @@ function initTriggers()
     cellTrigger()
     moveTrigger()
     summonTrigger()
+    statusPanelUpdateTrigger()
+    damageDetectTrigger()
+    deadDetectTrigger()
     debugTrigger()
     debugTriggerGold()
 end
@@ -2179,8 +2260,6 @@ function spawnTrigger()
                     replaceCell(player)
                 end
                 player.spawnTimer = player.spawnTimer - 1
-                local text = BlzFrameGetChild(player.statePanel, 0)
-                BlzFrameSetText(text, "Next wave: " .. player.spawnTimer)
             end
         end
     end)
@@ -2357,6 +2436,13 @@ function getAttackPointRect(castPlayer)
         end
     end
 end
+function statusPanelUpdateTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterTimerEventPeriodic(trig, 1.00)
+    TriggerAddAction(trig, function()
+        updatePanelForAllPlayers()
+    end)
+end
 function summonTrigger()
     local trig = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SUMMON)
@@ -2502,12 +2588,158 @@ function replaceTexture(inputString)
     local replacedString = inputString:gsub("ReplaceableTextures\\CommandButtons\\(.-)%.blp", "ReplaceableTextures\\CommandButtonsDisabled\\DIS%1.blp")
     return replacedString
 end
-function initPanelForAllPlayers()
+
+function getTableInfo()
+    local tableInfo = {}
+    tableInfo.header = {
+        { text = 'Name', weight = 0.085 },
+        { text = 'Wave', weight = 0.03 },
+        { text = 'Inc', weight = 0.03 },
+        { text = 'Gold', weight = 0.045 },
+        { text = 'Kills', weight = 0.05 },
+        { text = 'Damage', weight = 0.06 },
+    }
+    tableInfo.body = {}
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            local myPanel = BlzCreateFrame("CurvedStatusTemplate", BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
-            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.95, 0.56)
-            BlzFrameSetSize(myPanel, 0.2, 0.2)
+            table.insert(tableInfo.body, {
+                {
+                    text = GetPlayerName(player.id),
+                    color = player.color,
+                    isSensitive = false
+                },
+                {
+                    text = player.spawnTimer,
+                    color = player.color,
+                    isSensitive = false
+                },
+                {
+                    text = player.economy.income,
+                    color = player.color,
+                    isSensitive = true
+                },
+                {
+                    text = player.economy.totalGold,
+                    color = player.color,
+                    isSensitive = true
+                },
+                {
+                    text = player.totalKills,
+                    color = player.color,
+                    isSensitive = false
+                },
+                {
+                    text = player.totalDamage,
+                    color = player.color,
+                    isSensitive = false
+                }
+            })
+        end
+    end
+    return tableInfo
+end
+
+function updatePanelForAllPlayers()
+    local updatedTableInfo = getTableInfo()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local myPanel = player.statePanel
+            if myPanel then
+
+                for i, headerColumn in ipairs(updatedTableInfo.header) do
+                    local headerFrame = BlzFrameGetChild(myPanel, i - 1)
+                    BlzFrameSetText(headerFrame, headerColumn.text)
+                end
+
+                local headerCount = #updatedTableInfo.header
+                for i, row in ipairs(updatedTableInfo.body) do
+                    local isLocalPlayer = false
+                    for j, element in ipairs(row) do
+                        local bodyIndex = headerCount + ((i - 1) * #row) + (j - 1)
+                        local bodyFrame = BlzFrameGetChild(myPanel, bodyIndex)
+
+                        local text = BlzFrameGetText(bodyFrame)
+
+                        if isPlayerInTeam(text, team.players) then
+                            isLocalPlayer = true
+                        end
+
+                        if isLocalPlayer == true then
+                            BlzFrameSetText(bodyFrame, element.text)
+                        else
+                            if element.isSensitive == true then
+                                BlzFrameSetText(bodyFrame, "***")
+                            else
+                                BlzFrameSetText(bodyFrame, element.text)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+function isPlayerInTeam(text, players)
+    for _, player in ipairs(players) do
+        if text == GetPlayerName(player.id) then
+            return true
+        end
+    end
+    return false
+end
+
+function initPanelForAllPlayers()
+    local tableInfo = getTableInfo()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+
+            local myPanel = BlzCreateFrameByType("BACKDROP", "CurvedStatusTemplateMy", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonDisabledBackdropTemplate", 0)
+
+            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.93, 0.56)
+
+            local totalWeight = 0
+            for _, headerColumn in ipairs(tableInfo.header) do
+                totalWeight = totalWeight + headerColumn.weight + 0.005
+            end
+            local totalHeight = #tableInfo.body + 4
+            BlzFrameSetSize(myPanel, totalWeight + 0.015, totalHeight * 0.01)
+            BlzFrameSetAlpha(myPanel, 220)
+
+
+            local prevColumn = nil
+            for i, headerColumn in ipairs(tableInfo.header) do
+                local column = BlzCreateFrameByType('TEXT', 'CurvedStatusHeader', myPanel, 'TeamLabelTextTemplate', 0)
+                BlzFrameSetSize(column, headerColumn.weight, 0.2)
+                BlzFrameSetText(column, headerColumn.text)
+                BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
+                if i == 1 then
+                    BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, myPanel, FRAMEPOINT_TOPLEFT, 0.01, -0.01)
+                else
+                    BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0.005, 0)
+                end
+                prevColumn = column
+            end
+
+            for i, row in ipairs(tableInfo.body) do
+                local prevColumn = nil
+                for j, element in ipairs(row) do
+                    local column = BlzCreateFrameByType('TEXT', 'CurvedStatusRow1', myPanel, 'TeamLabelTextTemplate', 0)
+                    BlzFrameSetSize(column, tableInfo.header[j].weight, 0.2)
+                    BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
+                    BlzFrameSetTextColor(column, element.color)
+                    if j == 1 then
+                        if i == 1 then
+                            BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, myPanel, FRAMEPOINT_TOPLEFT, 0.01, -0.03)
+                        else
+                            BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, myPanel, FRAMEPOINT_TOPLEFT, 0.01, -0.02 - (0.01 * i))
+                        end
+                    else
+                        BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0.005, 0)
+                    end
+                    prevColumn = column
+                end
+            end
             BlzFrameSetVisible(myPanel, GetLocalPlayer() == player.id)
             player.statePanel = myPanel
         end
@@ -2528,7 +2760,7 @@ ForcePlayerStartLocation(Player(1), 1)
 SetPlayerColor(Player(1), ConvertPlayerColor(1))
 SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
 SetPlayerRaceSelectable(Player(1), false)
-SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(1), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(2), 2)
 ForcePlayerStartLocation(Player(2), 2)
 SetPlayerColor(Player(2), ConvertPlayerColor(2))
@@ -2773,15 +3005,16 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(0, 8)
-SetStartLocPrio(0, 0, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 1, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 2, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 3, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 4, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(0, 9)
+SetStartLocPrio(0, 0, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 8, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(1, 9)
 SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_HIGH)
@@ -2792,78 +3025,86 @@ SetStartLocPrio(1, 5, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 6, 7, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 7, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(2, 8)
+SetStartLocPrioCount(2, 9)
 SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 1, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 2, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 3, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 4, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(3, 8)
+SetStartLocPrio(2, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 8, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(3, 9)
 SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 2, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 3, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 4, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(4, 8)
+SetStartLocPrio(3, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 2, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 8, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(4, 9)
 SetStartLocPrio(4, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 3, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 4, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(5, 8)
+SetStartLocPrio(4, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 2, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 3, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 8, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(5, 9)
 SetStartLocPrio(5, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 4, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(6, 8)
+SetStartLocPrio(5, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 2, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 3, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 4, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 8, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(6, 9)
 SetStartLocPrio(6, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 5, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(7, 8)
+SetStartLocPrio(6, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 2, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 3, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 4, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 5, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 8, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(7, 9)
 SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 6, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(8, 8)
+SetStartLocPrio(7, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 2, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 3, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 4, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 5, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 6, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 8, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(8, 9)
 SetStartLocPrio(8, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 7, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(9, 8)
+SetStartLocPrio(8, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 2, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 3, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 4, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 5, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 6, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 7, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 8, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(9, 9)
 SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 1, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 2, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 3, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 4, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 5, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 6, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 7, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 8, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(10, 3)
 SetStartLocPrio(10, 0, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(10, 1, 17, MAP_LOC_PRIO_HIGH)

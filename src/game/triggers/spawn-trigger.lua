@@ -10,8 +10,6 @@ function spawnTrigger()
                     replaceCell(player)
                 end
                 player.spawnTimer = player.spawnTimer - 1
-                local text = BlzFrameGetChild(player.statePanel, 0)
-                BlzFrameSetText(text, "Next wave: " .. player.spawnTimer)
             end
         end
     end)
