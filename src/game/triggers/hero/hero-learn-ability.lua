@@ -1,3 +1,4 @@
+Debug.beginFile('hero-learn-ability.lua')
 function heroLearnAbility()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -16,3 +17,4 @@ function heroLearnAbility()
         end
     end
 end
+Debug.endFile()

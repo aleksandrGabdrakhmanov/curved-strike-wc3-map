@@ -1,3 +1,4 @@
+Debug.beginFile('income-trigger.lua')
 function incomeTrigger()
     local trig = CreateTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 1.00)
@@ -11,3 +12,4 @@ function incomeTrigger()
         end
     end)
 end
+Debug.endFile()

@@ -1,3 +1,4 @@
+Debug.beginFile('regions-init.lua')
 regions = {}
 function initRegions()
     for name, value in pairs(_G) do
@@ -28,3 +29,4 @@ function split(str, delimiter)
     end
     return result
 end
+Debug.endFile()

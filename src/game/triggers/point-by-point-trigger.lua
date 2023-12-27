@@ -1,3 +1,4 @@
+Debug.beginFile('point-by-point-trigger.lua')
 additionalDir = 500
 function moveByPointsTrigger()
     for _, team in ipairs(all_teams) do
@@ -51,3 +52,4 @@ function containsValue(value, array)
     end
     return false
 end
+Debug.endFile()

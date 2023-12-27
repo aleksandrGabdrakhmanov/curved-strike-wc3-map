@@ -1,3 +1,4 @@
+Debug.beginFile('spawn-trigger.lua')
 function spawnTrigger()
     local trig = CreateTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 1)
@@ -103,3 +104,4 @@ function isHero(id)
     end
     return false
 end
+Debug.endFile()

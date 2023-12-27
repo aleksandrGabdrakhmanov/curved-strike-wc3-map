@@ -1,3 +1,4 @@
+Debug.beginFile('main-triggers.lua')
 function initTriggers()
     incomeTrigger()
     moveByPointsTrigger()
@@ -19,3 +20,4 @@ function initTriggers()
     debugTrigger()
     debugTriggerGold()
 end
+Debug.endFile()

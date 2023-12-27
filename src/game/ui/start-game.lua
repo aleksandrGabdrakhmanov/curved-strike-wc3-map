@@ -1,3 +1,4 @@
+Debug.beginFile('start-game.lua')
 function initialUI()
     local fm = BlzGetFrameByName("ConsoleUIBackdrop", 0)
     frame = BlzCreateFrameByType("TEXT", "MyTextFrame", fm, "", 0)
@@ -119,3 +120,4 @@ function replaceTexture(inputString)
     local replacedString = inputString:gsub("ReplaceableTextures\\CommandButtons\\(.-)%.blp", "ReplaceableTextures\\CommandButtonsDisabled\\DIS%1.blp")
     return replacedString
 end
+Debug.endFile()

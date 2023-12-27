@@ -1,3 +1,4 @@
+Debug.beginFile('finish-research-trigger.lua')
 function finishResearchTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -9,3 +10,4 @@ function finishResearchTrigger()
         end
     end
 end
+Debug.endFile()

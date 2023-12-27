@@ -1,3 +1,4 @@
+Debug.beginFile('hero-construct-trigger.lua')
 function heroConstructTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -20,4 +21,5 @@ function heroConstructTrigger()
         end
     end
 end
+Debug.endFile()
 

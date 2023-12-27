@@ -1,3 +1,4 @@
+Debug.beginFile('game-init.lua')
 function initGame(mode)
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
@@ -290,3 +291,4 @@ function createBuildingsForPlayers()
         end
     end
 end
+Debug.endFile()

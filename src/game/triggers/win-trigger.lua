@@ -1,3 +1,4 @@
+Debug.beginFile('win-trigger.lua')
 function winTrigger()
     local trig = CreateTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 1.00)
@@ -15,3 +16,4 @@ function winTrigger()
         end
     end)
 end
+Debug.endFile()

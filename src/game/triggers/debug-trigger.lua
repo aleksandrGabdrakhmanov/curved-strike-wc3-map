@@ -1,3 +1,4 @@
+Debug.beginFile('debug-trigger.lua')
 function debugTrigger()
 
     local trig = CreateTrigger()
@@ -59,3 +60,4 @@ function debugTriggerGold()
         end
     end)
 end
+Debug.endFile()

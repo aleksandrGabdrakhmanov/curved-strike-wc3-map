@@ -1,3 +1,4 @@
+Debug.beginFile('enable-update-trigger.lua')
 function enableUpdateTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -25,3 +26,4 @@ function getUpgradesById(id)
     end
     return {}
 end
+Debug.endFile()

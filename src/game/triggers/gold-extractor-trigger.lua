@@ -1,3 +1,4 @@
+Debug.beginFile('gold-extractor-trigger.lua')
 function goldExtractorTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -22,3 +23,4 @@ function goldExtractorTrigger()
         end
     end
 end
+Debug.endFile()

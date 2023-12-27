@@ -1,3 +1,4 @@
+Debug.beginFile('dead-detect-trigger.lua')
 function deadDetectTrigger()
     local trig = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DEATH)
@@ -17,3 +18,4 @@ function deadDetectTrigger()
         end
     end)
 end
+Debug.endFile()

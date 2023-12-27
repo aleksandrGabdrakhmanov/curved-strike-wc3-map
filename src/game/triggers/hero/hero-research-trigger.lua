@@ -1,3 +1,4 @@
+Debug.beginFile('hero-research-trigger.lua')
 function heroResearchTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -15,3 +16,4 @@ function heroResearchTrigger()
         end
     end
 end
+Debug.endFile()

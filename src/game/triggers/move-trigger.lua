@@ -1,3 +1,4 @@
+Debug.beginFile('move-trigger.lua')
 function moveTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -64,3 +65,4 @@ function replaceGroupCell(group)
     end)
     DestroyGroup(group)
 end
+Debug.endFile()

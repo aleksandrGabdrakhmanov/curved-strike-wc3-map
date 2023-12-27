@@ -1,3 +1,4 @@
+Debug.beginFile('hero-dead-trigger.lua')
 function heroDeadTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -13,3 +14,4 @@ function heroDeadTrigger()
         end
     end
 end
+Debug.endFile()

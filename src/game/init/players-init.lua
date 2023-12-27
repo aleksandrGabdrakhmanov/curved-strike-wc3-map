@@ -1,3 +1,4 @@
+Debug.beginFile('players-init.lua')
 function setAllianceBetweenSpawnPlayers()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(getAllSpawnPlayers(team)) do
@@ -184,3 +185,4 @@ function setStartCameraPosition()
         end
     end
 end
+Debug.endFile()

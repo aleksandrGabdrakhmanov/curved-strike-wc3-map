@@ -1,3 +1,4 @@
+Debug.beginFile('hero-transfer-experiance.lua')
 function heroTransferExp()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -14,3 +15,4 @@ function heroTransferExp()
         end
     end
 end
+Debug.endFile()

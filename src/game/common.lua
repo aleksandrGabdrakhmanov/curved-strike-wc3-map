@@ -1,3 +1,4 @@
+Debug.beginFile('common.lua')
 function calculateDif(buidRect, spawnRect, unit)
 
     local buidRectX = GetRectCenterX(buidRect)
@@ -10,3 +11,4 @@ function calculateDif(buidRect, spawnRect, unit)
     local unitY = GetUnitY(unit)
     return spawnRectX - (buidRectX - unitX), spawnRectY - (buidRectY - unitY)
 end
+Debug.endFile()

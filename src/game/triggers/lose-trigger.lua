@@ -1,3 +1,4 @@
+Debug.beginFile('lose-trigger.lua')
 function loseTrigger()
     for _, team in ipairs(all_teams) do
         local group = GetUnitsOfPlayerAll(team.base.player)
@@ -31,3 +32,4 @@ function loseTrigger()
         DestroyGroup(group)
     end
 end
+Debug.endFile()

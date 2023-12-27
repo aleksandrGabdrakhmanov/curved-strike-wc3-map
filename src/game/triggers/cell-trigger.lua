@@ -1,3 +1,4 @@
+Debug.beginFile('cell-trigger.lua')
 function cellTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -46,3 +47,4 @@ function replaceGroupCell(group)
     end)
     DestroyGroup(group)
 end
+Debug.endFile()

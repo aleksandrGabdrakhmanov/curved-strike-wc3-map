@@ -1,3 +1,4 @@
+Debug.beginFile('spell-finish-trigger.lua')
 function spellFinishTrigger()
     local trig = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_FINISH)
@@ -27,3 +28,4 @@ function getAttackPointRect(castPlayer)
         end
     end
 end
+Debug.endFile()

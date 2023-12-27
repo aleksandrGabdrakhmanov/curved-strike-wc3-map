@@ -1,3 +1,4 @@
+Debug.beginFile('damage-detect-trigger.lua')
 function damageDetectTrigger()
     local trig = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DAMAGED)
@@ -17,3 +18,4 @@ function damageDetectTrigger()
         end
     end)
 end
+Debug.endFile()

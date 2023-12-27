@@ -1,4 +1,4 @@
-
+Debug.beginFile('status-panel.lua')
 function getTableInfo()
     local tableInfo = {}
     tableInfo.header = {
@@ -159,4 +159,5 @@ function initPanelForAllPlayers()
         end
     end
 end
+Debug.endFile()
 

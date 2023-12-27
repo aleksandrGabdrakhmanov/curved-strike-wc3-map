@@ -1,3 +1,4 @@
+Debug.beginFile('spell-cast-trigger.lua')
 custom_cast_ai_params = {
     {
         unitId = 'u006',
@@ -52,3 +53,4 @@ function getSpawnPlayerIds(player, checkPlayer)
     end
     return false
 end
+Debug.endFile()

@@ -1,3 +1,4 @@
+Debug.beginFile('hero-main.lua')
 function initHeroTriggers()
     heroResearchTrigger()
     heroConstructTrigger()
@@ -6,3 +7,4 @@ function initHeroTriggers()
     heroLearnAbility()
     heroNewSkill()
 end
+Debug.endFile()

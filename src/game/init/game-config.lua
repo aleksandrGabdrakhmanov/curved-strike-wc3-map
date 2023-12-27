@@ -1,3 +1,4 @@
+Debug.beginFile('game-config.lua')
 function initGameConfig(mode)
     game_modes = {
         curved = {
@@ -171,3 +172,4 @@ function initGlobalVariables()
         {id = 'ntav', race = 'other'}
     }
 end
+Debug.endFile()
