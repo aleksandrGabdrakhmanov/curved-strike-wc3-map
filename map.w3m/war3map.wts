@@ -29,11 +29,6 @@ STRING 7
 Footman
 }
 
-STRING 8
-{
-Player 2
-}
-
 STRING 9
 // Doodads: D001 (Corner), Name (Name)
 {
@@ -1912,5 +1907,10 @@ STRING 351
 // Abilities: A007 (Move), EditorSuffix (Editor Suffix)
 {
 (Large)
+}
+
+STRING 352
+{
+sdfsdf#123443
 }
 

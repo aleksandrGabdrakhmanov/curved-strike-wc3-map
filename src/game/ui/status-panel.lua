@@ -14,7 +14,7 @@ function getTableInfo()
         for _, player in ipairs(team.players) do
             table.insert(tableInfo.body, {
                 {
-                    text = GetPlayerName(player.id),
+                    text = string.gsub(GetPlayerName(player.id), "#.*", ""),
                     color = player.color,
                     isSensitive = false
                 },
