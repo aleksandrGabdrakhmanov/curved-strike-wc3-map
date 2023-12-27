@@ -14,7 +14,7 @@ function getTableInfo()
         for _, player in ipairs(team.players) do
             table.insert(tableInfo.body, {
                 {
-                    text = string.gsub(GetPlayerName(player.id), "#.*", ""),
+                    text = getClearName(player),
                     color = player.color,
                     isSensitive = false
                 },
@@ -47,6 +47,10 @@ function getTableInfo()
         end
     end
     return tableInfo
+end
+
+function getClearName(player)
+    return string.gsub(GetPlayerName(player.id), "#.*", "")
 end
 
 function updatePanelForAllPlayers()
@@ -92,7 +96,7 @@ end
 
 function isPlayerInTeam(text, players)
     for _, player in ipairs(players) do
-        if text == GetPlayerName(player.id) then
+        if text == getClearName(player) then
             return true
         end
     end
