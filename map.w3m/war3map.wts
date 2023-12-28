@@ -343,12 +343,6 @@ STRING 67
 (Level 1)
 }
 
-STRING 72
-// Abilities: A000 (Build Gold Extractor), Ubertip (Tooltip - Normal - Extended)
-{
-Grants an additional |cffffff001 gold|r every second.
-}
-
 STRING 86
 {
 Player 11
@@ -1912,5 +1906,11 @@ STRING 351
 STRING 355
 {
 Player 2
+}
+
+STRING 360
+// Abilities: A000 (Build Gold Extractor), Ubertip (Tooltip - Normal - Extended)
+{
+Grants an additional gold
 }
 

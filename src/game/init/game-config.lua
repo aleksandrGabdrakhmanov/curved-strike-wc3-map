@@ -7,6 +7,13 @@ function initGameConfig(mode)
                 interval = 35,
                 dif = 0
             },
+            economy = {
+                startGold = 300,
+                startIncomePerSec = 5,
+                incomeBoost = 1,
+                firstMinePrice = 150,
+                nextMineDiffPrice = 150
+            },
             playerPosition = { 1, 2, 3, 4, 5 }
         },
         united = {
@@ -14,6 +21,13 @@ function initGameConfig(mode)
             spawnPolicy = {
                 interval = 0,
                 dif = 35
+            },
+            economy = {
+                startGold = 300,
+                startIncomePerSec = 5,
+                incomeBoost = 1,
+                firstMinePrice = 150,
+                nextMineDiffPrice = 150
             },
             playerPosition = { 3, 4, 2, 1, 5 }
         },
@@ -23,18 +37,20 @@ function initGameConfig(mode)
                 interval = 0,
                 dif = 35
             },
+            economy = {
+                startGold = 600,
+                startIncomePerSec = 10,
+                incomeBoost = 2,
+                firstMinePrice = 300,
+                nextMineDiffPrice = 300
+            },
             playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
         }
     }
 
     game_config = {
         mode = mode,
-        economy = {
-            startGold = 300,
-            startIncomePerSec = 5,
-            firstMinePrice = 300, -- need init. now get from map
-            nextMineDiffPrice = 300
-        },
+        economy = game_modes[mode].economy,
         units = {
             range = game_modes[mode].unitRange
         },
@@ -159,10 +175,6 @@ function initGlobalVariables()
 
     upgrades_special = {
         summonHeroBuilder = 'R000'
-    }
-
-    text = {
-        mineLevel = "Level: "
     }
 
     main_race = {

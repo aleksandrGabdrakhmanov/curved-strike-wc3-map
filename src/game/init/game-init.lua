@@ -273,7 +273,13 @@ function createBuildingsForPlayers()
                     GetRectCenterY(player.mineRect),
                     0
             )
-            player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, unit, 0, 10, 204, 204, 0, 0)
+
+            local ability = BlzGetUnitAbility(unit, FourCC(abilities.mine))
+            BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, game_config.economy.firstMinePrice)
+            BlzSetAbilityRealField(ability, ABILITY_RF_ARF_MISSILE_ARC, game_config.economy.incomeBoost)
+
+
+            player.economy.mineTextTag = CreateTextTagUnitBJ(getMineTag(player), unit, 0, 10, 204, 204, 0, 0)
 
             CreateUnit(
                     player.id,
