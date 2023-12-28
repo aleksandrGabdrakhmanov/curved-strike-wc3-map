@@ -136,6 +136,7 @@ function addPlayersInTeam(players)
                 laboratoryRect = nil,
                 attackPointRect = {},
                 spawnRect = nil,
+                shopRect = nil,
                 spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif,
                 heroes = {},
                 totalDamage = 0,
@@ -191,6 +192,7 @@ function initRect()
             player.mainRect = regions[game_config.mode][team.i][player.i]['main']
             player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
             player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
+            player.shopRect = regions[game_config.mode][team.i][player.i]['shop']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
@@ -285,6 +287,13 @@ function createBuildingsForPlayers()
                     FourCC(units_special.laboratory),
                     GetRectCenterX(player.laboratoryRect),
                     GetRectCenterY(player.laboratoryRect),
+                    0
+            )
+            CreateUnit(
+                    player.id,
+                    FourCC(units_special.shop),
+                    GetRectCenterX(player.shopRect),
+                    GetRectCenterY(player.shopRect),
                     0
             )
 

@@ -292,6 +292,36 @@ gg_trg_ItemshopGUI_Init_Shop = nil
 gg_trg_ItemshopGUI_Init_Haggle_Skills = nil
 gg_trg_ItemshopGUI_Init = nil
 gg_trg_ItemshopGUI_Init_ShortCuts = nil
+gg_rct_curved_1_1_shop = nil
+gg_rct_curved_1_2_shop = nil
+gg_rct_curved_1_3_shop = nil
+gg_rct_curved_1_4_shop = nil
+gg_rct_curved_1_5_shop = nil
+gg_rct_curved_2_1_shop = nil
+gg_rct_curved_2_2_shop = nil
+gg_rct_curved_2_3_shop = nil
+gg_rct_curved_2_4_shop = nil
+gg_rct_curved_2_5_shop = nil
+gg_rct_united_1_1_shop = nil
+gg_rct_united_1_2_shop = nil
+gg_rct_united_1_3_shop = nil
+gg_rct_united_1_4_shop = nil
+gg_rct_united_1_5_shop = nil
+gg_rct_united_2_5_shop = nil
+gg_rct_united_2_4_shop = nil
+gg_rct_united_2_3_shop = nil
+gg_rct_united_2_2_shop = nil
+gg_rct_united_2_1_shop = nil
+gg_rct_royal_1_1_shop = nil
+gg_rct_royal_10_1_shop = nil
+gg_rct_royal_9_1_shop = nil
+gg_rct_royal_8_1_shop = nil
+gg_rct_royal_7_1_shop = nil
+gg_rct_royal_6_1_shop = nil
+gg_rct_royal_5_1_shop = nil
+gg_rct_royal_4_1_shop = nil
+gg_rct_royal_3_1_shop = nil
+gg_rct_royal_2_1_shop = nil
 function InitGlobals()
 local i = 0
 
@@ -1608,13 +1638,13 @@ do
     ,'prvt', 'rde3', 'bspd', 'gcel', 'rde2', 'clsd', 'dsum', 'stel', 'desc', 'modt', 'ofro', 'thdm', 'hlst', 'mnst', 'pghe', 'pgma', 'pnvu', 'pres'
     ,'ankh', 'shas', 'stwp', 'ofir', 'oli2', 'odef', 'oven', 'oslo', 'ocor', 'shtm', 'I001', 'klmm', 'crdt'
     }
-    
+
     local Haggle_Skills = {
         -- skill, GoldBase, Lumberbase, GoldAdd, LumberAdd
         -- add is added per Level of that skill to Base. The current Cost is than multiplied by that Factor.
         --{FourCC('A000'), 0.8, 0.8, 0.0, 0.0}
     }
-    
+
     -- position of the custom UI
     -- it can leave the 4:3 Screen but you should checkout the start of function TasItemShopUI.Create
     local xPos = 0.0
@@ -1636,7 +1666,7 @@ do
     local toolTipSizeX = 0.2 -- only content
     local toolTipSizeXBig = 0.3 -- only content
     local toolTipLimitBig = 300 -- When a TooltipText Contains this amount or more of Chars it will use toolTipSizeXBig
-    
+
     -- this can be used to change the visual ("EscMenuControlBackdropTemplate") ("TasItemShopRaceBackdrop")
     local boxFrameName = "TasItemShopRaceBackdrop"
     local boxButtonListFrameName = "EscMenuControlBackdropTemplate"
@@ -1668,10 +1698,10 @@ do
     local SellButtonIcon = "ReplaceableTextures\\CommandButtons\\BTNReturnGoods"
     local SellButtonIconDisabled = getDisabledIcon(SellButtonIcon)
 
-    local MainUserTexture = "ui\\widgets\\console\\human\\commandbutton\\human-multipleselection-border" 
-    local MainItemTexture = "ui\\widgets\\console\\human\\commandbutton\\human-multipleselection-border" 
+    local MainUserTexture = "ui\\widgets\\console\\human\\commandbutton\\human-multipleselection-border"
+    local MainItemTexture = "ui\\widgets\\console\\human\\commandbutton\\human-multipleselection-border"
 
-    local shopRange = 900 -- the max distance between shop and Shoper, this can be overwritten by shopObject.Range.
+    local shopRange = 4000 -- the max distance between shop and Shoper, this can be overwritten by shopObject.Range.
     local updateTime = 0.4 -- how many seconds pass before a new update is applied. update: search new shopers, validat current shopers and update UI.
     -- Titel-text in the reference Boxes
     local textUpgrades = "COLON_UPGRADE" --tries to localize on creation
@@ -1713,7 +1743,7 @@ do
     -- (2) the buy button is below the buttonList, the RefButtons are at the bottom outside of the Box
     -- (3) the buy button is below the buttonList, the RefButtons are left outside of the Box they are also from top to bottom
     local LayoutType = 0
-    
+
 
     -- (true) right clicking an refInventoryButton in the UI will sell the item
     -- (false) right clicking it will buy it again.
@@ -1758,9 +1788,9 @@ do
     --local buttonListButtonName = "TasButton"
     --local buttonListButtonSizeX = 0.2
     --local buttonListButtonSizeY = 0.0265
-    
+
     local categoryButtonSize = 0.019
-    
+
     -- This runs right before the actually UI is created.
     -- this is a good place to add items, categories, fusions shops etc.
     local function UserInit()
@@ -1792,7 +1822,7 @@ do
         local catCrit = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNCriticalStrike", "Crit")
         local catLifeSteal = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNVampiricAura", "Lifesteal")
         local catEvade = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNEvasion", "Evasion")
-        
+
         -- setup custom shops
         -- custom Shops are optional.
         -- They can have a White or Blacklist of items they can(n't) sell and have a fixed cost modifier for Gold, Lumber aswell as a function for more dynamic things for Gold and Lumber.
@@ -1808,14 +1838,14 @@ do
         -- create an shopObject for 'ngme', has to pay 20more than normal, beaware that this can be overwritten by GUI Example
         shopObject = TasItemShopCreateShop('ngme', false, 1.2, 1.2
         -- custom gold Cost function
-            ,function(itemCode, cost, client, shop) return cost end
+        ,function(itemCode, cost, client, shop) return cost end
         -- custom lumber Cost function
-            ,function(itemCode, cost, client, shop) return cost end
+        ,function(itemCode, cost, client, shop) return cost end
         )
         --'I002' crown +100 was never added to the database but this shop can craft/sell it.
         shopObject = TasItemShopAddShop('n002', 'ckng', 'I001', 'I002', 'arsh')
         shopObject.Mode = true
-        
+
 
         -- Define skills/Buffs that change the costs in the shop
         -- cursed Units have to pay +25
@@ -1850,7 +1880,7 @@ do
         -- define item Categories
         -- uses the locals from earlier.
         -- An item can have multiple categories just add them together like this: catStr + catAgi + catInt
-        
+
         TasItemSetCategory('rst1', catStr)
         TasItemSetCategory('bgst', catStr)
         TasItemSetCategory('rin1', catInt)
@@ -1869,7 +1899,7 @@ do
         TasItemSetCategory('rat9', catDmg)
         TasItemSetCategory('rat6', catDmg)
         TasItemSetCategory('ratf', catDmg)
-        
+
         TasItemSetCategory('rlif', catLifeReg)
 
         TasItemSetCategory('ajen', catAura + catAtkSpeed + catMoveSpeed)
@@ -1987,7 +2017,7 @@ do
             if shopObject.Lumber then
                 lumber = shopObject.Lumber(itemCode, lumber, buyer, shop)
             end
-            
+
         end
         return math.floor(gold), math.floor(lumber)
     end
@@ -2028,7 +2058,7 @@ do
         table.insert(BUY_ABLE_ITEMS, itemCode)
         TasItemCaclCost(itemCode)
         if bj_gameStarted then
-            
+
         end
     end
     function TasItemShopAddHaggleSkill(skill, goldBase, lumberBase, goldAdd, lumberAdd)
@@ -2051,7 +2081,7 @@ do
             shopObject = {Mode = whiteList, GoldFactor = __jarray(goldFactor), LumberFactor = __jarray(lumberFactor), Gold = goldFunction, Lumber = lumberFunction}
             TasItemShopUI.Shops[unitCode] = shopObject
         end
-        
+
         return shopObject
     end
     TasItemShopCreateShopSimple = TasItemShopCreateShop
@@ -2062,7 +2092,7 @@ do
             TasItemCaclCost(v)
             shopObject[v] = true
             --print(GetObjectName(v))
-            table.insert(shopObject, v) 
+            table.insert(shopObject, v)
         end
         return shopObject
     end
@@ -2084,8 +2114,8 @@ do
         end
         return shopObject
     end
-    
-    
+
+
 
     local real = MarkGameStarted
     local Shoper = {}
@@ -2111,7 +2141,7 @@ do
 
     function TasItemShopUI.SetQuickLink(player, itemCode)
         -- request to calc the itemCode costs, this is done in case it was not added to the shop
-        TasItemCaclCost(itemCode) 
+        TasItemCaclCost(itemCode)
         -- have that data already?
         if TasItemShopUI.QuickLink[player][itemCode] then
             for i, v in ipairs(TasItemShopUI.QuickLink[player]) do
@@ -2156,10 +2186,10 @@ do
         end
         return missing
     end
-    
+
 
     local function updateItemFrame(frameObject, data, showGold, showLumber)
-        
+
         if frameObject.HighLight ~= nil then
             BlzFrameSetVisible(frameObject.HighLight, TasItemShopUI.MarkedItemCodes[data])
         end
@@ -2169,10 +2199,10 @@ do
         end
         BlzFrameSetTexture(frameObject.Icon, BlzGetAbilityIcon(data), 0, false)
         BlzFrameSetText(frameObject.Text, GetObjectName(data))
-    
+
         BlzFrameSetTexture(frameObject.ToolTipFrameIcon, BlzGetAbilityIcon(data), 0, false)
-        BlzFrameSetText(frameObject.ToolTipFrameName, GetObjectName(data))      
-    --        frameObject.ToolTipFrameSeperator
+        BlzFrameSetText(frameObject.ToolTipFrameName, GetObjectName(data))
+        --        frameObject.ToolTipFrameSeperator
         BlzFrameSetText(frameObject.ToolTipFrameText, BlzGetAbilityExtendedTooltip(data, 0))
 
         if string.len(BlzGetAbilityExtendedTooltip(data, 0)) >= toolTipLimitBig then
@@ -2180,7 +2210,7 @@ do
         else
             BlzFrameSetSize(frameObject.ToolTipFrameText, toolTipSizeX, 0)
         end
-  
+
 
         if showGold or showLumber then
             local gold, lumber
@@ -2220,14 +2250,14 @@ do
             BlzFrameSetVisible(frameObject.TextGold, false)
             BlzFrameSetVisible(frameObject.IconGold, false)
         end
-        
+
     end
     local function updateUndoButton(data, actionName)
         BlzFrameSetTexture(TasItemShopUI.Frames.UndoButtonIcon, BlzGetAbilityIcon(data), 0, false)
         BlzFrameSetTexture(TasItemShopUI.Frames.UndoButtonIconPushed, BlzGetAbilityIcon(data), 0, false)
         BlzFrameSetText(TasItemShopUI.Frames.UndoText, GetLocalizedString(textUndo).. actionName .. "\n" .. GetObjectName(data))
     end
-    
+
     local function GiveItem(unit, item, undo)
         local itemCode = GetItemTypeId(item)
         local oldCharges = GetItemCharges(item)
@@ -2238,7 +2268,7 @@ do
             -- the item could be stacked.
             -- request triggerCount of the Itemstacking trigger, then give the item.
             local oldDataCount = GetItemStackingEventData()
-            UnitAddItem(unit, item)                
+            UnitAddItem(unit, item)
             if undo then
                 -- with undo, request the data again. If the counter is different -> a reforged item stacking event happend
                 local newDataCount, stackedItem, chargeChange = GetItemStackingEventData()
@@ -2246,7 +2276,7 @@ do
                 if newDataCount ~= oldDataCount then
                     undo.StackChargesGainer = stackedItem
                     undo.StackCharges = chargeChange
-                -- no built in stacking event, but the user might have a custom stacking.
+                    -- no built in stacking event, but the user might have a custom stacking.
                 elseif GetItemCharges(item) < oldCharges then
                     for i = 0, bj_MAX_INVENTORY - 1 do
                         if GetItemTypeId(UnitItemInSlot(unit, i)) == itemCode then
@@ -2272,7 +2302,7 @@ do
                 if GetHandleId(item) == 0 or UnitHasItem(unit, item) then
                     found = true
                     if canUndo then
-                       table.insert(undo.ResultItem, {item, unit})
+                        table.insert(undo.ResultItem, {item, unit})
                     end
                     break
                 end
@@ -2288,132 +2318,132 @@ do
 
     end
     local function BuyItem(player, itemCode)
-        
+
         xpcall( function()
-        --print(GetPlayerName(player), "Wana Buy", GetObjectName(itemCode), "with", GetUnitName(ShoperMain[player]))
-        if BlzGroupGetSize(Shoper[player]) == 0 then
-            if GetLocalPlayer() == player then
-                print(GetLocalizedString(textNoValidShopper))
-            end
-            return
-        end
-        local gold, lumber, items
-        local shopObject = TasItemShopUI.Shops[GetUnitTypeId(CurrentShop[player])]
-        -- can not buy this?
-        if not flexibleShop and not CanBuyItem(itemCode, shopObject, player) then
-            if GetLocalPlayer() == player then print(GetObjectName(itemCode), GetLocalizedString(textCanNotBuySufix)) end
-            return
-        end
-
-        if TasItemFusion.BuiltWay[itemCode] then
-            gold, lumber, items = TasItemFusionCalc(TasItemFusion.Player[player].UseAble, itemCode)
-        else
-            gold, lumber = TasItemGetCost(itemCode)
-        end
-
-        gold, lumber = CostModifier(gold, lumber, itemCode,  ShoperMain[player], CurrentShop[player], shopObject)
-
-        -- only items buyable in the shop can be replaced by Gold? Also ignore non fusion items.
-        if not flexibleShop and TasItemFusion.BuiltWay[itemCode] then
-            local missingItemCode = AllMatsProvided(player, itemCode, shopObject)
-            if #missingItemCode > 0 then
-                if GetLocalPlayer() == player then print(GetLocalizedString(textCanNotBuyPrefix), GetObjectName(itemCode)) for i, v in ipairs(missingItemCode) do print(GetObjectName(v), GetLocalizedString(textCanNotBuySufix)) end end
+            --print(GetPlayerName(player), "Wana Buy", GetObjectName(itemCode), "with", GetUnitName(ShoperMain[player]))
+            if BlzGroupGetSize(Shoper[player]) == 0 then
+                if GetLocalPlayer() == player then
+                    print(GetLocalizedString(textNoValidShopper))
+                end
                 return
             end
-        end
-
-        if GetPlayerState(player, PLAYER_STATE_RESOURCE_GOLD) >= gold then
-            if GetPlayerState(player, PLAYER_STATE_RESOURCE_LUMBER) >= lumber then
-                local undo
-                if canUndo then
-                    local units = {}
-                    undo = {ResultItem = {}, Result = itemCode, Gold = gold, Lumber = lumber, Items = {}, ActionName = "Buy"}
-                    table.insert(TasItemShopUI.Undo[player], undo)
-                    for i = 0, BlzGroupGetSize(Shoper[player]) - 1, 1 do
-                        units[i + 1] = BlzGroupUnitAt(Shoper[player], i)
-                    end
-                    local owner
-                    if items then
-                        for _,v in ipairs(items) do
-                            for _,u in ipairs(units) do
-                                if UnitHasItem(u, v) then
-                                    owner = u
-                                    break
-                                end
-                            end 
-                            --table.insert(undo.Items, {GetItemTypeId(v), owner})
-                            --RemoveItem(v)
-                            table.insert(undo.Items, {v, owner})
-                            --print(GetItemName(v), GetHandleId(v))
-                            UnitRemoveItem(owner, v)
-                            SetItemVisible(v, false)
-                        end
-                    end
-                    if GetLocalPlayer() == player then
-                        BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, true)
-                        updateUndoButton(undo.Result, undo.ActionName)
-                    end
-                else
-                    if items then
-                        for _,v in ipairs(items) do
-                            RemoveItem(v)
-                        end
-                    end
-                end
-                AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_GOLD, -gold)
-                AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_LUMBER, -lumber)
-                local newItem = CreateItem(itemCode, GetUnitX(ShoperMain[player]), GetUnitY(ShoperMain[player]))
-                GiveItemGroup(player, newItem, undo)
-                
-                --CreateItem(itemCode, GetPlayerStartLocationX(player), GetPlayerStartLocationY(player))
-                TasItemShopUIShow(player, CurrentShop[player])
-            elseif not GetSoundIsPlaying(SoundNoLumber[GetPlayerRace(player)]) then
-                StartSoundForPlayerBJ(player, SoundNoLumber[GetPlayerRace(player)])
+            local gold, lumber, items
+            local shopObject = TasItemShopUI.Shops[GetUnitTypeId(CurrentShop[player])]
+            -- can not buy this?
+            if not flexibleShop and not CanBuyItem(itemCode, shopObject, player) then
+                if GetLocalPlayer() == player then print(GetObjectName(itemCode), GetLocalizedString(textCanNotBuySufix)) end
+                return
             end
-        elseif not GetSoundIsPlaying(SoundNoGold[GetPlayerRace(player)]) then
-            StartSoundForPlayerBJ(player, SoundNoGold[GetPlayerRace(player)])
-        end
-    end, print)
+
+            if TasItemFusion.BuiltWay[itemCode] then
+                gold, lumber, items = TasItemFusionCalc(TasItemFusion.Player[player].UseAble, itemCode)
+            else
+                gold, lumber = TasItemGetCost(itemCode)
+            end
+
+            gold, lumber = CostModifier(gold, lumber, itemCode,  ShoperMain[player], CurrentShop[player], shopObject)
+
+            -- only items buyable in the shop can be replaced by Gold? Also ignore non fusion items.
+            if not flexibleShop and TasItemFusion.BuiltWay[itemCode] then
+                local missingItemCode = AllMatsProvided(player, itemCode, shopObject)
+                if #missingItemCode > 0 then
+                    if GetLocalPlayer() == player then print(GetLocalizedString(textCanNotBuyPrefix), GetObjectName(itemCode)) for i, v in ipairs(missingItemCode) do print(GetObjectName(v), GetLocalizedString(textCanNotBuySufix)) end end
+                    return
+                end
+            end
+
+            if GetPlayerState(player, PLAYER_STATE_RESOURCE_GOLD) >= gold then
+                if GetPlayerState(player, PLAYER_STATE_RESOURCE_LUMBER) >= lumber then
+                    local undo
+                    if canUndo then
+                        local units = {}
+                        undo = {ResultItem = {}, Result = itemCode, Gold = gold, Lumber = lumber, Items = {}, ActionName = "Buy"}
+                        table.insert(TasItemShopUI.Undo[player], undo)
+                        for i = 0, BlzGroupGetSize(Shoper[player]) - 1, 1 do
+                            units[i + 1] = BlzGroupUnitAt(Shoper[player], i)
+                        end
+                        local owner
+                        if items then
+                            for _,v in ipairs(items) do
+                                for _,u in ipairs(units) do
+                                    if UnitHasItem(u, v) then
+                                        owner = u
+                                        break
+                                    end
+                                end
+                                --table.insert(undo.Items, {GetItemTypeId(v), owner})
+                                --RemoveItem(v)
+                                table.insert(undo.Items, {v, owner})
+                                --print(GetItemName(v), GetHandleId(v))
+                                UnitRemoveItem(owner, v)
+                                SetItemVisible(v, false)
+                            end
+                        end
+                        if GetLocalPlayer() == player then
+                            BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, true)
+                            updateUndoButton(undo.Result, undo.ActionName)
+                        end
+                    else
+                        if items then
+                            for _,v in ipairs(items) do
+                                RemoveItem(v)
+                            end
+                        end
+                    end
+                    AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_GOLD, -gold)
+                    AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_LUMBER, -lumber)
+                    local newItem = CreateItem(itemCode, GetUnitX(ShoperMain[player]), GetUnitY(ShoperMain[player]))
+                    GiveItemGroup(player, newItem, undo)
+
+                    --CreateItem(itemCode, GetPlayerStartLocationX(player), GetPlayerStartLocationY(player))
+                    TasItemShopUIShow(player, CurrentShop[player])
+                elseif not GetSoundIsPlaying(SoundNoLumber[GetPlayerRace(player)]) then
+                    StartSoundForPlayerBJ(player, SoundNoLumber[GetPlayerRace(player)])
+                end
+            elseif not GetSoundIsPlaying(SoundNoGold[GetPlayerRace(player)]) then
+                StartSoundForPlayerBJ(player, SoundNoGold[GetPlayerRace(player)])
+            end
+        end, print)
     end
 
     local function SellItem(player, item)
         xpcall(function()
-        local wasSelectedItem = (item == TasItemShopUI.SelectedItem[player])
-        if not item then return end
-        local itemCode = GetItemTypeId(item)
+            local wasSelectedItem = (item == TasItemShopUI.SelectedItem[player])
+            if not item then return end
+            local itemCode = GetItemTypeId(item)
 
-        local gold, lumber, charges = GetItemSellCosts(ShoperMain[player], CurrentShop[player], item)
-        
-        AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_GOLD, gold)
-        AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_LUMBER, lumber)
-        if canUndo then
-            undo = {ResultItem = {}, Result = itemCode, Gold = -gold, Lumber = -lumber, Items = {}, ActionName = "Sell"}
-            table.insert(TasItemShopUI.Undo[player], undo)
-            for i = 0, BlzGroupGetSize(Shoper[player]) - 1, 1 do
-                owner = BlzGroupUnitAt(Shoper[player], i)
-                if UnitHasItem(owner, item) then
-                    UnitRemoveItem(owner, item)
-                    SetItemVisible(item, false)
-                    undo.Items[1] = {item, owner}
-                    break
+            local gold, lumber, charges = GetItemSellCosts(ShoperMain[player], CurrentShop[player], item)
+
+            AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_GOLD, gold)
+            AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_LUMBER, lumber)
+            if canUndo then
+                undo = {ResultItem = {}, Result = itemCode, Gold = -gold, Lumber = -lumber, Items = {}, ActionName = "Sell"}
+                table.insert(TasItemShopUI.Undo[player], undo)
+                for i = 0, BlzGroupGetSize(Shoper[player]) - 1, 1 do
+                    owner = BlzGroupUnitAt(Shoper[player], i)
+                    if UnitHasItem(owner, item) then
+                        UnitRemoveItem(owner, item)
+                        SetItemVisible(item, false)
+                        undo.Items[1] = {item, owner}
+                        break
+                    end
                 end
-            end
-            
-            if GetLocalPlayer() == player then
-                BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, true)
-                updateUndoButton(undo.Result, undo.ActionName)
-            end
-        else
-            RemoveItem(item)
-        end
 
-        if wasSelectedItem then
-            if GetLocalPlayer() == player then
-                BlzFrameSetEnable(TasItemShopUI.Frames.SellButton, false)
-                --BlzFrameSetVisible(TasItemShopUI.Frames.BoxSell, false)
+                if GetLocalPlayer() == player then
+                    BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, true)
+                    updateUndoButton(undo.Result, undo.ActionName)
+                end
+            else
+                RemoveItem(item)
             end
-            TasItemShopUI.SelectedItem[player] = nil
-        end
+
+            if wasSelectedItem then
+                if GetLocalPlayer() == player then
+                    BlzFrameSetEnable(TasItemShopUI.Frames.SellButton, false)
+                    --BlzFrameSetVisible(TasItemShopUI.Frames.BoxSell, false)
+                end
+                TasItemShopUI.SelectedItem[player] = nil
+            end
         end, print)
     end
     local function updateRefButton(frameObject, data, unit, updateBroken)
@@ -2433,8 +2463,8 @@ do
             else
                 BlzFrameSetText(frameObject.ToolTipFrameText, GetObjectName(data))
             end
-            
-            if unit ~= nill and IsUnitType(unit, UNIT_TYPE_HERO) then
+
+            if unit ~= nil and IsUnitType(unit, UNIT_TYPE_HERO) then
                 BlzFrameSetText(frameObject.ToolTipFrameText, BlzFrameGetText(frameObject.ToolTipFrameText) .. "\n" .. GetHeroProperName(unit))
             end
             if updateBroken then
@@ -2486,7 +2516,7 @@ do
         BlzFrameSetVisible(refButtons.Page, count > #refButtons)
         return validCounter
     end
-    
+
     local function updateHaveMats(player, data)
         local itemCounter = __jarray(0)
         local mat
@@ -2507,7 +2537,7 @@ do
             BlzFrameSetVisible(frameObject.IconDone, BlzFrameIsVisible(frameObject.Button) and ShoperMain[player] == BlzGroupUnitAt(Shoper[player], index - 1 + offset))
         end
     end
-    
+
     local function setSelected(player, data)
         local oldData = TasItemShopUI.Selected[player]
         TasItemShopUI.Selected[player] = data
@@ -2533,7 +2563,7 @@ do
             end
             if refButtonCountMats > 0 then
                 if TasItemFusion.BuiltWay[data] then
-                    updateRefButtons(TasItemFusion.BuiltWay[data].Mats, TasItemShopUI.Frames.BoxMaterial, TasItemShopUI.Frames.Material, CurrentOffSetMaterial[player])                
+                    updateRefButtons(TasItemFusion.BuiltWay[data].Mats, TasItemShopUI.Frames.BoxMaterial, TasItemShopUI.Frames.Material, CurrentOffSetMaterial[player])
                     updateHaveMats(player, data)
                 else
                     BlzFrameSetVisible(TasItemShopUI.Frames.BoxMaterial, false)
@@ -2542,7 +2572,7 @@ do
             if refButtonCountInv > 0 then
                 if not inventoryShowMainOnly then
                     if TasItemFusion.Player[player].UseAble.Count > 0 then
-                        updateRefButtons(TasItemFusion.Player[player].UseAble, TasItemShopUI.Frames.BoxInventory, TasItemShopUI.Frames.Inventory, CurrentOffSetInventory[player])        
+                        updateRefButtons(TasItemFusion.Player[player].UseAble, TasItemShopUI.Frames.BoxInventory, TasItemShopUI.Frames.Inventory, CurrentOffSetInventory[player])
                     else
                         BlzFrameSetVisible(TasItemShopUI.Frames.BoxInventory, false)
                     end
@@ -2563,7 +2593,7 @@ do
                 updateOverLayMainSelected(player)
             end
 
-            
+
             updateItemFrame(TasItemShopUI.Frames.Current, data, buyButtonShowGold, buyButtonShowLumber)
             if not flexibleShop and (not CanBuyItem(data, LocalShopObject, GetLocalPlayer()) or (TasItemFusion.BuiltWay[data] and #AllMatsProvided(player, data, LocalShopObject) > 0)) then
                 BlzFrameSetText(TasItemShopUI.Frames.Current.TextGold, GetLocalizedString(textUnBuyable))
@@ -2571,7 +2601,7 @@ do
             end
         end
     end
-    
+
     local function setSelectedItem(player, item)
         TasItemShopUI.SelectedItem[player] = item
         if item ~= nil then
@@ -2592,722 +2622,722 @@ do
             end
         end
     end
-function TasItemShopUI.Create()
-    BlzLoadTOCFile("war3mapImported\\Templates.toc")
-    BlzLoadTOCFile("war3mapImported\\TasItemShop.toc")
+    function TasItemShopUI.Create()
+        BlzLoadTOCFile("war3mapImported\\Templates.toc")
+        BlzLoadTOCFile("war3mapImported\\TasItemShop.toc")
 
-    local frames, parent, object, currentObject, frame
-    parent = GetParent()
+        local frames, parent, object, currentObject, frame
+        parent = GetParent()
 
-    if posScreenRelative then
-        frame = BlzCreateFrameByType("FRAME", "Fullscreen", parent, "", 0)
-        BlzFrameSetVisible(frame, false)
-        BlzFrameSetSize(frame, 0.8, 0.6)
-        BlzFrameSetAbsPoint(frame, FRAMEPOINT_BOTTOM, 0.4, 0)
-        TasItemShopUI.Frames.Fullscreen = frame
-    end
-
-    xSize = 0.02 + buttonListCols*buttonListButtonSizeX + buttonListButtonGapCol * (buttonListCols - 1)
-    --ySize = 0.1285 + buttonListRows*buttonListButtonSizeY + refButtonBoxSizeY
-    ySize = 0.0815 + buttonListRows*buttonListButtonSizeY + buttonListButtonGapRow * (buttonListRows - 1)
-    
-    -- super
-    TasItemShopUI.Frames.ParentSuper = BlzCreateFrameByType("FRAME", "TasItemShopUI", parent, "", 0)
-    BlzFrameSetSize(TasItemShopUI.Frames.ParentSuper, 0.001, 0.001)
-    
-    parent = BlzCreateFrameByType("BUTTON", "TasItemShopUI", TasItemShopUI.Frames.ParentSuper, "", 0)
-    BlzFrameSetSize(parent, xSize, ySize)
-    BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerScrollParent, parent, FRAMEEVENT_MOUSE_WHEEL)
-    BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, parent, FRAMEEVENT_CONTROL_CLICK)
-    if posScreenRelative then
-        BlzFrameSetPoint(parent, posPoint, TasItemShopUI.Frames.Fullscreen, posPoint, xPos, yPos)
-    else
-        BlzFrameSetAbsPoint(parent, posPoint, xPos, yPos)
-    end
-    
-    TasItemShopUI.Frames.ParentSuperUI = parent
-
-
-    frame = BlzCreateFrame(boxFrameName, parent, 0, 0)
-    BlzFrameSetAllPoints(frame, parent)
-    TasItemShopUI.Frames.BoxSuper = frame
-
-    -- round down, boxSize - 2times gap to border / buttonSize + gap between buttons
-    local buttonsInRow = math.floor(0.0 + ((xSize - (boxCatBorderGap)*2)/(categoryButtonSize + 0.003)))
-    -- round up
-    local rows = math.ceil(0.0+ (#TasItemShopUI.Categories/buttonsInRow))
-    --print(#TasItemShopUI.Categories, buttonsInRow, rows)
-    ySize = ySize + rows * categoryButtonSize
-    -- ButtonList
-    parent = BlzCreateFrame(boxButtonListFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
-    BlzFrameSetPoint(parent, FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_TOPRIGHT, 0, 0)  
-    -- baseSizeY = 0.0455
-    BlzFrameSetSize(parent, xSize, 0.0455 + buttonListRows*buttonListButtonSizeY + rows * categoryButtonSize + buttonListButtonGapRow * (buttonListRows - 1))
-    --ySize = 0.1285 + buttonListRows*buttonListButtonSizeY + refButtonBoxSizeY
-    object = CreateTasButtonListEx(buttonListButtonName, buttonListCols, buttonListRows, parent,
-        function(clickedData, buttonListObject, dataIndex)
-            local player = GetTriggerPlayer()
-            
-            if player == GetLocalPlayer() then
-                local time = os.clock()
-                if TasItemShopUI.Selected[player] == clickedData and time - DoubleClickStamp <= doubleClickTimeOut then
-                    -- finish the timer, so the player has to do 2 clicks again to trigger a DoubleClick
-                    DoubleClickStamp = 0
-                    BlzFrameClick(TasItemShopUI.Frames.Current.Button)
-                else
-                    DoubleClickStamp = time
-                end
-            end
-            if TasItemShopUI.QuickLinkKeyActive[player] then
-                TasItemShopUI.SetQuickLink(player, clickedData)
-            end
-
-            setSelected(player, clickedData)
-            
+        if posScreenRelative then
+            frame = BlzCreateFrameByType("FRAME", "Fullscreen", parent, "", 0)
+            BlzFrameSetVisible(frame, false)
+            BlzFrameSetSize(frame, 0.8, 0.6)
+            BlzFrameSetAbsPoint(frame, FRAMEPOINT_BOTTOM, 0.4, 0)
+            TasItemShopUI.Frames.Fullscreen = frame
         end
+
+        xSize = 0.02 + buttonListCols*buttonListButtonSizeX + buttonListButtonGapCol * (buttonListCols - 1)
+        --ySize = 0.1285 + buttonListRows*buttonListButtonSizeY + refButtonBoxSizeY
+        ySize = 0.0815 + buttonListRows*buttonListButtonSizeY + buttonListButtonGapRow * (buttonListRows - 1)
+
+        -- super
+        TasItemShopUI.Frames.ParentSuper = BlzCreateFrameByType("FRAME", "TasItemShopUI", parent, "", 0)
+        BlzFrameSetSize(TasItemShopUI.Frames.ParentSuper, 0.001, 0.001)
+
+        parent = BlzCreateFrameByType("BUTTON", "TasItemShopUI", TasItemShopUI.Frames.ParentSuper, "", 0)
+        BlzFrameSetSize(parent, xSize, ySize)
+        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerScrollParent, parent, FRAMEEVENT_MOUSE_WHEEL)
+        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, parent, FRAMEEVENT_CONTROL_CLICK)
+        if posScreenRelative then
+            BlzFrameSetPoint(parent, posPoint, TasItemShopUI.Frames.Fullscreen, posPoint, xPos, yPos)
+        else
+            BlzFrameSetAbsPoint(parent, posPoint, xPos, yPos)
+        end
+
+        TasItemShopUI.Frames.ParentSuperUI = parent
+
+
+        frame = BlzCreateFrame(boxFrameName, parent, 0, 0)
+        BlzFrameSetAllPoints(frame, parent)
+        TasItemShopUI.Frames.BoxSuper = frame
+
+        -- round down, boxSize - 2times gap to border / buttonSize + gap between buttons
+        local buttonsInRow = math.floor(0.0 + ((xSize - (boxCatBorderGap)*2)/(categoryButtonSize + 0.003)))
+        -- round up
+        local rows = math.ceil(0.0+ (#TasItemShopUI.Categories/buttonsInRow))
+        --print(#TasItemShopUI.Categories, buttonsInRow, rows)
+        ySize = ySize + rows * categoryButtonSize
+        -- ButtonList
+        parent = BlzCreateFrame(boxButtonListFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
+        BlzFrameSetPoint(parent, FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_TOPRIGHT, 0, 0)
+        -- baseSizeY = 0.0455
+        BlzFrameSetSize(parent, xSize, 0.0455 + buttonListRows*buttonListButtonSizeY + rows * categoryButtonSize + buttonListButtonGapRow * (buttonListRows - 1))
+        --ySize = 0.1285 + buttonListRows*buttonListButtonSizeY + refButtonBoxSizeY
+        object = CreateTasButtonListEx(buttonListButtonName, buttonListCols, buttonListRows, parent,
+                function(clickedData, buttonListObject, dataIndex)
+                    local player = GetTriggerPlayer()
+
+                    if player == GetLocalPlayer() then
+                        local time = os.clock()
+                        if TasItemShopUI.Selected[player] == clickedData and time - DoubleClickStamp <= doubleClickTimeOut then
+                            -- finish the timer, so the player has to do 2 clicks again to trigger a DoubleClick
+                            DoubleClickStamp = 0
+                            BlzFrameClick(TasItemShopUI.Frames.Current.Button)
+                        else
+                            DoubleClickStamp = time
+                        end
+                    end
+                    if TasItemShopUI.QuickLinkKeyActive[player] then
+                        TasItemShopUI.SetQuickLink(player, clickedData)
+                    end
+
+                    setSelected(player, clickedData)
+
+                end
         ,function(clickedData, buttonListObject, dataIndex) BuyItem(GetTriggerPlayer(), clickedData) end
         ,updateItemFrame
         ,function(data, searchedText, buttonListObject)
-            --return string.find(GetObjectName(data), searchedText)
-            return string.find(string.lower(GetObjectName(data)), string.lower(searchedText))
-            --return string.find(string.lower(BlzGetAbilityExtendedTooltip(data, 0)), string.lower(searchedText))
-        end
+                    --return string.find(GetObjectName(data), searchedText)
+                    return string.find(string.lower(GetObjectName(data)), string.lower(searchedText))
+                    --return string.find(string.lower(BlzGetAbilityExtendedTooltip(data, 0)), string.lower(searchedText))
+                end
         ,function(data, buttonListObject, isTextSearching)
-            local selected = TasItemShopUI.Categories.Value[GetLocalPlayer()]
-            if ToggleIconButtonGetValue(TasItemShopUI.ModeObject, GetLocalPlayer()) == 0 then
-                return selected == 0 or BlzBitAnd(TasItemCategory[data], selected) >= selected
-            else
-                return selected == 0 or BlzBitAnd(TasItemCategory[data], selected) > 0
-            end
-        end
-        --async Left Click
-        ,function(buttonListObject, data, frame)
-        end
-        --async Rigth Click
-        ,function(buttonListObject, data, frame)
-            ShowSprite(frame, GetLocalPlayer())
-        end
-        ,buttonListButtonGapCol
-        ,buttonListButtonGapRow
-    )
-    TasItemShopUI.ButtonList = object
-    TasItemShopUI.Frames.BoxButtonList = parent
-    
-    for i, frameObject in ipairs(object.Frames) do
-        if buttonListHighLightFrameName then
-            frameObject.HighLight = BlzCreateFrame(buttonListHighLightFrameName, frameObject.Button, 0, 0)
-            BlzFrameSetAllPoints(frameObject.HighLight, frameObject.Button)
-            BlzFrameSetVisible(frameObject.HighLight, false)
-        end
-
-    end
-    
-    
-    -- category
-    frame = BlzCreateFrame(boxCatFrameName, parent, 0, 0)
-    BlzFrameSetPoint(frame, FRAMEPOINT_TOPRIGHT, TasItemShopUI.ButtonList.InputFrame, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
-    BlzFrameSetSize(frame, xSize, 0.0135 + rows * categoryButtonSize)
-    TasItemShopUI.Frames.BoxCategory = frame
-    parent = frame
-    frames = {}
-    local groupObject = CreateToggleIconButtonGroup(true, function(groupObject, buttonObject, player, groupValue)
-        TasItemShopUI.Categories.Value[player] = groupValue
-        TasButtonListSearch(TasItemShopUI.ButtonList)
-    end)
-    ToggleIconButton.DefaultSizeX = categoryButtonSize
-    ToggleIconButton.DefaultSizeY = categoryButtonSize
-    --frame = ToggleIconButtonGroupModeButton(groupObject, parent).Button
-    local clearButton = ToggleIconButtonGroupClearButton(groupObject, parent)
-    --BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_TOPLEFT, boxFrameBorderGap, -boxFrameBorderGap)
-    BlzFrameSetPoint(clearButton, FRAMEPOINT_TOPLEFT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_TOPLEFT, boxFrameBorderGap, -boxFrameBorderGap)
-    BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearButton, clearButton, FRAMEEVENT_CONTROL_CLICK)
-    BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, clearButton, FRAMEEVENT_CONTROL_CLICK)
-
-    local modeObject = CreateToggleIconButton(parent, 1, GetLocalizedString(categoryModeTextOr), categoryModeIconOr, 0, GetLocalizedString(categoryModeTextAnd), categoryModeIconAnd)
-    BlzFrameSetPoint(modeObject.Button, FRAMEPOINT_BOTTOMLEFT, clearButton, FRAMEPOINT_BOTTOMRIGHT, 0.003, 0)
-    modeObject.Action = function()
-        if GetTriggerPlayer() == GetLocalPlayer() then
-            TasButtonListSearch(TasItemShopUI.ButtonList)
-        end
-    end
-    TasItemShopUI.ModeObject = modeObject
-    
-
-    for index, value in ipairs(TasItemShopUI.Categories) do
-        frames[index] = CreateToggleIconButton(parent, CategoryValue[index], GetLocalizedString(value[2]), value[1])
-        if index == 1 then      
-            BlzFrameSetPoint(frames[index].Button, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxCatBorderGap, -boxCatBorderGap)
-        else
-            BlzFrameSetPoint(frames[index].Button, FRAMEPOINT_TOPLEFT, frames[index - 1].Button, FRAMEPOINT_TOPRIGHT, 0.003, 0)
-        end
-        ToggleIconButtonGroupAddButton(groupObject, frames[index])
-    end
-
-    for index = 2, rows, 1 do
-    --    print((index-1)*buttonsInRow + 1, "->", (index-2)*buttonsInRow + 1)
-        BlzFrameSetPoint(frames[(index-1)*buttonsInRow + 1].Button, FRAMEPOINT_TOPLEFT, frames[(index-2)*buttonsInRow + 1].Button, FRAMEPOINT_BOTTOMLEFT, 0, -0.001)        
-    end
-
-    frame = TasItemShopUI.ButtonList.Frames[1].Button
-    BlzFrameClearAllPoints(frame)
-    BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, TasItemShopUI.Frames.BoxCategory, FRAMEPOINT_BOTTOMLEFT, 0.0045, 0)
-
-
-    if toolTipPosY and toolTipPosX then
-        for i, v in ipairs(TasItemShopUI.ButtonList.Frames) do
-            BlzFrameClearAllPoints(v.ToolTipFrameText)
-            if toolTipPosPointParent then
-                BlzFrameSetPoint(v.ToolTipFrameText, toolTipPosPoint, v.Button, toolTipPosPointParent, toolTipPosX, toolTipPosY)                
-            else
-                BlzFrameSetAbsPoint(v.ToolTipFrameText, toolTipPosPoint, toolTipPosX, toolTipPosY)
-            end
-        end
-    end
-
-
-    local function CreateRefButtons(amount, parent, textFrame, trigger, haveTooltip)
-        frames = {}
-        for index = 1, amount do
-            frames[index] = {
-                Button = BlzCreateFrame("TasItemShopRefButton", parent, 0, 0),
-            }
-            frame = frames[index].Button
-            BlzFrameSetText(frame, index)
-            frames[index].Icon = BlzGetFrameByName("TasItemShopRefButtonBackdrop", 0)
-            frames[index].IconPushed = BlzGetFrameByName("TasItemShopRefButtonBackdropPushed", 0)
-            frames[index].IconDone = BlzGetFrameByName("TasItemShopRefButtonBackdropBackdrop", 0)
-            frames[index].IconBroken = BlzGetFrameByName("TasItemShopRefButtonBackdropBackdrop2", 0)
-            BlzFrameSetSize(frame, refButtonSize, refButtonSize)
-            
-            BlzFrameSetVisible(frames[index].IconDone, false)
-            BlzFrameSetVisible(frames[index].IconBroken, false)
-            if haveTooltip then
-                CreateTasButtonTooltip(frames[index], TasItemShopUI.Frames.BoxSuper)
-                
-                if toolTipPosY and toolTipPosX then
-                    BlzFrameClearAllPoints(frames[index].ToolTipFrameText)
-                    if toolTipPosPointParent then
-                        BlzFrameSetPoint(frames[index].ToolTipFrameText, toolTipPosPoint, frames[index].Button, toolTipPosPointParent, toolTipPosX, toolTipPosY)
+                    local selected = TasItemShopUI.Categories.Value[GetLocalPlayer()]
+                    if ToggleIconButtonGetValue(TasItemShopUI.ModeObject, GetLocalPlayer()) == 0 then
+                        return selected == 0 or BlzBitAnd(TasItemCategory[data], selected) >= selected
                     else
-                        BlzFrameSetAbsPoint(frames[index].ToolTipFrameText, toolTipPosPoint, toolTipPosX, toolTipPosY)
+                        return selected == 0 or BlzBitAnd(TasItemCategory[data], selected) > 0
                     end
                 end
-            end
-            if index == 1 then
-                BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, textFrame, FRAMEPOINT_BOTTOMLEFT, 0.0, -0.003)
-            --elseif index == 5 then
-            -- BlzFrameSetPoint(frame, FRAMEPOINT_BOTTOMLEFT, frames[index - 4].Button, FRAMEPOINT_TOPLEFT, 0, 0.003)
-            else
-                BlzFrameSetPoint(frame, FRAMEPOINT_BOTTOMLEFT, frames[index - 1].Button, FRAMEPOINT_BOTTOMRIGHT, refButtonGap, 0)
+        --async Left Click
+        ,function(buttonListObject, data, frame)
+                end
+        --async Rigth Click
+        ,function(buttonListObject, data, frame)
+                    ShowSprite(frame, GetLocalPlayer())
+                end
+        ,buttonListButtonGapCol
+        ,buttonListButtonGapRow
+        )
+        TasItemShopUI.ButtonList = object
+        TasItemShopUI.Frames.BoxButtonList = parent
+
+        for i, frameObject in ipairs(object.Frames) do
+            if buttonListHighLightFrameName then
+                frameObject.HighLight = BlzCreateFrame(buttonListHighLightFrameName, frameObject.Button, 0, 0)
+                BlzFrameSetAllPoints(frameObject.HighLight, frameObject.Button)
+                BlzFrameSetVisible(frameObject.HighLight, false)
             end
 
-            BlzTriggerRegisterFrameEvent(trigger, frame, FRAMEEVENT_CONTROL_CLICK)
-            BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frame, FRAMEEVENT_CONTROL_CLICK)
-            
-            BlzTriggerRegisterFrameEvent(trigger, frame, FRAMEEVENT_MOUSE_UP)
-            
         end
-        return frames
-    end
-    local function MakeRefButtonsCol(box, textFrame, frames)
-        BlzFrameClearAllPoints(box)
-        BlzFrameClearAllPoints(frames.PageDown)
-        BlzFrameSetPoint(frames.PageDown, FRAMEPOINT_TOPRIGHT, textFrame, FRAMEPOINT_BOTTOMRIGHT, 0.0, -refButtonGap)
-        for i, v in ipairs(frames) do
-            
-            BlzFrameClearAllPoints(v.Button)
-            if i == 1 then
-                BlzFrameSetPoint(v.Button, FRAMEPOINT_TOP, box, FRAMEPOINT_TOP, 0.0, -BlzFrameGetHeight(textFrame) - refButtonPageSize -refButtonGap*2 -boxFrameBorderGap)
-            else
-                BlzFrameSetPoint(v.Button, FRAMEPOINT_TOPLEFT, frames[i - 1].Button, FRAMEPOINT_BOTTOMLEFT, 0, -refButtonGap)
-            end
-        end
-        BlzFrameSetSize(box, BlzFrameGetWidth(textFrame) + boxFrameBorderGap*2 , (refButtonSize + refButtonGap)*#frames + refButtonPageSize + boxFrameBorderGap*2)
-    end
-    local function CreateRefPage(parent, textFrame, trigger, pageSize, refButtons)
+
+
+        -- category
+        frame = BlzCreateFrame(boxCatFrameName, parent, 0, 0)
+        BlzFrameSetPoint(frame, FRAMEPOINT_TOPRIGHT, TasItemShopUI.ButtonList.InputFrame, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
+        BlzFrameSetSize(frame, xSize, 0.0135 + rows * categoryButtonSize)
+        TasItemShopUI.Frames.BoxCategory = frame
+        parent = frame
         frames = {}
-        
-        frames[1] = BlzCreateFrameByType("FRAME", "TasItemShopUIPageControl", parent, "", 0)
-        frames[2] = BlzCreateFrame("TasItemShopCatButton", frames[1], 0, 0)
-        frames[3] = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
-        frames[4] = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
-        frames[5] = BlzCreateFrame("TasItemShopCatButton", frames[1], 0, 0)
-        frames[6] = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
-        frames[7] = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
-        frames[8] = BlzCreateFrame("TasButtonTextTemplate", frames[1], 0, 0)
-        BlzFrameSetText(frames[8], "00")
-        BlzFrameSetSize(frames[2], refButtonPageSize, refButtonPageSize)
-        BlzFrameSetSize(frames[5], refButtonPageSize, refButtonPageSize)
-        BlzTriggerRegisterFrameEvent(trigger, frames[2], FRAMEEVENT_CONTROL_CLICK)
-        BlzTriggerRegisterFrameEvent(trigger, frames[2], FRAMEEVENT_MOUSE_UP)
-        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frames[2], FRAMEEVENT_CONTROL_CLICK)
-        BlzTriggerRegisterFrameEvent(trigger, frames[5], FRAMEEVENT_CONTROL_CLICK)
-        BlzTriggerRegisterFrameEvent(trigger, frames[5], FRAMEEVENT_MOUSE_UP)
-        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frames[5], FRAMEEVENT_CONTROL_CLICK)
-        BlzFrameSetTexture(frames[3], refButtonPageUp, 0, false)
-        BlzFrameSetTexture(frames[4], refButtonPageUp, 0, false)
-        BlzFrameSetTexture(frames[6], refButtonPageDown, 0, false)
-        BlzFrameSetTexture(frames[7], refButtonPageDown, 0, false)
+        local groupObject = CreateToggleIconButtonGroup(true, function(groupObject, buttonObject, player, groupValue)
+            TasItemShopUI.Categories.Value[player] = groupValue
+            TasButtonListSearch(TasItemShopUI.ButtonList)
+        end)
+        ToggleIconButton.DefaultSizeX = categoryButtonSize
+        ToggleIconButton.DefaultSizeY = categoryButtonSize
+        --frame = ToggleIconButtonGroupModeButton(groupObject, parent).Button
+        local clearButton = ToggleIconButtonGroupClearButton(groupObject, parent)
+        --BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_TOPLEFT, boxFrameBorderGap, -boxFrameBorderGap)
+        BlzFrameSetPoint(clearButton, FRAMEPOINT_TOPLEFT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_TOPLEFT, boxFrameBorderGap, -boxFrameBorderGap)
+        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearButton, clearButton, FRAMEEVENT_CONTROL_CLICK)
+        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, clearButton, FRAMEEVENT_CONTROL_CLICK)
 
-        --BlzFrameSetPoint(frames[2], FRAMEPOINT_TOPLEFT, textFrame, FRAMEPOINT_TOPRIGHT, 0.003, 0)
-        --BlzFrameSetPoint(frames[8], FRAMEPOINT_TOPLEFT, frames[2], FRAMEPOINT_TOPRIGHT, 0.003, 0)
-        --BlzFrameSetPoint(frames[5], FRAMEPOINT_TOPLEFT, frames[8], FRAMEPOINT_TOPRIGHT, 0.003, 0)
-
-        BlzFrameSetPoint(frames[2], FRAMEPOINT_TOPRIGHT, frames[8], FRAMEPOINT_TOPLEFT, -0.003, 0)
-        BlzFrameSetPoint(frames[8], FRAMEPOINT_TOPRIGHT, frames[5], FRAMEPOINT_TOPLEFT, -0.003, 0)
-        BlzFrameSetPoint(frames[5], FRAMEPOINT_TOPRIGHT, parent, FRAMEPOINT_TOPRIGHT, -boxFrameBorderGap, -boxFrameBorderGap)
-
-        --BlzFrameSetPoint(frames[2], FRAMEPOINT_TOPLEFT, textFrame, FRAMEPOINT_BOTTOMLEFT, 0, -0.003)
-        --BlzFrameSetPoint(frames[8], FRAMEPOINT_TOPLEFT, textFrame, FRAMEPOINT_TOPRIGHT, 0.003, 0)
-        --BlzFrameSetPoint(frames[5], FRAMEPOINT_TOPLEFT, frames[2], FRAMEPOINT_BOTTOMLEFT, 0, -0.003)
+        local modeObject = CreateToggleIconButton(parent, 1, GetLocalizedString(categoryModeTextOr), categoryModeIconOr, 0, GetLocalizedString(categoryModeTextAnd), categoryModeIconAnd)
+        BlzFrameSetPoint(modeObject.Button, FRAMEPOINT_BOTTOMLEFT, clearButton, FRAMEPOINT_BOTTOMRIGHT, 0.003, 0)
+        modeObject.Action = function()
+            if GetTriggerPlayer() == GetLocalPlayer() then
+                TasButtonListSearch(TasItemShopUI.ButtonList)
+            end
+        end
+        TasItemShopUI.ModeObject = modeObject
 
 
-        --CreateTasButtonTooltip(frames[index], TasItemShopUI.Frames.BoxSuper)
-        TasItemShopUI.Frames[frames[2]] = pageSize
-        TasItemShopUI.Frames[frames[5]] = -pageSize
+        for index, value in ipairs(TasItemShopUI.Categories) do
+            frames[index] = CreateToggleIconButton(parent, CategoryValue[index], GetLocalizedString(value[2]), value[1])
+            if index == 1 then
+                BlzFrameSetPoint(frames[index].Button, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxCatBorderGap, -boxCatBorderGap)
+            else
+                BlzFrameSetPoint(frames[index].Button, FRAMEPOINT_TOPLEFT, frames[index - 1].Button, FRAMEPOINT_TOPRIGHT, 0.003, 0)
+            end
+            ToggleIconButtonGroupAddButton(groupObject, frames[index])
+        end
 
-        refButtons.Page = frames[1]
-        refButtons.PageUp = frames[2]
-        refButtons.PageDown = frames[5]
-        refButtons.PageText = frames[8]
-        return frames
-    end
-    local refRows = {}
-    
-    local function PlaceRefButtonBox(box)
-        BlzFrameClearAllPoints(box)
-        if #refRows == 0 then
-            BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.BoxButtonList, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
-            refRows[1] = {xSize - BlzFrameGetWidth(box), box}
-            ySize = ySize + refButtonBoxSizeY
-            BlzFrameSetSize(TasItemShopUI.Frames.ParentSuperUI, xSize, ySize)
-            return #refRows
-        else
-            local found = false
-            for i, v in ipairs(refRows) do
-                if v[1] - BlzFrameGetWidth(box) >= 0 then
-                    found = true
-                    BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, v[#v], FRAMEPOINT_TOPLEFT, 0, 0)
-                    table.insert(v, box)
-                    v[1] = v[1] - BlzFrameGetWidth(box)
-                    return i
+        for index = 2, rows, 1 do
+            --    print((index-1)*buttonsInRow + 1, "->", (index-2)*buttonsInRow + 1)
+            BlzFrameSetPoint(frames[(index-1)*buttonsInRow + 1].Button, FRAMEPOINT_TOPLEFT, frames[(index-2)*buttonsInRow + 1].Button, FRAMEPOINT_BOTTOMLEFT, 0, -0.001)
+        end
+
+        frame = TasItemShopUI.ButtonList.Frames[1].Button
+        BlzFrameClearAllPoints(frame)
+        BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, TasItemShopUI.Frames.BoxCategory, FRAMEPOINT_BOTTOMLEFT, 0.0045, 0)
+
+
+        if toolTipPosY and toolTipPosX then
+            for i, v in ipairs(TasItemShopUI.ButtonList.Frames) do
+                BlzFrameClearAllPoints(v.ToolTipFrameText)
+                if toolTipPosPointParent then
+                    BlzFrameSetPoint(v.ToolTipFrameText, toolTipPosPoint, v.Button, toolTipPosPointParent, toolTipPosX, toolTipPosY)
+                else
+                    BlzFrameSetAbsPoint(v.ToolTipFrameText, toolTipPosPoint, toolTipPosX, toolTipPosY)
                 end
             end
-            if not found then
-                BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, refRows[#refRows][2], FRAMEPOINT_BOTTOMRIGHT, 0, 0)
-                table.insert(refRows, {xSize - BlzFrameGetWidth(box), box})
+        end
+
+
+        local function CreateRefButtons(amount, parent, textFrame, trigger, haveTooltip)
+            frames = {}
+            for index = 1, amount do
+                frames[index] = {
+                    Button = BlzCreateFrame("TasItemShopRefButton", parent, 0, 0),
+                }
+                frame = frames[index].Button
+                BlzFrameSetText(frame, index)
+                frames[index].Icon = BlzGetFrameByName("TasItemShopRefButtonBackdrop", 0)
+                frames[index].IconPushed = BlzGetFrameByName("TasItemShopRefButtonBackdropPushed", 0)
+                frames[index].IconDone = BlzGetFrameByName("TasItemShopRefButtonBackdropBackdrop", 0)
+                frames[index].IconBroken = BlzGetFrameByName("TasItemShopRefButtonBackdropBackdrop2", 0)
+                BlzFrameSetSize(frame, refButtonSize, refButtonSize)
+
+                BlzFrameSetVisible(frames[index].IconDone, false)
+                BlzFrameSetVisible(frames[index].IconBroken, false)
+                if haveTooltip then
+                    CreateTasButtonTooltip(frames[index], TasItemShopUI.Frames.BoxSuper)
+
+                    if toolTipPosY and toolTipPosX then
+                        BlzFrameClearAllPoints(frames[index].ToolTipFrameText)
+                        if toolTipPosPointParent then
+                            BlzFrameSetPoint(frames[index].ToolTipFrameText, toolTipPosPoint, frames[index].Button, toolTipPosPointParent, toolTipPosX, toolTipPosY)
+                        else
+                            BlzFrameSetAbsPoint(frames[index].ToolTipFrameText, toolTipPosPoint, toolTipPosX, toolTipPosY)
+                        end
+                    end
+                end
+                if index == 1 then
+                    BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, textFrame, FRAMEPOINT_BOTTOMLEFT, 0.0, -0.003)
+                    --elseif index == 5 then
+                    -- BlzFrameSetPoint(frame, FRAMEPOINT_BOTTOMLEFT, frames[index - 4].Button, FRAMEPOINT_TOPLEFT, 0, 0.003)
+                else
+                    BlzFrameSetPoint(frame, FRAMEPOINT_BOTTOMLEFT, frames[index - 1].Button, FRAMEPOINT_BOTTOMRIGHT, refButtonGap, 0)
+                end
+
+                BlzTriggerRegisterFrameEvent(trigger, frame, FRAMEEVENT_CONTROL_CLICK)
+                BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frame, FRAMEEVENT_CONTROL_CLICK)
+
+                BlzTriggerRegisterFrameEvent(trigger, frame, FRAMEEVENT_MOUSE_UP)
+
+            end
+            return frames
+        end
+        local function MakeRefButtonsCol(box, textFrame, frames)
+            BlzFrameClearAllPoints(box)
+            BlzFrameClearAllPoints(frames.PageDown)
+            BlzFrameSetPoint(frames.PageDown, FRAMEPOINT_TOPRIGHT, textFrame, FRAMEPOINT_BOTTOMRIGHT, 0.0, -refButtonGap)
+            for i, v in ipairs(frames) do
+
+                BlzFrameClearAllPoints(v.Button)
+                if i == 1 then
+                    BlzFrameSetPoint(v.Button, FRAMEPOINT_TOP, box, FRAMEPOINT_TOP, 0.0, -BlzFrameGetHeight(textFrame) - refButtonPageSize -refButtonGap*2 -boxFrameBorderGap)
+                else
+                    BlzFrameSetPoint(v.Button, FRAMEPOINT_TOPLEFT, frames[i - 1].Button, FRAMEPOINT_BOTTOMLEFT, 0, -refButtonGap)
+                end
+            end
+            BlzFrameSetSize(box, BlzFrameGetWidth(textFrame) + boxFrameBorderGap*2 , (refButtonSize + refButtonGap)*#frames + refButtonPageSize + boxFrameBorderGap*2)
+        end
+        local function CreateRefPage(parent, textFrame, trigger, pageSize, refButtons)
+            frames = {}
+
+            frames[1] = BlzCreateFrameByType("FRAME", "TasItemShopUIPageControl", parent, "", 0)
+            frames[2] = BlzCreateFrame("TasItemShopCatButton", frames[1], 0, 0)
+            frames[3] = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
+            frames[4] = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
+            frames[5] = BlzCreateFrame("TasItemShopCatButton", frames[1], 0, 0)
+            frames[6] = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
+            frames[7] = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
+            frames[8] = BlzCreateFrame("TasButtonTextTemplate", frames[1], 0, 0)
+            BlzFrameSetText(frames[8], "00")
+            BlzFrameSetSize(frames[2], refButtonPageSize, refButtonPageSize)
+            BlzFrameSetSize(frames[5], refButtonPageSize, refButtonPageSize)
+            BlzTriggerRegisterFrameEvent(trigger, frames[2], FRAMEEVENT_CONTROL_CLICK)
+            BlzTriggerRegisterFrameEvent(trigger, frames[2], FRAMEEVENT_MOUSE_UP)
+            BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frames[2], FRAMEEVENT_CONTROL_CLICK)
+            BlzTriggerRegisterFrameEvent(trigger, frames[5], FRAMEEVENT_CONTROL_CLICK)
+            BlzTriggerRegisterFrameEvent(trigger, frames[5], FRAMEEVENT_MOUSE_UP)
+            BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frames[5], FRAMEEVENT_CONTROL_CLICK)
+            BlzFrameSetTexture(frames[3], refButtonPageUp, 0, false)
+            BlzFrameSetTexture(frames[4], refButtonPageUp, 0, false)
+            BlzFrameSetTexture(frames[6], refButtonPageDown, 0, false)
+            BlzFrameSetTexture(frames[7], refButtonPageDown, 0, false)
+
+            --BlzFrameSetPoint(frames[2], FRAMEPOINT_TOPLEFT, textFrame, FRAMEPOINT_TOPRIGHT, 0.003, 0)
+            --BlzFrameSetPoint(frames[8], FRAMEPOINT_TOPLEFT, frames[2], FRAMEPOINT_TOPRIGHT, 0.003, 0)
+            --BlzFrameSetPoint(frames[5], FRAMEPOINT_TOPLEFT, frames[8], FRAMEPOINT_TOPRIGHT, 0.003, 0)
+
+            BlzFrameSetPoint(frames[2], FRAMEPOINT_TOPRIGHT, frames[8], FRAMEPOINT_TOPLEFT, -0.003, 0)
+            BlzFrameSetPoint(frames[8], FRAMEPOINT_TOPRIGHT, frames[5], FRAMEPOINT_TOPLEFT, -0.003, 0)
+            BlzFrameSetPoint(frames[5], FRAMEPOINT_TOPRIGHT, parent, FRAMEPOINT_TOPRIGHT, -boxFrameBorderGap, -boxFrameBorderGap)
+
+            --BlzFrameSetPoint(frames[2], FRAMEPOINT_TOPLEFT, textFrame, FRAMEPOINT_BOTTOMLEFT, 0, -0.003)
+            --BlzFrameSetPoint(frames[8], FRAMEPOINT_TOPLEFT, textFrame, FRAMEPOINT_TOPRIGHT, 0.003, 0)
+            --BlzFrameSetPoint(frames[5], FRAMEPOINT_TOPLEFT, frames[2], FRAMEPOINT_BOTTOMLEFT, 0, -0.003)
+
+
+            --CreateTasButtonTooltip(frames[index], TasItemShopUI.Frames.BoxSuper)
+            TasItemShopUI.Frames[frames[2]] = pageSize
+            TasItemShopUI.Frames[frames[5]] = -pageSize
+
+            refButtons.Page = frames[1]
+            refButtons.PageUp = frames[2]
+            refButtons.PageDown = frames[5]
+            refButtons.PageText = frames[8]
+            return frames
+        end
+        local refRows = {}
+
+        local function PlaceRefButtonBox(box)
+            BlzFrameClearAllPoints(box)
+            if #refRows == 0 then
+                BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.BoxButtonList, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
+                refRows[1] = {xSize - BlzFrameGetWidth(box), box}
                 ySize = ySize + refButtonBoxSizeY
                 BlzFrameSetSize(TasItemShopUI.Frames.ParentSuperUI, xSize, ySize)
                 return #refRows
-            end
-        end
-        
-    end
-
-    local function PlaceRefButtonBoxCol(box)
-        
-        if #refRows == 0 then
-            BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.ParentSuperUI, FRAMEPOINT_TOPLEFT, 0, 0)
-            refRows[1] = {ySize - BlzFrameGetHeight(box), box}
-            return #refRows
-        else
-            local found = false
-            for i, v in ipairs(refRows) do
-                if v[1] - BlzFrameGetHeight(box) >= 0 then
-                    found = true
-                    BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, v[#v], FRAMEPOINT_BOTTOMRIGHT, 0, 0)
-                    table.insert(v, box)
-                    
-                    v[1] = v[1] - BlzFrameGetHeight(box)
-                    return i
-                    --break
+            else
+                local found = false
+                for i, v in ipairs(refRows) do
+                    if v[1] - BlzFrameGetWidth(box) >= 0 then
+                        found = true
+                        BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, v[#v], FRAMEPOINT_TOPLEFT, 0, 0)
+                        table.insert(v, box)
+                        v[1] = v[1] - BlzFrameGetWidth(box)
+                        return i
+                    end
+                end
+                if not found then
+                    BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, refRows[#refRows][2], FRAMEPOINT_BOTTOMRIGHT, 0, 0)
+                    table.insert(refRows, {xSize - BlzFrameGetWidth(box), box})
+                    ySize = ySize + refButtonBoxSizeY
+                    BlzFrameSetSize(TasItemShopUI.Frames.ParentSuperUI, xSize, ySize)
+                    return #refRows
                 end
             end
-            if not found then
-                BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, refRows[#refRows][2], FRAMEPOINT_TOPLEFT, 0, 0)
-                table.insert(refRows, {ySize - BlzFrameGetHeight(box), box})
+
+        end
+
+        local function PlaceRefButtonBoxCol(box)
+
+            if #refRows == 0 then
+                BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.ParentSuperUI, FRAMEPOINT_TOPLEFT, 0, 0)
+                refRows[1] = {ySize - BlzFrameGetHeight(box), box}
                 return #refRows
-            end
-        end
-    end
-   
-    
-    -- built from
-    if refButtonCountMats > 0 then
-        parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
-        BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountMats + boxFrameBorderGap*2, refButtonBoxSizeY)
-        local row = PlaceRefButtonBox(parent)
-        TasItemShopUI.Frames.BoxMaterial = parent
+            else
+                local found = false
+                for i, v in ipairs(refRows) do
+                    if v[1] - BlzFrameGetHeight(box) >= 0 then
+                        found = true
+                        BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, v[#v], FRAMEPOINT_BOTTOMRIGHT, 0, 0)
+                        table.insert(v, box)
 
-        frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
-        BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
-        BlzFrameSetText(frame, GetLocalizedString(textMats))
-        TasItemShopUI.Frames.MaterialText = frame
-
-        TasItemShopUI.Frames.Material = CreateRefButtons(refButtonCountMats, parent, frame, TasItemShopUI.TriggerMaterial, true)
-
-        CreateRefPage(parent, TasItemShopUI.Frames.MaterialText, TasItemShopUI.TriggerMaterialPage, refButtonCountMats, TasItemShopUI.Frames.Material)
-    end
-
-    -- possible upgrades
-    if refButtonCountUp > 0 then
-        parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
-        BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountUp + boxFrameBorderGap*2, refButtonBoxSizeY)
-        local row = PlaceRefButtonBox(parent)
-        TasItemShopUI.Frames.BoxUpgrades = parent
-
-        frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
-        BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
-        BlzFrameSetText(frame, GetLocalizedString(textUpgrades))
-        TasItemShopUI.Frames.UpgradesText = frame
-
-        TasItemShopUI.Frames.Upgrades = CreateRefButtons(refButtonCountUp, parent, frame, TasItemShopUI.TriggerUpgrade, true)
-
-        CreateRefPage(parent, TasItemShopUI.Frames.UpgradesText, TasItemShopUI.TriggerUpgradePage, refButtonCountUp, TasItemShopUI.Frames.Upgrades)
-    end  
-    
-    -- ShortCuts
-    if refButtonCountQuickLink > 0 then
-        parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
-        BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountQuickLink + boxFrameBorderGap*2, refButtonBoxSizeY)
-        local row = PlaceRefButtonBox(parent)
-        TasItemShopUI.Frames.BoxQuickLink = parent
-
-        frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
-        BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
-        BlzFrameSetText(frame, GetLocalizedString(textQuickLink))
-        TasItemShopUI.Frames.QuickLinkText = frame
-
-        TasItemShopUI.Frames.QuickLinkHighLight = BlzCreateFrame(buttonListHighLightFrameName, parent, 0, 0)
-        BlzFrameSetAllPoints(TasItemShopUI.Frames.QuickLinkHighLight, parent)
-        BlzFrameSetVisible(TasItemShopUI.Frames.QuickLinkHighLight, false)
-
-        TasItemShopUI.Frames.QuickLink = CreateRefButtons(refButtonCountQuickLink, parent, frame, TasItemShopUI.TriggerQuickLink, true)
-
-        CreateRefPage(parent, TasItemShopUI.Frames.QuickLinkText, TasItemShopUI.TriggerQuickLinkPage, refButtonCountQuickLink, TasItemShopUI.Frames.QuickLink)
-    end
-
-    -- Inventory
-    if refButtonCountInv > 0 then
-        parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
-        BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountInv + boxFrameBorderGap*2, refButtonBoxSizeY)
-        local row = PlaceRefButtonBox(parent)
-        
-        TasItemShopUI.Frames.BoxInventory = parent
-
-        frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
-        BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
-        BlzFrameSetText(frame, GetLocalizedString(textInventory))
-        TasItemShopUI.Frames.InventoryText = frame
-
-        TasItemShopUI.Frames.Inventory = CreateRefButtons(refButtonCountInv, parent, frame, TasItemShopUI.TriggerInventory, true)
-
-        for i, v in ipairs(TasItemShopUI.Frames.Inventory) do
-            BlzFrameSetTexture(v.IconDone, MainItemTexture, 0, true)
-        end
-
-        CreateRefPage(parent, TasItemShopUI.Frames.InventoryText, TasItemShopUI.TriggerInventoryPage, refButtonCountInv, TasItemShopUI.Frames.Inventory)
-    end
-
-    -- User
-    if refButtonCountUser > 0 then
-        parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
-        BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountUser + boxFrameBorderGap*2, refButtonBoxSizeY)
-
-        PlaceRefButtonBox(parent)
-        if refBoxUserPos then
-            PlaceRefButtonBoxFree(parent, refBoxUserPos, refBoxUserRelative, refBoxUserPosRelative, refBoxUserX, refBoxUserY, refBoxUserDirection)
-        else
-            
-        end
-        TasItemShopUI.Frames.BoxUser = parent
-
-        frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
-        BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
-        BlzFrameSetText(frame, GetLocalizedString(textUser))
-        TasItemShopUI.Frames.UserText = frame
-        TasItemShopUI.Frames.User = CreateRefButtons(refButtonCountUser, parent, frame, TasItemShopUI.TriggerUser, false)
-
-        
-        for i, v in ipairs(TasItemShopUI.Frames.User) do
-            BlzFrameSetTexture(v.IconDone, MainUserTexture, 0, true)
-            v.ToolTipFrameText = CreateSimpleTooltip(v.Button, "User")
-        end
-
-        CreateRefPage(parent, TasItemShopUI.Frames.UserText, TasItemShopUI.TriggerUserPage, refButtonCountUser, TasItemShopUI.Frames.User)
-    end
-    
-    local frameObject = {}
-    frameObject.Index = int
-    
-    frameObject.Button = BlzCreateFrame("TasButton", TasItemShopUI.Frames.BoxSuper, 0, 0)
-    CreateTasButtonTooltip(frameObject, TasItemShopUI.Frames.BoxSuper)
-
-    frameObject.Icon = BlzGetFrameByName("TasButtonIcon", 0)
-    frameObject.Text = BlzGetFrameByName("TasButtonText", 0)
-    frameObject.IconGold = BlzGetFrameByName("TasButtonIconGold", 0)
-    frameObject.TextGold = BlzGetFrameByName("TasButtonTextGold", 0)
-    frameObject.IconLumber = BlzGetFrameByName("TasButtonIconLumber", 0)
-    frameObject.TextLumber = BlzGetFrameByName("TasButtonTextLumber", 0)
-    BlzFrameSetPoint(frameObject.Button, FRAMEPOINT_BOTTOM, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_BOTTOM, 0, boxFrameBorderGap)
-    TasItemShopUI.Frames.Current = frameObject
-    currentObject = frameObject
-    BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerBuy, currentObject.Button, FRAMEEVENT_CONTROL_CLICK)
-    BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, currentObject.Button, FRAMEEVENT_CONTROL_CLICK)
-
-    
-    frame = BlzCreateFrame("TasButtonTextTemplate", TasItemShopUI.Frames.BoxSuper, 0, 0)
-    BlzFrameSetPoint(frame, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.ButtonList.InputFrame, FRAMEPOINT_BOTTOMLEFT, -boxFrameBorderGap, 0)
-    BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, modeObject.Button, FRAMEPOINT_TOPRIGHT, boxFrameBorderGap, 0)
-    BlzFrameSetTextAlignment(frame, TEXT_JUSTIFY_CENTER, TEXT_JUSTIFY_MIDDLE)
-    BlzFrameSetText(frame, "Name")
-    TasItemShopUI.Frames.TitelText = frame
-
-    BlzFrameClearAllPoints(currentObject.ToolTipFrameText)
-    if toolTipPosPointParent then
-        BlzFrameSetPoint(currentObject.ToolTipFrameText, toolTipPosPoint, currentObject.Button, toolTipPosPointParent, toolTipPosX, toolTipPosY)
-    else
-        BlzFrameSetAbsPoint(currentObject.ToolTipFrameText, toolTipPosPoint, toolTipPosX, toolTipPosY)
-    end
-
-    if canUndo then
-        parent = BlzCreateFrame(boxUndoFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
-        BlzFrameSetSize(parent, refButtonSize + boxUndoBorderGap*2, refButtonSize + boxUndoBorderGap*2)
-        BlzFrameSetPoint(parent, FRAMEPOINT_BOTTOMLEFT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_BOTTOMLEFT, 0.00, 0.00)
-        TasItemShopUI.Frames.BoxUndo = parent
-        TasItemShopUI.Frames.UndoButton = BlzCreateFrame("TasItemShopCatButton", parent, 0, 0)
-        TasItemShopUI.Frames.UndoButtonIcon = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
-        TasItemShopUI.Frames.UndoButtonIconPushed = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
-        TasItemShopUI.Frames.UndoText = CreateSimpleTooltip(TasItemShopUI.Frames.UndoButton, textUndo)
-
-        frame = TasItemShopUI.Frames.UndoButton
-        BlzFrameSetSize(frame, refButtonSize, refButtonSize)
-        BlzFrameSetPoint(frame, FRAMEPOINT_CENTER, parent, FRAMEPOINT_CENTER, 0, 0)
-        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerUndo, frame, FRAMEEVENT_CONTROL_CLICK)
-        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frame, FRAMEEVENT_CONTROL_CLICK)
-        BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, false)
-    end
-
-    if canDefuse then
-        parent = BlzCreateFrame(boxDefuseFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
-        BlzFrameSetSize(parent, refButtonSize + boxDefuseBorderGap*2, refButtonSize + boxDefuseBorderGap*2)
-        BlzFrameSetPoint(parent, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_BOTTOMRIGHT, 0.00, 0.00)
-        TasItemShopUI.Frames.BoxDefuse = parent
-        TasItemShopUI.Frames.DefuseButton = BlzCreateFrame("TasItemShopCatButton", parent, 0, 0)
-        TasItemShopUI.Frames.DefuseButtonIcon = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
-        TasItemShopUI.Frames.DefuseButtonIconPushed = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
-        TasItemShopUI.Frames.DefuseButtonIconDisabled = BlzGetFrameByName("TasItemShopCatButtonBackdropDisabled", 0)
-        TasItemShopUI.Frames.DefuseText = CreateSimpleTooltip(TasItemShopUI.Frames.DefuseButton, textDefuse)
-         
-        BlzFrameSetTexture(TasItemShopUI.Frames.DefuseButtonIcon, DefuseButtonIcon, 0, false)
-        BlzFrameSetTexture(TasItemShopUI.Frames.DefuseButtonIconPushed, DefuseButtonIcon, 0, false)
-        BlzFrameSetTexture(TasItemShopUI.Frames.DefuseButtonIconDisabled, DefuseButtonIconDisabled, 0, false)
-        frame = TasItemShopUI.Frames.DefuseButton
-        BlzFrameSetSize(frame, refButtonSize, refButtonSize)
-        BlzFrameSetPoint(frame, FRAMEPOINT_CENTER, parent, FRAMEPOINT_CENTER, 0, 0)
-        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerDefuse, frame, FRAMEEVENT_CONTROL_CLICK)
-        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frame, FRAMEEVENT_CONTROL_CLICK)
-        --BlzFrameSetVisible(TasItemShopUI.Frames.BoxDefuse, false)
-        BlzFrameSetEnable(TasItemShopUI.Frames.DefuseButton, false)
-
-        BlzFrameClearAllPoints(TasItemShopUI.Frames.DefuseText)
-        BlzFrameSetPoint(TasItemShopUI.Frames.DefuseText, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.DefuseButton, FRAMEPOINT_TOPRIGHT, 0, 0.008)
-    end
-    if canSellItems then
-        parent = BlzCreateFrame(boxDefuseFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
-        BlzFrameSetSize(parent, refButtonSize + boxSellBorderGap*2, refButtonSize + boxSellBorderGap*2)
-        if canDefuse then      
-            BlzFrameSetPoint(parent, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.BoxDefuse, FRAMEPOINT_BOTTOMLEFT, 0.00, 0.00)
-        else
-            BlzFrameSetPoint(parent, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_BOTTOMRIGHT, 0.00, 0.00)
-        end
-
-        TasItemShopUI.Frames.BoxSell = parent
-        TasItemShopUI.Frames.SellButton = BlzCreateFrame("TasItemShopCatButton", parent, 0, 0)
-        TasItemShopUI.Frames.SellButtonIcon = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
-        TasItemShopUI.Frames.SellButtonIconDisabled = BlzGetFrameByName("TasItemShopCatButtonBackdropDisabled", 0)
-        TasItemShopUI.Frames.SellButtonIconPushed = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
-        TasItemShopUI.Frames.SellText = CreateSimpleTooltip(TasItemShopUI.Frames.SellButton, textSell)
-
-        BlzFrameSetTexture(TasItemShopUI.Frames.SellButtonIcon, SellButtonIcon, 0, false)
-        BlzFrameSetTexture(TasItemShopUI.Frames.SellButtonIconPushed, SellButtonIcon, 0, false)
-        BlzFrameSetTexture(TasItemShopUI.Frames.SellButtonIconDisabled, SellButtonIconDisabled, 0, false)
-        frame = TasItemShopUI.Frames.SellButton
-        BlzFrameSetSize(frame, refButtonSize, refButtonSize)
-        BlzFrameSetPoint(frame, FRAMEPOINT_CENTER, parent, FRAMEPOINT_CENTER, 0, 0)
-        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerSell, frame, FRAMEEVENT_CONTROL_CLICK)
-        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frame, FRAMEEVENT_CONTROL_CLICK)
-        BlzFrameSetEnable(TasItemShopUI.Frames.SellButton, false)
-        
-        BlzFrameClearAllPoints(TasItemShopUI.Frames.SellText)
-        BlzFrameSetPoint(TasItemShopUI.Frames.SellText, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.SellButton, FRAMEPOINT_TOPRIGHT, 0, 0.008)
-    end
-    
-
-    parent = BlzCreateFrameByType("BUTTON", "TasRightClickSpriteParent", TasItemShopUI.Frames.BoxSuper, "", 0)
-    BlzFrameSetLevel(parent, 99)
-    frame = BlzCreateFrameByType("SPRITE", "TasRightClickSprite", parent, "", 0)
-    BlzFrameSetSize(frame, refButtonSize, refButtonSize)
-    BlzFrameSetScale(frame, spriteScale)
-    BlzFrameSetModel(frame, spriteModel, 0)   
-    BlzFrameSetVisible(parent, false)
-    TasItemShopUI.Frames.SpriteParent = parent
-    TasItemShopUI.Frames.Sprite = frame  
-    if LayoutType == 1 then
-
-    elseif LayoutType == 2 then
-        ySize = ySize - refButtonBoxSizeY*#refRows
-        BlzFrameSetSize(TasItemShopUI.Frames.ParentSuperUI, xSize, ySize)
-        BlzFrameSetPoint(refRows[1][2], FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.ParentSuperUI, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
-    elseif LayoutType == 3 then
-        ySize = ySize - refButtonBoxSizeY*#refRows
-        BlzFrameSetSize(TasItemShopUI.Frames.ParentSuperUI, xSize, ySize)
-        BlzFrameSetPoint(refRows[1][2], FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.ParentSuperUI, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
-        
-        
-        --MakeRefButtonsCol(box, textFrame, frames)
-        MakeRefButtonsCol(TasItemShopUI.Frames.BoxUser, TasItemShopUI.Frames.UserText, TasItemShopUI.Frames.User)
-        MakeRefButtonsCol(TasItemShopUI.Frames.BoxInventory, TasItemShopUI.Frames.InventoryText, TasItemShopUI.Frames.Inventory)
-        MakeRefButtonsCol(TasItemShopUI.Frames.BoxMaterial, TasItemShopUI.Frames.MaterialText, TasItemShopUI.Frames.Material)
-        MakeRefButtonsCol(TasItemShopUI.Frames.BoxUpgrades, TasItemShopUI.Frames.UpgradesText, TasItemShopUI.Frames.Upgrades)
-
-        refRows = {}
-        PlaceRefButtonBoxCol(TasItemShopUI.Frames.BoxUser)
-        PlaceRefButtonBoxCol(TasItemShopUI.Frames.BoxInventory)
-        PlaceRefButtonBoxCol(TasItemShopUI.Frames.BoxMaterial)
-        PlaceRefButtonBoxCol(TasItemShopUI.Frames.BoxUpgrades)
-
-        
-    end
-    BlzFrameSetSize(TasItemShopUI.Frames.ParentSuperUI, xSize, ySize)
-    BlzFrameSetVisible(TasItemShopUI.Frames.ParentSuper, false)
-end
-
-function TasItemShopUIShow(player, shop, shopperGroup, mainShoper)
-    xpcall(function()
-    local flag = (shop ~=nil)
-    
-    if player == GetLocalPlayer() then
-        BlzFrameSetVisible(TasItemShopUI.Frames.ParentSuper, flag)
-        if flag then
-            BlzFrameSetVisible(BlzFrameGetParent(TasItemShopUI.Frames.ParentSuper), true)
-        end
-    end
-
-    if flag then
-        local oldShop = CurrentShop[player]
-        local isNewShopType = GetUnitTypeId(oldShop) ~= GetUnitTypeId(shop)
-        CurrentShop[player] = shop
-
-        if mainShoper then
-            ShoperMain[player] = mainShoper
-        elseif shopperGroup then
-            ShoperMain[player] = FirstOfGroup(shopperGroup)
-        end
-        if shopperGroup then
-            GroupClear(Shoper[player])
-            -- when a group was given
-            if string.sub(tostring(shopperGroup), 1, 6) == "group:" then
-                BlzGroupAddGroupFast(shopperGroup, Shoper[player])
-            end
-        end
-
-        GroupAddUnit(Shoper[player], mainShoper)
-
-        local oldSize = TasItemFusion.Player[player].UseAble.Count
-        TasItemFusionGetUseableItems(player, Shoper[player], not sharedItems)
-        
-        if oldSize ~= TasItemFusion.Player[player].UseAble.Count then
-            
-            CurrentOffSetInventory[player] = 0
-        end
-        if isNewShopType then
-            -- has to unmark buyAble
-            local buttonList = TasItemShopUI.ButtonList
-            local shopObject = TasItemShopUI.Shops[GetUnitTypeId(shop)]
-            BUY_ABLE_ITEMS.Marker[player] = {}
-            
-            TasButtonListClearData(buttonList, player)
-            -- has custom Shop Data?
-            if shopObject then
-                -- WhiteListMode?
-                if shopObject.Mode then
-                    for i, v in ipairs(shopObject) do
-                        TasButtonListAddData(buttonList, v, player)
-                        BUY_ABLE_ITEMS.Marker[player][v] = true
+                        v[1] = v[1] - BlzFrameGetHeight(box)
+                        return i
+                        --break
                     end
-                else
-                    -- BlackListMode
-                    for i, v in ipairs(BUY_ABLE_ITEMS) do
-                        if type(v) == "string" then
-                            if not shopObject[FourCC(v)] then
-                                TasButtonListAddData(buttonList, FourCC(v), player)
-                                BUY_ABLE_ITEMS.Marker[player][FourCC(v)] = true
+                end
+                if not found then
+                    BlzFrameSetPoint(box, FRAMEPOINT_TOPRIGHT, refRows[#refRows][2], FRAMEPOINT_TOPLEFT, 0, 0)
+                    table.insert(refRows, {ySize - BlzFrameGetHeight(box), box})
+                    return #refRows
+                end
+            end
+        end
+
+
+        -- built from
+        if refButtonCountMats > 0 then
+            parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
+            BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountMats + boxFrameBorderGap*2, refButtonBoxSizeY)
+            local row = PlaceRefButtonBox(parent)
+            TasItemShopUI.Frames.BoxMaterial = parent
+
+            frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
+            BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
+            BlzFrameSetText(frame, GetLocalizedString(textMats))
+            TasItemShopUI.Frames.MaterialText = frame
+
+            TasItemShopUI.Frames.Material = CreateRefButtons(refButtonCountMats, parent, frame, TasItemShopUI.TriggerMaterial, true)
+
+            CreateRefPage(parent, TasItemShopUI.Frames.MaterialText, TasItemShopUI.TriggerMaterialPage, refButtonCountMats, TasItemShopUI.Frames.Material)
+        end
+
+        -- possible upgrades
+        if refButtonCountUp > 0 then
+            parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
+            BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountUp + boxFrameBorderGap*2, refButtonBoxSizeY)
+            local row = PlaceRefButtonBox(parent)
+            TasItemShopUI.Frames.BoxUpgrades = parent
+
+            frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
+            BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
+            BlzFrameSetText(frame, GetLocalizedString(textUpgrades))
+            TasItemShopUI.Frames.UpgradesText = frame
+
+            TasItemShopUI.Frames.Upgrades = CreateRefButtons(refButtonCountUp, parent, frame, TasItemShopUI.TriggerUpgrade, true)
+
+            CreateRefPage(parent, TasItemShopUI.Frames.UpgradesText, TasItemShopUI.TriggerUpgradePage, refButtonCountUp, TasItemShopUI.Frames.Upgrades)
+        end
+
+        -- ShortCuts
+        if refButtonCountQuickLink > 0 then
+            parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
+            BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountQuickLink + boxFrameBorderGap*2, refButtonBoxSizeY)
+            local row = PlaceRefButtonBox(parent)
+            TasItemShopUI.Frames.BoxQuickLink = parent
+
+            frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
+            BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
+            BlzFrameSetText(frame, GetLocalizedString(textQuickLink))
+            TasItemShopUI.Frames.QuickLinkText = frame
+
+            TasItemShopUI.Frames.QuickLinkHighLight = BlzCreateFrame(buttonListHighLightFrameName, parent, 0, 0)
+            BlzFrameSetAllPoints(TasItemShopUI.Frames.QuickLinkHighLight, parent)
+            BlzFrameSetVisible(TasItemShopUI.Frames.QuickLinkHighLight, false)
+
+            TasItemShopUI.Frames.QuickLink = CreateRefButtons(refButtonCountQuickLink, parent, frame, TasItemShopUI.TriggerQuickLink, true)
+
+            CreateRefPage(parent, TasItemShopUI.Frames.QuickLinkText, TasItemShopUI.TriggerQuickLinkPage, refButtonCountQuickLink, TasItemShopUI.Frames.QuickLink)
+        end
+
+        -- Inventory
+        if refButtonCountInv > 0 then
+            parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
+            BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountInv + boxFrameBorderGap*2, refButtonBoxSizeY)
+            local row = PlaceRefButtonBox(parent)
+
+            TasItemShopUI.Frames.BoxInventory = parent
+
+            frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
+            BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
+            BlzFrameSetText(frame, GetLocalizedString(textInventory))
+            TasItemShopUI.Frames.InventoryText = frame
+
+            TasItemShopUI.Frames.Inventory = CreateRefButtons(refButtonCountInv, parent, frame, TasItemShopUI.TriggerInventory, true)
+
+            for i, v in ipairs(TasItemShopUI.Frames.Inventory) do
+                BlzFrameSetTexture(v.IconDone, MainItemTexture, 0, true)
+            end
+
+            CreateRefPage(parent, TasItemShopUI.Frames.InventoryText, TasItemShopUI.TriggerInventoryPage, refButtonCountInv, TasItemShopUI.Frames.Inventory)
+        end
+
+        -- User
+        if refButtonCountUser > 0 then
+            parent = BlzCreateFrame(boxRefFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
+            BlzFrameSetSize(parent, (refButtonSize + refButtonGap)*refButtonCountUser + boxFrameBorderGap*2, refButtonBoxSizeY)
+
+            PlaceRefButtonBox(parent)
+            if refBoxUserPos then
+                PlaceRefButtonBoxFree(parent, refBoxUserPos, refBoxUserRelative, refBoxUserPosRelative, refBoxUserX, refBoxUserY, refBoxUserDirection)
+            else
+
+            end
+            TasItemShopUI.Frames.BoxUser = parent
+
+            frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
+            BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, boxRefBorderGap, -boxRefBorderGap)
+            BlzFrameSetText(frame, GetLocalizedString(textUser))
+            TasItemShopUI.Frames.UserText = frame
+            TasItemShopUI.Frames.User = CreateRefButtons(refButtonCountUser, parent, frame, TasItemShopUI.TriggerUser, false)
+
+
+            for i, v in ipairs(TasItemShopUI.Frames.User) do
+                BlzFrameSetTexture(v.IconDone, MainUserTexture, 0, true)
+                v.ToolTipFrameText = CreateSimpleTooltip(v.Button, "User")
+            end
+
+            CreateRefPage(parent, TasItemShopUI.Frames.UserText, TasItemShopUI.TriggerUserPage, refButtonCountUser, TasItemShopUI.Frames.User)
+        end
+
+        local frameObject = {}
+        frameObject.Index = int
+
+        frameObject.Button = BlzCreateFrame("TasButton", TasItemShopUI.Frames.BoxSuper, 0, 0)
+        CreateTasButtonTooltip(frameObject, TasItemShopUI.Frames.BoxSuper)
+
+        frameObject.Icon = BlzGetFrameByName("TasButtonIcon", 0)
+        frameObject.Text = BlzGetFrameByName("TasButtonText", 0)
+        frameObject.IconGold = BlzGetFrameByName("TasButtonIconGold", 0)
+        frameObject.TextGold = BlzGetFrameByName("TasButtonTextGold", 0)
+        frameObject.IconLumber = BlzGetFrameByName("TasButtonIconLumber", 0)
+        frameObject.TextLumber = BlzGetFrameByName("TasButtonTextLumber", 0)
+        BlzFrameSetPoint(frameObject.Button, FRAMEPOINT_BOTTOM, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_BOTTOM, 0, boxFrameBorderGap)
+        TasItemShopUI.Frames.Current = frameObject
+        currentObject = frameObject
+        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerBuy, currentObject.Button, FRAMEEVENT_CONTROL_CLICK)
+        BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, currentObject.Button, FRAMEEVENT_CONTROL_CLICK)
+
+
+        frame = BlzCreateFrame("TasButtonTextTemplate", TasItemShopUI.Frames.BoxSuper, 0, 0)
+        BlzFrameSetPoint(frame, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.ButtonList.InputFrame, FRAMEPOINT_BOTTOMLEFT, -boxFrameBorderGap, 0)
+        BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, modeObject.Button, FRAMEPOINT_TOPRIGHT, boxFrameBorderGap, 0)
+        BlzFrameSetTextAlignment(frame, TEXT_JUSTIFY_CENTER, TEXT_JUSTIFY_MIDDLE)
+        BlzFrameSetText(frame, "Name")
+        TasItemShopUI.Frames.TitelText = frame
+
+        BlzFrameClearAllPoints(currentObject.ToolTipFrameText)
+        if toolTipPosPointParent then
+            BlzFrameSetPoint(currentObject.ToolTipFrameText, toolTipPosPoint, currentObject.Button, toolTipPosPointParent, toolTipPosX, toolTipPosY)
+        else
+            BlzFrameSetAbsPoint(currentObject.ToolTipFrameText, toolTipPosPoint, toolTipPosX, toolTipPosY)
+        end
+
+        if canUndo then
+            parent = BlzCreateFrame(boxUndoFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
+            BlzFrameSetSize(parent, refButtonSize + boxUndoBorderGap*2, refButtonSize + boxUndoBorderGap*2)
+            BlzFrameSetPoint(parent, FRAMEPOINT_BOTTOMLEFT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_BOTTOMLEFT, 0.00, 0.00)
+            TasItemShopUI.Frames.BoxUndo = parent
+            TasItemShopUI.Frames.UndoButton = BlzCreateFrame("TasItemShopCatButton", parent, 0, 0)
+            TasItemShopUI.Frames.UndoButtonIcon = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
+            TasItemShopUI.Frames.UndoButtonIconPushed = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
+            TasItemShopUI.Frames.UndoText = CreateSimpleTooltip(TasItemShopUI.Frames.UndoButton, textUndo)
+
+            frame = TasItemShopUI.Frames.UndoButton
+            BlzFrameSetSize(frame, refButtonSize, refButtonSize)
+            BlzFrameSetPoint(frame, FRAMEPOINT_CENTER, parent, FRAMEPOINT_CENTER, 0, 0)
+            BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerUndo, frame, FRAMEEVENT_CONTROL_CLICK)
+            BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frame, FRAMEEVENT_CONTROL_CLICK)
+            BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, false)
+        end
+
+        if canDefuse then
+            parent = BlzCreateFrame(boxDefuseFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
+            BlzFrameSetSize(parent, refButtonSize + boxDefuseBorderGap*2, refButtonSize + boxDefuseBorderGap*2)
+            BlzFrameSetPoint(parent, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_BOTTOMRIGHT, 0.00, 0.00)
+            TasItemShopUI.Frames.BoxDefuse = parent
+            TasItemShopUI.Frames.DefuseButton = BlzCreateFrame("TasItemShopCatButton", parent, 0, 0)
+            TasItemShopUI.Frames.DefuseButtonIcon = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
+            TasItemShopUI.Frames.DefuseButtonIconPushed = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
+            TasItemShopUI.Frames.DefuseButtonIconDisabled = BlzGetFrameByName("TasItemShopCatButtonBackdropDisabled", 0)
+            TasItemShopUI.Frames.DefuseText = CreateSimpleTooltip(TasItemShopUI.Frames.DefuseButton, textDefuse)
+
+            BlzFrameSetTexture(TasItemShopUI.Frames.DefuseButtonIcon, DefuseButtonIcon, 0, false)
+            BlzFrameSetTexture(TasItemShopUI.Frames.DefuseButtonIconPushed, DefuseButtonIcon, 0, false)
+            BlzFrameSetTexture(TasItemShopUI.Frames.DefuseButtonIconDisabled, DefuseButtonIconDisabled, 0, false)
+            frame = TasItemShopUI.Frames.DefuseButton
+            BlzFrameSetSize(frame, refButtonSize, refButtonSize)
+            BlzFrameSetPoint(frame, FRAMEPOINT_CENTER, parent, FRAMEPOINT_CENTER, 0, 0)
+            BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerDefuse, frame, FRAMEEVENT_CONTROL_CLICK)
+            BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frame, FRAMEEVENT_CONTROL_CLICK)
+            --BlzFrameSetVisible(TasItemShopUI.Frames.BoxDefuse, false)
+            BlzFrameSetEnable(TasItemShopUI.Frames.DefuseButton, false)
+
+            BlzFrameClearAllPoints(TasItemShopUI.Frames.DefuseText)
+            BlzFrameSetPoint(TasItemShopUI.Frames.DefuseText, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.DefuseButton, FRAMEPOINT_TOPRIGHT, 0, 0.008)
+        end
+        if canSellItems then
+            parent = BlzCreateFrame(boxDefuseFrameName, TasItemShopUI.Frames.BoxSuper, 0, 0)
+            BlzFrameSetSize(parent, refButtonSize + boxSellBorderGap*2, refButtonSize + boxSellBorderGap*2)
+            if canDefuse then
+                BlzFrameSetPoint(parent, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.BoxDefuse, FRAMEPOINT_BOTTOMLEFT, 0.00, 0.00)
+            else
+                BlzFrameSetPoint(parent, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.BoxSuper, FRAMEPOINT_BOTTOMRIGHT, 0.00, 0.00)
+            end
+
+            TasItemShopUI.Frames.BoxSell = parent
+            TasItemShopUI.Frames.SellButton = BlzCreateFrame("TasItemShopCatButton", parent, 0, 0)
+            TasItemShopUI.Frames.SellButtonIcon = BlzGetFrameByName("TasItemShopCatButtonBackdrop", 0)
+            TasItemShopUI.Frames.SellButtonIconDisabled = BlzGetFrameByName("TasItemShopCatButtonBackdropDisabled", 0)
+            TasItemShopUI.Frames.SellButtonIconPushed = BlzGetFrameByName("TasItemShopCatButtonBackdropPushed", 0)
+            TasItemShopUI.Frames.SellText = CreateSimpleTooltip(TasItemShopUI.Frames.SellButton, textSell)
+
+            BlzFrameSetTexture(TasItemShopUI.Frames.SellButtonIcon, SellButtonIcon, 0, false)
+            BlzFrameSetTexture(TasItemShopUI.Frames.SellButtonIconPushed, SellButtonIcon, 0, false)
+            BlzFrameSetTexture(TasItemShopUI.Frames.SellButtonIconDisabled, SellButtonIconDisabled, 0, false)
+            frame = TasItemShopUI.Frames.SellButton
+            BlzFrameSetSize(frame, refButtonSize, refButtonSize)
+            BlzFrameSetPoint(frame, FRAMEPOINT_CENTER, parent, FRAMEPOINT_CENTER, 0, 0)
+            BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerSell, frame, FRAMEEVENT_CONTROL_CLICK)
+            BlzTriggerRegisterFrameEvent(TasItemShopUI.TriggerClearFocus, frame, FRAMEEVENT_CONTROL_CLICK)
+            BlzFrameSetEnable(TasItemShopUI.Frames.SellButton, false)
+
+            BlzFrameClearAllPoints(TasItemShopUI.Frames.SellText)
+            BlzFrameSetPoint(TasItemShopUI.Frames.SellText, FRAMEPOINT_BOTTOMRIGHT, TasItemShopUI.Frames.SellButton, FRAMEPOINT_TOPRIGHT, 0, 0.008)
+        end
+
+
+        parent = BlzCreateFrameByType("BUTTON", "TasRightClickSpriteParent", TasItemShopUI.Frames.BoxSuper, "", 0)
+        BlzFrameSetLevel(parent, 99)
+        frame = BlzCreateFrameByType("SPRITE", "TasRightClickSprite", parent, "", 0)
+        BlzFrameSetSize(frame, refButtonSize, refButtonSize)
+        BlzFrameSetScale(frame, spriteScale)
+        BlzFrameSetModel(frame, spriteModel, 0)
+        BlzFrameSetVisible(parent, false)
+        TasItemShopUI.Frames.SpriteParent = parent
+        TasItemShopUI.Frames.Sprite = frame
+        if LayoutType == 1 then
+
+        elseif LayoutType == 2 then
+            ySize = ySize - refButtonBoxSizeY*#refRows
+            BlzFrameSetSize(TasItemShopUI.Frames.ParentSuperUI, xSize, ySize)
+            BlzFrameSetPoint(refRows[1][2], FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.ParentSuperUI, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
+        elseif LayoutType == 3 then
+            ySize = ySize - refButtonBoxSizeY*#refRows
+            BlzFrameSetSize(TasItemShopUI.Frames.ParentSuperUI, xSize, ySize)
+            BlzFrameSetPoint(refRows[1][2], FRAMEPOINT_TOPRIGHT, TasItemShopUI.Frames.ParentSuperUI, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
+
+
+            --MakeRefButtonsCol(box, textFrame, frames)
+            MakeRefButtonsCol(TasItemShopUI.Frames.BoxUser, TasItemShopUI.Frames.UserText, TasItemShopUI.Frames.User)
+            MakeRefButtonsCol(TasItemShopUI.Frames.BoxInventory, TasItemShopUI.Frames.InventoryText, TasItemShopUI.Frames.Inventory)
+            MakeRefButtonsCol(TasItemShopUI.Frames.BoxMaterial, TasItemShopUI.Frames.MaterialText, TasItemShopUI.Frames.Material)
+            MakeRefButtonsCol(TasItemShopUI.Frames.BoxUpgrades, TasItemShopUI.Frames.UpgradesText, TasItemShopUI.Frames.Upgrades)
+
+            refRows = {}
+            PlaceRefButtonBoxCol(TasItemShopUI.Frames.BoxUser)
+            PlaceRefButtonBoxCol(TasItemShopUI.Frames.BoxInventory)
+            PlaceRefButtonBoxCol(TasItemShopUI.Frames.BoxMaterial)
+            PlaceRefButtonBoxCol(TasItemShopUI.Frames.BoxUpgrades)
+
+
+        end
+        BlzFrameSetSize(TasItemShopUI.Frames.ParentSuperUI, xSize, ySize)
+        BlzFrameSetVisible(TasItemShopUI.Frames.ParentSuper, false)
+    end
+
+    function TasItemShopUIShow(player, shop, shopperGroup, mainShoper)
+        xpcall(function()
+            local flag = (shop ~=nil)
+
+            if player == GetLocalPlayer() then
+                BlzFrameSetVisible(TasItemShopUI.Frames.ParentSuper, flag)
+                if flag then
+                    BlzFrameSetVisible(BlzFrameGetParent(TasItemShopUI.Frames.ParentSuper), true)
+                end
+            end
+
+            if flag then
+                local oldShop = CurrentShop[player]
+                local isNewShopType = GetUnitTypeId(oldShop) ~= GetUnitTypeId(shop)
+                CurrentShop[player] = shop
+
+                if mainShoper then
+                    ShoperMain[player] = mainShoper
+                elseif shopperGroup then
+                    ShoperMain[player] = FirstOfGroup(shopperGroup)
+                end
+                if shopperGroup then
+                    GroupClear(Shoper[player])
+                    -- when a group was given
+                    if string.sub(tostring(shopperGroup), 1, 6) == "group:" then
+                        BlzGroupAddGroupFast(shopperGroup, Shoper[player])
+                    end
+                end
+
+                GroupAddUnit(Shoper[player], mainShoper)
+
+                local oldSize = TasItemFusion.Player[player].UseAble.Count
+                TasItemFusionGetUseableItems(player, Shoper[player], not sharedItems)
+
+                if oldSize ~= TasItemFusion.Player[player].UseAble.Count then
+
+                    CurrentOffSetInventory[player] = 0
+                end
+                if isNewShopType then
+                    -- has to unmark buyAble
+                    local buttonList = TasItemShopUI.ButtonList
+                    local shopObject = TasItemShopUI.Shops[GetUnitTypeId(shop)]
+                    BUY_ABLE_ITEMS.Marker[player] = {}
+
+                    TasButtonListClearData(buttonList, player)
+                    -- has custom Shop Data?
+                    if shopObject then
+                        -- WhiteListMode?
+                        if shopObject.Mode then
+                            for i, v in ipairs(shopObject) do
+                                TasButtonListAddData(buttonList, v, player)
+                                BUY_ABLE_ITEMS.Marker[player][v] = true
                             end
-                        elseif type(v) == "number" then
-                            if not shopObject[v] then
+                        else
+                            -- BlackListMode
+                            for i, v in ipairs(BUY_ABLE_ITEMS) do
+                                if type(v) == "string" then
+                                    if not shopObject[FourCC(v)] then
+                                        TasButtonListAddData(buttonList, FourCC(v), player)
+                                        BUY_ABLE_ITEMS.Marker[player][FourCC(v)] = true
+                                    end
+                                elseif type(v) == "number" then
+                                    if not shopObject[v] then
+                                        TasButtonListAddData(buttonList, v, player)
+                                        BUY_ABLE_ITEMS.Marker[player][v] = true
+                                    end
+                                end
+                            end
+                        end
+                    else
+                        -- none custom Shop, add all data.
+                        for i, v in ipairs(BUY_ABLE_ITEMS) do
+                            if type(v) == "string" then
+                                BUY_ABLE_ITEMS.Marker[player][FourCC(v)] = true
+                                TasButtonListAddData(buttonList, FourCC(v), player)
+                            elseif type(v) == "number" then
                                 TasButtonListAddData(buttonList, v, player)
                                 BUY_ABLE_ITEMS.Marker[player][v] = true
                             end
                         end
                     end
                 end
-            else
-                -- none custom Shop, add all data.
-                for i, v in ipairs(BUY_ABLE_ITEMS) do
-                    if type(v) == "string" then
-                        BUY_ABLE_ITEMS.Marker[player][FourCC(v)] = true
-                        TasButtonListAddData(buttonList, FourCC(v), player)
-                    elseif type(v) == "number" then
-                        TasButtonListAddData(buttonList, v, player)
-                        BUY_ABLE_ITEMS.Marker[player][v] = true
+                if GetLocalPlayer() == player then
+                    if IsUnitType(ShoperMain[player], UNIT_TYPE_HERO) then
+                        BlzFrameSetText(TasItemShopUI.Frames.TitelText, GetUnitName(shop) .. " - ".. GetHeroProperName(ShoperMain[player]))
+                    else
+                        BlzFrameSetText(TasItemShopUI.Frames.TitelText, GetUnitName(shop) .. " - ".. GetUnitName(ShoperMain[player]))
+                    end
+
+                    LocalShopObject = TasItemShopUI.Shops[GetUnitTypeId(shop)]
+                    if isNewShopType then
+                        TasButtonListSearch(TasItemShopUI.ButtonList)
                     end
                 end
-            end
-        end
-        if GetLocalPlayer() == player then
-            if IsUnitType(ShoperMain[player], UNIT_TYPE_HERO) then
-                BlzFrameSetText(TasItemShopUI.Frames.TitelText, GetUnitName(shop) .. " - ".. GetHeroProperName(ShoperMain[player]))
+                UpdateTasButtonList(TasItemShopUI.ButtonList)
+                setSelected(player, TasItemShopUI.Selected[player])
+                setSelectedItem(player, TasItemShopUI.SelectedItem[player])
             else
-                BlzFrameSetText(TasItemShopUI.Frames.TitelText, GetUnitName(shop) .. " - ".. GetUnitName(ShoperMain[player]))
-            end
-            
-            LocalShopObject = TasItemShopUI.Shops[GetUnitTypeId(shop)]
-            if isNewShopType then
-                TasButtonListSearch(TasItemShopUI.ButtonList)
-            end
-        end
-        UpdateTasButtonList(TasItemShopUI.ButtonList)
-        setSelected(player, TasItemShopUI.Selected[player])
-        setSelectedItem(player, TasItemShopUI.SelectedItem[player])
-    else
-        CurrentShop[player] = nil
-        if canUndo then
-            -- loop the undo of that player from last to first
-            for i = #TasItemShopUI.Undo[player], 1, -1 do
-                -- remove all used material
-                for _,v in ipairs(TasItemShopUI.Undo[player][i].Items) do
-                    SetItemVisible(v[1], true)
-                    RemoveItem(v[1])
+                CurrentShop[player] = nil
+                if canUndo then
+                    -- loop the undo of that player from last to first
+                    for i = #TasItemShopUI.Undo[player], 1, -1 do
+                        -- remove all used material
+                        for _,v in ipairs(TasItemShopUI.Undo[player][i].Items) do
+                            SetItemVisible(v[1], true)
+                            RemoveItem(v[1])
+                        end
+
+                        TasItemShopUI.Undo[player][i].ResultItem = nil
+                        TasItemShopUI.Undo[player][i].StackChargesGainer = nil
+                        TasItemShopUI.Undo[player][i] = nil
+                    end
+                    if GetLocalPlayer() == player then
+                        BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, false)
+                    end
+
                 end
-                
-                TasItemShopUI.Undo[player][i].ResultItem = nil
-                TasItemShopUI.Undo[player][i].StackChargesGainer = nil
-                TasItemShopUI.Undo[player][i] = nil
             end
-            if GetLocalPlayer() == player then
-                BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, false)
-            end
-            
-        end
+        end, print)
     end
-end, print)
-end
 
 
-function TasItemShopUIShowSimple(player, shop, mainShoper)
-    TasItemShopUIShow(player, shop, nil, mainShoper)
-end
+    function TasItemShopUIShowSimple(player, shop, mainShoper)
+        TasItemShopUIShow(player, shop, nil, mainShoper)
+    end
     local function RefButtonPageChange(current, add, min, max, player)
         local size = math.abs(add)
         if BlzGetTriggerFrameEvent() == FRAMEEVENT_CONTROL_CLICK then
@@ -3345,7 +3375,7 @@ end
                 current = min
             end
         end
-        
+
         return current
     end
     local function RefButtonAction(itemCode)
@@ -3353,7 +3383,7 @@ end
         local frame = BlzGetTriggerFrame()
 
         if BlzGetTriggerFrameEvent() == FRAMEEVENT_CONTROL_CLICK then
-        -- print(GetPlayerName(player), "Clicked Material", index)
+            -- print(GetPlayerName(player), "Clicked Material", index)
             setSelected(player, itemCode)
         else
             if IsRightClick(player) then
@@ -3365,433 +3395,411 @@ end
     end
     function MarkGameStarted()
         real()
-    xpcall(function()
-        TasItemShopUI.IsReforged = (GetLocalizedString("REFORGED") ~= "REFORGED")
-        local function CreateTriggerEx(action)
-            local trigger = CreateTrigger()
-            TriggerAddAction(trigger, action)
-            return trigger
-        end
- 
-        TasItemShopUI.TriggerClearButton = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            if player == GetLocalPlayer() then
-                BlzFrameSetText(TasItemShopUI.ButtonList.InputFrame, "")
-            end
-        end)
-
-        TasItemShopUI.TriggerClearFocus = CreateTriggerEx(function()
-            local frame = BlzGetTriggerFrame()
-            if GetTriggerPlayer() == GetLocalPlayer() then
-                BlzFrameSetEnable(frame, false)
-                BlzFrameSetEnable(frame, true)
-            end
-            frame = nil
-        end)
-
-        TasItemShopUI.TriggerBuy = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local itemCode = TasItemShopUI.Selected[player]
-            ShowSprite(BlzGetTriggerFrame(), player)
-            BuyItem(player, itemCode)
-        end)
-
-        TasItemShopUI.TriggerMaterial = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local itemCode = TasItemShopUI.Selected[player]
-            local index = tonumber(BlzFrameGetText(BlzGetTriggerFrame())) + CurrentOffSetMaterial[player]
-            RefButtonAction(TasItemFusion.BuiltWay[itemCode].Mats[index])
-
-        end)
-
-        TasItemShopUI.TriggerMaterialPage = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local itemCode = TasItemShopUI.Selected[player]
-            local max = #TasItemFusion.BuiltWay[itemCode].Mats
-            local min = 0
-            local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
-            
-            CurrentOffSetMaterial[player] = RefButtonPageChange(CurrentOffSetMaterial[player], add, min, max, player)
-            if GetLocalPlayer() == player then
-                updateRefButtons(TasItemFusion.BuiltWay[itemCode].Mats, TasItemShopUI.Frames.BoxMaterial, TasItemShopUI.Frames.Material, CurrentOffSetMaterial[player])
-                updateHaveMats(player, itemCode)
-            end
-        end)
-
-        TasItemShopUI.TriggerUpgrade = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local itemCode = TasItemShopUI.Selected[player]
-            local index = tonumber(BlzFrameGetText(BlzGetTriggerFrame())) + CurrentOffSetUpgrade[player]
-            RefButtonAction(TasItemFusion.UsedIn[itemCode][index].Result)
-        end)
-
-        
-
-        TasItemShopUI.TriggerUpgradePage = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local itemCode = TasItemShopUI.Selected[player]
-            local max = #TasItemFusion.UsedIn[itemCode]
-            local min = 0
-            local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
-            
-            CurrentOffSetUpgrade[player] = RefButtonPageChange(CurrentOffSetUpgrade[player], add, min, max, player)
-            if GetLocalPlayer() == player then
-                updateRefButtons(TasItemFusion.UsedIn[itemCode], TasItemShopUI.Frames.BoxUpgrades, TasItemShopUI.Frames.Upgrades, CurrentOffSetUpgrade[player])
-            end
-        end)
-
-        TasItemShopUI.TriggerQuickLink = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local index = tonumber(BlzFrameGetText(BlzGetTriggerFrame())) + CurrentOffSetQuickLink[player]
-            local itemCode = TasItemShopUI.QuickLink[player][index]
-            if TasItemShopUI.QuickLinkKeyActive[player] and BlzGetTriggerFrameEvent() == FRAMEEVENT_CONTROL_CLICK then
-                TasItemShopUI.SetQuickLink(player, itemCode)
-            else
-                RefButtonAction(itemCode)
-            end
-            
-        end)
-
-        TasItemShopUI.TriggerQuickLinkPage = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local max = #TasItemShopUI.QuickLink[player]
-            local min = 0
-            local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
-            
-            CurrentOffSetQuickLink[player] = RefButtonPageChange(CurrentOffSetQuickLink[player], add, min, max, player)
-            if GetLocalPlayer() == player then
-                updateRefButtons(TasItemShopUI.QuickLink[player], TasItemShopUI.Frames.BoxQuickLink, TasItemShopUI.Frames.QuickLink, CurrentOffSetQuickLink[player])
-            end          
-        end)
-
-        TasItemShopUI.TriggerInventory = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local frame = BlzGetTriggerFrame()
-            local index = tonumber(BlzFrameGetText(frame)) + CurrentOffSetInventory[player]
-            local item
-            if inventoryShowMainOnly then
-                -- warcraft inventory starts with 0 but button indexes with 1
-                item = UnitItemInSlot(ShoperMain[player], index - 1)
-            else
-                item = TasItemFusion.Player[player].UseAble[index]
-            end
-            local itemCode = GetItemTypeId(item)
-            
-            -- prevent a possible desync when the inventory item was not given to TasItemCost yet. TasItemCost creates and destroys an item when a new type is given.
-            TasItemCaclCost(itemCode)
-
-            if BlzGetTriggerFrameEvent() == FRAMEEVENT_CONTROL_CLICK then
-            -- print(GetPlayerName(player), "Clicked Material", index)
-                setSelected(player, itemCode)
-                setSelectedItem(player, item)
-            else
-                if IsRightClick(player) then
-                    ShowSprite(frame, player)
-                    StartSoundForPlayerBJ(player, ToggleIconButton.Sound)
-                    if canSellItems and inventoryRightClickSell then
-                        SellItem(player, item)
-                    else
-                        BuyItem(player, itemCode)
-                        setSelectedItem(player, item)
-                    end
-                end
-            end
-            
-        end)
-
-        TasItemShopUI.TriggerInventoryPage = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local max = TasItemFusion.Player[player].UseAble.Count
-            local min = 0
-            local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
-            
-            CurrentOffSetInventory[player] = RefButtonPageChange(CurrentOffSetInventory[player], add, min, max, player)
-            
-            if GetLocalPlayer() == player then
-                updateRefButtons(TasItemFusion.Player[player].UseAble, TasItemShopUI.Frames.BoxInventory, TasItemShopUI.Frames.Inventory, CurrentOffSetInventory[player])
-            end
-            
-        end)
-
-        
-
-        TasItemShopUI.TriggerUndo = CreateTriggerEx(function()
-            
-            xpcall(function()
-            local player = GetTriggerPlayer()
-            if #TasItemShopUI.Undo[player] < 1 then return end
-            local undo = table.remove(TasItemShopUI.Undo[player])
-            
-            --print("Use Undo:",#TasItemShopUI.Undo[player] + 1, GetObjectName(undo.Result))
-            AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_GOLD, undo.Gold)
-            AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_LUMBER, undo.Lumber)
-
-            -- find the result and destroy it, this assumes that the shoper Group not changed since the buying
-            for i, v in ipairs(undo.ResultItem) do RemoveItem(v[1]) undo.ResultItem[i][1] = nil end
-            
-            if undo.StackChargesGainer then
-                SetItemCharges(undo.StackChargesGainer, GetItemCharges(undo.StackChargesGainer) - undo.StackCharges)
-                undo.StackChargesGainer = nil
-            end
-            -- show the used material and give them back
-            for i,v in ipairs(undo.Items) do
-                SetItemVisible(v[1], true)
-                UnitAddItem(v[2], v[1])
-            end
-            TasItemShopUIShow(player, CurrentShop[player])
-            if GetLocalPlayer() == player then
-                
-                if #TasItemShopUI.Undo[GetLocalPlayer()] > 0 then
-                    BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, true)
-                    updateUndoButton(TasItemShopUI.Undo[player][#TasItemShopUI.Undo[player]].Result, TasItemShopUI.Undo[player][#TasItemShopUI.Undo[player]].ActionName)
-                else
-                    BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, false)
-                end
-            end
-        end, print)
-        end)
-
-        TasItemShopUI.TriggerSell = CreateTriggerEx(function()
-            SellItem(GetTriggerPlayer(), TasItemShopUI.SelectedItem[GetTriggerPlayer()])
-        end)
-
-        TasItemShopUI.TriggerDefuse = CreateTriggerEx(function()
-            
-            xpcall(function()
-                
-            local player = GetTriggerPlayer()
-            if not TasItemShopUI.SelectedItem[player] then return end
-            local item = TasItemShopUI.SelectedItem[player]
-            local itemCode = GetItemTypeId(item)
-            TasItemShopUI.SelectedItem[player] = nil
-            
-            local gold, lumber = TasItemGetCost(itemCode)
-            local gold2, lumber2
-            for i, v in ipairs(TasItemFusion.BuiltWay[itemCode].Mats) do
-                gold2, lumber2 = TasItemGetCost(v)
-                gold = gold - gold2
-                lumber = lumber - lumber2
+        xpcall(function()
+            TasItemShopUI.IsReforged = (GetLocalizedString("REFORGED") ~= "REFORGED")
+            local function CreateTriggerEx(action)
+                local trigger = CreateTrigger()
+                TriggerAddAction(trigger, action)
+                return trigger
             end
 
-            AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_GOLD, gold)
-            AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_LUMBER, lumber)
-            local undo
-            if canUndo then
-                undo = {ResultItem = {}, Result = itemCode, Gold = -gold, Lumber = -lumber, Items = {}, ActionName = GetLocalizedString(textDefuse)}
-                table.insert(TasItemShopUI.Undo[player], undo)
-                for i = 0, BlzGroupGetSize(Shoper[player]) - 1, 1 do
-                    owner = BlzGroupUnitAt(Shoper[player], i)
-                    if UnitHasItem(owner, item) then
-                        UnitRemoveItem(owner, item)
-                        SetItemVisible(item, false)
-                        undo.Items[1] = {item, owner}
-                        break
-                    end
-                end
-                
-                if GetLocalPlayer() == player then
-                    BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, true)
-                    updateUndoButton(undo.Result, GetLocalizedString(textDefuse))
-                end
-            else
-                RemoveItem(item)
-            end
-
-            for i, v in ipairs(TasItemFusion.BuiltWay[itemCode].Mats) do
-                item = CreateItem(v, GetUnitX(ShoperMain[player]), GetUnitY(ShoperMain[player]))
-                GiveItemGroup(player, item, undo)
-            end
-            
-            if GetLocalPlayer() == player then
-                --BlzFrameSetVisible(TasItemShopUI.Frames.BoxDefuse, false)
-                BlzFrameSetEnable(TasItemShopUI.Frames.DefuseButton, false)
-            end
-        end, print)
-        end)
-        
-        local tempGroup = CreateGroup()
-        local function ShopSelectionAction(player, shop, target)
-            xpcall(function()
-            -- is a registered shop UnitType?
-            if TasItemShopUI.Shops[GetUnitTypeId(shop)] then
-                local range = TasItemShopUI.Shops[GetUnitTypeId(shop)].Range
-                if not range then range = shopRange end
-                GroupEnumUnitsInRange(tempGroup, GetUnitX(shop), GetUnitY(shop), range + 400, nil)
-                -- remove unallowed shoppers
-                
-                ForGroup(tempGroup, function()
-                    if not IsValidShopper(player, shop, GetEnumUnit(), range) then
-                        GroupRemoveUnit(tempGroup, GetEnumUnit())
-                    end
-                end)
-                if not target and IsUnitInGroup(ShoperMain[player], tempGroup) then
-                    target = ShoperMain[player]
-                end
-                
-                TasItemShopUIShow(player, shop, tempGroup, target)
-            -- no, end shopping!
-            elseif CurrentShop[player] then
-                TasItemShopUIShow(player)
-            end
-        end, print)
-        end
-        TasItemShopUI.TriggerSelect = CreateTriggerEx(function()
-            ShopSelectionAction(GetTriggerPlayer(), GetTriggerUnit())
-        end)
-        TriggerRegisterAnyUnitEventBJ(TasItemShopUI.TriggerSelect, EVENT_PLAYER_UNIT_SELECTED)
-
-        if userButtonOrder then
-            TasItemShopUI.TriggerOrder = CreateTriggerEx(function()
-                if TasItemShopUI.Shops[GetUnitTypeId(GetTriggerUnit())] then
-                    ShopSelectionAction(GetOwningPlayer(GetOrderTargetUnit()), GetTriggerUnit(), GetOrderTargetUnit())
+            TasItemShopUI.TriggerClearButton = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                if player == GetLocalPlayer() then
+                    BlzFrameSetText(TasItemShopUI.ButtonList.InputFrame, "")
                 end
             end)
-            TriggerRegisterAnyUnitEventBJ(TasItemShopUI.TriggerOrder, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
-        end
 
-        TasItemShopUI.TriggerUser = CreateTriggerEx(function()
-            local frame = BlzGetTriggerFrame()
-            local player = GetTriggerPlayer()
-            local index = tonumber(BlzFrameGetText(BlzGetTriggerFrame())) + CurrentOffSetUser[player]
-            local unit = BlzGroupUnitAt(Shoper[player], index - 1)
-
-            if BlzGetTriggerFrameEvent() == FRAMEEVENT_CONTROL_CLICK then
-                if not userButtonOrder then
-                    ShopSelectionAction(player, CurrentShop[player], unit)
+            TasItemShopUI.TriggerClearFocus = CreateTriggerEx(function()
+                local frame = BlzGetTriggerFrame()
+                if GetTriggerPlayer() == GetLocalPlayer() then
+                    BlzFrameSetEnable(frame, false)
+                    BlzFrameSetEnable(frame, true)
                 end
-                IssueNeutralTargetOrder(player, CurrentShop[player], "smart", unit)
-            else
-                if IsRightClick(player) then
-                    SelectUnitForPlayerSingle(unit, player)
+                frame = nil
+            end)
+
+            TasItemShopUI.TriggerBuy = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local itemCode = TasItemShopUI.Selected[player]
+                ShowSprite(BlzGetTriggerFrame(), player)
+                BuyItem(player, itemCode)
+            end)
+
+            TasItemShopUI.TriggerMaterial = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local itemCode = TasItemShopUI.Selected[player]
+                local index = tonumber(BlzFrameGetText(BlzGetTriggerFrame())) + CurrentOffSetMaterial[player]
+                RefButtonAction(TasItemFusion.BuiltWay[itemCode].Mats[index])
+
+            end)
+
+            TasItemShopUI.TriggerMaterialPage = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local itemCode = TasItemShopUI.Selected[player]
+                local max = #TasItemFusion.BuiltWay[itemCode].Mats
+                local min = 0
+                local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
+
+                CurrentOffSetMaterial[player] = RefButtonPageChange(CurrentOffSetMaterial[player], add, min, max, player)
+                if GetLocalPlayer() == player then
+                    updateRefButtons(TasItemFusion.BuiltWay[itemCode].Mats, TasItemShopUI.Frames.BoxMaterial, TasItemShopUI.Frames.Material, CurrentOffSetMaterial[player])
+                    updateHaveMats(player, itemCode)
                 end
-            end
-        end)
+            end)
 
-        TasItemShopUI.TriggerUserPage = CreateTriggerEx(function()
-            local player = GetTriggerPlayer()
-            local max = BlzGroupGetSize(Shoper[player])
-            local min = 0
-            local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
-            CurrentOffSetUser[player] = RefButtonPageChange(CurrentOffSetUser[player], add, min, max, player)
-            
-            if GetLocalPlayer() == player then
-                updateRefButtons(Shoper[player], TasItemShopUI.Frames.BoxUser, TasItemShopUI.Frames.User, CurrentOffSetUser[player])
-                updateOverLayMainSelected(player)
-            end
-            
-        end)
+            TasItemShopUI.TriggerUpgrade = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local itemCode = TasItemShopUI.Selected[player]
+                local index = tonumber(BlzFrameGetText(BlzGetTriggerFrame())) + CurrentOffSetUpgrade[player]
+                RefButtonAction(TasItemFusion.UsedIn[itemCode][index].Result)
+            end)
 
-        TasItemShopUI.TriggerESC = CreateTriggerEx(function()
-            TasItemShopUIShow(GetTriggerPlayer())
-        end)
 
-        TasItemShopUI.TriggerScrollParent = CreateTriggerEx(function()
-            local frame = TasItemShopUI.ButtonList.Slider
-            if GetLocalPlayer() == GetTriggerPlayer() then
-                if BlzGetTriggerFrameValue() > 0 then
-                    BlzFrameSetValue(frame, BlzFrameGetValue(frame) + TasItemShopUI.ButtonList.SliderStep)
+
+            TasItemShopUI.TriggerUpgradePage = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local itemCode = TasItemShopUI.Selected[player]
+                local max = #TasItemFusion.UsedIn[itemCode]
+                local min = 0
+                local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
+
+                CurrentOffSetUpgrade[player] = RefButtonPageChange(CurrentOffSetUpgrade[player], add, min, max, player)
+                if GetLocalPlayer() == player then
+                    updateRefButtons(TasItemFusion.UsedIn[itemCode], TasItemShopUI.Frames.BoxUpgrades, TasItemShopUI.Frames.Upgrades, CurrentOffSetUpgrade[player])
+                end
+            end)
+
+            TasItemShopUI.TriggerQuickLink = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local index = tonumber(BlzFrameGetText(BlzGetTriggerFrame())) + CurrentOffSetQuickLink[player]
+                local itemCode = TasItemShopUI.QuickLink[player][index]
+                if TasItemShopUI.QuickLinkKeyActive[player] and BlzGetTriggerFrameEvent() == FRAMEEVENT_CONTROL_CLICK then
+                    TasItemShopUI.SetQuickLink(player, itemCode)
                 else
-                    BlzFrameSetValue(frame, BlzFrameGetValue(frame) - TasItemShopUI.ButtonList.SliderStep)
+                    RefButtonAction(itemCode)
                 end
-            end
-        end)
 
-        TasItemShopUI.TriggerCategoryMode = CreateTriggerEx(function()
-            if GetTriggerPlayer() == GetLocalPlayer() then
-                TasButtonListSearch(TasItemShopUI.ButtonList)
-            end
-        end)
+            end)
 
-        TasItemShopUI.TriggerPressShift = CreateTriggerEx(function()
-            --print("Hold Shift")
-            TasItemShopUI.QuickLinkKeyActive[GetTriggerPlayer()] = true
-            if refButtonCountQuickLink > 0 and GetTriggerPlayer() == GetLocalPlayer() then
-                BlzFrameSetVisible(TasItemShopUI.Frames.QuickLinkHighLight, true)
-            end
-        end)
-        TasItemShopUI.TriggerReleaseShift = CreateTriggerEx(function()
-            --print("Release Shift")
-            TasItemShopUI.QuickLinkKeyActive[GetTriggerPlayer()] = false
-            if refButtonCountQuickLink > 0 and GetTriggerPlayer() == GetLocalPlayer() then
-                BlzFrameSetVisible(TasItemShopUI.Frames.QuickLinkHighLight, false)
-            end
-        end)
-        
+            TasItemShopUI.TriggerQuickLinkPage = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local max = #TasItemShopUI.QuickLink[player]
+                local min = 0
+                local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
 
-        local tempUnits = {Count = 0}
-        TimerStart(CreateTimer(), updateTime, true, function()
-          --  xpcall(function()
-          if posScreenRelative then
-            --credits to ScrewTheTrees(Fred) & Niklas
-            BlzFrameSetSize(TasItemShopUI.Frames.Fullscreen, BlzGetLocalClientWidth()/BlzGetLocalClientHeight()*0.6, 0.6)
-          end
-            local player, unit
+                CurrentOffSetQuickLink[player] = RefButtonPageChange(CurrentOffSetQuickLink[player], add, min, max, player)
+                if GetLocalPlayer() == player then
+                    updateRefButtons(TasItemShopUI.QuickLink[player], TasItemShopUI.Frames.BoxQuickLink, TasItemShopUI.Frames.QuickLink, CurrentOffSetQuickLink[player])
+                end
+            end)
+
+            TasItemShopUI.TriggerInventory = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local frame = BlzGetTriggerFrame()
+                local index = tonumber(BlzFrameGetText(frame)) + CurrentOffSetInventory[player]
+                local item
+                if inventoryShowMainOnly then
+                    -- warcraft inventory starts with 0 but button indexes with 1
+                    item = UnitItemInSlot(ShoperMain[player], index - 1)
+                else
+                    item = TasItemFusion.Player[player].UseAble[index]
+                end
+                local itemCode = GetItemTypeId(item)
+
+                -- prevent a possible desync when the inventory item was not given to TasItemCost yet. TasItemCost creates and destroys an item when a new type is given.
+                TasItemCaclCost(itemCode)
+
+                if BlzGetTriggerFrameEvent() == FRAMEEVENT_CONTROL_CLICK then
+                    -- print(GetPlayerName(player), "Clicked Material", index)
+                    setSelected(player, itemCode)
+                    setSelectedItem(player, item)
+                else
+                    if IsRightClick(player) then
+                        ShowSprite(frame, player)
+                        StartSoundForPlayerBJ(player, ToggleIconButton.Sound)
+                        if canSellItems and inventoryRightClickSell then
+                            SellItem(player, item)
+                        else
+                            BuyItem(player, itemCode)
+                            setSelectedItem(player, item)
+                        end
+                    end
+                end
+
+            end)
+
+            TasItemShopUI.TriggerInventoryPage = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local max = TasItemFusion.Player[player].UseAble.Count
+                local min = 0
+                local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
+
+                CurrentOffSetInventory[player] = RefButtonPageChange(CurrentOffSetInventory[player], add, min, max, player)
+
+                if GetLocalPlayer() == player then
+                    updateRefButtons(TasItemFusion.Player[player].UseAble, TasItemShopUI.Frames.BoxInventory, TasItemShopUI.Frames.Inventory, CurrentOffSetInventory[player])
+                end
+
+            end)
+
+
+
+            TasItemShopUI.TriggerUndo = CreateTriggerEx(function()
+
+                xpcall(function()
+                    local player = GetTriggerPlayer()
+                    if #TasItemShopUI.Undo[player] < 1 then return end
+                    local undo = table.remove(TasItemShopUI.Undo[player])
+
+                    --print("Use Undo:",#TasItemShopUI.Undo[player] + 1, GetObjectName(undo.Result))
+                    AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_GOLD, undo.Gold)
+                    AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_LUMBER, undo.Lumber)
+
+                    -- find the result and destroy it, this assumes that the shoper Group not changed since the buying
+                    for i, v in ipairs(undo.ResultItem) do RemoveItem(v[1]) undo.ResultItem[i][1] = nil end
+
+                    if undo.StackChargesGainer then
+                        SetItemCharges(undo.StackChargesGainer, GetItemCharges(undo.StackChargesGainer) - undo.StackCharges)
+                        undo.StackChargesGainer = nil
+                    end
+                    -- show the used material and give them back
+                    for i,v in ipairs(undo.Items) do
+                        SetItemVisible(v[1], true)
+                        UnitAddItem(v[2], v[1])
+                    end
+                    TasItemShopUIShow(player, CurrentShop[player])
+                    if GetLocalPlayer() == player then
+
+                        if #TasItemShopUI.Undo[GetLocalPlayer()] > 0 then
+                            BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, true)
+                            updateUndoButton(TasItemShopUI.Undo[player][#TasItemShopUI.Undo[player]].Result, TasItemShopUI.Undo[player][#TasItemShopUI.Undo[player]].ActionName)
+                        else
+                            BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, false)
+                        end
+                    end
+                end, print)
+            end)
+
+            TasItemShopUI.TriggerSell = CreateTriggerEx(function()
+                SellItem(GetTriggerPlayer(), TasItemShopUI.SelectedItem[GetTriggerPlayer()])
+            end)
+
+            TasItemShopUI.TriggerDefuse = CreateTriggerEx(function()
+
+                xpcall(function()
+
+                    local player = GetTriggerPlayer()
+                    if not TasItemShopUI.SelectedItem[player] then return end
+                    local item = TasItemShopUI.SelectedItem[player]
+                    local itemCode = GetItemTypeId(item)
+                    TasItemShopUI.SelectedItem[player] = nil
+
+                    local gold, lumber = TasItemGetCost(itemCode)
+                    local gold2, lumber2
+                    for i, v in ipairs(TasItemFusion.BuiltWay[itemCode].Mats) do
+                        gold2, lumber2 = TasItemGetCost(v)
+                        gold = gold - gold2
+                        lumber = lumber - lumber2
+                    end
+
+                    AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_GOLD, gold)
+                    AdjustPlayerStateSimpleBJ(player, PLAYER_STATE_RESOURCE_LUMBER, lumber)
+                    local undo
+                    if canUndo then
+                        undo = {ResultItem = {}, Result = itemCode, Gold = -gold, Lumber = -lumber, Items = {}, ActionName = GetLocalizedString(textDefuse)}
+                        table.insert(TasItemShopUI.Undo[player], undo)
+                        for i = 0, BlzGroupGetSize(Shoper[player]) - 1, 1 do
+                            owner = BlzGroupUnitAt(Shoper[player], i)
+                            if UnitHasItem(owner, item) then
+                                UnitRemoveItem(owner, item)
+                                SetItemVisible(item, false)
+                                undo.Items[1] = {item, owner}
+                                break
+                            end
+                        end
+
+                        if GetLocalPlayer() == player then
+                            BlzFrameSetVisible(TasItemShopUI.Frames.BoxUndo, true)
+                            updateUndoButton(undo.Result, GetLocalizedString(textDefuse))
+                        end
+                    else
+                        RemoveItem(item)
+                    end
+
+                    for i, v in ipairs(TasItemFusion.BuiltWay[itemCode].Mats) do
+                        item = CreateItem(v, GetUnitX(ShoperMain[player]), GetUnitY(ShoperMain[player]))
+                        GiveItemGroup(player, item, undo)
+                    end
+
+                    if GetLocalPlayer() == player then
+                        --BlzFrameSetVisible(TasItemShopUI.Frames.BoxDefuse, false)
+                        BlzFrameSetEnable(TasItemShopUI.Frames.DefuseButton, false)
+                    end
+                end, print)
+            end)
+
+            local tempGroup = CreateGroup()
+            local function ShopSelectionAction(player, shop, target)
+                xpcall(function()
+                    -- is a registered shop UnitType?
+                    if TasItemShopUI.Shops[GetUnitTypeId(shop)] then
+                        local range = TasItemShopUI.Shops[GetUnitTypeId(shop)].Range
+                        if not range then range = shopRange end
+                        GroupEnumUnitsInRange(tempGroup, GetUnitX(shop), GetUnitY(shop), range + 400, nil)
+                        -- remove unallowed shoppers
+
+                        ForGroup(tempGroup, function()
+                            if not IsValidShopper(player, shop, GetEnumUnit(), range) then
+                                GroupRemoveUnit(tempGroup, GetEnumUnit())
+                            end
+                        end)
+                        if not target and IsUnitInGroup(ShoperMain[player], tempGroup) then
+                            target = ShoperMain[player]
+                        end
+
+                        TasItemShopUIShow(player, shop, tempGroup, target)
+                        -- no, end shopping!
+                    elseif CurrentShop[player] then
+                        TasItemShopUIShow(player)
+                    end
+                end, print)
+            end
+            TasItemShopUI.TriggerSelect = CreateTriggerEx(function()
+                ShopSelectionAction(GetTriggerPlayer(), GetTriggerUnit())
+            end)
+            TriggerRegisterAnyUnitEventBJ(TasItemShopUI.TriggerSelect, EVENT_PLAYER_UNIT_SELECTED)
+
+            if userButtonOrder then
+                TasItemShopUI.TriggerOrder = CreateTriggerEx(function()
+                    if TasItemShopUI.Shops[GetUnitTypeId(GetTriggerUnit())] then
+                        ShopSelectionAction(GetOwningPlayer(GetOrderTargetUnit()), GetTriggerUnit(), GetOrderTargetUnit())
+                    end
+                end)
+                TriggerRegisterAnyUnitEventBJ(TasItemShopUI.TriggerOrder, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+            end
+
+            TasItemShopUI.TriggerUser = CreateTriggerEx(function()
+                local frame = BlzGetTriggerFrame()
+                local player = GetTriggerPlayer()
+                local index = tonumber(BlzFrameGetText(BlzGetTriggerFrame())) + CurrentOffSetUser[player]
+                local unit = BlzGroupUnitAt(Shoper[player], index - 1)
+
+                if BlzGetTriggerFrameEvent() == FRAMEEVENT_CONTROL_CLICK then
+                    if not userButtonOrder then
+                        ShopSelectionAction(player, CurrentShop[player], unit)
+                    end
+                    IssueNeutralTargetOrder(player, CurrentShop[player], "smart", unit)
+                else
+                    if IsRightClick(player) then
+                        SelectUnitForPlayerSingle(unit, player)
+                    end
+                end
+            end)
+
+            TasItemShopUI.TriggerUserPage = CreateTriggerEx(function()
+                local player = GetTriggerPlayer()
+                local max = BlzGroupGetSize(Shoper[player])
+                local min = 0
+                local add = TasItemShopUI.Frames[BlzGetTriggerFrame()]
+                CurrentOffSetUser[player] = RefButtonPageChange(CurrentOffSetUser[player], add, min, max, player)
+
+                if GetLocalPlayer() == player then
+                    updateRefButtons(Shoper[player], TasItemShopUI.Frames.BoxUser, TasItemShopUI.Frames.User, CurrentOffSetUser[player])
+                    updateOverLayMainSelected(player)
+                end
+
+            end)
+
+            TasItemShopUI.TriggerESC = CreateTriggerEx(function()
+                TasItemShopUIShow(GetTriggerPlayer())
+            end)
+
+            TasItemShopUI.TriggerScrollParent = CreateTriggerEx(function()
+                local frame = TasItemShopUI.ButtonList.Slider
+                if GetLocalPlayer() == GetTriggerPlayer() then
+                    if BlzGetTriggerFrameValue() > 0 then
+                        BlzFrameSetValue(frame, BlzFrameGetValue(frame) + TasItemShopUI.ButtonList.SliderStep)
+                    else
+                        BlzFrameSetValue(frame, BlzFrameGetValue(frame) - TasItemShopUI.ButtonList.SliderStep)
+                    end
+                end
+            end)
+
+            TasItemShopUI.TriggerCategoryMode = CreateTriggerEx(function()
+                if GetTriggerPlayer() == GetLocalPlayer() then
+                    TasButtonListSearch(TasItemShopUI.ButtonList)
+                end
+            end)
+
+            TasItemShopUI.TriggerPressShift = CreateTriggerEx(function()
+                --print("Hold Shift")
+                TasItemShopUI.QuickLinkKeyActive[GetTriggerPlayer()] = true
+                if refButtonCountQuickLink > 0 and GetTriggerPlayer() == GetLocalPlayer() then
+                    BlzFrameSetVisible(TasItemShopUI.Frames.QuickLinkHighLight, true)
+                end
+            end)
+            TasItemShopUI.TriggerReleaseShift = CreateTriggerEx(function()
+                --print("Release Shift")
+                TasItemShopUI.QuickLinkKeyActive[GetTriggerPlayer()] = false
+                if refButtonCountQuickLink > 0 and GetTriggerPlayer() == GetLocalPlayer() then
+                    BlzFrameSetVisible(TasItemShopUI.Frames.QuickLinkHighLight, false)
+                end
+            end)
+
+
+            local tempUnits = {Count = 0}
+            TimerStart(CreateTimer(), updateTime, true, function()
+                --  xpcall(function()
+                if posScreenRelative then
+                    --credits to ScrewTheTrees(Fred) & Niklas
+                    BlzFrameSetSize(TasItemShopUI.Frames.Fullscreen, BlzGetLocalClientWidth()/BlzGetLocalClientHeight()*0.6, 0.6)
+                end
+                local player, unit
+                for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+                    player = Player(i)
+
+                    if CurrentShop[player] then
+                        ShopSelectionAction(player, CurrentShop[player])
+                    end
+                end
+                --end, print)
+            end)
+            --call the function handling custom User setup
+            xpcall(UserInit, print)
+            --precalc any added Item
+            for i = 1, #BUY_ABLE_ITEMS do
+                -- if type(BUY_ABLE_ITEMS[i]) == "string" then BUY_ABLE_ITEMS[i] = FourCC(BUY_ABLE_ITEMS[i]) end
+                TasItemCaclCost(BUY_ABLE_ITEMS[i])
+            end
+
+
+            local player
+            BUY_ABLE_ITEMS.Marker = {}
             for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
                 player = Player(i)
-                
-                if CurrentShop[player] then
-                    ShopSelectionAction(player, CurrentShop[player])
+                Shoper[player] = CreateGroup()
+                TasItemShopUI.Undo[player] = {}
+                BUY_ABLE_ITEMS.Marker[player] = {}
+                TriggerRegisterPlayerEventEndCinematic(TasItemShopUI.TriggerESC, player)
+                TasItemShopUI.QuickLink[player] = {}
+                if quickLinkKey then
+                    --"none"(0), "shift"(1), "control"(2), "alt"(4) and "META"(8) (windows key)
+                    --1 + 2 + 4 + 8 = 15
+                    for meta = 0, 15 do
+                        BlzTriggerRegisterPlayerKeyEvent(TasItemShopUI.TriggerPressShift, player, quickLinkKey, meta, true)
+                        BlzTriggerRegisterPlayerKeyEvent(TasItemShopUI.TriggerReleaseShift, player, quickLinkKey, meta, false)
+                    end
                 end
             end
-        --end, print)
-        end)
-        --call the function handling custom User setup
-        xpcall(UserInit, print)
-        --precalc any added Item
-        for i = 1, #BUY_ABLE_ITEMS do
-           -- if type(BUY_ABLE_ITEMS[i]) == "string" then BUY_ABLE_ITEMS[i] = FourCC(BUY_ABLE_ITEMS[i]) end
-            TasItemCaclCost(BUY_ABLE_ITEMS[i])
-        end
-        
 
-        local player
-        BUY_ABLE_ITEMS.Marker = {}
-        for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
-            player = Player(i)
-            Shoper[player] = CreateGroup()
-            TasItemShopUI.Undo[player] = {}
-            BUY_ABLE_ITEMS.Marker[player] = {}
-            TriggerRegisterPlayerEventEndCinematic(TasItemShopUI.TriggerESC, player)
-            TasItemShopUI.QuickLink[player] = {}
-            if quickLinkKey then
-                --"none"(0), "shift"(1), "control"(2), "alt"(4) and "META"(8) (windows key)
-                --1 + 2 + 4 + 8 = 15
-                for meta = 0, 15 do
-                    BlzTriggerRegisterPlayerKeyEvent(TasItemShopUI.TriggerPressShift, player, quickLinkKey, meta, true)
-                    BlzTriggerRegisterPlayerKeyEvent(TasItemShopUI.TriggerReleaseShift, player, quickLinkKey, meta, false)
-                end
-            end
-        end
+            TasItemShopUI.Create()
+            -- Frame related code actions are not saved/Loaded, probably repeat them after Loading the game
+            if FrameLoaderAdd then FrameLoaderAdd(TasItemShopUI.Create) end
 
-        TasItemShopUI.Create()
-        -- Frame related code actions are not saved/Loaded, probably repeat them after Loading the game
-        if FrameLoaderAdd then FrameLoaderAdd(TasItemShopUI.Create) end
-        
-    end, print)
-end
+        end, print)
+    end
 
-end
-
-function CreateNeutralPassiveBuildings()
-local p = Player(PLAYER_NEUTRAL_PASSIVE)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("ngme"), -11712.0, -4480.0, 270.000, FourCC("ngme"))
-end
-
-function CreatePlayerBuildings()
-end
-
-function CreatePlayerUnits()
-end
-
-function CreateAllUnits()
-CreateNeutralPassiveBuildings()
-CreatePlayerBuildings()
-CreatePlayerUnits()
 end
 
 function CreateRegions()
@@ -3854,52 +3862,52 @@ gg_rct_curved_team_2_base = Rect(160.0, 3968.0, 768.0, 4608.0)
 gg_rct_curved_team_2_tower = Rect(-1664.0, 4032.0, -1152.0, 4544.0)
 gg_rct_united_1_1_build = Rect(-13568.0, -4480.0, -11904.0, -2944.0)
 gg_rct_united_1_1_main = Rect(-14080.0, -3456.0, -13568.0, -2944.0)
-gg_rct_united_1_1_mine = Rect(-15104.0, -3456.0, -14592.0, -2944.0)
+gg_rct_united_1_1_mine = Rect(-15616.0, -3456.0, -15104.0, -2944.0)
 gg_rct_united_1_1_spawn = Rect(-11552.0, -4480.0, -9888.0, -2944.0)
 gg_rct_united_1_1_worker = Rect(-13376.0, -3232.0, -13280.0, -3136.0)
 gg_rct_united_1_2_build = Rect(-13248.0, -4480.0, -11904.0, -3392.0)
 gg_rct_united_1_2_main = Rect(-14080.0, -4064.0, -13568.0, -3552.0)
-gg_rct_united_1_2_mine = Rect(-15104.0, -4064.0, -14592.0, -3552.0)
+gg_rct_united_1_2_mine = Rect(-15616.0, -4064.0, -15104.0, -3552.0)
 gg_rct_united_1_2_spawn = Rect(-11232.0, -4480.0, -9888.0, -3392.0)
 gg_rct_united_1_2_worker = Rect(-12928.0, -3776.0, -12832.0, -3680.0)
 gg_rct_united_1_3_build = Rect(-12800.0, -5024.0, -11904.0, -3904.0)
 gg_rct_united_1_3_main = Rect(-14080.0, -4736.0, -13568.0, -4224.0)
-gg_rct_united_1_3_mine = Rect(-15104.0, -4736.0, -14592.0, -4224.0)
+gg_rct_united_1_3_mine = Rect(-15616.0, -4736.0, -15104.0, -4224.0)
 gg_rct_united_1_3_spawn = Rect(-10784.0, -5024.0, -9888.0, -3904.0)
 gg_rct_united_1_3_worker = Rect(-12416.0, -4512.0, -12288.0, -4384.0)
 gg_rct_united_1_4_build = Rect(-13248.0, -5504.0, -11904.0, -4416.0)
 gg_rct_united_1_4_main = Rect(-14080.0, -5376.0, -13568.0, -4864.0)
-gg_rct_united_1_4_mine = Rect(-15104.0, -5376.0, -14592.0, -4864.0)
+gg_rct_united_1_4_mine = Rect(-15616.0, -5376.0, -15104.0, -4864.0)
 gg_rct_united_1_4_spawn = Rect(-11232.0, -5504.0, -9888.0, -4416.0)
 gg_rct_united_1_4_worker = Rect(-12960.0, -5248.0, -12864.0, -5152.0)
 gg_rct_united_1_5_build = Rect(-13568.0, -5952.0, -11904.0, -4416.0)
 gg_rct_united_1_5_main = Rect(-14080.0, -5952.0, -13568.0, -5440.0)
-gg_rct_united_1_5_mine = Rect(-15104.0, -5952.0, -14592.0, -5440.0)
+gg_rct_united_1_5_mine = Rect(-15616.0, -5952.0, -15104.0, -5440.0)
 gg_rct_united_1_5_spawn = Rect(-11552.0, -5952.0, -9888.0, -4416.0)
 gg_rct_united_1_5_worker = Rect(-13376.0, -5760.0, -13280.0, -5664.0)
 gg_rct_united_2_1_build = Rect(4224.0, -5952.0, 5888.0, -4416.0)
 gg_rct_united_2_1_main = Rect(5888.0, -5952.0, 6400.0, -5440.0)
-gg_rct_united_2_1_mine = Rect(6912.0, -5952.0, 7424.0, -5440.0)
+gg_rct_united_2_1_mine = Rect(7424.0, -5952.0, 7936.0, -5440.0)
 gg_rct_united_2_1_spawn = Rect(2208.0, -5952.0, 3872.0, -4416.0)
 gg_rct_united_2_1_worker = Rect(5600.0, -5760.0, 5696.0, -5664.0)
 gg_rct_united_2_2_build = Rect(4224.0, -5504.0, 5568.0, -4416.0)
 gg_rct_united_2_2_main = Rect(5888.0, -5344.0, 6400.0, -4832.0)
-gg_rct_united_2_2_mine = Rect(6912.0, -5344.0, 7424.0, -4832.0)
+gg_rct_united_2_2_mine = Rect(7424.0, -5344.0, 7936.0, -4832.0)
 gg_rct_united_2_2_spawn = Rect(2208.0, -5504.0, 3552.0, -4416.0)
 gg_rct_united_2_2_worker = Rect(5152.0, -5216.0, 5248.0, -5120.0)
 gg_rct_united_2_3_build = Rect(4224.0, -4992.0, 5120.0, -3872.0)
 gg_rct_united_2_3_main = Rect(5888.0, -4704.0, 6400.0, -4192.0)
-gg_rct_united_2_3_mine = Rect(6912.0, -4704.0, 7424.0, -4192.0)
+gg_rct_united_2_3_mine = Rect(7424.0, -4704.0, 7936.0, -4192.0)
 gg_rct_united_2_3_spawn = Rect(2208.0, -4992.0, 3104.0, -3872.0)
 gg_rct_united_2_3_worker = Rect(4608.0, -4512.0, 4736.0, -4384.0)
 gg_rct_united_2_4_build = Rect(4224.0, -4480.0, 5568.0, -3392.0)
 gg_rct_united_2_4_main = Rect(5888.0, -4064.0, 6400.0, -3552.0)
-gg_rct_united_2_4_mine = Rect(6912.0, -4064.0, 7424.0, -3552.0)
+gg_rct_united_2_4_mine = Rect(7424.0, -4064.0, 7936.0, -3552.0)
 gg_rct_united_2_4_spawn = Rect(2208.0, -4480.0, 3552.0, -3392.0)
 gg_rct_united_2_4_worker = Rect(5184.0, -3744.0, 5280.0, -3648.0)
 gg_rct_united_2_5_build = Rect(4224.0, -4480.0, 5888.0, -2944.0)
 gg_rct_united_2_5_main = Rect(5888.0, -3456.0, 6400.0, -2944.0)
-gg_rct_united_2_5_mine = Rect(6912.0, -3456.0, 7424.0, -2944.0)
+gg_rct_united_2_5_mine = Rect(7424.0, -3456.0, 7936.0, -2944.0)
 gg_rct_united_2_5_spawn = Rect(2208.0, -4480.0, 3872.0, -2944.0)
 gg_rct_united_2_5_worker = Rect(5600.0, -3232.0, 5696.0, -3136.0)
 gg_rct_united_team_1_base = Rect(-9888.0, -4768.0, -9280.0, -4128.0)
@@ -4061,6 +4069,36 @@ gg_rct_royal_10_1_laboratory = Rect(11872.0, -1344.0, 12384.0, -832.0)
 gg_rct_royal_10_1_worker_1 = Rect(10688.0, -1696.0, 11840.0, -576.0)
 gg_rct_royal_10_1_worker_2 = Rect(10688.0, -544.0, 11840.0, 576.0)
 gg_rct_royal_team_10_base_1 = Rect(9408.0, -2304.0, 10048.0, -1696.0)
+gg_rct_curved_1_1_shop = Rect(-12160.0, 7680.0, -11648.0, 8192.0)
+gg_rct_curved_1_2_shop = Rect(-12160.0, 5824.0, -11648.0, 6336.0)
+gg_rct_curved_1_3_shop = Rect(-12160.0, 3968.0, -11648.0, 4480.0)
+gg_rct_curved_1_4_shop = Rect(-12160.0, 2112.0, -11648.0, 2624.0)
+gg_rct_curved_1_5_shop = Rect(-12160.0, 256.0, -11648.0, 768.0)
+gg_rct_curved_2_1_shop = Rect(4160.0, 7680.0, 4672.0, 8192.0)
+gg_rct_curved_2_2_shop = Rect(4160.0, 5824.0, 4672.0, 6336.0)
+gg_rct_curved_2_3_shop = Rect(4160.0, 3968.0, 4672.0, 4480.0)
+gg_rct_curved_2_4_shop = Rect(4160.0, 2112.0, 4672.0, 2624.0)
+gg_rct_curved_2_5_shop = Rect(4160.0, 256.0, 4672.0, 768.0)
+gg_rct_united_1_1_shop = Rect(-15104.0, -3456.0, -14592.0, -2944.0)
+gg_rct_united_1_2_shop = Rect(-15104.0, -4064.0, -14592.0, -3552.0)
+gg_rct_united_1_3_shop = Rect(-15104.0, -4736.0, -14592.0, -4224.0)
+gg_rct_united_1_4_shop = Rect(-15104.0, -5376.0, -14592.0, -4864.0)
+gg_rct_united_1_5_shop = Rect(-15104.0, -5952.0, -14592.0, -5440.0)
+gg_rct_united_2_5_shop = Rect(6912.0, -3456.0, 7424.0, -2944.0)
+gg_rct_united_2_4_shop = Rect(6912.0, -4064.0, 7424.0, -3552.0)
+gg_rct_united_2_3_shop = Rect(6912.0, -4704.0, 7424.0, -4192.0)
+gg_rct_united_2_2_shop = Rect(6912.0, -5344.0, 7424.0, -4832.0)
+gg_rct_united_2_1_shop = Rect(6912.0, -5952.0, 7424.0, -5440.0)
+gg_rct_royal_1_1_shop = Rect(12416.0, 6016.0, 12928.0, 6528.0)
+gg_rct_royal_10_1_shop = Rect(12384.0, -800.0, 12896.0, -288.0)
+gg_rct_royal_9_1_shop = Rect(12384.0, -8480.0, 12896.0, -7968.0)
+gg_rct_royal_8_1_shop = Rect(12416.0, -15232.0, 12928.0, -14720.0)
+gg_rct_royal_7_1_shop = Rect(19168.0, -15232.0, 19680.0, -14720.0)
+gg_rct_royal_6_1_shop = Rect(25984.0, -15232.0, 26496.0, -14720.0)
+gg_rct_royal_5_1_shop = Rect(26016.0, -8512.0, 26528.0, -8000.0)
+gg_rct_royal_4_1_shop = Rect(26016.0, -832.0, 26528.0, -320.0)
+gg_rct_royal_3_1_shop = Rect(25984.0, 6016.0, 26496.0, 6528.0)
+gg_rct_royal_2_1_shop = Rect(19168.0, 6048.0, 19680.0, 6560.0)
 end
 
 --CUSTOM_CODE
@@ -6629,6 +6667,7 @@ function initGlobalVariables()
         mine = 'ugol',
         main = 'htow',
         laboratory = 'nmgv',
+        shop = 'ngme',
         heroBuilder = 'e00M',
         randomHero = 'ncop'
     }
@@ -6796,6 +6835,7 @@ function addPlayersInTeam(players)
                 laboratoryRect = nil,
                 attackPointRect = {},
                 spawnRect = nil,
+                shopRect = nil,
                 spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif,
                 heroes = {},
                 totalDamage = 0,
@@ -6851,6 +6891,7 @@ function initRect()
             player.mainRect = regions[game_config.mode][team.i][player.i]['main']
             player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
             player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
+            player.shopRect = regions[game_config.mode][team.i][player.i]['shop']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
@@ -6945,6 +6986,13 @@ function createBuildingsForPlayers()
                     FourCC(units_special.laboratory),
                     GetRectCenterX(player.laboratoryRect),
                     GetRectCenterY(player.laboratoryRect),
+                    0
+            )
+            CreateUnit(
+                    player.id,
+                    FourCC(units_special.shop),
+                    GetRectCenterX(player.shopRect),
+                    GetRectCenterY(player.shopRect),
                     0
             )
 
@@ -8799,7 +8847,6 @@ SetAmbientDaySound("LordaeronSummerDay")
 SetAmbientNightSound("LordaeronSummerNight")
 SetMapMusic("Music", true, 0)
 CreateRegions()
-CreateAllUnits()
 InitBlizzard()
 InitGlobals()
 InitCustomTriggers()

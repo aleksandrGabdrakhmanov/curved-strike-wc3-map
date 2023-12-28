@@ -144,6 +144,7 @@ function initGlobalVariables()
         mine = 'ugol',
         main = 'htow',
         laboratory = 'nmgv',
+        shop = 'ngme',
         heroBuilder = 'e00M',
         randomHero = 'ncop'
     }
