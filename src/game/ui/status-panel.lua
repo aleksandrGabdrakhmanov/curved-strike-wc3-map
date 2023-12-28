@@ -110,7 +110,7 @@ function initPanelForAllPlayers()
 
             local myPanel = BlzCreateFrameByType("BACKDROP", "CurvedStatusTemplateMy", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonDisabledBackdropTemplate", 0)
 
-            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.93, 0.56)
+            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.1, 0.1)
 
             local totalWeight = 0
             for _, headerColumn in ipairs(tableInfo.header) do

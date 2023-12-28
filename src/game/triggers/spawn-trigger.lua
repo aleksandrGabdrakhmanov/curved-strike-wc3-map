@@ -39,6 +39,55 @@ function handleHeroSpawn(player, unit, x, y, label)
         ReviveHeroLoc(hero.unit, Location(x, y), false)
         SetUnitManaPercentBJ(hero.unit, 100)
     end
+    SynchronizeInventory(unit, hero.unit)
+end
+
+function SynchronizeInventory(hero1, hero2)
+    local itemsHero1 = {}
+    local itemsHero2 = {}
+
+    for slot = 0, 5 do
+        local item = UnitItemInSlot(hero1, slot)
+        if item then
+            table.insert(itemsHero1, GetItemTypeId(item))
+        end
+    end
+    print('hero1 ')
+    print(hero1)
+    print('hero2 ')
+    print(hero2)
+    print(table.print(itemsHero1))
+
+    for slot = 0, 5 do
+        local item = UnitItemInSlot(hero2, slot)
+        if item then
+            local itemId = GetItemTypeId(item)
+            table.insert(itemsHero2, itemId)
+
+            if not table.contains(itemsHero1, itemId) then
+                RemoveItem(item)
+            end
+        end
+    end
+    print('table2:')
+    print(table.print(itemsHero2))
+
+    for _, itemId in ipairs(itemsHero1) do
+        if not table.contains(itemsHero2, itemId) then
+            print('add item')
+            local newItem = CreateItem(itemId, GetUnitX(hero2), GetUnitY(hero2))
+            UnitAddItem(hero2, newItem)
+        end
+    end
+end
+
+function table.contains(table, element)
+    for _, value in pairs(table) do
+        if value == element then
+            return true
+        end
+    end
+    return false
 end
 
 function getHero(heroes, unit)
