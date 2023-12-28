@@ -6530,6 +6530,13 @@ function initGameConfig(mode)
                 interval = 35,
                 dif = 0
             },
+            economy = {
+                startGold = 300,
+                startIncomePerSec = 5,
+                incomeBoost = 1,
+                firstMinePrice = 150,
+                nextMineDiffPrice = 150
+            },
             playerPosition = { 1, 2, 3, 4, 5 }
         },
         united = {
@@ -6537,6 +6544,13 @@ function initGameConfig(mode)
             spawnPolicy = {
                 interval = 0,
                 dif = 35
+            },
+            economy = {
+                startGold = 300,
+                startIncomePerSec = 5,
+                incomeBoost = 1,
+                firstMinePrice = 150,
+                nextMineDiffPrice = 150
             },
             playerPosition = { 3, 4, 2, 1, 5 }
         },
@@ -6546,18 +6560,20 @@ function initGameConfig(mode)
                 interval = 0,
                 dif = 35
             },
+            economy = {
+                startGold = 600,
+                startIncomePerSec = 10,
+                incomeBoost = 2,
+                firstMinePrice = 300,
+                nextMineDiffPrice = 300
+            },
             playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
         }
     }
 
     game_config = {
         mode = mode,
-        economy = {
-            startGold = 300,
-            startIncomePerSec = 5,
-            firstMinePrice = 300, -- need init. now get from map
-            nextMineDiffPrice = 300
-        },
+        economy = game_modes[mode].economy,
         units = {
             range = game_modes[mode].unitRange
         },
@@ -6667,6 +6683,7 @@ function initGlobalVariables()
         mine = 'ugol',
         main = 'htow',
         laboratory = 'nmgv',
+        shop = 'ngme',
         heroBuilder = 'e00M',
         randomHero = 'ncop'
     }
@@ -6681,10 +6698,6 @@ function initGlobalVariables()
 
     upgrades_special = {
         summonHeroBuilder = 'R000'
-    }
-
-    text = {
-        mineLevel = "Level: "
     }
 
     main_race = {
@@ -6834,6 +6847,7 @@ function addPlayersInTeam(players)
                 laboratoryRect = nil,
                 attackPointRect = {},
                 spawnRect = nil,
+                shopRect = nil,
                 spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif,
                 heroes = {},
                 totalDamage = 0,
@@ -6889,6 +6903,7 @@ function initRect()
             player.mainRect = regions[game_config.mode][team.i][player.i]['main']
             player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
             player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
+            player.shopRect = regions[game_config.mode][team.i][player.i]['shop']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
@@ -6969,7 +6984,13 @@ function createBuildingsForPlayers()
                     GetRectCenterY(player.mineRect),
                     0
             )
-            player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, unit, 0, 10, 204, 204, 0, 0)
+
+            local ability = BlzGetUnitAbility(unit, FourCC(abilities.mine))
+            BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, game_config.economy.firstMinePrice)
+            BlzSetAbilityRealField(ability, ABILITY_RF_ARF_MISSILE_ARC, game_config.economy.incomeBoost)
+
+
+            player.economy.mineTextTag = CreateTextTagUnitBJ(getMineTag(player), unit, 0, 10, 204, 204, 0, 0)
 
             CreateUnit(
                     player.id,
@@ -6983,6 +7004,13 @@ function createBuildingsForPlayers()
                     FourCC(units_special.laboratory),
                     GetRectCenterX(player.laboratoryRect),
                     GetRectCenterY(player.laboratoryRect),
+                    0
+            )
+            CreateUnit(
+                    player.id,
+                    FourCC(units_special.shop),
+                    GetRectCenterX(player.shopRect),
+                    GetRectCenterY(player.shopRect),
                     0
             )
 
@@ -7441,18 +7469,23 @@ function goldExtractorTrigger()
                 local abilityIntegerId = GetSpellAbilityId()
                 local ability = BlzGetUnitAbility(GetTriggerUnit(), abilityIntegerId)
                 player.economy.minePrice = player.economy.minePrice + game_config.economy.nextMineDiffPrice
-                player.economy.income = player.economy.income + 1
+                player.economy.income = player.economy.income + game_config.economy.incomeBoost
                 player.economy.mineLevel = player.economy.mineLevel + 1
                 BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, player.economy.minePrice)
 
                 SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, GetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD) + game_config.economy.nextMineDiffPrice)
 
                 DestroyTextTag(player.economy.mineTextTag)
-                player.economy.mineTextTag = CreateTextTagUnitBJ(text.mineLevel .. player.economy.mineLevel, GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
+                player.economy.mineTextTag = CreateTextTagUnitBJ(getMineTag(player), GetTriggerUnit(), 0, 10, 204, 204, 0, 0)
             end)
         end
     end
 end
+
+function getMineTag(player)
+    return 'Level: ' .. player.economy.mineLevel .. ' (' .. player.economy.income * 60 .. '/m) next: ' .. (player.economy.income + game_config.economy.incomeBoost) * 60 .. '/m'
+end
+
 Debug.endFile()
 Debug.beginFile('hero-construct-trigger.lua')
 function heroConstructTrigger()
@@ -7823,6 +7856,55 @@ function handleHeroSpawn(player, unit, x, y, label)
         ReviveHeroLoc(hero.unit, Location(x, y), false)
         SetUnitManaPercentBJ(hero.unit, 100)
     end
+    SynchronizeInventory(unit, hero.unit)
+end
+
+function SynchronizeInventory(hero1, hero2)
+    local itemsHero1 = {}
+    local itemsHero2 = {}
+
+    for slot = 0, 5 do
+        local item = UnitItemInSlot(hero1, slot)
+        if item then
+            table.insert(itemsHero1, GetItemTypeId(item))
+        end
+    end
+    print('hero1 ')
+    print(hero1)
+    print('hero2 ')
+    print(hero2)
+    print(table.print(itemsHero1))
+
+    for slot = 0, 5 do
+        local item = UnitItemInSlot(hero2, slot)
+        if item then
+            local itemId = GetItemTypeId(item)
+            table.insert(itemsHero2, itemId)
+
+            if not table.contains(itemsHero1, itemId) then
+                RemoveItem(item)
+            end
+        end
+    end
+    print('table2:')
+    print(table.print(itemsHero2))
+
+    for _, itemId in ipairs(itemsHero1) do
+        if not table.contains(itemsHero2, itemId) then
+            print('add item')
+            local newItem = CreateItem(itemId, GetUnitX(hero2), GetUnitY(hero2))
+            UnitAddItem(hero2, newItem)
+        end
+    end
+end
+
+function table.contains(table, element)
+    for _, value in pairs(table) do
+        if value == element then
+            return true
+        end
+    end
+    return false
 end
 
 function getHero(heroes, unit)
@@ -8243,19 +8325,12 @@ end
 
 function initPanelForAllPlayers()
     local tableInfo = getTableInfo()
-
-    CreateLeaderboardBJ(bj_FORCE_ALL_PLAYERS, "title")
-    local parent = BlzGetFrameByName("Leaderboard", 0)
-    BlzFrameSetSize(parent, 0, 0)
-    BlzFrameSetVisible(BlzGetFrameByName("LeaderboardBackdrop", 0), false)
-    BlzFrameSetVisible(BlzGetFrameByName("LeaderboardTitle", 0), false)
-
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
 
-            local myPanel = BlzCreateFrameByType("BACKDROP", "CurvedStatusTemplateMy", parent, "QuestButtonDisabledBackdropTemplate", 0)
+            local myPanel = BlzCreateFrameByType("BACKDROP", "CurvedStatusTemplateMy", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonDisabledBackdropTemplate", 0)
 
-            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.93, 0.56)
+            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.1, 0.1)
 
             local totalWeight = 0
             for _, headerColumn in ipairs(tableInfo.header) do
