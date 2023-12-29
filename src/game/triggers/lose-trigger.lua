@@ -21,8 +21,7 @@ function loseTrigger()
                             KillUnit(GetEnumUnit())
                         end)
                         DestroyGroup(allUnitsSpawn)
-
-                        CustomDefeatDialogBJ(player.id, "lose")
+                        DisplayTextToPlayer(player.id, 500, 500, "You lose")
                         team.lose = true
                         CreateFogModifierRectBJ( true, player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect() )
                     end

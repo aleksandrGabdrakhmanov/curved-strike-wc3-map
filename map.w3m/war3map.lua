@@ -7769,8 +7769,7 @@ function loseTrigger()
                             KillUnit(GetEnumUnit())
                         end)
                         DestroyGroup(allUnitsSpawn)
-
-                        CustomDefeatDialogBJ(player.id, "lose")
+                        DisplayTextToPlayer(player.id, 500, 500, "You lose")
                         team.lose = true
                         CreateFogModifierRectBJ( true, player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect() )
                     end
@@ -8444,11 +8443,8 @@ function initPanelForAllPlayers()
             local myPanel = BlzCreateFrameByType("BACKDROP", "CurvedStatusTemplateMy", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonDisabledBackdropTemplate", 0)
 
             local shop = BlzGetFrameByName("TasItemShopUI", 0)
-
             BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.93, 0.56)
             BlzFrameSetLevel(myPanel,1)
-
-            print('shop parent:')
             local parent = BlzFrameGetParent(shop)
             BlzFrameSetLevel(shop,2)
             BlzFrameSetLevel(parent,2)
