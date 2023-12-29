@@ -318,13 +318,6 @@ gg_rct_royal_2_1_shop = nil
 gg_rct_curved_camera = nil
 gg_rct_united_camera = nil
 gg_rct_royal_camera = nil
-gg_trg_ItemshopGUI_Init_Cats = nil
-gg_trg_ItemshopGUI_Init_Fusions = nil
-gg_trg_ItemshopGUI_Init_Items = nil
-gg_trg_ItemshopGUI_Init_Shop = nil
-gg_trg_ItemshopGUI_Init_Haggle_Skills = nil
-gg_trg_ItemshopGUI_Init = nil
-gg_trg_ItemshopGUI_Init_ShortCuts = nil
 gg_rct_curved_1_1_image = nil
 gg_rct_curved_1_2_image = nil
 gg_rct_curved_1_3_image = nil
@@ -365,6 +358,13 @@ gg_rct_royal_9_1_image_1 = nil
 gg_rct_royal_9_1_image_2 = nil
 gg_rct_royal_10_1_image_1 = nil
 gg_rct_royal_10_1_image_2 = nil
+gg_trg_ItemshopGUI_Init_Cats = nil
+gg_trg_ItemshopGUI_Init_Fusions = nil
+gg_trg_ItemshopGUI_Init_Items = nil
+gg_trg_ItemshopGUI_Init_Shop = nil
+gg_trg_ItemshopGUI_Init_Haggle_Skills = nil
+gg_trg_ItemshopGUI_Init = nil
+gg_trg_ItemshopGUI_Init_ShortCuts = nil
 function InitGlobals()
 local i = 0
 
@@ -6817,13 +6817,25 @@ function initGame(mode)
     initPanelForAllPlayers()
 end
 
+
 function createPictures()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            print('add image')
-            local image = CreateImageBJ("ReplaceableTextures\\Splats\\AuraRune9b.blp", 256, GetRectCenter(player.photoRect), 0, 2)
-            SetImageRenderAlways( image, true )
-            ShowImageBJ( true, image )
+
+            if type(player.imageRect) == 'table' then
+                for _, image in ipairs(player.imageRect) do
+                    local name = GetPlayerName(player.id)
+                    local image = CreateImageBJ("playerImg\\" .. name, 256, GetRectCenter(image), 0, 2)
+                    SetImageRenderAlways( image, true )
+                    ShowImageBJ( true, image )
+                end
+
+            else
+                local name = GetPlayerName(player.id)
+                local image = CreateImageBJ("playerImg\\" .. name, 256, GetRectCenter(player.imageRect), 0, 2)
+                SetImageRenderAlways( image, true )
+                ShowImageBJ( true, image )
+            end
         end
     end
 end
@@ -7003,7 +7015,7 @@ function initRect()
             player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
             player.shopRect = regions[game_config.mode][team.i][player.i]['shop']
             player.cameraRect = regions[game_config.mode]['camera']
-            player.photoRect = regions[game_config.mode][team.i][player.i]['photo']
+            player.imageRect = regions[game_config.mode][team.i][player.i]['image']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
@@ -7757,8 +7769,7 @@ function loseTrigger()
                             KillUnit(GetEnumUnit())
                         end)
                         DestroyGroup(allUnitsSpawn)
-
-                        CustomDefeatDialogBJ(player.id, "lose")
+                        DisplayTextToPlayer(player.id, 500, 500, "You lose")
                         team.lose = true
                         CreateFogModifierRectBJ( true, player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect() )
                     end
@@ -7970,11 +7981,6 @@ function SynchronizeInventory(hero1, hero2)
             table.insert(itemsHero1, GetItemTypeId(item))
         end
     end
-    print('hero1 ')
-    print(hero1)
-    print('hero2 ')
-    print(hero2)
-    print(table.print(itemsHero1))
 
     for slot = 0, 5 do
         local item = UnitItemInSlot(hero2, slot)
@@ -7987,12 +7993,9 @@ function SynchronizeInventory(hero1, hero2)
             end
         end
     end
-    print('table2:')
-    print(table.print(itemsHero2))
 
     for _, itemId in ipairs(itemsHero1) do
         if not table.contains(itemsHero2, itemId) then
-            print('add item')
             local newItem = CreateItem(itemId, GetUnitX(hero2), GetUnitY(hero2))
             UnitAddItem(hero2, newItem)
         end
@@ -8431,7 +8434,13 @@ function initPanelForAllPlayers()
 
             local myPanel = BlzCreateFrameByType("BACKDROP", "CurvedStatusTemplateMy", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonDisabledBackdropTemplate", 0)
 
-            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.1, 0.1)
+            local shop = BlzGetFrameByName("TasItemShopUI", 0)
+            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.93, 0.56)
+            BlzFrameSetLevel(myPanel,1)
+            local parent = BlzFrameGetParent(shop)
+            BlzFrameSetLevel(shop,2)
+            BlzFrameSetLevel(parent,2)
+
 
             local totalWeight = 0
             for _, headerColumn in ipairs(tableInfo.header) do
@@ -8445,7 +8454,7 @@ function initPanelForAllPlayers()
             local prevColumn = nil
             for i, headerColumn in ipairs(tableInfo.header) do
                 local column = BlzCreateFrameByType('TEXT', 'CurvedStatusHeader', myPanel, 'TeamLabelTextTemplate', 0)
-                BlzFrameSetSize(column, headerColumn.weight, 0.2)
+                BlzFrameSetSize(column, headerColumn.weight, 0.02)
                 BlzFrameSetText(column, headerColumn.text)
                 BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
                 if i == 1 then
@@ -8460,7 +8469,7 @@ function initPanelForAllPlayers()
                 local prevColumn = nil
                 for j, element in ipairs(row) do
                     local column = BlzCreateFrameByType('TEXT', 'CurvedStatusRow1', myPanel, 'TeamLabelTextTemplate', 0)
-                    BlzFrameSetSize(column, tableInfo.header[j].weight, 0.2)
+                    BlzFrameSetSize(column, tableInfo.header[j].weight, 0.02)
                     BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
                     BlzFrameSetTextColor(column, element.color)
                     if j == 1 then
@@ -8633,55 +8642,55 @@ ForcePlayerStartLocation(Player(1), 1)
 SetPlayerColor(Player(1), ConvertPlayerColor(1))
 SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
 SetPlayerRaceSelectable(Player(1), false)
-SetPlayerController(Player(1), MAP_CONTROL_USER)
+SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(2), 2)
 ForcePlayerStartLocation(Player(2), 2)
 SetPlayerColor(Player(2), ConvertPlayerColor(2))
 SetPlayerRacePreference(Player(2), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(2), false)
-SetPlayerController(Player(2), MAP_CONTROL_USER)
+SetPlayerController(Player(2), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(3), 3)
 ForcePlayerStartLocation(Player(3), 3)
 SetPlayerColor(Player(3), ConvertPlayerColor(3))
 SetPlayerRacePreference(Player(3), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(3), false)
-SetPlayerController(Player(3), MAP_CONTROL_USER)
+SetPlayerController(Player(3), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(4), 4)
 ForcePlayerStartLocation(Player(4), 4)
 SetPlayerColor(Player(4), ConvertPlayerColor(4))
 SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(4), false)
-SetPlayerController(Player(4), MAP_CONTROL_USER)
+SetPlayerController(Player(4), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(5), 5)
 ForcePlayerStartLocation(Player(5), 5)
 SetPlayerColor(Player(5), ConvertPlayerColor(5))
 SetPlayerRacePreference(Player(5), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(5), false)
-SetPlayerController(Player(5), MAP_CONTROL_USER)
+SetPlayerController(Player(5), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(6), 6)
 ForcePlayerStartLocation(Player(6), 6)
 SetPlayerColor(Player(6), ConvertPlayerColor(6))
 SetPlayerRacePreference(Player(6), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(6), false)
-SetPlayerController(Player(6), MAP_CONTROL_USER)
+SetPlayerController(Player(6), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(7), 7)
 ForcePlayerStartLocation(Player(7), 7)
 SetPlayerColor(Player(7), ConvertPlayerColor(7))
 SetPlayerRacePreference(Player(7), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(7), false)
-SetPlayerController(Player(7), MAP_CONTROL_USER)
+SetPlayerController(Player(7), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(8), 8)
 ForcePlayerStartLocation(Player(8), 8)
 SetPlayerColor(Player(8), ConvertPlayerColor(8))
 SetPlayerRacePreference(Player(8), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(8), false)
-SetPlayerController(Player(8), MAP_CONTROL_USER)
+SetPlayerController(Player(8), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(9), 9)
 ForcePlayerStartLocation(Player(9), 9)
 SetPlayerColor(Player(9), ConvertPlayerColor(9))
 SetPlayerRacePreference(Player(9), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(9), false)
-SetPlayerController(Player(9), MAP_CONTROL_USER)
+SetPlayerController(Player(9), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(10), 10)
 SetPlayerColor(Player(10), ConvertPlayerColor(10))
 SetPlayerRacePreference(Player(10), RACE_PREF_RANDOM)
@@ -8878,16 +8887,6 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(0, 9)
-SetStartLocPrio(0, 0, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 8, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(1, 9)
 SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_HIGH)
@@ -9059,7 +9058,7 @@ SetMapName("TRIGSTR_001")
 SetMapDescription("TRIGSTR_003")
 SetPlayers(20)
 SetTeams(20)
-SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
+SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
 DefineStartLocation(0, -15872.0, 11008.0)
 DefineStartLocation(1, -15872.0, 11008.0)
 DefineStartLocation(2, -15872.0, 11008.0)

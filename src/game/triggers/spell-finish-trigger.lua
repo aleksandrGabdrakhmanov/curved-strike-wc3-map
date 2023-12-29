@@ -6,7 +6,8 @@ function spellFinishTrigger()
 
         local attackPointRect = getAttackPointRect(GetOwningPlayer(GetTriggerUnit()))
         for _, atPointRect in ipairs(attackPointRect) do
-            if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) then
+            local label = GetUnitUserData(GetTriggerUnit())
+            if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) and (label == atPointRect.label or label == 0) then
                 moveByLocation(atPointRect, GetTriggerUnit())
                 return
             end

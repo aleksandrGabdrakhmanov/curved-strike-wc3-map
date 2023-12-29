@@ -36,6 +36,7 @@ function handleHeroSpawn(player, unit, x, y, label)
         hero.unit = unit
     elseif hero.status == "dead" then
         hero.status = "alive"
+        SetUnitUserData(hero.unit, label)
         ReviveHeroLoc(hero.unit, Location(x, y), false)
         SetUnitManaPercentBJ(hero.unit, 100)
     end
@@ -52,11 +53,6 @@ function SynchronizeInventory(hero1, hero2)
             table.insert(itemsHero1, GetItemTypeId(item))
         end
     end
-    print('hero1 ')
-    print(hero1)
-    print('hero2 ')
-    print(hero2)
-    print(table.print(itemsHero1))
 
     for slot = 0, 5 do
         local item = UnitItemInSlot(hero2, slot)
@@ -69,12 +65,9 @@ function SynchronizeInventory(hero1, hero2)
             end
         end
     end
-    print('table2:')
-    print(table.print(itemsHero2))
 
     for _, itemId in ipairs(itemsHero1) do
         if not table.contains(itemsHero2, itemId) then
-            print('add item')
             local newItem = CreateItem(itemId, GetUnitX(hero2), GetUnitY(hero2))
             UnitAddItem(hero2, newItem)
         end

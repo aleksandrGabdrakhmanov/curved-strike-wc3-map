@@ -1,4 +1,6 @@
 [Misc]
+BoneDecayTime=10.0
+DecayTime=1.0
 GlobalExperience=0
 HeroReviveManaFactor=1.0
 NeedHeroXP=1000
