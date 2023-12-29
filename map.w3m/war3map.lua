@@ -7965,6 +7965,7 @@ function handleHeroSpawn(player, unit, x, y, label)
         hero.unit = unit
     elseif hero.status == "dead" then
         hero.status = "alive"
+        SetUnitUserData(hero.unit, label)
         ReviveHeroLoc(hero.unit, Location(x, y), false)
         SetUnitManaPercentBJ(hero.unit, 100)
     end
@@ -8139,7 +8140,8 @@ function spellFinishTrigger()
 
         local attackPointRect = getAttackPointRect(GetOwningPlayer(GetTriggerUnit()))
         for _, atPointRect in ipairs(attackPointRect) do
-            if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) then
+            local label = GetUnitUserData(GetTriggerUnit())
+            if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) and (label == atPointRect.label or label == 0) then
                 moveByLocation(atPointRect, GetTriggerUnit())
                 return
             end
