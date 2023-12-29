@@ -1781,7 +1781,7 @@ do
     local refButtonBoxSizeY = 0.047
 
     -- LayoutType alters the position of buttons
-    -- (0) the buy button is at the bottom between buttonList and buybutton the refBoxes are placed  
+    -- (0) the buy button is at the bottom between buttonList and buybutton the refBoxes are placed
     -- (1) the buy button is below the buttonList below it are the refButtons
     -- (2) the buy button is below the buttonList, the RefButtons are at the bottom outside of the Box
     -- (3) the buy button is below the buttonList, the RefButtons are left outside of the Box they are also from top to bottom
@@ -1794,7 +1794,7 @@ do
     local inventoryShowMainOnly = true --(false) show all items currently useable
 
     local userButtonOrder = false -- (true) Creates any UnitTargetOrder Event enables right clicking Units in the world to swap main shoppers.
-    local doubleClickTimeOut = 2.0 -- amount of seconds a doppleclick inside the Buttonlist counts as Buying    
+    local doubleClickTimeOut = 2.0 -- amount of seconds a doppleclick inside the Buttonlist counts as Buying
 
     -- model displayed when buy request was started.
     --local spriteModel = "UI\\Feedback\\GoldCredit\\GoldCredit.mdl" -- in 1.31 the coins are black only.
@@ -8443,7 +8443,16 @@ function initPanelForAllPlayers()
 
             local myPanel = BlzCreateFrameByType("BACKDROP", "CurvedStatusTemplateMy", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonDisabledBackdropTemplate", 0)
 
-            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.1, 0.1)
+            local shop = BlzGetFrameByName("TasItemShopUI", 0)
+
+            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.93, 0.56)
+            BlzFrameSetLevel(myPanel,1)
+
+            print('shop parent:')
+            local parent = BlzFrameGetParent(shop)
+            BlzFrameSetLevel(shop,2)
+            BlzFrameSetLevel(parent,2)
+
 
             local totalWeight = 0
             for _, headerColumn in ipairs(tableInfo.header) do
@@ -8457,7 +8466,7 @@ function initPanelForAllPlayers()
             local prevColumn = nil
             for i, headerColumn in ipairs(tableInfo.header) do
                 local column = BlzCreateFrameByType('TEXT', 'CurvedStatusHeader', myPanel, 'TeamLabelTextTemplate', 0)
-                BlzFrameSetSize(column, headerColumn.weight, 0.2)
+                BlzFrameSetSize(column, headerColumn.weight, 0.02)
                 BlzFrameSetText(column, headerColumn.text)
                 BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
                 if i == 1 then
@@ -8472,7 +8481,7 @@ function initPanelForAllPlayers()
                 local prevColumn = nil
                 for j, element in ipairs(row) do
                     local column = BlzCreateFrameByType('TEXT', 'CurvedStatusRow1', myPanel, 'TeamLabelTextTemplate', 0)
-                    BlzFrameSetSize(column, tableInfo.header[j].weight, 0.2)
+                    BlzFrameSetSize(column, tableInfo.header[j].weight, 0.02)
                     BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
                     BlzFrameSetTextColor(column, element.color)
                     if j == 1 then
