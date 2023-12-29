@@ -285,13 +285,6 @@ gg_rct_royal_10_1_laboratory = nil
 gg_rct_royal_10_1_worker_1 = nil
 gg_rct_royal_10_1_worker_2 = nil
 gg_rct_royal_team_10_base_1 = nil
-gg_trg_ItemshopGUI_Init_Cats = nil
-gg_trg_ItemshopGUI_Init_Fusions = nil
-gg_trg_ItemshopGUI_Init_Items = nil
-gg_trg_ItemshopGUI_Init_Shop = nil
-gg_trg_ItemshopGUI_Init_Haggle_Skills = nil
-gg_trg_ItemshopGUI_Init = nil
-gg_trg_ItemshopGUI_Init_ShortCuts = nil
 gg_rct_curved_1_1_shop = nil
 gg_rct_curved_1_2_shop = nil
 gg_rct_curved_1_3_shop = nil
@@ -322,6 +315,56 @@ gg_rct_royal_5_1_shop = nil
 gg_rct_royal_4_1_shop = nil
 gg_rct_royal_3_1_shop = nil
 gg_rct_royal_2_1_shop = nil
+gg_rct_curved_camera = nil
+gg_rct_united_camera = nil
+gg_rct_royal_camera = nil
+gg_trg_ItemshopGUI_Init_Cats = nil
+gg_trg_ItemshopGUI_Init_Fusions = nil
+gg_trg_ItemshopGUI_Init_Items = nil
+gg_trg_ItemshopGUI_Init_Shop = nil
+gg_trg_ItemshopGUI_Init_Haggle_Skills = nil
+gg_trg_ItemshopGUI_Init = nil
+gg_trg_ItemshopGUI_Init_ShortCuts = nil
+gg_rct_curved_1_1_image = nil
+gg_rct_curved_1_2_image = nil
+gg_rct_curved_1_3_image = nil
+gg_rct_curved_1_4_image = nil
+gg_rct_curved_1_5_image = nil
+gg_rct_curved_2_1_image = nil
+gg_rct_curved_2_2_image = nil
+gg_rct_curved_2_3_image = nil
+gg_rct_curved_2_4_image = nil
+gg_rct_curved_2_5_image = nil
+gg_rct_united_1_1_image = nil
+gg_rct_united_1_2_image = nil
+gg_rct_united_1_3_image = nil
+gg_rct_united_1_4_image = nil
+gg_rct_united_1_5_image = nil
+gg_rct_united_2_1_image = nil
+gg_rct_united_2_2_image = nil
+gg_rct_united_2_3_image = nil
+gg_rct_united_2_4_image = nil
+gg_rct_united_2_5_image = nil
+gg_rct_royal_1_1_image_1 = nil
+gg_rct_royal_1_1_image_2 = nil
+gg_rct_royal_2_1_image_1 = nil
+gg_rct_royal_2_1_image_2 = nil
+gg_rct_royal_3_1_image_1 = nil
+gg_rct_royal_3_1_image_2 = nil
+gg_rct_royal_4_1_image_2 = nil
+gg_rct_royal_4_1_image_1 = nil
+gg_rct_royal_5_1_image_1 = nil
+gg_rct_royal_5_1_image_2 = nil
+gg_rct_royal_6_1_image_1 = nil
+gg_rct_royal_6_1_image_2 = nil
+gg_rct_royal_7_1_image_1 = nil
+gg_rct_royal_7_1_image_2 = nil
+gg_rct_royal_8_1_image_2 = nil
+gg_rct_royal_8_1_image_1 = nil
+gg_rct_royal_9_1_image_1 = nil
+gg_rct_royal_9_1_image_2 = nil
+gg_rct_royal_10_1_image_1 = nil
+gg_rct_royal_10_1_image_2 = nil
 function InitGlobals()
 local i = 0
 
@@ -4099,6 +4142,49 @@ gg_rct_royal_5_1_shop = Rect(26016.0, -8512.0, 26528.0, -8000.0)
 gg_rct_royal_4_1_shop = Rect(26016.0, -832.0, 26528.0, -320.0)
 gg_rct_royal_3_1_shop = Rect(25984.0, 6016.0, 26496.0, 6528.0)
 gg_rct_royal_2_1_shop = Rect(19168.0, 6048.0, 19680.0, 6560.0)
+gg_rct_curved_camera = Rect(-13216.0, -768.0, 5184.0, 9440.0)
+gg_rct_united_camera = Rect(-16064.0, -8864.0, 8544.0, -640.0)
+gg_rct_royal_camera = Rect(6720.0, -20288.0, 32256.0, 11296.0)
+gg_rct_curved_1_1_image = Rect(-7584.0, 4704.0, -7360.0, 4928.0)
+gg_rct_curved_1_2_image = Rect(-7584.0, 4448.0, -7360.0, 4672.0)
+gg_rct_curved_1_3_image = Rect(-7584.0, 4192.0, -7360.0, 4416.0)
+gg_rct_curved_1_4_image = Rect(-7584.0, 3936.0, -7360.0, 4160.0)
+gg_rct_curved_1_5_image = Rect(-7584.0, 3680.0, -7360.0, 3904.0)
+gg_rct_curved_2_1_image = Rect(-192.0, 4672.0, 32.0, 4896.0)
+gg_rct_curved_2_2_image = Rect(-192.0, 4416.0, 32.0, 4640.0)
+gg_rct_curved_2_3_image = Rect(-192.0, 4160.0, 32.0, 4384.0)
+gg_rct_curved_2_4_image = Rect(-192.0, 3904.0, 32.0, 4128.0)
+gg_rct_curved_2_5_image = Rect(-192.0, 3648.0, 32.0, 3872.0)
+gg_rct_united_1_1_image = Rect(-9280.0, -4064.0, -9056.0, -3840.0)
+gg_rct_united_1_2_image = Rect(-9280.0, -4320.0, -9056.0, -4096.0)
+gg_rct_united_1_3_image = Rect(-9280.0, -4576.0, -9056.0, -4352.0)
+gg_rct_united_1_4_image = Rect(-9280.0, -4832.0, -9056.0, -4608.0)
+gg_rct_united_1_5_image = Rect(-9280.0, -5088.0, -9056.0, -4864.0)
+gg_rct_united_2_1_image = Rect(1248.0, -4160.0, 1472.0, -3936.0)
+gg_rct_united_2_2_image = Rect(1248.0, -4416.0, 1472.0, -4192.0)
+gg_rct_united_2_3_image = Rect(1248.0, -4672.0, 1472.0, -4448.0)
+gg_rct_united_2_4_image = Rect(1248.0, -4928.0, 1472.0, -4704.0)
+gg_rct_united_2_5_image = Rect(1248.0, -5184.0, 1472.0, -4960.0)
+gg_rct_royal_1_1_image_1 = Rect(9440.0, 5216.0, 9664.0, 5440.0)
+gg_rct_royal_1_1_image_2 = Rect(13472.0, 8928.0, 13696.0, 9152.0)
+gg_rct_royal_2_1_image_1 = Rect(17280.0, 8896.0, 17504.0, 9120.0)
+gg_rct_royal_2_1_image_2 = Rect(21152.0, 8896.0, 21376.0, 9120.0)
+gg_rct_royal_3_1_image_1 = Rect(25024.0, 8896.0, 25248.0, 9120.0)
+gg_rct_royal_3_1_image_2 = Rect(28896.0, 5184.0, 29120.0, 5408.0)
+gg_rct_royal_4_1_image_2 = Rect(28864.0, -2624.0, 29088.0, -2400.0)
+gg_rct_royal_4_1_image_1 = Rect(28864.0, 1184.0, 29088.0, 1408.0)
+gg_rct_royal_5_1_image_1 = Rect(28864.0, -6496.0, 29088.0, -6272.0)
+gg_rct_royal_5_1_image_2 = Rect(28864.0, -10272.0, 29088.0, -10048.0)
+gg_rct_royal_6_1_image_1 = Rect(28864.0, -14144.0, 29088.0, -13920.0)
+gg_rct_royal_6_1_image_2 = Rect(25088.0, -18176.0, 25312.0, -17952.0)
+gg_rct_royal_7_1_image_1 = Rect(21184.0, -18240.0, 21408.0, -18016.0)
+gg_rct_royal_7_1_image_2 = Rect(17344.0, -18240.0, 17568.0, -18016.0)
+gg_rct_royal_8_1_image_2 = Rect(13504.0, -18208.0, 13728.0, -17984.0)
+gg_rct_royal_8_1_image_1 = Rect(9376.0, -14176.0, 9600.0, -13952.0)
+gg_rct_royal_9_1_image_1 = Rect(9408.0, -6496.0, 9632.0, -6272.0)
+gg_rct_royal_9_1_image_2 = Rect(9408.0, -10336.0, 9632.0, -10112.0)
+gg_rct_royal_10_1_image_1 = Rect(9408.0, 1184.0, 9632.0, 1408.0)
+gg_rct_royal_10_1_image_2 = Rect(9408.0, -2528.0, 9632.0, -2304.0)
 end
 
 --CUSTOM_CODE
@@ -6725,9 +6811,33 @@ function initGame(mode)
 
     createBaseAndTower()
     addWorkers()
-    setStartCameraPosition()
+    initCamera()
     createBuildingsForPlayers()
+    createPictures()
     initPanelForAllPlayers()
+end
+
+
+function createPictures()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+
+            if type(player.imageRect) == 'table' then
+                for _, image in ipairs(player.imageRect) do
+                    local name = GetPlayerName(player.id)
+                    local image = CreateImageBJ("playerImg\\" .. name, 256, GetRectCenter(image), 0, 2)
+                    SetImageRenderAlways( image, true )
+                    ShowImageBJ( true, image )
+                end
+
+            else
+                local name = GetPlayerName(player.id)
+                local image = CreateImageBJ("playerImg\\" .. name, 256, GetRectCenter(player.imageRect), 0, 2)
+                SetImageRenderAlways( image, true )
+                ShowImageBJ( true, image )
+            end
+        end
+    end
 end
 
 function initTeams(mode)
@@ -6904,6 +7014,8 @@ function initRect()
             player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
             player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
             player.shopRect = regions[game_config.mode][team.i][player.i]['shop']
+            player.cameraRect = regions[game_config.mode]['camera']
+            player.imageRect = regions[game_config.mode][team.i][player.i]['image']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
@@ -7205,9 +7317,10 @@ function getRandomUnits(units)
     return randomUnits
 end
 
-function setStartCameraPosition()
+function initCamera()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
+            SetCameraBoundsToRectForPlayerBJ( player.id, player.cameraRect )
             SetCameraPositionForPlayer(player.id, GetRectCenterX(player.mainRect), GetRectCenterY(player.mainRect))
         end
     end

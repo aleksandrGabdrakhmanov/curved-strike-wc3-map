@@ -178,9 +178,10 @@ function getRandomUnits(units)
     return randomUnits
 end
 
-function setStartCameraPosition()
+function initCamera()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
+            SetCameraBoundsToRectForPlayerBJ( player.id, player.cameraRect )
             SetCameraPositionForPlayer(player.id, GetRectCenterX(player.mainRect), GetRectCenterY(player.mainRect))
         end
     end

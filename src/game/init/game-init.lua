@@ -14,9 +14,33 @@ function initGame(mode)
 
     createBaseAndTower()
     addWorkers()
-    setStartCameraPosition()
+    initCamera()
     createBuildingsForPlayers()
+    createPictures()
     initPanelForAllPlayers()
+end
+
+
+function createPictures()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+
+            if type(player.imageRect) == 'table' then
+                for _, image in ipairs(player.imageRect) do
+                    local name = GetPlayerName(player.id)
+                    local image = CreateImageBJ("playerImg\\" .. name, 256, GetRectCenter(image), 0, 2)
+                    SetImageRenderAlways( image, true )
+                    ShowImageBJ( true, image )
+                end
+
+            else
+                local name = GetPlayerName(player.id)
+                local image = CreateImageBJ("playerImg\\" .. name, 256, GetRectCenter(player.imageRect), 0, 2)
+                SetImageRenderAlways( image, true )
+                ShowImageBJ( true, image )
+            end
+        end
+    end
 end
 
 function initTeams(mode)
@@ -193,6 +217,8 @@ function initRect()
             player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
             player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
             player.shopRect = regions[game_config.mode][team.i][player.i]['shop']
+            player.cameraRect = regions[game_config.mode]['camera']
+            player.imageRect = regions[game_config.mode][team.i][player.i]['image']
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
