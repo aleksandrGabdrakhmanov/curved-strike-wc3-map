@@ -41,6 +41,46 @@ STRING 10
 Corner (No Pathing)
 }
 
+STRING 11
+{
+Player 3
+}
+
+STRING 12
+{
+Player 4
+}
+
+STRING 13
+{
+Player 5
+}
+
+STRING 14
+{
+Player 6
+}
+
+STRING 15
+{
+Player 7
+}
+
+STRING 16
+{
+Player 8
+}
+
+STRING 17
+{
+Player 9
+}
+
+STRING 18
+{
+Player 10
+}
+
 STRING 20
 {
 Team 2
@@ -1863,14 +1903,14 @@ STRING 351
 (Large)
 }
 
+STRING 355
+{
+Player 2
+}
+
 STRING 360
 // Abilities: A000 (Build Gold Extractor), Ubertip (Tooltip - Normal - Extended)
 {
 Grants an additional gold
-}
-
-STRING 361
-{
-DOMINATOR#23895
 }
 
