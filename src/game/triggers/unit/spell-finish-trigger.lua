@@ -3,16 +3,19 @@ function spellFinishTrigger()
     local trig = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_FINISH)
     TriggerAddAction(trig, function()
-
-        local attackPointRect = getAttackPointRect(GetOwningPlayer(GetTriggerUnit()))
-        for _, atPointRect in ipairs(attackPointRect) do
-            local label = GetUnitUserData(GetTriggerUnit())
-            if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) and (label == atPointRect.label or label == 0) then
-                moveByLocation(atPointRect, GetTriggerUnit())
-                return
-            end
-        end
+        moveAfterSpell()
     end)
+end
+
+function moveAfterSpell()
+    local attackPointRect = getAttackPointRect(GetOwningPlayer(GetTriggerUnit()))
+    for _, atPointRect in ipairs(attackPointRect) do
+        local label = GetUnitUserData(GetTriggerUnit())
+        if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) and (label == atPointRect.label or label == 0) then
+            moveByLocation(atPointRect, GetTriggerUnit())
+            return
+        end
+    end
 end
 
 function IsUnitInRect(r, u)

@@ -7799,6 +7799,7 @@ function initTriggers()
     summonTrigger()
     statusPanelUpdateTrigger()
     damageDetectTrigger()
+    KodoTrigger()
     deadDetectTrigger()
     debugTrigger()
     debugTriggerGold()
@@ -8076,6 +8077,37 @@ function isHero(id)
     return false
 end
 Debug.endFile()
+Debug.beginFile('status-panel-update-trigger.lua')
+function statusPanelUpdateTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterTimerEventPeriodic(trig, 1.00)
+    TriggerAddAction(trig, function()
+        updatePanelForAllPlayers()
+    end)
+end
+Debug.endFile()
+Debug.beginFile('summon-trigger.lua')
+function summonTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SUMMON)
+    TriggerAddAction(trig, function()
+        SetUnitUserData(GetSummonedUnit(), GetUnitUserData(GetSummoningUnit()))
+    end)
+end
+Debug.endFile()
+Debug.beginFile('kodo-trigger.lua')
+function KodoTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+    TriggerAddAction(trig, function()
+        local order = GetIssuedOrderId()
+        if order == 852104 then
+            TriggerSleepAction(3)
+            moveAfterSpell()
+        end
+    end)
+end
+Debug.endFile()
 Debug.beginFile('spell-cast-trigger.lua')
 custom_cast_ai_params = {
     {
@@ -8137,16 +8169,19 @@ function spellFinishTrigger()
     local trig = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_FINISH)
     TriggerAddAction(trig, function()
-
-        local attackPointRect = getAttackPointRect(GetOwningPlayer(GetTriggerUnit()))
-        for _, atPointRect in ipairs(attackPointRect) do
-            local label = GetUnitUserData(GetTriggerUnit())
-            if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) and (label == atPointRect.label or label == 0) then
-                moveByLocation(atPointRect, GetTriggerUnit())
-                return
-            end
-        end
+        moveAfterSpell()
     end)
+end
+
+function moveAfterSpell()
+    local attackPointRect = getAttackPointRect(GetOwningPlayer(GetTriggerUnit()))
+    for _, atPointRect in ipairs(attackPointRect) do
+        local label = GetUnitUserData(GetTriggerUnit())
+        if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) and (label == atPointRect.label or label == 0) then
+            moveByLocation(atPointRect, GetTriggerUnit())
+            return
+        end
+    end
 end
 
 function IsUnitInRect(r, u)
@@ -8162,24 +8197,6 @@ function getAttackPointRect(castPlayer)
             end
         end
     end
-end
-Debug.endFile()
-Debug.beginFile('status-panel-update-trigger.lua')
-function statusPanelUpdateTrigger()
-    local trig = CreateTrigger()
-    TriggerRegisterTimerEventPeriodic(trig, 1.00)
-    TriggerAddAction(trig, function()
-        updatePanelForAllPlayers()
-    end)
-end
-Debug.endFile()
-Debug.beginFile('summon-trigger.lua')
-function summonTrigger()
-    local trig = CreateTrigger()
-    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SUMMON)
-    TriggerAddAction(trig, function()
-        SetUnitUserData(GetSummonedUnit(), GetUnitUserData(GetSummoningUnit()))
-    end)
 end
 Debug.endFile()
 Debug.beginFile('win-trigger.lua')
