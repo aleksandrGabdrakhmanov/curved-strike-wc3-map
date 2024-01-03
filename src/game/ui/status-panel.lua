@@ -4,7 +4,7 @@ function getTableInfo()
     tableInfo.header = {
         { text = 'Name', weight = 0.085 },
         { text = 'Wave', weight = 0.03 },
-        { text = 'Inc', weight = 0.03 },
+        { text = 'Inc/min', weight = 0.05 },
         { text = 'Gold', weight = 0.045 },
         { text = 'Kills', weight = 0.05 },
         { text = 'Damage', weight = 0.06 },
@@ -24,7 +24,7 @@ function getTableInfo()
                     isSensitive = false
                 },
                 {
-                    text = player.economy.income,
+                    text = getIncome(player),
                     color = player.color,
                     isSensitive = true
                 },
@@ -47,6 +47,14 @@ function getTableInfo()
         end
     end
     return tableInfo
+end
+
+function getIncome(player)
+    if player.economy.incomeForCenter == 0 then
+        return player.economy.income * 60
+    else
+        return player.economy.income * 60 .. '(+' .. player.economy.incomeForCenter * 60 .. ')'
+    end
 end
 
 function getClearName(player)

@@ -5,7 +5,7 @@ function incomeTrigger()
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                addGold(player, player.economy.income)
+                addGold(player, player.economy.income + player.economy.incomeForCenter)
             end
         end
     end)

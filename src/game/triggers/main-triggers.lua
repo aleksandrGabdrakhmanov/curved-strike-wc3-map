@@ -19,6 +19,7 @@ function initTriggers()
     KodoTrigger()
     deadDetectTrigger()
     killTowerTrigger()
+    centerControlTrigger()
     debugTrigger()
     debugTriggerGold()
 end

@@ -148,10 +148,11 @@ function addPlayersInTeam(players)
                 i = game_config.playerPosition[nextPosition],
                 economy = {
                     income = game_config.economy.startIncomePerSec,
+                    incomeForCenter = 0,
                     minePrice = game_config.economy.firstMinePrice,
                     mineLevel = 0,
                     mineTextTag = nil,
-                    totalGold = game_config.economy.startGold,
+                    totalGold = game_config.economy.startGold
                 },
                 buildRect = nil,
                 workerRect = nil,
@@ -222,6 +223,7 @@ function initRect()
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
+        team.base.addGoldRect = regions[game_config.mode]['team'][team.i]['addGold']
     end
 
     for _, team in ipairs(all_teams) do

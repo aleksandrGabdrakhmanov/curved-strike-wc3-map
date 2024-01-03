@@ -7,7 +7,6 @@ function killTowerTrigger()
             local unitId = ('>I4'):pack(GetUnitTypeId(unit))
             if unitId == units_special.tower then
                 local trig = CreateTrigger()
-                print('create trigger for tower')
                 TriggerRegisterUnitEvent(trig, unit, EVENT_UNIT_DEATH)
                 TriggerAddAction(trig, function()
                     local unit = GetKillingUnit()

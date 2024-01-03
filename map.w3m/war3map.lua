@@ -365,6 +365,10 @@ gg_trg_ItemshopGUI_Init_Shop = nil
 gg_trg_ItemshopGUI_Init_Haggle_Skills = nil
 gg_trg_ItemshopGUI_Init = nil
 gg_trg_ItemshopGUI_Init_ShortCuts = nil
+gg_rct_curved_team_1_addGold = nil
+gg_rct_curved_team_2_addGold = nil
+gg_rct_united_team_1_addGold = nil
+gg_rct_united_team_2_addGold = nil
 function InitGlobals()
 local i = 0
 
@@ -4185,6 +4189,10 @@ gg_rct_royal_9_1_image_1 = Rect(9408.0, -6496.0, 9632.0, -6272.0)
 gg_rct_royal_9_1_image_2 = Rect(9408.0, -10336.0, 9632.0, -10112.0)
 gg_rct_royal_10_1_image_1 = Rect(9408.0, 1184.0, 9632.0, 1408.0)
 gg_rct_royal_10_1_image_2 = Rect(9408.0, -2528.0, 9632.0, -2304.0)
+gg_rct_curved_team_1_addGold = Rect(-3744.0, 1568.0, 800.0, 7008.0)
+gg_rct_curved_team_2_addGold = Rect(-8288.0, 1568.0, -3744.0, 7008.0)
+gg_rct_united_team_1_addGold = Rect(-3840.0, -7456.0, 2208.0, -1984.0)
+gg_rct_united_team_2_addGold = Rect(-9888.0, -7456.0, -3840.0, -1984.0)
 end
 
 --CUSTOM_CODE
@@ -6622,7 +6630,8 @@ function initGameConfig(mode)
                 incomeBoost = 1,
                 firstMinePrice = 150,
                 nextMineDiffPrice = 150,
-                goldByTower = 125
+                goldByTower = 125,
+                incomeForCenter = 1
             },
             playerPosition = { 1, 2, 3, 4, 5 }
         },
@@ -6638,7 +6647,8 @@ function initGameConfig(mode)
                 incomeBoost = 1,
                 firstMinePrice = 150,
                 nextMineDiffPrice = 150,
-                goldByTower = 125
+                goldByTower = 125,
+                incomeForCenter = 1
             },
             playerPosition = { 3, 4, 2, 1, 5 }
         },
@@ -6654,7 +6664,8 @@ function initGameConfig(mode)
                 incomeBoost = 2,
                 firstMinePrice = 300,
                 nextMineDiffPrice = 300,
-                goldByTower = 125
+                goldByTower = 125,
+                incomeForCenter = 1
             },
             playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
         }
@@ -6948,10 +6959,11 @@ function addPlayersInTeam(players)
                 i = game_config.playerPosition[nextPosition],
                 economy = {
                     income = game_config.economy.startIncomePerSec,
+                    incomeForCenter = 0,
                     minePrice = game_config.economy.firstMinePrice,
                     mineLevel = 0,
                     mineTextTag = nil,
-                    totalGold = game_config.economy.startGold,
+                    totalGold = game_config.economy.startGold
                 },
                 buildRect = nil,
                 workerRect = nil,
@@ -7022,6 +7034,7 @@ function initRect()
         end
         team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
         team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
+        team.base.addGoldRect = regions[game_config.mode]['team'][team.i]['addGold']
     end
 
     for _, team in ipairs(all_teams) do
@@ -7425,6 +7438,40 @@ function replaceGroupCell(group)
     DestroyGroup(group)
 end
 Debug.endFile()
+Debug.beginFile('center-control-trigger.lua')
+function centerControlTrigger()
+    for _, team in ipairs(all_teams) do
+        local trig = CreateTrigger()
+        TriggerRegisterEnterRectSimple(trig, team.base.addGoldRect)
+        TriggerAddAction(trig, function()
+            print('function')
+            local unit = GetTriggerUnit()
+            local trgPlayer = GetOwningPlayer(unit)
+            print(GetPlayerName(trgPlayer))
+            local isAddGold = false
+            for _, player in ipairs(team.players) do
+                if (player.spawnPlayerId == trgPlayer) then
+                    isAddGold = true
+                end
+            end
+
+            if isAddGold == true then
+                for _, player in ipairs(team.players) do
+                    player.economy.incomeForCenter = game_config.economy.incomeForCenter
+                end
+            end
+
+            for _, otherTeam in ipairs(all_teams) do
+                if otherTeam ~= team then
+                    for _, player in ipairs(otherTeam.players) do
+                        player.economy.incomeForCenter = 0
+                    end
+                end
+            end
+        end)
+    end
+end
+Debug.endFile()
 Debug.beginFile('damage-detect-trigger.lua')
 function damageDetectTrigger()
     local trig = CreateTrigger()
@@ -7741,7 +7788,7 @@ function incomeTrigger()
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                addGold(player, player.economy.income)
+                addGold(player, player.economy.income + player.economy.incomeForCenter)
             end
         end
     end)
@@ -7840,6 +7887,7 @@ function initTriggers()
     KodoTrigger()
     deadDetectTrigger()
     killTowerTrigger()
+    centerControlTrigger()
     debugTrigger()
     debugTriggerGold()
 end
@@ -8386,7 +8434,7 @@ function getTableInfo()
     tableInfo.header = {
         { text = 'Name', weight = 0.085 },
         { text = 'Wave', weight = 0.03 },
-        { text = 'Inc', weight = 0.03 },
+        { text = 'Inc/min', weight = 0.05 },
         { text = 'Gold', weight = 0.045 },
         { text = 'Kills', weight = 0.05 },
         { text = 'Damage', weight = 0.06 },
@@ -8406,7 +8454,7 @@ function getTableInfo()
                     isSensitive = false
                 },
                 {
-                    text = player.economy.income,
+                    text = getIncome(player),
                     color = player.color,
                     isSensitive = true
                 },
@@ -8429,6 +8477,14 @@ function getTableInfo()
         end
     end
     return tableInfo
+end
+
+function getIncome(player)
+    if player.economy.incomeForCenter == 0 then
+        return player.economy.income * 60
+    else
+        return player.economy.income * 60 .. '(+' .. player.economy.incomeForCenter * 60 .. ')'
+    end
 end
 
 function getClearName(player)
