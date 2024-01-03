@@ -6621,7 +6621,8 @@ function initGameConfig(mode)
                 startIncomePerSec = 5,
                 incomeBoost = 1,
                 firstMinePrice = 150,
-                nextMineDiffPrice = 150
+                nextMineDiffPrice = 150,
+                goldByTower = 125
             },
             playerPosition = { 1, 2, 3, 4, 5 }
         },
@@ -6636,7 +6637,8 @@ function initGameConfig(mode)
                 startIncomePerSec = 5,
                 incomeBoost = 1,
                 firstMinePrice = 150,
-                nextMineDiffPrice = 150
+                nextMineDiffPrice = 150,
+                goldByTower = 125
             },
             playerPosition = { 3, 4, 2, 1, 5 }
         },
@@ -6651,7 +6653,8 @@ function initGameConfig(mode)
                 startIncomePerSec = 10,
                 incomeBoost = 2,
                 firstMinePrice = 300,
-                nextMineDiffPrice = 300
+                nextMineDiffPrice = 300,
+                goldByTower = 125
             },
             playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
         }
@@ -7738,12 +7741,47 @@ function incomeTrigger()
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                local currentGold = GetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD)
-                player.economy.totalGold = player.economy.totalGold + player.economy.income
-                SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + player.economy.income)
+                addGold(player, player.economy.income)
             end
         end
     end)
+end
+
+function addGold(player, gold)
+    local currentGold = GetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD)
+    player.economy.totalGold = player.economy.totalGold + gold
+    SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + gold)
+end
+
+Debug.endFile()
+Debug.beginFile('kill-tower-trigger.lua')
+function killTowerTrigger()
+    for _, team in ipairs(all_teams) do
+        local group = GetUnitsOfPlayerAll(team.base.player)
+        ForGroup(group, function()
+            local unit = GetEnumUnit()
+            local unitId = ('>I4'):pack(GetUnitTypeId(unit))
+            if unitId == units_special.tower then
+                local trig = CreateTrigger()
+                print('create trigger for tower')
+                TriggerRegisterUnitEvent(trig, unit, EVENT_UNIT_DEATH)
+                TriggerAddAction(trig, function()
+                    local unit = GetKillingUnit()
+                    local player = GetOwningPlayer(unit)
+                    for _, otherTeam in ipairs(all_teams) do
+                        if otherTeam.base.player == player then
+                            for _, player in ipairs(otherTeam.players) do
+                                DisplayTextToPlayer(player.id, 100, 200, '+' .. game_config.economy.goldByTower .. ' gold for killing a tower. ')
+                                addGold(player, game_config.economy.goldByTower)
+                            end
+                            return
+                        end
+                    end
+                end)
+            end
+        end)
+        DestroyGroup(group)
+    end
 end
 Debug.endFile()
 Debug.beginFile('lose-trigger.lua')
@@ -7801,6 +7839,7 @@ function initTriggers()
     damageDetectTrigger()
     KodoTrigger()
     deadDetectTrigger()
+    killTowerTrigger()
     debugTrigger()
     debugTriggerGold()
 end

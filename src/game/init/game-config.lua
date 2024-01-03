@@ -12,7 +12,8 @@ function initGameConfig(mode)
                 startIncomePerSec = 5,
                 incomeBoost = 1,
                 firstMinePrice = 150,
-                nextMineDiffPrice = 150
+                nextMineDiffPrice = 150,
+                goldByTower = 125
             },
             playerPosition = { 1, 2, 3, 4, 5 }
         },
@@ -27,7 +28,8 @@ function initGameConfig(mode)
                 startIncomePerSec = 5,
                 incomeBoost = 1,
                 firstMinePrice = 150,
-                nextMineDiffPrice = 150
+                nextMineDiffPrice = 150,
+                goldByTower = 125
             },
             playerPosition = { 3, 4, 2, 1, 5 }
         },
@@ -42,7 +44,8 @@ function initGameConfig(mode)
                 startIncomePerSec = 10,
                 incomeBoost = 2,
                 firstMinePrice = 300,
-                nextMineDiffPrice = 300
+                nextMineDiffPrice = 300,
+                goldByTower = 125
             },
             playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
         }

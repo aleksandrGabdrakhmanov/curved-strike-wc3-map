@@ -18,6 +18,7 @@ function initTriggers()
     damageDetectTrigger()
     KodoTrigger()
     deadDetectTrigger()
+    killTowerTrigger()
     debugTrigger()
     debugTriggerGold()
 end
