@@ -16,7 +16,8 @@ function initGameConfig(mode)
                 goldByTower = 125,
                 incomeForCenter = 1
             },
-            playerPosition = { 1, 2, 3, 4, 5 }
+            playerPosition = { 1, 2, 3, 4, 5 },
+            isOpenAllMap = false
         },
         united = {
             unitRange = 1.5, -- 150%
@@ -33,7 +34,8 @@ function initGameConfig(mode)
                 goldByTower = 125,
                 incomeForCenter = 1
             },
-            playerPosition = { 3, 4, 2, 1, 5 }
+            playerPosition = { 3, 4, 2, 1, 5 },
+            isOpenAllMap = false
         },
         royal = {
             unitRange = 1, -- 150%
@@ -50,7 +52,8 @@ function initGameConfig(mode)
                 goldByTower = 125,
                 incomeForCenter = 1
             },
-            playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+            playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+            isOpenAllMap = true
         }
     }
 
@@ -61,7 +64,8 @@ function initGameConfig(mode)
             range = game_modes[mode].unitRange
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
-        playerPosition = game_modes[mode].playerPosition
+        playerPosition = game_modes[mode].playerPosition,
+        isOpenAllMap = game_modes[mode].isOpenAllMap
     }
 end
 
