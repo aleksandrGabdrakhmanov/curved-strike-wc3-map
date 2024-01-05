@@ -20,9 +20,9 @@ function initGameConfig(mode)
             isOpenAllMap = false
         },
         united = {
-            unitRange = 1.5, -- 150%
+            unitRange = 1, -- 150%
             spawnPolicy = {
-                interval = 0,
+                interval = 4,
                 dif = 35
             },
             economy = {
@@ -34,26 +34,8 @@ function initGameConfig(mode)
                 goldByTower = 125,
                 incomeForCenter = 1
             },
-            playerPosition = { 3, 4, 2, 1, 5 },
+            playerPosition = { 1, 2, 3, 4, 5 },
             isOpenAllMap = false
-        },
-        royal = {
-            unitRange = 1, -- 150%
-            spawnPolicy = {
-                interval = 0,
-                dif = 35
-            },
-            economy = {
-                startGold = 600,
-                startIncomePerSec = 10,
-                incomeBoost = 2,
-                firstMinePrice = 300,
-                nextMineDiffPrice = 300,
-                goldByTower = 125,
-                incomeForCenter = 1
-            },
-            playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-            isOpenAllMap = true
         }
     }
 

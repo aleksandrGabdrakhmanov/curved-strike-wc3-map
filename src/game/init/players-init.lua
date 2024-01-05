@@ -177,16 +177,4 @@ function getRandomUnits(units)
 
     return randomUnits
 end
-
-function initCamera()
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            SetCameraBoundsToRectForPlayerBJ( player.id, player.cameraRect )
-            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.mainRect), GetRectCenterY(player.mainRect))
-            if game_config.isOpenAllMap == true then
-                CreateFogModifierRectBJ( true, player.id, FOG_OF_WAR_VISIBLE, player.cameraRect )
-            end
-        end
-    end
-end
 Debug.endFile()

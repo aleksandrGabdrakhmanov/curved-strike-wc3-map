@@ -6,7 +6,7 @@ function KodoTrigger()
         local order = GetIssuedOrderId()
         if order == 852104 then
             TriggerSleepAction(3)
-            moveAfterSpell()
+            immediatelyMoveUnit(GetTriggerUnit())
         end
     end)
 end

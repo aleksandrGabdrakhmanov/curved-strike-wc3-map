@@ -76,60 +76,6 @@ gg_rct_curved_team_1_base = nil
 gg_rct_curved_team_1_tower = nil
 gg_rct_curved_team_2_base = nil
 gg_rct_curved_team_2_tower = nil
-gg_rct_united_1_1_build = nil
-gg_rct_united_1_1_main = nil
-gg_rct_united_1_1_mine = nil
-gg_rct_united_1_1_spawn = nil
-gg_rct_united_1_1_worker = nil
-gg_rct_united_1_2_build = nil
-gg_rct_united_1_2_main = nil
-gg_rct_united_1_2_mine = nil
-gg_rct_united_1_2_spawn = nil
-gg_rct_united_1_2_worker = nil
-gg_rct_united_1_3_build = nil
-gg_rct_united_1_3_main = nil
-gg_rct_united_1_3_mine = nil
-gg_rct_united_1_3_spawn = nil
-gg_rct_united_1_3_worker = nil
-gg_rct_united_1_4_build = nil
-gg_rct_united_1_4_main = nil
-gg_rct_united_1_4_mine = nil
-gg_rct_united_1_4_spawn = nil
-gg_rct_united_1_4_worker = nil
-gg_rct_united_1_5_build = nil
-gg_rct_united_1_5_main = nil
-gg_rct_united_1_5_mine = nil
-gg_rct_united_1_5_spawn = nil
-gg_rct_united_1_5_worker = nil
-gg_rct_united_2_1_build = nil
-gg_rct_united_2_1_main = nil
-gg_rct_united_2_1_mine = nil
-gg_rct_united_2_1_spawn = nil
-gg_rct_united_2_1_worker = nil
-gg_rct_united_2_2_build = nil
-gg_rct_united_2_2_main = nil
-gg_rct_united_2_2_mine = nil
-gg_rct_united_2_2_spawn = nil
-gg_rct_united_2_2_worker = nil
-gg_rct_united_2_3_build = nil
-gg_rct_united_2_3_main = nil
-gg_rct_united_2_3_mine = nil
-gg_rct_united_2_3_spawn = nil
-gg_rct_united_2_3_worker = nil
-gg_rct_united_2_4_build = nil
-gg_rct_united_2_4_main = nil
-gg_rct_united_2_4_mine = nil
-gg_rct_united_2_4_spawn = nil
-gg_rct_united_2_4_worker = nil
-gg_rct_united_2_5_build = nil
-gg_rct_united_2_5_main = nil
-gg_rct_united_2_5_mine = nil
-gg_rct_united_2_5_spawn = nil
-gg_rct_united_2_5_worker = nil
-gg_rct_united_team_1_base = nil
-gg_rct_united_team_1_tower = nil
-gg_rct_united_team_2_base = nil
-gg_rct_united_team_2_tower = nil
 gg_rct_curved_1_1_laboratory = nil
 gg_rct_curved_1_2_laboratory = nil
 gg_rct_curved_1_3_laboratory = nil
@@ -140,151 +86,7 @@ gg_rct_curved_2_2_laboratory = nil
 gg_rct_curved_2_3_laboratory = nil
 gg_rct_curved_2_4_laboratory = nil
 gg_rct_curved_2_5_laboratory = nil
-gg_rct_united_1_1_laboratory = nil
-gg_rct_united_1_2_laboratory = nil
-gg_rct_united_1_3_laboratory = nil
-gg_rct_united_1_4_laboratory = nil
-gg_rct_united_1_5_laboratory = nil
-gg_rct_united_2_5_laboratory = nil
-gg_rct_united_2_4_laboratory = nil
-gg_rct_united_2_3_laboratory = nil
-gg_rct_united_2_2_laboratory = nil
-gg_rct_united_2_1_laboratory = nil
 gg_rct_curved_team_2_attack_1_left = nil
-gg_rct_united_team_1_attack_1_right = nil
-gg_rct_united_team_1_attack_2_down = nil
-gg_rct_united_team_1_attack_3_up = nil
-gg_rct_united_team_1_attack_4_right = nil
-gg_rct_united_team_2_attack_1_left = nil
-gg_rct_united_team_2_attack_2_down = nil
-gg_rct_united_team_2_attack_3_up = nil
-gg_rct_united_team_2_attack_4_left = nil
-gg_rct_royal_1_1_build_1 = nil
-gg_rct_royal_1_1_build_2 = nil
-gg_rct_royal_1_1_main = nil
-gg_rct_royal_1_1_mine = nil
-gg_rct_royal_1_1_spawn_1 = nil
-gg_rct_royal_1_1_spawn_2 = nil
-gg_rct_royal_team_1_base_1 = nil
-gg_rct_royal_team_1_base_2 = nil
-gg_rct_royal_1_1_laboratory = nil
-gg_rct_royal_2_1_build_1 = nil
-gg_rct_royal_2_1_build_2 = nil
-gg_rct_royal_2_1_main = nil
-gg_rct_royal_2_1_mine = nil
-gg_rct_royal_2_1_spawn_1 = nil
-gg_rct_royal_2_1_spawn_2 = nil
-gg_rct_royal_team_2_base_1 = nil
-gg_rct_royal_team_2_base_2 = nil
-gg_rct_royal_2_1_laboratory = nil
-gg_rct_royal_global_attack_1_right_2 = nil
-gg_rct_royal_global_attack_9_down_1 = nil
-gg_rct_royal_1_1_worker_1 = nil
-gg_rct_royal_1_1_worker_2 = nil
-gg_rct_royal_2_1_worker_1 = nil
-gg_rct_royal_2_1_worker_2 = nil
-gg_rct_royal_global_attack_2_down_2 = nil
-gg_rct_royal_global_attack_3_down_2 = nil
-gg_rct_royal_global_attack_4_left_2 = nil
-gg_rct_royal_global_attack_5_left_2 = nil
-gg_rct_royal_global_attack_6_up_2 = nil
-gg_rct_royal_global_attack_7_up_2 = nil
-gg_rct_royal_global_attack_8_right_2 = nil
-gg_rct_royal_global_attack_10_right_1 = nil
-gg_rct_royal_global_attack_11_right_1 = nil
-gg_rct_royal_global_attack_12_up_1 = nil
-gg_rct_royal_global_attack_13_up_1 = nil
-gg_rct_royal_global_attack_14_left_1 = nil
-gg_rct_royal_global_attack_15_left_1 = nil
-gg_rct_royal_global_attack_16_down_1 = nil
-gg_rct_royal_3_1_build_1 = nil
-gg_rct_royal_3_1_build_2 = nil
-gg_rct_royal_3_1_main = nil
-gg_rct_royal_3_1_mine = nil
-gg_rct_royal_3_1_spawn_1 = nil
-gg_rct_royal_3_1_spawn_2 = nil
-gg_rct_royal_team_3_base_1 = nil
-gg_rct_royal_team_3_base_2 = nil
-gg_rct_royal_3_1_laboratory = nil
-gg_rct_royal_3_1_worker_1 = nil
-gg_rct_royal_3_1_worker_2 = nil
-gg_rct_royal_4_1_build_1 = nil
-gg_rct_royal_4_1_build_2 = nil
-gg_rct_royal_4_1_main = nil
-gg_rct_royal_4_1_mine = nil
-gg_rct_royal_4_1_spawn_1 = nil
-gg_rct_royal_4_1_spawn_2 = nil
-gg_rct_royal_team_4_base_2 = nil
-gg_rct_royal_4_1_laboratory = nil
-gg_rct_royal_4_1_worker_1 = nil
-gg_rct_royal_4_1_worker_2 = nil
-gg_rct_royal_team_4_base_1 = nil
-gg_rct_royal_5_1_build_1 = nil
-gg_rct_royal_5_1_build_2 = nil
-gg_rct_royal_5_1_main = nil
-gg_rct_royal_5_1_mine = nil
-gg_rct_royal_5_1_spawn_1 = nil
-gg_rct_royal_5_1_spawn_2 = nil
-gg_rct_royal_team_5_base_2 = nil
-gg_rct_royal_5_1_laboratory = nil
-gg_rct_royal_5_1_worker_1 = nil
-gg_rct_royal_5_1_worker_2 = nil
-gg_rct_royal_team_5_base_1 = nil
-gg_rct_royal_6_1_build_1 = nil
-gg_rct_royal_6_1_build_2 = nil
-gg_rct_royal_6_1_main = nil
-gg_rct_royal_6_1_mine = nil
-gg_rct_royal_6_1_spawn_1 = nil
-gg_rct_royal_6_1_spawn_2 = nil
-gg_rct_royal_team_6_base_1 = nil
-gg_rct_royal_team_6_base_2 = nil
-gg_rct_royal_6_1_laboratory = nil
-gg_rct_royal_6_1_worker_1 = nil
-gg_rct_royal_6_1_worker_2 = nil
-gg_rct_royal_7_1_build_1 = nil
-gg_rct_royal_7_1_build_2 = nil
-gg_rct_royal_7_1_main = nil
-gg_rct_royal_7_1_mine = nil
-gg_rct_royal_7_1_spawn_1 = nil
-gg_rct_royal_7_1_spawn_2 = nil
-gg_rct_royal_team_7_base_2 = nil
-gg_rct_royal_7_1_laboratory = nil
-gg_rct_royal_7_1_worker_1 = nil
-gg_rct_royal_7_1_worker_2 = nil
-gg_rct_royal_team_7_base_1 = nil
-gg_rct_royal_8_1_build_1 = nil
-gg_rct_royal_8_1_build_2 = nil
-gg_rct_royal_8_1_main = nil
-gg_rct_royal_8_1_mine = nil
-gg_rct_royal_8_1_spawn_1 = nil
-gg_rct_royal_8_1_spawn_2 = nil
-gg_rct_royal_team_8_base_1 = nil
-gg_rct_royal_team_8_base_2 = nil
-gg_rct_royal_8_1_laboratory = nil
-gg_rct_royal_8_1_worker_1 = nil
-gg_rct_royal_8_1_worker_2 = nil
-gg_rct_royal_9_1_build_1 = nil
-gg_rct_royal_9_1_build_2 = nil
-gg_rct_royal_9_1_main = nil
-gg_rct_royal_9_1_mine = nil
-gg_rct_royal_9_1_spawn_1 = nil
-gg_rct_royal_9_1_spawn_2 = nil
-gg_rct_royal_team_9_base_2 = nil
-gg_rct_royal_9_1_laboratory = nil
-gg_rct_royal_9_1_worker_1 = nil
-gg_rct_royal_9_1_worker_2 = nil
-gg_rct_royal_team_9_base_1 = nil
-gg_rct_royal_10_1_build_1 = nil
-gg_rct_royal_10_1_build_2 = nil
-gg_rct_royal_10_1_main = nil
-gg_rct_royal_10_1_mine = nil
-gg_rct_royal_10_1_spawn_1 = nil
-gg_rct_royal_10_1_spawn_2 = nil
-gg_rct_royal_team_10_base_2 = nil
-gg_rct_royal_10_1_laboratory = nil
-gg_rct_royal_10_1_worker_1 = nil
-gg_rct_royal_10_1_worker_2 = nil
-gg_rct_royal_team_10_base_1 = nil
 gg_rct_curved_1_1_shop = nil
 gg_rct_curved_1_2_shop = nil
 gg_rct_curved_1_3_shop = nil
@@ -295,29 +97,6 @@ gg_rct_curved_2_2_shop = nil
 gg_rct_curved_2_3_shop = nil
 gg_rct_curved_2_4_shop = nil
 gg_rct_curved_2_5_shop = nil
-gg_rct_united_1_1_shop = nil
-gg_rct_united_1_2_shop = nil
-gg_rct_united_1_3_shop = nil
-gg_rct_united_1_4_shop = nil
-gg_rct_united_1_5_shop = nil
-gg_rct_united_2_5_shop = nil
-gg_rct_united_2_4_shop = nil
-gg_rct_united_2_3_shop = nil
-gg_rct_united_2_2_shop = nil
-gg_rct_united_2_1_shop = nil
-gg_rct_royal_1_1_shop = nil
-gg_rct_royal_10_1_shop = nil
-gg_rct_royal_9_1_shop = nil
-gg_rct_royal_8_1_shop = nil
-gg_rct_royal_7_1_shop = nil
-gg_rct_royal_6_1_shop = nil
-gg_rct_royal_5_1_shop = nil
-gg_rct_royal_4_1_shop = nil
-gg_rct_royal_3_1_shop = nil
-gg_rct_royal_2_1_shop = nil
-gg_rct_curved_camera = nil
-gg_rct_united_camera = nil
-gg_rct_royal_camera = nil
 gg_rct_curved_1_1_image = nil
 gg_rct_curved_1_2_image = nil
 gg_rct_curved_1_3_image = nil
@@ -328,36 +107,8 @@ gg_rct_curved_2_2_image = nil
 gg_rct_curved_2_3_image = nil
 gg_rct_curved_2_4_image = nil
 gg_rct_curved_2_5_image = nil
-gg_rct_united_1_1_image = nil
-gg_rct_united_1_2_image = nil
-gg_rct_united_1_3_image = nil
-gg_rct_united_1_4_image = nil
-gg_rct_united_1_5_image = nil
-gg_rct_united_2_1_image = nil
-gg_rct_united_2_2_image = nil
-gg_rct_united_2_3_image = nil
-gg_rct_united_2_4_image = nil
-gg_rct_united_2_5_image = nil
-gg_rct_royal_1_1_image_1 = nil
-gg_rct_royal_1_1_image_2 = nil
-gg_rct_royal_2_1_image_1 = nil
-gg_rct_royal_2_1_image_2 = nil
-gg_rct_royal_3_1_image_1 = nil
-gg_rct_royal_3_1_image_2 = nil
-gg_rct_royal_4_1_image_2 = nil
-gg_rct_royal_4_1_image_1 = nil
-gg_rct_royal_5_1_image_1 = nil
-gg_rct_royal_5_1_image_2 = nil
-gg_rct_royal_6_1_image_1 = nil
-gg_rct_royal_6_1_image_2 = nil
-gg_rct_royal_7_1_image_1 = nil
-gg_rct_royal_7_1_image_2 = nil
-gg_rct_royal_8_1_image_2 = nil
-gg_rct_royal_8_1_image_1 = nil
-gg_rct_royal_9_1_image_1 = nil
-gg_rct_royal_9_1_image_2 = nil
-gg_rct_royal_10_1_image_1 = nil
-gg_rct_royal_10_1_image_2 = nil
+gg_rct_curved_team_1_addGold = nil
+gg_rct_curved_team_2_addGold = nil
 gg_trg_ItemshopGUI_Init_Cats = nil
 gg_trg_ItemshopGUI_Init_Fusions = nil
 gg_trg_ItemshopGUI_Init_Items = nil
@@ -365,10 +116,6 @@ gg_trg_ItemshopGUI_Init_Shop = nil
 gg_trg_ItemshopGUI_Init_Haggle_Skills = nil
 gg_trg_ItemshopGUI_Init = nil
 gg_trg_ItemshopGUI_Init_ShortCuts = nil
-gg_rct_curved_team_1_addGold = nil
-gg_rct_curved_team_2_addGold = nil
-gg_rct_united_team_1_addGold = nil
-gg_rct_united_team_2_addGold = nil
 function InitGlobals()
 local i = 0
 
@@ -3852,347 +3599,94 @@ end
 function CreateRegions()
 local we
 
-gg_rct_curved_team_1_attack_1_right = Rect(-9408.0, 1568.0, 800.0, 7008.0)
-gg_rct_curved_1_1_build = Rect(-11136.0, 7168.0, -9984.0, 8832.0)
-gg_rct_curved_1_1_main = Rect(-11648.0, 7680.0, -11136.0, 8192.0)
-gg_rct_curved_1_1_mine = Rect(-11648.0, 7168.0, -11136.0, 7680.0)
-gg_rct_curved_1_1_spawn = Rect(-9408.0, 3456.0, -8256.0, 5120.0)
-gg_rct_curved_1_1_worker = Rect(-11136.0, 7168.0, -9984.0, 8832.0)
-gg_rct_curved_1_2_build = Rect(-11136.0, 5312.0, -9984.0, 6976.0)
-gg_rct_curved_1_2_main = Rect(-11648.0, 5824.0, -11136.0, 6336.0)
-gg_rct_curved_1_2_mine = Rect(-11648.0, 5312.0, -11136.0, 5824.0)
-gg_rct_curved_1_2_spawn = Rect(-9408.0, 3456.0, -8256.0, 5120.0)
-gg_rct_curved_1_2_worker = Rect(-11136.0, 5312.0, -9984.0, 6976.0)
-gg_rct_curved_1_3_build = Rect(-11136.0, 3456.0, -9984.0, 5120.0)
-gg_rct_curved_1_3_main = Rect(-11648.0, 3968.0, -11136.0, 4480.0)
-gg_rct_curved_1_3_mine = Rect(-11648.0, 3456.0, -11136.0, 3968.0)
-gg_rct_curved_1_3_spawn = Rect(-9408.0, 3456.0, -8256.0, 5120.0)
-gg_rct_curved_1_3_worker = Rect(-11136.0, 3456.0, -9984.0, 5120.0)
-gg_rct_curved_1_4_build = Rect(-11136.0, 1600.0, -9984.0, 3264.0)
-gg_rct_curved_1_4_main = Rect(-11648.0, 2112.0, -11136.0, 2624.0)
-gg_rct_curved_1_4_mine = Rect(-11648.0, 1600.0, -11136.0, 2112.0)
-gg_rct_curved_1_4_spawn = Rect(-9408.0, 3456.0, -8256.0, 5120.0)
-gg_rct_curved_1_4_worker = Rect(-11136.0, 1600.0, -9984.0, 3264.0)
-gg_rct_curved_1_5_build = Rect(-11136.0, -256.0, -9984.0, 1408.0)
-gg_rct_curved_1_5_main = Rect(-11648.0, 256.0, -11136.0, 768.0)
-gg_rct_curved_1_5_mine = Rect(-11648.0, -256.0, -11136.0, 256.0)
-gg_rct_curved_1_5_spawn = Rect(-9408.0, 3456.0, -8256.0, 5120.0)
-gg_rct_curved_1_5_worker = Rect(-11136.0, -256.0, -9984.0, 1408.0)
-gg_rct_curved_2_1_build = Rect(2496.0, 7168.0, 3648.0, 8832.0)
-gg_rct_curved_2_1_main = Rect(3648.0, 7680.0, 4160.0, 8192.0)
-gg_rct_curved_2_1_mine = Rect(3648.0, 7168.0, 4160.0, 7680.0)
-gg_rct_curved_2_1_spawn = Rect(768.0, 3456.0, 1920.0, 5120.0)
-gg_rct_curved_2_1_worker = Rect(2496.0, 7168.0, 3648.0, 8832.0)
-gg_rct_curved_2_2_build = Rect(2496.0, 5312.0, 3648.0, 6976.0)
-gg_rct_curved_2_2_main = Rect(3648.0, 5824.0, 4160.0, 6336.0)
-gg_rct_curved_2_2_mine = Rect(3648.0, 5312.0, 4160.0, 5824.0)
-gg_rct_curved_2_2_spawn = Rect(768.0, 3456.0, 1920.0, 5120.0)
-gg_rct_curved_2_2_worker = Rect(2496.0, 5312.0, 3648.0, 6976.0)
-gg_rct_curved_2_3_build = Rect(2496.0, 3456.0, 3648.0, 5120.0)
-gg_rct_curved_2_3_main = Rect(3648.0, 3968.0, 4160.0, 4480.0)
-gg_rct_curved_2_3_mine = Rect(3648.0, 3456.0, 4160.0, 3968.0)
-gg_rct_curved_2_3_spawn = Rect(768.0, 3456.0, 1920.0, 5120.0)
-gg_rct_curved_2_3_worker = Rect(2496.0, 3456.0, 3648.0, 5120.0)
-gg_rct_curved_2_4_build = Rect(2496.0, 1600.0, 3648.0, 3264.0)
-gg_rct_curved_2_4_main = Rect(3648.0, 2112.0, 4160.0, 2624.0)
-gg_rct_curved_2_4_mine = Rect(3648.0, 1600.0, 4160.0, 2112.0)
-gg_rct_curved_2_4_spawn = Rect(768.0, 3456.0, 1920.0, 5120.0)
-gg_rct_curved_2_4_worker = Rect(2496.0, 1600.0, 3648.0, 3264.0)
-gg_rct_curved_2_5_build = Rect(2496.0, -256.0, 3648.0, 1408.0)
-gg_rct_curved_2_5_main = Rect(3648.0, 256.0, 4160.0, 768.0)
-gg_rct_curved_2_5_mine = Rect(3648.0, -256.0, 4160.0, 256.0)
-gg_rct_curved_2_5_spawn = Rect(768.0, 3456.0, 1920.0, 5120.0)
-gg_rct_curved_2_5_worker = Rect(2496.0, -256.0, 3648.0, 1408.0)
-gg_rct_curved_team_1_base = Rect(-8224.0, 3968.0, -7616.0, 4608.0)
-gg_rct_curved_team_1_tower = Rect(-6272.0, 4032.0, -5760.0, 4544.0)
-gg_rct_curved_team_2_base = Rect(160.0, 3968.0, 768.0, 4608.0)
-gg_rct_curved_team_2_tower = Rect(-1664.0, 4032.0, -1152.0, 4544.0)
-gg_rct_united_1_1_build = Rect(-13568.0, -4480.0, -11904.0, -2944.0)
-gg_rct_united_1_1_main = Rect(-14080.0, -3456.0, -13568.0, -2944.0)
-gg_rct_united_1_1_mine = Rect(-15616.0, -3456.0, -15104.0, -2944.0)
-gg_rct_united_1_1_spawn = Rect(-11552.0, -4480.0, -9888.0, -2944.0)
-gg_rct_united_1_1_worker = Rect(-13376.0, -3232.0, -13280.0, -3136.0)
-gg_rct_united_1_2_build = Rect(-13248.0, -4480.0, -11904.0, -3392.0)
-gg_rct_united_1_2_main = Rect(-14080.0, -4064.0, -13568.0, -3552.0)
-gg_rct_united_1_2_mine = Rect(-15616.0, -4064.0, -15104.0, -3552.0)
-gg_rct_united_1_2_spawn = Rect(-11232.0, -4480.0, -9888.0, -3392.0)
-gg_rct_united_1_2_worker = Rect(-12928.0, -3776.0, -12832.0, -3680.0)
-gg_rct_united_1_3_build = Rect(-12800.0, -5024.0, -11904.0, -3904.0)
-gg_rct_united_1_3_main = Rect(-14080.0, -4736.0, -13568.0, -4224.0)
-gg_rct_united_1_3_mine = Rect(-15616.0, -4736.0, -15104.0, -4224.0)
-gg_rct_united_1_3_spawn = Rect(-10784.0, -5024.0, -9888.0, -3904.0)
-gg_rct_united_1_3_worker = Rect(-12416.0, -4512.0, -12288.0, -4384.0)
-gg_rct_united_1_4_build = Rect(-13248.0, -5504.0, -11904.0, -4416.0)
-gg_rct_united_1_4_main = Rect(-14080.0, -5376.0, -13568.0, -4864.0)
-gg_rct_united_1_4_mine = Rect(-15616.0, -5376.0, -15104.0, -4864.0)
-gg_rct_united_1_4_spawn = Rect(-11232.0, -5504.0, -9888.0, -4416.0)
-gg_rct_united_1_4_worker = Rect(-12960.0, -5248.0, -12864.0, -5152.0)
-gg_rct_united_1_5_build = Rect(-13568.0, -5952.0, -11904.0, -4416.0)
-gg_rct_united_1_5_main = Rect(-14080.0, -5952.0, -13568.0, -5440.0)
-gg_rct_united_1_5_mine = Rect(-15616.0, -5952.0, -15104.0, -5440.0)
-gg_rct_united_1_5_spawn = Rect(-11552.0, -5952.0, -9888.0, -4416.0)
-gg_rct_united_1_5_worker = Rect(-13376.0, -5760.0, -13280.0, -5664.0)
-gg_rct_united_2_1_build = Rect(4224.0, -5952.0, 5888.0, -4416.0)
-gg_rct_united_2_1_main = Rect(5888.0, -5952.0, 6400.0, -5440.0)
-gg_rct_united_2_1_mine = Rect(7424.0, -5952.0, 7936.0, -5440.0)
-gg_rct_united_2_1_spawn = Rect(2208.0, -5952.0, 3872.0, -4416.0)
-gg_rct_united_2_1_worker = Rect(5600.0, -5760.0, 5696.0, -5664.0)
-gg_rct_united_2_2_build = Rect(4224.0, -5504.0, 5568.0, -4416.0)
-gg_rct_united_2_2_main = Rect(5888.0, -5344.0, 6400.0, -4832.0)
-gg_rct_united_2_2_mine = Rect(7424.0, -5344.0, 7936.0, -4832.0)
-gg_rct_united_2_2_spawn = Rect(2208.0, -5504.0, 3552.0, -4416.0)
-gg_rct_united_2_2_worker = Rect(5152.0, -5216.0, 5248.0, -5120.0)
-gg_rct_united_2_3_build = Rect(4224.0, -4992.0, 5120.0, -3872.0)
-gg_rct_united_2_3_main = Rect(5888.0, -4704.0, 6400.0, -4192.0)
-gg_rct_united_2_3_mine = Rect(7424.0, -4704.0, 7936.0, -4192.0)
-gg_rct_united_2_3_spawn = Rect(2208.0, -4992.0, 3104.0, -3872.0)
-gg_rct_united_2_3_worker = Rect(4608.0, -4512.0, 4736.0, -4384.0)
-gg_rct_united_2_4_build = Rect(4224.0, -4480.0, 5568.0, -3392.0)
-gg_rct_united_2_4_main = Rect(5888.0, -4064.0, 6400.0, -3552.0)
-gg_rct_united_2_4_mine = Rect(7424.0, -4064.0, 7936.0, -3552.0)
-gg_rct_united_2_4_spawn = Rect(2208.0, -4480.0, 3552.0, -3392.0)
-gg_rct_united_2_4_worker = Rect(5184.0, -3744.0, 5280.0, -3648.0)
-gg_rct_united_2_5_build = Rect(4224.0, -4480.0, 5888.0, -2944.0)
-gg_rct_united_2_5_main = Rect(5888.0, -3456.0, 6400.0, -2944.0)
-gg_rct_united_2_5_mine = Rect(7424.0, -3456.0, 7936.0, -2944.0)
-gg_rct_united_2_5_spawn = Rect(2208.0, -4480.0, 3872.0, -2944.0)
-gg_rct_united_2_5_worker = Rect(5600.0, -3232.0, 5696.0, -3136.0)
-gg_rct_united_team_1_base = Rect(-9888.0, -4768.0, -9280.0, -4128.0)
-gg_rct_united_team_1_tower = Rect(-7808.0, -4736.0, -7200.0, -4096.0)
-gg_rct_united_team_2_base = Rect(1600.0, -4832.0, 2208.0, -4192.0)
-gg_rct_united_team_2_tower = Rect(-736.0, -4800.0, -128.0, -4160.0)
-gg_rct_curved_1_1_laboratory = Rect(-11648.0, 8192.0, -11136.0, 8704.0)
-gg_rct_curved_1_2_laboratory = Rect(-11648.0, 6336.0, -11136.0, 6848.0)
-gg_rct_curved_1_3_laboratory = Rect(-11648.0, 4480.0, -11136.0, 4992.0)
-gg_rct_curved_1_4_laboratory = Rect(-11648.0, 2624.0, -11136.0, 3136.0)
-gg_rct_curved_1_5_laboratory = Rect(-11648.0, 768.0, -11136.0, 1280.0)
-gg_rct_curved_2_1_laboratory = Rect(3648.0, 8192.0, 4160.0, 8704.0)
-gg_rct_curved_2_2_laboratory = Rect(3648.0, 6336.0, 4160.0, 6848.0)
-gg_rct_curved_2_3_laboratory = Rect(3648.0, 4480.0, 4160.0, 4992.0)
-gg_rct_curved_2_4_laboratory = Rect(3648.0, 2624.0, 4160.0, 3136.0)
-gg_rct_curved_2_5_laboratory = Rect(3648.0, 768.0, 4160.0, 1280.0)
-gg_rct_united_1_1_laboratory = Rect(-14592.0, -3456.0, -14080.0, -2944.0)
-gg_rct_united_1_2_laboratory = Rect(-14592.0, -4064.0, -14080.0, -3552.0)
-gg_rct_united_1_3_laboratory = Rect(-14592.0, -4736.0, -14080.0, -4224.0)
-gg_rct_united_1_4_laboratory = Rect(-14592.0, -5376.0, -14080.0, -4864.0)
-gg_rct_united_1_5_laboratory = Rect(-14592.0, -5952.0, -14080.0, -5440.0)
-gg_rct_united_2_5_laboratory = Rect(6400.0, -3456.0, 6912.0, -2944.0)
-gg_rct_united_2_4_laboratory = Rect(6400.0, -4064.0, 6912.0, -3552.0)
-gg_rct_united_2_3_laboratory = Rect(6400.0, -4704.0, 6912.0, -4192.0)
-gg_rct_united_2_2_laboratory = Rect(6400.0, -5344.0, 6912.0, -4832.0)
-gg_rct_united_2_1_laboratory = Rect(6400.0, -5952.0, 6912.0, -5440.0)
-gg_rct_curved_team_2_attack_1_left = Rect(-8288.0, 1568.0, 1920.0, 7008.0)
-gg_rct_united_team_1_attack_1_right = Rect(-11680.0, -7328.0, -416.0, -2240.0)
-gg_rct_united_team_1_attack_2_down = Rect(-576.0, -3648.0, 2176.0, -2144.0)
-gg_rct_united_team_1_attack_3_up = Rect(-576.0, -7328.0, 2176.0, -5184.0)
-gg_rct_united_team_1_attack_4_right = Rect(-576.0, -5344.0, 2176.0, -3488.0)
-gg_rct_united_team_2_attack_1_left = Rect(-7136.0, -7360.0, 3936.0, -2272.0)
-gg_rct_united_team_2_attack_2_down = Rect(-9856.0, -3680.0, -6976.0, -2272.0)
-gg_rct_united_team_2_attack_3_up = Rect(-9856.0, -7328.0, -7008.0, -5152.0)
-gg_rct_united_team_2_attack_4_left = Rect(-9856.0, -5344.0, -6976.0, -3488.0)
-gg_rct_royal_1_1_build_1 = Rect(10688.0, 6080.0, 11776.0, 7168.0)
-gg_rct_royal_1_1_build_2 = Rect(11776.0, 7168.0, 12864.0, 8256.0)
-gg_rct_royal_1_1_main = Rect(11872.0, 6560.0, 12384.0, 7072.0)
-gg_rct_royal_1_1_mine = Rect(12416.0, 6560.0, 12928.0, 7072.0)
-gg_rct_royal_1_1_spawn_1 = Rect(9184.0, 6080.0, 10272.0, 7168.0)
-gg_rct_royal_1_1_spawn_2 = Rect(11776.0, 8672.0, 12864.0, 9824.0)
-gg_rct_royal_team_1_base_1 = Rect(9440.0, 5440.0, 10048.0, 6080.0)
-gg_rct_royal_team_1_base_2 = Rect(12864.0, 8928.0, 13472.0, 9568.0)
-gg_rct_royal_1_1_laboratory = Rect(11872.0, 6016.0, 12384.0, 6528.0)
-gg_rct_royal_2_1_build_1 = Rect(18272.0, 7104.0, 19392.0, 8256.0)
-gg_rct_royal_2_1_build_2 = Rect(19424.0, 7104.0, 20544.0, 8256.0)
-gg_rct_royal_2_1_main = Rect(19168.0, 6560.0, 19680.0, 7072.0)
-gg_rct_royal_2_1_mine = Rect(19712.0, 6560.0, 20224.0, 7072.0)
-gg_rct_royal_2_1_spawn_1 = Rect(18272.0, 8640.0, 19424.0, 9792.0)
-gg_rct_royal_2_1_spawn_2 = Rect(19392.0, 8640.0, 20544.0, 9792.0)
-gg_rct_royal_team_2_base_1 = Rect(17664.0, 8896.0, 18272.0, 9536.0)
-gg_rct_royal_team_2_base_2 = Rect(20544.0, 8896.0, 21152.0, 9536.0)
-gg_rct_royal_2_1_laboratory = Rect(18624.0, 6560.0, 19136.0, 7072.0)
-gg_rct_royal_global_attack_1_right_2 = Rect(11584.0, 7840.0, 29184.0, 11168.0)
-gg_rct_royal_global_attack_9_down_1 = Rect(7776.0, -17824.0, 11712.0, 8000.0)
-gg_rct_royal_1_1_worker_1 = Rect(10688.0, 6080.0, 11776.0, 7168.0)
-gg_rct_royal_1_1_worker_2 = Rect(11776.0, 7168.0, 12864.0, 8256.0)
-gg_rct_royal_2_1_worker_1 = Rect(18272.0, 7104.0, 19392.0, 8256.0)
-gg_rct_royal_2_1_worker_2 = Rect(19424.0, 7104.0, 20544.0, 8256.0)
-gg_rct_royal_global_attack_2_down_2 = Rect(29024.0, 7840.0, 32256.0, 11168.0)
-gg_rct_royal_global_attack_3_down_2 = Rect(27712.0, -17984.0, 32224.0, 8032.0)
-gg_rct_royal_global_attack_4_left_2 = Rect(27712.0, -19168.0, 32192.0, -17856.0)
-gg_rct_royal_global_attack_5_left_2 = Rect(9920.0, -19136.0, 27872.0, -16096.0)
-gg_rct_royal_global_attack_6_up_2 = Rect(7936.0, -19136.0, 10432.0, -16032.0)
-gg_rct_royal_global_attack_7_up_2 = Rect(7776.0, -16320.0, 11712.0, 9152.0)
-gg_rct_royal_global_attack_8_right_2 = Rect(7776.0, 9024.0, 11712.0, 11168.0)
-gg_rct_royal_global_attack_10_right_1 = Rect(7840.0, -19136.0, 11712.0, -17664.0)
-gg_rct_royal_global_attack_11_right_1 = Rect(11552.0, -19136.0, 29248.0, -16096.0)
-gg_rct_royal_global_attack_12_up_1 = Rect(29088.0, -19136.0, 32256.0, -16096.0)
-gg_rct_royal_global_attack_13_up_1 = Rect(27712.0, -16224.0, 32192.0, 9248.0)
-gg_rct_royal_global_attack_14_left_1 = Rect(27712.0, 9088.0, 32256.0, 11136.0)
-gg_rct_royal_global_attack_15_left_1 = Rect(9888.0, 7840.0, 27872.0, 11136.0)
-gg_rct_royal_global_attack_16_down_1 = Rect(7776.0, 7840.0, 10016.0, 11200.0)
-gg_rct_royal_3_1_build_1 = Rect(26048.0, 7168.0, 27136.0, 8256.0)
-gg_rct_royal_3_1_build_2 = Rect(27136.0, 6080.0, 28224.0, 7168.0)
-gg_rct_royal_3_1_main = Rect(26528.0, 6560.0, 27040.0, 7072.0)
-gg_rct_royal_3_1_mine = Rect(26528.0, 6016.0, 27040.0, 6528.0)
-gg_rct_royal_3_1_spawn_1 = Rect(26048.0, 8672.0, 27136.0, 9760.0)
-gg_rct_royal_3_1_spawn_2 = Rect(28640.0, 6080.0, 29792.0, 7168.0)
-gg_rct_royal_team_3_base_1 = Rect(25408.0, 8896.0, 26048.0, 9504.0)
-gg_rct_royal_team_3_base_2 = Rect(28896.0, 5472.0, 29536.0, 6080.0)
-gg_rct_royal_3_1_laboratory = Rect(25984.0, 6560.0, 26496.0, 7072.0)
-gg_rct_royal_3_1_worker_1 = Rect(26048.0, 7168.0, 27136.0, 8256.0)
-gg_rct_royal_3_1_worker_2 = Rect(27136.0, 6080.0, 28224.0, 7168.0)
-gg_rct_royal_4_1_build_1 = Rect(27072.0, -544.0, 28224.0, 576.0)
-gg_rct_royal_4_1_build_2 = Rect(27072.0, -1696.0, 28224.0, -576.0)
-gg_rct_royal_4_1_main = Rect(26528.0, -832.0, 27040.0, -320.0)
-gg_rct_royal_4_1_mine = Rect(26528.0, -1376.0, 27040.0, -864.0)
-gg_rct_royal_4_1_spawn_1 = Rect(28608.0, -576.0, 29760.0, 576.0)
-gg_rct_royal_4_1_spawn_2 = Rect(28608.0, -1696.0, 29760.0, -544.0)
-gg_rct_royal_team_4_base_2 = Rect(28864.0, -2304.0, 29504.0, -1696.0)
-gg_rct_royal_4_1_laboratory = Rect(26528.0, -288.0, 27040.0, 224.0)
-gg_rct_royal_4_1_worker_1 = Rect(27072.0, -544.0, 28224.0, 576.0)
-gg_rct_royal_4_1_worker_2 = Rect(27072.0, -1696.0, 28224.0, -576.0)
-gg_rct_royal_team_4_base_1 = Rect(28864.0, 576.0, 29504.0, 1184.0)
-gg_rct_royal_5_1_build_1 = Rect(27072.0, -8224.0, 28224.0, -7104.0)
-gg_rct_royal_5_1_build_2 = Rect(27072.0, -9376.0, 28224.0, -8256.0)
-gg_rct_royal_5_1_main = Rect(26528.0, -8512.0, 27040.0, -8000.0)
-gg_rct_royal_5_1_mine = Rect(26528.0, -9056.0, 27040.0, -8544.0)
-gg_rct_royal_5_1_spawn_1 = Rect(28608.0, -8256.0, 29760.0, -7104.0)
-gg_rct_royal_5_1_spawn_2 = Rect(28608.0, -9376.0, 29760.0, -8224.0)
-gg_rct_royal_team_5_base_2 = Rect(28864.0, -9984.0, 29504.0, -9376.0)
-gg_rct_royal_5_1_laboratory = Rect(26528.0, -7968.0, 27040.0, -7456.0)
-gg_rct_royal_5_1_worker_1 = Rect(27072.0, -8224.0, 28224.0, -7104.0)
-gg_rct_royal_5_1_worker_2 = Rect(27072.0, -9376.0, 28224.0, -8256.0)
-gg_rct_royal_team_5_base_1 = Rect(28864.0, -7104.0, 29504.0, -6496.0)
-gg_rct_royal_6_1_build_1 = Rect(27136.0, -15872.0, 28224.0, -14784.0)
-gg_rct_royal_6_1_build_2 = Rect(26048.0, -16960.0, 27136.0, -15872.0)
-gg_rct_royal_6_1_main = Rect(26528.0, -15776.0, 27040.0, -15264.0)
-gg_rct_royal_6_1_mine = Rect(25984.0, -15776.0, 26496.0, -15264.0)
-gg_rct_royal_6_1_spawn_1 = Rect(28640.0, -15872.0, 29728.0, -14784.0)
-gg_rct_royal_6_1_spawn_2 = Rect(26048.0, -18528.0, 27136.0, -17376.0)
-gg_rct_royal_team_6_base_1 = Rect(28864.0, -14784.0, 29472.0, -14144.0)
-gg_rct_royal_team_6_base_2 = Rect(25440.0, -18272.0, 26048.0, -17632.0)
-gg_rct_royal_6_1_laboratory = Rect(26528.0, -15232.0, 27040.0, -14720.0)
-gg_rct_royal_6_1_worker_1 = Rect(27136.0, -15872.0, 28224.0, -14784.0)
-gg_rct_royal_6_1_worker_2 = Rect(26048.0, -16960.0, 27136.0, -15872.0)
-gg_rct_royal_7_1_build_1 = Rect(19456.0, -16960.0, 20576.0, -15808.0)
-gg_rct_royal_7_1_build_2 = Rect(18304.0, -16960.0, 19424.0, -15808.0)
-gg_rct_royal_7_1_main = Rect(19168.0, -15776.0, 19680.0, -15264.0)
-gg_rct_royal_7_1_mine = Rect(18624.0, -15776.0, 19136.0, -15264.0)
-gg_rct_royal_7_1_spawn_1 = Rect(19424.0, -18496.0, 20576.0, -17344.0)
-gg_rct_royal_7_1_spawn_2 = Rect(18304.0, -18496.0, 19456.0, -17344.0)
-gg_rct_royal_team_7_base_2 = Rect(17696.0, -18240.0, 18304.0, -17600.0)
-gg_rct_royal_7_1_laboratory = Rect(19712.0, -15776.0, 20224.0, -15264.0)
-gg_rct_royal_7_1_worker_1 = Rect(19456.0, -16960.0, 20576.0, -15808.0)
-gg_rct_royal_7_1_worker_2 = Rect(18304.0, -16960.0, 19424.0, -15808.0)
-gg_rct_royal_team_7_base_1 = Rect(20576.0, -18240.0, 21184.0, -17600.0)
-gg_rct_royal_8_1_build_1 = Rect(11776.0, -16960.0, 12864.0, -15872.0)
-gg_rct_royal_8_1_build_2 = Rect(10688.0, -15872.0, 11776.0, -14784.0)
-gg_rct_royal_8_1_main = Rect(11872.0, -15776.0, 12384.0, -15264.0)
-gg_rct_royal_8_1_mine = Rect(11872.0, -15232.0, 12384.0, -14720.0)
-gg_rct_royal_8_1_spawn_1 = Rect(11776.0, -18464.0, 12864.0, -17376.0)
-gg_rct_royal_8_1_spawn_2 = Rect(9120.0, -15872.0, 10272.0, -14784.0)
-gg_rct_royal_team_8_base_1 = Rect(12864.0, -18208.0, 13504.0, -17600.0)
-gg_rct_royal_team_8_base_2 = Rect(9376.0, -14784.0, 10016.0, -14176.0)
-gg_rct_royal_8_1_laboratory = Rect(12416.0, -15776.0, 12928.0, -15264.0)
-gg_rct_royal_8_1_worker_1 = Rect(11776.0, -16960.0, 12864.0, -15872.0)
-gg_rct_royal_8_1_worker_2 = Rect(10688.0, -15872.0, 11776.0, -14784.0)
-gg_rct_royal_9_1_build_1 = Rect(10688.0, -9376.0, 11840.0, -8256.0)
-gg_rct_royal_9_1_build_2 = Rect(10688.0, -8224.0, 11840.0, -7104.0)
-gg_rct_royal_9_1_main = Rect(11872.0, -8480.0, 12384.0, -7968.0)
-gg_rct_royal_9_1_mine = Rect(11872.0, -7936.0, 12384.0, -7424.0)
-gg_rct_royal_9_1_spawn_1 = Rect(9152.0, -9376.0, 10304.0, -8224.0)
-gg_rct_royal_9_1_spawn_2 = Rect(9152.0, -8256.0, 10304.0, -7104.0)
-gg_rct_royal_team_9_base_2 = Rect(9408.0, -7104.0, 10048.0, -6496.0)
-gg_rct_royal_9_1_laboratory = Rect(11872.0, -9024.0, 12384.0, -8512.0)
-gg_rct_royal_9_1_worker_1 = Rect(10688.0, -9376.0, 11840.0, -8256.0)
-gg_rct_royal_9_1_worker_2 = Rect(10688.0, -8224.0, 11840.0, -7104.0)
-gg_rct_royal_team_9_base_1 = Rect(9408.0, -9984.0, 10048.0, -9376.0)
-gg_rct_royal_10_1_build_1 = Rect(10688.0, -1696.0, 11840.0, -576.0)
-gg_rct_royal_10_1_build_2 = Rect(10688.0, -544.0, 11840.0, 576.0)
-gg_rct_royal_10_1_main = Rect(11872.0, -800.0, 12384.0, -288.0)
-gg_rct_royal_10_1_mine = Rect(11872.0, -256.0, 12384.0, 256.0)
-gg_rct_royal_10_1_spawn_1 = Rect(9152.0, -1696.0, 10304.0, -544.0)
-gg_rct_royal_10_1_spawn_2 = Rect(9152.0, -576.0, 10304.0, 576.0)
-gg_rct_royal_team_10_base_2 = Rect(9408.0, 576.0, 10048.0, 1184.0)
-gg_rct_royal_10_1_laboratory = Rect(11872.0, -1344.0, 12384.0, -832.0)
-gg_rct_royal_10_1_worker_1 = Rect(10688.0, -1696.0, 11840.0, -576.0)
-gg_rct_royal_10_1_worker_2 = Rect(10688.0, -544.0, 11840.0, 576.0)
-gg_rct_royal_team_10_base_1 = Rect(9408.0, -2304.0, 10048.0, -1696.0)
-gg_rct_curved_1_1_shop = Rect(-12160.0, 7680.0, -11648.0, 8192.0)
-gg_rct_curved_1_2_shop = Rect(-12160.0, 5824.0, -11648.0, 6336.0)
-gg_rct_curved_1_3_shop = Rect(-12160.0, 3968.0, -11648.0, 4480.0)
-gg_rct_curved_1_4_shop = Rect(-12160.0, 2112.0, -11648.0, 2624.0)
-gg_rct_curved_1_5_shop = Rect(-12160.0, 256.0, -11648.0, 768.0)
-gg_rct_curved_2_1_shop = Rect(4160.0, 7680.0, 4672.0, 8192.0)
-gg_rct_curved_2_2_shop = Rect(4160.0, 5824.0, 4672.0, 6336.0)
-gg_rct_curved_2_3_shop = Rect(4160.0, 3968.0, 4672.0, 4480.0)
-gg_rct_curved_2_4_shop = Rect(4160.0, 2112.0, 4672.0, 2624.0)
-gg_rct_curved_2_5_shop = Rect(4160.0, 256.0, 4672.0, 768.0)
-gg_rct_united_1_1_shop = Rect(-15104.0, -3456.0, -14592.0, -2944.0)
-gg_rct_united_1_2_shop = Rect(-15104.0, -4064.0, -14592.0, -3552.0)
-gg_rct_united_1_3_shop = Rect(-15104.0, -4736.0, -14592.0, -4224.0)
-gg_rct_united_1_4_shop = Rect(-15104.0, -5376.0, -14592.0, -4864.0)
-gg_rct_united_1_5_shop = Rect(-15104.0, -5952.0, -14592.0, -5440.0)
-gg_rct_united_2_5_shop = Rect(6912.0, -3456.0, 7424.0, -2944.0)
-gg_rct_united_2_4_shop = Rect(6912.0, -4064.0, 7424.0, -3552.0)
-gg_rct_united_2_3_shop = Rect(6912.0, -4704.0, 7424.0, -4192.0)
-gg_rct_united_2_2_shop = Rect(6912.0, -5344.0, 7424.0, -4832.0)
-gg_rct_united_2_1_shop = Rect(6912.0, -5952.0, 7424.0, -5440.0)
-gg_rct_royal_1_1_shop = Rect(12416.0, 6016.0, 12928.0, 6528.0)
-gg_rct_royal_10_1_shop = Rect(12384.0, -800.0, 12896.0, -288.0)
-gg_rct_royal_9_1_shop = Rect(12384.0, -8480.0, 12896.0, -7968.0)
-gg_rct_royal_8_1_shop = Rect(12416.0, -15232.0, 12928.0, -14720.0)
-gg_rct_royal_7_1_shop = Rect(19168.0, -15232.0, 19680.0, -14720.0)
-gg_rct_royal_6_1_shop = Rect(25984.0, -15232.0, 26496.0, -14720.0)
-gg_rct_royal_5_1_shop = Rect(26016.0, -8512.0, 26528.0, -8000.0)
-gg_rct_royal_4_1_shop = Rect(26016.0, -832.0, 26528.0, -320.0)
-gg_rct_royal_3_1_shop = Rect(25984.0, 6016.0, 26496.0, 6528.0)
-gg_rct_royal_2_1_shop = Rect(19168.0, 6048.0, 19680.0, 6560.0)
-gg_rct_curved_camera = Rect(-13216.0, -768.0, 5184.0, 9440.0)
-gg_rct_united_camera = Rect(-16064.0, -8864.0, 8544.0, -640.0)
-gg_rct_royal_camera = Rect(6720.0, -20288.0, 32256.0, 11296.0)
-gg_rct_curved_1_1_image = Rect(-7584.0, 4704.0, -7360.0, 4928.0)
-gg_rct_curved_1_2_image = Rect(-7584.0, 4448.0, -7360.0, 4672.0)
-gg_rct_curved_1_3_image = Rect(-7584.0, 4192.0, -7360.0, 4416.0)
-gg_rct_curved_1_4_image = Rect(-7584.0, 3936.0, -7360.0, 4160.0)
-gg_rct_curved_1_5_image = Rect(-7584.0, 3680.0, -7360.0, 3904.0)
-gg_rct_curved_2_1_image = Rect(-192.0, 4672.0, 32.0, 4896.0)
-gg_rct_curved_2_2_image = Rect(-192.0, 4416.0, 32.0, 4640.0)
-gg_rct_curved_2_3_image = Rect(-192.0, 4160.0, 32.0, 4384.0)
-gg_rct_curved_2_4_image = Rect(-192.0, 3904.0, 32.0, 4128.0)
-gg_rct_curved_2_5_image = Rect(-192.0, 3648.0, 32.0, 3872.0)
-gg_rct_united_1_1_image = Rect(-9280.0, -4064.0, -9056.0, -3840.0)
-gg_rct_united_1_2_image = Rect(-9280.0, -4320.0, -9056.0, -4096.0)
-gg_rct_united_1_3_image = Rect(-9280.0, -4576.0, -9056.0, -4352.0)
-gg_rct_united_1_4_image = Rect(-9280.0, -4832.0, -9056.0, -4608.0)
-gg_rct_united_1_5_image = Rect(-9280.0, -5088.0, -9056.0, -4864.0)
-gg_rct_united_2_1_image = Rect(1248.0, -4160.0, 1472.0, -3936.0)
-gg_rct_united_2_2_image = Rect(1248.0, -4416.0, 1472.0, -4192.0)
-gg_rct_united_2_3_image = Rect(1248.0, -4672.0, 1472.0, -4448.0)
-gg_rct_united_2_4_image = Rect(1248.0, -4928.0, 1472.0, -4704.0)
-gg_rct_united_2_5_image = Rect(1248.0, -5184.0, 1472.0, -4960.0)
-gg_rct_royal_1_1_image_1 = Rect(9440.0, 5216.0, 9664.0, 5440.0)
-gg_rct_royal_1_1_image_2 = Rect(13472.0, 8928.0, 13696.0, 9152.0)
-gg_rct_royal_2_1_image_1 = Rect(17280.0, 8896.0, 17504.0, 9120.0)
-gg_rct_royal_2_1_image_2 = Rect(21152.0, 8896.0, 21376.0, 9120.0)
-gg_rct_royal_3_1_image_1 = Rect(25024.0, 8896.0, 25248.0, 9120.0)
-gg_rct_royal_3_1_image_2 = Rect(28896.0, 5184.0, 29120.0, 5408.0)
-gg_rct_royal_4_1_image_2 = Rect(28864.0, -2624.0, 29088.0, -2400.0)
-gg_rct_royal_4_1_image_1 = Rect(28864.0, 1184.0, 29088.0, 1408.0)
-gg_rct_royal_5_1_image_1 = Rect(28864.0, -6496.0, 29088.0, -6272.0)
-gg_rct_royal_5_1_image_2 = Rect(28864.0, -10272.0, 29088.0, -10048.0)
-gg_rct_royal_6_1_image_1 = Rect(28864.0, -14144.0, 29088.0, -13920.0)
-gg_rct_royal_6_1_image_2 = Rect(25088.0, -18176.0, 25312.0, -17952.0)
-gg_rct_royal_7_1_image_1 = Rect(21184.0, -18240.0, 21408.0, -18016.0)
-gg_rct_royal_7_1_image_2 = Rect(17344.0, -18240.0, 17568.0, -18016.0)
-gg_rct_royal_8_1_image_2 = Rect(13504.0, -18208.0, 13728.0, -17984.0)
-gg_rct_royal_8_1_image_1 = Rect(9376.0, -14176.0, 9600.0, -13952.0)
-gg_rct_royal_9_1_image_1 = Rect(9408.0, -6496.0, 9632.0, -6272.0)
-gg_rct_royal_9_1_image_2 = Rect(9408.0, -10336.0, 9632.0, -10112.0)
-gg_rct_royal_10_1_image_1 = Rect(9408.0, 1184.0, 9632.0, 1408.0)
-gg_rct_royal_10_1_image_2 = Rect(9408.0, -2528.0, 9632.0, -2304.0)
-gg_rct_curved_team_1_addGold = Rect(-3744.0, 1568.0, 800.0, 7008.0)
-gg_rct_curved_team_2_addGold = Rect(-8288.0, 1568.0, -3744.0, 7008.0)
-gg_rct_united_team_1_addGold = Rect(-3840.0, -7456.0, 2208.0, -1984.0)
-gg_rct_united_team_2_addGold = Rect(-9888.0, -7456.0, -3840.0, -1984.0)
+gg_rct_curved_team_1_attack_1_right = Rect(-12672.0, 3552.0, -2464.0, 8992.0)
+gg_rct_curved_1_1_build = Rect(-14400.0, 9152.0, -13248.0, 10816.0)
+gg_rct_curved_1_1_main = Rect(-14912.0, 9664.0, -14400.0, 10176.0)
+gg_rct_curved_1_1_mine = Rect(-14912.0, 9152.0, -14400.0, 9664.0)
+gg_rct_curved_1_1_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+gg_rct_curved_1_1_worker = Rect(-14400.0, 9152.0, -13248.0, 10816.0)
+gg_rct_curved_1_2_build = Rect(-14400.0, 7296.0, -13248.0, 8960.0)
+gg_rct_curved_1_2_main = Rect(-14912.0, 7808.0, -14400.0, 8320.0)
+gg_rct_curved_1_2_mine = Rect(-14912.0, 7296.0, -14400.0, 7808.0)
+gg_rct_curved_1_2_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+gg_rct_curved_1_2_worker = Rect(-14400.0, 7296.0, -13248.0, 8960.0)
+gg_rct_curved_1_3_build = Rect(-14400.0, 5440.0, -13248.0, 7104.0)
+gg_rct_curved_1_3_main = Rect(-14912.0, 5952.0, -14400.0, 6464.0)
+gg_rct_curved_1_3_mine = Rect(-14912.0, 5440.0, -14400.0, 5952.0)
+gg_rct_curved_1_3_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+gg_rct_curved_1_3_worker = Rect(-14400.0, 5440.0, -13248.0, 7104.0)
+gg_rct_curved_1_4_build = Rect(-14400.0, 3584.0, -13248.0, 5248.0)
+gg_rct_curved_1_4_main = Rect(-14912.0, 4096.0, -14400.0, 4608.0)
+gg_rct_curved_1_4_mine = Rect(-14912.0, 3584.0, -14400.0, 4096.0)
+gg_rct_curved_1_4_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+gg_rct_curved_1_4_worker = Rect(-14400.0, 3584.0, -13248.0, 5248.0)
+gg_rct_curved_1_5_build = Rect(-14400.0, 1728.0, -13248.0, 3392.0)
+gg_rct_curved_1_5_main = Rect(-14912.0, 2240.0, -14400.0, 2752.0)
+gg_rct_curved_1_5_mine = Rect(-14912.0, 1728.0, -14400.0, 2240.0)
+gg_rct_curved_1_5_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+gg_rct_curved_1_5_worker = Rect(-14400.0, 1728.0, -13248.0, 3392.0)
+gg_rct_curved_2_1_build = Rect(-768.0, 9152.0, 384.0, 10816.0)
+gg_rct_curved_2_1_main = Rect(384.0, 9664.0, 896.0, 10176.0)
+gg_rct_curved_2_1_mine = Rect(384.0, 9152.0, 896.0, 9664.0)
+gg_rct_curved_2_1_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+gg_rct_curved_2_1_worker = Rect(-768.0, 9152.0, 384.0, 10816.0)
+gg_rct_curved_2_2_build = Rect(-768.0, 7296.0, 384.0, 8960.0)
+gg_rct_curved_2_2_main = Rect(384.0, 7808.0, 896.0, 8320.0)
+gg_rct_curved_2_2_mine = Rect(384.0, 7296.0, 896.0, 7808.0)
+gg_rct_curved_2_2_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+gg_rct_curved_2_2_worker = Rect(-768.0, 7296.0, 384.0, 8960.0)
+gg_rct_curved_2_3_build = Rect(-768.0, 5440.0, 384.0, 7104.0)
+gg_rct_curved_2_3_main = Rect(384.0, 5952.0, 896.0, 6464.0)
+gg_rct_curved_2_3_mine = Rect(384.0, 5440.0, 896.0, 5952.0)
+gg_rct_curved_2_3_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+gg_rct_curved_2_3_worker = Rect(-768.0, 5440.0, 384.0, 7104.0)
+gg_rct_curved_2_4_build = Rect(-768.0, 3584.0, 384.0, 5248.0)
+gg_rct_curved_2_4_main = Rect(384.0, 4096.0, 896.0, 4608.0)
+gg_rct_curved_2_4_mine = Rect(384.0, 3584.0, 896.0, 4096.0)
+gg_rct_curved_2_4_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+gg_rct_curved_2_4_worker = Rect(-768.0, 3584.0, 384.0, 5248.0)
+gg_rct_curved_2_5_build = Rect(-768.0, 1728.0, 384.0, 3392.0)
+gg_rct_curved_2_5_main = Rect(384.0, 2240.0, 896.0, 2752.0)
+gg_rct_curved_2_5_mine = Rect(384.0, 1728.0, 896.0, 2240.0)
+gg_rct_curved_2_5_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+gg_rct_curved_2_5_worker = Rect(-768.0, 1728.0, 384.0, 3392.0)
+gg_rct_curved_team_1_base = Rect(-11488.0, 5952.0, -10880.0, 6592.0)
+gg_rct_curved_team_1_tower = Rect(-9536.0, 6016.0, -9024.0, 6528.0)
+gg_rct_curved_team_2_base = Rect(-3104.0, 5952.0, -2496.0, 6592.0)
+gg_rct_curved_team_2_tower = Rect(-4928.0, 6016.0, -4416.0, 6528.0)
+gg_rct_curved_1_1_laboratory = Rect(-14912.0, 10176.0, -14400.0, 10688.0)
+gg_rct_curved_1_2_laboratory = Rect(-14912.0, 8320.0, -14400.0, 8832.0)
+gg_rct_curved_1_3_laboratory = Rect(-14912.0, 6464.0, -14400.0, 6976.0)
+gg_rct_curved_1_4_laboratory = Rect(-14912.0, 4608.0, -14400.0, 5120.0)
+gg_rct_curved_1_5_laboratory = Rect(-14912.0, 2752.0, -14400.0, 3264.0)
+gg_rct_curved_2_1_laboratory = Rect(384.0, 10176.0, 896.0, 10688.0)
+gg_rct_curved_2_2_laboratory = Rect(384.0, 8320.0, 896.0, 8832.0)
+gg_rct_curved_2_3_laboratory = Rect(384.0, 6464.0, 896.0, 6976.0)
+gg_rct_curved_2_4_laboratory = Rect(384.0, 4608.0, 896.0, 5120.0)
+gg_rct_curved_2_5_laboratory = Rect(384.0, 2752.0, 896.0, 3264.0)
+gg_rct_curved_team_2_attack_1_left = Rect(-11552.0, 3552.0, -1344.0, 8992.0)
+gg_rct_curved_1_1_shop = Rect(-15424.0, 9664.0, -14912.0, 10176.0)
+gg_rct_curved_1_2_shop = Rect(-15424.0, 7808.0, -14912.0, 8320.0)
+gg_rct_curved_1_3_shop = Rect(-15424.0, 5952.0, -14912.0, 6464.0)
+gg_rct_curved_1_4_shop = Rect(-15424.0, 4096.0, -14912.0, 4608.0)
+gg_rct_curved_1_5_shop = Rect(-15424.0, 2240.0, -14912.0, 2752.0)
+gg_rct_curved_2_1_shop = Rect(896.0, 9664.0, 1408.0, 10176.0)
+gg_rct_curved_2_2_shop = Rect(896.0, 7808.0, 1408.0, 8320.0)
+gg_rct_curved_2_3_shop = Rect(896.0, 5952.0, 1408.0, 6464.0)
+gg_rct_curved_2_4_shop = Rect(896.0, 4096.0, 1408.0, 4608.0)
+gg_rct_curved_2_5_shop = Rect(896.0, 2240.0, 1408.0, 2752.0)
+gg_rct_curved_1_1_image = Rect(-10848.0, 6688.0, -10624.0, 6912.0)
+gg_rct_curved_1_2_image = Rect(-10848.0, 6432.0, -10624.0, 6656.0)
+gg_rct_curved_1_3_image = Rect(-10848.0, 6176.0, -10624.0, 6400.0)
+gg_rct_curved_1_4_image = Rect(-10848.0, 5920.0, -10624.0, 6144.0)
+gg_rct_curved_1_5_image = Rect(-10848.0, 5664.0, -10624.0, 5888.0)
+gg_rct_curved_2_1_image = Rect(-3456.0, 6656.0, -3232.0, 6880.0)
+gg_rct_curved_2_2_image = Rect(-3456.0, 6400.0, -3232.0, 6624.0)
+gg_rct_curved_2_3_image = Rect(-3456.0, 6144.0, -3232.0, 6368.0)
+gg_rct_curved_2_4_image = Rect(-3456.0, 5888.0, -3232.0, 6112.0)
+gg_rct_curved_2_5_image = Rect(-3456.0, 5632.0, -3232.0, 5856.0)
+gg_rct_curved_team_1_addGold = Rect(-7008.0, 3552.0, -2464.0, 8992.0)
+gg_rct_curved_team_2_addGold = Rect(-11552.0, 3552.0, -7008.0, 8992.0)
 end
 
 --CUSTOM_CODE
@@ -6637,9 +6131,9 @@ function initGameConfig(mode)
             isOpenAllMap = false
         },
         united = {
-            unitRange = 1.5, -- 150%
+            unitRange = 1, -- 150%
             spawnPolicy = {
-                interval = 0,
+                interval = 4,
                 dif = 35
             },
             economy = {
@@ -6651,26 +6145,8 @@ function initGameConfig(mode)
                 goldByTower = 125,
                 incomeForCenter = 1
             },
-            playerPosition = { 3, 4, 2, 1, 5 },
+            playerPosition = { 1, 2, 3, 4, 5 },
             isOpenAllMap = false
-        },
-        royal = {
-            unitRange = 1, -- 150%
-            spawnPolicy = {
-                interval = 0,
-                dif = 35
-            },
-            economy = {
-                startGold = 600,
-                startIncomePerSec = 10,
-                incomeBoost = 2,
-                firstMinePrice = 300,
-                nextMineDiffPrice = 300,
-                goldByTower = 125,
-                incomeForCenter = 1
-            },
-            playerPosition = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-            isOpenAllMap = true
         }
     }
 
@@ -6829,7 +6305,6 @@ function initGame(mode)
 
     createBaseAndTower()
     addWorkers()
-    initCamera()
     createBuildingsForPlayers()
     createPictures()
     initPanelForAllPlayers()
@@ -7026,29 +6501,28 @@ end
 function initRect()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            player.buildRect = regions[game_config.mode][team.i][player.i]['build']
-            player.workerRect = regions[game_config.mode][team.i][player.i]['worker']
-            player.mineRect = regions[game_config.mode][team.i][player.i]['mine']
-            player.mainRect = regions[game_config.mode][team.i][player.i]['main']
-            player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
-            player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
-            player.shopRect = regions[game_config.mode][team.i][player.i]['shop']
-            player.cameraRect = regions[game_config.mode]['camera']
-            player.imageRect = regions[game_config.mode][team.i][player.i]['image']
+            player.buildRect = regions['curved'][team.i][player.i]['build']
+            player.workerRect = regions['curved'][team.i][player.i]['worker']
+            player.mineRect = regions['curved'][team.i][player.i]['mine']
+            player.mainRect = regions['curved'][team.i][player.i]['main']
+            player.laboratoryRect = regions['curved'][team.i][player.i]['laboratory']
+            player.spawnRect = regions['curved'][team.i][player.i]['spawn']
+            player.shopRect = regions['curved'][team.i][player.i]['shop']
+            player.imageRect = regions['curved'][team.i][player.i]['image']
         end
-        team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
-        team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
-        team.base.addGoldRect = regions[game_config.mode]['team'][team.i]['addGold']
+        team.base.baseRect = regions['curved']['team'][team.i]['base']
+        team.base.towerRect = regions['curved']['team'][team.i]['tower']
+        team.base.addGoldRect = regions['curved']['team'][team.i]['addGold']
     end
 
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            local attackData = regions[game_config.mode][team.i][player.i]['attack']
+            local attackData = regions['curved'][team.i][player.i]['attack']
             if not attackData then
-                attackData = regions[game_config.mode]['team'][team.i]['attack']
+                attackData = regions['curved']['team'][team.i]['attack']
             end
             if not attackData then
-                attackData = regions[game_config.mode]['global']['attack']
+                attackData = regions['curved']['global']['attack']
             end
 
             local directions = { 'right', 'left', 'up', 'down' }
@@ -7335,18 +6809,6 @@ function getRandomUnits(units)
     end
 
     return randomUnits
-end
-
-function initCamera()
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            SetCameraBoundsToRectForPlayerBJ( player.id, player.cameraRect )
-            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.mainRect), GetRectCenterY(player.mainRect))
-            if game_config.isOpenAllMap == true then
-                CreateFogModifierRectBJ( true, player.id, FOG_OF_WAR_VISIBLE, player.cameraRect )
-            end
-        end
-    end
 end
 Debug.endFile()
 Debug.beginFile('regions-init.lua')
@@ -7873,7 +7335,7 @@ Debug.endFile()
 Debug.beginFile('main-triggers.lua')
 function initTriggers()
     incomeTrigger()
-    moveByPointsTrigger()
+    moveTrigger()
     loseTrigger()
     winTrigger()
     goldExtractorTrigger()
@@ -7884,7 +7346,7 @@ function initTriggers()
     spawnTrigger()
     initHeroTriggers()
     cellTrigger()
-    moveTrigger()
+    replaceTrigger()
     summonTrigger()
     statusPanelUpdateTrigger()
     damageDetectTrigger()
@@ -7897,7 +7359,62 @@ function initTriggers()
 end
 Debug.endFile()
 Debug.beginFile('move-trigger.lua')
+additionalDir = 500
 function moveTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            for i = 1, #player.attackPointRect do
+                local trig = CreateTrigger()
+                TriggerRegisterTimerEventPeriodic(trig, 2.00)
+                TriggerAddAction(trig, function()
+                    local group = GetUnitsInRectAll(player.attackPointRect[i].rect)
+                    ForGroup(group, function ()
+                        local unit = GetEnumUnit()
+                        local label = GetUnitUserData(unit)
+                        local owner = GetOwningPlayer(unit)
+                        if owner == player.spawnPlayerId and (label == player.attackPointRect[i].label or label == 0) then
+                            if GetUnitCurrentOrder(unit) == 0 or
+                                    GetUnitCurrentOrder(unit) == 851983 then
+                                moveByLocation(player.attackPointRect[i], unit)
+                            end
+                        end
+                    end)
+                    DestroyGroup(group)
+                end)
+            end
+        end
+    end
+end
+
+function moveByLocation(rect, unit)
+    local x, y
+    if rect.direction == 'right' then
+        x = GetRectMaxX(rect.rect) + additionalDir
+        y = GetUnitY(unit)
+    elseif rect.direction == 'down' then
+        x = GetUnitX(unit)
+        y = GetRectMinY(rect.rect) - additionalDir
+    elseif rect.direction == 'left' then
+        x = GetRectMinX(rect.rect) - additionalDir
+        y = GetUnitY(unit)
+    elseif rect.direction == 'up' then
+        x = GetUnitX(unit)
+        y = GetRectMaxY(rect.rect) + additionalDir
+    end
+    IssuePointOrderLoc(unit, "attack", Location(x, y))
+end
+
+function containsValue(value, array)
+    for _, v in ipairs(array) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
+Debug.endFile()
+Debug.beginFile('replace-trigger.lua')
+function replaceTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             local trig = CreateTrigger()
@@ -7964,61 +7481,6 @@ function replaceGroupCell(group)
     DestroyGroup(group)
 end
 Debug.endFile()
-Debug.beginFile('point-by-point-trigger.lua')
-additionalDir = 500
-function moveByPointsTrigger()
-    for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
-            for i = 1, #player.attackPointRect do
-                local trig = CreateTrigger()
-                TriggerRegisterTimerEventPeriodic(trig, 2.00)
-                TriggerAddAction(trig, function()
-                    local group = GetUnitsInRectAll(player.attackPointRect[i].rect)
-                    ForGroup(group, function ()
-                        local unit = GetEnumUnit()
-                        local label = GetUnitUserData(unit)
-                        local owner = GetOwningPlayer(unit)
-                        if owner == player.spawnPlayerId and (label == player.attackPointRect[i].label or label == 0) then
-                            if GetUnitCurrentOrder(unit) == 0 or
-                                    GetUnitCurrentOrder(unit) == 851983 then
-                                moveByLocation(player.attackPointRect[i], unit)
-                            end
-                        end
-                    end)
-                    DestroyGroup(group)
-                end)
-            end
-        end
-    end
-end
-
-function moveByLocation(rect, unit)
-    local x, y
-    if rect.direction == 'right' then
-        x = GetRectMaxX(rect.rect) + additionalDir
-        y = GetUnitY(unit)
-    elseif rect.direction == 'down' then
-        x = GetUnitX(unit)
-        y = GetRectMinY(rect.rect) - additionalDir
-    elseif rect.direction == 'left' then
-        x = GetRectMinX(rect.rect) - additionalDir
-        y = GetUnitY(unit)
-    elseif rect.direction == 'up' then
-        x = GetUnitX(unit)
-        y = GetRectMaxY(rect.rect) + additionalDir
-    end
-    IssuePointOrderLoc(unit, "attack", Location(x, y))
-end
-
-function containsValue(value, array)
-    for _, v in ipairs(array) do
-        if v == value then
-            return true
-        end
-    end
-    return false
-end
-Debug.endFile()
 Debug.beginFile('spawn-trigger.lua')
 function spawnTrigger()
     local trig = CreateTrigger()
@@ -8043,6 +7505,7 @@ function handleUnitSpawn(player, id, x, y, label)
         local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
         SetUnitUserData( unit, label)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+        immediatelyMoveUnit(unit)
     end
 end
 
@@ -8055,11 +7518,13 @@ function handleHeroSpawn(player, unit, x, y, label)
         SetUnitUserData( unit, label)
         hero.status = "alive"
         hero.unit = unit
+        immediatelyMoveUnit(unit)
     elseif hero.status == "dead" then
         hero.status = "alive"
         SetUnitUserData(hero.unit, label)
         ReviveHeroLoc(hero.unit, Location(x, y), false)
         SetUnitManaPercentBJ(hero.unit, 100)
+        immediatelyMoveUnit(hero.unit)
     end
     SynchronizeInventory(unit, hero.unit)
 end
@@ -8194,7 +7659,7 @@ function KodoTrigger()
         local order = GetIssuedOrderId()
         if order == 852104 then
             TriggerSleepAction(3)
-            moveAfterSpell()
+            immediatelyMoveUnit(GetTriggerUnit())
         end
     end)
 end
@@ -8260,16 +7725,16 @@ function spellFinishTrigger()
     local trig = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SPELL_FINISH)
     TriggerAddAction(trig, function()
-        moveAfterSpell()
+        immediatelyMoveUnit(GetTriggerUnit())
     end)
 end
 
-function moveAfterSpell()
-    local attackPointRect = getAttackPointRect(GetOwningPlayer(GetTriggerUnit()))
+function immediatelyMoveUnit(unit)
+    local attackPointRect = getAttackPointRect(GetOwningPlayer(unit))
     for _, atPointRect in ipairs(attackPointRect) do
-        local label = GetUnitUserData(GetTriggerUnit())
-        if IsUnitInRect(atPointRect.rect, GetTriggerUnit()) and (label == atPointRect.label or label == 0) then
-            moveByLocation(atPointRect, GetTriggerUnit())
+        local label = GetUnitUserData(unit)
+        if IsUnitInRect(atPointRect.rect, unit) and (label == atPointRect.label or label == 0) then
+            moveByLocation(atPointRect, unit)
             return
         end
     end
@@ -9158,7 +8623,7 @@ SetEnemyStartLocPrio(19, 0, 18, MAP_LOC_PRIO_LOW)
 end
 
 function main()
-SetCameraBounds(-16128.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -28672.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 32256.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -16128.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 32256.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -28672.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+SetCameraBounds(-16128.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 1024.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 2688.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -16128.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 2688.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 1024.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
 SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
 NewSoundEnvironment("Default")
 SetAmbientDaySound("LordaeronSummerDay")

@@ -14,7 +14,6 @@ function initGame(mode)
 
     createBaseAndTower()
     addWorkers()
-    initCamera()
     createBuildingsForPlayers()
     createPictures()
     initPanelForAllPlayers()
@@ -211,29 +210,28 @@ end
 function initRect()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            player.buildRect = regions[game_config.mode][team.i][player.i]['build']
-            player.workerRect = regions[game_config.mode][team.i][player.i]['worker']
-            player.mineRect = regions[game_config.mode][team.i][player.i]['mine']
-            player.mainRect = regions[game_config.mode][team.i][player.i]['main']
-            player.laboratoryRect = regions[game_config.mode][team.i][player.i]['laboratory']
-            player.spawnRect = regions[game_config.mode][team.i][player.i]['spawn']
-            player.shopRect = regions[game_config.mode][team.i][player.i]['shop']
-            player.cameraRect = regions[game_config.mode]['camera']
-            player.imageRect = regions[game_config.mode][team.i][player.i]['image']
+            player.buildRect = regions['curved'][team.i][player.i]['build']
+            player.workerRect = regions['curved'][team.i][player.i]['worker']
+            player.mineRect = regions['curved'][team.i][player.i]['mine']
+            player.mainRect = regions['curved'][team.i][player.i]['main']
+            player.laboratoryRect = regions['curved'][team.i][player.i]['laboratory']
+            player.spawnRect = regions['curved'][team.i][player.i]['spawn']
+            player.shopRect = regions['curved'][team.i][player.i]['shop']
+            player.imageRect = regions['curved'][team.i][player.i]['image']
         end
-        team.base.baseRect = regions[game_config.mode]['team'][team.i]['base']
-        team.base.towerRect = regions[game_config.mode]['team'][team.i]['tower']
-        team.base.addGoldRect = regions[game_config.mode]['team'][team.i]['addGold']
+        team.base.baseRect = regions['curved']['team'][team.i]['base']
+        team.base.towerRect = regions['curved']['team'][team.i]['tower']
+        team.base.addGoldRect = regions['curved']['team'][team.i]['addGold']
     end
 
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            local attackData = regions[game_config.mode][team.i][player.i]['attack']
+            local attackData = regions['curved'][team.i][player.i]['attack']
             if not attackData then
-                attackData = regions[game_config.mode]['team'][team.i]['attack']
+                attackData = regions['curved']['team'][team.i]['attack']
             end
             if not attackData then
-                attackData = regions[game_config.mode]['global']['attack']
+                attackData = regions['curved']['global']['attack']
             end
 
             local directions = { 'right', 'left', 'up', 'down' }

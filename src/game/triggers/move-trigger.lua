@@ -1,68 +1,55 @@
 Debug.beginFile('move-trigger.lua')
+additionalDir = 500
 function moveTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            local trig = CreateTrigger()
-            TriggerRegisterPlayerUnitEvent(trig, player.id, EVENT_PLAYER_UNIT_SPELL_EFFECT)
-            TriggerAddCondition(trig, Condition(function()
-                return GetSpellAbilityId() == FourCC(abilities.moveLarge) or
-                        GetSpellAbilityId() == FourCC(abilities.moveMedium) or
-                        GetSpellAbilityId() == FourCC(abilities.moveSmall)
-            end))
-            TriggerAddAction(trig, function()
-                local location = GetSpellTargetLoc()
-
-                if type(player.buildRect) == "table" then
-                    for i in ipairs(player.buildRect) do
-                        if isLocationInRectangle(location, player.buildRect[i]) then
-                            local unit = GetSpellAbilityUnit()
-                            SetUnitPositionLoc(unit, location)
+            for i = 1, #player.attackPointRect do
+                local trig = CreateTrigger()
+                TriggerRegisterTimerEventPeriodic(trig, 2.00)
+                TriggerAddAction(trig, function()
+                    local group = GetUnitsInRectAll(player.attackPointRect[i].rect)
+                    ForGroup(group, function ()
+                        local unit = GetEnumUnit()
+                        local label = GetUnitUserData(unit)
+                        local owner = GetOwningPlayer(unit)
+                        if owner == player.spawnPlayerId and (label == player.attackPointRect[i].label or label == 0) then
+                            if GetUnitCurrentOrder(unit) == 0 or
+                                    GetUnitCurrentOrder(unit) == 851983 then
+                                moveByLocation(player.attackPointRect[i], unit)
+                            end
                         end
-                    end
-                else
-                    if isLocationInRectangle(location, player.buildRect) then
-                        local unit = GetSpellAbilityUnit()
-                        SetUnitPositionLoc(unit, location)
-                    end
-                end
-            end)
+                    end)
+                    DestroyGroup(group)
+                end)
+            end
         end
     end
 end
 
-function isLocationInRectangle(location, rect)
-    rectMinX = GetRectMinX(rect)
-    rectMinY = GetRectMinY(rect)
-    rectMaxX = GetRectMaxX(rect)
-    rectMaxY = GetRectMaxY(rect)
-
-    local locX = GetLocationX(location)
-    local locY = GetLocationY(location)
-
-    return locX >= rectMinX and locX <= rectMaxX and locY >= rectMinY and locY <= rectMaxY
-end
-
-function replaceCell(player)
-    if type(player.buildRect) == "table" then
-        for i in ipairs(player.buildRect) do
-            local group = GetUnitsInRectAll(player.buildRect[i])
-            replaceGroupCell(group)
-        end
-    else
-        local group = GetUnitsInRectAll(player.buildRect)
-        replaceGroupCell(group)
+function moveByLocation(rect, unit)
+    local x, y
+    if rect.direction == 'right' then
+        x = GetRectMaxX(rect.rect) + additionalDir
+        y = GetUnitY(unit)
+    elseif rect.direction == 'down' then
+        x = GetUnitX(unit)
+        y = GetRectMinY(rect.rect) - additionalDir
+    elseif rect.direction == 'left' then
+        x = GetRectMinX(rect.rect) - additionalDir
+        y = GetUnitY(unit)
+    elseif rect.direction == 'up' then
+        x = GetUnitX(unit)
+        y = GetRectMaxY(rect.rect) + additionalDir
     end
+    IssuePointOrderLoc(unit, "attack", Location(x, y))
 end
 
-function replaceGroupCell(group)
-    ForGroup(group, function()
-        local unit = GetEnumUnit()
-        local ability = BlzGetUnitAbility(unit, FourCC(abilities.sell100))
-        if ability ~= nil then
-            UnitAddAbility(unit, FourCC(abilities.sell75))
-            UnitRemoveAbilityBJ(FourCC(abilities.sell100), unit)
+function containsValue(value, array)
+    for _, v in ipairs(array) do
+        if v == value then
+            return true
         end
-    end)
-    DestroyGroup(group)
+    end
+    return false
 end
 Debug.endFile()

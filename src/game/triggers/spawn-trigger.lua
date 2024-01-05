@@ -22,6 +22,7 @@ function handleUnitSpawn(player, id, x, y, label)
         local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
         SetUnitUserData( unit, label)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+        immediatelyMoveUnit(unit)
     end
 end
 
@@ -34,11 +35,13 @@ function handleHeroSpawn(player, unit, x, y, label)
         SetUnitUserData( unit, label)
         hero.status = "alive"
         hero.unit = unit
+        immediatelyMoveUnit(unit)
     elseif hero.status == "dead" then
         hero.status = "alive"
         SetUnitUserData(hero.unit, label)
         ReviveHeroLoc(hero.unit, Location(x, y), false)
         SetUnitManaPercentBJ(hero.unit, 100)
+        immediatelyMoveUnit(hero.unit)
     end
     SynchronizeInventory(unit, hero.unit)
 end
