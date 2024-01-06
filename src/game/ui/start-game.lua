@@ -14,9 +14,8 @@ function startGameUI()
     local selectingText = BlzGetFrameByName("StartGameMenuModeSelecting", 0)
     BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
 
-    initModeButton("CurvedButton", 'curved')
+    initModeButton("DirectButton", 'direct')
     initModeButton("UnitedButton", 'united')
-    initModeButton("RoyalButton", 'royal')
     initUnitsAvailableButtons()
 end
 

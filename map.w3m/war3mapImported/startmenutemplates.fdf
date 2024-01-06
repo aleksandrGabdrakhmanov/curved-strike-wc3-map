@@ -40,7 +40,7 @@ Frame "BACKDROP" "StartGameMenu" {
             SetPoint LEFT, "StartGameMenuMode", LEFT, 0, 0.015,
             Text "Mode:",
         }
-        Frame "GLUETEXTBUTTON" "CurvedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
+        Frame "GLUETEXTBUTTON" "DirectButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
             Width 0.08,
             SetPoint LEFT, "StartGameMenuModeText", RIGHT, 0.01, 0,
             ButtonText "GameplayButtonText",
@@ -50,18 +50,10 @@ Frame "BACKDROP" "StartGameMenu" {
         }
         Frame "GLUETEXTBUTTON" "UnitedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
             Width 0.08,
-            SetPoint LEFT, "CurvedButton", RIGHT, 0.01, 0,
+            SetPoint LEFT, "DirectButton", RIGHT, 0.01, 0,
             ButtonText "GameplayButtonText",
             Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
                 Text "UNITED",
-            }
-        }
-        Frame "GLUETEXTBUTTON" "RoyalButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
-            Width 0.08,
-            SetPoint LEFT, "UnitedButton", RIGHT, 0.01, 0,
-            ButtonText "GameplayButtonText",
-            Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
-                Text "BATTLE ROYAL",
             }
         }
     }

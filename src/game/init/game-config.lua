@@ -1,7 +1,7 @@
 Debug.beginFile('game-config.lua')
 function initGameConfig(mode)
     game_modes = {
-        curved = {
+        direct = {
             unitRange = 1, -- 100%
             spawnPolicy = {
                 interval = 35,

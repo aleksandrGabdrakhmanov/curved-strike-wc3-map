@@ -6112,7 +6112,7 @@ Debug.endFile()
 Debug.beginFile('game-config.lua')
 function initGameConfig(mode)
     game_modes = {
-        curved = {
+        direct = {
             unitRange = 1, -- 100%
             spawnPolicy = {
                 interval = 35,
@@ -6290,10 +6290,10 @@ function initGlobalVariables()
 end
 Debug.endFile()
 Debug.beginFile('game-init.lua')
-function initGame(mode)
+function initGame()
     UseTimeOfDayBJ(false)
     SetTimeOfDay(12)
-    initTeams(mode)
+    initTeams()
     initRect()
 
     setEnemyBetweenPlayers()
@@ -6333,63 +6333,29 @@ function createPictures()
     end
 end
 
-function initTeams(mode)
+function initTeams()
     all_teams = {}
 
-    if mode == 'united' or mode == 'curved' then
-        all_teams[1] = {
-            i = 1,
-            players = addPlayersInTeam(players_team_left),
-            base = {
-                player = Player(17),
-                winTeam = 2,
-                baseRect = nil,
-                towerRect = nil
-            }
+    all_teams[1] = {
+        i = 1,
+        players = addPlayersInTeam(players_team_left),
+        base = {
+            player = Player(17),
+            winTeam = 2,
+            baseRect = nil,
+            towerRect = nil
         }
-        all_teams[2] = {
-            i = 2,
-            players = addPlayersInTeam(players_team_right),
-            base = {
-                player = Player(12),
-                winTeam = 1,
-                baseRect = nil,
-                towerRect = nil
-            }
+    }
+    all_teams[2] = {
+        i = 2,
+        players = addPlayersInTeam(players_team_right),
+        base = {
+            player = Player(12),
+            winTeam = 1,
+            baseRect = nil,
+            towerRect = nil
         }
-    elseif mode == 'royal' then
-
-        local playersPosition = {
-            [1] = { 1 },
-            [2] = { 1, 6 },
-            [3] = { 2, 5, 9},
-            [4] = { 1, 3, 6, 8},
-            [5] = { 1, 3, 5, 7, 9 },
-            [6] = { 1, 2, 3, 5, 7, 9 },
-            [7] = { 1, 2, 3, 5, 7, 8, 9 },
-            [8] = { 1, 2, 3, 4, 5, 7, 8, 9 },
-            [9] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
-            [10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
-        }
-        local currentPosition = playersPosition[getCountPlayers()]
-
-        local positionId = 1
-        for _, player in ipairs(mergeSequences(players_team_left, players_team_right)) do
-            if (GetPlayerSlotState(player.id) == PLAYER_SLOT_STATE_PLAYING) then
-                all_teams[positionId] = {
-                    i = currentPosition[positionId],
-                    players = addPlayersInTeam({ player }),
-                    base = {
-                        player = player.spawnId,
-                        winTeam = 2,
-                        baseRect = nil,
-                        towerRect = nil
-                    }
-                }
-                positionId = positionId + 1
-            end
-        end
-    end
+    }
 end
 
 function getCountPlayers()
@@ -6628,7 +6594,7 @@ Debug.beginFile('main-init.lua')
 function initMain(mode)
     initRegions()
     initGameConfig(mode)
-    initGame(mode)
+    initGame()
 end
 Debug.endFile()
 Debug.beginFile('players-init.lua')
@@ -7790,9 +7756,8 @@ function startGameUI()
     local selectingText = BlzGetFrameByName("StartGameMenuModeSelecting", 0)
     BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
 
-    initModeButton("CurvedButton", 'curved')
+    initModeButton("DirectButton", 'direct')
     initModeButton("UnitedButton", 'united')
-    initModeButton("RoyalButton", 'royal')
     initUnitsAvailableButtons()
 end
 
