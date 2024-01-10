@@ -17,6 +17,7 @@ function initGame()
     createBuildingsForPlayers()
     createPictures()
     initPanelForAllPlayers()
+    initAbilitiesPanel()
 end
 
 
@@ -130,7 +131,9 @@ function addPlayersInTeam(players)
                 spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif,
                 heroes = {},
                 totalDamage = 0,
-                totalKills = 0
+                totalKills = 0,
+                availableUnits = {},
+                availableHeroes = {}
             })
             nextPosition = nextPosition + 1
         end

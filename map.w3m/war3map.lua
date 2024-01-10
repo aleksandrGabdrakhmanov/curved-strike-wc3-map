@@ -117,18 +117,17 @@ gg_trg_ItemshopGUI_Init_Haggle_Skills = nil
 gg_trg_ItemshopGUI_Init = nil
 gg_trg_ItemshopGUI_Init_ShortCuts = nil
 function InitGlobals()
-local i = 0
-
-udg_TasItemShop_WhiteList = false
-udg_TasItemShop_Category = 0
-udg_TasItemShop_Text = ""
-udg_TasItemShop_Icon = ""
-udg_TasItemShop_Gold = 1.00
-udg_TasItemShop_Lumber = 1.00
-udg_TasItemShop_GoldAdd = 0.0
-udg_TasItemShop_LumberAdd = 0.0
-udg_MyItemShopCat = 0
-udg_MyItemShopCat2 = 0
+    local i = 0
+    udg_TasItemShop_WhiteList = false
+    udg_TasItemShop_Category = 0
+    udg_TasItemShop_Text = ""
+    udg_TasItemShop_Icon = ""
+    udg_TasItemShop_Gold = 1.00
+    udg_TasItemShop_Lumber = 1.00
+    udg_TasItemShop_GoldAdd = 0.0
+    udg_TasItemShop_LumberAdd = 0.0
+    udg_MyItemShopCat = 0
+    udg_MyItemShopCat2 = 0
 end
 
 -- After Loading string.pack & string.unpack stop working. Hence one nils them for the save.
@@ -3597,96 +3596,95 @@ do
 end
 
 function CreateRegions()
-local we
-
-gg_rct_curved_team_1_attack_1_right = Rect(-12672.0, 3552.0, -2464.0, 8992.0)
-gg_rct_curved_1_1_build = Rect(-14400.0, 9152.0, -13248.0, 10816.0)
-gg_rct_curved_1_1_main = Rect(-14912.0, 9664.0, -14400.0, 10176.0)
-gg_rct_curved_1_1_mine = Rect(-14912.0, 9152.0, -14400.0, 9664.0)
-gg_rct_curved_1_1_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
-gg_rct_curved_1_1_worker = Rect(-14400.0, 9152.0, -13248.0, 10816.0)
-gg_rct_curved_1_2_build = Rect(-14400.0, 7296.0, -13248.0, 8960.0)
-gg_rct_curved_1_2_main = Rect(-14912.0, 7808.0, -14400.0, 8320.0)
-gg_rct_curved_1_2_mine = Rect(-14912.0, 7296.0, -14400.0, 7808.0)
-gg_rct_curved_1_2_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
-gg_rct_curved_1_2_worker = Rect(-14400.0, 7296.0, -13248.0, 8960.0)
-gg_rct_curved_1_3_build = Rect(-14400.0, 5440.0, -13248.0, 7104.0)
-gg_rct_curved_1_3_main = Rect(-14912.0, 5952.0, -14400.0, 6464.0)
-gg_rct_curved_1_3_mine = Rect(-14912.0, 5440.0, -14400.0, 5952.0)
-gg_rct_curved_1_3_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
-gg_rct_curved_1_3_worker = Rect(-14400.0, 5440.0, -13248.0, 7104.0)
-gg_rct_curved_1_4_build = Rect(-14400.0, 3584.0, -13248.0, 5248.0)
-gg_rct_curved_1_4_main = Rect(-14912.0, 4096.0, -14400.0, 4608.0)
-gg_rct_curved_1_4_mine = Rect(-14912.0, 3584.0, -14400.0, 4096.0)
-gg_rct_curved_1_4_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
-gg_rct_curved_1_4_worker = Rect(-14400.0, 3584.0, -13248.0, 5248.0)
-gg_rct_curved_1_5_build = Rect(-14400.0, 1728.0, -13248.0, 3392.0)
-gg_rct_curved_1_5_main = Rect(-14912.0, 2240.0, -14400.0, 2752.0)
-gg_rct_curved_1_5_mine = Rect(-14912.0, 1728.0, -14400.0, 2240.0)
-gg_rct_curved_1_5_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
-gg_rct_curved_1_5_worker = Rect(-14400.0, 1728.0, -13248.0, 3392.0)
-gg_rct_curved_2_1_build = Rect(-768.0, 9152.0, 384.0, 10816.0)
-gg_rct_curved_2_1_main = Rect(384.0, 9664.0, 896.0, 10176.0)
-gg_rct_curved_2_1_mine = Rect(384.0, 9152.0, 896.0, 9664.0)
-gg_rct_curved_2_1_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
-gg_rct_curved_2_1_worker = Rect(-768.0, 9152.0, 384.0, 10816.0)
-gg_rct_curved_2_2_build = Rect(-768.0, 7296.0, 384.0, 8960.0)
-gg_rct_curved_2_2_main = Rect(384.0, 7808.0, 896.0, 8320.0)
-gg_rct_curved_2_2_mine = Rect(384.0, 7296.0, 896.0, 7808.0)
-gg_rct_curved_2_2_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
-gg_rct_curved_2_2_worker = Rect(-768.0, 7296.0, 384.0, 8960.0)
-gg_rct_curved_2_3_build = Rect(-768.0, 5440.0, 384.0, 7104.0)
-gg_rct_curved_2_3_main = Rect(384.0, 5952.0, 896.0, 6464.0)
-gg_rct_curved_2_3_mine = Rect(384.0, 5440.0, 896.0, 5952.0)
-gg_rct_curved_2_3_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
-gg_rct_curved_2_3_worker = Rect(-768.0, 5440.0, 384.0, 7104.0)
-gg_rct_curved_2_4_build = Rect(-768.0, 3584.0, 384.0, 5248.0)
-gg_rct_curved_2_4_main = Rect(384.0, 4096.0, 896.0, 4608.0)
-gg_rct_curved_2_4_mine = Rect(384.0, 3584.0, 896.0, 4096.0)
-gg_rct_curved_2_4_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
-gg_rct_curved_2_4_worker = Rect(-768.0, 3584.0, 384.0, 5248.0)
-gg_rct_curved_2_5_build = Rect(-768.0, 1728.0, 384.0, 3392.0)
-gg_rct_curved_2_5_main = Rect(384.0, 2240.0, 896.0, 2752.0)
-gg_rct_curved_2_5_mine = Rect(384.0, 1728.0, 896.0, 2240.0)
-gg_rct_curved_2_5_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
-gg_rct_curved_2_5_worker = Rect(-768.0, 1728.0, 384.0, 3392.0)
-gg_rct_curved_team_1_base = Rect(-11488.0, 5952.0, -10880.0, 6592.0)
-gg_rct_curved_team_1_tower = Rect(-9536.0, 6016.0, -9024.0, 6528.0)
-gg_rct_curved_team_2_base = Rect(-3104.0, 5952.0, -2496.0, 6592.0)
-gg_rct_curved_team_2_tower = Rect(-4928.0, 6016.0, -4416.0, 6528.0)
-gg_rct_curved_1_1_laboratory = Rect(-14912.0, 10176.0, -14400.0, 10688.0)
-gg_rct_curved_1_2_laboratory = Rect(-14912.0, 8320.0, -14400.0, 8832.0)
-gg_rct_curved_1_3_laboratory = Rect(-14912.0, 6464.0, -14400.0, 6976.0)
-gg_rct_curved_1_4_laboratory = Rect(-14912.0, 4608.0, -14400.0, 5120.0)
-gg_rct_curved_1_5_laboratory = Rect(-14912.0, 2752.0, -14400.0, 3264.0)
-gg_rct_curved_2_1_laboratory = Rect(384.0, 10176.0, 896.0, 10688.0)
-gg_rct_curved_2_2_laboratory = Rect(384.0, 8320.0, 896.0, 8832.0)
-gg_rct_curved_2_3_laboratory = Rect(384.0, 6464.0, 896.0, 6976.0)
-gg_rct_curved_2_4_laboratory = Rect(384.0, 4608.0, 896.0, 5120.0)
-gg_rct_curved_2_5_laboratory = Rect(384.0, 2752.0, 896.0, 3264.0)
-gg_rct_curved_team_2_attack_1_left = Rect(-11552.0, 3552.0, -1344.0, 8992.0)
-gg_rct_curved_1_1_shop = Rect(-15424.0, 9664.0, -14912.0, 10176.0)
-gg_rct_curved_1_2_shop = Rect(-15424.0, 7808.0, -14912.0, 8320.0)
-gg_rct_curved_1_3_shop = Rect(-15424.0, 5952.0, -14912.0, 6464.0)
-gg_rct_curved_1_4_shop = Rect(-15424.0, 4096.0, -14912.0, 4608.0)
-gg_rct_curved_1_5_shop = Rect(-15424.0, 2240.0, -14912.0, 2752.0)
-gg_rct_curved_2_1_shop = Rect(896.0, 9664.0, 1408.0, 10176.0)
-gg_rct_curved_2_2_shop = Rect(896.0, 7808.0, 1408.0, 8320.0)
-gg_rct_curved_2_3_shop = Rect(896.0, 5952.0, 1408.0, 6464.0)
-gg_rct_curved_2_4_shop = Rect(896.0, 4096.0, 1408.0, 4608.0)
-gg_rct_curved_2_5_shop = Rect(896.0, 2240.0, 1408.0, 2752.0)
-gg_rct_curved_1_1_image = Rect(-10848.0, 6688.0, -10624.0, 6912.0)
-gg_rct_curved_1_2_image = Rect(-10848.0, 6432.0, -10624.0, 6656.0)
-gg_rct_curved_1_3_image = Rect(-10848.0, 6176.0, -10624.0, 6400.0)
-gg_rct_curved_1_4_image = Rect(-10848.0, 5920.0, -10624.0, 6144.0)
-gg_rct_curved_1_5_image = Rect(-10848.0, 5664.0, -10624.0, 5888.0)
-gg_rct_curved_2_1_image = Rect(-3456.0, 6656.0, -3232.0, 6880.0)
-gg_rct_curved_2_2_image = Rect(-3456.0, 6400.0, -3232.0, 6624.0)
-gg_rct_curved_2_3_image = Rect(-3456.0, 6144.0, -3232.0, 6368.0)
-gg_rct_curved_2_4_image = Rect(-3456.0, 5888.0, -3232.0, 6112.0)
-gg_rct_curved_2_5_image = Rect(-3456.0, 5632.0, -3232.0, 5856.0)
-gg_rct_curved_team_1_addGold = Rect(-7008.0, 3552.0, -2464.0, 8992.0)
-gg_rct_curved_team_2_addGold = Rect(-11552.0, 3552.0, -7008.0, 8992.0)
+    local we
+    gg_rct_curved_team_1_attack_1_right = Rect(-12672.0, 3552.0, -2464.0, 8992.0)
+    gg_rct_curved_1_1_build = Rect(-14400.0, 9152.0, -13248.0, 10816.0)
+    gg_rct_curved_1_1_main = Rect(-14912.0, 9664.0, -14400.0, 10176.0)
+    gg_rct_curved_1_1_mine = Rect(-14912.0, 9152.0, -14400.0, 9664.0)
+    gg_rct_curved_1_1_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+    gg_rct_curved_1_1_worker = Rect(-14400.0, 9152.0, -13248.0, 10816.0)
+    gg_rct_curved_1_2_build = Rect(-14400.0, 7296.0, -13248.0, 8960.0)
+    gg_rct_curved_1_2_main = Rect(-14912.0, 7808.0, -14400.0, 8320.0)
+    gg_rct_curved_1_2_mine = Rect(-14912.0, 7296.0, -14400.0, 7808.0)
+    gg_rct_curved_1_2_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+    gg_rct_curved_1_2_worker = Rect(-14400.0, 7296.0, -13248.0, 8960.0)
+    gg_rct_curved_1_3_build = Rect(-14400.0, 5440.0, -13248.0, 7104.0)
+    gg_rct_curved_1_3_main = Rect(-14912.0, 5952.0, -14400.0, 6464.0)
+    gg_rct_curved_1_3_mine = Rect(-14912.0, 5440.0, -14400.0, 5952.0)
+    gg_rct_curved_1_3_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+    gg_rct_curved_1_3_worker = Rect(-14400.0, 5440.0, -13248.0, 7104.0)
+    gg_rct_curved_1_4_build = Rect(-14400.0, 3584.0, -13248.0, 5248.0)
+    gg_rct_curved_1_4_main = Rect(-14912.0, 4096.0, -14400.0, 4608.0)
+    gg_rct_curved_1_4_mine = Rect(-14912.0, 3584.0, -14400.0, 4096.0)
+    gg_rct_curved_1_4_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+    gg_rct_curved_1_4_worker = Rect(-14400.0, 3584.0, -13248.0, 5248.0)
+    gg_rct_curved_1_5_build = Rect(-14400.0, 1728.0, -13248.0, 3392.0)
+    gg_rct_curved_1_5_main = Rect(-14912.0, 2240.0, -14400.0, 2752.0)
+    gg_rct_curved_1_5_mine = Rect(-14912.0, 1728.0, -14400.0, 2240.0)
+    gg_rct_curved_1_5_spawn = Rect(-12672.0, 5440.0, -11520.0, 7104.0)
+    gg_rct_curved_1_5_worker = Rect(-14400.0, 1728.0, -13248.0, 3392.0)
+    gg_rct_curved_2_1_build = Rect(-768.0, 9152.0, 384.0, 10816.0)
+    gg_rct_curved_2_1_main = Rect(384.0, 9664.0, 896.0, 10176.0)
+    gg_rct_curved_2_1_mine = Rect(384.0, 9152.0, 896.0, 9664.0)
+    gg_rct_curved_2_1_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+    gg_rct_curved_2_1_worker = Rect(-768.0, 9152.0, 384.0, 10816.0)
+    gg_rct_curved_2_2_build = Rect(-768.0, 7296.0, 384.0, 8960.0)
+    gg_rct_curved_2_2_main = Rect(384.0, 7808.0, 896.0, 8320.0)
+    gg_rct_curved_2_2_mine = Rect(384.0, 7296.0, 896.0, 7808.0)
+    gg_rct_curved_2_2_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+    gg_rct_curved_2_2_worker = Rect(-768.0, 7296.0, 384.0, 8960.0)
+    gg_rct_curved_2_3_build = Rect(-768.0, 5440.0, 384.0, 7104.0)
+    gg_rct_curved_2_3_main = Rect(384.0, 5952.0, 896.0, 6464.0)
+    gg_rct_curved_2_3_mine = Rect(384.0, 5440.0, 896.0, 5952.0)
+    gg_rct_curved_2_3_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+    gg_rct_curved_2_3_worker = Rect(-768.0, 5440.0, 384.0, 7104.0)
+    gg_rct_curved_2_4_build = Rect(-768.0, 3584.0, 384.0, 5248.0)
+    gg_rct_curved_2_4_main = Rect(384.0, 4096.0, 896.0, 4608.0)
+    gg_rct_curved_2_4_mine = Rect(384.0, 3584.0, 896.0, 4096.0)
+    gg_rct_curved_2_4_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+    gg_rct_curved_2_4_worker = Rect(-768.0, 3584.0, 384.0, 5248.0)
+    gg_rct_curved_2_5_build = Rect(-768.0, 1728.0, 384.0, 3392.0)
+    gg_rct_curved_2_5_main = Rect(384.0, 2240.0, 896.0, 2752.0)
+    gg_rct_curved_2_5_mine = Rect(384.0, 1728.0, 896.0, 2240.0)
+    gg_rct_curved_2_5_spawn = Rect(-2496.0, 5440.0, -1344.0, 7104.0)
+    gg_rct_curved_2_5_worker = Rect(-768.0, 1728.0, 384.0, 3392.0)
+    gg_rct_curved_team_1_base = Rect(-11488.0, 5952.0, -10880.0, 6592.0)
+    gg_rct_curved_team_1_tower = Rect(-9536.0, 6016.0, -9024.0, 6528.0)
+    gg_rct_curved_team_2_base = Rect(-3104.0, 5952.0, -2496.0, 6592.0)
+    gg_rct_curved_team_2_tower = Rect(-4928.0, 6016.0, -4416.0, 6528.0)
+    gg_rct_curved_1_1_laboratory = Rect(-14912.0, 10176.0, -14400.0, 10688.0)
+    gg_rct_curved_1_2_laboratory = Rect(-14912.0, 8320.0, -14400.0, 8832.0)
+    gg_rct_curved_1_3_laboratory = Rect(-14912.0, 6464.0, -14400.0, 6976.0)
+    gg_rct_curved_1_4_laboratory = Rect(-14912.0, 4608.0, -14400.0, 5120.0)
+    gg_rct_curved_1_5_laboratory = Rect(-14912.0, 2752.0, -14400.0, 3264.0)
+    gg_rct_curved_2_1_laboratory = Rect(384.0, 10176.0, 896.0, 10688.0)
+    gg_rct_curved_2_2_laboratory = Rect(384.0, 8320.0, 896.0, 8832.0)
+    gg_rct_curved_2_3_laboratory = Rect(384.0, 6464.0, 896.0, 6976.0)
+    gg_rct_curved_2_4_laboratory = Rect(384.0, 4608.0, 896.0, 5120.0)
+    gg_rct_curved_2_5_laboratory = Rect(384.0, 2752.0, 896.0, 3264.0)
+    gg_rct_curved_team_2_attack_1_left = Rect(-11552.0, 3552.0, -1344.0, 8992.0)
+    gg_rct_curved_1_1_shop = Rect(-15424.0, 9664.0, -14912.0, 10176.0)
+    gg_rct_curved_1_2_shop = Rect(-15424.0, 7808.0, -14912.0, 8320.0)
+    gg_rct_curved_1_3_shop = Rect(-15424.0, 5952.0, -14912.0, 6464.0)
+    gg_rct_curved_1_4_shop = Rect(-15424.0, 4096.0, -14912.0, 4608.0)
+    gg_rct_curved_1_5_shop = Rect(-15424.0, 2240.0, -14912.0, 2752.0)
+    gg_rct_curved_2_1_shop = Rect(896.0, 9664.0, 1408.0, 10176.0)
+    gg_rct_curved_2_2_shop = Rect(896.0, 7808.0, 1408.0, 8320.0)
+    gg_rct_curved_2_3_shop = Rect(896.0, 5952.0, 1408.0, 6464.0)
+    gg_rct_curved_2_4_shop = Rect(896.0, 4096.0, 1408.0, 4608.0)
+    gg_rct_curved_2_5_shop = Rect(896.0, 2240.0, 1408.0, 2752.0)
+    gg_rct_curved_1_1_image = Rect(-10848.0, 6688.0, -10624.0, 6912.0)
+    gg_rct_curved_1_2_image = Rect(-10848.0, 6432.0, -10624.0, 6656.0)
+    gg_rct_curved_1_3_image = Rect(-10848.0, 6176.0, -10624.0, 6400.0)
+    gg_rct_curved_1_4_image = Rect(-10848.0, 5920.0, -10624.0, 6144.0)
+    gg_rct_curved_1_5_image = Rect(-10848.0, 5664.0, -10624.0, 5888.0)
+    gg_rct_curved_2_1_image = Rect(-3456.0, 6656.0, -3232.0, 6880.0)
+    gg_rct_curved_2_2_image = Rect(-3456.0, 6400.0, -3232.0, 6624.0)
+    gg_rct_curved_2_3_image = Rect(-3456.0, 6144.0, -3232.0, 6368.0)
+    gg_rct_curved_2_4_image = Rect(-3456.0, 5888.0, -3232.0, 6112.0)
+    gg_rct_curved_2_5_image = Rect(-3456.0, 5632.0, -3232.0, 5856.0)
+    gg_rct_curved_team_1_addGold = Rect(-7008.0, 3552.0, -2464.0, 8992.0)
+    gg_rct_curved_team_2_addGold = Rect(-11552.0, 3552.0, -7008.0, 8992.0)
 end
 
 --CUSTOM_CODE
@@ -6178,41 +6176,41 @@ function initGlobalVariables()
         { id = Player(9), spawnId = Player(10), team = 2 }
     }
     heroes_for_build = {
-        { id = 'H011', parentId = 'Hpal', race = 'human', line = 1, position = 1,  name = 'Paladin' },
-        { id = 'H01A', parentId = 'Hamg', race = 'human', line = 1, position = 2,  name = 'Archmage' },
-        { id = 'H01B', parentId = 'Hmkg', race = 'human', line = 1, position = 3,  name = 'Mountain King' },
-        { id = 'H01C', parentId = 'Hblm', race = 'human', line = 1, position = 4,  name = 'Blood Mage' },
+        { id = 'H011', parentId = 'Hpal', race = 'human', line = 1, position = 1, name = 'Paladin', abilities = {{ id = 'AHhb'}, { id = 'AHds'}, { id = 'AHre'}, { id = 'AHad'}} },
+        { id = 'H01A', parentId = 'Hamg', race = 'human', line = 1, position = 2, name = 'Archmage', abilities = {{ id = 'AHbz'}, { id = 'AHab'}, { id = 'AHwe'}, { id = 'ANto'}} },
+        { id = 'H01B', parentId = 'Hmkg', race = 'human', line = 1, position = 3, name = 'Mountain King', abilities = {{ id = 'AHtc'}, { id = 'AHtb'}, { id = 'AHbn'}, { id = 'AHav'}} },
+        { id = 'H01C', parentId = 'Hblm', race = 'human', line = 1, position = 4, name = 'Blood Mage', abilities = {{ id = 'AHfc'}, { id = 'AHbn'}, { id = 'AHdr'}, { id = 'AHpx'}} },
 
-        { id = 'O00E', parentId = 'Obla', race = 'orc', line = 2, position = 1, name = 'Blademaster' },
-        { id = 'O00F', parentId = 'Ofar', race = 'orc', line = 2, position = 2, name = 'Far Seer' },
-        { id = 'O00G', parentId = 'Otch', race = 'orc', line = 2, position = 3, name = 'Tauren Chieftain' },
-        { id = 'O00H', parentId = 'Oshd', race = 'orc', line = 2, position = 4, name = 'Shadow Hunter' },
+        { id = 'O00E', parentId = 'Obla', race = 'orc', line = 2, position = 1, name = 'Blademaster', abilities = {{ id = 'AOwk'}, { id = 'AOcr'}, { id = 'AOmi'}, { id = 'AOww'}} },
+        { id = 'O00F', parentId = 'Ofar', race = 'orc', line = 2, position = 2, name = 'Far Seer', abilities = {{ id = 'AOfs'}, { id = 'AOsf'}, { id = 'AOcl'}, { id = 'AOeq'}} },
+        { id = 'O00G', parentId = 'Otch', race = 'orc', line = 2, position = 3, name = 'Tauren Chieftain', abilities = {{ id = 'AOsh'}, { id = 'AOae'}, { id = 'AOre'}, { id = 'AOws'}} },
+        { id = 'O00H', parentId = 'Oshd', race = 'orc', line = 2, position = 4, name = 'Shadow Hunter', abilities = {{ id = 'AOhw'}, { id = 'AOhx'}, { id = 'AOsw'}, { id = 'AOvd'}} },
 
-        { id = 'U00B', parentId = 'Udea', race = 'undead', line = 3, position = 1, name = 'Death Knight' },
-        { id = 'U00C', parentId = 'Ulic', race = 'undead', line = 3, position = 2, name = 'Lich' },
-        { id = 'U00D', parentId = 'Udre', race = 'undead', line = 3, position = 3, name = 'Dreadlord' },
-        { id = 'U00E', parentId = 'Ucrl', race = 'undead', line = 3, position = 4, name = 'Crypt Lord' },
+        { id = 'U00B', parentId = 'Udea', race = 'undead', line = 3, position = 1, name = 'Death Knight', abilities = {{ id = 'AUdc'}, { id = 'AUdp'}, { id = 'AUau'}, { id = 'AUan'}} },
+        { id = 'U00C', parentId = 'Ulic', race = 'undead', line = 3, position = 2, name = 'Lich', abilities = {{ id = 'AUfn'}, { id = 'AUfu'}, { id = 'AUdr'}, { id = 'AUdd'}} },
+        { id = 'U00D', parentId = 'Udre', race = 'undead', line = 3, position = 3, name = 'Dreadlord', abilities = {{ id = 'AUav'}, { id = 'AUcs'}, { id = 'AUin'}, { id = 'A001'}} },
+        { id = 'U00E', parentId = 'Ucrl', race = 'undead', line = 3, position = 4, name = 'Crypt Lord', abilities = {{ id = 'AUim'}, { id = 'AUts'}, { id = 'AUcb'}, { id = 'AUls'}} },
 
-        { id = 'E00N', parentId = 'Ekee', race = 'elf', line = 4, position = 1, name = 'Keeper of the Grove' },
-        { id = 'E00O', parentId = 'Emoo', race = 'elf', line = 4, position = 2, name = 'Priestess of the Moon' },
-        { id = 'E00P', parentId = 'Edem', race = 'elf', line = 4, position = 3, name = 'Demon Hunter' },
-        { id = 'E00Q', parentId = 'Ewar', race = 'elf', line = 4, position = 4, name = 'Warden' },
+        { id = 'E00N', parentId = 'Ekee', race = 'elf', line = 4, position = 1, name = 'Keeper of the Grove', abilities = {{ id = 'AEer'}, { id = 'AEah'}, { id = 'A002'}, { id = 'AEtq'}} },
+        { id = 'E00O', parentId = 'Emoo', race = 'elf', line = 4, position = 2, name = 'Priestess of the Moon', abilities = {{ id = 'AHfa'}, { id = 'ANsi'}, { id = 'AEar'}, { id = 'AEsf'}} },
+        { id = 'E00P', parentId = 'Edem', race = 'elf', line = 4, position = 3, name = 'Demon Hunter', abilities = {{ id = 'AEmb'}, { id = 'AEim'}, { id = 'AEev'}, { id = 'AEme'}} },
+        { id = 'E00Q', parentId = 'Ewar', race = 'elf', line = 4, position = 4, name = 'Warden', abilities = {{ id = 'AEbl'}, { id = 'AEfk'}, { id = 'AEsh'}, { id = 'AEsv'}} },
 
-        { id = 'N000', parentId = 'Nalc', race = 'other', line = 5, position = 1, name = 'Alchemist' },
-        { id = 'N001', parentId = 'Nngs', race = 'other', line = 5, position = 2,  name = 'Sea Witch' },
-        { id = 'N002', parentId = 'Ntin', race = 'other', line = 5, position = 3,  name = 'Tinker' },
-        { id = 'N003', parentId = 'Nbst', race = 'other', line = 5, position = 4,  name = 'Beastmaster' },
-        { id = 'N004', parentId = 'Npbm', race = 'other', line = 5, position = 5,  name = 'Brewmaster' },
-        { id = 'N005', parentId = 'Nbrn', race = 'other', line = 5, position = 6,  name = 'Dark Ranger' },
-        { id = 'N006', parentId = 'Nfir', race = 'other', line = 5, position = 7,  name = 'Firelord' },
-        { id = 'N007', parentId = 'Nplh', race = 'other', line = 5, position = 8,  name = 'Pit Lord' }
+        { id = 'N000', parentId = 'Nalc', race = 'other', line = 5, position = 1, name = 'Alchemist', abilities = {{ id = 'ANhs'}, { id = 'ANab'}, { id = 'ANcr'}, { id = 'ANtm'}} },
+        { id = 'N001', parentId = 'Nngs', race = 'other', line = 5, position = 2, name = 'Sea Witch', abilities = {{ id = 'ANfl'}, { id = 'ANfa'}, { id = 'ANms'}, { id = 'ANto'}} },
+        { id = 'N002', parentId = 'Ntin', race = 'other', line = 5, position = 3, name = 'Tinker', abilities = {{ id = 'ANsy'}, { id = 'ANcs'}, { id = 'ANeg'}, { id = 'ANrg'}} },
+        { id = 'N003', parentId = 'Nbst', race = 'other', line = 5, position = 4, name = 'Beastmaster', abilities = {{ id = 'ANsg'}, { id = 'ANsq'}, { id = 'ANsw'}, { id = 'ANst'}} },
+        { id = 'N004', parentId = 'Npbm', race = 'other', line = 5, position = 5, name = 'Brewmaster', abilities = {{ id = 'ANbf'}, { id = 'ANdh'}, { id = 'ANdb'}, { id = 'ANef'}} },
+        { id = 'N005', parentId = 'Nbrn', race = 'other', line = 5, position = 6, name = 'Dark Ranger', abilities = {{ id = 'ANse'}, { id = 'ANba'}, { id = 'ANdr'}, { id = 'ANch'}} },
+        { id = 'N006', parentId = 'Nfir', race = 'other', line = 5, position = 7, name = 'Firelord', abilities = {{ id = 'ANic'}, { id = 'ANso'}, { id = 'ANlm'}, { id = 'ANvc'}} },
+        { id = 'N007', parentId = 'Nplh', race = 'other', line = 5, position = 8, name = 'Pit Lord', abilities = {{ id = 'ANrf'}, { id = 'ANht'}, { id = 'ANca'}, { id = 'ANdo'}} }
     }
     units_for_build = {
-        { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}},
+        { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, name = 'Footman', upgrades = {'Rhde'}, abilities = {{ id = 'Adef'}}},
         { id = 'h004', parentId = 'h00D', tier = 1, race = 'human', line = 1, position = 2, name = 'Rifleman', upgrades = {'Rhri'}},
-        { id = 'h008', parentId = 'h00I', tier = 1, race = 'human', line = 1, position = 3, name = 'Sorceress', upgrades = {'Rhst'}},
+        { id = 'h008', parentId = 'h00I', tier = 1, race = 'human', line = 1, position = 3, name = 'Sorceress', upgrades = {'Rhst'}, abilities = {{ id = 'Aply'}, { id = 'A008'}, { id = 'Aslo'}}},
         { id = 'h003', parentId = 'h00E', tier = 2, race = 'human', line = 1, position = 4, name = 'Mortar Team', upgrades = {'Rhfl', 'Rhfs'}},
-        { id = 'h007', parentId = 'h00H', tier = 2, race = 'human', line = 1, position = 5,  name = 'Priest', upgrades = {'Rhpt'}},
+        { id = 'h007', parentId = 'h00H', tier = 2, race = 'human', line = 1, position = 5,  name = 'Priest', upgrades = {'Rhpt'}, abilities = {{ id = 'Ahea'}, { id = 'Ainf'}, { id = 'Adis'}}},
         { id = 'h006', parentId = 'h00K', tier = 2, race = 'human', line = 1, position = 6,  name = 'Spellbreaker', upgrades = {'Rhss'}},
         { id = 'h000', parentId = 'h00F', tier = 2, race = 'human', line = 1, position = 7,  name = 'Flying Machine', upgrades = {'Rhgb', 'Rhfc'}},
         { id = 'h009', parentId = 'h00L', tier = 3, race = 'human', line = 1, position = 8,  name = 'Dragonhawk Rider', upgrades = {'Rhan'}},
@@ -6222,10 +6220,10 @@ function initGlobalVariables()
 
         { id = 'h00P', parentId = 'o003', tier = 1, race = 'orc', line = 2, position = 1,  name = 'Grunt', upgrades = {'Robs'}},
         { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', line = 2, position = 2,  name = 'Headhunter', upgrades = {'Robk', 'Rotr'}},
-        { id = 'h00T', parentId = 'o00C', tier = 1, race = 'orc', line = 2, position = 3,  name = 'Shaman', upgrades = {'Rost'}},
-        { id = 'h00S', parentId = 'o004', tier = 2, race = 'orc', line = 2, position = 4,  name = 'Raider', upgrades = {'Roen', 'Ropg'}},
-        { id = 'h00X', parentId = 'o00B', tier = 2, race = 'orc', line = 2, position = 5,  name = 'Witch Doctor', upgrades = {'Rowd', 'Rotr'}},
-        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', line = 2, position = 6,  name = 'Spirit Walker', upgrades = {'Rowt'}},
+        { id = 'h00T', parentId = 'o00C', tier = 1, race = 'orc', line = 2, position = 3,  name = 'Shaman', upgrades = {'Rost'}, abilities = {{ id = 'Ablo'}, { id = 'Alsh'}, { id = 'Aprg'}}},
+        { id = 'h00S', parentId = 'o004', tier = 2, race = 'orc', line = 2, position = 4,  name = 'Raider', upgrades = {'Roen', 'Ropg'}, abilities = {{ id = 'Aens'}}},
+        { id = 'h00X', parentId = 'o00B', tier = 2, race = 'orc', line = 2, position = 5,  name = 'Witch Doctor', upgrades = {'Rowd', 'Rotr'}, abilities = {{ id = 'Aeye'}, { id = 'Ahwd'}, { id = 'Asta'}}},
+        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', line = 2, position = 6,  name = 'Spirit Walker', upgrades = {'Rowt'}, abilities = {{ id = 'Aspl'}, { id = 'Adcn'}, { id = 'Aast'}}},
         { id = 'h00N', parentId = 'o00A', tier = 2, race = 'orc', line = 2, position = 7,  name = 'Batrider', upgrades = {'Rotr'}},
         { id = 'h00R', parentId = 'o008', tier = 2, race = 'orc', line = 2, position = 8,  name = 'Kodo Beast', upgrades = {'Rwdm'}},
         { id = 'h00V', parentId = 'o005', tier = 3, race = 'orc', line = 2, position = 9,  name = 'Tauren', upgrades = {'Rows'}},
@@ -6233,11 +6231,11 @@ function initGlobalVariables()
         { id = 'h00W', parentId = 'o009', tier = 3, race = 'orc', line = 2, position = 11,  name = 'Wind Rider', upgrades = {'Rovs'}},
 
         { id = 'h014', parentId = 'u001', tier = 1, race = 'undead', line = 3, position = 1,  name = 'Ghoul', upgrades = {'Rugf'}},
-        { id = 'h010', parentId = 'u004', tier = 1, race = 'undead', line = 3, position = 2,  name = 'Crypt Fiend', upgrades = {'Ruwb', 'Rubu'}},
-        { id = 'h00Z', parentId = 'u006', tier = 1, race = 'undead', line = 3, position = 3,  name = 'Banshee', upgrades = {'Ruba'}},
-        { id = 'h017', parentId = 'u008', tier = 2, race = 'undead', line = 3, position = 4,  name = 'Obsidian Statue', upgrades = {}},
-        { id = 'h013', parentId = 'u005', tier = 2, race = 'undead', line = 3, position = 5,  name = 'Gargoyle', upgrades = {'Rusf'}},
-        { id = 'h016', parentId = 'u007', tier = 2, race = 'undead', line = 3, position = 6,  name = 'Necromancer', upgrades = {'Rusl', 'Rune', 'Rusm'}},
+        { id = 'h010', parentId = 'u004', tier = 1, race = 'undead', line = 3, position = 2,  name = 'Crypt Fiend', upgrades = {'Ruwb', 'Rubu'}, abilities = {{ id = 'Aweb'}, { id = 'Abur'}}},
+        { id = 'h00Z', parentId = 'u006', tier = 1, race = 'undead', line = 3, position = 3,  name = 'Banshee', upgrades = {'Ruba'}, abilities = {{ id = 'Aams'}, { id = 'Acrs'}}},
+        { id = 'h017', parentId = 'u008', tier = 2, race = 'undead', line = 3, position = 4,  name = 'Obsidian Statue', upgrades = {}, abilities = {{ id = 'Arpl'}, { id = 'Arpm'}}},
+        { id = 'h013', parentId = 'u005', tier = 2, race = 'undead', line = 3, position = 5,  name = 'Gargoyle', upgrades = {'Rusf'}, abilities = {{ id = 'Astn'}, { id = 'Aatp'}}},
+        { id = 'h016', parentId = 'u007', tier = 2, race = 'undead', line = 3, position = 6,  name = 'Necromancer', upgrades = {'Rusl', 'Rune', 'Rusm'}, abilities = {{ id = 'Acri'}, { id = 'Arai'}, { id = 'Auhf'}}},
         { id = 'h015', parentId = 'u003', tier = 2, race = 'undead', line = 3, position = 7,  name = 'Meat Wagon', upgrades = {'Rupc'}},
         { id = 'h018', parentId = 'u000', tier = 2, race = 'undead', line = 3, position = 8,  name = 'Shade', upgrades = {}},
         { id = 'h00Y', parentId = 'u002', tier = 3, race = 'undead', line = 3, position = 9,  name = 'Abomination', upgrades = {'Rupc'}},
@@ -6249,10 +6247,10 @@ function initGlobalVariables()
         { id = 'e004', parentId = 'e00D', tier = 1, race = 'elf', line = 4, position = 3,  name = 'Dryad', upgrades = {'Resi'}},
         { id = 'e006', parentId = 'e00E', tier = 2, race = 'elf', line = 4, position = 4,  name = 'Glaive Thower', upgrades = {}},
         { id = 'e007', parentId = 'e00F', tier = 2, race = 'elf', line = 4, position = 5,  name = 'Hippogryph', upgrades = {}},
-        { id = 'e002', parentId = 'e00J', tier = 2, race = 'elf', line = 4, position = 6,  name = 'Druid of the Claw', upgrades = {'Redc'}},
-        { id = 'e003', parentId = 'e00I', tier = 2, race = 'elf', line = 4, position = 7,  name = 'Druid of the Talon', upgrades = {'Redt'}},
-        { id = 'e005', parentId = 'e00L', tier = 2, race = 'elf', line = 4, position = 8,  name = 'Faerie Dragon', upgrades = {}},
-        { id = 'e00A', parentId = 'e00K', tier = 3, race = 'elf', line = 4, position = 9,  name = 'Mountain Giant', upgrades = {'Rers', 'Rehs'}},
+        { id = 'e002', parentId = 'e00J', tier = 2, race = 'elf', line = 4, position = 6,  name = 'Druid of the Claw', upgrades = {'Redc'}, abilities = {{ id = 'Abrf'}, { id = 'Arej'}, { id = 'Aroa'}}},
+        { id = 'e003', parentId = 'e00I', tier = 2, race = 'elf', line = 4, position = 7,  name = 'Druid of the Talon', upgrades = {'Redt'}, abilities = {{ id = 'Acyc'}, { id = 'Arav'}, { id = 'Afae'}}},
+        { id = 'e005', parentId = 'e00L', tier = 2, race = 'elf', line = 4, position = 8,  name = 'Faerie Dragon', upgrades = {}, abilities = {{ id = 'Amfl'}}},
+        { id = 'e00A', parentId = 'e00K', tier = 3, race = 'elf', line = 4, position = 9,  name = 'Mountain Giant', upgrades = {'Rers', 'Rehs'}, abilities = {{ id = 'Atau'}}},
         { id = 'e008', parentId = 'e00G', tier = 3, race = 'elf', line = 4, position = 10,  name = 'Hippogryph Rider', upgrades = {}},
         { id = 'e001', parentId = 'e00H', tier = 3, race = 'elf', line = 4, position = 11,  name = 'Chimaera', upgrades = {'Recb'}},
     }
@@ -6281,11 +6279,11 @@ function initGlobalVariables()
     }
 
     main_race = {
-        {id = 'hcas', race = 'human'},
-        {id = 'ofrt', race = 'orc'},
-        {id = 'unp2', race = 'undead'},
-        {id = 'etoe', race = 'elf'},
-        {id = 'ntav', race = 'other'}
+        { id = 'hcas', race = 'human' },
+        { id = 'ofrt', race = 'orc' },
+        { id = 'unp2', race = 'undead' },
+        { id = 'etoe', race = 'elf' },
+        { id = 'ntav', race = 'other' }
     }
 end
 Debug.endFile()
@@ -6308,6 +6306,7 @@ function initGame()
     createBuildingsForPlayers()
     createPictures()
     initPanelForAllPlayers()
+    initAbilitiesPanel()
 end
 
 
@@ -6421,7 +6420,9 @@ function addPlayersInTeam(players)
                 spawnTimer = game_config.playerPosition[nextPosition] * game_config.spawnPolicy.interval + game_config.spawnPolicy.dif,
                 heroes = {},
                 totalDamage = 0,
-                totalKills = 0
+                totalKills = 0,
+                availableUnits = {},
+                availableHeroes = {}
             })
             nextPosition = nextPosition + 1
         end
@@ -6711,10 +6712,9 @@ function changeAvailableUnitsForPlayers()
             end
             local randomUnits = getRandomUnits(units_for_build)
             for _, unit in ipairs(randomUnits) do
+                table.insert(player.availableUnits, unit)
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
             end
-
-
             reRollHeroes(player)
         end
     end
@@ -7094,17 +7094,45 @@ function heroConstructTrigger()
                     local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
                     KillUnit(GroupPickRandomUnit(group))
                     DestroyGroup(group)
+                    local unitId = GetUnitTypeId(GetTriggerUnit())
                     table.insert(player.heroes, {
                         status = "new",
                         building = GetTriggerUnit(),
                         unit = nil,
-                        newSkills = {}
+                        newSkills = {},
+                        unitConfig = getHeroUnitId(('>I4'):pack(unitId))
                     })
+                    if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
+                        updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))
+                    end
                     reRollHeroes(player)
                 end
             end)
         end
     end
+end
+
+function isDuplicateHero(unitId, heroes)
+    local count = 0
+    for _, hero in ipairs(heroes) do
+        if unitId == hero.unitConfig.id then
+            count = count + 1
+        end
+    end
+    if count > 1 then
+        return true
+    else
+        return false
+    end
+    end
+
+function getHeroUnitId(searchId)
+    for _, unit in pairs(heroes_for_build) do
+        if unit.id == searchId then
+            return unit
+        end
+    end
+    return nil
 end
 Debug.endFile()
 
@@ -7166,6 +7194,7 @@ function heroNewSkill()
                 for _, hero in ipairs(player.heroes) do
                     if hero.status == 'alive' then
                         for i = #hero.newSkills, 1, -1 do
+                            SetPlayerAbilityAvailable(player.spawnPlayerId, hero.newSkills[i], true)
                             SelectHeroSkill(hero.unit, hero.newSkills[i])
                             table.remove(hero.newSkills, i)
                         end
@@ -7476,10 +7505,9 @@ function handleUnitSpawn(player, id, x, y, label)
 end
 
 function handleHeroSpawn(player, unit, x, y, label)
-    local unitId = GetUnitTypeId(unit)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
-        local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
+        local unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         SetUnitUserData( unit, label)
         hero.status = "alive"
@@ -7574,15 +7602,6 @@ end
 
 function getParentUnitId(searchId)
     for _, unit in pairs(units_for_build) do
-        if unit.id == searchId then
-            return unit.parentId
-        end
-    end
-    return nil
-end
-
-function getHeroUnitId(searchId)
-    for _, unit in pairs(heroes_for_build) do
         if unit.id == searchId then
             return unit.parentId
         end
@@ -7698,8 +7717,7 @@ end
 function immediatelyMoveUnit(unit)
     local attackPointRect = getAttackPointRect(GetOwningPlayer(unit))
     for _, atPointRect in ipairs(attackPointRect) do
-        local label = GetUnitUserData(unit)
-        if IsUnitInRect(atPointRect.rect, unit) and (label == atPointRect.label or label == 0) then
+        if IsUnitInRect(atPointRect.rect, unit) then
             moveByLocation(atPointRect, unit)
             return
         end
@@ -7739,6 +7757,87 @@ function winTrigger()
         end
     end)
 end
+Debug.endFile()
+Debug.beginFile('start-game.lua')
+function initAbilitiesPanel()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local buttonAbility = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
+            BlzFrameSetAbsPoint(buttonAbility, FRAMEPOINT_BOTTOMLEFT, 0.2, 0.13)
+            BlzFrameSetSize(buttonAbility, 0.08, 0.03)
+            BlzFrameSetText(buttonAbility, "Abilities")
+            BlzFrameSetVisible(buttonAbility, GetLocalPlayer() == player.id)
+
+            local panelAbility = BlzCreateFrameByType("BACKDROP", "MyPanelAbility", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonBackdropTemplate", 0)
+            BlzFrameSetPoint(panelAbility, FRAMEPOINT_BOTTOM, buttonAbility, FRAMEPOINT_TOP, 0, 0)
+            BlzFrameSetVisible(panelAbility, false)
+
+            player.unitsWithAbility = 0
+            for _, unit in ipairs(player.availableUnits) do
+                local isAdded = initButtonForUnit(unit, panelAbility, player, player.unitsWithAbility)
+                if isAdded then
+                    player.unitsWithAbility = player.unitsWithAbility + 1
+                end
+            end
+            player.unitsWithAbility = player.unitsWithAbility + 1
+            player.buttonAbility = buttonAbility
+            player.panelAbility = panelAbility
+            player.isVisiblePanelAbility = false
+            BlzFrameSetSize(player.panelAbility, 0.2, player.unitsWithAbility * 0.025)
+
+            local trigger = CreateTrigger()
+            BlzTriggerRegisterFrameEvent(trigger, buttonAbility, FRAMEEVENT_CONTROL_CLICK)
+            TriggerAddAction(trigger, function()
+                if player.isVisiblePanelAbility then
+                    player.isVisiblePanelAbility = false
+                    BlzFrameSetVisible(player.panelAbility, player.isVisiblePanelAbility)
+                else
+                    player.isVisiblePanelAbility = true
+                    BlzFrameSetVisible(player.panelAbility, player.isVisiblePanelAbility)
+                end
+            end)
+        end
+    end
+end
+
+function updateAbilityPanel(player, hero)
+    initButtonForUnit(hero, player.panelAbility, player, player.unitsWithAbility)
+    player.unitsWithAbility = player.unitsWithAbility + 1
+    BlzFrameSetSize(player.panelAbility, 0.2, (player.unitsWithAbility + 1) * 0.025)
+end
+
+function initButtonForUnit(unit, containerFrame, player, position)
+    if unit.abilities then
+        local button = BlzCreateFrame("MyIconButtonTemplate", containerFrame, 0, 0)
+        BlzFrameSetPoint(button, FRAMEPOINT_TOPLEFT, containerFrame, FRAMEPOINT_TOPLEFT, 0.01, -(0.01 + (BlzFrameGetHeight(button) * position)))
+
+        local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
+        BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(unit.parentId)), 0, true)
+        for id, ability in ipairs(unit.abilities) do
+            local buttonAbility = BlzCreateFrame("MyIconButtonTemplate", containerFrame, 0, 0)
+            BlzFrameSetPoint(buttonAbility, FRAMEPOINT_LEFT, button, FRAMEPOINT_RIGHT, BlzFrameGetHeight(button) * (id - 1), 0)
+
+            local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
+            BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(ability.id)), 0, true)
+            local trig = CreateTrigger()
+            BlzTriggerRegisterFrameEvent(trig, buttonAbility, FRAMEEVENT_CONTROL_CLICK)
+            TriggerAddAction(trig, function()
+                if ability.active == true or ability.active == nil then
+                    ability.active = false
+                    BlzFrameSetTexture(buttonTexture, replaceTexture(BlzGetAbilityIcon(FourCC(ability.id))), 0, true)
+                    SetPlayerAbilityAvailable(player.spawnPlayerId, FourCC(ability.id), false)
+                else
+                    ability.active = true
+                    BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(ability.id)), 0, true)
+                    SetPlayerAbilityAvailable(player.spawnPlayerId, FourCC(ability.id), true)
+                end
+            end)
+        end
+        return true
+    end
+    return false
+end
+
 Debug.endFile()
 Debug.beginFile('start-game.lua')
 function initialUI()
@@ -8042,593 +8141,593 @@ Debug.endFile()
 
 --CUSTOM_CODE
 function Trig_ItemshopGUI_Init_Cats_Actions()
-udg_TasItemShop_Text = "GUI"
-udg_TasItemShop_Icon = "ReplaceableTextures\\CommandButtons\\BTNDranaiAkama.blp"
-TriggerExecute(udg_TasItemShopCategory)
-udg_MyItemShopCat = udg_TasItemShop_Category
-udg_TasItemShop_Text = "GUI2"
-udg_TasItemShop_Icon = "ReplaceableTextures\\CommandButtons\\BTNAcolyte.blp"
-TriggerExecute(udg_TasItemShopCategory)
-udg_MyItemShopCat2 = udg_TasItemShop_Category
+    udg_TasItemShop_Text = "GUI"
+    udg_TasItemShop_Icon = "ReplaceableTextures\\CommandButtons\\BTNDranaiAkama.blp"
+    TriggerExecute(udg_TasItemShopCategory)
+    udg_MyItemShopCat = udg_TasItemShop_Category
+    udg_TasItemShop_Text = "GUI2"
+    udg_TasItemShop_Icon = "ReplaceableTextures\\CommandButtons\\BTNAcolyte.blp"
+    TriggerExecute(udg_TasItemShopCategory)
+    udg_MyItemShopCat2 = udg_TasItemShop_Category
 end
 
 function InitTrig_ItemshopGUI_Init_Cats()
-gg_trg_ItemshopGUI_Init_Cats = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Cats, Trig_ItemshopGUI_Init_Cats_Actions)
+    gg_trg_ItemshopGUI_Init_Cats = CreateTrigger()
+    TriggerAddAction(gg_trg_ItemshopGUI_Init_Cats, Trig_ItemshopGUI_Init_Cats_Actions)
 end
 
 function Trig_ItemshopGUI_Init_Fusions_Actions()
-udg_TasItemShop_Item = FourCC("frgd")
-udg_TasItemShop_Mats[1] = FourCC("ofro")
-udg_TasItemShop_Mats[2] = FourCC("ratf")
-TriggerExecute(udg_TasItemShopFusion)
-udg_TasItemShop_Item = FourCC("srbd")
-udg_TasItemShop_Mats[1] = FourCC("ofir")
-udg_TasItemShop_Mats[2] = FourCC("ratf")
-TriggerExecute(udg_TasItemShopFusion)
+    udg_TasItemShop_Item = FourCC("frgd")
+    udg_TasItemShop_Mats[1] = FourCC("ofro")
+    udg_TasItemShop_Mats[2] = FourCC("ratf")
+    TriggerExecute(udg_TasItemShopFusion)
+    udg_TasItemShop_Item = FourCC("srbd")
+    udg_TasItemShop_Mats[1] = FourCC("ofir")
+    udg_TasItemShop_Mats[2] = FourCC("ratf")
+    TriggerExecute(udg_TasItemShopFusion)
 end
 
 function InitTrig_ItemshopGUI_Init_Fusions()
-gg_trg_ItemshopGUI_Init_Fusions = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Fusions, Trig_ItemshopGUI_Init_Fusions_Actions)
+    gg_trg_ItemshopGUI_Init_Fusions = CreateTrigger()
+    TriggerAddAction(gg_trg_ItemshopGUI_Init_Fusions, Trig_ItemshopGUI_Init_Fusions_Actions)
 end
 
 function Trig_ItemshopGUI_Init_Items_Actions()
-udg_TasItemShop_Item = FourCC("srbd")
-udg_TasItemShop_Category = udg_MyItemShopCat
-TriggerExecute(udg_TasItemShopAdd)
-udg_TasItemShop_Item = FourCC("frgd")
-udg_TasItemShop_Category = (udg_MyItemShopCat + udg_MyItemShopCat2)
-TriggerExecute(udg_TasItemShopAdd)
+    udg_TasItemShop_Item = FourCC("srbd")
+    udg_TasItemShop_Category = udg_MyItemShopCat
+    TriggerExecute(udg_TasItemShopAdd)
+    udg_TasItemShop_Item = FourCC("frgd")
+    udg_TasItemShop_Category = (udg_MyItemShopCat + udg_MyItemShopCat2)
+    TriggerExecute(udg_TasItemShopAdd)
 end
 
 function InitTrig_ItemshopGUI_Init_Items()
-gg_trg_ItemshopGUI_Init_Items = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Items, Trig_ItemshopGUI_Init_Items_Actions)
+    gg_trg_ItemshopGUI_Init_Items = CreateTrigger()
+    TriggerAddAction(gg_trg_ItemshopGUI_Init_Items, Trig_ItemshopGUI_Init_Items_Actions)
 end
 
 function Trig_ItemshopGUI_Init_Shop_Actions()
-udg_TasItemShop_Unit = FourCC("ngme")
-udg_TasItemShop_Gold = 1.20
-udg_TasItemShop_Lumber = 1.20
-udg_TasItemShop_WhiteList = false
-udg_TasItemShop_Mats[1] = FourCC("desc")
-udg_TasItemShop_Mats[2] = FourCC("ckng")
-TriggerExecute(udg_TasItemShopCreateShop)
+    udg_TasItemShop_Unit = FourCC("ngme")
+    udg_TasItemShop_Gold = 1.20
+    udg_TasItemShop_Lumber = 1.20
+    udg_TasItemShop_WhiteList = false
+    udg_TasItemShop_Mats[1] = FourCC("desc")
+    udg_TasItemShop_Mats[2] = FourCC("ckng")
+    TriggerExecute(udg_TasItemShopCreateShop)
 end
 
 function InitTrig_ItemshopGUI_Init_Shop()
-gg_trg_ItemshopGUI_Init_Shop = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Shop, Trig_ItemshopGUI_Init_Shop_Actions)
+    gg_trg_ItemshopGUI_Init_Shop = CreateTrigger()
+    TriggerAddAction(gg_trg_ItemshopGUI_Init_Shop, Trig_ItemshopGUI_Init_Shop_Actions)
 end
 
 function Trig_ItemshopGUI_Init_Haggle_Skills_Actions()
-udg_TasItemShop_Skill = FourCC("A000")
-udg_TasItemShop_Gold = 0.80
-udg_TasItemShop_Lumber = 0.80
-udg_TasItemShop_LumberAdd = 0.00
-udg_TasItemShop_GoldAdd = 0.00
-TriggerExecute(udg_TasItemShopHaggle)
-udg_TasItemShop_Buff = FourCC("BOhx")
-udg_TasItemShop_Gold = 3.00
-udg_TasItemShop_Lumber = 3.00
-TriggerExecute(udg_TasItemShopHaggle)
+    udg_TasItemShop_Skill = FourCC("A000")
+    udg_TasItemShop_Gold = 0.80
+    udg_TasItemShop_Lumber = 0.80
+    udg_TasItemShop_LumberAdd = 0.00
+    udg_TasItemShop_GoldAdd = 0.00
+    TriggerExecute(udg_TasItemShopHaggle)
+    udg_TasItemShop_Buff = FourCC("BOhx")
+    udg_TasItemShop_Gold = 3.00
+    udg_TasItemShop_Lumber = 3.00
+    TriggerExecute(udg_TasItemShopHaggle)
 end
 
 function InitTrig_ItemshopGUI_Init_Haggle_Skills()
-gg_trg_ItemshopGUI_Init_Haggle_Skills = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Haggle_Skills, Trig_ItemshopGUI_Init_Haggle_Skills_Actions)
+    gg_trg_ItemshopGUI_Init_Haggle_Skills = CreateTrigger()
+    TriggerAddAction(gg_trg_ItemshopGUI_Init_Haggle_Skills, Trig_ItemshopGUI_Init_Haggle_Skills_Actions)
 end
 
 function Trig_ItemshopGUI_Init_Actions()
-TriggerExecute(gg_trg_ItemshopGUI_Init_Cats)
-TriggerExecute(gg_trg_ItemshopGUI_Init_Fusions)
-TriggerExecute(gg_trg_ItemshopGUI_Init_Haggle_Skills)
-TriggerExecute(gg_trg_ItemshopGUI_Init_Items)
-TriggerExecute(gg_trg_ItemshopGUI_Init_Shop)
+    TriggerExecute(gg_trg_ItemshopGUI_Init_Cats)
+    TriggerExecute(gg_trg_ItemshopGUI_Init_Fusions)
+    TriggerExecute(gg_trg_ItemshopGUI_Init_Haggle_Skills)
+    TriggerExecute(gg_trg_ItemshopGUI_Init_Items)
+    TriggerExecute(gg_trg_ItemshopGUI_Init_Shop)
 end
 
 function InitTrig_ItemshopGUI_Init()
-gg_trg_ItemshopGUI_Init = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init, Trig_ItemshopGUI_Init_Actions)
+    gg_trg_ItemshopGUI_Init = CreateTrigger()
+    TriggerAddAction(gg_trg_ItemshopGUI_Init, Trig_ItemshopGUI_Init_Actions)
 end
 
 function Trig_ItemshopGUI_Init_ShortCuts_Func002Func003C()
-if (not (GetPlayerRace(GetEnumPlayer()) == RACE_HUMAN)) then
-return false
-end
-return true
+    if (not (GetPlayerRace(GetEnumPlayer()) == RACE_HUMAN)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ItemshopGUI_Init_ShortCuts_Func002A()
-udg_TasItemShop_Player = GetEnumPlayer()
-if (Trig_ItemshopGUI_Init_ShortCuts_Func002Func003C()) then
-udg_TasItemShop_Mats[1] = FourCC("bgst")
-udg_TasItemShop_Mats[2] = FourCC("ckng")
-udg_TasItemShop_Mats[3] = FourCC("ratf")
-else
-udg_TasItemShop_Mats[1] = FourCC("mcou")
-udg_TasItemShop_Mats[2] = FourCC("rde2")
-udg_TasItemShop_Mats[3] = FourCC("rwiz")
-end
-TriggerExecute(udg_TasItemShopShortCuts)
+    udg_TasItemShop_Player = GetEnumPlayer()
+    if (Trig_ItemshopGUI_Init_ShortCuts_Func002Func003C()) then
+        udg_TasItemShop_Mats[1] = FourCC("bgst")
+        udg_TasItemShop_Mats[2] = FourCC("ckng")
+        udg_TasItemShop_Mats[3] = FourCC("ratf")
+    else
+        udg_TasItemShop_Mats[1] = FourCC("mcou")
+        udg_TasItemShop_Mats[2] = FourCC("rde2")
+        udg_TasItemShop_Mats[3] = FourCC("rwiz")
+    end
+    TriggerExecute(udg_TasItemShopShortCuts)
 end
 
 function Trig_ItemshopGUI_Init_ShortCuts_Actions()
-ForForce(GetPlayersAll(), Trig_ItemshopGUI_Init_ShortCuts_Func002A)
+    ForForce(GetPlayersAll(), Trig_ItemshopGUI_Init_ShortCuts_Func002A)
 end
 
 function InitTrig_ItemshopGUI_Init_ShortCuts()
-gg_trg_ItemshopGUI_Init_ShortCuts = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_ItemshopGUI_Init_ShortCuts, 1.00)
-TriggerAddAction(gg_trg_ItemshopGUI_Init_ShortCuts, Trig_ItemshopGUI_Init_ShortCuts_Actions)
+    gg_trg_ItemshopGUI_Init_ShortCuts = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_ItemshopGUI_Init_ShortCuts, 1.00)
+    TriggerAddAction(gg_trg_ItemshopGUI_Init_ShortCuts, Trig_ItemshopGUI_Init_ShortCuts_Actions)
 end
 
 function InitCustomTriggers()
-InitTrig_ItemshopGUI_Init_Cats()
-InitTrig_ItemshopGUI_Init_Fusions()
-InitTrig_ItemshopGUI_Init_Items()
-InitTrig_ItemshopGUI_Init_Shop()
-InitTrig_ItemshopGUI_Init_Haggle_Skills()
-InitTrig_ItemshopGUI_Init()
-InitTrig_ItemshopGUI_Init_ShortCuts()
+    InitTrig_ItemshopGUI_Init_Cats()
+    InitTrig_ItemshopGUI_Init_Fusions()
+    InitTrig_ItemshopGUI_Init_Items()
+    InitTrig_ItemshopGUI_Init_Shop()
+    InitTrig_ItemshopGUI_Init_Haggle_Skills()
+    InitTrig_ItemshopGUI_Init()
+    InitTrig_ItemshopGUI_Init_ShortCuts()
 end
 
 function RunInitializationTriggers()
-ConditionalTriggerExecute(gg_trg_ItemshopGUI_Init)
+    ConditionalTriggerExecute(gg_trg_ItemshopGUI_Init)
 end
 
 function InitCustomPlayerSlots()
-SetPlayerStartLocation(Player(0), 0)
-ForcePlayerStartLocation(Player(0), 0)
-SetPlayerColor(Player(0), ConvertPlayerColor(0))
-SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(0), false)
-SetPlayerController(Player(0), MAP_CONTROL_USER)
-SetPlayerStartLocation(Player(1), 1)
-ForcePlayerStartLocation(Player(1), 1)
-SetPlayerColor(Player(1), ConvertPlayerColor(1))
-SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
-SetPlayerRaceSelectable(Player(1), false)
-SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(2), 2)
-ForcePlayerStartLocation(Player(2), 2)
-SetPlayerColor(Player(2), ConvertPlayerColor(2))
-SetPlayerRacePreference(Player(2), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(2), false)
-SetPlayerController(Player(2), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(3), 3)
-ForcePlayerStartLocation(Player(3), 3)
-SetPlayerColor(Player(3), ConvertPlayerColor(3))
-SetPlayerRacePreference(Player(3), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(3), false)
-SetPlayerController(Player(3), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(4), 4)
-ForcePlayerStartLocation(Player(4), 4)
-SetPlayerColor(Player(4), ConvertPlayerColor(4))
-SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(4), false)
-SetPlayerController(Player(4), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(5), 5)
-ForcePlayerStartLocation(Player(5), 5)
-SetPlayerColor(Player(5), ConvertPlayerColor(5))
-SetPlayerRacePreference(Player(5), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(5), false)
-SetPlayerController(Player(5), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(6), 6)
-ForcePlayerStartLocation(Player(6), 6)
-SetPlayerColor(Player(6), ConvertPlayerColor(6))
-SetPlayerRacePreference(Player(6), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(6), false)
-SetPlayerController(Player(6), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(7), 7)
-ForcePlayerStartLocation(Player(7), 7)
-SetPlayerColor(Player(7), ConvertPlayerColor(7))
-SetPlayerRacePreference(Player(7), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(7), false)
-SetPlayerController(Player(7), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(8), 8)
-ForcePlayerStartLocation(Player(8), 8)
-SetPlayerColor(Player(8), ConvertPlayerColor(8))
-SetPlayerRacePreference(Player(8), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(8), false)
-SetPlayerController(Player(8), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(9), 9)
-ForcePlayerStartLocation(Player(9), 9)
-SetPlayerColor(Player(9), ConvertPlayerColor(9))
-SetPlayerRacePreference(Player(9), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(9), false)
-SetPlayerController(Player(9), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(10), 10)
-SetPlayerColor(Player(10), ConvertPlayerColor(10))
-SetPlayerRacePreference(Player(10), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(10), true)
-SetPlayerController(Player(10), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(11), 11)
-SetPlayerColor(Player(11), ConvertPlayerColor(11))
-SetPlayerRacePreference(Player(11), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(11), true)
-SetPlayerController(Player(11), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(12), 12)
-SetPlayerColor(Player(12), ConvertPlayerColor(12))
-SetPlayerRacePreference(Player(12), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(12), true)
-SetPlayerController(Player(12), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(13), 13)
-SetPlayerColor(Player(13), ConvertPlayerColor(13))
-SetPlayerRacePreference(Player(13), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(13), true)
-SetPlayerController(Player(13), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(14), 14)
-SetPlayerColor(Player(14), ConvertPlayerColor(14))
-SetPlayerRacePreference(Player(14), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(14), true)
-SetPlayerController(Player(14), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(15), 15)
-SetPlayerColor(Player(15), ConvertPlayerColor(15))
-SetPlayerRacePreference(Player(15), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(15), true)
-SetPlayerController(Player(15), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(16), 16)
-SetPlayerColor(Player(16), ConvertPlayerColor(16))
-SetPlayerRacePreference(Player(16), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(16), true)
-SetPlayerController(Player(16), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(17), 17)
-SetPlayerColor(Player(17), ConvertPlayerColor(17))
-SetPlayerRacePreference(Player(17), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(17), true)
-SetPlayerController(Player(17), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(18), 18)
-SetPlayerColor(Player(18), ConvertPlayerColor(18))
-SetPlayerRacePreference(Player(18), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(18), true)
-SetPlayerController(Player(18), MAP_CONTROL_COMPUTER)
-SetPlayerStartLocation(Player(19), 19)
-SetPlayerColor(Player(19), ConvertPlayerColor(19))
-SetPlayerRacePreference(Player(19), RACE_PREF_RANDOM)
-SetPlayerRaceSelectable(Player(19), true)
-SetPlayerController(Player(19), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(0), 0)
+    ForcePlayerStartLocation(Player(0), 0)
+    SetPlayerColor(Player(0), ConvertPlayerColor(0))
+    SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(0), false)
+    SetPlayerController(Player(0), MAP_CONTROL_USER)
+    SetPlayerStartLocation(Player(1), 1)
+    ForcePlayerStartLocation(Player(1), 1)
+    SetPlayerColor(Player(1), ConvertPlayerColor(1))
+    SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
+    SetPlayerRaceSelectable(Player(1), false)
+    SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(2), 2)
+    ForcePlayerStartLocation(Player(2), 2)
+    SetPlayerColor(Player(2), ConvertPlayerColor(2))
+    SetPlayerRacePreference(Player(2), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(2), false)
+    SetPlayerController(Player(2), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(3), 3)
+    ForcePlayerStartLocation(Player(3), 3)
+    SetPlayerColor(Player(3), ConvertPlayerColor(3))
+    SetPlayerRacePreference(Player(3), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(3), false)
+    SetPlayerController(Player(3), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(4), 4)
+    ForcePlayerStartLocation(Player(4), 4)
+    SetPlayerColor(Player(4), ConvertPlayerColor(4))
+    SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(4), false)
+    SetPlayerController(Player(4), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(5), 5)
+    ForcePlayerStartLocation(Player(5), 5)
+    SetPlayerColor(Player(5), ConvertPlayerColor(5))
+    SetPlayerRacePreference(Player(5), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(5), false)
+    SetPlayerController(Player(5), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(6), 6)
+    ForcePlayerStartLocation(Player(6), 6)
+    SetPlayerColor(Player(6), ConvertPlayerColor(6))
+    SetPlayerRacePreference(Player(6), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(6), false)
+    SetPlayerController(Player(6), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(7), 7)
+    ForcePlayerStartLocation(Player(7), 7)
+    SetPlayerColor(Player(7), ConvertPlayerColor(7))
+    SetPlayerRacePreference(Player(7), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(7), false)
+    SetPlayerController(Player(7), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(8), 8)
+    ForcePlayerStartLocation(Player(8), 8)
+    SetPlayerColor(Player(8), ConvertPlayerColor(8))
+    SetPlayerRacePreference(Player(8), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(8), false)
+    SetPlayerController(Player(8), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(9), 9)
+    ForcePlayerStartLocation(Player(9), 9)
+    SetPlayerColor(Player(9), ConvertPlayerColor(9))
+    SetPlayerRacePreference(Player(9), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(9), false)
+    SetPlayerController(Player(9), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(10), 10)
+    SetPlayerColor(Player(10), ConvertPlayerColor(10))
+    SetPlayerRacePreference(Player(10), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(10), true)
+    SetPlayerController(Player(10), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(11), 11)
+    SetPlayerColor(Player(11), ConvertPlayerColor(11))
+    SetPlayerRacePreference(Player(11), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(11), true)
+    SetPlayerController(Player(11), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(12), 12)
+    SetPlayerColor(Player(12), ConvertPlayerColor(12))
+    SetPlayerRacePreference(Player(12), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(12), true)
+    SetPlayerController(Player(12), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(13), 13)
+    SetPlayerColor(Player(13), ConvertPlayerColor(13))
+    SetPlayerRacePreference(Player(13), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(13), true)
+    SetPlayerController(Player(13), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(14), 14)
+    SetPlayerColor(Player(14), ConvertPlayerColor(14))
+    SetPlayerRacePreference(Player(14), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(14), true)
+    SetPlayerController(Player(14), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(15), 15)
+    SetPlayerColor(Player(15), ConvertPlayerColor(15))
+    SetPlayerRacePreference(Player(15), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(15), true)
+    SetPlayerController(Player(15), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(16), 16)
+    SetPlayerColor(Player(16), ConvertPlayerColor(16))
+    SetPlayerRacePreference(Player(16), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(16), true)
+    SetPlayerController(Player(16), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(17), 17)
+    SetPlayerColor(Player(17), ConvertPlayerColor(17))
+    SetPlayerRacePreference(Player(17), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(17), true)
+    SetPlayerController(Player(17), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(18), 18)
+    SetPlayerColor(Player(18), ConvertPlayerColor(18))
+    SetPlayerRacePreference(Player(18), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(18), true)
+    SetPlayerController(Player(18), MAP_CONTROL_COMPUTER)
+    SetPlayerStartLocation(Player(19), 19)
+    SetPlayerColor(Player(19), ConvertPlayerColor(19))
+    SetPlayerRacePreference(Player(19), RACE_PREF_RANDOM)
+    SetPlayerRaceSelectable(Player(19), true)
+    SetPlayerController(Player(19), MAP_CONTROL_COMPUTER)
 end
 
 function InitCustomTeams()
-SetPlayerTeam(Player(0), 0)
-SetPlayerTeam(Player(2), 0)
-SetPlayerTeam(Player(3), 0)
-SetPlayerTeam(Player(4), 0)
-SetPlayerTeam(Player(5), 0)
-SetPlayerTeam(Player(1), 1)
-SetPlayerTeam(Player(6), 1)
-SetPlayerTeam(Player(7), 1)
-SetPlayerTeam(Player(8), 1)
-SetPlayerTeam(Player(9), 1)
-SetPlayerAllianceStateAllyBJ(Player(1), Player(6), true)
-SetPlayerAllianceStateAllyBJ(Player(1), Player(7), true)
-SetPlayerAllianceStateAllyBJ(Player(1), Player(8), true)
-SetPlayerAllianceStateAllyBJ(Player(1), Player(9), true)
-SetPlayerAllianceStateAllyBJ(Player(6), Player(1), true)
-SetPlayerAllianceStateAllyBJ(Player(6), Player(7), true)
-SetPlayerAllianceStateAllyBJ(Player(6), Player(8), true)
-SetPlayerAllianceStateAllyBJ(Player(6), Player(9), true)
-SetPlayerAllianceStateAllyBJ(Player(7), Player(1), true)
-SetPlayerAllianceStateAllyBJ(Player(7), Player(6), true)
-SetPlayerAllianceStateAllyBJ(Player(7), Player(8), true)
-SetPlayerAllianceStateAllyBJ(Player(7), Player(9), true)
-SetPlayerAllianceStateAllyBJ(Player(8), Player(1), true)
-SetPlayerAllianceStateAllyBJ(Player(8), Player(6), true)
-SetPlayerAllianceStateAllyBJ(Player(8), Player(7), true)
-SetPlayerAllianceStateAllyBJ(Player(8), Player(9), true)
-SetPlayerAllianceStateAllyBJ(Player(9), Player(1), true)
-SetPlayerAllianceStateAllyBJ(Player(9), Player(6), true)
-SetPlayerAllianceStateAllyBJ(Player(9), Player(7), true)
-SetPlayerAllianceStateAllyBJ(Player(9), Player(8), true)
-SetPlayerAllianceStateVisionBJ(Player(1), Player(6), true)
-SetPlayerAllianceStateVisionBJ(Player(1), Player(7), true)
-SetPlayerAllianceStateVisionBJ(Player(1), Player(8), true)
-SetPlayerAllianceStateVisionBJ(Player(1), Player(9), true)
-SetPlayerAllianceStateVisionBJ(Player(6), Player(1), true)
-SetPlayerAllianceStateVisionBJ(Player(6), Player(7), true)
-SetPlayerAllianceStateVisionBJ(Player(6), Player(8), true)
-SetPlayerAllianceStateVisionBJ(Player(6), Player(9), true)
-SetPlayerAllianceStateVisionBJ(Player(7), Player(1), true)
-SetPlayerAllianceStateVisionBJ(Player(7), Player(6), true)
-SetPlayerAllianceStateVisionBJ(Player(7), Player(8), true)
-SetPlayerAllianceStateVisionBJ(Player(7), Player(9), true)
-SetPlayerAllianceStateVisionBJ(Player(8), Player(1), true)
-SetPlayerAllianceStateVisionBJ(Player(8), Player(6), true)
-SetPlayerAllianceStateVisionBJ(Player(8), Player(7), true)
-SetPlayerAllianceStateVisionBJ(Player(8), Player(9), true)
-SetPlayerAllianceStateVisionBJ(Player(9), Player(1), true)
-SetPlayerAllianceStateVisionBJ(Player(9), Player(6), true)
-SetPlayerAllianceStateVisionBJ(Player(9), Player(7), true)
-SetPlayerAllianceStateVisionBJ(Player(9), Player(8), true)
-SetPlayerTeam(Player(10), 2)
-SetPlayerTeam(Player(11), 2)
-SetPlayerTeam(Player(12), 2)
-SetPlayerTeam(Player(13), 2)
-SetPlayerTeam(Player(14), 2)
-SetPlayerAllianceStateAllyBJ(Player(10), Player(11), true)
-SetPlayerAllianceStateAllyBJ(Player(10), Player(12), true)
-SetPlayerAllianceStateAllyBJ(Player(10), Player(13), true)
-SetPlayerAllianceStateAllyBJ(Player(10), Player(14), true)
-SetPlayerAllianceStateAllyBJ(Player(11), Player(10), true)
-SetPlayerAllianceStateAllyBJ(Player(11), Player(12), true)
-SetPlayerAllianceStateAllyBJ(Player(11), Player(13), true)
-SetPlayerAllianceStateAllyBJ(Player(11), Player(14), true)
-SetPlayerAllianceStateAllyBJ(Player(12), Player(10), true)
-SetPlayerAllianceStateAllyBJ(Player(12), Player(11), true)
-SetPlayerAllianceStateAllyBJ(Player(12), Player(13), true)
-SetPlayerAllianceStateAllyBJ(Player(12), Player(14), true)
-SetPlayerAllianceStateAllyBJ(Player(13), Player(10), true)
-SetPlayerAllianceStateAllyBJ(Player(13), Player(11), true)
-SetPlayerAllianceStateAllyBJ(Player(13), Player(12), true)
-SetPlayerAllianceStateAllyBJ(Player(13), Player(14), true)
-SetPlayerAllianceStateAllyBJ(Player(14), Player(10), true)
-SetPlayerAllianceStateAllyBJ(Player(14), Player(11), true)
-SetPlayerAllianceStateAllyBJ(Player(14), Player(12), true)
-SetPlayerAllianceStateAllyBJ(Player(14), Player(13), true)
-SetPlayerAllianceStateVisionBJ(Player(10), Player(11), true)
-SetPlayerAllianceStateVisionBJ(Player(10), Player(12), true)
-SetPlayerAllianceStateVisionBJ(Player(10), Player(13), true)
-SetPlayerAllianceStateVisionBJ(Player(10), Player(14), true)
-SetPlayerAllianceStateVisionBJ(Player(11), Player(10), true)
-SetPlayerAllianceStateVisionBJ(Player(11), Player(12), true)
-SetPlayerAllianceStateVisionBJ(Player(11), Player(13), true)
-SetPlayerAllianceStateVisionBJ(Player(11), Player(14), true)
-SetPlayerAllianceStateVisionBJ(Player(12), Player(10), true)
-SetPlayerAllianceStateVisionBJ(Player(12), Player(11), true)
-SetPlayerAllianceStateVisionBJ(Player(12), Player(13), true)
-SetPlayerAllianceStateVisionBJ(Player(12), Player(14), true)
-SetPlayerAllianceStateVisionBJ(Player(13), Player(10), true)
-SetPlayerAllianceStateVisionBJ(Player(13), Player(11), true)
-SetPlayerAllianceStateVisionBJ(Player(13), Player(12), true)
-SetPlayerAllianceStateVisionBJ(Player(13), Player(14), true)
-SetPlayerAllianceStateVisionBJ(Player(14), Player(10), true)
-SetPlayerAllianceStateVisionBJ(Player(14), Player(11), true)
-SetPlayerAllianceStateVisionBJ(Player(14), Player(12), true)
-SetPlayerAllianceStateVisionBJ(Player(14), Player(13), true)
-SetPlayerTeam(Player(15), 3)
-SetPlayerTeam(Player(16), 3)
-SetPlayerTeam(Player(17), 3)
-SetPlayerTeam(Player(18), 3)
-SetPlayerTeam(Player(19), 3)
-SetPlayerAllianceStateAllyBJ(Player(15), Player(16), true)
-SetPlayerAllianceStateAllyBJ(Player(15), Player(17), true)
-SetPlayerAllianceStateAllyBJ(Player(15), Player(18), true)
-SetPlayerAllianceStateAllyBJ(Player(15), Player(19), true)
-SetPlayerAllianceStateAllyBJ(Player(16), Player(15), true)
-SetPlayerAllianceStateAllyBJ(Player(16), Player(17), true)
-SetPlayerAllianceStateAllyBJ(Player(16), Player(18), true)
-SetPlayerAllianceStateAllyBJ(Player(16), Player(19), true)
-SetPlayerAllianceStateAllyBJ(Player(17), Player(15), true)
-SetPlayerAllianceStateAllyBJ(Player(17), Player(16), true)
-SetPlayerAllianceStateAllyBJ(Player(17), Player(18), true)
-SetPlayerAllianceStateAllyBJ(Player(17), Player(19), true)
-SetPlayerAllianceStateAllyBJ(Player(18), Player(15), true)
-SetPlayerAllianceStateAllyBJ(Player(18), Player(16), true)
-SetPlayerAllianceStateAllyBJ(Player(18), Player(17), true)
-SetPlayerAllianceStateAllyBJ(Player(18), Player(19), true)
-SetPlayerAllianceStateAllyBJ(Player(19), Player(15), true)
-SetPlayerAllianceStateAllyBJ(Player(19), Player(16), true)
-SetPlayerAllianceStateAllyBJ(Player(19), Player(17), true)
-SetPlayerAllianceStateAllyBJ(Player(19), Player(18), true)
-SetPlayerAllianceStateVisionBJ(Player(15), Player(16), true)
-SetPlayerAllianceStateVisionBJ(Player(15), Player(17), true)
-SetPlayerAllianceStateVisionBJ(Player(15), Player(18), true)
-SetPlayerAllianceStateVisionBJ(Player(15), Player(19), true)
-SetPlayerAllianceStateVisionBJ(Player(16), Player(15), true)
-SetPlayerAllianceStateVisionBJ(Player(16), Player(17), true)
-SetPlayerAllianceStateVisionBJ(Player(16), Player(18), true)
-SetPlayerAllianceStateVisionBJ(Player(16), Player(19), true)
-SetPlayerAllianceStateVisionBJ(Player(17), Player(15), true)
-SetPlayerAllianceStateVisionBJ(Player(17), Player(16), true)
-SetPlayerAllianceStateVisionBJ(Player(17), Player(18), true)
-SetPlayerAllianceStateVisionBJ(Player(17), Player(19), true)
-SetPlayerAllianceStateVisionBJ(Player(18), Player(15), true)
-SetPlayerAllianceStateVisionBJ(Player(18), Player(16), true)
-SetPlayerAllianceStateVisionBJ(Player(18), Player(17), true)
-SetPlayerAllianceStateVisionBJ(Player(18), Player(19), true)
-SetPlayerAllianceStateVisionBJ(Player(19), Player(15), true)
-SetPlayerAllianceStateVisionBJ(Player(19), Player(16), true)
-SetPlayerAllianceStateVisionBJ(Player(19), Player(17), true)
-SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
+    SetPlayerTeam(Player(0), 0)
+    SetPlayerTeam(Player(2), 0)
+    SetPlayerTeam(Player(3), 0)
+    SetPlayerTeam(Player(4), 0)
+    SetPlayerTeam(Player(5), 0)
+    SetPlayerTeam(Player(1), 1)
+    SetPlayerTeam(Player(6), 1)
+    SetPlayerTeam(Player(7), 1)
+    SetPlayerTeam(Player(8), 1)
+    SetPlayerTeam(Player(9), 1)
+    SetPlayerAllianceStateAllyBJ(Player(1), Player(6), true)
+    SetPlayerAllianceStateAllyBJ(Player(1), Player(7), true)
+    SetPlayerAllianceStateAllyBJ(Player(1), Player(8), true)
+    SetPlayerAllianceStateAllyBJ(Player(1), Player(9), true)
+    SetPlayerAllianceStateAllyBJ(Player(6), Player(1), true)
+    SetPlayerAllianceStateAllyBJ(Player(6), Player(7), true)
+    SetPlayerAllianceStateAllyBJ(Player(6), Player(8), true)
+    SetPlayerAllianceStateAllyBJ(Player(6), Player(9), true)
+    SetPlayerAllianceStateAllyBJ(Player(7), Player(1), true)
+    SetPlayerAllianceStateAllyBJ(Player(7), Player(6), true)
+    SetPlayerAllianceStateAllyBJ(Player(7), Player(8), true)
+    SetPlayerAllianceStateAllyBJ(Player(7), Player(9), true)
+    SetPlayerAllianceStateAllyBJ(Player(8), Player(1), true)
+    SetPlayerAllianceStateAllyBJ(Player(8), Player(6), true)
+    SetPlayerAllianceStateAllyBJ(Player(8), Player(7), true)
+    SetPlayerAllianceStateAllyBJ(Player(8), Player(9), true)
+    SetPlayerAllianceStateAllyBJ(Player(9), Player(1), true)
+    SetPlayerAllianceStateAllyBJ(Player(9), Player(6), true)
+    SetPlayerAllianceStateAllyBJ(Player(9), Player(7), true)
+    SetPlayerAllianceStateAllyBJ(Player(9), Player(8), true)
+    SetPlayerAllianceStateVisionBJ(Player(1), Player(6), true)
+    SetPlayerAllianceStateVisionBJ(Player(1), Player(7), true)
+    SetPlayerAllianceStateVisionBJ(Player(1), Player(8), true)
+    SetPlayerAllianceStateVisionBJ(Player(1), Player(9), true)
+    SetPlayerAllianceStateVisionBJ(Player(6), Player(1), true)
+    SetPlayerAllianceStateVisionBJ(Player(6), Player(7), true)
+    SetPlayerAllianceStateVisionBJ(Player(6), Player(8), true)
+    SetPlayerAllianceStateVisionBJ(Player(6), Player(9), true)
+    SetPlayerAllianceStateVisionBJ(Player(7), Player(1), true)
+    SetPlayerAllianceStateVisionBJ(Player(7), Player(6), true)
+    SetPlayerAllianceStateVisionBJ(Player(7), Player(8), true)
+    SetPlayerAllianceStateVisionBJ(Player(7), Player(9), true)
+    SetPlayerAllianceStateVisionBJ(Player(8), Player(1), true)
+    SetPlayerAllianceStateVisionBJ(Player(8), Player(6), true)
+    SetPlayerAllianceStateVisionBJ(Player(8), Player(7), true)
+    SetPlayerAllianceStateVisionBJ(Player(8), Player(9), true)
+    SetPlayerAllianceStateVisionBJ(Player(9), Player(1), true)
+    SetPlayerAllianceStateVisionBJ(Player(9), Player(6), true)
+    SetPlayerAllianceStateVisionBJ(Player(9), Player(7), true)
+    SetPlayerAllianceStateVisionBJ(Player(9), Player(8), true)
+    SetPlayerTeam(Player(10), 2)
+    SetPlayerTeam(Player(11), 2)
+    SetPlayerTeam(Player(12), 2)
+    SetPlayerTeam(Player(13), 2)
+    SetPlayerTeam(Player(14), 2)
+    SetPlayerAllianceStateAllyBJ(Player(10), Player(11), true)
+    SetPlayerAllianceStateAllyBJ(Player(10), Player(12), true)
+    SetPlayerAllianceStateAllyBJ(Player(10), Player(13), true)
+    SetPlayerAllianceStateAllyBJ(Player(10), Player(14), true)
+    SetPlayerAllianceStateAllyBJ(Player(11), Player(10), true)
+    SetPlayerAllianceStateAllyBJ(Player(11), Player(12), true)
+    SetPlayerAllianceStateAllyBJ(Player(11), Player(13), true)
+    SetPlayerAllianceStateAllyBJ(Player(11), Player(14), true)
+    SetPlayerAllianceStateAllyBJ(Player(12), Player(10), true)
+    SetPlayerAllianceStateAllyBJ(Player(12), Player(11), true)
+    SetPlayerAllianceStateAllyBJ(Player(12), Player(13), true)
+    SetPlayerAllianceStateAllyBJ(Player(12), Player(14), true)
+    SetPlayerAllianceStateAllyBJ(Player(13), Player(10), true)
+    SetPlayerAllianceStateAllyBJ(Player(13), Player(11), true)
+    SetPlayerAllianceStateAllyBJ(Player(13), Player(12), true)
+    SetPlayerAllianceStateAllyBJ(Player(13), Player(14), true)
+    SetPlayerAllianceStateAllyBJ(Player(14), Player(10), true)
+    SetPlayerAllianceStateAllyBJ(Player(14), Player(11), true)
+    SetPlayerAllianceStateAllyBJ(Player(14), Player(12), true)
+    SetPlayerAllianceStateAllyBJ(Player(14), Player(13), true)
+    SetPlayerAllianceStateVisionBJ(Player(10), Player(11), true)
+    SetPlayerAllianceStateVisionBJ(Player(10), Player(12), true)
+    SetPlayerAllianceStateVisionBJ(Player(10), Player(13), true)
+    SetPlayerAllianceStateVisionBJ(Player(10), Player(14), true)
+    SetPlayerAllianceStateVisionBJ(Player(11), Player(10), true)
+    SetPlayerAllianceStateVisionBJ(Player(11), Player(12), true)
+    SetPlayerAllianceStateVisionBJ(Player(11), Player(13), true)
+    SetPlayerAllianceStateVisionBJ(Player(11), Player(14), true)
+    SetPlayerAllianceStateVisionBJ(Player(12), Player(10), true)
+    SetPlayerAllianceStateVisionBJ(Player(12), Player(11), true)
+    SetPlayerAllianceStateVisionBJ(Player(12), Player(13), true)
+    SetPlayerAllianceStateVisionBJ(Player(12), Player(14), true)
+    SetPlayerAllianceStateVisionBJ(Player(13), Player(10), true)
+    SetPlayerAllianceStateVisionBJ(Player(13), Player(11), true)
+    SetPlayerAllianceStateVisionBJ(Player(13), Player(12), true)
+    SetPlayerAllianceStateVisionBJ(Player(13), Player(14), true)
+    SetPlayerAllianceStateVisionBJ(Player(14), Player(10), true)
+    SetPlayerAllianceStateVisionBJ(Player(14), Player(11), true)
+    SetPlayerAllianceStateVisionBJ(Player(14), Player(12), true)
+    SetPlayerAllianceStateVisionBJ(Player(14), Player(13), true)
+    SetPlayerTeam(Player(15), 3)
+    SetPlayerTeam(Player(16), 3)
+    SetPlayerTeam(Player(17), 3)
+    SetPlayerTeam(Player(18), 3)
+    SetPlayerTeam(Player(19), 3)
+    SetPlayerAllianceStateAllyBJ(Player(15), Player(16), true)
+    SetPlayerAllianceStateAllyBJ(Player(15), Player(17), true)
+    SetPlayerAllianceStateAllyBJ(Player(15), Player(18), true)
+    SetPlayerAllianceStateAllyBJ(Player(15), Player(19), true)
+    SetPlayerAllianceStateAllyBJ(Player(16), Player(15), true)
+    SetPlayerAllianceStateAllyBJ(Player(16), Player(17), true)
+    SetPlayerAllianceStateAllyBJ(Player(16), Player(18), true)
+    SetPlayerAllianceStateAllyBJ(Player(16), Player(19), true)
+    SetPlayerAllianceStateAllyBJ(Player(17), Player(15), true)
+    SetPlayerAllianceStateAllyBJ(Player(17), Player(16), true)
+    SetPlayerAllianceStateAllyBJ(Player(17), Player(18), true)
+    SetPlayerAllianceStateAllyBJ(Player(17), Player(19), true)
+    SetPlayerAllianceStateAllyBJ(Player(18), Player(15), true)
+    SetPlayerAllianceStateAllyBJ(Player(18), Player(16), true)
+    SetPlayerAllianceStateAllyBJ(Player(18), Player(17), true)
+    SetPlayerAllianceStateAllyBJ(Player(18), Player(19), true)
+    SetPlayerAllianceStateAllyBJ(Player(19), Player(15), true)
+    SetPlayerAllianceStateAllyBJ(Player(19), Player(16), true)
+    SetPlayerAllianceStateAllyBJ(Player(19), Player(17), true)
+    SetPlayerAllianceStateAllyBJ(Player(19), Player(18), true)
+    SetPlayerAllianceStateVisionBJ(Player(15), Player(16), true)
+    SetPlayerAllianceStateVisionBJ(Player(15), Player(17), true)
+    SetPlayerAllianceStateVisionBJ(Player(15), Player(18), true)
+    SetPlayerAllianceStateVisionBJ(Player(15), Player(19), true)
+    SetPlayerAllianceStateVisionBJ(Player(16), Player(15), true)
+    SetPlayerAllianceStateVisionBJ(Player(16), Player(17), true)
+    SetPlayerAllianceStateVisionBJ(Player(16), Player(18), true)
+    SetPlayerAllianceStateVisionBJ(Player(16), Player(19), true)
+    SetPlayerAllianceStateVisionBJ(Player(17), Player(15), true)
+    SetPlayerAllianceStateVisionBJ(Player(17), Player(16), true)
+    SetPlayerAllianceStateVisionBJ(Player(17), Player(18), true)
+    SetPlayerAllianceStateVisionBJ(Player(17), Player(19), true)
+    SetPlayerAllianceStateVisionBJ(Player(18), Player(15), true)
+    SetPlayerAllianceStateVisionBJ(Player(18), Player(16), true)
+    SetPlayerAllianceStateVisionBJ(Player(18), Player(17), true)
+    SetPlayerAllianceStateVisionBJ(Player(18), Player(19), true)
+    SetPlayerAllianceStateVisionBJ(Player(19), Player(15), true)
+    SetPlayerAllianceStateVisionBJ(Player(19), Player(16), true)
+    SetPlayerAllianceStateVisionBJ(Player(19), Player(17), true)
+    SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(1, 9)
-SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(1, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(2, 9)
-SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(3, 9)
-SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(4, 9)
-SetStartLocPrio(4, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(5, 9)
-SetStartLocPrio(5, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(6, 9)
-SetStartLocPrio(6, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 5, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(7, 9)
-SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 5, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 6, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(8, 9)
-SetStartLocPrio(8, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 5, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 6, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 7, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(9, 9)
-SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 5, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 6, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 7, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 8, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(10, 3)
-SetStartLocPrio(10, 0, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(10, 1, 17, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(10, 2, 19, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrioCount(10, 1)
-SetEnemyStartLocPrio(10, 0, 18, MAP_LOC_PRIO_LOW)
-SetStartLocPrioCount(11, 4)
-SetStartLocPrio(11, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(11, 1, 4, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(11, 2, 18, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(11, 3, 19, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrioCount(11, 3)
-SetEnemyStartLocPrio(11, 0, 4, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrio(11, 1, 17, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrio(11, 2, 19, MAP_LOC_PRIO_LOW)
-SetStartLocPrioCount(12, 3)
-SetStartLocPrio(12, 0, 17, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(12, 1, 18, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(12, 2, 19, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrioCount(12, 3)
-SetEnemyStartLocPrio(12, 0, 1, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrio(12, 1, 18, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrio(12, 2, 19, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(13, 1)
-SetStartLocPrio(13, 0, 0, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrioCount(13, 2)
-SetEnemyStartLocPrio(13, 0, 4, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrio(13, 1, 18, MAP_LOC_PRIO_LOW)
-SetStartLocPrioCount(14, 2)
-SetStartLocPrio(14, 0, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(14, 1, 9, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrioCount(14, 2)
-SetEnemyStartLocPrio(14, 0, 4, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrio(14, 1, 19, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(15, 1)
-SetStartLocPrio(15, 0, 17, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrioCount(15, 3)
-SetEnemyStartLocPrio(15, 0, 1, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrio(15, 1, 18, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrio(15, 2, 19, MAP_LOC_PRIO_LOW)
-SetStartLocPrioCount(16, 1)
-SetStartLocPrio(16, 0, 19, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrioCount(16, 3)
-SetEnemyStartLocPrio(16, 0, 4, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrio(16, 1, 18, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrio(16, 2, 19, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(17, 3)
-SetStartLocPrio(17, 0, 4, MAP_LOC_PRIO_LOW)
-SetStartLocPrio(17, 1, 18, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(17, 2, 19, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrioCount(17, 2)
-SetEnemyStartLocPrio(17, 0, 18, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(18, 2)
-SetStartLocPrio(18, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(18, 1, 17, MAP_LOC_PRIO_HIGH)
-SetEnemyStartLocPrioCount(18, 1)
-SetStartLocPrioCount(19, 1)
-SetStartLocPrio(19, 0, 18, MAP_LOC_PRIO_LOW)
-SetEnemyStartLocPrioCount(19, 1)
-SetEnemyStartLocPrio(19, 0, 18, MAP_LOC_PRIO_LOW)
+    SetStartLocPrioCount(1, 9)
+    SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(1, 2, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(1, 3, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(1, 4, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(1, 5, 6, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(1, 6, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(1, 7, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(1, 8, 9, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(2, 9)
+    SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(2, 1, 1, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(2, 2, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(2, 3, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(2, 4, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(2, 5, 6, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(2, 6, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(2, 7, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(2, 8, 9, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(3, 9)
+    SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(3, 1, 1, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(3, 2, 2, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(3, 3, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(3, 4, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(3, 5, 6, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(3, 6, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(3, 7, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(3, 8, 9, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(4, 9)
+    SetStartLocPrio(4, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(4, 1, 1, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(4, 2, 2, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(4, 3, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(4, 4, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(4, 5, 6, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(4, 6, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(4, 7, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(4, 8, 9, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(5, 9)
+    SetStartLocPrio(5, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 1, 1, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 2, 2, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 3, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 4, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 5, 6, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 6, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 7, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 8, 9, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(6, 9)
+    SetStartLocPrio(6, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 1, 1, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 2, 2, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 3, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 4, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 5, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 6, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 7, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 8, 9, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(7, 9)
+    SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(7, 1, 1, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(7, 2, 2, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(7, 3, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(7, 4, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(7, 5, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(7, 6, 6, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(7, 7, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(7, 8, 9, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(8, 9)
+    SetStartLocPrio(8, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(8, 1, 1, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(8, 2, 2, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(8, 3, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(8, 4, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(8, 5, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(8, 6, 6, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(8, 7, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(8, 8, 9, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(9, 9)
+    SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 1, 1, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 2, 2, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 3, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 4, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 5, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 6, 6, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 7, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 8, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(10, 3)
+    SetStartLocPrio(10, 0, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(10, 1, 17, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(10, 2, 19, MAP_LOC_PRIO_HIGH)
+    SetEnemyStartLocPrioCount(10, 1)
+    SetEnemyStartLocPrio(10, 0, 18, MAP_LOC_PRIO_LOW)
+    SetStartLocPrioCount(11, 4)
+    SetStartLocPrio(11, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(11, 1, 4, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(11, 2, 18, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(11, 3, 19, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrioCount(11, 3)
+    SetEnemyStartLocPrio(11, 0, 4, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrio(11, 1, 17, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrio(11, 2, 19, MAP_LOC_PRIO_LOW)
+    SetStartLocPrioCount(12, 3)
+    SetStartLocPrio(12, 0, 17, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(12, 1, 18, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(12, 2, 19, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrioCount(12, 3)
+    SetEnemyStartLocPrio(12, 0, 1, MAP_LOC_PRIO_HIGH)
+    SetEnemyStartLocPrio(12, 1, 18, MAP_LOC_PRIO_HIGH)
+    SetEnemyStartLocPrio(12, 2, 19, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(13, 1)
+    SetStartLocPrio(13, 0, 0, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrioCount(13, 2)
+    SetEnemyStartLocPrio(13, 0, 4, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrio(13, 1, 18, MAP_LOC_PRIO_LOW)
+    SetStartLocPrioCount(14, 2)
+    SetStartLocPrio(14, 0, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(14, 1, 9, MAP_LOC_PRIO_HIGH)
+    SetEnemyStartLocPrioCount(14, 2)
+    SetEnemyStartLocPrio(14, 0, 4, MAP_LOC_PRIO_HIGH)
+    SetEnemyStartLocPrio(14, 1, 19, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(15, 1)
+    SetStartLocPrio(15, 0, 17, MAP_LOC_PRIO_HIGH)
+    SetEnemyStartLocPrioCount(15, 3)
+    SetEnemyStartLocPrio(15, 0, 1, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrio(15, 1, 18, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrio(15, 2, 19, MAP_LOC_PRIO_LOW)
+    SetStartLocPrioCount(16, 1)
+    SetStartLocPrio(16, 0, 19, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrioCount(16, 3)
+    SetEnemyStartLocPrio(16, 0, 4, MAP_LOC_PRIO_HIGH)
+    SetEnemyStartLocPrio(16, 1, 18, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrio(16, 2, 19, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(17, 3)
+    SetStartLocPrio(17, 0, 4, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(17, 1, 18, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(17, 2, 19, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrioCount(17, 2)
+    SetEnemyStartLocPrio(17, 0, 18, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(18, 2)
+    SetStartLocPrio(18, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(18, 1, 17, MAP_LOC_PRIO_HIGH)
+    SetEnemyStartLocPrioCount(18, 1)
+    SetStartLocPrioCount(19, 1)
+    SetStartLocPrio(19, 0, 18, MAP_LOC_PRIO_LOW)
+    SetEnemyStartLocPrioCount(19, 1)
+    SetEnemyStartLocPrio(19, 0, 18, MAP_LOC_PRIO_LOW)
 end
 
 function main()
-SetCameraBounds(-16128.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 1024.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 2688.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -16128.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 2688.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 1024.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
-SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
-NewSoundEnvironment("Default")
-SetAmbientDaySound("LordaeronSummerDay")
-SetAmbientNightSound("LordaeronSummerNight")
-SetMapMusic("Music", true, 0)
-CreateRegions()
-InitBlizzard()
-InitGlobals()
-InitCustomTriggers()
-RunInitializationTriggers()
+    SetCameraBounds(-16128.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 1024.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 2688.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -16128.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 2688.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 1024.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+    SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+    NewSoundEnvironment("Default")
+    SetAmbientDaySound("LordaeronSummerDay")
+    SetAmbientNightSound("LordaeronSummerNight")
+    SetMapMusic("Music", true, 0)
+    CreateRegions()
+    InitBlizzard()
+    InitGlobals()
+    InitCustomTriggers()
+    RunInitializationTriggers()
 end
 
 function config()
-SetMapName("TRIGSTR_001")
-SetMapDescription("TRIGSTR_003")
-SetPlayers(20)
-SetTeams(20)
-SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -15872.0, 11008.0)
-DefineStartLocation(1, -15872.0, 11008.0)
-DefineStartLocation(2, -15872.0, 11008.0)
-DefineStartLocation(3, -15872.0, 11008.0)
-DefineStartLocation(4, -15872.0, 11008.0)
-DefineStartLocation(5, -15872.0, 11008.0)
-DefineStartLocation(6, -15872.0, 11008.0)
-DefineStartLocation(7, -15872.0, 11008.0)
-DefineStartLocation(8, -15872.0, 11008.0)
-DefineStartLocation(9, -15872.0, 11008.0)
-DefineStartLocation(10, -15808.0, 11008.0)
-DefineStartLocation(11, -15872.0, 11008.0)
-DefineStartLocation(12, -15872.0, 11008.0)
-DefineStartLocation(13, -15872.0, 11008.0)
-DefineStartLocation(14, -15872.0, 11008.0)
-DefineStartLocation(15, -15872.0, 11008.0)
-DefineStartLocation(16, -15872.0, 11008.0)
-DefineStartLocation(17, -15872.0, 11008.0)
-DefineStartLocation(18, -15872.0, 11008.0)
-DefineStartLocation(19, -15872.0, 11008.0)
-InitCustomPlayerSlots()
-InitCustomTeams()
-InitAllyPriorities()
+    SetMapName("TRIGSTR_001")
+    SetMapDescription("TRIGSTR_003")
+    SetPlayers(20)
+    SetTeams(20)
+    SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+    DefineStartLocation(0, -15872.0, 11008.0)
+    DefineStartLocation(1, -15872.0, 11008.0)
+    DefineStartLocation(2, -15872.0, 11008.0)
+    DefineStartLocation(3, -15872.0, 11008.0)
+    DefineStartLocation(4, -15872.0, 11008.0)
+    DefineStartLocation(5, -15872.0, 11008.0)
+    DefineStartLocation(6, -15872.0, 11008.0)
+    DefineStartLocation(7, -15872.0, 11008.0)
+    DefineStartLocation(8, -15872.0, 11008.0)
+    DefineStartLocation(9, -15872.0, 11008.0)
+    DefineStartLocation(10, -15808.0, 11008.0)
+    DefineStartLocation(11, -15872.0, 11008.0)
+    DefineStartLocation(12, -15872.0, 11008.0)
+    DefineStartLocation(13, -15872.0, 11008.0)
+    DefineStartLocation(14, -15872.0, 11008.0)
+    DefineStartLocation(15, -15872.0, 11008.0)
+    DefineStartLocation(16, -15872.0, 11008.0)
+    DefineStartLocation(17, -15872.0, 11008.0)
+    DefineStartLocation(18, -15872.0, 11008.0)
+    DefineStartLocation(19, -15872.0, 11008.0)
+    InitCustomPlayerSlots()
+    InitCustomTeams()
+    InitAllyPriorities()
 end
 

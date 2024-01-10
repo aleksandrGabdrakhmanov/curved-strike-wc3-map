@@ -112,10 +112,9 @@ function changeAvailableUnitsForPlayers()
             end
             local randomUnits = getRandomUnits(units_for_build)
             for _, unit in ipairs(randomUnits) do
+                table.insert(player.availableUnits, unit)
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
             end
-
-
             reRollHeroes(player)
         end
     end

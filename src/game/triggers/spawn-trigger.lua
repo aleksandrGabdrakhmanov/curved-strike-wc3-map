@@ -27,10 +27,9 @@ function handleUnitSpawn(player, id, x, y, label)
 end
 
 function handleHeroSpawn(player, unit, x, y, label)
-    local unitId = GetUnitTypeId(unit)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
-        local unit = CreateUnit(player.spawnPlayerId, FourCC(getHeroUnitId(('>I4'):pack(unitId))), x, y, 270)
+        local unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         SetUnitUserData( unit, label)
         hero.status = "alive"
@@ -125,15 +124,6 @@ end
 
 function getParentUnitId(searchId)
     for _, unit in pairs(units_for_build) do
-        if unit.id == searchId then
-            return unit.parentId
-        end
-    end
-    return nil
-end
-
-function getHeroUnitId(searchId)
-    for _, unit in pairs(heroes_for_build) do
         if unit.id == searchId then
             return unit.parentId
         end

@@ -8,6 +8,7 @@ function heroNewSkill()
                 for _, hero in ipairs(player.heroes) do
                     if hero.status == 'alive' then
                         for i = #hero.newSkills, 1, -1 do
+                            SetPlayerAbilityAvailable(player.spawnPlayerId, hero.newSkills[i], true)
                             SelectHeroSkill(hero.unit, hero.newSkills[i])
                             table.remove(hero.newSkills, i)
                         end

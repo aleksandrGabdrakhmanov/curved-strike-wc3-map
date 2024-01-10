@@ -10,8 +10,7 @@ end
 function immediatelyMoveUnit(unit)
     local attackPointRect = getAttackPointRect(GetOwningPlayer(unit))
     for _, atPointRect in ipairs(attackPointRect) do
-        local label = GetUnitUserData(unit)
-        if IsUnitInRect(atPointRect.rect, unit) and (label == atPointRect.label or label == 0) then
+        if IsUnitInRect(atPointRect.rect, unit) then
             moveByLocation(atPointRect, unit)
             return
         end

@@ -1,6 +1,6 @@
 ﻿STRING 1
 {
-Curved Strike v0.07
+Curved Strike v0.08
 }
 
 STRING 2
@@ -1912,5 +1912,89 @@ STRING 360
 // Abilities: A000 (Build Gold Extractor), Ubertip (Tooltip - Normal - Extended)
 {
 Grants an additional gold
+}
+
+STRING 361
+// Upgrades: R001 (Defend), Name (Name)
+{
+Defend On
+}
+
+STRING 362
+// Upgrades: R001 (Defend), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 363
+// Upgrades: R002 (Defend), Name (Name)
+{
+Defend Off
+}
+
+STRING 364
+// Upgrades: R002 (Defend), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 365
+// Upgrades: R001 (Defend), Tip (Tooltip)
+{
+Defend On
+}
+
+STRING 366
+// Upgrades: R002 (Defend), Tip (Tooltip)
+{
+Defend Off
+}
+
+STRING 367
+// Units: o00I (Peon test), Name (Name)
+{
+Peon test
+}
+
+STRING 368
+// Abilities: A009 (Defend), Tip (Tooltip - Normal)
+{
+Defend on
+}
+
+STRING 369
+// Abilities: A008 (Channel), Tip (Tooltip - Normal)
+{
+Invisibility
+}
+
+STRING 370
+// Abilities: A008 (Channel), EditorSuffix (Editor Suffix)
+{
+(New)
+}
+
+STRING 371
+// Abilities: A008 (Channel), Ubertip (Tooltip - Normal - Extended)
+{
+Makes a unit invisible. If the unit attacks, uses an ability or casts a spell, it will become visible. |nLasts 2 seconds.
+}
+
+STRING 372
+// Abilities: A008 (Channel), Hotkey (Hotkey - Normal)
+{
+I
+}
+
+STRING 374
+// Abilities: S000 (Flying Machine Bombs), Name (Name)
+{
+Flying Machine Bombs
+}
+
+STRING 375
+// Abilities: S000 (Flying Machine Bombs), EditorSuffix (Editor Suffix)
+{
+(based on Berserker)
 }
 
