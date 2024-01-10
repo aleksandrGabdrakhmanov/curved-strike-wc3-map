@@ -6435,34 +6435,34 @@ end
 
 function getColorById(playerId)
     if (playerId == 0) then
-        return BlzConvertColor(255, 255, 2, 2)
+        return {r=255, g=2, b=2, t=255}
     end
     if (playerId == 1) then
-        return BlzConvertColor(255, 0, 65, 255)
+        return {r=0, g=65, b=255, t=255}
     end
     if (playerId == 2) then
-        return BlzConvertColor(255, 27, 229, 184)
+        return {r=27, g=229, b=184, t=255}
     end
     if (playerId == 3) then
-        return BlzConvertColor(255, 83, 0, 128)
+        return {r=83, g=0, b=128, t=255}
     end
     if (playerId == 4) then
-        return BlzConvertColor(255, 255, 255, 0)
+        return {r=255, g=255, b=0, t=255}
     end
     if (playerId == 5) then
-        return BlzConvertColor(255, 254, 137, 13)
+        return {r=254, g=137, b=13, t=255}
     end
     if (playerId == 6) then
-        return BlzConvertColor(255, 31, 191, 0)
+        return {r=31, g=191, b=0, t=255}
     end
     if (playerId == 7) then
-        return BlzConvertColor(255, 228, 90, 170)
+        return {r=228, g=90, b=170, t=255}
     end
     if (playerId == 8) then
-        return BlzConvertColor(255, 148, 149, 150)
+        return {r=148, g=149, b=150, t=255}
     end
     if (playerId == 9) then
-        return BlzConvertColor(255, 125, 190, 241)
+        return {r=125, g=190, b=241, t=255}
     end
 end
 
@@ -6821,10 +6821,35 @@ Debug.endFile()
 Debug.beginFile('start-game.lua')
 function startGame(mode)
     initMain(mode)
+    initGameTimer()
     initialUI()
     initTriggers()
 end
 Debug.endFile()
+Debug.beginFile('game-time-timer.lua')
+function initGameTimer()
+    totalSeconds = 0
+    local gameTimer = CreateTimer()
+    TimerStart(gameTimer, 1.0, true, function()
+        totalSeconds = totalSeconds + 1
+    end)
+end
+
+function GetFormattedGameTime()
+    local hours = math.floor(totalSeconds / 3600)
+    local mins = math.floor((totalSeconds % 3600) / 60)
+    local secs = totalSeconds % 60
+
+    if hours > 0 then
+        return string.format("%d:%02d:%02d", hours, mins, secs)
+    elseif mins > 0 then
+        return string.format("%02d:%02d", mins, secs)
+    else
+        return string.format("%02d", secs)
+    end
+end
+Debug.endFile()
+
 Debug.beginFile('cell-trigger.lua')
 function cellTrigger()
     for _, team in ipairs(all_teams) do
@@ -8030,37 +8055,34 @@ function updatePanelForAllPlayers()
     local updatedTableInfo = getTableInfo()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            local myPanel = player.statePanel
-            if myPanel then
+            for row, bodyRow in ipairs(updatedTableInfo.body) do
+                local isLocalPlayer = false
+                local playerName = bodyRow[1].text
+                for col, cell in ipairs(bodyRow) do
 
-                for i, headerColumn in ipairs(updatedTableInfo.header) do
-                    local headerFrame = BlzFrameGetChild(myPanel, i - 1)
-                    BlzFrameSetText(headerFrame, headerColumn.text)
-                end
+                    MultiboardSetTitleText(player.multiboard,
+                            'Time: ' .. GetFormattedGameTime() ..'   Wave: ' .. player.spawnTimer .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills)
 
-                local headerCount = #updatedTableInfo.header
-                for i, row in ipairs(updatedTableInfo.body) do
-                    local isLocalPlayer = false
-                    for j, element in ipairs(row) do
-                        local bodyIndex = headerCount + ((i - 1) * #row) + (j - 1)
-                        local bodyFrame = BlzFrameGetChild(myPanel, bodyIndex)
 
-                        local text = BlzFrameGetText(bodyFrame)
+                    local item = MultiboardGetItem(player.multiboard, row, col - 1)
+                    if isPlayerInTeam(playerName, team.players) then
+                        isLocalPlayer = true
+                    end
 
-                        if isPlayerInTeam(text, team.players) then
-                            isLocalPlayer = true
-                        end
+                    MultiboardSetItemStyle(item, true, false)
 
-                        if isLocalPlayer == true then
-                            BlzFrameSetText(bodyFrame, element.text)
+                    if isLocalPlayer == true then
+                        MultiboardSetItemValue(item, cell.text)
+                    else
+                        if cell.isSensitive == true then
+                            MultiboardSetItemValue(item, "***")
                         else
-                            if element.isSensitive == true then
-                                BlzFrameSetText(bodyFrame, "***")
-                            else
-                                BlzFrameSetText(bodyFrame, element.text)
-                            end
+                            MultiboardSetItemValue(item, cell.text)
                         end
                     end
+                    MultiboardSetItemValueColor(item, cell.color.r, cell.color.g, cell.color.b, cell.color.t)
+                    MultiboardSetItemWidth(item, updatedTableInfo.header[col].weight)
+                    MultiboardReleaseItem(item)
                 end
             end
         end
@@ -8078,63 +8100,41 @@ end
 
 function initPanelForAllPlayers()
     local tableInfo = getTableInfo()
+
+    local shop = BlzGetFrameByName("TasItemShopUI", 0)
+    local parent = BlzFrameGetParent(shop)
+    BlzFrameSetLevel(shop,99)
+    BlzFrameSetLevel(parent,99)
+    print('shop parent: ' .. BlzFrameGetName(parent))
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
+            local multiboard = CreateMultiboard()
+            local multi = BlzGetFrameByName('Multiboard', 0)
+            BlzFrameSetParent(multi, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+            local parent = BlzFrameGetParent(multi)
+            print('multi parent: ' .. BlzFrameGetName(parent))
+            BlzFrameSetLevel(multi,1)
+            BlzFrameSetLevel(parent,1)
 
-            local myPanel = BlzCreateFrameByType("BACKDROP", "CurvedStatusTemplateMy", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonDisabledBackdropTemplate", 0)
+            MultiboardSetRowCount(multiboard, #tableInfo.body + 1)
+            MultiboardSetColumnCount(multiboard, #tableInfo.header)
 
-            local shop = BlzGetFrameByName("TasItemShopUI", 0)
-            BlzFrameSetAbsPoint(myPanel, FRAMEPOINT_TOPRIGHT, 0.93, 0.56)
-            BlzFrameSetLevel(myPanel,1)
-            local parent = BlzFrameGetParent(shop)
-            BlzFrameSetLevel(shop,2)
-            BlzFrameSetLevel(parent,2)
-
-
-            local totalWeight = 0
-            for _, headerColumn in ipairs(tableInfo.header) do
-                totalWeight = totalWeight + headerColumn.weight + 0.005
-            end
-            local totalHeight = #tableInfo.body + 4
-            BlzFrameSetSize(myPanel, totalWeight + 0.015, totalHeight * 0.01)
-            BlzFrameSetAlpha(myPanel, 220)
-
-
-            local prevColumn = nil
-            for i, headerColumn in ipairs(tableInfo.header) do
-                local column = BlzCreateFrameByType('TEXT', 'CurvedStatusHeader', myPanel, 'TeamLabelTextTemplate', 0)
-                BlzFrameSetSize(column, headerColumn.weight, 0.02)
-                BlzFrameSetText(column, headerColumn.text)
-                BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
-                if i == 1 then
-                    BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, myPanel, FRAMEPOINT_TOPLEFT, 0.01, -0.01)
-                else
-                    BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0.005, 0)
-                end
-                prevColumn = column
+            for i, header in ipairs(tableInfo.header) do
+                local title = MultiboardGetItem(multiboard, 0, i - 1)
+                MultiboardSetItemStyle(title, true, false)
+                MultiboardSetItemValue(title, header.text)
+                MultiboardSetItemWidth(title, header.weight)
+                MultiboardReleaseItem(title)
             end
 
-            for i, row in ipairs(tableInfo.body) do
-                local prevColumn = nil
-                for j, element in ipairs(row) do
-                    local column = BlzCreateFrameByType('TEXT', 'CurvedStatusRow1', myPanel, 'TeamLabelTextTemplate', 0)
-                    BlzFrameSetSize(column, tableInfo.header[j].weight, 0.02)
-                    BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
-                    BlzFrameSetTextColor(column, element.color)
-                    if j == 1 then
-                        if i == 1 then
-                            BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, myPanel, FRAMEPOINT_TOPLEFT, 0.01, -0.03)
-                        else
-                            BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, myPanel, FRAMEPOINT_TOPLEFT, 0.01, -0.02 - (0.01 * i))
-                        end
-                    else
-                        BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0.005, 0)
-                    end
-                    prevColumn = column
-                end
+            player.multiboard = multiboard
+        end
+    end
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            if GetLocalPlayer() == player.id then
+                MultiboardDisplay(player.multiboard, true)
             end
-            BlzFrameSetVisible(myPanel, GetLocalPlayer() == player.id)
-            player.statePanel = myPanel
         end
     end
 end

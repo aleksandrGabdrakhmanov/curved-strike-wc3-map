@@ -144,34 +144,34 @@ end
 
 function getColorById(playerId)
     if (playerId == 0) then
-        return BlzConvertColor(255, 255, 2, 2)
+        return {r=255, g=2, b=2, t=255}
     end
     if (playerId == 1) then
-        return BlzConvertColor(255, 0, 65, 255)
+        return {r=0, g=65, b=255, t=255}
     end
     if (playerId == 2) then
-        return BlzConvertColor(255, 27, 229, 184)
+        return {r=27, g=229, b=184, t=255}
     end
     if (playerId == 3) then
-        return BlzConvertColor(255, 83, 0, 128)
+        return {r=83, g=0, b=128, t=255}
     end
     if (playerId == 4) then
-        return BlzConvertColor(255, 255, 255, 0)
+        return {r=255, g=255, b=0, t=255}
     end
     if (playerId == 5) then
-        return BlzConvertColor(255, 254, 137, 13)
+        return {r=254, g=137, b=13, t=255}
     end
     if (playerId == 6) then
-        return BlzConvertColor(255, 31, 191, 0)
+        return {r=31, g=191, b=0, t=255}
     end
     if (playerId == 7) then
-        return BlzConvertColor(255, 228, 90, 170)
+        return {r=228, g=90, b=170, t=255}
     end
     if (playerId == 8) then
-        return BlzConvertColor(255, 148, 149, 150)
+        return {r=148, g=149, b=150, t=255}
     end
     if (playerId == 9) then
-        return BlzConvertColor(255, 125, 190, 241)
+        return {r=125, g=190, b=241, t=255}
     end
 end
 

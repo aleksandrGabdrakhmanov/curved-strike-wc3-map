@@ -2,6 +2,7 @@ IncludeFile "UI\FrameDef\ui\scriptdialog.fdf",
 IncludeFile "UI\FrameDef\ui\escmenumainpanel.fdf",
 IncludeFile "UI\FrameDef\ui\questdialog.fdf",
 IncludeFile "UI\FrameDef\glue\battlenetprofilepanel.fdf",
+IncludeFile "UI\FrameDef\UI\EscMenuTemplates.fdf",
 Frame "BACKDROP" "StartGameMenu" {
     Width 0.4,
     Height 0.45,
