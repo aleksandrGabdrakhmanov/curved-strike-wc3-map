@@ -10,11 +10,11 @@ function initGameConfig(mode)
             economy = {
                 startGold = 300,
                 startIncomePerSec = 5,
-                incomeBoost = 1,
+                incomeBoost = 0.5,
                 firstMinePrice = 150,
                 nextMineDiffPrice = 75,
                 goldByTower = 125,
-                incomeForCenter = 1
+                incomeForCenter = 0.5
             },
             playerPosition = { 1, 2, 3, 4, 5 },
             isOpenAllMap = false
@@ -28,11 +28,11 @@ function initGameConfig(mode)
             economy = {
                 startGold = 300,
                 startIncomePerSec = 5,
-                incomeBoost = 1,
+                incomeBoost = 0.5,
                 firstMinePrice = 150,
                 nextMineDiffPrice = 75,
                 goldByTower = 125,
-                incomeForCenter = 1
+                incomeForCenter = 0.5
             },
             playerPosition = { 1, 2, 3, 4, 5 },
             isOpenAllMap = false

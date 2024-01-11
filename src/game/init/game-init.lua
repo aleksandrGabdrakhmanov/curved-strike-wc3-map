@@ -118,7 +118,8 @@ function addPlayersInTeam(players)
                     minePrice = game_config.economy.firstMinePrice,
                     mineLevel = 0,
                     mineTextTag = nil,
-                    totalGold = game_config.economy.startGold
+                    totalGold = game_config.economy.startGold,
+                    roundUp = false
                 },
                 buildRect = nil,
                 workerRect = nil,
@@ -135,7 +136,7 @@ function addPlayersInTeam(players)
                 availableUnits = {},
                 availableHeroes = {},
                 tier = 'T1',
-                food = 0
+                food = 0,
             })
             nextPosition = nextPosition + 1
         end

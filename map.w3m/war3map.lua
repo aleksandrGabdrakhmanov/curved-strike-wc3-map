@@ -6121,11 +6121,11 @@ function initGameConfig(mode)
             economy = {
                 startGold = 300,
                 startIncomePerSec = 5,
-                incomeBoost = 1,
+                incomeBoost = 0.5,
                 firstMinePrice = 150,
-                nextMineDiffPrice = 150,
+                nextMineDiffPrice = 75,
                 goldByTower = 125,
-                incomeForCenter = 1
+                incomeForCenter = 0.5
             },
             playerPosition = { 1, 2, 3, 4, 5 },
             isOpenAllMap = false
@@ -6139,11 +6139,11 @@ function initGameConfig(mode)
             economy = {
                 startGold = 300,
                 startIncomePerSec = 5,
-                incomeBoost = 1,
+                incomeBoost = 0.5,
                 firstMinePrice = 150,
-                nextMineDiffPrice = 150,
+                nextMineDiffPrice = 75,
                 goldByTower = 125,
-                incomeForCenter = 1
+                incomeForCenter = 0.5
             },
             playerPosition = { 1, 2, 3, 4, 5 },
             isOpenAllMap = false
@@ -6411,7 +6411,8 @@ function addPlayersInTeam(players)
                     minePrice = game_config.economy.firstMinePrice,
                     mineLevel = 0,
                     mineTextTag = nil,
-                    totalGold = game_config.economy.startGold
+                    totalGold = game_config.economy.startGold,
+                    roundUp = false
                 },
                 buildRect = nil,
                 workerRect = nil,
@@ -6428,7 +6429,7 @@ function addPlayersInTeam(players)
                 availableUnits = {},
                 availableHeroes = {},
                 tier = 'T1',
-                food = 0
+                food = 0,
             })
             nextPosition = nextPosition + 1
         end
@@ -7250,7 +7251,19 @@ function incomeTrigger()
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                addGold(player, player.economy.income + player.economy.incomeForCenter)
+
+                player.economy.roundUp = not player.economy.roundUp
+
+                local income = player.economy.income + player.economy.incomeForCenter
+                local roundedIncome
+
+                if player.economy.roundUp then
+                    roundedIncome = math.ceil(income)
+                else
+                    roundedIncome = math.floor(income)
+                end
+
+                addGold(player, roundedIncome)
             end
         end
     end)

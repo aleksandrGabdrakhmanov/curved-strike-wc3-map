@@ -5,7 +5,19 @@ function incomeTrigger()
     TriggerAddAction(trig, function()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                addGold(player, player.economy.income + player.economy.incomeForCenter)
+
+                player.economy.roundUp = not player.economy.roundUp
+
+                local income = player.economy.income + player.economy.incomeForCenter
+                local roundedIncome
+
+                if player.economy.roundUp then
+                    roundedIncome = math.ceil(income)
+                else
+                    roundedIncome = math.floor(income)
+                end
+
+                addGold(player, roundedIncome)
             end
         end
     end)
@@ -16,5 +28,4 @@ function addGold(player, gold)
     player.economy.totalGold = player.economy.totalGold + gold
     SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + gold)
 end
-
 Debug.endFile()
