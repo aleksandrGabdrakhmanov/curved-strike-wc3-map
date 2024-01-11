@@ -16,28 +16,26 @@ function spawnTrigger()
     end)
 end
 
-function handleUnitSpawn(player, id, x, y, label)
+function handleUnitSpawn(player, id, x, y)
     local parentId = getParentUnitId(('>I4'):pack(id))
     if parentId then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-        SetUnitUserData( unit, label)
+        SetUnitUserData( unit, totalGameSeconds)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         immediatelyMoveUnit(unit)
     end
 end
 
-function handleHeroSpawn(player, unit, x, y, label)
+function handleHeroSpawn(player, unit, x, y)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
-        SetUnitUserData( unit, label)
         hero.status = "alive"
         hero.unit = unit
         immediatelyMoveUnit(unit)
     elseif hero.status == "dead" then
         hero.status = "alive"
-        SetUnitUserData(hero.unit, label)
         ReviveHeroLoc(hero.unit, Location(x, y), false)
         SetUnitManaPercentBJ(hero.unit, 100)
         immediatelyMoveUnit(hero.unit)
@@ -95,7 +93,7 @@ function getHero(heroes, unit)
 end
 
 function processGroupForSpawn(player)
-    local function processRect(buildRect, spawnRect, label)
+    local function processRect(buildRect, spawnRect)
         local groupForBuild = GetUnitsInRectAll(buildRect)
         ForGroup(groupForBuild, function()
             local unit = GetEnumUnit()
@@ -104,22 +102,16 @@ function processGroupForSpawn(player)
             if owner == player.id then
                 local x, y = calculateDif(buildRect, spawnRect, unit)
                 if isHero(('>I4'):pack(id)) then
-                    handleHeroSpawn(player, unit, x, y, label)
+                    handleHeroSpawn(player, unit, x, y)
                 else
-                    handleUnitSpawn(player, id, x, y, label)
+                    handleUnitSpawn(player, id, x, y)
                 end
             end
         end)
         DestroyGroup(groupForBuild)
     end
 
-    if type(player.buildRect) == "table" then
-        for i in ipairs(player.buildRect) do
-            processRect(player.buildRect[i], player.spawnRect[i], i)
-        end
-    else
-        processRect(player.buildRect, player.spawnRect, 0)
-    end
+    processRect(player.buildRect, player.spawnRect)
 end
 
 function getParentUnitId(searchId)

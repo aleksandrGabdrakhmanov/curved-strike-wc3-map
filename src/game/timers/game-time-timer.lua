@@ -1,6 +1,6 @@
 Debug.beginFile('game-time-timer.lua')
 function initGameTimer()
-    totalSeconds = 0
+    totalGameSeconds = 0
     local gameTimer = CreateTimer()
     TimerStart(gameTimer, 1.0, true, function()
         for _, team in ipairs(all_teams) do
@@ -10,14 +10,14 @@ function initGameTimer()
                 end
             end
         end
-        totalSeconds = totalSeconds + 1
+        totalGameSeconds = totalGameSeconds + 1
     end)
 end
 
 function GetFormattedGameTime()
-    local hours = math.floor(totalSeconds / 3600)
-    local mins = math.floor((totalSeconds % 3600) / 60)
-    local secs = totalSeconds % 60
+    local hours = math.floor(totalGameSeconds / 3600)
+    local mins = math.floor((totalGameSeconds % 3600) / 60)
+    local secs = totalGameSeconds % 60
 
     if hours > 0 then
         return string.format("%d:%02d:%02d", hours, mins, secs)

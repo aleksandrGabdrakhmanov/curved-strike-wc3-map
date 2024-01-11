@@ -210,15 +210,7 @@ function initRect()
             for i, data in ipairs(attackData) do
                 for _, dir in ipairs(directions) do
                     if data[dir] then
-                        if type(data[dir]) == 'table' then
-                            if data[dir][1] ~= nil then
-                                player.attackPointRect[i] = { rect = data[dir][1], direction = dir, label = 1 }
-                            elseif data[dir][2] ~= nil then
-                                player.attackPointRect[i] = { rect = data[dir][2], direction = dir, label = 2 }
-                            end
-                        else
-                            player.attackPointRect[i] = { rect = data[dir], direction = dir, label = nil }
-                        end
+                        player.attackPointRect[i] = { rect = data[dir], direction = dir }
                         break
                     end
                 end

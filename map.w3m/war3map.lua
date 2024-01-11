@@ -6503,15 +6503,7 @@ function initRect()
             for i, data in ipairs(attackData) do
                 for _, dir in ipairs(directions) do
                     if data[dir] then
-                        if type(data[dir]) == 'table' then
-                            if data[dir][1] ~= nil then
-                                player.attackPointRect[i] = { rect = data[dir][1], direction = dir, label = 1 }
-                            elseif data[dir][2] ~= nil then
-                                player.attackPointRect[i] = { rect = data[dir][2], direction = dir, label = 2 }
-                            end
-                        else
-                            player.attackPointRect[i] = { rect = data[dir], direction = dir, label = nil }
-                        end
+                        player.attackPointRect[i] = { rect = data[dir], direction = dir }
                         break
                     end
                 end
@@ -6833,7 +6825,7 @@ end
 Debug.endFile()
 Debug.beginFile('game-time-timer.lua')
 function initGameTimer()
-    totalSeconds = 0
+    totalGameSeconds = 0
     local gameTimer = CreateTimer()
     TimerStart(gameTimer, 1.0, true, function()
         for _, team in ipairs(all_teams) do
@@ -6843,14 +6835,14 @@ function initGameTimer()
                 end
             end
         end
-        totalSeconds = totalSeconds + 1
+        totalGameSeconds = totalGameSeconds + 1
     end)
 end
 
 function GetFormattedGameTime()
-    local hours = math.floor(totalSeconds / 3600)
-    local mins = math.floor((totalSeconds % 3600) / 60)
-    local secs = totalSeconds % 60
+    local hours = math.floor(totalGameSeconds / 3600)
+    local mins = math.floor((totalGameSeconds % 3600) / 60)
+    local secs = totalGameSeconds % 60
 
     if hours > 0 then
         return string.format("%d:%02d:%02d", hours, mins, secs)
@@ -6876,7 +6868,6 @@ function centerControlTrigger()
                     isAddGold = true
                 end
             end
-
             if isAddGold == true then
                 for _, player in ipairs(team.players) do
                     player.economy.incomeForCenter = game_config.economy.incomeForCenter
@@ -7378,9 +7369,8 @@ function moveTrigger()
                     local group = GetUnitsInRectAll(player.attackPointRect[i].rect)
                     ForGroup(group, function ()
                         local unit = GetEnumUnit()
-                        local label = GetUnitUserData(unit)
                         local owner = GetOwningPlayer(unit)
-                        if owner == player.spawnPlayerId and (label == player.attackPointRect[i].label or label == 0) then
+                        if owner == player.spawnPlayerId then
                             if GetUnitCurrentOrder(unit) == 0 or
                                     GetUnitCurrentOrder(unit) == 851983 then
                                 moveByLocation(player.attackPointRect[i], unit)
@@ -7558,28 +7548,26 @@ function spawnTrigger()
     end)
 end
 
-function handleUnitSpawn(player, id, x, y, label)
+function handleUnitSpawn(player, id, x, y)
     local parentId = getParentUnitId(('>I4'):pack(id))
     if parentId then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-        SetUnitUserData( unit, label)
+        SetUnitUserData( unit, totalGameSeconds)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         immediatelyMoveUnit(unit)
     end
 end
 
-function handleHeroSpawn(player, unit, x, y, label)
+function handleHeroSpawn(player, unit, x, y)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
-        SetUnitUserData( unit, label)
         hero.status = "alive"
         hero.unit = unit
         immediatelyMoveUnit(unit)
     elseif hero.status == "dead" then
         hero.status = "alive"
-        SetUnitUserData(hero.unit, label)
         ReviveHeroLoc(hero.unit, Location(x, y), false)
         SetUnitManaPercentBJ(hero.unit, 100)
         immediatelyMoveUnit(hero.unit)
@@ -7637,7 +7625,7 @@ function getHero(heroes, unit)
 end
 
 function processGroupForSpawn(player)
-    local function processRect(buildRect, spawnRect, label)
+    local function processRect(buildRect, spawnRect)
         local groupForBuild = GetUnitsInRectAll(buildRect)
         ForGroup(groupForBuild, function()
             local unit = GetEnumUnit()
@@ -7646,22 +7634,16 @@ function processGroupForSpawn(player)
             if owner == player.id then
                 local x, y = calculateDif(buildRect, spawnRect, unit)
                 if isHero(('>I4'):pack(id)) then
-                    handleHeroSpawn(player, unit, x, y, label)
+                    handleHeroSpawn(player, unit, x, y)
                 else
-                    handleUnitSpawn(player, id, x, y, label)
+                    handleUnitSpawn(player, id, x, y)
                 end
             end
         end)
         DestroyGroup(groupForBuild)
     end
 
-    if type(player.buildRect) == "table" then
-        for i in ipairs(player.buildRect) do
-            processRect(player.buildRect[i], player.spawnRect[i], i)
-        end
-    else
-        processRect(player.buildRect, player.spawnRect, 0)
-    end
+    processRect(player.buildRect, player.spawnRect)
 end
 
 function getParentUnitId(searchId)
