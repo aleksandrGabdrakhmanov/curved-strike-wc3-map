@@ -28,6 +28,9 @@ function initAbilitiesPanel()
             local trigger = CreateTrigger()
             BlzTriggerRegisterFrameEvent(trigger, buttonAbility, FRAMEEVENT_CONTROL_CLICK)
             TriggerAddAction(trigger, function()
+                if GetTriggerPlayer() ~= GetLocalPlayer() then
+                    return
+                end
                 if player.isVisiblePanelAbility then
                     player.isVisiblePanelAbility = false
                     BlzFrameSetVisible(player.panelAbility, player.isVisiblePanelAbility)
