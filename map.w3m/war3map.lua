@@ -6257,7 +6257,7 @@ function initGlobalVariables()
         { id = 'e001', parentId = 'e00H', tier = 3, race = 'elf', line = 4, position = 11, food = 5, name = 'Chimaera', upgrades = { 'Recb' } },
     }
     units_special = {
-        builder = 'o000',
+        builder = 'u00F',
         tower = 'o001',
         base = 'o002',
         mine = 'ugol',

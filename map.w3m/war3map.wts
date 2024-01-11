@@ -458,7 +458,7 @@ Demolisher
 }
 
 STRING 108
-// Units: h00O (Demolisher), Hotkey (Hotkey)
+// Units: h00W (Wind Rider), Hotkey (Hotkey)
 {
 C
 }
@@ -644,7 +644,7 @@ Wind Rider
 }
 
 STRING 139
-// Units: h00W (Wind Rider), Hotkey (Hotkey)
+// Units: h00O (Demolisher), Hotkey (Hotkey)
 {
 X
 }
@@ -698,7 +698,7 @@ Abomination
 }
 
 STRING 148
-// Units: h00Y (Abomination), Hotkey (Hotkey)
+// Units: o005 (Tauren), Hotkey (Hotkey)
 {
 Z
 }
@@ -722,7 +722,7 @@ Banshee
 }
 
 STRING 152
-// Units: h00Z (Banshee), Hotkey (Hotkey)
+// Units: o00C (Shaman), Hotkey (Hotkey)
 {
 E
 }
@@ -746,7 +746,7 @@ Crypt Fiend
 }
 
 STRING 156
-// Units: h010 (Crypt Fiend), Hotkey (Hotkey)
+// Units: o006 (Headhunter), Hotkey (Hotkey)
 {
 W
 }
@@ -770,7 +770,7 @@ Destroyer
 }
 
 STRING 160
-// Units: e001 (Chimaera), Hotkey (Hotkey)
+// Units: o007 (Demolisher), Hotkey (Hotkey)
 {
 X
 }
@@ -794,7 +794,7 @@ Frost Wyrm
 }
 
 STRING 164
-// Units: h012 (Frost Wyrm), Hotkey (Hotkey)
+// Units: o009 (Wind Rider), Hotkey (Hotkey)
 {
 C
 }
@@ -818,7 +818,7 @@ Gargoyle
 }
 
 STRING 168
-// Units: h013 (Gargoyle), Hotkey (Hotkey)
+// Units: o00B (Witch Doctor), Hotkey (Hotkey)
 {
 A
 }
@@ -842,7 +842,7 @@ Ghoul
 }
 
 STRING 172
-// Units: h014 (Ghoul), Hotkey (Hotkey)
+// Units: o003 (Grunt), Hotkey (Hotkey)
 {
 Q
 }
@@ -866,7 +866,7 @@ Meat Wagon
 }
 
 STRING 176
-// Units: h015 (Meat Wagon), Hotkey (Hotkey)
+// Units: o00A (Batrider), Hotkey (Hotkey)
 {
 D
 }
@@ -890,7 +890,7 @@ Necromancer
 }
 
 STRING 180
-// Units: h016 (Necromancer), Hotkey (Hotkey)
+// Units: o00D (Spirit Walker), Hotkey (Hotkey)
 {
 S
 }
@@ -956,7 +956,7 @@ Health: <earc,HP>|nDamage: <earc,mindmg1> - <earc,maxdmg1>|nAttack Speed: 0.98|n
 }
 
 STRING 191
-// Units: e000 (Archer), Hotkey (Hotkey)
+// Units: h014 (Ghoul), Hotkey (Hotkey)
 {
 Q
 }
@@ -980,7 +980,7 @@ Health: <echm,HP>|nDamage: <echm,mindmg2> - <echm,maxdmg2>|nAttack Speed 1.63|nA
 }
 
 STRING 195
-// Units: h019 (Destroyer), Hotkey (Hotkey)
+// Units: e008 (Hippogryph Rider), Hotkey (Hotkey)
 {
 X
 }
@@ -1004,7 +1004,7 @@ Health: <edoc,HP>|nDamage: <edoc,mindmg1> - <edoc,maxdmg1>|nAttack Speed 0.98|nA
 }
 
 STRING 199
-// Units: e002 (Druid of the Claw), Hotkey (Hotkey)
+// Units: h016 (Necromancer), Hotkey (Hotkey)
 {
 S
 }
@@ -1028,7 +1028,7 @@ Health: <edot,HP>|nDamage: <edot,mindmg1> - <edot,maxdmg1>|nAttack Speed 1.04|nA
 }
 
 STRING 203
-// Units: e003 (Druid of the Talon), Hotkey (Hotkey)
+// Units: h015 (Meat Wagon), Hotkey (Hotkey)
 {
 D
 }
@@ -1052,7 +1052,7 @@ Health: <edry,HP>|nDamage: <edry,mindmg1> - <edry,maxdmg1>|nAttack Speed 1.56|nA
 }
 
 STRING 207
-// Units: e004 (Dryad), Hotkey (Hotkey)
+// Units: h00Z (Banshee), Hotkey (Hotkey)
 {
 E
 }
@@ -1076,7 +1076,7 @@ Health: <efdr,HP>|nDamage: <efdr,mindmg1> - <efdr,maxdmg1>|nAttack Speed 1.14|nA
 }
 
 STRING 211
-// Units: e005 (Faerie Dragon), Hotkey (Hotkey)
+// Units: o008 (Kodo Beast), Hotkey (Hotkey)
 {
 F
 }
@@ -1124,7 +1124,7 @@ Health: <ehip,HP>|nDamage: 18 - 20|nAttack Speed 0.70|nAttack Type: |cffffc800No
 }
 
 STRING 219
-// Units: e007 (Hippogryph), Hotkey (Hotkey)
+// Units: h013 (Gargoyle), Hotkey (Hotkey)
 {
 A
 }
@@ -1142,7 +1142,7 @@ Build Hippogryph Rider
 }
 
 STRING 222
-// Units: e008 (Hippogryph Rider), Hotkey (Hotkey)
+// Units: e007 (Hippogryph), Hotkey (Hotkey)
 {
 A
 }
@@ -1172,7 +1172,7 @@ Health: <esen,HP>|nDamage: <esen,mindmg1> - <esen,maxdmg1>|nAttack Speed 1.17|nA
 }
 
 STRING 227
-// Units: e009 (Huntress), Hotkey (Hotkey)
+// Units: h010 (Crypt Fiend), Hotkey (Hotkey)
 {
 W
 }
@@ -1196,7 +1196,7 @@ Health: <emtg,HP>|nDamage: <emtg,mindmg1> - <emtg,maxdmg1>|nAttack Speed 1.63|nA
 }
 
 STRING 231
-// Units: e00A (Mountain Giant), Hotkey (Hotkey)
+// Units: h00Y (Abomination), Hotkey (Hotkey)
 {
 Z
 }
@@ -1262,7 +1262,7 @@ Hero Builder
 }
 
 STRING 245
-// Units: H011 (Paladin), Hotkey (Hotkey)
+// Units: e009 (Huntress), Hotkey (Hotkey)
 {
 Q
 }
@@ -1274,13 +1274,13 @@ Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemen
 }
 
 STRING 247
-// Units: H01A (Archmage), Hotkey (Hotkey)
+// Units: e000 (Archer), Hotkey (Hotkey)
 {
 W
 }
 
 STRING 248
-// Units: H01B (Mountain King), Hotkey (Hotkey)
+// Units: e004 (Dryad), Hotkey (Hotkey)
 {
 E
 }
@@ -1292,7 +1292,7 @@ R
 }
 
 STRING 250
-// Units: O00E (Blademaster), Hotkey (Hotkey)
+// Units: e00C (Huntress), Hotkey (Hotkey)
 {
 Q
 }
@@ -1304,13 +1304,13 @@ Mystical Hero, effective at ranged attacks. Can learn Chain Lightning, Firebolt,
 }
 
 STRING 252
-// Units: O00F (Far Seer), Hotkey (Hotkey)
+// Units: H01A (Archmage), Hotkey (Hotkey)
 {
 W
 }
 
 STRING 253
-// Units: O00G (Tauren Chieftain), Hotkey (Hotkey)
+// Units: H01B (Mountain King), Hotkey (Hotkey)
 {
 E
 }
@@ -1322,13 +1322,13 @@ R
 }
 
 STRING 255
-// Units: U00B (Death Knight), Hotkey (Hotkey)
+// Units: H011 (Paladin), Hotkey (Hotkey)
 {
 Q
 }
 
 STRING 256
-// Units: U00C (Lich), Hotkey (Hotkey)
+// Units: O00F (Far Seer), Hotkey (Hotkey)
 {
 W
 }
@@ -1340,7 +1340,7 @@ R
 }
 
 STRING 258
-// Units: E00N (Keeper of the Grove), Hotkey (Hotkey)
+// Units: O00E (Blademaster), Hotkey (Hotkey)
 {
 Q
 }
@@ -1352,7 +1352,7 @@ Warrior Hero, adept at enhancing ranged attacks and slaying enemies from afar. C
 }
 
 STRING 260
-// Units: E00O (Priestess of the Moon), Hotkey (Hotkey)
+// Units: U00C (Lich), Hotkey (Hotkey)
 {
 W
 }
@@ -1376,37 +1376,37 @@ A
 }
 
 STRING 264
-// Units: N001 (Sea Witch), Hotkey (Hotkey)
+// Units: e002 (Druid of the Claw), Hotkey (Hotkey)
 {
 S
 }
 
 STRING 265
-// Units: N002 (Tinker), Hotkey (Hotkey)
+// Units: e003 (Druid of the Talon), Hotkey (Hotkey)
 {
 D
 }
 
 STRING 266
-// Units: N003 (Beastmaster), Hotkey (Hotkey)
+// Units: e005 (Faerie Dragon), Hotkey (Hotkey)
 {
 F
 }
 
 STRING 267
-// Units: N004 (Brewmaster), Hotkey (Hotkey)
+// Units: e00A (Mountain Giant), Hotkey (Hotkey)
 {
 Z
 }
 
 STRING 268
-// Units: N005 (Dark Ranger), Hotkey (Hotkey)
+// Units: h019 (Destroyer), Hotkey (Hotkey)
 {
 X
 }
 
 STRING 269
-// Units: N006 (Firelord), Hotkey (Hotkey)
+// Units: h012 (Frost Wyrm), Hotkey (Hotkey)
 {
 C
 }
@@ -1772,7 +1772,7 @@ Move Unit (Large)
 }
 
 STRING 330
-// Units: h01D (Move Unit (Large)), Hotkey (Hotkey)
+// Units: U00B (Death Knight), Hotkey (Hotkey)
 {
 Q
 }
@@ -1790,7 +1790,7 @@ Move Unit (Medium)
 }
 
 STRING 333
-// Units: h01E (Move Unit (Medium)), Hotkey (Hotkey)
+// Units: E00N (Keeper of the Grove), Hotkey (Hotkey)
 {
 Q
 }
@@ -1808,7 +1808,7 @@ Move Unit (Small)
 }
 
 STRING 336
-// Units: h01F (Move Unit (Small)), Hotkey (Hotkey)
+// Units: h01D (Move Unit (Large)), Hotkey (Hotkey)
 {
 Q
 }
@@ -1921,7 +1921,7 @@ Defend On
 }
 
 STRING 362
-// Upgrades: R001 (Defend), Hotkey (Hotkey)
+// Units: O00G (Tauren Chieftain), Hotkey (Hotkey)
 {
 Z
 }
@@ -1933,7 +1933,7 @@ Defend Off
 }
 
 STRING 364
-// Upgrades: R002 (Defend), Hotkey (Hotkey)
+// Units: N004 (Brewmaster), Hotkey (Hotkey)
 {
 Z
 }
@@ -1948,12 +1948,6 @@ STRING 366
 // Upgrades: R002 (Defend), Tip (Tooltip)
 {
 Defend Off
-}
-
-STRING 367
-// Units: o00I (Peon test), Name (Name)
-{
-Peon test
 }
 
 STRING 368
@@ -1996,5 +1990,71 @@ STRING 375
 // Abilities: S000 (Flying Machine Bombs), EditorSuffix (Editor Suffix)
 {
 (based on Berserker)
+}
+
+STRING 376
+// Units: e001 (Chimaera), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 377
+// Units: E00O (Priestess of the Moon), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 378
+// Units: N001 (Sea Witch), Hotkey (Hotkey)
+{
+S
+}
+
+STRING 379
+// Units: N002 (Tinker), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 380
+// Units: N003 (Beastmaster), Hotkey (Hotkey)
+{
+F
+}
+
+STRING 381
+// Units: N005 (Dark Ranger), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 382
+// Units: N006 (Firelord), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 383
+// Units: h01E (Move Unit (Medium)), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 384
+// Units: h01F (Move Unit (Small)), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 385
+// Upgrades: R001 (Defend), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 386
+// Upgrades: R002 (Defend), Hotkey (Hotkey)
+{
+Z
 }
 
