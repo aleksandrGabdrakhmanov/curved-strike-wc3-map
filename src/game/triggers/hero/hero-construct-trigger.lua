@@ -15,7 +15,8 @@ function heroConstructTrigger()
                         building = GetTriggerUnit(),
                         unit = nil,
                         newSkills = {},
-                        unitConfig = getHeroUnitId(('>I4'):pack(unitId))
+                        unitConfig = getHeroUnitId(('>I4'):pack(unitId)),
+                        icon = BlzGetAbilityIcon(unitId)
                     })
                     if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
                         updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))

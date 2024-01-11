@@ -4,10 +4,18 @@ function getTableInfo()
     tableInfo.header = {
         { text = 'Name', weight = 0.085 },
         { text = 'Wave', weight = 0.03 },
-        { text = 'Inc/min', weight = 0.05 },
+        { text = 'Inc/min', weight = 0.06 },
         { text = 'Gold', weight = 0.045 },
         { text = 'Kills', weight = 0.05 },
         { text = 'Damage', weight = 0.06 },
+        { text = 'Tier', weight = 0.04 },
+        { text = 'Heroes', weight = 0.06 },
+        { },
+        { },
+        { },
+        { },
+        { },
+        { },
     }
     tableInfo.body = {}
     for _, team in ipairs(all_teams) do
@@ -42,6 +50,46 @@ function getTableInfo()
                     text = player.totalDamage,
                     color = player.color,
                     isSensitive = false
+                },
+                {
+                    text = 'T1',
+                    color = player.color,
+                    isSensitive = false
+                },
+                {
+                    icon = player.heroes[1] and player.heroes[1].icon or nil,
+                    color = player.color,
+                    isSensitive = true
+                },
+                {
+                    icon = player.heroes[2] and player.heroes[2].icon or nil,
+                    color = player.color,
+                    isSensitive = true
+                },
+                {
+                    icon = player.heroes[3] and player.heroes[3].icon or nil,
+                    color = player.color,
+                    isSensitive = true
+                },
+                {
+                    icon = player.heroes[4] and player.heroes[4].icon or nil,
+                    color = player.color,
+                    isSensitive = true
+                },
+                {
+                    icon = player.heroes[5] and player.heroes[5].icon or nil,
+                    color = player.color,
+                    isSensitive = true
+                },
+                {
+                    icon = player.heroes[6] and player.heroes[6].icon or nil,
+                    color = player.color,
+                    isSensitive = true
+                },
+                {
+                    icon = player.heroes[7] and player.heroes[7].icon or nil,
+                    color = player.color,
+                    isSensitive = true
                 }
             })
         end
@@ -79,21 +127,41 @@ function updatePanelForAllPlayers()
                         isLocalPlayer = true
                     end
 
-                    MultiboardSetItemStyle(item, true, false)
-
-                    if isLocalPlayer == true then
-                        MultiboardSetItemValue(item, cell.text)
-                    else
-                        if cell.isSensitive == true then
-                            MultiboardSetItemValue(item, "***")
-                        else
+                    if (cell.text) then
+                        MultiboardSetItemStyle(item, true, false)
+                        if isLocalPlayer == true then
                             MultiboardSetItemValue(item, cell.text)
+                        else
+                            if cell.isSensitive == true then
+                                MultiboardSetItemValue(item, "***")
+                            else
+                                MultiboardSetItemValue(item, cell.text)
+                            end
                         end
+                        MultiboardSetItemValueColor(item, cell.color.r, cell.color.g, cell.color.b, cell.color.t)
+                        MultiboardSetItemWidth(item, updatedTableInfo.header[col].weight)
+                    elseif (cell.icon) then
+                        MultiboardSetItemStyle(item, false, true)
+                        if isLocalPlayer == true then
+                            MultiboardSetItemIcon(item, cell.icon)
+                            MultiboardSetItemWidth(item, 0.01)
+                        else
+                            if cell.isSensitive == true then
+                                MultiboardSetItemStyle(item, true, false)
+                                MultiboardSetItemValue(item, "")
+                                MultiboardSetItemWidth(item, 0.01)
+                            else
+                                MultiboardSetItemIcon(item, cell.icon)
+                                MultiboardSetItemWidth(item, 0.01)
+                            end
+                        end
+                    else
+                        MultiboardSetItemStyle(item, true, false)
+                        MultiboardSetItemValue(item, "")
+                        MultiboardSetItemWidth(item, 0.01)
                     end
-                    MultiboardSetItemValueColor(item, cell.color.r, cell.color.g, cell.color.b, cell.color.t)
-                    MultiboardSetItemWidth(item, updatedTableInfo.header[col].weight)
-                    MultiboardReleaseItem(item)
-                end
+                        MultiboardReleaseItem(item)
+                    end
             end
         end
     end
@@ -110,28 +178,23 @@ end
 
 function initPanelForAllPlayers()
     local tableInfo = getTableInfo()
-
-    local shop = BlzGetFrameByName("TasItemShopUI", 0)
-    local parent = BlzFrameGetParent(shop)
-    BlzFrameSetLevel(shop,99)
-    BlzFrameSetLevel(parent,99)
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             local multiboard = CreateMultiboard()
-            local multi = BlzGetFrameByName('Multiboard', 0)
-            BlzFrameSetParent(multi, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-            local parent = BlzFrameGetParent(multi)
-            BlzFrameSetLevel(multi,1)
-            BlzFrameSetLevel(parent,1)
-
             MultiboardSetRowCount(multiboard, #tableInfo.body + 1)
             MultiboardSetColumnCount(multiboard, #tableInfo.header)
 
             for i, header in ipairs(tableInfo.header) do
                 local title = MultiboardGetItem(multiboard, 0, i - 1)
-                MultiboardSetItemStyle(title, true, false)
-                MultiboardSetItemValue(title, header.text)
-                MultiboardSetItemWidth(title, header.weight)
+                if header.text ~= nil then
+                    MultiboardSetItemStyle(title, true, false)
+                    MultiboardSetItemValue(title, header.text)
+                    MultiboardSetItemWidth(title, header.weight)
+
+                else
+                    MultiboardSetItemStyle(title, false, false)
+                    MultiboardSetItemWidth(title, 0.0001)
+                end
                 MultiboardReleaseItem(title)
             end
 

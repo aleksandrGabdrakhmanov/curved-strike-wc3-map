@@ -3,6 +3,13 @@ function initGameTimer()
     totalSeconds = 0
     local gameTimer = CreateTimer()
     TimerStart(gameTimer, 1.0, true, function()
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                if GetLocalPlayer() == player.id then
+                    MultiboardDisplay(player.multiboard, true)
+                end
+            end
+        end
         totalSeconds = totalSeconds + 1
     end)
 end
