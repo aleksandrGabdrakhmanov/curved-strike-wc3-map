@@ -52,9 +52,9 @@ function getTableInfo()
                     isSensitive = false
                 },
                 {
-                    text = 'T1',
+                    text = player.tier,
                     color = player.color,
-                    isSensitive = false
+                    isSensitive = true
                 },
                 {
                     icon = player.heroes[1] and player.heroes[1].icon or nil,

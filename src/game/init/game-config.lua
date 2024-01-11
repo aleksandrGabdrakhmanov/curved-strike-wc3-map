@@ -154,7 +154,9 @@ function initGlobalVariables()
         laboratory = 'nmgv',
         shop = 'ngme',
         heroBuilder = 'e00M',
-        randomHero = 'ncop'
+        randomHero = 'ncop',
+        t2 = 'hkee',
+        t3 = 'hcas'
     }
     abilities = {
         mine = 'A000',

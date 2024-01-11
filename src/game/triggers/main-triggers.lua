@@ -20,6 +20,7 @@ function initTriggers()
     deadDetectTrigger()
     killTowerTrigger()
     centerControlTrigger()
+    tierDetectTrigger()
     debugTrigger()
     debugTriggerGold()
 end

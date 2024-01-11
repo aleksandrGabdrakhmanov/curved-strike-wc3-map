@@ -133,7 +133,8 @@ function addPlayersInTeam(players)
                 totalDamage = 0,
                 totalKills = 0,
                 availableUnits = {},
-                availableHeroes = {}
+                availableHeroes = {},
+                tier = 'T1'
             })
             nextPosition = nextPosition + 1
         end

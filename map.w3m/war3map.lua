@@ -6265,7 +6265,9 @@ function initGlobalVariables()
         laboratory = 'nmgv',
         shop = 'ngme',
         heroBuilder = 'e00M',
-        randomHero = 'ncop'
+        randomHero = 'ncop',
+        t2 = 'hkee',
+        t3 = 'hcas'
     }
     abilities = {
         mine = 'A000',
@@ -6424,7 +6426,8 @@ function addPlayersInTeam(players)
                 totalDamage = 0,
                 totalKills = 0,
                 availableUnits = {},
-                availableHeroes = {}
+                availableHeroes = {},
+                tier = 'T1'
             })
             nextPosition = nextPosition + 1
         end
@@ -7384,6 +7387,7 @@ function initTriggers()
     deadDetectTrigger()
     killTowerTrigger()
     centerControlTrigger()
+    tierDetectTrigger()
     debugTrigger()
     debugTriggerGold()
 end
@@ -7669,6 +7673,25 @@ function summonTrigger()
     TriggerAddAction(trig, function()
         SetUnitUserData(GetSummonedUnit(), GetUnitUserData(GetSummoningUnit()))
     end)
+end
+Debug.endFile()
+Debug.beginFile('tier-detect-trigger.lua')
+function tierDetectTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterPlayerUnitEventSimple( trig, player.id, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
+            TriggerAddAction(trig, function()
+                if (GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.t2)) then
+                    player.tier = 'T2'
+                end
+                if (GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.t3)) then
+                    player.tier = 'T3'
+                end
+
+            end)
+        end
+    end
 end
 Debug.endFile()
 Debug.beginFile('kodo-trigger.lua')
@@ -8050,7 +8073,7 @@ function getTableInfo()
                     isSensitive = false
                 },
                 {
-                    text = 'T1',
+                    text = player.tier,
                     color = player.color,
                     isSensitive = false
                 },
