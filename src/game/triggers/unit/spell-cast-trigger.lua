@@ -17,6 +17,14 @@ custom_cast_ai_params = {
         condition = {
             livePercent = 20
         }
+    },
+    {
+        unitId = 'e00J',
+        order = 'rejuvination',
+        timeout = 2.00,
+        condition = {
+            livePercent = 80
+        }
     }
 }
 function customCastAITrigger()

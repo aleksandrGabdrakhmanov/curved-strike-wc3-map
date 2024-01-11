@@ -12,7 +12,7 @@ function initGameConfig(mode)
                 startIncomePerSec = 5,
                 incomeBoost = 1,
                 firstMinePrice = 150,
-                nextMineDiffPrice = 150,
+                nextMineDiffPrice = 75,
                 goldByTower = 125,
                 incomeForCenter = 1
             },
@@ -30,7 +30,7 @@ function initGameConfig(mode)
                 startIncomePerSec = 5,
                 incomeBoost = 1,
                 firstMinePrice = 150,
-                nextMineDiffPrice = 150,
+                nextMineDiffPrice = 75,
                 goldByTower = 125,
                 incomeForCenter = 1
             },

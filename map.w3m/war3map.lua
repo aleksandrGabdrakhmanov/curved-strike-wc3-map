@@ -7739,6 +7739,14 @@ custom_cast_ai_params = {
         condition = {
             livePercent = 20
         }
+    },
+    {
+        unitId = 'e00J',
+        order = 'rejuvination',
+        timeout = 2.00,
+        condition = {
+            livePercent = 80
+        }
     }
 }
 function customCastAITrigger()
@@ -8670,8 +8678,16 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(1, 1)
+SetStartLocPrioCount(1, 9)
 SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(1, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(1, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(1, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(1, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(1, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(1, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(1, 8, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(2, 9)
 SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(2, 1, 1, MAP_LOC_PRIO_HIGH)
