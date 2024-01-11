@@ -18,12 +18,15 @@ function heroConstructTrigger()
                         unitConfig = getHeroUnitId(('>I4'):pack(unitId)),
                         icon = BlzGetAbilityIcon(unitId)
                     })
+                    player.food = player.food + 5
                     if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
                         updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))
                     end
                     reRollHeroes(player)
+                else
+                    player.food = player.food + getFoodCostUnit(('>I4'):pack(GetUnitTypeId(GetTriggerUnit())))
                 end
-            end)
+                end)
         end
     end
 end
@@ -49,6 +52,14 @@ function getHeroUnitId(searchId)
         end
     end
     return nil
+end
+function getFoodCostUnit(unitId)
+    for _, unit in pairs(units_for_build) do
+        if unit.id == unitId then
+            return unit.food
+        end
+    end
+    return 0
 end
 Debug.endFile()
 

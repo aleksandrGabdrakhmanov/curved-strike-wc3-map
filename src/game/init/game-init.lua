@@ -134,7 +134,8 @@ function addPlayersInTeam(players)
                 totalKills = 0,
                 availableUnits = {},
                 availableHeroes = {},
-                tier = 'T1'
+                tier = 'T1',
+                food = 0
             })
             nextPosition = nextPosition + 1
         end

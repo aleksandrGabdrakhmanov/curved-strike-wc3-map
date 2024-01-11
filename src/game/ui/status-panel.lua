@@ -9,6 +9,7 @@ function getTableInfo()
         { text = 'Kills', weight = 0.05 },
         { text = 'Damage', weight = 0.06 },
         { text = 'Tier', weight = 0.04 },
+        { text = 'Army', weight = 0.04 },
         { text = 'Heroes', weight = 0.06 },
         { },
         { },
@@ -53,6 +54,11 @@ function getTableInfo()
                 },
                 {
                     text = player.tier,
+                    color = player.color,
+                    isSensitive = true
+                },
+                {
+                    text = player.food,
                     color = player.color,
                     isSensitive = true
                 },

@@ -1,5 +1,5 @@
-Debug.beginFile('cell-trigger.lua')
-function cellTrigger()
+Debug.beginFile('sell-trigger.lua')
+function sellTrigger()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             local trig = CreateTrigger()
@@ -19,6 +19,7 @@ function cellTrigger()
                 else
                     SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + math.floor(cost * 0.75))
                 end
+                player.food = player.food - getFoodCostUnit(('>I4'):pack(GetUnitTypeId(unit)))
             end)
         end
     end
