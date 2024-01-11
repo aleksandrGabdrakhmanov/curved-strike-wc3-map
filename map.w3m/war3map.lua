@@ -6210,7 +6210,7 @@ function initGlobalVariables()
     units_for_build = {
         { id = 'h00C', parentId = 'h00A', tier = 1, race = 'human', line = 1, position = 1, food = 2, name = 'Footman', upgrades = { 'Rhde' }, abilities = { { id = 'Adef' } } },
         { id = 'h004', parentId = 'h00D', tier = 1, race = 'human', line = 1, position = 2, food = 3, name = 'Rifleman', upgrades = { 'Rhri' } },
-        { id = 'h008', parentId = 'h00I', tier = 1, race = 'human', line = 1, position = 3, food = 2, name = 'Sorceress', upgrades = { 'Rhst' }, abilities = { { id = 'Aply' }, { id = 'A008' }, { id = 'Aslo' } } },
+        { id = 'h008', parentId = 'h00I', tier = 1, race = 'human', line = 1, position = 3, food = 2, name = 'Sorceress', upgrades = { 'Rhst' }, abilities = { { id = 'Aply' }, { id = 'Aivs' }, { id = 'Aslo' } } },
         { id = 'h003', parentId = 'h00E', tier = 2, race = 'human', line = 1, position = 4, food = 3, name = 'Mortar Team', upgrades = { 'Rhfl', 'Rhfs' } },
         { id = 'h007', parentId = 'h00H', tier = 2, race = 'human', line = 1, position = 5, food = 2, name = 'Priest', upgrades = { 'Rhpt' }, abilities = { { id = 'Ahea' }, { id = 'Ainf' }, { id = 'Adis' } } },
         { id = 'h006', parentId = 'h00K', tier = 2, race = 'human', line = 1, position = 6, food = 3, name = 'Spellbreaker', upgrades = { 'Rhss' } },
@@ -7731,6 +7731,14 @@ custom_cast_ai_params = {
         unitId = 'h00H',
         order = 'innerfire',
         timeout = 5.00
+    },
+    {
+        unitId = 'h00I',
+        order = 'invisibility',
+        timeout = 1.00,
+        condition = {
+            livePercent = 20
+        }
     }
 }
 function customCastAITrigger()
@@ -7745,18 +7753,30 @@ function createTriggerByCastParam(castParam)
     TriggerAddAction(trig, function()
         local group = GetUnitsOfTypeIdAll(FourCC(castParam.unitId))
         ForGroup(group, function()
-            local randomUnit = GroupPickRandomUnit(
-                    GetUnitsInRangeOfLocMatching(
-                            500,
-                            GetUnitLoc(GetEnumUnit()),
-                            Filter(function()
-                                local filterUnit = GetFilterUnit()
-                                local ownerFilterUnit = GetOwningPlayer(filterUnit)
-                                return getSpawnPlayerIds(GetOwningPlayer(GetEnumUnit()), ownerFilterUnit)
-                            end)
-                    )
+            local unitsGroup = GetUnitsInRangeOfLocMatching(
+                    500,
+                    GetUnitLoc(GetEnumUnit()),
+                    Filter(function()
+                        local filterUnit = GetFilterUnit()
+
+                        if castParam.condition then
+                            if castParam.condition.livePercent then
+                                local livePercent = GetUnitLifePercent(filterUnit)
+                                if castParam.condition.livePercent <= livePercent then
+                                    return false
+                                end
+                            end
+                        end
+                        local ownerFilterUnit = GetOwningPlayer(filterUnit)
+                        return getSpawnPlayerIds(GetOwningPlayer(GetEnumUnit()), ownerFilterUnit)
+                    end)
             )
-            IssueTargetOrderBJ(GetEnumUnit(), castParam.order, randomUnit)
+
+            if CountUnitsInGroup(unitsGroup) >= 1 then
+                local randomUnit = GroupPickRandomUnit(unitsGroup)
+                IssueTargetOrderBJ(GetEnumUnit(), castParam.order, randomUnit)
+            end
+            DestroyGroup(unitsGroup)
         end)
     end)
 end

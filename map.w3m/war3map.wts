@@ -1957,25 +1957,25 @@ Defend on
 }
 
 STRING 369
-// Abilities: A008 (Channel), Tip (Tooltip - Normal)
+// Abilities: A008 (Invisibility), Name (Name)
 {
 Invisibility
 }
 
 STRING 370
-// Abilities: A008 (Channel), EditorSuffix (Editor Suffix)
+// Abilities: A008 (Invisibility), EditorSuffix (Editor Suffix)
 {
 (New)
 }
 
 STRING 371
-// Abilities: A008 (Channel), Ubertip (Tooltip - Normal - Extended)
+// Abilities: A008 (Invisibility), Ubertip (Tooltip - Normal - Extended)
 {
 Makes a unit invisible. If the unit attacks, uses an ability or casts a spell, it will become visible. |nLasts 2 seconds.
 }
 
 STRING 372
-// Abilities: A008 (Channel), Hotkey (Hotkey - Normal)
+// Abilities: A008 (Invisibility), Hotkey (Hotkey - Normal)
 {
 I
 }
@@ -2056,5 +2056,23 @@ STRING 386
 // Upgrades: R002 (Defend), Hotkey (Hotkey)
 {
 Z
+}
+
+STRING 387
+// Abilities: A008 (Invisibility), Tip (Tooltip - Normal)
+{
+Invisibility
+}
+
+STRING 388
+// Abilities: A00A (Invisibility), Name (Name)
+{
+Invisibility
+}
+
+STRING 389
+// Abilities: A00A (Invisibility), EditorSuffix (Editor Suffix)
+{
+(New) (Buff)
 }
 

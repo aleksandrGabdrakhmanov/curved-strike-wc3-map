@@ -9,6 +9,14 @@ custom_cast_ai_params = {
         unitId = 'h00H',
         order = 'innerfire',
         timeout = 5.00
+    },
+    {
+        unitId = 'h00I',
+        order = 'invisibility',
+        timeout = 1.00,
+        condition = {
+            livePercent = 20
+        }
     }
 }
 function customCastAITrigger()
@@ -23,18 +31,30 @@ function createTriggerByCastParam(castParam)
     TriggerAddAction(trig, function()
         local group = GetUnitsOfTypeIdAll(FourCC(castParam.unitId))
         ForGroup(group, function()
-            local randomUnit = GroupPickRandomUnit(
-                    GetUnitsInRangeOfLocMatching(
-                            500,
-                            GetUnitLoc(GetEnumUnit()),
-                            Filter(function()
-                                local filterUnit = GetFilterUnit()
-                                local ownerFilterUnit = GetOwningPlayer(filterUnit)
-                                return getSpawnPlayerIds(GetOwningPlayer(GetEnumUnit()), ownerFilterUnit)
-                            end)
-                    )
+            local unitsGroup = GetUnitsInRangeOfLocMatching(
+                    500,
+                    GetUnitLoc(GetEnumUnit()),
+                    Filter(function()
+                        local filterUnit = GetFilterUnit()
+
+                        if castParam.condition then
+                            if castParam.condition.livePercent then
+                                local livePercent = GetUnitLifePercent(filterUnit)
+                                if castParam.condition.livePercent <= livePercent then
+                                    return false
+                                end
+                            end
+                        end
+                        local ownerFilterUnit = GetOwningPlayer(filterUnit)
+                        return getSpawnPlayerIds(GetOwningPlayer(GetEnumUnit()), ownerFilterUnit)
+                    end)
             )
-            IssueTargetOrderBJ(GetEnumUnit(), castParam.order, randomUnit)
+
+            if CountUnitsInGroup(unitsGroup) >= 1 then
+                local randomUnit = GroupPickRandomUnit(unitsGroup)
+                IssueTargetOrderBJ(GetEnumUnit(), castParam.order, randomUnit)
+            end
+            DestroyGroup(unitsGroup)
         end)
     end)
 end
