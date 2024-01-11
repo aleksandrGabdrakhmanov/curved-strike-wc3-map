@@ -6881,12 +6881,12 @@ function centerControlTrigger()
                 for _, player in ipairs(team.players) do
                     player.economy.incomeForCenter = game_config.economy.incomeForCenter
                 end
-            end
 
-            for _, otherTeam in ipairs(all_teams) do
-                if otherTeam ~= team then
-                    for _, player in ipairs(otherTeam.players) do
-                        player.economy.incomeForCenter = 0
+                for _, otherTeam in ipairs(all_teams) do
+                    if otherTeam ~= team then
+                        for _, player in ipairs(otherTeam.players) do
+                            player.economy.incomeForCenter = 0
+                        end
                     end
                 end
             end
@@ -7274,7 +7274,6 @@ function addGold(player, gold)
     player.economy.totalGold = player.economy.totalGold + gold
     SetPlayerState(player.id, PLAYER_STATE_RESOURCE_GOLD, currentGold + gold)
 end
-
 Debug.endFile()
 Debug.beginFile('kill-tower-trigger.lua')
 function killTowerTrigger()

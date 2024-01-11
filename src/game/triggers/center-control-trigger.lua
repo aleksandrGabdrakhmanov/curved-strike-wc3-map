@@ -12,17 +12,16 @@ function centerControlTrigger()
                     isAddGold = true
                 end
             end
-
             if isAddGold == true then
                 for _, player in ipairs(team.players) do
                     player.economy.incomeForCenter = game_config.economy.incomeForCenter
                 end
-            end
 
-            for _, otherTeam in ipairs(all_teams) do
-                if otherTeam ~= team then
-                    for _, player in ipairs(otherTeam.players) do
-                        player.economy.incomeForCenter = 0
+                for _, otherTeam in ipairs(all_teams) do
+                    if otherTeam ~= team then
+                        for _, player in ipairs(otherTeam.players) do
+                            player.economy.incomeForCenter = 0
+                        end
                     end
                 end
             end
