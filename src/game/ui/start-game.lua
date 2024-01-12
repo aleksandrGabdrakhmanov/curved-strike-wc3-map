@@ -9,7 +9,8 @@ end
 
 function startGameUI()
     ui_config = {
-        isMirror = false
+        isUnitsMirror = false,
+        isHeroesMirror = false
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
@@ -19,9 +20,17 @@ function startGameUI()
 
     checkBox('Mirror units', "StartGameMenuUnits", function()
         if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
-            ui_config.isMirror = true
+            ui_config.isUnitsMirror = true
         else
-            ui_config.isMirror = false
+            ui_config.isUnitsMirror = false
+        end
+    end)
+
+    checkBox('Mirror heroes', "StartGameMenuHeroes", function()
+        if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
+            ui_config.isHeroesMirror = true
+        else
+            ui_config.isHeroesMirror = false
         end
     end)
 

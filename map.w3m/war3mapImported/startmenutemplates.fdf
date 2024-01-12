@@ -17,7 +17,7 @@ Frame "BACKDROP" "StartGameMenu" {
     BackdropBlendAll,
     Frame "Frame" "StartGameMenuUnits" {
         Width 0.28,
-        Height 0.15,
+        Height 0.14,
         SetPoint TOPLEFT, "StartGameMenu", TOPLEFT, 0.02, -0.01,
         Frame "TEXT" "StartGameMenuModeText" INHERITS "EscMenuTitleTextTemplate" {
             SetPoint TOPLEFT, "StartGameMenuUnits", TOPLEFT, 0.02, -0.01,
@@ -26,8 +26,8 @@ Frame "BACKDROP" "StartGameMenu" {
     }
     Frame "Frame" "StartGameMenuHeroes" {
         Width 0.28,
-        Height 0.15,
-        SetPoint TOP, "StartGameMenuUnits", BOTTOM, 0, -0.05,
+        Height 0.165,
+        SetPoint TOP, "StartGameMenuUnits", BOTTOM, 0, -0.02,
         Frame "TEXT" "StartGameMenuHeroesText" INHERITS "EscMenuTitleTextTemplate" {
             SetPoint TOPLEFT, "StartGameMenuHeroes", TOPLEFT, 0.02, -0.01,
             Text "Available heroes:",

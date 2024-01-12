@@ -6155,8 +6155,9 @@ function initGameConfig(mode)
         economy = game_modes[mode].economy,
         units = {
             range = game_modes[mode].unitRange,
-            lifetime = 1,
-            isMirror = ui_config.isMirror
+            lifetime = 2,
+            isUnitsMirror = ui_config.isUnitsMirror,
+            isHeroesMirror = ui_config.isHeroesMirror
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
         playerPosition = game_modes[mode].playerPosition,
@@ -6705,8 +6706,17 @@ end
 
 function changeAvailableUnitsForPlayers()
 
-    local isMirror = game_config.units.isMirror
+    local isMirror = game_config.units.isUnitsMirror
     local mirrorUnits = {}
+    mirrorHeroes = {}
+    for _, team in ipairs(all_teams) do
+        for playerIndex, player in ipairs(team.players) do
+            mirrorHeroes[playerIndex] = {}
+            for i = 0, 30 do
+                mirrorHeroes[playerIndex][i] = getRandomHeroes(heroes_for_build, 3)
+            end
+        end
+    end
 
     for _, team in ipairs(all_teams) do
         for playerIndex, player in ipairs(team.players) do
@@ -6731,17 +6741,23 @@ function changeAvailableUnitsForPlayers()
                 table.insert(player.availableUnits, unit)
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
             end
-
-            reRollHeroes(player)
+            reRollHeroes(player, playerIndex, 0)
         end
     end
 end
 
-function reRollHeroes(player)
+function reRollHeroes(player, position, heroNumber)
+
     for _, hero in ipairs(heroes_for_build) do
         SetPlayerUnitAvailableBJ(FourCC(hero.id), FALSE, player.id)
     end
-    local threeHeroes = getRandomHeroes(heroes_for_build, 3)
+
+    local threeHeroes
+    if game_config.units.isHeroesMirror then
+        threeHeroes = mirrorHeroes[position][heroNumber]
+    else
+        threeHeroes = getRandomHeroes(heroes_for_build, 3)
+    end
     for _, hero in ipairs(threeHeroes) do
         SetPlayerUnitAvailableBJ(FourCC(hero.id), TRUE, player.id)
     end
@@ -6755,7 +6771,6 @@ function getRandomHeroes(heroes, count)
             table.insert(availableHeroes, hero)
         end
     end
-
 
     local selected = {}
     local result = {}
@@ -7084,7 +7099,7 @@ Debug.endFile()
 Debug.beginFile('hero-construct-trigger.lua')
 function heroConstructTrigger()
     for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
+        for playerIndex, player in ipairs(team.players) do
             local trig = CreateTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_CONSTRUCT_FINISH)
             TriggerAddAction(trig, function()
@@ -7105,7 +7120,7 @@ function heroConstructTrigger()
                     if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
                         updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))
                     end
-                    reRollHeroes(player)
+                    reRollHeroes(player, playerIndex, #player.heroes)
                 else
                     player.food = player.food + getFoodCostUnit(('>I4'):pack(GetUnitTypeId(GetTriggerUnit())))
                 end
@@ -8007,7 +8022,8 @@ end
 
 function startGameUI()
     ui_config = {
-        isMirror = false
+        isUnitsMirror = false,
+        isHeroesMirror = false
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
@@ -8017,9 +8033,17 @@ function startGameUI()
 
     checkBox('Mirror units', "StartGameMenuUnits", function()
         if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
-            ui_config.isMirror = true
+            ui_config.isUnitsMirror = true
         else
-            ui_config.isMirror = false
+            ui_config.isUnitsMirror = false
+        end
+    end)
+
+    checkBox('Mirror heroes', "StartGameMenuHeroes", function()
+        if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
+            ui_config.isHeroesMirror = true
+        else
+            ui_config.isHeroesMirror = false
         end
     end)
 

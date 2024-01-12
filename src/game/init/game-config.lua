@@ -44,8 +44,9 @@ function initGameConfig(mode)
         economy = game_modes[mode].economy,
         units = {
             range = game_modes[mode].unitRange,
-            lifetime = 1,
-            isMirror = ui_config.isMirror
+            lifetime = 2,
+            isUnitsMirror = ui_config.isUnitsMirror,
+            isHeroesMirror = ui_config.isHeroesMirror
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
         playerPosition = game_modes[mode].playerPosition,

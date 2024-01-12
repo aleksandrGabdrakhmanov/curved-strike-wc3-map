@@ -103,8 +103,17 @@ end
 
 function changeAvailableUnitsForPlayers()
 
-    local isMirror = game_config.units.isMirror
+    local isMirror = game_config.units.isUnitsMirror
     local mirrorUnits = {}
+    mirrorHeroes = {}
+    for _, team in ipairs(all_teams) do
+        for playerIndex, player in ipairs(team.players) do
+            mirrorHeroes[playerIndex] = {}
+            for i = 0, 30 do
+                mirrorHeroes[playerIndex][i] = getRandomHeroes(heroes_for_build, 3)
+            end
+        end
+    end
 
     for _, team in ipairs(all_teams) do
         for playerIndex, player in ipairs(team.players) do
@@ -129,16 +138,23 @@ function changeAvailableUnitsForPlayers()
                 table.insert(player.availableUnits, unit)
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
             end
-            reRollHeroes(player)
+            reRollHeroes(player, playerIndex, 0)
         end
     end
 end
 
-function reRollHeroes(player)
+function reRollHeroes(player, position, heroNumber)
+
     for _, hero in ipairs(heroes_for_build) do
         SetPlayerUnitAvailableBJ(FourCC(hero.id), FALSE, player.id)
     end
-    local threeHeroes = getRandomHeroes(heroes_for_build, 3)
+
+    local threeHeroes
+    if game_config.units.isHeroesMirror then
+        threeHeroes = mirrorHeroes[position][heroNumber]
+    else
+        threeHeroes = getRandomHeroes(heroes_for_build, 3)
+    end
     for _, hero in ipairs(threeHeroes) do
         SetPlayerUnitAvailableBJ(FourCC(hero.id), TRUE, player.id)
     end
@@ -152,7 +168,6 @@ function getRandomHeroes(heroes, count)
             table.insert(availableHeroes, hero)
         end
     end
-
 
     local selected = {}
     local result = {}

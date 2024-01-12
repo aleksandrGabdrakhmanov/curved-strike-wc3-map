@@ -1,7 +1,7 @@
 Debug.beginFile('hero-construct-trigger.lua')
 function heroConstructTrigger()
     for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
+        for playerIndex, player in ipairs(team.players) do
             local trig = CreateTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_CONSTRUCT_FINISH)
             TriggerAddAction(trig, function()
@@ -22,7 +22,7 @@ function heroConstructTrigger()
                     if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
                         updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))
                     end
-                    reRollHeroes(player)
+                    reRollHeroes(player, playerIndex, #player.heroes)
                 else
                     player.food = player.food + getFoodCostUnit(('>I4'):pack(GetUnitTypeId(GetTriggerUnit())))
                 end
