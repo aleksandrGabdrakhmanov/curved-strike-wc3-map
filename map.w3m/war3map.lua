@@ -6134,7 +6134,7 @@ function initGameConfig(mode)
             unitRange = 1, -- 150%
             spawnPolicy = {
                 interval = 4,
-                dif = 35
+                dif = 15
             },
             economy = {
                 startGold = 300,
@@ -6154,7 +6154,8 @@ function initGameConfig(mode)
         mode = mode,
         economy = game_modes[mode].economy,
         units = {
-            range = game_modes[mode].unitRange
+            range = game_modes[mode].unitRange,
+            lifetime = 1
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
         playerPosition = game_modes[mode].playerPosition,
@@ -6430,6 +6431,7 @@ function addPlayersInTeam(players)
                 availableHeroes = {},
                 tier = 'T1',
                 food = 0,
+                waveNumber = 0
             })
             nextPosition = nextPosition + 1
         end
@@ -7295,6 +7297,48 @@ function killTowerTrigger()
     end
 end
 Debug.endFile()
+Debug.beginFile('lifetime-limit.lua')
+function lifetimeLimitTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterTimerEventPeriodic(trig, 5.00)
+    TriggerAddAction(trig, function()
+        for _, team in ipairs(all_teams) do
+            for _, player in ipairs(team.players) do
+                local allUnits = GetUnitsOfPlayerAll(player.spawnPlayerId)
+                ForGroup(allUnits, function()
+                    local unit = GetEnumUnit()
+                    if not IsUnitType(unit, UNIT_TYPE_DEAD) then
+                        local waveNumber = GetUnitUserData(unit)
+                        if waveNumber ~= 0 then
+                            if (player.waveNumber - waveNumber >= game_config.units.lifetime) then
+                                local removeTimer = CreateTimer()
+                                local tick = 10
+                                local tag = CreateTextTagUnitBJ(tick, unit, 1,  10, 255, 2, 2, 255)
+                                TimerStart(removeTimer, 0.5, true, function()
+                                    tick = tick - 1
+                                    if tick <= 0 then
+
+                                        local effect = AddSpecialEffectLocBJ( GetUnitLoc(unit), "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl" )
+                                        BlzSetSpecialEffectScale( GetLastCreatedEffectBJ(), ( 0.30 * I2R(GetUnitLevel(unit)) ) )
+                                        DestroyEffectBJ( effect )
+                                        RemoveUnit(unit)
+                                        DestroyTimer(removeTimer)
+                                        DestroyTextTag(tag)
+                                    else
+                                        DestroyTextTag(tag)
+                                        tag = CreateTextTagUnitBJ(tick, unit, 1,  10, 255, 2, 2, 255)
+                                    end
+                                end)
+                            end
+                        end
+                    end
+                end)
+                DestroyGroup(allUnits)
+            end
+        end
+    end)
+end
+Debug.endFile()
 Debug.beginFile('lose-trigger.lua')
 function loseTrigger()
     for _, team in ipairs(all_teams) do
@@ -7353,6 +7397,7 @@ function initTriggers()
     killTowerTrigger()
     centerControlTrigger()
     tierDetectTrigger()
+    lifetimeLimitTrigger()
     debugTrigger()
     debugTriggerGold()
 end
@@ -7538,6 +7583,7 @@ function spawnTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if player.spawnTimer <= 0 then
+                    player.waveNumber = player.waveNumber + 1
                     processGroupForSpawn(player)
                     player.spawnTimer = game_config.spawnPolicy.interval * #team.players + game_config.spawnPolicy.dif
                     replaceCell(player)
@@ -7552,7 +7598,7 @@ function handleUnitSpawn(player, id, x, y)
     local parentId = getParentUnitId(('>I4'):pack(id))
     if parentId then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-        SetUnitUserData( unit, totalGameSeconds)
+        SetUnitUserData(unit, player.waveNumber)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         immediatelyMoveUnit(unit)
     end

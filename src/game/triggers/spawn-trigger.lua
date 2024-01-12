@@ -6,6 +6,7 @@ function spawnTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if player.spawnTimer <= 0 then
+                    player.waveNumber = player.waveNumber + 1
                     processGroupForSpawn(player)
                     player.spawnTimer = game_config.spawnPolicy.interval * #team.players + game_config.spawnPolicy.dif
                     replaceCell(player)
@@ -20,7 +21,7 @@ function handleUnitSpawn(player, id, x, y)
     local parentId = getParentUnitId(('>I4'):pack(id))
     if parentId then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-        SetUnitUserData( unit, totalGameSeconds)
+        SetUnitUserData(unit, player.waveNumber)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         immediatelyMoveUnit(unit)
     end

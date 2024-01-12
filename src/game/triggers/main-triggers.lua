@@ -21,6 +21,7 @@ function initTriggers()
     killTowerTrigger()
     centerControlTrigger()
     tierDetectTrigger()
+    lifetimeLimitTrigger()
     debugTrigger()
     debugTriggerGold()
 end

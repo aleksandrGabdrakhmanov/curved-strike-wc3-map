@@ -23,7 +23,7 @@ function initGameConfig(mode)
             unitRange = 1, -- 150%
             spawnPolicy = {
                 interval = 4,
-                dif = 35
+                dif = 15
             },
             economy = {
                 startGold = 300,
@@ -43,7 +43,8 @@ function initGameConfig(mode)
         mode = mode,
         economy = game_modes[mode].economy,
         units = {
-            range = game_modes[mode].unitRange
+            range = game_modes[mode].unitRange,
+            lifetime = 1
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
         playerPosition = game_modes[mode].playerPosition,
