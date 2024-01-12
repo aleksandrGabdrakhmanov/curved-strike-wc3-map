@@ -3,6 +3,7 @@ IncludeFile "UI\FrameDef\ui\escmenumainpanel.fdf",
 IncludeFile "UI\FrameDef\ui\questdialog.fdf",
 IncludeFile "UI\FrameDef\glue\battlenetprofilepanel.fdf",
 IncludeFile "UI\FrameDef\UI\EscMenuTemplates.fdf",
+IncludeFile "UI\FrameDef\ui\upperbuttonbar.fdf",
 Frame "BACKDROP" "StartGameMenu" {
     Width 0.4,
     Height 0.45,
@@ -73,4 +74,11 @@ Frame "GLUETEXTBUTTON" "MyIconButtonTemplate"{
     ControlBackdrop "MyButtonBackdropTemplate",
     Frame "BACKDROP" "MyButtonBackdropTemplate" {
     }
+}
+String "MyUpperButtonBarButtonTextTemplate" {
+    Font "MasterFont",0.01,
+    FontColor 1.0 1.0 1.0,
+}
+Frame "SIMPLEBUTTON" "AbilitiesButton" INHERITS "UpperButtonBarButtonTemplate" {
+    NormalText "MyUpperButtonBarButtonTextTemplate" "Abilities",
 }

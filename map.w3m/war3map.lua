@@ -7931,10 +7931,9 @@ Debug.beginFile('start-game.lua')
 function initAbilitiesPanel()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            local buttonAbility = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
+            local buttonAbility = BlzCreateSimpleFrame('AbilitiesButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0)
             BlzFrameSetAbsPoint(buttonAbility, FRAMEPOINT_BOTTOMLEFT, 0.2, 0.13)
             BlzFrameSetSize(buttonAbility, 0.08, 0.03)
-            BlzFrameSetText(buttonAbility, "Abilities")
             BlzFrameSetVisible(buttonAbility, GetLocalPlayer() == player.id)
 
             local panelAbility = BlzCreateFrameByType("BACKDROP", "MyPanelAbility", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonBackdropTemplate", 0)
