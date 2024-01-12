@@ -8,15 +8,41 @@ function initialUI()
 end
 
 function startGameUI()
+    ui_config = {
+        isMirror = false
+    }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
     BlzFrameSetAbsPoint(popupFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
     local selectingText = BlzGetFrameByName("StartGameMenuModeSelecting", 0)
     BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
 
+    checkBox('Mirror units', "StartGameMenuUnits", function()
+        if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
+            ui_config.isMirror = true
+        else
+            ui_config.isMirror = false
+        end
+    end)
+
     initModeButton("DirectButton", 'direct')
     initModeButton("UnitedButton", 'united')
     initUnitsAvailableButtons()
+end
+
+function checkBox(text, before, func)
+    local frameCheckBox = BlzCreateFrame("QuestCheckBox2",  BlzGetFrameByName("StartGameMenu", 0), 0, 0)
+    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(before, 0), FRAMEPOINT_BOTTOMLEFT, 0, 0)
+    BlzFrameSetScale(frameCheckBox, 1.5)
+
+    local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", BlzGetFrameByName("StartGameMenu", 0), "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(frameText, text)
+    BlzFrameSetPoint(frameText, FRAMEPOINT_LEFT, BlzGetFrameByName("QuestCheckBox2", 0), FRAMEPOINT_RIGHT, 0.005, 0)
+
+    local trigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)
+    BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_UNCHECKED)
+    TriggerAddAction(trigger, func)
 end
 
 function initModeButton(buttonName, mode)

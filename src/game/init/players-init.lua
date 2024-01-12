@@ -102,15 +102,29 @@ function addWorkers()
 end
 
 function changeAvailableUnitsForPlayers()
+
+    local isMirror = game_config.units.isMirror
+    local mirrorUnits = {}
+
     for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
+        for playerIndex, player in ipairs(team.players) do
             for _, unit in ipairs(units_for_build) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), FALSE, player.id)
                 for _, upgrade in ipairs(unit.upgrades) do
                     SetPlayerTechMaxAllowed(player.id, FourCC(upgrade), 0)
                 end
             end
-            local randomUnits = getRandomUnits(units_for_build)
+
+            local randomUnits
+            if isMirror and mirrorUnits[playerIndex] then
+                randomUnits = mirrorUnits[playerIndex]
+            else
+                randomUnits = getRandomUnits(units_for_build)
+                if isMirror then
+                    mirrorUnits[playerIndex] = randomUnits
+                end
+            end
+
             for _, unit in ipairs(randomUnits) do
                 table.insert(player.availableUnits, unit)
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)

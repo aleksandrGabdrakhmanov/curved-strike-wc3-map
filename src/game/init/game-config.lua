@@ -23,7 +23,7 @@ function initGameConfig(mode)
             unitRange = 1, -- 150%
             spawnPolicy = {
                 interval = 4,
-                dif = 15
+                dif = 35
             },
             economy = {
                 startGold = 300,
@@ -44,7 +44,8 @@ function initGameConfig(mode)
         economy = game_modes[mode].economy,
         units = {
             range = game_modes[mode].unitRange,
-            lifetime = 1
+            lifetime = 1,
+            isMirror = ui_config.isMirror
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
         playerPosition = game_modes[mode].playerPosition,

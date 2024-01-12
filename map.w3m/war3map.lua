@@ -6134,7 +6134,7 @@ function initGameConfig(mode)
             unitRange = 1, -- 150%
             spawnPolicy = {
                 interval = 4,
-                dif = 15
+                dif = 35
             },
             economy = {
                 startGold = 300,
@@ -6155,7 +6155,8 @@ function initGameConfig(mode)
         economy = game_modes[mode].economy,
         units = {
             range = game_modes[mode].unitRange,
-            lifetime = 1
+            lifetime = 1,
+            isMirror = ui_config.isMirror
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
         playerPosition = game_modes[mode].playerPosition,
@@ -6703,19 +6704,34 @@ function addWorkers()
 end
 
 function changeAvailableUnitsForPlayers()
+
+    local isMirror = game_config.units.isMirror
+    local mirrorUnits = {}
+
     for _, team in ipairs(all_teams) do
-        for _, player in ipairs(team.players) do
+        for playerIndex, player in ipairs(team.players) do
             for _, unit in ipairs(units_for_build) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), FALSE, player.id)
                 for _, upgrade in ipairs(unit.upgrades) do
                     SetPlayerTechMaxAllowed(player.id, FourCC(upgrade), 0)
                 end
             end
-            local randomUnits = getRandomUnits(units_for_build)
+
+            local randomUnits
+            if isMirror and mirrorUnits[playerIndex] then
+                randomUnits = mirrorUnits[playerIndex]
+            else
+                randomUnits = getRandomUnits(units_for_build)
+                if isMirror then
+                    mirrorUnits[playerIndex] = randomUnits
+                end
+            end
+
             for _, unit in ipairs(randomUnits) do
                 table.insert(player.availableUnits, unit)
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
             end
+
             reRollHeroes(player)
         end
     end
@@ -7317,9 +7333,8 @@ function lifetimeLimitTrigger()
                                 TimerStart(removeTimer, 0.5, true, function()
                                     tick = tick - 1
                                     if tick <= 0 then
-
                                         local effect = AddSpecialEffectLocBJ( GetUnitLoc(unit), "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl" )
-                                        BlzSetSpecialEffectScale( GetLastCreatedEffectBJ(), ( 0.30 * I2R(GetUnitLevel(unit)) ) )
+                                        BlzSetSpecialEffectScale( effect, ( 0.30 * I2R(GetUnitLevel(unit)) ) )
                                         DestroyEffectBJ( effect )
                                         RemoveUnit(unit)
                                         DestroyTimer(removeTimer)
@@ -7991,15 +8006,41 @@ function initialUI()
 end
 
 function startGameUI()
+    ui_config = {
+        isMirror = false
+    }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
     BlzFrameSetAbsPoint(popupFrame, FRAMEPOINT_CENTER, 0.4, 0.35)
     local selectingText = BlzGetFrameByName("StartGameMenuModeSelecting", 0)
     BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
 
+    checkBox('Mirror units', "StartGameMenuUnits", function()
+        if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
+            ui_config.isMirror = true
+        else
+            ui_config.isMirror = false
+        end
+    end)
+
     initModeButton("DirectButton", 'direct')
     initModeButton("UnitedButton", 'united')
     initUnitsAvailableButtons()
+end
+
+function checkBox(text, before, func)
+    local frameCheckBox = BlzCreateFrame("QuestCheckBox2",  BlzGetFrameByName("StartGameMenu", 0), 0, 0)
+    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(before, 0), FRAMEPOINT_BOTTOMLEFT, 0, 0)
+    BlzFrameSetScale(frameCheckBox, 1.5)
+
+    local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", BlzGetFrameByName("StartGameMenu", 0), "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(frameText, text)
+    BlzFrameSetPoint(frameText, FRAMEPOINT_LEFT, BlzGetFrameByName("QuestCheckBox2", 0), FRAMEPOINT_RIGHT, 0.005, 0)
+
+    local trigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)
+    BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_UNCHECKED)
+    TriggerAddAction(trigger, func)
 end
 
 function initModeButton(buttonName, mode)
