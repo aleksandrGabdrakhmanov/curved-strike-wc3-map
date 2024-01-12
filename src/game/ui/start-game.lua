@@ -10,7 +10,8 @@ end
 function startGameUI()
     ui_config = {
         isUnitsMirror = false,
-        isHeroesMirror = false
+        isHeroesMirror = false,
+        maxHeroes = 3
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
@@ -34,19 +35,44 @@ function startGameUI()
         end
     end)
 
+    local frameText = BlzCreateFrameByType("TEXT", "TextCountHeroes", BlzGetFrameByName("StartGameMenu", 0), "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(frameText, "Max heroes")
+    BlzFrameSetPoint(frameText, FRAMEPOINT_TOPLEFT, BlzGetFrameByName("MyTextFrame", 0), FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
+
+    local slider = BlzCreateFrame("EscMenuSliderTemplate",  BlzGetFrameByName("StartGameMenu", 0),0,0)
+    local label = BlzCreateFrame("EscMenuLabelTextTemplate", slider, 0, 0)
+    BlzFrameSetPoint(slider, FRAMEPOINT_LEFT, BlzGetFrameByName("TextCountHeroes", 0), FRAMEPOINT_RIGHT, 0.015, 0)
+    BlzFrameSetPoint(label, FRAMEPOINT_LEFT, slider, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetMinMaxValue(slider, 0, 7)
+    BlzFrameSetValue(slider, ui_config.maxHeroes)
+    BlzFrameSetStepSize(slider, 1)
+
+    BlzFrameSetText(label, ui_config.maxHeroes)
+
+    local trigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trigger, slider, FRAMEEVENT_SLIDER_VALUE_CHANGED)
+    TriggerAddAction(trigger, function()
+        ui_config.maxHeroes = BlzGetTriggerFrameValue()
+        BlzFrameSetText(label, math.floor(ui_config.maxHeroes))
+    end)
+
+
+
     initModeButton("DirectButton", 'direct')
     initModeButton("UnitedButton", 'united')
     initUnitsAvailableButtons()
 end
 
 function checkBox(text, before, func)
-    local frameCheckBox = BlzCreateFrame("QuestCheckBox2",  BlzGetFrameByName("StartGameMenu", 0), 0, 0)
-    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(before, 0), FRAMEPOINT_BOTTOMLEFT, 0, 0)
-    BlzFrameSetScale(frameCheckBox, 1.5)
 
     local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", BlzGetFrameByName("StartGameMenu", 0), "EscMenuSaveDialogTextTemplate", 0)
     BlzFrameSetText(frameText, text)
-    BlzFrameSetPoint(frameText, FRAMEPOINT_LEFT, BlzGetFrameByName("QuestCheckBox2", 0), FRAMEPOINT_RIGHT, 0.005, 0)
+    BlzFrameSetPoint(frameText, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(before, 0), FRAMEPOINT_BOTTOMLEFT, 0, 0)
+
+
+    local frameCheckBox = BlzCreateFrame("QuestCheckBox2",  BlzGetFrameByName("StartGameMenu", 0), 0, 0)
+    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, BlzGetFrameByName("MyTextFrame", 0), FRAMEPOINT_RIGHT, 0.005, 0)
+    BlzFrameSetScale(frameCheckBox, 1.5)
 
     local trigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)

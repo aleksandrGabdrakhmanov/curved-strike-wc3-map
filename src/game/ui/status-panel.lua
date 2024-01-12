@@ -3,8 +3,8 @@ function getTableInfo()
     local tableInfo = {}
     tableInfo.header = {
         { text = 'Name', weight = 0.085 },
-        { text = 'Wave', weight = 0.03 },
-        { text = 'Inc/min', weight = 0.06 },
+        { text = 'Wave', weight = 0.04 },
+        { text = 'Inc/min', weight = 0.07 },
         { text = 'Gold', weight = 0.045 },
         { text = 'Kills', weight = 0.05 },
         { text = 'Damage', weight = 0.06 },
@@ -105,9 +105,9 @@ end
 
 function getIncome(player)
     if player.economy.incomeForCenter == 0 then
-        return player.economy.income * 60
+        return math.floor(player.economy.income * 60)
     else
-        return player.economy.income * 60 .. '(+' .. player.economy.incomeForCenter * 60 .. ')'
+        return math.floor(player.economy.income * 60) .. '(+' .. math.floor(player.economy.incomeForCenter * 60) .. ')'
     end
 end
 

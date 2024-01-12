@@ -137,7 +137,8 @@ function addPlayersInTeam(players)
                 availableHeroes = {},
                 tier = 'T1',
                 food = 0,
-                waveNumber = 0
+                waveNumber = 0,
+                heroBuilderCount = 0
             })
             nextPosition = nextPosition + 1
         end

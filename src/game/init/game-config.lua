@@ -46,7 +46,8 @@ function initGameConfig(mode)
             range = game_modes[mode].unitRange,
             lifetime = 2,
             isUnitsMirror = ui_config.isUnitsMirror,
-            isHeroesMirror = ui_config.isHeroesMirror
+            isHeroesMirror = ui_config.isHeroesMirror,
+            maxHeroes = ui_config.maxHeroes
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
         playerPosition = game_modes[mode].playerPosition,

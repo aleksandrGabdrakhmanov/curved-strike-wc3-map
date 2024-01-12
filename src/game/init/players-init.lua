@@ -117,6 +117,7 @@ function changeAvailableUnitsForPlayers()
 
     for _, team in ipairs(all_teams) do
         for playerIndex, player in ipairs(team.players) do
+            checkHeroAvailable(player, 0)
             for _, unit in ipairs(units_for_build) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), FALSE, player.id)
                 for _, upgrade in ipairs(unit.upgrades) do

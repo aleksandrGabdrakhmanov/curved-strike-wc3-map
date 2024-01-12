@@ -6157,7 +6157,8 @@ function initGameConfig(mode)
             range = game_modes[mode].unitRange,
             lifetime = 2,
             isUnitsMirror = ui_config.isUnitsMirror,
-            isHeroesMirror = ui_config.isHeroesMirror
+            isHeroesMirror = ui_config.isHeroesMirror,
+            maxHeroes = ui_config.maxHeroes
         },
         spawnPolicy = game_modes[mode].spawnPolicy,
         playerPosition = game_modes[mode].playerPosition,
@@ -6433,7 +6434,8 @@ function addPlayersInTeam(players)
                 availableHeroes = {},
                 tier = 'T1',
                 food = 0,
-                waveNumber = 0
+                waveNumber = 0,
+                heroBuilderCount = 0
             })
             nextPosition = nextPosition + 1
         end
@@ -6720,6 +6722,7 @@ function changeAvailableUnitsForPlayers()
 
     for _, team in ipairs(all_teams) do
         for playerIndex, player in ipairs(team.players) do
+            checkHeroAvailable(player, 0)
             for _, unit in ipairs(units_for_build) do
                 SetPlayerUnitAvailableBJ(FourCC(unit.id), FALSE, player.id)
                 for _, upgrade in ipairs(unit.upgrades) do
@@ -7239,14 +7242,18 @@ function heroResearchTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_RESEARCH_FINISH)
             TriggerAddAction(trig, function()
                 if (GetResearched() == FourCC(upgrades_special.summonHeroBuilder)) then
-                    if type(player.workerRect) == "table" then
-                        CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(player.workerRect[1]), GetRectCenterY(player.workerRect[1]), 270)
-                    else
-                        CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect), 270)
-                    end
+                    CreateUnit(player.id, FourCC(units_special.heroBuilder), GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect), 270)
+                    player.heroBuilderCount = player.heroBuilderCount + 1
+                    checkHeroAvailable(player, player.heroBuilderCount)
                 end
             end)
         end
+    end
+end
+
+function checkHeroAvailable(player, heroesCount)
+    if game_config.units.maxHeroes <= heroesCount then
+        SetPlayerTechMaxAllowed(player.id, FourCC(upgrades_special.summonHeroBuilder), 0)
     end
 end
 Debug.endFile()
@@ -8022,7 +8029,8 @@ end
 function startGameUI()
     ui_config = {
         isUnitsMirror = false,
-        isHeroesMirror = false
+        isHeroesMirror = false,
+        maxHeroes = 3
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
     popupFrame = BlzCreateFrame("StartGameMenu", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
@@ -8046,19 +8054,44 @@ function startGameUI()
         end
     end)
 
+    local frameText = BlzCreateFrameByType("TEXT", "TextCountHeroes", BlzGetFrameByName("StartGameMenu", 0), "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(frameText, "Max heroes")
+    BlzFrameSetPoint(frameText, FRAMEPOINT_TOPLEFT, BlzGetFrameByName("MyTextFrame", 0), FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
+
+    local slider = BlzCreateFrame("EscMenuSliderTemplate",  BlzGetFrameByName("StartGameMenu", 0),0,0)
+    local label = BlzCreateFrame("EscMenuLabelTextTemplate", slider, 0, 0)
+    BlzFrameSetPoint(slider, FRAMEPOINT_LEFT, BlzGetFrameByName("TextCountHeroes", 0), FRAMEPOINT_RIGHT, 0.015, 0)
+    BlzFrameSetPoint(label, FRAMEPOINT_LEFT, slider, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetMinMaxValue(slider, 0, 7)
+    BlzFrameSetValue(slider, ui_config.maxHeroes)
+    BlzFrameSetStepSize(slider, 1)
+
+    BlzFrameSetText(label, ui_config.maxHeroes)
+
+    local trigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trigger, slider, FRAMEEVENT_SLIDER_VALUE_CHANGED)
+    TriggerAddAction(trigger, function()
+        ui_config.maxHeroes = BlzGetTriggerFrameValue()
+        BlzFrameSetText(label, math.floor(ui_config.maxHeroes))
+    end)
+
+
+
     initModeButton("DirectButton", 'direct')
     initModeButton("UnitedButton", 'united')
     initUnitsAvailableButtons()
 end
 
 function checkBox(text, before, func)
-    local frameCheckBox = BlzCreateFrame("QuestCheckBox2",  BlzGetFrameByName("StartGameMenu", 0), 0, 0)
-    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(before, 0), FRAMEPOINT_BOTTOMLEFT, 0, 0)
-    BlzFrameSetScale(frameCheckBox, 1.5)
 
     local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", BlzGetFrameByName("StartGameMenu", 0), "EscMenuSaveDialogTextTemplate", 0)
     BlzFrameSetText(frameText, text)
-    BlzFrameSetPoint(frameText, FRAMEPOINT_LEFT, BlzGetFrameByName("QuestCheckBox2", 0), FRAMEPOINT_RIGHT, 0.005, 0)
+    BlzFrameSetPoint(frameText, FRAMEPOINT_TOPLEFT, BlzGetFrameByName(before, 0), FRAMEPOINT_BOTTOMLEFT, 0, 0)
+
+
+    local frameCheckBox = BlzCreateFrame("QuestCheckBox2",  BlzGetFrameByName("StartGameMenu", 0), 0, 0)
+    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, BlzGetFrameByName("MyTextFrame", 0), FRAMEPOINT_RIGHT, 0.005, 0)
+    BlzFrameSetScale(frameCheckBox, 1.5)
 
     local trigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)
@@ -8172,8 +8205,8 @@ function getTableInfo()
     local tableInfo = {}
     tableInfo.header = {
         { text = 'Name', weight = 0.085 },
-        { text = 'Wave', weight = 0.03 },
-        { text = 'Inc/min', weight = 0.06 },
+        { text = 'Wave', weight = 0.04 },
+        { text = 'Inc/min', weight = 0.07 },
         { text = 'Gold', weight = 0.045 },
         { text = 'Kills', weight = 0.05 },
         { text = 'Damage', weight = 0.06 },
@@ -8274,9 +8307,9 @@ end
 
 function getIncome(player)
     if player.economy.incomeForCenter == 0 then
-        return player.economy.income * 60
+        return math.floor(player.economy.income * 60)
     else
-        return player.economy.income * 60 .. '(+' .. player.economy.incomeForCenter * 60 .. ')'
+        return math.floor(player.economy.income * 60) .. '(+' .. math.floor(player.economy.incomeForCenter * 60) .. ')'
     end
 end
 
