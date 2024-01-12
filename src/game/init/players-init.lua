@@ -101,6 +101,14 @@ function addWorkers()
     end
 end
 
+function initCamera()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            SetCameraPositionForPlayer(player.id, GetRectCenterX(player.workerRect), GetRectCenterY(player.workerRect))
+        end
+    end
+end
+
 function changeAvailableUnitsForPlayers()
 
     local isMirror = game_config.units.isUnitsMirror

@@ -11,6 +11,7 @@ function initGame()
     setAllianceBetweenPlayersAndSpawnPlayers()
     changeColorAndNameSpawnPlayers()
     changeAvailableUnitsForPlayers()
+    initCamera()
 
     createBaseAndTower()
     addWorkers()
