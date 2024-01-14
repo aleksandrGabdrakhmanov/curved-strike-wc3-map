@@ -59,11 +59,6 @@ Frame "BACKDROP" "StartGameMenu" {
             }
         }
     }
-     Frame "TEXT" "StartGameMenuModeSelecting" INHERITS "EscMenuTitleTextTemplate" {
-        SetPoint TOP, "StartGameMenuMode", BOTTOM, 0, -0.015,
-        FontColor 0.0 1.0 0.0 1.0,
-        Text "are selecting",
-     }
 }
 
 Frame "GLUETEXTBUTTON" "MyIconButtonTemplate"{
@@ -82,3 +77,31 @@ String "MyUpperButtonBarButtonTextTemplate" {
 Frame "SIMPLEBUTTON" "AbilitiesButton" INHERITS "UpperButtonBarButtonTemplate" {
     NormalText "MyUpperButtonBarButtonTextTemplate" "Abilities",
 }
+Frame "TEXT" "GreenText" INHERITS "EscMenuTitleTextTemplate" {
+        FontColor 0.0 1.0 0.0 1.0,
+        Text "are selecting",
+}
+Frame "GLUETEXTBUTTON" "ModeButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
+        Width 0.08,
+        ButtonText "ModeButtonText",
+        Frame "TEXT" "ModeButtonText" INHERITS "EscMenuButtonTextTemplate" {
+            Text "MODE",
+        }
+}
+Frame "GLUETEXTBUTTON" "ConfigPageButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
+        Width 0.08,
+        Height 0.03,
+        ButtonText "ConfigPageButtonText",
+        Frame "TEXT" "ConfigPageButtonText" INHERITS "EscMenuButtonTextTemplate" {
+            Text "MODE",
+        }
+}
+Frame "GLUETEXTBUTTON" "StartGameButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
+        Width 0.08,
+        ButtonText "StartGameButtonText",
+        Frame "TEXT" "StartGameButtonText" INHERITS "EscMenuButtonTextTemplate" {
+            FontColor 1.0 0.01 0.01 1.0,
+            Text "MODE",
+        }
+}
+

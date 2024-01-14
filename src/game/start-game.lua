@@ -1,6 +1,6 @@
 Debug.beginFile('start-game.lua')
-function startGame(mode)
-    initMain(mode)
+function startGame()
+    initMain()
     initGameTimer()
     initialUI()
     initTriggers()

@@ -1,7 +1,7 @@
 Debug.beginFile('main-init.lua')
-function initMain(mode)
+function initMain()
     initRegions()
-    initGameConfig(mode)
+    initGameConfig()
     initGame()
 end
 Debug.endFile()

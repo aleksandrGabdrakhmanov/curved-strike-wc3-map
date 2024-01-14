@@ -1,57 +1,28 @@
 Debug.beginFile('game-config.lua')
-function initGameConfig(mode)
-    game_modes = {
-        direct = {
-            unitRange = 1, -- 100%
-            spawnPolicy = {
-                interval = 35,
-                dif = 0
-            },
-            economy = {
-                startGold = 300,
-                startIncomePerSec = 5,
-                incomeBoost = 0.5,
-                firstMinePrice = 150,
-                nextMineDiffPrice = 75,
-                goldByTower = 125,
-                incomeForCenter = 0.5
-            },
-            playerPosition = { 1, 2, 3, 4, 5 },
-            isOpenAllMap = false
-        },
-        united = {
-            unitRange = 1, -- 150%
-            spawnPolicy = {
-                interval = 4,
-                dif = 35
-            },
-            economy = {
-                startGold = 300,
-                startIncomePerSec = 5,
-                incomeBoost = 0.5,
-                firstMinePrice = 150,
-                nextMineDiffPrice = 75,
-                goldByTower = 125,
-                incomeForCenter = 0.5
-            },
-            playerPosition = { 1, 2, 3, 4, 5 },
-            isOpenAllMap = false
-        }
-    }
-
+function initGameConfig()
     game_config = {
-        mode = mode,
-        economy = game_modes[mode].economy,
+        economy = {
+            startGold = 300,
+            startIncomePerSec = 5,
+            incomeBoost = 0.5,
+            firstMinePrice = 150,
+            nextMineDiffPrice = 75,
+            goldByTower = 125,
+            incomeForCenter = 0.5
+        },
         units = {
-            range = game_modes[mode].unitRange,
+            range = 1,
             lifetime = 2,
             isUnitsMirror = ui_config.isUnitsMirror,
             isHeroesMirror = ui_config.isHeroesMirror,
             maxHeroes = ui_config.maxHeroes
         },
-        spawnPolicy = game_modes[mode].spawnPolicy,
-        playerPosition = game_modes[mode].playerPosition,
-        isOpenAllMap = game_modes[mode].isOpenAllMap
+        spawnPolicy = {
+            interval = 35,
+            dif = 0
+        },
+        playerPosition = { 1, 2, 3, 4, 5 },
+        isOpenAllMap = false
     }
 end
 
