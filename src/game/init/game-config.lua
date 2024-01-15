@@ -2,9 +2,9 @@ Debug.beginFile('game-config.lua')
 function initGameConfig()
     game_config = {
         economy = {
-            startGold = 300,
-            startIncomePerSec = 5,
-            incomeBoost = 0.5,
+            startGold = ui_config.startGold,
+            startIncomePerSec = ui_config.baseIncome / 60,
+            incomeBoost = ui_config.incomeBoost / 60,
             firstMinePrice = 150,
             nextMineDiffPrice = 75,
             goldByTower = 125,

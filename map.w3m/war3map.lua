@@ -6113,9 +6113,9 @@ Debug.beginFile('game-config.lua')
 function initGameConfig()
     game_config = {
         economy = {
-            startGold = 300,
-            startIncomePerSec = 5,
-            incomeBoost = 0.5,
+            startGold = ui_config.startGold,
+            startIncomePerSec = ui_config.baseIncome / 60,
+            incomeBoost = ui_config.incomeBoost / 60,
             firstMinePrice = 150,
             nextMineDiffPrice = 75,
             goldByTower = 125,
@@ -7997,7 +7997,96 @@ function initButtonForUnit(unit, containerFrame, player, position)
 end
 
 Debug.endFile()
-Debug.beginFile('start-game.lua')
+Debug.beginFile('element-check-box.lua')
+function checkBox(text, parentFrame, checkedFunc, uncheckedFunc)
+
+    local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", parentFrame, "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(frameText, text)
+    BlzFrameSetSize(frameText, ui_params.lengthString, ui_params.widthString)
+
+    local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentFrame, 0, 0)
+    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetScale(frameCheckBox, 1.5)
+
+    local trigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)
+    BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_UNCHECKED)
+    TriggerAddAction(trigger, function()
+        if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
+            checkedFunc()
+        else
+            uncheckedFunc()
+        end
+    end)
+    return frameText
+end
+Debug.endFile()
+Debug.beginFile('element-check-box.lua')
+function createEditBox(parentPage, text, minValue, maxValue, initValue, action)
+    local frameText = BlzCreateFrameByType("TEXT", "TextFrame", parentPage, "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(frameText, text)
+    BlzFrameSetSize(frameText, ui_params.lengthString, ui_params.widthString)
+
+    local editBox = BlzCreateFrame("EscMenuEditBoxTemplate", parentPage, 0, 0) --create the box
+    BlzFrameSetPoint(editBox, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetSize(editBox, 0.1, 0.03)
+    BlzFrameSetText(editBox, initValue)
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, editBox, FRAMEEVENT_EDITBOX_TEXT_CHANGED)
+    TriggerAddAction(trig, function()
+        local value = extractNumber(BlzGetTriggerFrameText())
+
+        local newValue
+        if value ~= nil then
+            if value <= minValue then
+                newValue = minValue
+            elseif value >= maxValue then
+                newValue = maxValue
+            else
+                newValue = value
+            end
+        else
+            newValue = 0
+        end
+        action(newValue)
+        BlzFrameSetText(editBox, newValue)
+    end)
+    return frameText
+end
+
+function extractNumber(inputString)
+    local number = string.match(inputString, "%-?%d+")
+    return number and tonumber(number) or nil
+end
+Debug.endFile()
+
+Debug.beginFile('element-slider.lua')
+function createSlider(parentPage, text, minValue, maxValue, initValue, step, func)
+    local frameText = BlzCreateFrameByType("TEXT", "TextCountHeroes", parentPage, "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(frameText, text)
+    BlzFrameSetSize(frameText, ui_params.lengthString, ui_params.widthString)
+
+    local slider = BlzCreateFrame("EscMenuSliderTemplate", parentPage, 0, 0)
+    BlzFrameSetPoint(slider, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetMinMaxValue(slider, minValue, maxValue)
+    BlzFrameSetValue(slider, initValue)
+    BlzFrameSetStepSize(slider, step)
+
+    local label = BlzCreateFrame("EscMenuLabelTextTemplate", slider, 0, 0)
+    BlzFrameSetPoint(label, FRAMEPOINT_LEFT, slider, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetText(label, initValue)
+
+    local sliderTrigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(sliderTrigger, slider, FRAMEEVENT_SLIDER_VALUE_CHANGED)
+    TriggerAddAction(sliderTrigger, function()
+        local value = BlzGetTriggerFrameValue()
+        func(value)
+        BlzFrameSetText(label, math.floor(value))
+    end)
+    return frameText
+end
+Debug.endFile()
+Debug.beginFile('main-start-game.lua')
 function initialUI()
     local fm = BlzGetFrameByName("ConsoleUIBackdrop", 0)
     frame = BlzCreateFrameByType("TEXT", "MyTextFrame", fm, "", 0)
@@ -8008,17 +8097,22 @@ end
 
 function startGameUI()
     ui_params = {
+        lengthString = 0.2,
+        widthString = 0.02,
         indent = 0.015,
         width = 0.4
     }
     ui_config = {
         isUnitsMirror = false,
         isHeroesMirror = false,
-        maxHeroes = 3
+        maxHeroes = 3,
+        startGold = 300,
+        baseIncome = 300,
+        incomeBoost = 30
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
-    preConfigGameModes = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "QuestButtonBackdropTemplate", 0)
+    local preConfigGameModes = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "QuestButtonBackdropTemplate", 0)
     BlzFrameSetAbsPoint(preConfigGameModes, FRAMEPOINT_CENTER, 0.4, 0.45)
     BlzFrameSetSize(preConfigGameModes, ui_params.width, 0.08)
 
@@ -8026,66 +8120,34 @@ function startGameUI()
     BlzFrameSetText(frameText, "Pre-configured game modes")
     BlzFrameSetPoint(frameText, FRAMEPOINT_TOP, preConfigGameModes, FRAMEPOINT_TOP, 0, -ui_params.indent)
 
-    allPages = {}
-
-    local buttonGeneral, pageGeneral = configPage("General")
+    local allPages = {}
+    buttonGeneral, pageGeneral = createPageGeneral(preConfigGameModes, allPages)
     BlzFrameSetPoint(buttonGeneral, FRAMEPOINT_TOPLEFT, preConfigGameModes, FRAMEPOINT_BOTTOMLEFT, 0, 0)
 
-    local buttonUnits, pageUnits = configPage("Units")
-    BlzFrameSetPoint(buttonUnits, FRAMEPOINT_LEFT, buttonGeneral, FRAMEPOINT_RIGHT, -0.005, 0)
-    local availableUnitsTextFrame = BlzCreateFrameByType('TEXT', 'availableUnitsTextFrame', pageUnits, 'EscMenuSaveDialogTextTemplate', 0)
-    BlzFrameSetText(availableUnitsTextFrame, 'Available units:')
-    BlzFrameSetPoint(availableUnitsTextFrame, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
-    for i, race in ipairs(main_race) do
-        initRaceAvailableButton(race, i, availableUnitsTextFrame, units_for_build, 5)
-    end
-    for _, unit in ipairs(units_for_build) do
-        initUnitAvailableButton(unit, availableUnitsTextFrame)
-    end
-    local checkBoxUnits = checkBox('Mirror units', pageUnits,
-            function() ui_config.isUnitsMirror = true end,
-            function() ui_config.isUnitsMirror = false end
-    )
-    BlzFrameSetPoint(checkBoxUnits, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.17)
+    buttonEconomy = createPageEconomy(preConfigGameModes, allPages)
+    BlzFrameSetPoint(buttonEconomy, FRAMEPOINT_LEFT, buttonGeneral, FRAMEPOINT_RIGHT, -0.005, 0)
 
+    buttonUnits = createPageUnits(preConfigGameModes, allPages)
+    BlzFrameSetPoint(buttonUnits, FRAMEPOINT_LEFT, buttonEconomy, FRAMEPOINT_RIGHT, -0.005, 0)
 
-    local buttonHeroes, pageHeroes = configPage("Heroes")
+    buttonHeroes = createPageHeroes(preConfigGameModes, allPages)
     BlzFrameSetPoint(buttonHeroes, FRAMEPOINT_LEFT, buttonUnits, FRAMEPOINT_RIGHT, -0.005, 0)
-    local availableHeroesTextFrame = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', pageHeroes, 'EscMenuSaveDialogTextTemplate', 0)
-    BlzFrameSetText(availableHeroesTextFrame, 'Available heroes:')
-    BlzFrameSetPoint(availableHeroesTextFrame, FRAMEPOINT_TOPLEFT, pageHeroes, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
-    for i, race in ipairs(main_race) do
-        initRaceAvailableButton(race, i, availableHeroesTextFrame, heroes_for_build, 6)
+
+    for number, page in ipairs(allPages) do
+        if number == 1 then
+            BlzFrameSetVisible(page, true)
+        else
+            BlzFrameSetVisible(page, false)
+        end
     end
-    for _, hero in ipairs(heroes_for_build) do
-        initUnitAvailableButton(hero, availableHeroesTextFrame)
-    end
-    local checkBoxHeroes = checkBox('Mirror heroes', pageHeroes,
-            function() ui_config.isHeroesMirror = true end,
-            function() ui_config.isHeroesMirror = false end
-    )
-    BlzFrameSetPoint(checkBoxHeroes, FRAMEPOINT_TOPLEFT, pageHeroes, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.2)
 
-    local frameText = BlzCreateFrameByType("TEXT", "TextCountHeroes", pageHeroes, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetText(frameText, "Max heroes")
-    BlzFrameSetPoint(frameText, FRAMEPOINT_TOPLEFT, checkBoxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
-
-    local slider = BlzCreateFrame("EscMenuSliderTemplate",  pageHeroes,0,0)
-    local label = BlzCreateFrame("EscMenuLabelTextTemplate", slider, 0, 0)
-    BlzFrameSetPoint(slider, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0.015, 0)
-    BlzFrameSetPoint(label, FRAMEPOINT_LEFT, slider, FRAMEPOINT_RIGHT, 0, 0)
-    BlzFrameSetMinMaxValue(slider, 0, 7)
-    BlzFrameSetValue(slider, ui_config.maxHeroes)
-    BlzFrameSetStepSize(slider, 1)
-
-    BlzFrameSetText(label, ui_config.maxHeroes)
-
-    local trigger = CreateTrigger()
-    BlzTriggerRegisterFrameEvent(trigger, slider, FRAMEEVENT_SLIDER_VALUE_CHANGED)
-    TriggerAddAction(trigger, function()
-        ui_config.maxHeroes = BlzGetTriggerFrameValue()
-        BlzFrameSetText(label, math.floor(ui_config.maxHeroes))
+    local startGameButton = buttonWithAction('START', preConfigGameModes, function()
+        if GetTriggerPlayer() == getMainPlayer() then
+            BlzFrameSetVisible(preConfigGameModes, FALSE)
+            startGame()
+        end
     end)
+    BlzFrameSetPoint(startGameButton, FRAMEPOINT_BOTTOMRIGHT, pageGeneral, FRAMEPOINT_BOTTOMRIGHT, -ui_params.indent, ui_params.indent)
 
     local startGameButton = BlzCreateFrame('StartGameButton', preConfigGameModes, 0, 0)
     BlzFrameSetLevel(startGameButton, 99)
@@ -8106,14 +8168,23 @@ function startGameUI()
     BlzFrameSetPoint(selectingText, FRAMEPOINT_TOP, generalConfig, FRAMEPOINT_BOTTOM, 0, 0)
 end
 
+function buttonWithAction(text, parentFrame, action)
+    local button = BlzCreateFrame('Button', parentFrame, 0, 0)
+    BlzFrameSetLevel(button, 99)
+    BlzFrameSetText(button, text)
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, action)
+    return button
+end
 
-function configPage(text)
-    local configButton = BlzCreateFrame('ConfigPageButton', preConfigGameModes, 0, 0)
+function configPage(text, parent, allPages)
+    local configButton = BlzCreateFrame('ConfigPageButton', parent, 0, 0)
     BlzFrameSetLevel(configButton, 99)
     BlzFrameSetText(configButton, text)
 
-    local pageFrame = BlzCreateFrameByType('BACKDROP', 'GeneralConfig', preConfigGameModes, "QuestButtonBackdropTemplate", 0)
-    BlzFrameSetPoint(pageFrame, FRAMEPOINT_TOP, preConfigGameModes, FRAMEPOINT_BOTTOM, 0, 0)
+    local pageFrame = BlzCreateFrameByType('BACKDROP', 'GeneralConfig', parent, "QuestButtonBackdropTemplate", 0)
+    BlzFrameSetPoint(pageFrame, FRAMEPOINT_TOP, parent, FRAMEPOINT_BOTTOM, 0, 0)
     BlzFrameSetSize(pageFrame, ui_params.width, 0.35)
     table.insert(allPages, pageFrame)
 
@@ -8126,28 +8197,6 @@ function configPage(text)
         BlzFrameSetVisible(pageFrame, true)
     end)
     return configButton, pageFrame
-end
-
-function checkBox(text, parentFrame, checkedFunc, uncheckedFunc)
-
-    local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", parentFrame, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetText(frameText, text)
-
-    local frameCheckBox = BlzCreateFrame("QuestCheckBox2",  parentFrame, 0, 0)
-    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0.005, 0)
-    BlzFrameSetScale(frameCheckBox, 1.5)
-
-    local trigger = CreateTrigger()
-    BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)
-    BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_UNCHECKED)
-    TriggerAddAction(trigger, function()
-        if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
-            checkedFunc()
-        else
-            uncheckedFunc()
-        end
-    end)
-    return frameText
 end
 
 function initRaceAvailableButton(race, position, frame, unitContainer, max)
@@ -8191,7 +8240,7 @@ end
 
 function initUnitAvailableButton(unit, containerFrame)
     local button = BlzCreateFrame("MyIconButtonTemplate", containerFrame, 0, 0)
-    BlzFrameSetPoint(button, FRAMEPOINT_TOPLEFT, containerFrame, FRAMEPOINT_TOPLEFT, (BlzFrameGetWidth(button) * unit.position), -(BlzFrameGetHeight(button) * unit.line)+ 0.01)
+    BlzFrameSetPoint(button, FRAMEPOINT_TOPLEFT, containerFrame, FRAMEPOINT_TOPLEFT, (BlzFrameGetWidth(button) * unit.position), -(BlzFrameGetHeight(button) * unit.line) + 0.01)
 
     local buttonTexture = BlzGetFrameByName("MyButtonBackdropTemplate", 0)
     BlzFrameSetTexture(buttonTexture, BlzGetAbilityIcon(FourCC(unit.parentId)), 0, true)
@@ -8217,6 +8266,86 @@ end
 function replaceTexture(inputString)
     local replacedString = inputString:gsub("ReplaceableTextures\\CommandButtons\\(.-)%.blp", "ReplaceableTextures\\CommandButtonsDisabled\\DIS%1.blp")
     return replacedString
+end
+Debug.endFile()
+Debug.beginFile('page-economy.lua')
+function createPageEconomy(parentFrame, allPages)
+    local buttonEconomy, pageEconomy = configPage("Economy", parentFrame, allPages)
+    local startGoldEditBox = createEditBox(pageEconomy, 'Start gold', 0, 999999, ui_config.startGold, function(value)
+        ui_config.startGold = value
+    end)
+    BlzFrameSetPoint(startGoldEditBox, FRAMEPOINT_TOPLEFT, pageEconomy, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
+
+    local baseIncomeSlider = createSlider(pageEconomy, 'Base income/min', 60, 3000, ui_config.baseIncome, 30, function(value)
+        ui_config.baseIncome = value
+    end)
+    BlzFrameSetPoint(baseIncomeSlider, FRAMEPOINT_TOPLEFT, startGoldEditBox, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local incomeForEachMineSlider = createSlider(pageEconomy, 'Added inc for each mine', 30, 300, ui_config.incomeBoost, 30, function(value)
+        ui_config.incomeBoost = value
+    end)
+    BlzFrameSetPoint(incomeForEachMineSlider, FRAMEPOINT_TOPLEFT, baseIncomeSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+    return buttonEconomy
+end
+Debug.endFile()
+Debug.beginFile('page-general.lua')
+function createPageGeneral(parentFrame, allPages)
+    local buttonGeneral, pageGeneral = configPage("General", parentFrame, allPages)
+    return buttonGeneral, pageGeneral
+end
+Debug.endFile()
+Debug.beginFile('page-heroes.lua')
+function createPageHeroes(parentFrame, allPages)
+    local buttonHeroes, pageHeroes = configPage("Heroes", parentFrame, allPages)
+    local availableHeroesTextFrame = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', pageHeroes, 'EscMenuSaveDialogTextTemplate', 0)
+    BlzFrameSetText(availableHeroesTextFrame, 'Available heroes:')
+    BlzFrameSetPoint(availableHeroesTextFrame, FRAMEPOINT_TOPLEFT, pageHeroes, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, availableHeroesTextFrame, heroes_for_build, 6)
+    end
+    for _, hero in ipairs(heroes_for_build) do
+        initUnitAvailableButton(hero, availableHeroesTextFrame)
+    end
+    local checkBoxHeroes = checkBox('Mirror heroes', pageHeroes,
+            function()
+                ui_config.isHeroesMirror = true
+            end,
+            function()
+                ui_config.isHeroesMirror = false
+            end
+    )
+    BlzFrameSetPoint(checkBoxHeroes, FRAMEPOINT_TOPLEFT, pageHeroes, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.2)
+
+    local sliderMaxHeroes = createSlider(pageHeroes, "Max heroes", 0, 7, ui_config.maxHeroes, 1,
+            function(value)
+                ui_config.maxHeroes = value
+            end)
+    BlzFrameSetPoint(sliderMaxHeroes, FRAMEPOINT_TOPLEFT, checkBoxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
+    return buttonHeroes
+end
+Debug.endFile()
+Debug.beginFile('page-units.lua')
+function createPageUnits(parentFrame, allPages)
+    local buttonUnits, pageUnits = configPage("Units", parentFrame, allPages)
+    local availableUnitsTextFrame = BlzCreateFrameByType('TEXT', 'availableUnitsTextFrame', pageUnits, 'EscMenuSaveDialogTextTemplate', 0)
+    BlzFrameSetText(availableUnitsTextFrame, 'Available units:')
+    BlzFrameSetPoint(availableUnitsTextFrame, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, availableUnitsTextFrame, units_for_build, 5)
+    end
+    for _, unit in ipairs(units_for_build) do
+        initUnitAvailableButton(unit, availableUnitsTextFrame)
+    end
+    local checkBoxUnits = checkBox('Mirror units', pageUnits,
+            function()
+                ui_config.isUnitsMirror = true
+            end,
+            function()
+                ui_config.isUnitsMirror = false
+            end
+    )
+    BlzFrameSetPoint(checkBoxUnits, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.17)
+    return buttonUnits
 end
 Debug.endFile()
 Debug.beginFile('status-panel.lua')
