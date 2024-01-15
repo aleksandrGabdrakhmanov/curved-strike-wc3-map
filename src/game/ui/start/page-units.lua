@@ -19,6 +19,12 @@ function createPageUnits(parentFrame, allPages)
             end
     )
     BlzFrameSetPoint(checkBoxUnits, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.17)
+
+    local lifetimeSlider = createSlider(pageUnits, 'Max lifespan of unit in waves', 1, 10, ui_config.lifetime, 1, function(value)
+        ui_config.lifetime = value
+    end)
+    BlzFrameSetPoint(lifetimeSlider, FRAMEPOINT_TOPLEFT, checkBoxUnits, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
     return buttonUnits
 end
 Debug.endFile()

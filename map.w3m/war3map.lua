@@ -6116,21 +6116,21 @@ function initGameConfig()
             startGold = ui_config.startGold,
             startIncomePerSec = ui_config.baseIncome / 60,
             incomeBoost = ui_config.incomeBoost / 60,
-            firstMinePrice = 150,
-            nextMineDiffPrice = 75,
-            goldByTower = 125,
-            incomeForCenter = 0.5
+            firstMinePrice = ui_config.firstMinePrice,
+            nextMineDiffPrice = ui_config.nextMineDiffPrice,
+            goldByTower = ui_config.goldByTower,
+            incomeForCenter = ui_config.incomeForCenter / 60
         },
         units = {
             range = 1,
-            lifetime = 2,
+            lifetime = ui_config.lifetime,
             isUnitsMirror = ui_config.isUnitsMirror,
             isHeroesMirror = ui_config.isHeroesMirror,
             maxHeroes = ui_config.maxHeroes
         },
         spawnPolicy = {
-            interval = 35,
-            dif = 0
+            interval = ui_config.spawnInterval,
+            dif = ui_config.spawnDif
         },
         playerPosition = { 1, 2, 3, 4, 5 },
         isOpenAllMap = false
@@ -8108,7 +8108,14 @@ function startGameUI()
         maxHeroes = 3,
         startGold = 300,
         baseIncome = 300,
-        incomeBoost = 30
+        incomeBoost = 30,
+        firstMinePrice = 150,
+        nextMineDiffPrice = 30,
+        incomeForCenter = 30,
+        goldByTower = 125,
+        spawnInterval = 35,
+        spawnDif = 0,
+        lifetime = 2
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
@@ -8285,12 +8292,43 @@ function createPageEconomy(parentFrame, allPages)
         ui_config.incomeBoost = value
     end)
     BlzFrameSetPoint(incomeForEachMineSlider, FRAMEPOINT_TOPLEFT, baseIncomeSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local incomeForCenterControl = createSlider(pageEconomy, 'Added inc for controlling center', 0, 300, ui_config.incomeForCenter, 30, function(value)
+        ui_config.incomeForCenter = value
+    end)
+    BlzFrameSetPoint(incomeForCenterControl, FRAMEPOINT_TOPLEFT, incomeForEachMineSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local firstMinePriceSlider = createSlider(pageEconomy, 'Price first mine', 1, 1500, ui_config.firstMinePrice, 1, function(value)
+        ui_config.firstMinePrice = value
+    end)
+    BlzFrameSetPoint(firstMinePriceSlider, FRAMEPOINT_TOPLEFT, incomeForCenterControl, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local nextMinePriceSlider = createSlider(pageEconomy, 'Price diff for each next mine', 1, 300, ui_config.nextMineDiffPrice, 1, function(value)
+        ui_config.nextMineDiffPrice = value
+    end)
+    BlzFrameSetPoint(nextMinePriceSlider, FRAMEPOINT_TOPLEFT, firstMinePriceSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local goldByTowerSlider = createSlider(pageEconomy, 'Gold for killing the tower', 0, 1500, ui_config.goldByTower, 1, function(value)
+        ui_config.goldByTower = value
+    end)
+    BlzFrameSetPoint(goldByTowerSlider, FRAMEPOINT_TOPLEFT, nextMinePriceSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
     return buttonEconomy
 end
 Debug.endFile()
 Debug.beginFile('page-general.lua')
 function createPageGeneral(parentFrame, allPages)
     local buttonGeneral, pageGeneral = configPage("General", parentFrame, allPages)
+
+    local spawnIntervalSlider = createSlider(pageGeneral, 'Wave interval each players', 1, 120, ui_config.spawnInterval, 1, function(value)
+        ui_config.spawnInterval = value
+    end)
+    BlzFrameSetPoint(spawnIntervalSlider, FRAMEPOINT_TOPLEFT, pageGeneral, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
+
+    local spawnDifSlider = createSlider(pageGeneral, 'Wave interval all players', 0, 120, ui_config.spawnDif, 1, function(value)
+        ui_config.spawnDif = value
+    end)
+    BlzFrameSetPoint(spawnDifSlider, FRAMEPOINT_TOPLEFT, spawnIntervalSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
     return buttonGeneral, pageGeneral
 end
 Debug.endFile()
@@ -8345,6 +8383,12 @@ function createPageUnits(parentFrame, allPages)
             end
     )
     BlzFrameSetPoint(checkBoxUnits, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.17)
+
+    local lifetimeSlider = createSlider(pageUnits, 'Max lifespan of unit in waves', 1, 10, ui_config.lifetime, 1, function(value)
+        ui_config.lifetime = value
+    end)
+    BlzFrameSetPoint(lifetimeSlider, FRAMEPOINT_TOPLEFT, checkBoxUnits, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
     return buttonUnits
 end
 Debug.endFile()
@@ -8378,7 +8422,7 @@ function getTableInfo()
                     isSensitive = false
                 },
                 {
-                    text = player.spawnTimer,
+                    text = math.floor(player.spawnTimer),
                     color = player.color,
                     isSensitive = false
                 },

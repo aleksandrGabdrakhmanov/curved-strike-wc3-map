@@ -15,6 +15,26 @@ function createPageEconomy(parentFrame, allPages)
         ui_config.incomeBoost = value
     end)
     BlzFrameSetPoint(incomeForEachMineSlider, FRAMEPOINT_TOPLEFT, baseIncomeSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local incomeForCenterControl = createSlider(pageEconomy, 'Added inc for controlling center', 0, 300, ui_config.incomeForCenter, 30, function(value)
+        ui_config.incomeForCenter = value
+    end)
+    BlzFrameSetPoint(incomeForCenterControl, FRAMEPOINT_TOPLEFT, incomeForEachMineSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local firstMinePriceSlider = createSlider(pageEconomy, 'Price first mine', 1, 1500, ui_config.firstMinePrice, 1, function(value)
+        ui_config.firstMinePrice = value
+    end)
+    BlzFrameSetPoint(firstMinePriceSlider, FRAMEPOINT_TOPLEFT, incomeForCenterControl, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local nextMinePriceSlider = createSlider(pageEconomy, 'Price diff for each next mine', 1, 300, ui_config.nextMineDiffPrice, 1, function(value)
+        ui_config.nextMineDiffPrice = value
+    end)
+    BlzFrameSetPoint(nextMinePriceSlider, FRAMEPOINT_TOPLEFT, firstMinePriceSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local goldByTowerSlider = createSlider(pageEconomy, 'Gold for killing the tower', 0, 1500, ui_config.goldByTower, 1, function(value)
+        ui_config.goldByTower = value
+    end)
+    BlzFrameSetPoint(goldByTowerSlider, FRAMEPOINT_TOPLEFT, nextMinePriceSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
     return buttonEconomy
 end
 Debug.endFile()

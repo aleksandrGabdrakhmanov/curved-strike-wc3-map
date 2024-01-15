@@ -28,7 +28,7 @@ function getTableInfo()
                     isSensitive = false
                 },
                 {
-                    text = player.spawnTimer,
+                    text = math.floor(player.spawnTimer),
                     color = player.color,
                     isSensitive = false
                 },

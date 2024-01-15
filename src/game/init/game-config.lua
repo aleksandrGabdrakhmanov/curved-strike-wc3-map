@@ -5,21 +5,21 @@ function initGameConfig()
             startGold = ui_config.startGold,
             startIncomePerSec = ui_config.baseIncome / 60,
             incomeBoost = ui_config.incomeBoost / 60,
-            firstMinePrice = 150,
-            nextMineDiffPrice = 75,
-            goldByTower = 125,
-            incomeForCenter = 0.5
+            firstMinePrice = ui_config.firstMinePrice,
+            nextMineDiffPrice = ui_config.nextMineDiffPrice,
+            goldByTower = ui_config.goldByTower,
+            incomeForCenter = ui_config.incomeForCenter / 60
         },
         units = {
             range = 1,
-            lifetime = 2,
+            lifetime = ui_config.lifetime,
             isUnitsMirror = ui_config.isUnitsMirror,
             isHeroesMirror = ui_config.isHeroesMirror,
             maxHeroes = ui_config.maxHeroes
         },
         spawnPolicy = {
-            interval = 35,
-            dif = 0
+            interval = ui_config.spawnInterval,
+            dif = ui_config.spawnDif
         },
         playerPosition = { 1, 2, 3, 4, 5 },
         isOpenAllMap = false

@@ -20,7 +20,14 @@ function startGameUI()
         maxHeroes = 3,
         startGold = 300,
         baseIncome = 300,
-        incomeBoost = 30
+        incomeBoost = 30,
+        firstMinePrice = 150,
+        nextMineDiffPrice = 30,
+        incomeForCenter = 30,
+        goldByTower = 125,
+        spawnInterval = 35,
+        spawnDif = 0,
+        lifetime = 2
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
