@@ -7337,7 +7337,7 @@ function lifetimeLimitTrigger()
                                     if tick <= 0 then
                                         local effect = AddSpecialEffectLocBJ( GetUnitLoc(unit), "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl" )
                                         BlzSetSpecialEffectScale( effect, ( 0.30 * I2R(GetUnitLevel(unit)) ) )
-                                        DestroyEffectBJ( effect )
+                                        DestroyEffect( effect )
                                         RemoveUnit(unit)
                                         DestroyTimer(removeTimer)
                                         DestroyTextTag(tag)
@@ -7782,6 +7782,7 @@ custom_cast_ai_params = {
     {
         unitId = 'u006',
         order = 'antimagicshell',
+        radius = 500,
         timeout = 2.00,
         condition = {
             target = 'ally'
@@ -7790,6 +7791,7 @@ custom_cast_ai_params = {
     {
         unitId = 'h00H',
         order = 'innerfire',
+        radius = 500,
         timeout = 5.00,
         condition = {
             target = 'ally'
@@ -7798,6 +7800,7 @@ custom_cast_ai_params = {
     {
         unitId = 'h00I',
         order = 'invisibility',
+        radius = 500,
         timeout = 1.00,
         condition = {
             target = 'ally',
@@ -7807,6 +7810,7 @@ custom_cast_ai_params = {
     {
         unitId = 'e00J',
         order = 'rejuvination',
+        radius = 500,
         timeout = 2.00,
         condition = {
             target = 'ally',
@@ -7816,10 +7820,20 @@ custom_cast_ai_params = {
     {
         unitId = 'e00J',
         order = 'bearform',
+        radius = 500,
         timeout = 2.00,
         condition = {
             target = 'itself',
             livePercent = 75
+        }
+    },
+    {
+        unitId = 'e00I',
+        order = 'cyclone',
+        radius = 500,
+        timeout = 2.00,
+        condition = {
+            target = 'enemy'
         }
     }
 }
@@ -7838,7 +7852,7 @@ function createTriggerByCastParam(castParam)
 
             if castParam.condition.target == 'ally' or castParam.condition.target == 'enemy' then
                 local unitsGroup = GetUnitsInRangeOfLocMatching(
-                        500,
+                        castParam.radius,
                         GetUnitLoc(GetEnumUnit()),
                         Filter(function()
                             local filterUnit = GetFilterUnit()
@@ -7851,7 +7865,12 @@ function createTriggerByCastParam(castParam)
                                 end
                             end
                             local ownerFilterUnit = GetOwningPlayer(filterUnit)
-                            return getSpawnPlayerIds(GetOwningPlayer(GetEnumUnit()), ownerFilterUnit)
+
+                            if castParam.condition.target == 'ally' then
+                                return isPlayerAlly(GetOwningPlayer(GetEnumUnit()), ownerFilterUnit)
+                            elseif castParam.condition.target == 'enemy' then
+                                return isPlayerEnemy(GetOwningPlayer(GetEnumUnit()), ownerFilterUnit)
+                            end
                         end)
                 )
 
@@ -7875,13 +7894,32 @@ function createTriggerByCastParam(castParam)
     end)
 end
 
-function getSpawnPlayerIds(player, checkPlayer)
+function isPlayerAlly(player, checkPlayer)
     for _, team in ipairs(all_teams) do
         for _, p in ipairs(team.players) do
             if p.spawnPlayerId == player then
                 for _, spawnP in ipairs(getAllSpawnPlayers(team)) do
                     if spawnP == checkPlayer then
                         return true
+                    end
+                end
+            end
+        end
+    end
+    return false
+end
+
+function isPlayerEnemy(player, checkPlayer)
+    for _, team in ipairs(all_teams) do
+        for _, p in ipairs(team.players) do
+            if p.spawnPlayerId == player then
+                for _, teamOther in ipairs(all_teams) do
+                    if (teamOther ~= team) then
+                        for _, spawnP in ipairs(getAllSpawnPlayers(teamOther)) do
+                            if spawnP == checkPlayer then
+                                return true
+                            end
+                        end
                     end
                 end
             end
