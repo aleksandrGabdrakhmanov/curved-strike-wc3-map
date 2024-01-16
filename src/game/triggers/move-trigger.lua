@@ -5,7 +5,7 @@ function moveTrigger()
         for _, player in ipairs(team.players) do
             for i = 1, #player.attackPointRect do
                 local trig = CreateTrigger()
-                TriggerRegisterTimerEventPeriodic(trig, 2.00)
+                TriggerRegisterTimerEventPeriodic(trig, 4.00)
                 TriggerAddAction(trig, function()
                     local group = GetUnitsInRectAll(player.attackPointRect[i].rect)
                     ForGroup(group, function ()

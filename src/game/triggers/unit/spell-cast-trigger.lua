@@ -5,6 +5,7 @@ custom_cast_ai_params = {
         order = 'antimagicshell',
         radius = 500,
         timeout = 2.00,
+        orderTarget = 'conditionUnit',
         condition = {
             target = 'ally'
         }
@@ -14,6 +15,7 @@ custom_cast_ai_params = {
         order = 'innerfire',
         radius = 500,
         timeout = 5.00,
+        orderTarget = 'conditionUnit',
         condition = {
             target = 'ally'
         }
@@ -23,6 +25,7 @@ custom_cast_ai_params = {
         order = 'invisibility',
         radius = 500,
         timeout = 1.00,
+        orderTarget = 'conditionUnit',
         condition = {
             target = 'ally',
             livePercent = 20
@@ -33,6 +36,7 @@ custom_cast_ai_params = {
         order = 'rejuvination',
         radius = 500,
         timeout = 2.00,
+        orderTarget = 'conditionUnit',
         condition = {
             target = 'ally',
             livePercent = 90
@@ -43,6 +47,7 @@ custom_cast_ai_params = {
         order = 'bearform',
         radius = 500,
         timeout = 2.00,
+        orderTarget = 'conditionUnit',
         condition = {
             target = 'itself',
             livePercent = 75
@@ -53,6 +58,7 @@ custom_cast_ai_params = {
         order = 'revanform',
         radius = 900,
         timeout = 2.00,
+        orderTarget = 'conditionUnit',
         condition = {
             target = 'enemy'
         }
@@ -61,9 +67,32 @@ custom_cast_ai_params = {
         unitId = 'e00I',
         order = 'cyclone',
         radius = 500,
-        timeout = 2.00,
+        timeout = 3.00,
+        orderTarget = 'conditionUnit',
         condition = {
             target = 'enemy'
+        }
+    },
+    {
+        unitId = 'e00I',
+        order = 'ravenform',
+        radius = 500,
+        timeout = 1.00,
+        orderTarget = 'itself',
+        condition = {
+            target = 'enemy',
+            isFly = true,
+            exceptionUnits = {'u00A'}
+        }
+    },
+    {
+        unitId = 'edtm',
+        order = 'unravenform',
+        radius = 500,
+        timeout = 7.00,
+        orderTarget = 'itself',
+        condition = {
+            target = 'itself'
         }
     }
 }
@@ -87,10 +116,22 @@ function createTriggerByCastParam(castParam)
                         Filter(function()
                             local filterUnit = GetFilterUnit()
                             if castParam.condition then
+                                if castParam.condition.exceptionUnits then
+                                    for _, unit in ipairs(castParam.condition.exceptionUnits) do
+                                        if GetUnitTypeId(filterUnit) == FourCC(unit) then
+                                            return false
+                                        end
+                                    end
+                                end
                                 if castParam.condition.livePercent then
                                     local livePercent = GetUnitLifePercent(filterUnit)
                                     if castParam.condition.livePercent <= livePercent then
                                         return false
+                                    end
+                                end
+                                if castParam.condition.isFly then
+                                    if BlzGetUnitMovementType(filterUnit) == MOVE_TYPE_FLY then
+                                        return true
                                     end
                                 end
                             end
@@ -106,7 +147,12 @@ function createTriggerByCastParam(castParam)
 
                 if CountUnitsInGroup(unitsGroup) >= 1 then
                     local randomUnit = GroupPickRandomUnit(unitsGroup)
-                    IssueTargetOrderBJ(GetEnumUnit(), castParam.order, randomUnit)
+
+                    if castParam.orderTarget == 'conditionUnit' then
+                        IssueTargetOrderBJ(GetEnumUnit(), castParam.order, randomUnit)
+                    elseif castParam.orderTarget == 'itself' then
+                        IssueImmediateOrder(GetEnumUnit(), castParam.order)
+                    end
                 end
                 DestroyGroup(unitsGroup)
             elseif castParam.condition.target == 'itself' then
@@ -116,6 +162,8 @@ function createTriggerByCastParam(castParam)
                         if castParam.condition.livePercent >= livePercent then
                             IssueImmediateOrder(GetEnumUnit(), castParam.order)
                         end
+                    else
+                        IssueImmediateOrder(GetEnumUnit(), castParam.order)
                     end
                 end
             end
