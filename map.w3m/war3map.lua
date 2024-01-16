@@ -1483,7 +1483,7 @@ do
     local sharedItems = false -- (false) can only fuse material owned by neutral passive (default) or oneself. The code handling that is in TasItemFusion.
     local canProviderGetItem = true -- (true) when the mainShopper's inventory is full, try to give the other matieral provider the item
     local canUndo = true -- (true) There is an Undo Button which allows to Revert BuyActions done in this shopping. A shopping ends when the UI is closed, changing current shop counts as closed.
-    local canDefuse = true -- (true) There is a Defuse Button which allows to defuse FusionItems hold.
+    local canDefuse = false -- (true) There is a Defuse Button which allows to defuse FusionItems hold.
     local DefuseButtonIcon = "ReplaceableTextures\\CommandButtons\\BTNdemolish"
     local DefuseButtonIconDisabled = getDisabledIcon(DefuseButtonIcon)
     local canSellItems = true -- (true)
@@ -1518,11 +1518,11 @@ do
     local quickLinkKey = OSKEY_LSHIFT  -- nil will prevent the user from changing shortcuts. can also be commented out
     -- how many refButtons, refButtons have pages, if needed.
     -- A feature is disabled with a counter smaller than 1.
-    local refButtonCountMats = 4 -- materialRefs.
-    local refButtonCountUp = 4 -- possible upgrades of the current Selected
+    local refButtonCountMats = 0 -- materialRefs.
+    local refButtonCountUp = 0 -- possible upgrades of the current Selected
     local refButtonCountInv = 6 -- inventory items, this system allows an unitgroup to provide items, if you don't use that feature only upto 6 makes sense.
     local refButtonCountUser = 6 -- References to the shopping Units/material provider.
-    local refButtonCountQuickLink = 4 -- User SelectAble Shortcuts
+    local refButtonCountQuickLink = 0 -- User SelectAble Shortcuts
     local refButtonSize = 0.02
     local refButtonGap = 0.003
     local refButtonPageSize = 0.012
