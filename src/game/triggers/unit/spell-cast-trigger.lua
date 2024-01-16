@@ -89,7 +89,17 @@ custom_cast_ai_params = {
         unitId = 'edtm',
         order = 'unravenform',
         radius = 500,
-        timeout = 7.00,
+        timeout = 2.00,
+        orderTarget = 'itself',
+        condition = {
+            target = 'itself'
+        }
+    },
+    {
+        unitId = 'ucrm',
+        order = 'unburrow',
+        radius = 500,
+        timeout = 5.00,
         orderTarget = 'itself',
         condition = {
             target = 'itself'

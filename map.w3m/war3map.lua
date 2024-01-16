@@ -6209,7 +6209,7 @@ function initGlobalVariables()
 
         { id = 'h014', parentId = 'u001', tier = 1, race = 'undead', line = 3, position = 1, food = 2, name = 'Ghoul', upgrades = { 'Rugf' } },
         { id = 'h010', parentId = 'u004', tier = 1, race = 'undead', line = 3, position = 2, food = 3, name = 'Crypt Fiend', upgrades = { 'Ruwb', 'Rubu' }, abilities = { { id = 'Aweb' }, { id = 'Abur' } } },
-        { id = 'h00Z', parentId = 'u006', tier = 1, race = 'undead', line = 3, position = 3, food = 2, name = 'Banshee', upgrades = { 'Ruba' }, abilities = { { id = 'Aams' }, { id = 'Acrs' } } },
+        { id = 'h00Z', parentId = 'u006', tier = 1, race = 'undead', line = 3, position = 3, food = 2, name = 'Banshee', upgrades = { 'Ruba' }, abilities = { { id = 'Aams' }, { id = 'Acrs' }, { id = 'Aps2' } } },
         { id = 'h017', parentId = 'u008', tier = 2, race = 'undead', line = 3, position = 4, food = 3, name = 'Obsidian Statue', upgrades = {}, abilities = { { id = 'Arpl' }, { id = 'Arpm' } } },
         { id = 'h013', parentId = 'u005', tier = 2, race = 'undead', line = 3, position = 5, food = 2, name = 'Gargoyle', upgrades = { 'Rusf' }, abilities = { { id = 'Astn' }, { id = 'Aatp' } } },
         { id = 'h016', parentId = 'u007', tier = 2, race = 'undead', line = 3, position = 6, food = 2, name = 'Necromancer', upgrades = { 'Rusl', 'Rune', 'Rusm' }, abilities = { { id = 'Acri' }, { id = 'Arai' }, { id = 'Auhf' } } },
@@ -7868,7 +7868,17 @@ custom_cast_ai_params = {
         unitId = 'edtm',
         order = 'unravenform',
         radius = 500,
-        timeout = 7.00,
+        timeout = 2.00,
+        orderTarget = 'itself',
+        condition = {
+            target = 'itself'
+        }
+    },
+    {
+        unitId = 'ucrm',
+        order = 'unburrow',
+        radius = 500,
+        timeout = 5.00,
         orderTarget = 'itself',
         condition = {
             target = 'itself'
