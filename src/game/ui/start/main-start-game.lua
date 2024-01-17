@@ -1,12 +1,4 @@
 Debug.beginFile('main-start-game.lua')
-function initialUI()
-    local fm = BlzGetFrameByName("ConsoleUIBackdrop", 0)
-    frame = BlzCreateFrameByType("TEXT", "MyTextFrame", fm, "", 0)
-    BlzFrameSetAbsPoint(frame, FRAMEPOINT_CENTER, 0.85, 0.5)
-    BlzFrameSetEnable(frame, false)
-    BlzFrameSetScale(frame, 1)
-end
-
 function startGameUI()
     ui_params = {
         lengthString = 0.2,
@@ -34,10 +26,12 @@ function startGameUI()
     local preConfigGameModes = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "QuestButtonBackdropTemplate", 0)
     BlzFrameSetAbsPoint(preConfigGameModes, FRAMEPOINT_CENTER, 0.4, 0.45)
     BlzFrameSetSize(preConfigGameModes, ui_params.width, 0.08)
+    BlzFrameSetEnable(preConfigGameModes, GetLocalPlayer() == getMainPlayer())
 
     local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", preConfigGameModes, "EscMenuTitleTextTemplate", 0)
     BlzFrameSetText(frameText, "Pre-configured game modes")
     BlzFrameSetPoint(frameText, FRAMEPOINT_TOP, preConfigGameModes, FRAMEPOINT_TOP, 0, -ui_params.indent)
+    BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
 
     local allPages = {}
     buttonGeneral, pageGeneral = createPageGeneral(preConfigGameModes, allPages)
@@ -72,25 +66,26 @@ function startGameUI()
     BlzFrameSetLevel(startGameButton, 99)
     BlzFrameSetText(startGameButton, 'START')
     BlzFrameSetPoint(startGameButton, FRAMEPOINT_BOTTOMRIGHT, pageGeneral, FRAMEPOINT_BOTTOMRIGHT, -ui_params.indent, ui_params.indent)
+    BlzFrameSetEnable(startGameButton, GetLocalPlayer() == getMainPlayer())
+    BlzFrameSetEnable(startGameButton, GetLocalPlayer() == getMainPlayer())
     local trig1 = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig1, startGameButton, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig1, function()
-        if GetTriggerPlayer() == getMainPlayer() then
-            BlzFrameSetVisible(preConfigGameModes, FALSE)
-            startGame()
-        end
+        BlzFrameSetVisible(preConfigGameModes, FALSE)
+        startGame()
     end)
 
     local selectingText = BlzCreateFrame("GreenText", preConfigGameModes, 0, 0)
     BlzFrameSetParent(selectingText, preConfigGameModes)
     BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
-    BlzFrameSetPoint(selectingText, FRAMEPOINT_TOP, generalConfig, FRAMEPOINT_BOTTOM, 0, 0)
+    BlzFrameSetPoint(selectingText, FRAMEPOINT_BOTTOM, preConfigGameModes, FRAMEPOINT_TOP, 0, 0)
 end
 
 function buttonWithAction(text, parentFrame, action)
     local button = BlzCreateFrame('Button', parentFrame, 0, 0)
     BlzFrameSetLevel(button, 99)
     BlzFrameSetText(button, text)
+    BlzFrameSetEnable(button, GetLocalPlayer() == getMainPlayer())
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, action)
@@ -101,10 +96,12 @@ function configPage(text, parent, allPages)
     local configButton = BlzCreateFrame('ConfigPageButton', parent, 0, 0)
     BlzFrameSetLevel(configButton, 99)
     BlzFrameSetText(configButton, text)
+    BlzFrameSetEnable(configButton, GetLocalPlayer() == getMainPlayer())
 
     local pageFrame = BlzCreateFrameByType('BACKDROP', 'GeneralConfig', parent, "QuestButtonBackdropTemplate", 0)
     BlzFrameSetPoint(pageFrame, FRAMEPOINT_TOP, parent, FRAMEPOINT_BOTTOM, 0, 0)
     BlzFrameSetSize(pageFrame, ui_params.width, 0.35)
+    BlzFrameSetEnable(pageFrame, GetLocalPlayer() == getMainPlayer())
     table.insert(allPages, pageFrame)
 
     local trig = CreateTrigger()

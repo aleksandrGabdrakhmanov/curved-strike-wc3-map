@@ -4,10 +4,12 @@ function checkBox(text, parentFrame, checkedFunc, uncheckedFunc)
     local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", parentFrame, "EscMenuSaveDialogTextTemplate", 0)
     BlzFrameSetText(frameText, text)
     BlzFrameSetSize(frameText, ui_params.lengthString, ui_params.widthString)
+    BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
 
     local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentFrame, 0, 0)
     BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
     BlzFrameSetScale(frameCheckBox, 1.5)
+    BlzFrameSetEnable(frameCheckBox, GetLocalPlayer() == getMainPlayer())
 
     local trigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)
