@@ -1,5 +1,39 @@
 Debug.beginFile('shop-config.lua')
 function configShop()
-    BUY_ABLE_ITEMS = {'bgst'}
+    BUY_ABLE_ITEMS = {
+        'afac',
+        'spsh',
+        'ajen',
+        'bgst',
+        'belv',
+        'cnob',
+        'ratc',
+        'clfm',
+        'gcel',
+        'hval',
+        'hcun',
+        'rhth',
+        'kpin',
+        'lgdh',
+        'mcou',
+        'odef',
+        'pmna',
+        'rde3',
+        'rlif',
+        'ciri',
+        'brac',
+        'sbch',
+        'rwiz',
+        'evtl',
+        'lhst',
+        'ward',
+        'desc',
+        'gemt',
+        'ocor',
+        'ofir',
+        'oli2',
+        'oslo',
+        'oven'
+    }
 end
 Debug.endFile()

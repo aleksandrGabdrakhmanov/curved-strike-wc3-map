@@ -1506,13 +1506,13 @@ do
         local catOrb = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNOrbOfDarkness", "Orb")
         local catAura = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNLionHorn", "Aura")
         local catActive = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNStaffOfSilence", "Active")
-        local catPower = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNControlMagic", "SpellPower")
-        local catCooldown = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNHumanMissileUpOne", "Cooldown")
+        --local catPower = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNControlMagic", "SpellPower")
+        --local catCooldown = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNHumanMissileUpOne", "Cooldown")
         local catAtkSpeed = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNHumanMissileUpOne", "Attackspeed")
         local catMress = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNRunedBracers", "Magic-Resistence")
-        local catConsum = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNPotionGreenSmall", "ConsumAble")
+        --local catConsum = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNPotionGreenSmall", "ConsumAble")
         local catMoveSpeed = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNBootsOfSpeed", "COLON_MOVE_SPEED")
-        local catCrit = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNCriticalStrike", "Crit")
+        --local catCrit = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNCriticalStrike", "Crit")
         local catLifeSteal = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNVampiricAura", "Lifesteal")
         local catEvade = TasItemShopAddCategory("ReplaceableTextures\\CommandButtons\\BTNEvasion", "Evasion")
 
@@ -1529,7 +1529,7 @@ do
         -- enable BlackListMode
         shopObject.Mode = false
         -- create an shopObject for 'ngme', has to pay 20more than normal, beaware that this can be overwritten by GUI Example
-        shopObject = TasItemShopCreateShop('ngme', false, 1.2, 1.2
+        shopObject = TasItemShopCreateShop('ngme', false, 1, 1
         -- custom gold Cost function
         ,function(itemCode, cost, client, shop) return cost end
         -- custom lumber Cost function
@@ -1543,79 +1543,44 @@ do
         -- Define skills/Buffs that change the costs in the shop
         -- cursed Units have to pay +25
         TasItemShopAddHaggleSkill(FourCC('Bcrs'), 1.25, 1.25)
-        
+
         -- define item Categories
         -- uses the locals from earlier.
         -- An item can have multiple categories just add them together like this: catStr + catAgi + catInt
 
-        TasItemSetCategory('rst1', catStr)
+        TasItemSetCategory('afac', catDmg + catAura)
+        TasItemSetCategory('spsh', catMress)
+        TasItemSetCategory('ajen', catAtkSpeed + catMoveSpeed + catAura)
         TasItemSetCategory('bgst', catStr)
-        TasItemSetCategory('rin1', catInt)
-        TasItemSetCategory('ciri', catInt)
-        TasItemSetCategory('rag1', catAgi)
         TasItemSetCategory('belv', catAgi)
-
-        TasItemSetCategory('I001', catStr + catAgi + catInt)
-
-        TasItemSetCategory('ckng', catStr + catAgi + catInt)
-        TasItemSetCategory('mcou', catStr + catInt)
+        TasItemSetCategory('cnob', catStr + catAgi + catInt)
+        TasItemSetCategory('ratc', catDmg)
+        TasItemSetCategory('clfm', catDmg + catActive)
+        TasItemSetCategory('gcel', catAtkSpeed)
         TasItemSetCategory('hval', catStr + catAgi)
         TasItemSetCategory('hcun', catAgi + catInt)
-        TasItemSetCategory('cnob', catStr + catAgi + catInt)
-
-        TasItemSetCategory('rat9', catDmg)
-        TasItemSetCategory('rat6', catDmg)
-        TasItemSetCategory('ratf', catDmg)
-
-        TasItemSetCategory('rlif', catLifeReg)
-
-        TasItemSetCategory('ajen', catAura + catAtkSpeed + catMoveSpeed)
-        TasItemSetCategory('clfm', catAura + catDmg)
-        TasItemSetCategory('ward', catAura + catDmg)
-        TasItemSetCategory('kpin', catAura + catManaReg)
-        TasItemSetCategory('lgdh', catAura + catMoveSpeed + catLifeReg)
-        TasItemSetCategory('rde4', catArmor)
-        TasItemSetCategory('pmna', catMana)
         TasItemSetCategory('rhth', catLife)
-        TasItemSetCategory('ssil', catActive)
-        TasItemSetCategory('lhst', catAura + catArmor)
-        TasItemSetCategory('afac', catAura + catDmg)
-        TasItemSetCategory('sbch', catAura + catDmg)
-        TasItemSetCategory('sbch', catAura + catLifeSteal)
-        TasItemSetCategory('brac', catMress)
-        TasItemSetCategory('spsh', catMress + catActive)
-        TasItemSetCategory('rwiz', catManaReg)
-        TasItemSetCategory('crys', catActive)
-        TasItemSetCategory('evtl', catEvade)
-        TasItemSetCategory('penr', catMana)
-        TasItemSetCategory('prvt', catLife)
+        TasItemSetCategory('kpin', catManaReg + catAura)
+        TasItemSetCategory('lgdh', catLifeReg + catMoveSpeed + catAura)
+        TasItemSetCategory('mcou', catStr + catInt)
+        TasItemSetCategory('odef', catDmg + catOrb)
+        TasItemSetCategory('pmna', catMana)
         TasItemSetCategory('rde3', catArmor)
-        TasItemSetCategory('bspd', catMoveSpeed)
-        TasItemSetCategory('gcel', catAtkSpeed)
-        TasItemSetCategory('rde2', catArmor)
-        TasItemSetCategory('clsd', catActive)
-        TasItemSetCategory('dsum', catActive + catMoveSpeed)
-        TasItemSetCategory('stel', catActive + catMoveSpeed)
-        TasItemSetCategory('desc', catActive + catMoveSpeed)
-        TasItemSetCategory('ofro', catDmg + catOrb)
-        TasItemSetCategory('modt', catLifeSteal + catOrb)
-        TasItemSetCategory('thdm', catActive)
-        TasItemSetCategory('hlst', catActive + catConsum + catLifeReg)
-        TasItemSetCategory('mnst', catActive + catConsum + catManaReg)
-        TasItemSetCategory('pghe', catActive + catConsum)
-        TasItemSetCategory('pgma', catActive + catConsum)
-        TasItemSetCategory('pnvu', catActive + catConsum)
-        TasItemSetCategory('pres', catActive + catConsum)
-        TasItemSetCategory('ankh', catConsum)
-        TasItemSetCategory('stwp', catActive + catConsum + catMoveSpeed)
-        TasItemSetCategory('shas', catActive + catConsum + catMoveSpeed)
-        TasItemSetCategory('ofir', catOrb + catDmg)
-        TasItemSetCategory('oli2', catOrb + catDmg)
-        TasItemSetCategory('odef', catOrb + catDmg)
-        TasItemSetCategory('oven', catOrb + catDmg)
-        TasItemSetCategory('oslo', catOrb + catDmg)
-        TasItemSetCategory('ocor', catOrb + catDmg)
-        TasItemSetCategory('shtm', catActive)
+        TasItemSetCategory('rlif', catLifeReg)
+        TasItemSetCategory('ciri', catInt)
+        TasItemSetCategory('brac', catMress)
+        TasItemSetCategory('sbch', catLifeSteal + catAura)
+        TasItemSetCategory('rwiz', catManaReg)
+        TasItemSetCategory('evtl', catEvade)
+        TasItemSetCategory('lhst', catArmor + catAura)
+        TasItemSetCategory('ward', catDmg + catAura)
+        TasItemSetCategory('desc', catActive)
+        TasItemSetCategory('gemt', catActive)
+        TasItemSetCategory('ocor', catDmg + catOrb)
+        TasItemSetCategory('ofir', catDmg + catOrb)
+        TasItemSetCategory('oli2', catDmg + catOrb)
+        TasItemSetCategory('oslo', catDmg + catOrb)
+        TasItemSetCategory('oven', catDmg + catOrb)
     end
     local function GetParent()
         local parent
@@ -6707,7 +6672,41 @@ Debug.endFile()
 
 Debug.beginFile('shop-config.lua')
 function configShop()
-    BUY_ABLE_ITEMS = {'bgst'}
+    BUY_ABLE_ITEMS = {
+        'afac',
+        'spsh',
+        'ajen',
+        'bgst',
+        'belv',
+        'cnob',
+        'ratc',
+        'clfm',
+        'gcel',
+        'hval',
+        'hcun',
+        'rhth',
+        'kpin',
+        'lgdh',
+        'mcou',
+        'odef',
+        'pmna',
+        'rde3',
+        'rlif',
+        'ciri',
+        'brac',
+        'sbch',
+        'rwiz',
+        'evtl',
+        'lhst',
+        'ward',
+        'desc',
+        'gemt',
+        'ocor',
+        'ofir',
+        'oli2',
+        'oslo',
+        'oven'
+    }
 end
 Debug.endFile()
 Debug.beginFile('start-game.lua')

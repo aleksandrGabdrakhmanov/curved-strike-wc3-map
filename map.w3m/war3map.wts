@@ -2076,3 +2076,21 @@ STRING 389
 (New) (Buff)
 }
 
+STRING 390
+// Items: rde3 (Ring of Protection +5), Name (Name)
+{
+Ring of Protection +5
+}
+
+STRING 391
+// Items: rde3 (Ring of Protection +5), Description (Description)
+{
+Boosts armor by 5.
+}
+
+STRING 392
+// Items: rde3 (Ring of Protection +5), Tip (Tooltip - Basic)
+{
+Purchase Ring of Protection +5
+}
+
