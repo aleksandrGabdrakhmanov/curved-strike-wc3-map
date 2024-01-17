@@ -1,26 +1,3 @@
-udg_TasItemShopFusion = nil
-udg_TasItemShopShortCuts = nil
-udg_TasItemShopCreateShop = nil
-udg_TasItemShopCategory = nil
-udg_TasItemShopAdd = nil
-udg_TasItemShopHaggle = nil
-udg_TasItemShopCosts = nil
-udg_TasItemShop_Mats = __jarray(0)
-udg_TasItemShop_Item = 0
-udg_TasItemShop_Unit = 0
-udg_TasItemShop_WhiteList = false
-udg_TasItemShop_Category = 0
-udg_TasItemShop_Text = ""
-udg_TasItemShop_Icon = ""
-udg_TasItemShop_Gold = 0.0
-udg_TasItemShop_Lumber = 0.0
-udg_TasItemShop_Skill = 0
-udg_TasItemShop_Player = nil
-udg_TasItemShop_Buff = 0
-udg_TasItemShop_GoldAdd = 0.0
-udg_TasItemShop_LumberAdd = 0.0
-udg_MyItemShopCat = 0
-udg_MyItemShopCat2 = 0
 gg_rct_curved_team_1_attack_1_right = nil
 gg_rct_curved_1_1_build = nil
 gg_rct_curved_1_1_main = nil
@@ -109,26 +86,7 @@ gg_rct_curved_2_4_image = nil
 gg_rct_curved_2_5_image = nil
 gg_rct_curved_team_1_addGold = nil
 gg_rct_curved_team_2_addGold = nil
-gg_trg_ItemshopGUI_Init_Cats = nil
-gg_trg_ItemshopGUI_Init_Fusions = nil
-gg_trg_ItemshopGUI_Init_Items = nil
-gg_trg_ItemshopGUI_Init_Shop = nil
-gg_trg_ItemshopGUI_Init_Haggle_Skills = nil
-gg_trg_ItemshopGUI_Init = nil
-gg_trg_ItemshopGUI_Init_ShortCuts = nil
 function InitGlobals()
-local i = 0
-
-udg_TasItemShop_WhiteList = false
-udg_TasItemShop_Category = 0
-udg_TasItemShop_Text = ""
-udg_TasItemShop_Icon = ""
-udg_TasItemShop_Gold = 1.00
-udg_TasItemShop_Lumber = 1.00
-udg_TasItemShop_GoldAdd = 0.0
-udg_TasItemShop_LumberAdd = 0.0
-udg_MyItemShopCat = 0
-udg_MyItemShopCat2 = 0
 end
 
 -- After Loading string.pack & string.unpack stop working. Hence one nils them for the save.
@@ -1324,60 +1282,6 @@ end
 function CreateTasButtonListV3(rowCount, parent, buttonAction, updateAction, searchAction, filterAction)
     return CreateTasButtonListEx("TasButtonGrid", 3, rowCount, parent, buttonAction, nil, updateAction, searchAction, filterAction)
 end
-do
-    local real = InitBlizzard
-    function InitBlizzard()
-        real()
-        udg_TasItemShopFusion = CreateTrigger()
-        udg_TasItemShopAdd = CreateTrigger()
-        udg_TasItemShopCategory = CreateTrigger()
-        udg_TasItemShopCreateShop = CreateTrigger()
-        udg_TasItemShopHaggle = CreateTrigger()
-        udg_TasItemShopCosts = CreateTrigger()
-        udg_TasItemShopShortCuts = CreateTrigger()
-        TriggerAddAction(udg_TasItemShopFusion, function()
-            TasItemFusionAdd(udg_TasItemShop_Item, table.unpack(udg_TasItemShop_Mats))
-            udg_TasItemShop_Mats = {}
-        end)
-        TriggerAddAction(udg_TasItemShopAdd, function()
-            TasItemShopAdd(udg_TasItemShop_Item, udg_TasItemShop_Category)
-        end)
-        TriggerAddAction(udg_TasItemShopCategory, function()
-            udg_TasItemShop_Category = TasItemShopAddCategory(udg_TasItemShop_Icon, udg_TasItemShop_Text)
-        end)
-        TriggerAddAction(udg_TasItemShopCreateShop, function()
-            TasItemShopCreateShop(udg_TasItemShop_Unit, udg_TasItemShop_WhiteList, udg_TasItemShop_Gold, udg_TasItemShop_Lumber, nil, nil)
-            TasItemShopAddShop(udg_TasItemShop_Unit, table.unpack(udg_TasItemShop_Mats))
-            udg_TasItemShop_Mats = {}
-        end)
-        TriggerAddAction(udg_TasItemShopHaggle, function()
-            local skill = udg_TasItemShop_Skill
-            if skill == 0 then skill = udg_TasItemShop_Buff end
-            TasItemShopAddHaggleSkill(skill, udg_TasItemShop_Gold, udg_TasItemShop_Lumber, udg_TasItemShop_GoldAdd, udg_TasItemShop_LumberAdd)
-            
-            udg_TasItemShop_Buff = 0
-            udg_TasItemShop_Skill = 0
-        end)
-        TriggerAddAction(udg_TasItemShopCosts, function()
-            TasItemShopGoldFactor(udg_TasItemShop_Unit, udg_TasItemShop_Gold, udg_TasItemShop_Item)
-            TasItemShopLumberFactor(udg_TasItemShop_Unit, udg_TasItemShop_Lumber, udg_TasItemShop_Item)   
-        end)
-        TriggerAddAction(udg_TasItemShopShortCuts, function()
-            if not bj_gameStarted then
-                BJDebugMsg("TasItemShopShortCuts was executed to early, Use 0.01s or later")
-                BJDebugMsg(GetPlayerName(udg_TasItemShop_Player))
-                BJDebugMsg(GetObjectName(udg_TasItemShop_Mats[1]))
-            else
-                TasItemShopUI.ClearQuickLink(udg_TasItemShop_Player)
-                for i, v in ipairs(udg_TasItemShop_Mats) do
-                    TasItemShopUI.SetQuickLink(udg_TasItemShop_Player, v)
-                end
-                udg_TasItemShop_Mats = {}
-            end
-            
-        end)
-    end
-end
 --[[ TasItemShopV4g by Tasyen
 TasItemSetCategory(itemCode, category)
 TasItemShopAdd(itemCode, category)
@@ -1427,11 +1331,6 @@ do
     -- A list of items buyable, you could just smack in all your buyAble TasItems here.
     -- Or use TasItemShopAdd(itemCode, category) inside local function UserInit()
     -- This List is used by shops without custom data or by BlackList Shops
-    local BUY_ABLE_ITEMS = {'bgst', 'ciri', 'belv', 'hval', 'hcun', 'mcou', 'ckng', 'rat9', 'ratf', 'rst1', 'rin1', 'rag1', 'cnob', 'rat6', 'rlif'
-    ,'ajen', 'clfm', 'ward', 'kpin', 'lgdh', 'rde4', 'pmna', 'rhth', 'ssil', 'spsh', 'lhst', 'afac', 'sbch', 'brac', 'rwiz', 'crys', 'evtl', 'penr'
-    ,'prvt', 'rde3', 'bspd', 'gcel', 'rde2', 'clsd', 'dsum', 'stel', 'desc', 'modt', 'ofro', 'thdm', 'hlst', 'mnst', 'pghe', 'pgma', 'pnvu', 'pres'
-    ,'ankh', 'shas', 'stwp', 'ofir', 'oli2', 'odef', 'oven', 'oslo', 'ocor', 'shtm', 'I001', 'klmm', 'crdt'
-    }
 
     local Haggle_Skills = {
         -- skill, GoldBase, Lumberbase, GoldAdd, LumberAdd
@@ -1644,33 +1543,7 @@ do
         -- Define skills/Buffs that change the costs in the shop
         -- cursed Units have to pay +25
         TasItemShopAddHaggleSkill(FourCC('Bcrs'), 1.25, 1.25)
-
-        -- define Fusions
-        -- result created by 'xxx', 'xx' , 'x'...
-        -- item can only be crafted by one way
-        -- can add any amount of material in the Lua version
-        TasItemFusionAdd('bgst', 'rst1', 'rst1')
-        TasItemFusionAdd('ciri', 'rin1', 'rin1')
-        TasItemFusionAdd('belv', 'rag1', 'rag1')
-        TasItemFusionAdd('hval', 'rag1', 'rst1')
-        TasItemFusionAdd('hcun', 'rag1', 'rin1')
-        TasItemFusionAdd('mcou', 'rst1', 'rin1')
-        TasItemFusionAdd('ckng', 'cnob', 'cnob')
-        TasItemFusionAdd('rat9', 'rat6', 'rat6')
-        TasItemFusionAdd('ratf', 'rat9', 'rat9')
-        TasItemFusionAdd('rde4', 'rde3')
-        TasItemFusionAdd('rde3', 'rde2')
-        TasItemFusionAdd('rhth', 'prvt')
-        TasItemFusionAdd('pmna', 'penr')
-        TasItemFusionAdd('arsh', 'rde3', 'rde2')
-
-        TasItemFusionAdd('lhst', 'sfog')
-
-        -- crown of Kings + 50
-        TasItemFusionAdd('I001', 'ckng', 'ckng', 'ckng', 'ckng', 'ckng', 'ckng', 'bgst', 'bgst', 'ciri', 'ciri', 'belv', 'belv', 'cnob', 'cnob')
-        -- crown of Kings + 100, this is a joke you can not craft it because it was not added to buyAble Items
-        TasItemFusionAdd('I002', 'I001', 'I001')
-
+        
         -- define item Categories
         -- uses the locals from earlier.
         -- An item can have multiple categories just add them together like this: catStr + catAgi + catInt
@@ -6828,9 +6701,15 @@ Debug.beginFile('main.lua')
 OnInit(function()
     initGlobalVariables()
     startGameUI()
+    configShop()
 end)
 Debug.endFile()
 
+Debug.beginFile('shop-config.lua')
+function configShop()
+    BUY_ABLE_ITEMS = {'bgst'}
+end
+Debug.endFile()
 Debug.beginFile('start-game.lua')
 function startGame()
     initMain()
@@ -8750,143 +8629,6 @@ Debug.endFile()
 
 
 --CUSTOM_CODE
-function Trig_ItemshopGUI_Init_Cats_Actions()
-udg_TasItemShop_Text = "GUI"
-udg_TasItemShop_Icon = "ReplaceableTextures\\CommandButtons\\BTNDranaiAkama.blp"
-TriggerExecute(udg_TasItemShopCategory)
-udg_MyItemShopCat = udg_TasItemShop_Category
-udg_TasItemShop_Text = "GUI2"
-udg_TasItemShop_Icon = "ReplaceableTextures\\CommandButtons\\BTNAcolyte.blp"
-TriggerExecute(udg_TasItemShopCategory)
-udg_MyItemShopCat2 = udg_TasItemShop_Category
-end
-
-function InitTrig_ItemshopGUI_Init_Cats()
-gg_trg_ItemshopGUI_Init_Cats = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Cats, Trig_ItemshopGUI_Init_Cats_Actions)
-end
-
-function Trig_ItemshopGUI_Init_Fusions_Actions()
-udg_TasItemShop_Item = FourCC("frgd")
-udg_TasItemShop_Mats[1] = FourCC("ofro")
-udg_TasItemShop_Mats[2] = FourCC("ratf")
-TriggerExecute(udg_TasItemShopFusion)
-udg_TasItemShop_Item = FourCC("srbd")
-udg_TasItemShop_Mats[1] = FourCC("ofir")
-udg_TasItemShop_Mats[2] = FourCC("ratf")
-TriggerExecute(udg_TasItemShopFusion)
-end
-
-function InitTrig_ItemshopGUI_Init_Fusions()
-gg_trg_ItemshopGUI_Init_Fusions = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Fusions, Trig_ItemshopGUI_Init_Fusions_Actions)
-end
-
-function Trig_ItemshopGUI_Init_Items_Actions()
-udg_TasItemShop_Item = FourCC("srbd")
-udg_TasItemShop_Category = udg_MyItemShopCat
-TriggerExecute(udg_TasItemShopAdd)
-udg_TasItemShop_Item = FourCC("frgd")
-udg_TasItemShop_Category = (udg_MyItemShopCat + udg_MyItemShopCat2)
-TriggerExecute(udg_TasItemShopAdd)
-end
-
-function InitTrig_ItemshopGUI_Init_Items()
-gg_trg_ItemshopGUI_Init_Items = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Items, Trig_ItemshopGUI_Init_Items_Actions)
-end
-
-function Trig_ItemshopGUI_Init_Shop_Actions()
-udg_TasItemShop_Unit = FourCC("ngme")
-udg_TasItemShop_Gold = 1.20
-udg_TasItemShop_Lumber = 1.20
-udg_TasItemShop_WhiteList = false
-udg_TasItemShop_Mats[1] = FourCC("desc")
-udg_TasItemShop_Mats[2] = FourCC("ckng")
-TriggerExecute(udg_TasItemShopCreateShop)
-end
-
-function InitTrig_ItemshopGUI_Init_Shop()
-gg_trg_ItemshopGUI_Init_Shop = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Shop, Trig_ItemshopGUI_Init_Shop_Actions)
-end
-
-function Trig_ItemshopGUI_Init_Haggle_Skills_Actions()
-udg_TasItemShop_Skill = FourCC("A000")
-udg_TasItemShop_Gold = 0.80
-udg_TasItemShop_Lumber = 0.80
-udg_TasItemShop_LumberAdd = 0.00
-udg_TasItemShop_GoldAdd = 0.00
-TriggerExecute(udg_TasItemShopHaggle)
-udg_TasItemShop_Buff = FourCC("BOhx")
-udg_TasItemShop_Gold = 3.00
-udg_TasItemShop_Lumber = 3.00
-TriggerExecute(udg_TasItemShopHaggle)
-end
-
-function InitTrig_ItemshopGUI_Init_Haggle_Skills()
-gg_trg_ItemshopGUI_Init_Haggle_Skills = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init_Haggle_Skills, Trig_ItemshopGUI_Init_Haggle_Skills_Actions)
-end
-
-function Trig_ItemshopGUI_Init_Actions()
-TriggerExecute(gg_trg_ItemshopGUI_Init_Cats)
-TriggerExecute(gg_trg_ItemshopGUI_Init_Fusions)
-TriggerExecute(gg_trg_ItemshopGUI_Init_Haggle_Skills)
-TriggerExecute(gg_trg_ItemshopGUI_Init_Items)
-TriggerExecute(gg_trg_ItemshopGUI_Init_Shop)
-end
-
-function InitTrig_ItemshopGUI_Init()
-gg_trg_ItemshopGUI_Init = CreateTrigger()
-TriggerAddAction(gg_trg_ItemshopGUI_Init, Trig_ItemshopGUI_Init_Actions)
-end
-
-function Trig_ItemshopGUI_Init_ShortCuts_Func002Func003C()
-if (not (GetPlayerRace(GetEnumPlayer()) == RACE_HUMAN)) then
-return false
-end
-return true
-end
-
-function Trig_ItemshopGUI_Init_ShortCuts_Func002A()
-udg_TasItemShop_Player = GetEnumPlayer()
-if (Trig_ItemshopGUI_Init_ShortCuts_Func002Func003C()) then
-udg_TasItemShop_Mats[1] = FourCC("bgst")
-udg_TasItemShop_Mats[2] = FourCC("ckng")
-udg_TasItemShop_Mats[3] = FourCC("ratf")
-else
-udg_TasItemShop_Mats[1] = FourCC("mcou")
-udg_TasItemShop_Mats[2] = FourCC("rde2")
-udg_TasItemShop_Mats[3] = FourCC("rwiz")
-end
-TriggerExecute(udg_TasItemShopShortCuts)
-end
-
-function Trig_ItemshopGUI_Init_ShortCuts_Actions()
-ForForce(GetPlayersAll(), Trig_ItemshopGUI_Init_ShortCuts_Func002A)
-end
-
-function InitTrig_ItemshopGUI_Init_ShortCuts()
-gg_trg_ItemshopGUI_Init_ShortCuts = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_ItemshopGUI_Init_ShortCuts, 1.00)
-TriggerAddAction(gg_trg_ItemshopGUI_Init_ShortCuts, Trig_ItemshopGUI_Init_ShortCuts_Actions)
-end
-
-function InitCustomTriggers()
-InitTrig_ItemshopGUI_Init_Cats()
-InitTrig_ItemshopGUI_Init_Fusions()
-InitTrig_ItemshopGUI_Init_Items()
-InitTrig_ItemshopGUI_Init_Shop()
-InitTrig_ItemshopGUI_Init_Haggle_Skills()
-InitTrig_ItemshopGUI_Init()
-InitTrig_ItemshopGUI_Init_ShortCuts()
-end
-
-function RunInitializationTriggers()
-ConditionalTriggerExecute(gg_trg_ItemshopGUI_Init)
-end
-
 function InitCustomPlayerSlots()
 SetPlayerStartLocation(Player(0), 0)
 ForcePlayerStartLocation(Player(0), 0)
@@ -9296,8 +9038,6 @@ SetMapMusic("Music", true, 0)
 CreateRegions()
 InitBlizzard()
 InitGlobals()
-InitCustomTriggers()
-RunInitializationTriggers()
 end
 
 function config()
