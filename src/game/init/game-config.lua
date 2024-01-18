@@ -16,7 +16,9 @@ function initGameConfig()
             isUnitsMirror = ui_config.isUnitsMirror,
             isHeroesMirror = ui_config.isHeroesMirror,
             maxHeroes = ui_config.maxHeroes,
-            itemCapacity = ui_config.itemCapacity
+            itemCapacity = ui_config.itemCapacity,
+            baseHP = ui_config.baseHP,
+            towerHP = ui_config.towerHP
         },
         spawnPolicy = {
             interval = ui_config.spawnInterval,

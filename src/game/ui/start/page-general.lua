@@ -12,6 +12,16 @@ function createPageGeneral(parentFrame, allPages)
     end)
     BlzFrameSetPoint(spawnDifSlider, FRAMEPOINT_TOPLEFT, spawnIntervalSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
 
+    local baseHPEditBox = createEditBox(pageGeneral, 'Base HP', 1, 999999, ui_config.baseHP, function(value)
+        ui_config.baseHP = value
+    end)
+    BlzFrameSetPoint(baseHPEditBox, FRAMEPOINT_TOPLEFT, spawnDifSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
+    local towerHPEditBox = createEditBox(pageGeneral, 'Tower HP', 1, 999999, ui_config.towerHP, function(value)
+        ui_config.towerHP = value
+    end)
+    BlzFrameSetPoint(towerHPEditBox, FRAMEPOINT_TOPLEFT, baseHPEditBox, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
+
     return buttonGeneral, pageGeneral
 end
 Debug.endFile()

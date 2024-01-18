@@ -20,7 +20,9 @@ function startGameUI()
         spawnInterval = 35,
         spawnDif = 0,
         lifetime = 2,
-        itemCapacity = 4
+        itemCapacity = 4,
+        baseHP = 4000,
+        towerHP = 1200
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 

@@ -21,7 +21,6 @@ function initGame()
     initAbilitiesPanel()
 end
 
-
 function createPictures()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
@@ -30,15 +29,15 @@ function createPictures()
                 for _, image in ipairs(player.imageRect) do
                     local name = GetPlayerName(player.id)
                     local image = CreateImageBJ("playerImg\\" .. name, 256, GetRectCenter(image), 0, 2)
-                    SetImageRenderAlways( image, true )
-                    ShowImageBJ( true, image )
+                    SetImageRenderAlways(image, true)
+                    ShowImageBJ(true, image)
                 end
 
             else
                 local name = GetPlayerName(player.id)
                 local image = CreateImageBJ("playerImg\\" .. name, 256, GetRectCenter(player.imageRect), 0, 2)
-                SetImageRenderAlways( image, true )
-                ShowImageBJ( true, image )
+                SetImageRenderAlways(image, true)
+                ShowImageBJ(true, image)
             end
         end
     end
@@ -148,37 +147,36 @@ function addPlayersInTeam(players)
     return initialPlayers
 end
 
-
 function getColorById(playerId)
     if (playerId == 0) then
-        return {r=255, g=2, b=2, t=255}
+        return { r = 255, g = 2, b = 2, t = 255 }
     end
     if (playerId == 1) then
-        return {r=0, g=65, b=255, t=255}
+        return { r = 0, g = 65, b = 255, t = 255 }
     end
     if (playerId == 2) then
-        return {r=27, g=229, b=184, t=255}
+        return { r = 27, g = 229, b = 184, t = 255 }
     end
     if (playerId == 3) then
-        return {r=83, g=0, b=128, t=255}
+        return { r = 83, g = 0, b = 128, t = 255 }
     end
     if (playerId == 4) then
-        return {r=255, g=255, b=0, t=255}
+        return { r = 255, g = 255, b = 0, t = 255 }
     end
     if (playerId == 5) then
-        return {r=254, g=137, b=13, t=255}
+        return { r = 254, g = 137, b = 13, t = 255 }
     end
     if (playerId == 6) then
-        return {r=31, g=191, b=0, t=255}
+        return { r = 31, g = 191, b = 0, t = 255 }
     end
     if (playerId == 7) then
-        return {r=228, g=90, b=170, t=255}
+        return { r = 228, g = 90, b = 170, t = 255 }
     end
     if (playerId == 8) then
-        return {r=148, g=149, b=150, t=255}
+        return { r = 148, g = 149, b = 150, t = 255 }
     end
     if (playerId == 9) then
-        return {r=125, g=190, b=241, t=255}
+        return { r = 125, g = 190, b = 241, t = 255 }
     end
 end
 
@@ -214,7 +212,6 @@ function getIntegerColorById(playerId)
         return BlzConvertColor(255, 125, 190, 241)
     end
 end
-
 
 function initRect()
     for _, team in ipairs(all_teams) do
@@ -258,34 +255,26 @@ end
 
 function createBaseAndTower()
     for _, team in ipairs(all_teams) do
-        if type(team.base.baseRect) == "table" then
-            for _, rect in ipairs(team.base.baseRect) do
-                CreateUnit(
-                        team.base.player,
-                        FourCC(units_special.base),
-                        GetRectCenterX(rect),
-                        GetRectCenterY(rect),
-                        0
-                )
-            end
-        else
-            CreateUnit(
-                    team.base.player,
-                    FourCC(units_special.base),
-                    GetRectCenterX(team.base.baseRect),
-                    GetRectCenterY(team.base.baseRect),
-                    0
-            )
-        end
+        local base = CreateUnit(
+                team.base.player,
+                FourCC(units_special.base),
+                GetRectCenterX(team.base.baseRect),
+                GetRectCenterY(team.base.baseRect),
+                0
+        )
+        BlzSetUnitMaxHP(base, game_config.units.baseHP)
+        SetUnitLifeBJ(base, game_config.units.baseHP)
 
         if team.base.towerRect ~= nil then
-            CreateUnit(
+            local tower = CreateUnit(
                     team.base.player,
                     FourCC(units_special.tower),
                     GetRectCenterX(team.base.towerRect),
                     GetRectCenterY(team.base.towerRect),
                     0
             )
+            BlzSetUnitMaxHP(tower, game_config.units.towerHP)
+            SetUnitLifeBJ(tower, game_config.units.towerHP)
         end
     end
 end
@@ -304,7 +293,6 @@ function createBuildingsForPlayers()
             local ability = BlzGetUnitAbility(unit, FourCC(abilities.mine))
             BlzSetAbilityIntegerLevelField(ability, ABILITY_ILF_GOLD_COST_NDT1, 0, game_config.economy.firstMinePrice)
             BlzSetAbilityRealField(ability, ABILITY_RF_ARF_MISSILE_ARC, game_config.economy.incomeBoost)
-
 
             player.economy.mineTextTag = CreateTextTagUnitBJ(getMineTag(player), unit, 0, 10, 204, 204, 0, 0)
 
