@@ -24,5 +24,7 @@ function initTriggers()
     lifetimeLimitTrigger()
     debugTrigger()
     debugTriggerGold()
+    debugTriggerFinish()
+    debugTriggerFinish2()
 end
 Debug.endFile()

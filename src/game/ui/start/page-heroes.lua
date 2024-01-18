@@ -25,6 +25,12 @@ function createPageHeroes(parentFrame, allPages)
                 ui_config.maxHeroes = value
             end)
     BlzFrameSetPoint(sliderMaxHeroes, FRAMEPOINT_TOPLEFT, checkBoxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
+
+    local sliderItemCapacity = createSlider(pageHeroes, "Item capacity", 0, 6, ui_config.itemCapacity, 1,
+            function(value)
+                ui_config.itemCapacity = value
+            end)
+    BlzFrameSetPoint(sliderItemCapacity, FRAMEPOINT_TOPLEFT, sliderMaxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
     return buttonHeroes
 end
 Debug.endFile()

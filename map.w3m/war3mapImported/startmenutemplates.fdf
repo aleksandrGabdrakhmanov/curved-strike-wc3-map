@@ -104,4 +104,9 @@ Frame "GLUETEXTBUTTON" "StartGameButton" INHERITS WITHCHILDREN "ScriptDialogButt
             Text "MODE",
         }
 }
+Frame "TEXT" "HeaderTableText" INHERITS "EscMenuTitleTextTemplate" {
+        FontColor 0.0 1.0 13.0 1.0,
+        FrameFont "EscMenuTextFont", 0.015, "",
+        Text "are selecting",
+}
 

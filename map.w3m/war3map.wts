@@ -2094,3 +2094,75 @@ STRING 392
 Purchase Ring of Protection +5
 }
 
+STRING 393
+// Abilities: AInv (Inventory6), EditorSuffix (Editor Suffix)
+{
+ (Hero)(6)
+}
+
+STRING 394
+// Abilities: A00B (Inventory5), EditorSuffix (Editor Suffix)
+{
+ (Hero)(5)
+}
+
+STRING 395
+// Abilities: A00C (Inventory4), EditorSuffix (Editor Suffix)
+{
+ (Hero)(4)
+}
+
+STRING 396
+// Abilities: A00D (Inventory3), EditorSuffix (Editor Suffix)
+{
+ (Hero)(3)
+}
+
+STRING 397
+// Abilities: A00E (Inventory2), EditorSuffix (Editor Suffix)
+{
+ (Hero)(2)
+}
+
+STRING 398
+// Abilities: A00F (Inventory1), EditorSuffix (Editor Suffix)
+{
+ (Hero)(1)
+}
+
+STRING 399
+// Abilities: AInv (Inventory6), Name (Name)
+{
+Inventory6
+}
+
+STRING 400
+// Abilities: A00B (Inventory5), Name (Name)
+{
+Inventory5
+}
+
+STRING 401
+// Abilities: A00C (Inventory4), Name (Name)
+{
+Inventory4
+}
+
+STRING 402
+// Abilities: A00D (Inventory3), Name (Name)
+{
+Inventory3
+}
+
+STRING 403
+// Abilities: A00E (Inventory2), Name (Name)
+{
+Inventory2
+}
+
+STRING 404
+// Abilities: A00F (Inventory1), Name (Name)
+{
+Inventory1
+}
+

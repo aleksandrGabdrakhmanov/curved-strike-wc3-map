@@ -19,7 +19,8 @@ function startGameUI()
         goldByTower = 125,
         spawnInterval = 35,
         spawnDif = 0,
-        lifetime = 2
+        lifetime = 2,
+        itemCapacity = 4
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 

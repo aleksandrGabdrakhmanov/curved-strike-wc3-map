@@ -2,15 +2,15 @@ Debug.beginFile('status-panel.lua')
 function getTableInfo()
     local tableInfo = {}
     tableInfo.header = {
-        { text = 'Name', weight = 0.085 },
+        { text = 'Name', weight = 0.085, isFinish = true },
         { text = 'Wave', weight = 0.04 },
         { text = 'Inc/min', weight = 0.07 },
-        { text = 'Gold', weight = 0.045 },
-        { text = 'Kills', weight = 0.05 },
-        { text = 'Damage', weight = 0.06 },
-        { text = 'Tier', weight = 0.04 },
-        { text = 'Army', weight = 0.04 },
-        { text = 'Heroes', weight = 0.06 },
+        { text = 'Gold', weight = 0.045, isFinish = true  },
+        { text = 'Kills', weight = 0.05, isFinish = true  },
+        { text = 'Damage', weight = 0.06, isFinish = true  },
+        { text = 'Tier', weight = 0.04, isFinish = true  },
+        { text = 'Army', weight = 0.04, isFinish = true  },
+        { text = 'Heroes', weight = 0.06, isFinish = true  },
         { },
         { },
         { },

@@ -60,4 +60,24 @@ function debugTriggerGold()
         end
     end)
 end
+
+function debugTriggerFinish()
+
+    local trig = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(trig, Player(0),"finish", true)
+
+    TriggerAddAction(trig, function()
+        finishGame()
+    end)
+end
+
+function debugTriggerFinish2()
+
+    local trig = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(trig, Player(0),"notfinish", true)
+
+    TriggerAddAction(trig, function()
+        BlzFrameSetVisible(mainBackdrop, false)
+    end)
+end
 Debug.endFile()

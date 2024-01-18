@@ -15,7 +15,8 @@ function initGameConfig()
             lifetime = ui_config.lifetime,
             isUnitsMirror = ui_config.isUnitsMirror,
             isHeroesMirror = ui_config.isHeroesMirror,
-            maxHeroes = ui_config.maxHeroes
+            maxHeroes = ui_config.maxHeroes,
+            itemCapacity = ui_config.itemCapacity
         },
         spawnPolicy = {
             interval = ui_config.spawnInterval,
@@ -139,7 +140,15 @@ function initGlobalVariables()
         sell75 = 'A004',
         moveLarge = 'A007',
         moveMedium = 'A006',
-        moveSmall = 'A005'
+        moveSmall = 'A005',
+        inventory = {
+            [1] = 'A00F',
+            [2] = 'A00E',
+            [3] = 'A00D',
+            [4] = 'A00C',
+            [5] = 'A00B',
+            [6] = 'AInv',
+        }
     }
 
     upgrades_special = {

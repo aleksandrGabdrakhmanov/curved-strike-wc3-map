@@ -5964,7 +5964,8 @@ function initGameConfig()
             lifetime = ui_config.lifetime,
             isUnitsMirror = ui_config.isUnitsMirror,
             isHeroesMirror = ui_config.isHeroesMirror,
-            maxHeroes = ui_config.maxHeroes
+            maxHeroes = ui_config.maxHeroes,
+            itemCapacity = ui_config.itemCapacity
         },
         spawnPolicy = {
             interval = ui_config.spawnInterval,
@@ -6088,7 +6089,15 @@ function initGlobalVariables()
         sell75 = 'A004',
         moveLarge = 'A007',
         moveMedium = 'A006',
-        moveSmall = 'A005'
+        moveSmall = 'A005',
+        inventory = {
+            [1] = 'A00F',
+            [2] = 'A00E',
+            [3] = 'A00D',
+            [4] = 'A00C',
+            [5] = 'A00B',
+            [6] = 'AInv',
+        }
     }
 
     upgrades_special = {
@@ -6882,6 +6891,26 @@ function debugTriggerGold()
         end
     end)
 end
+
+function debugTriggerFinish()
+
+    local trig = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(trig, Player(0),"finish", true)
+
+    TriggerAddAction(trig, function()
+        finishGame()
+    end)
+end
+
+function debugTriggerFinish2()
+
+    local trig = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(trig, Player(0),"notfinish", true)
+
+    TriggerAddAction(trig, function()
+        BlzFrameSetVisible(mainBackdrop, false)
+    end)
+end
 Debug.endFile()
 Debug.beginFile('enable-update-trigger.lua')
 function enableUpdateTrigger()
@@ -6968,6 +6997,12 @@ function heroConstructTrigger()
                     KillUnit(GroupPickRandomUnit(group))
                     DestroyGroup(group)
                     local unitId = GetUnitTypeId(GetTriggerUnit())
+
+                    if game_config.units.itemCapacity == 0 then
+                        UnitRemoveAbility(GetTriggerUnit(), FourCC(abilities.inventory[6]))
+                    else
+                        UnitAddAbility(GetTriggerUnit(), FourCC(abilities.inventory[game_config.units.itemCapacity]))
+                    end
                     table.insert(player.heroes, {
                         status = "new",
                         building = GetTriggerUnit(),
@@ -7294,6 +7329,8 @@ function initTriggers()
     lifetimeLimitTrigger()
     debugTrigger()
     debugTriggerGold()
+    debugTriggerFinish()
+    debugTriggerFinish2()
 end
 Debug.endFile()
 Debug.beginFile('move-trigger.lua')
@@ -8008,6 +8045,63 @@ function initButtonForUnit(unit, containerFrame, player, position)
 end
 
 Debug.endFile()
+Debug.beginFile('finish-game.lua')
+function finishGame()
+    mainBackdrop = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonBackdropTemplate", 0)
+    BlzFrameSetAbsPoint(mainBackdrop, FRAMEPOINT_CENTER, 0.4, 0.35)
+    BlzFrameSetSize(mainBackdrop, 0.9, 0.38)
+    BlzFrameSetLevel(mainBackdrop, 99)
+
+    local tableInfo = getTableInfo()
+
+    local weightMultiplyForBigFont = 1.5
+    local heightFont = 0.02
+    local prevColumn
+    for i, headerColumn in ipairs(tableInfo.header) do
+        if headerColumn.text and headerColumn.isFinish then
+            local header = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
+            BlzFrameSetSize(header, headerColumn.weight * weightMultiplyForBigFont, heightFont)
+            BlzFrameSetText(header, headerColumn.text)
+            BlzFrameSetTextAlignment(header, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
+            if i == 1 then
+                BlzFrameSetSize(header, headerColumn.weight * weightMultiplyForBigFont * 2, heightFont)
+                BlzFrameSetPoint(header, FRAMEPOINT_TOPLEFT, mainBackdrop, FRAMEPOINT_TOPLEFT, 0.01, -0.01)
+            else
+                BlzFrameSetPoint(header, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0, 0)
+            end
+            prevColumn = header
+        end
+    end
+
+    local firstColumn
+    for _, row in ipairs(tableInfo.body) do
+        local prevColumn
+        for j, element in ipairs(row) do
+            if element.text and tableInfo.header[j].isFinish then
+                local column = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
+                BlzFrameSetSize(column, tableInfo.header[j].weight * weightMultiplyForBigFont, heightFont)
+                BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
+                BlzFrameSetText(column, element.text)
+                if j == 1 then
+                    BlzFrameSetSize(column, tableInfo.header[j].weight * weightMultiplyForBigFont * 2, heightFont)
+
+                    if firstColumn == nil then
+                        BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, mainBackdrop, FRAMEPOINT_TOPLEFT, 0.01, -0.06)
+                    else
+                        BlzFrameSetPoint(column, FRAMEPOINT_TOP, firstColumn, FRAMEPOINT_BOTTOM, 0, 0)
+                    end
+                else
+                    BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0, 0)
+                end
+                prevColumn = column
+                if j == 1 then
+                    firstColumn = column
+                end
+            end
+        end
+    end
+end
+Debug.endFile()
 Debug.beginFile('element-check-box.lua')
 function checkBox(text, parentFrame, checkedFunc, uncheckedFunc)
 
@@ -8125,7 +8219,8 @@ function startGameUI()
         goldByTower = 125,
         spawnInterval = 35,
         spawnDif = 0,
-        lifetime = 2
+        lifetime = 2,
+        itemCapacity = 4
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
@@ -8374,6 +8469,12 @@ function createPageHeroes(parentFrame, allPages)
                 ui_config.maxHeroes = value
             end)
     BlzFrameSetPoint(sliderMaxHeroes, FRAMEPOINT_TOPLEFT, checkBoxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
+
+    local sliderItemCapacity = createSlider(pageHeroes, "Item capacity", 0, 6, ui_config.itemCapacity, 1,
+            function(value)
+                ui_config.itemCapacity = value
+            end)
+    BlzFrameSetPoint(sliderItemCapacity, FRAMEPOINT_TOPLEFT, sliderMaxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
     return buttonHeroes
 end
 Debug.endFile()
@@ -8411,15 +8512,15 @@ Debug.beginFile('status-panel.lua')
 function getTableInfo()
     local tableInfo = {}
     tableInfo.header = {
-        { text = 'Name', weight = 0.085 },
+        { text = 'Name', weight = 0.085, isFinish = true },
         { text = 'Wave', weight = 0.04 },
         { text = 'Inc/min', weight = 0.07 },
-        { text = 'Gold', weight = 0.045 },
-        { text = 'Kills', weight = 0.05 },
-        { text = 'Damage', weight = 0.06 },
-        { text = 'Tier', weight = 0.04 },
-        { text = 'Army', weight = 0.04 },
-        { text = 'Heroes', weight = 0.06 },
+        { text = 'Gold', weight = 0.045, isFinish = true  },
+        { text = 'Kills', weight = 0.05, isFinish = true  },
+        { text = 'Damage', weight = 0.06, isFinish = true  },
+        { text = 'Tier', weight = 0.04, isFinish = true  },
+        { text = 'Army', weight = 0.04, isFinish = true  },
+        { text = 'Heroes', weight = 0.06, isFinish = true  },
         { },
         { },
         { },

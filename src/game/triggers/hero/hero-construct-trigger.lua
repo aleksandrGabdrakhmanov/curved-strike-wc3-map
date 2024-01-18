@@ -10,6 +10,12 @@ function heroConstructTrigger()
                     KillUnit(GroupPickRandomUnit(group))
                     DestroyGroup(group)
                     local unitId = GetUnitTypeId(GetTriggerUnit())
+
+                    if game_config.units.itemCapacity == 0 then
+                        UnitRemoveAbility(GetTriggerUnit(), FourCC(abilities.inventory[6]))
+                    else
+                        UnitAddAbility(GetTriggerUnit(), FourCC(abilities.inventory[game_config.units.itemCapacity]))
+                    end
                     table.insert(player.heroes, {
                         status = "new",
                         building = GetTriggerUnit(),
