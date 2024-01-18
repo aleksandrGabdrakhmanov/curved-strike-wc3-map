@@ -9,22 +9,7 @@ function loseTrigger()
                 local trig = CreateTrigger()
                 TriggerRegisterUnitEvent(trig, unit, EVENT_UNIT_DEATH)
                 TriggerAddAction(trig, function()
-                    for _, player in ipairs(team.players) do
-                        local allUnits = GetUnitsOfPlayerAll(player.id)
-                        ForGroup(allUnits, function()
-                            KillUnit(GetEnumUnit())
-                        end)
-                        DestroyGroup(allUnits)
-
-                        local allUnitsSpawn = GetUnitsOfPlayerAll(player.spawnPlayerId)
-                        ForGroup(allUnitsSpawn, function()
-                            KillUnit(GetEnumUnit())
-                        end)
-                        DestroyGroup(allUnitsSpawn)
-                        DisplayTextToPlayer(player.id, 500, 500, "You lose")
-                        team.lose = true
-                        CreateFogModifierRectBJ( true, player.id, FOG_OF_WAR_VISIBLE, GetPlayableMapRect() )
-                    end
+                    finishGame(team)
                 end)
             end
         end)

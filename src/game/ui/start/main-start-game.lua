@@ -55,14 +55,6 @@ function startGameUI()
         end
     end
 
-    local startGameButton = buttonWithAction('START', preConfigGameModes, function()
-        if GetTriggerPlayer() == getMainPlayer() then
-            BlzFrameSetVisible(preConfigGameModes, FALSE)
-            startGame()
-        end
-    end)
-    BlzFrameSetPoint(startGameButton, FRAMEPOINT_BOTTOMRIGHT, pageGeneral, FRAMEPOINT_BOTTOMRIGHT, -ui_params.indent, ui_params.indent)
-
     local startGameButton = BlzCreateFrame('StartGameButton', preConfigGameModes, 0, 0)
     BlzFrameSetLevel(startGameButton, 99)
     BlzFrameSetText(startGameButton, 'START')

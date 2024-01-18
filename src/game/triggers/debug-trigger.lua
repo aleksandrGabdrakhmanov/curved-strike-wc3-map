@@ -67,7 +67,7 @@ function debugTriggerFinish()
     TriggerRegisterPlayerChatEvent(trig, Player(0),"finish", true)
 
     TriggerAddAction(trig, function()
-        finishGame()
+        finishGame(all_teams[1])
     end)
 end
 

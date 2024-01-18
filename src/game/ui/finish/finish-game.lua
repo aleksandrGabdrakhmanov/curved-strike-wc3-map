@@ -1,8 +1,7 @@
 Debug.beginFile('finish-game.lua')
-function finishGame()
+function finishGame(loseTeam)
     mainBackdrop = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonBackdropTemplate", 0)
     BlzFrameSetAbsPoint(mainBackdrop, FRAMEPOINT_CENTER, 0.4, 0.35)
-    BlzFrameSetSize(mainBackdrop, 0.9, 0.38)
     BlzFrameSetLevel(mainBackdrop, 99)
 
     local weightMultiplyForBigFont = 1.5
@@ -15,7 +14,10 @@ function finishGame()
 
     local firstColumn = fakeText
     local prevColumn = fakeText
+    local totalWidth
+    local totalRows = 4
     for teamNumber, team in ipairs(all_teams) do
+        totalWidth = 0
         local tableInfo = getTableInfo(teamNumber)
 
         local teamLabel = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
@@ -29,6 +31,7 @@ function finishGame()
             if headerColumn.text and headerColumn.isFinish then
                 local header = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
                 BlzFrameSetSize(header, headerColumn.weight * weightMultiplyForBigFont, heightFont)
+                totalWidth = totalWidth + (headerColumn.weight * weightMultiplyForBigFont)
                 BlzFrameSetText(header, headerColumn.text)
                 BlzFrameSetTextAlignment(header, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
                 if i == 1 then
@@ -43,9 +46,10 @@ function finishGame()
 
         for _, row in ipairs(tableInfo.body) do
             local prevColumn
+            totalRows = totalRows + 1
             for j, element in ipairs(row) do
                 if element.text and tableInfo.header[j].isFinish then
-                    local column = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
+                    local column = BlzCreateFrame("RowTableText", mainBackdrop, 0, 0)
                     BlzFrameSetSize(column, tableInfo.header[j].weight * weightMultiplyForBigFont, heightFont)
                     BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
                     BlzFrameSetTextColor(column, element.integerColor)
@@ -58,9 +62,52 @@ function finishGame()
                     end
                     prevColumn = column
                 end
+                if element.icon then
+                    local frame = BlzCreateFrameByType("BACKDROP", "Any", mainBackdrop, "", 0)
+                    BlzFrameSetSize(frame, heightFont, heightFont)
+                    BlzFrameSetTexture(frame, element.icon, 0, true)
+                    if j == 1 then
+                        BlzFrameSetPoint(frame, FRAMEPOINT_TOP, firstColumn, FRAMEPOINT_BOTTOM, 0, 0)
+                        firstColumn = column
+                    else
+                        BlzFrameSetPoint(frame, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0, 0)
+                    end
+                    prevColumn = frame
+                end
             end
         end
-
     end
+
+    local mainButton = BlzCreateFrame("ScriptDialogButton", mainBackdrop, 0, 0)
+    local buttonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
+    BlzFrameSetSize(mainButton, 0.15, 0.04)
+    BlzFrameSetPoint(mainButton, FRAMEPOINT_BOTTOMRIGHT, mainBackdrop, FRAMEPOINT_BOTTOMRIGHT, -0.01, 0.01)
+    BlzFrameSetText(buttonText, "Exit")
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, mainButton, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        CustomVictorySkipBJ(GetLocalPlayer())
+    end)
+
+    local victoryOrLosePict = BlzCreateFrameByType("BACKDROP", "Any", mainBackdrop, "", 0)
+    BlzFrameSetSize(victoryOrLosePict, 0.14, 0.14)
+
+    if isPlayerIsWinner(loseTeam) then
+        BlzFrameSetTexture(victoryOrLosePict, "war3mapImported\\victory1.blp", 0, true)
+    else
+        BlzFrameSetTexture(victoryOrLosePict, "war3mapImported\\defeat1.blp", 0, true)
+    end
+    BlzFrameSetPoint(victoryOrLosePict, FRAMEPOINT_BOTTOM, mainButton, FRAMEPOINT_TOP, 0, 0.02)
+    BlzFrameSetSize(mainBackdrop, totalWidth + 0.17, totalRows * 0.022)
+end
+
+function isPlayerIsWinner(loseTeam)
+    localPlayer = GetLocalPlayer()
+    for _, player in ipairs(loseTeam.players) do
+        if localPlayer == player.id then
+            return false
+        end
+    end
+    return true
 end
 Debug.endFile()
