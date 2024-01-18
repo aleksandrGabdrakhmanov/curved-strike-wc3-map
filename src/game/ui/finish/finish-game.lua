@@ -97,8 +97,14 @@ function finishGame(loseTeam)
     else
         BlzFrameSetTexture(victoryOrLosePict, "war3mapImported\\defeat1.blp", 0, true)
     end
+    local totalHeight = totalRows * 0.023
+
+    local realHeight = totalHeight
+    if totalHeight < 0.25 then
+        realHeight = 0.25
+    end
     BlzFrameSetPoint(victoryOrLosePict, FRAMEPOINT_BOTTOM, mainButton, FRAMEPOINT_TOP, 0, 0.02)
-    BlzFrameSetSize(mainBackdrop, totalWidth + 0.17, totalRows * 0.022)
+    BlzFrameSetSize(mainBackdrop, totalWidth + 0.17, realHeight)
 end
 
 function isPlayerIsWinner(loseTeam)
