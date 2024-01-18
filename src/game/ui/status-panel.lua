@@ -1,16 +1,16 @@
 Debug.beginFile('status-panel.lua')
-function getTableInfo()
+function getTableInfo(teamId)
     local tableInfo = {}
     tableInfo.header = {
         { text = 'Name', weight = 0.085, isFinish = true },
         { text = 'Wave', weight = 0.04 },
         { text = 'Inc/min', weight = 0.07 },
-        { text = 'Gold', weight = 0.045, isFinish = true  },
-        { text = 'Kills', weight = 0.05, isFinish = true  },
-        { text = 'Damage', weight = 0.06, isFinish = true  },
-        { text = 'Tier', weight = 0.04, isFinish = true  },
-        { text = 'Army', weight = 0.04, isFinish = true  },
-        { text = 'Heroes', weight = 0.06, isFinish = true  },
+        { text = 'Gold', weight = 0.045, isFinish = true },
+        { text = 'Kills', weight = 0.05, isFinish = true },
+        { text = 'Damage', weight = 0.06, isFinish = true },
+        { text = 'Tier', weight = 0.04, isFinish = true },
+        { text = 'Army', weight = 0.04, isFinish = true },
+        { text = 'Heroes', weight = 0.06, isFinish = true },
         { },
         { },
         { },
@@ -19,82 +19,105 @@ function getTableInfo()
         { },
     }
     tableInfo.body = {}
-    for _, team in ipairs(all_teams) do
+
+    local teams
+    if teamId then
+        teams = { all_teams[teamId] }
+    else
+        teams = all_teams
+    end
+
+    for _, team in ipairs(teams) do
         for _, player in ipairs(team.players) do
             table.insert(tableInfo.body, {
                 {
                     text = getClearName(player),
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = false
                 },
                 {
                     text = math.floor(player.spawnTimer),
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = false
                 },
                 {
                     text = getIncome(player),
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     text = player.economy.totalGold,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     text = player.totalKills,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = false
                 },
                 {
                     text = player.totalDamage,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = false
                 },
                 {
                     text = player.tier,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     text = player.food,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[1] and player.heroes[1].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[2] and player.heroes[2].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[3] and player.heroes[3].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[4] and player.heroes[4].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[5] and player.heroes[5].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[6] and player.heroes[6].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[7] and player.heroes[7].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 }
             })
@@ -125,8 +148,7 @@ function updatePanelForAllPlayers()
                 for col, cell in ipairs(bodyRow) do
 
                     MultiboardSetTitleText(player.multiboard,
-                            'Time: ' .. GetFormattedGameTime() ..'   Wave: ' .. player.spawnTimer .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills)
-
+                            'Time: ' .. GetFormattedGameTime() .. '   Wave: ' .. player.spawnTimer .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills)
 
                     local item = MultiboardGetItem(player.multiboard, row, col - 1)
                     if isPlayerInTeam(playerName, team.players) then
@@ -166,8 +188,8 @@ function updatePanelForAllPlayers()
                         MultiboardSetItemValue(item, "")
                         MultiboardSetItemWidth(item, 0.01)
                     end
-                        MultiboardReleaseItem(item)
-                    end
+                    MultiboardReleaseItem(item)
+                end
             end
         end
     end

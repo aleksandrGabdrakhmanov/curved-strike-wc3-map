@@ -6226,6 +6226,7 @@ function addPlayersInTeam(players)
             table.insert(initialPlayers, {
                 id = player.id,
                 color = getColorById(GetPlayerId(player.id)),
+                integerColor = getIntegerColorById(GetPlayerId(player.id)),
                 spawnPlayerId = player.spawnId,
                 i = game_config.playerPosition[nextPosition],
                 economy = {
@@ -6293,6 +6294,39 @@ function getColorById(playerId)
     end
     if (playerId == 9) then
         return {r=125, g=190, b=241, t=255}
+    end
+end
+
+function getIntegerColorById(playerId)
+    if (playerId == 0) then
+        return BlzConvertColor(255, 255, 2, 2)
+    end
+    if (playerId == 1) then
+        return BlzConvertColor(255, 0, 65, 255)
+    end
+    if (playerId == 2) then
+        return BlzConvertColor(255, 27, 229, 184)
+    end
+    if (playerId == 3) then
+        return BlzConvertColor(255, 83, 0, 128)
+    end
+    if (playerId == 4) then
+        return BlzConvertColor(255, 255, 255, 0)
+    end
+    if (playerId == 5) then
+        return BlzConvertColor(255, 254, 137, 13)
+    end
+    if (playerId == 6) then
+        return BlzConvertColor(255, 31, 191, 0)
+    end
+    if (playerId == 7) then
+        return BlzConvertColor(255, 228, 90, 170)
+    end
+    if (playerId == 8) then
+        return BlzConvertColor(255, 148, 149, 150)
+    end
+    if (playerId == 9) then
+        return BlzConvertColor(255, 125, 190, 241)
     end
 end
 
@@ -8052,53 +8086,62 @@ function finishGame()
     BlzFrameSetSize(mainBackdrop, 0.9, 0.38)
     BlzFrameSetLevel(mainBackdrop, 99)
 
-    local tableInfo = getTableInfo()
-
     local weightMultiplyForBigFont = 1.5
     local heightFont = 0.02
-    local prevColumn
-    for i, headerColumn in ipairs(tableInfo.header) do
-        if headerColumn.text and headerColumn.isFinish then
-            local header = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
-            BlzFrameSetSize(header, headerColumn.weight * weightMultiplyForBigFont, heightFont)
-            BlzFrameSetText(header, headerColumn.text)
-            BlzFrameSetTextAlignment(header, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
-            if i == 1 then
-                BlzFrameSetSize(header, headerColumn.weight * weightMultiplyForBigFont * 2, heightFont)
-                BlzFrameSetPoint(header, FRAMEPOINT_TOPLEFT, mainBackdrop, FRAMEPOINT_TOPLEFT, 0.01, -0.01)
-            else
-                BlzFrameSetPoint(header, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0, 0)
-            end
-            prevColumn = header
-        end
-    end
 
-    local firstColumn
-    for _, row in ipairs(tableInfo.body) do
-        local prevColumn
-        for j, element in ipairs(row) do
-            if element.text and tableInfo.header[j].isFinish then
-                local column = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
-                BlzFrameSetSize(column, tableInfo.header[j].weight * weightMultiplyForBigFont, heightFont)
-                BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
-                BlzFrameSetText(column, element.text)
-                if j == 1 then
-                    BlzFrameSetSize(column, tableInfo.header[j].weight * weightMultiplyForBigFont * 2, heightFont)
+    local fakeText = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
+    BlzFrameSetSize(fakeText, 0.15, 0.01)
+    BlzFrameSetText(fakeText, '')
+    BlzFrameSetPoint(fakeText, FRAMEPOINT_TOPLEFT, mainBackdrop, FRAMEPOINT_TOPLEFT, 0.02, -0.01)
 
-                    if firstColumn == nil then
-                        BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, mainBackdrop, FRAMEPOINT_TOPLEFT, 0.01, -0.06)
-                    else
-                        BlzFrameSetPoint(column, FRAMEPOINT_TOP, firstColumn, FRAMEPOINT_BOTTOM, 0, 0)
-                    end
+    local firstColumn = fakeText
+    local prevColumn = fakeText
+    for teamNumber, team in ipairs(all_teams) do
+        local tableInfo = getTableInfo(teamNumber)
+
+        local teamLabel = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
+        BlzFrameSetSize(teamLabel, 0.15, 0.02)
+        BlzFrameSetText(teamLabel, 'Team ' .. teamNumber)
+        BlzFrameSetPoint(teamLabel, FRAMEPOINT_TOP, firstColumn, FRAMEPOINT_BOTTOM, 0, 0)
+        firstColumn = teamLabel
+        prevColumn = teamLabel
+
+        for i, headerColumn in ipairs(tableInfo.header) do
+            if headerColumn.text and headerColumn.isFinish then
+                local header = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
+                BlzFrameSetSize(header, headerColumn.weight * weightMultiplyForBigFont, heightFont)
+                BlzFrameSetText(header, headerColumn.text)
+                BlzFrameSetTextAlignment(header, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
+                if i == 1 then
+                    BlzFrameSetPoint(header, FRAMEPOINT_TOP, firstColumn, FRAMEPOINT_BOTTOM, 0, 0)
+                    firstColumn = header
                 else
-                    BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0, 0)
+                    BlzFrameSetPoint(header, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0, 0)
                 end
-                prevColumn = column
-                if j == 1 then
-                    firstColumn = column
+                prevColumn = header
+            end
+        end
+
+        for _, row in ipairs(tableInfo.body) do
+            local prevColumn
+            for j, element in ipairs(row) do
+                if element.text and tableInfo.header[j].isFinish then
+                    local column = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
+                    BlzFrameSetSize(column, tableInfo.header[j].weight * weightMultiplyForBigFont, heightFont)
+                    BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
+                    BlzFrameSetTextColor(column, element.integerColor)
+                    BlzFrameSetText(column, element.text)
+                    if j == 1 then
+                        BlzFrameSetPoint(column, FRAMEPOINT_TOP, firstColumn, FRAMEPOINT_BOTTOM, 0, 0)
+                        firstColumn = column
+                    else
+                        BlzFrameSetPoint(column, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0, 0)
+                    end
+                    prevColumn = column
                 end
             end
         end
+
     end
 end
 Debug.endFile()
@@ -8509,18 +8552,18 @@ function createPageUnits(parentFrame, allPages)
 end
 Debug.endFile()
 Debug.beginFile('status-panel.lua')
-function getTableInfo()
+function getTableInfo(teamId)
     local tableInfo = {}
     tableInfo.header = {
         { text = 'Name', weight = 0.085, isFinish = true },
         { text = 'Wave', weight = 0.04 },
         { text = 'Inc/min', weight = 0.07 },
-        { text = 'Gold', weight = 0.045, isFinish = true  },
-        { text = 'Kills', weight = 0.05, isFinish = true  },
-        { text = 'Damage', weight = 0.06, isFinish = true  },
-        { text = 'Tier', weight = 0.04, isFinish = true  },
-        { text = 'Army', weight = 0.04, isFinish = true  },
-        { text = 'Heroes', weight = 0.06, isFinish = true  },
+        { text = 'Gold', weight = 0.045, isFinish = true },
+        { text = 'Kills', weight = 0.05, isFinish = true },
+        { text = 'Damage', weight = 0.06, isFinish = true },
+        { text = 'Tier', weight = 0.04, isFinish = true },
+        { text = 'Army', weight = 0.04, isFinish = true },
+        { text = 'Heroes', weight = 0.06, isFinish = true },
         { },
         { },
         { },
@@ -8529,82 +8572,105 @@ function getTableInfo()
         { },
     }
     tableInfo.body = {}
-    for _, team in ipairs(all_teams) do
+
+    local teams
+    if teamId then
+        teams = { all_teams[teamId] }
+    else
+        teams = all_teams
+    end
+
+    for _, team in ipairs(teams) do
         for _, player in ipairs(team.players) do
             table.insert(tableInfo.body, {
                 {
                     text = getClearName(player),
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = false
                 },
                 {
                     text = math.floor(player.spawnTimer),
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = false
                 },
                 {
                     text = getIncome(player),
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     text = player.economy.totalGold,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     text = player.totalKills,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = false
                 },
                 {
                     text = player.totalDamage,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = false
                 },
                 {
                     text = player.tier,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     text = player.food,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[1] and player.heroes[1].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[2] and player.heroes[2].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[3] and player.heroes[3].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[4] and player.heroes[4].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[5] and player.heroes[5].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[6] and player.heroes[6].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 },
                 {
                     icon = player.heroes[7] and player.heroes[7].icon or nil,
                     color = player.color,
+                    integerColor = player.integerColor,
                     isSensitive = true
                 }
             })
@@ -8635,8 +8701,7 @@ function updatePanelForAllPlayers()
                 for col, cell in ipairs(bodyRow) do
 
                     MultiboardSetTitleText(player.multiboard,
-                            'Time: ' .. GetFormattedGameTime() ..'   Wave: ' .. player.spawnTimer .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills)
-
+                            'Time: ' .. GetFormattedGameTime() .. '   Wave: ' .. player.spawnTimer .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills)
 
                     local item = MultiboardGetItem(player.multiboard, row, col - 1)
                     if isPlayerInTeam(playerName, team.players) then
@@ -8676,8 +8741,8 @@ function updatePanelForAllPlayers()
                         MultiboardSetItemValue(item, "")
                         MultiboardSetItemWidth(item, 0.01)
                     end
-                        MultiboardReleaseItem(item)
-                    end
+                    MultiboardReleaseItem(item)
+                end
             end
         end
     end

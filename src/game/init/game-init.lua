@@ -111,6 +111,7 @@ function addPlayersInTeam(players)
             table.insert(initialPlayers, {
                 id = player.id,
                 color = getColorById(GetPlayerId(player.id)),
+                integerColor = getIntegerColorById(GetPlayerId(player.id)),
                 spawnPlayerId = player.spawnId,
                 i = game_config.playerPosition[nextPosition],
                 economy = {
@@ -178,6 +179,39 @@ function getColorById(playerId)
     end
     if (playerId == 9) then
         return {r=125, g=190, b=241, t=255}
+    end
+end
+
+function getIntegerColorById(playerId)
+    if (playerId == 0) then
+        return BlzConvertColor(255, 255, 2, 2)
+    end
+    if (playerId == 1) then
+        return BlzConvertColor(255, 0, 65, 255)
+    end
+    if (playerId == 2) then
+        return BlzConvertColor(255, 27, 229, 184)
+    end
+    if (playerId == 3) then
+        return BlzConvertColor(255, 83, 0, 128)
+    end
+    if (playerId == 4) then
+        return BlzConvertColor(255, 255, 255, 0)
+    end
+    if (playerId == 5) then
+        return BlzConvertColor(255, 254, 137, 13)
+    end
+    if (playerId == 6) then
+        return BlzConvertColor(255, 31, 191, 0)
+    end
+    if (playerId == 7) then
+        return BlzConvertColor(255, 228, 90, 170)
+    end
+    if (playerId == 8) then
+        return BlzConvertColor(255, 148, 149, 150)
+    end
+    if (playerId == 9) then
+        return BlzConvertColor(255, 125, 190, 241)
     end
 end
 
