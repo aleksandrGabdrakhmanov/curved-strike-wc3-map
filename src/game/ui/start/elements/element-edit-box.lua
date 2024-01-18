@@ -10,8 +10,14 @@ function createEditBox(parentPage, text, minValue, maxValue, initValue, action)
     BlzFrameSetSize(editBox, 0.1, 0.03)
     BlzFrameSetText(editBox, initValue)
     BlzFrameSetEnable(editBox, GetLocalPlayer() == getMainPlayer())
+
+    local label = BlzCreateFrame("EscMenuLabelTextTemplate", parentPage, 0, 0)
+    BlzFrameSetPoint(label, FRAMEPOINT_LEFT, editBox, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetText(label, '= ' .. initValue)
+    BlzFrameSetEnable(label, GetLocalPlayer() == getMainPlayer())
+
     local trig = CreateTrigger()
-    BlzTriggerRegisterFrameEvent(trig, editBox, FRAMEEVENT_EDITBOX_TEXT_CHANGED)
+    BlzTriggerRegisterFrameEvent(trig, editBox, FRAMEEVENT_EDITBOX_ENTER)
     TriggerAddAction(trig, function()
         local value = extractNumber(BlzGetTriggerFrameText())
 
@@ -25,10 +31,13 @@ function createEditBox(parentPage, text, minValue, maxValue, initValue, action)
                 newValue = value
             end
         else
-            newValue = 0
+            newValue = initValue
         end
-        action(newValue)
-        BlzFrameSetText(editBox, newValue)
+
+        if (newValue ~= nil) then
+            action(newValue)
+            BlzFrameSetText(label, '= ' .. newValue)
+        end
     end)
     return frameText
 end
