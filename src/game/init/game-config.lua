@@ -18,7 +18,8 @@ function initGameConfig()
             maxHeroes = ui_config.maxHeroes,
             itemCapacity = ui_config.itemCapacity,
             baseHP = ui_config.baseHP,
-            towerHP = ui_config.towerHP
+            towerHP = ui_config.towerHP,
+            countForSelect = ui_config.countForSelect
         },
         spawnPolicy = {
             interval = ui_config.spawnInterval,

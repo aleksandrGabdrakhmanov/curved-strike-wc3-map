@@ -5967,7 +5967,8 @@ function initGameConfig()
             maxHeroes = ui_config.maxHeroes,
             itemCapacity = ui_config.itemCapacity,
             baseHP = ui_config.baseHP,
-            towerHP = ui_config.towerHP
+            towerHP = ui_config.towerHP,
+            countForSelect = ui_config.countForSelect
         },
         spawnPolicy = {
             interval = ui_config.spawnInterval,
@@ -6612,7 +6613,7 @@ function reRollHeroes(player, position, heroNumber)
     if game_config.units.isHeroesMirror then
         threeHeroes = mirrorHeroes[position][heroNumber]
     else
-        threeHeroes = getRandomHeroes(heroes_for_build, 3)
+        threeHeroes = getRandomHeroes(heroes_for_build, game_config.units.countForSelect)
     end
     for _, hero in ipairs(threeHeroes) do
         SetPlayerUnitAvailableBJ(FourCC(hero.id), TRUE, player.id)
@@ -8321,7 +8322,8 @@ function startGameUI()
         lifetime = 2,
         itemCapacity = 4,
         baseHP = 4000,
-        towerHP = 1200
+        towerHP = 1200,
+        countForSelect = 3
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
@@ -8573,11 +8575,17 @@ function createPageHeroes(parentFrame, allPages)
             end)
     BlzFrameSetPoint(sliderMaxHeroes, FRAMEPOINT_TOPLEFT, checkBoxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
 
+    local sliderHeroForSelect = createSlider(pageHeroes, "Selectable hero count", 1, 11, ui_config.countForSelect, 1,
+            function(value)
+                ui_config.countForSelect = value
+            end)
+    BlzFrameSetPoint(sliderHeroForSelect, FRAMEPOINT_TOPLEFT, sliderMaxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
+
     local sliderItemCapacity = createSlider(pageHeroes, "Item capacity", 0, 6, ui_config.itemCapacity, 1,
             function(value)
                 ui_config.itemCapacity = value
             end)
-    BlzFrameSetPoint(sliderItemCapacity, FRAMEPOINT_TOPLEFT, sliderMaxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
+    BlzFrameSetPoint(sliderItemCapacity, FRAMEPOINT_TOPLEFT, sliderHeroForSelect, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
     return buttonHeroes
 end
 Debug.endFile()

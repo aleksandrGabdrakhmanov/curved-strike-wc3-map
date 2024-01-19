@@ -162,7 +162,7 @@ function reRollHeroes(player, position, heroNumber)
     if game_config.units.isHeroesMirror then
         threeHeroes = mirrorHeroes[position][heroNumber]
     else
-        threeHeroes = getRandomHeroes(heroes_for_build, 3)
+        threeHeroes = getRandomHeroes(heroes_for_build, game_config.units.countForSelect)
     end
     for _, hero in ipairs(threeHeroes) do
         SetPlayerUnitAvailableBJ(FourCC(hero.id), TRUE, player.id)

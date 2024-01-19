@@ -22,7 +22,8 @@ function startGameUI()
         lifetime = 2,
         itemCapacity = 4,
         baseHP = 4000,
-        towerHP = 1200
+        towerHP = 1200,
+        countForSelect = 3
     }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 

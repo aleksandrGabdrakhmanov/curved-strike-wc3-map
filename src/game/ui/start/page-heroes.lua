@@ -26,11 +26,17 @@ function createPageHeroes(parentFrame, allPages)
             end)
     BlzFrameSetPoint(sliderMaxHeroes, FRAMEPOINT_TOPLEFT, checkBoxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
 
+    local sliderHeroForSelect = createSlider(pageHeroes, "Selectable hero count", 1, 11, ui_config.countForSelect, 1,
+            function(value)
+                ui_config.countForSelect = value
+            end)
+    BlzFrameSetPoint(sliderHeroForSelect, FRAMEPOINT_TOPLEFT, sliderMaxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
+
     local sliderItemCapacity = createSlider(pageHeroes, "Item capacity", 0, 6, ui_config.itemCapacity, 1,
             function(value)
                 ui_config.itemCapacity = value
             end)
-    BlzFrameSetPoint(sliderItemCapacity, FRAMEPOINT_TOPLEFT, sliderMaxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
+    BlzFrameSetPoint(sliderItemCapacity, FRAMEPOINT_TOPLEFT, sliderHeroForSelect, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
     return buttonHeroes
 end
 Debug.endFile()
