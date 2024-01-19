@@ -8138,7 +8138,7 @@ function finishGame(loseTeam)
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, mainButton, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
-        CustomVictorySkipBJ(GetTriggerPlayer())
+        CustomVictoryBJ(GetTriggerPlayer(), false, true)
     end)
 
     local victoryOrLosePict = BlzCreateFrameByType("BACKDROP", "Any", mainBackdrop, "", 0)
