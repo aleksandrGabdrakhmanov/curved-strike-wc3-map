@@ -42,11 +42,13 @@ Frame "GLUETEXTBUTTON" "StartGameButton" INHERITS WITHCHILDREN "ScriptDialogButt
         }
 }
 Frame "TEXT" "HeaderTableText" INHERITS "EscMenuTitleTextTemplate" {
-        FrameFont "MasterFont", 0.015, "",
+        DecorateFileNames,
+        FrameFont "MasterFontBold", 0.015, "",
         Text "are selecting",
 }
 Frame "TEXT" "RowTableText" INHERITS "EscMenuTitleTextTemplate" {
-        FrameFont "EscMenuTextFont", 0.015, "",
+        DecorateFileNames,
+        FrameFont "MasterFontBold", 0.015, "",
         Text "are selecting",
 }
 Frame "BACKDROP" "ConfigPageBackdrop" {
@@ -63,5 +65,15 @@ Frame "BACKDROP" "FinishGameBackdrop" {
     BackdropCornerSize  0.0125,
     BackdropBackgroundInsets 0.005 0.005 0.005 0.005,
     BackdropEdgeFile  "UI\Widgets\EscMenu\Orc\orc-cinematic-border.blp",
+}
+
+Frame "SIMPLEFRAME" "FinishGameLine"{
+    Width 0.04,
+    Height 0.04,
+
+    Layer "BACKGROUND" {
+        Texture "FinishGameLineTexture" {
+        }
+    }
 }
 

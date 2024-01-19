@@ -50,6 +50,16 @@ function finishGame(loseTeam)
             for j, element in ipairs(row) do
                 if element.text and tableInfo.header[j].isFinish then
                     local column = BlzCreateFrame("RowTableText", mainBackdrop, 0, 0)
+                    if j == 1 then
+                        local line = BlzCreateSimpleFrame("FinishGameLine", mainBackdrop, 0)
+                        BlzFrameSetPoint(line, FRAMEPOINT_BOTTOMLEFT, column, FRAMEPOINT_BOTTOMLEFT, -0.005, 0.005)
+                        BlzFrameSetSize(line,totalWidth, 0.015)
+                        BlzFrameSetAlpha(line, 50)
+
+                        local texture = BlzGetFrameByName("FinishGameLineTexture", 0)
+                        BlzFrameSetTexture(texture, "war3mapImported\\line.tga", 0, true)
+                        BlzFrameSetVertexColor(texture, element.integerColor)
+                    end
                     BlzFrameSetSize(column, tableInfo.header[j].weight * weightMultiplyForBigFont, heightFont)
                     BlzFrameSetTextAlignment(column, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
                     BlzFrameSetTextColor(column, element.integerColor)
@@ -99,7 +109,7 @@ function finishGame(loseTeam)
     end
 
     BlzFrameSetPoint(victoryOrLosePict, FRAMEPOINT_BOTTOM, mainButton, FRAMEPOINT_TOP, 0, 0.001)
-    BlzFrameSetSize(mainBackdrop, totalWidth + 0.17, 0.35)
+    BlzFrameSetSize(mainBackdrop, totalWidth + 0.18, 0.35)
 end
 
 function isPlayerIsWinner(loseTeam)
