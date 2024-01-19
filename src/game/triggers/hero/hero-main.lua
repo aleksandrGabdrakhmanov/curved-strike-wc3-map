@@ -6,5 +6,6 @@ function initHeroTriggers()
     heroTransferExp()
     heroLearnAbility()
     heroNewSkill()
+    wardenTrigger()
 end
 Debug.endFile()

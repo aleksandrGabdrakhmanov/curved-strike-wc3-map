@@ -7128,6 +7128,7 @@ function initHeroTriggers()
     heroTransferExp()
     heroLearnAbility()
     heroNewSkill()
+    wardenTrigger()
 end
 Debug.endFile()
 Debug.beginFile('hero-new-skill.lua')
@@ -7191,6 +7192,33 @@ function heroTransferExp()
             end)
         end
     end
+end
+Debug.endFile()
+Debug.beginFile('warden-trigger.lua')
+function wardenTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DAMAGING)
+    TriggerAddAction(trig, function()
+        local unit = GetTriggerUnit()
+        if GetUnitTypeId(unit) == FourCC('Ewar') then
+            local rect = getPlayerBuildRect(GetOwningPlayer(unit))
+            local livePercent = GetUnitLifePercent(unit)
+            if livePercent <= 20 then
+                IssuePointOrder(unit, 'blink', GetRectCenterX(rect), GetRectCenterY(rect))
+            end
+        end
+    end)
+end
+
+function getPlayerBuildRect(player)
+    for _, team in ipairs(all_teams) do
+        for _, p in ipairs(team.players) do
+            if p.spawnPlayerId == player then
+                return p.spawnRect
+            end
+        end
+    end
+    return nil
 end
 Debug.endFile()
 Debug.beginFile('income-trigger.lua')
@@ -7351,7 +7379,7 @@ function moveTrigger()
         for _, player in ipairs(team.players) do
             for i = 1, #player.attackPointRect do
                 local trig = CreateTrigger()
-                TriggerRegisterTimerEventPeriodic(trig, 4.00)
+                TriggerRegisterTimerEventPeriodic(trig, 10)
                 TriggerAddAction(trig, function()
                     local group = GetUnitsInRectAll(player.attackPointRect[i].rect)
                     ForGroup(group, function ()
