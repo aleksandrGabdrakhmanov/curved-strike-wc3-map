@@ -6034,7 +6034,7 @@ function initGlobalVariables()
         { id = 'h009', parentId = 'h00L', tier = 3, race = 'human', line = 1, position = 8, food = 3, name = 'Dragonhawk Rider', upgrades = { 'Rhan' } },
         { id = 'h002', parentId = 'h00B', tier = 3, race = 'human', line = 1, position = 9, food = 4, name = 'Knight', upgrades = { 'Rhan' } },
         { id = 'h005', parentId = 'h00J', tier = 3, race = 'human', line = 1, position = 10, food = 3, name = 'Siege Engine', upgrades = { 'Rhrt' } },
-        { id = 'h001', parentId = 'h00G', tier = 2, race = 'human', line = 1, position = 11, food = 4, name = 'Gryphon Rider', upgrades = { 'Rhhb' } },
+        { id = 'h001', parentId = 'h00G', tier = 2, race = 'human', line = 1, position = 11, food = 4, name = 'Gryphon Rider', upgrades = { 'Rhhb', 'Rhan' } },
 
         { id = 'h00P', parentId = 'o003', tier = 1, race = 'orc', line = 2, position = 1, food = 3, name = 'Grunt', upgrades = { 'Robs' } },
         { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', line = 2, position = 2, food = 2, name = 'Headhunter', upgrades = { 'Robk', 'Rotr' } },

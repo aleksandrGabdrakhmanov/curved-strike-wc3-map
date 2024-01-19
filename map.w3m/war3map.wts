@@ -2166,3 +2166,15 @@ STRING 404
 Inventory1
 }
 
+STRING 405
+// Abilities: Ahan (Animal War Training), Ubertip (Tooltip - Normal - Extended)
+{
+Increases the maximum hit points of this unit by 30.
+}
+
+STRING 406
+// Upgrades: Rhan (Animal War Training), Ubertip (Tooltip - Extended)
+{
+Increases the maximum hit points of Knights, Dragonhawk Riders, and Gryphon Riders by 30.
+}
+
