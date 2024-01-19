@@ -1,6 +1,6 @@
 Debug.beginFile('finish-game.lua')
 function finishGame(loseTeam)
-    mainBackdrop = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestButtonBackdropTemplate", 0)
+    local mainBackdrop = BlzCreateFrame('FinishGameBackdrop', BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
     BlzFrameSetAbsPoint(mainBackdrop, FRAMEPOINT_CENTER, 0.4, 0.35)
     BlzFrameSetLevel(mainBackdrop, 99)
 
@@ -97,14 +97,9 @@ function finishGame(loseTeam)
     else
         BlzFrameSetTexture(victoryOrLosePict, "war3mapImported\\defeat1.blp", 0, true)
     end
-    local totalHeight = totalRows * 0.023
 
-    local realHeight = totalHeight
-    if totalHeight < 0.25 then
-        realHeight = 0.25
-    end
-    BlzFrameSetPoint(victoryOrLosePict, FRAMEPOINT_BOTTOM, mainButton, FRAMEPOINT_TOP, 0, 0.02)
-    BlzFrameSetSize(mainBackdrop, totalWidth + 0.17, realHeight)
+    BlzFrameSetPoint(victoryOrLosePict, FRAMEPOINT_BOTTOM, mainButton, FRAMEPOINT_TOP, 0, 0.001)
+    BlzFrameSetSize(mainBackdrop, totalWidth + 0.17, 0.35)
 end
 
 function isPlayerIsWinner(loseTeam)

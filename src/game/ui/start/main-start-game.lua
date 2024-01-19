@@ -14,7 +14,7 @@ function startGameUI()
         baseIncome = 300,
         incomeBoost = 30,
         firstMinePrice = 150,
-        nextMineDiffPrice = 30,
+        nextMineDiffPrice = 75,
         incomeForCenter = 30,
         goldByTower = 125,
         spawnInterval = 35,
@@ -93,7 +93,7 @@ function configPage(text, parent, allPages)
     BlzFrameSetText(configButton, text)
     BlzFrameSetEnable(configButton, GetLocalPlayer() == getMainPlayer())
 
-    local pageFrame = BlzCreateFrameByType('BACKDROP', 'GeneralConfig', parent, "QuestButtonBackdropTemplate", 0)
+    local pageFrame = BlzCreateFrame('ConfigPageBackdrop', parent, 0, 0)
     BlzFrameSetPoint(pageFrame, FRAMEPOINT_TOP, parent, FRAMEPOINT_BOTTOM, 0, 0)
     BlzFrameSetSize(pageFrame, ui_params.width, 0.35)
     BlzFrameSetEnable(pageFrame, GetLocalPlayer() == getMainPlayer())

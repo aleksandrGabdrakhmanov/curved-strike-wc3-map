@@ -4,62 +4,6 @@ IncludeFile "UI\FrameDef\ui\questdialog.fdf",
 IncludeFile "UI\FrameDef\glue\battlenetprofilepanel.fdf",
 IncludeFile "UI\FrameDef\UI\EscMenuTemplates.fdf",
 IncludeFile "UI\FrameDef\ui\upperbuttonbar.fdf",
-Frame "BACKDROP" "StartGameMenu" {
-    Width 0.4,
-    Height 0.45,
-    DecorateFileNames,
-    BackdropTileBackground,
-    BackdropBackground  "EscMenuBackground",
-    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
-    BackdropCornerSize  0.048,
-    BackdropBackgroundSize  0.256,
-    BackdropBackgroundInsets 0.01 0.01 0.01 0.01,
-    BackdropEdgeFile  "EscMenuBorder",
-    BackdropBlendAll,
-    Frame "Frame" "StartGameMenuUnits" {
-        Width 0.28,
-        Height 0.14,
-        SetPoint TOPLEFT, "StartGameMenu", TOPLEFT, 0.02, -0.01,
-        Frame "TEXT" "StartGameMenuModeText" INHERITS "EscMenuTitleTextTemplate" {
-            SetPoint TOPLEFT, "StartGameMenuUnits", TOPLEFT, 0.02, -0.01,
-            Text "Available units:",
-        }
-    }
-    Frame "Frame" "StartGameMenuHeroes" {
-        Width 0.28,
-        Height 0.165,
-        SetPoint TOP, "StartGameMenuUnits", BOTTOM, 0, -0.02,
-        Frame "TEXT" "StartGameMenuHeroesText" INHERITS "EscMenuTitleTextTemplate" {
-            SetPoint TOPLEFT, "StartGameMenuHeroes", TOPLEFT, 0.02, -0.01,
-            Text "Available heroes:",
-        }
-    }
-    Frame "Frame" "StartGameMenuMode" {
-        Width 0.28,
-        Height 0.06,
-        SetPoint BOTTOMLEFT, "StartGameMenu", BOTTOMLEFT, 0.03, 0.01,
-        Frame "TEXT" "StartGameMenuModeText" INHERITS "EscMenuTitleTextTemplate" {
-            SetPoint LEFT, "StartGameMenuMode", LEFT, 0, 0.015,
-            Text "Mode:",
-        }
-        Frame "GLUETEXTBUTTON" "DirectButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
-            Width 0.08,
-            SetPoint LEFT, "StartGameMenuModeText", RIGHT, 0.01, 0,
-            ButtonText "GameplayButtonText",
-            Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
-                Text "DIRECT",
-            }
-        }
-        Frame "GLUETEXTBUTTON" "UnitedButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
-            Width 0.08,
-            SetPoint LEFT, "DirectButton", RIGHT, 0.01, 0,
-            ButtonText "GameplayButtonText",
-            Frame "TEXT" "GameplayButtonText" INHERITS "EscMenuButtonTextTemplate" {
-                Text "UNITED",
-            }
-        }
-    }
-}
 
 Frame "GLUETEXTBUTTON" "MyIconButtonTemplate"{
     UseActiveContext,
@@ -80,13 +24,6 @@ Frame "SIMPLEBUTTON" "AbilitiesButton" INHERITS "UpperButtonBarButtonTemplate" {
 Frame "TEXT" "GreenText" INHERITS "EscMenuTitleTextTemplate" {
         FontColor 0.0 1.0 0.0 1.0,
         Text "are selecting",
-}
-Frame "GLUETEXTBUTTON" "ModeButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
-        Width 0.08,
-        ButtonText "ModeButtonText",
-        Frame "TEXT" "ModeButtonText" INHERITS "EscMenuButtonTextTemplate" {
-            Text "MODE",
-        }
 }
 Frame "GLUETEXTBUTTON" "ConfigPageButton" INHERITS WITHCHILDREN "ScriptDialogButton"  {
         Width 0.08,
@@ -111,5 +48,20 @@ Frame "TEXT" "HeaderTableText" INHERITS "EscMenuTitleTextTemplate" {
 Frame "TEXT" "RowTableText" INHERITS "EscMenuTitleTextTemplate" {
         FrameFont "EscMenuTextFont", 0.015, "",
         Text "are selecting",
+}
+Frame "BACKDROP" "ConfigPageBackdrop" {
+    BackdropBlendAll,
+    BackdropBackground  "war3mapImported\configPage.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.0125,
+    BackdropBackgroundInsets 0.005 0.005 0.005 0.005,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\Orc\orc-cinematic-border.blp",
+}
+Frame "BACKDROP" "FinishGameBackdrop" {
+    BackdropBackground  "war3mapImported\finishGame1.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.0125,
+    BackdropBackgroundInsets 0.005 0.005 0.005 0.005,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\Orc\orc-cinematic-border.blp",
 }
 
