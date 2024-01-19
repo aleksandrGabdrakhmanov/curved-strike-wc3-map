@@ -45,32 +45,16 @@ function handleHeroSpawn(player, unit, x, y)
 end
 
 function SynchronizeInventory(hero1, hero2)
-    local itemsHero1 = {}
-    local itemsHero2 = {}
-
     for slot = 0, 5 do
         local item = UnitItemInSlot(hero1, slot)
-        if item then
-            table.insert(itemsHero1, GetItemTypeId(item))
+
+        local itemForDelete = UnitItemInSlot(hero2, slot)
+        if itemForDelete then
+            RemoveItem(itemForDelete)
         end
-    end
 
-    for slot = 0, 5 do
-        local item = UnitItemInSlot(hero2, slot)
         if item then
-            local itemId = GetItemTypeId(item)
-            table.insert(itemsHero2, itemId)
-
-            if not table.contains(itemsHero1, itemId) then
-                RemoveItem(item)
-            end
-        end
-    end
-
-    for _, itemId in ipairs(itemsHero1) do
-        if not table.contains(itemsHero2, itemId) then
-            local newItem = CreateItem(itemId, GetUnitX(hero2), GetUnitY(hero2))
-            UnitAddItem(hero2, newItem)
+            UnitAddItemToSlotById(hero2, GetItemTypeId(item), slot)
         end
     end
 end
