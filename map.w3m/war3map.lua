@@ -8761,7 +8761,7 @@ function updatePanelForAllPlayers()
                 for col, cell in ipairs(bodyRow) do
 
                     MultiboardSetTitleText(player.multiboard,
-                            'Time: ' .. GetFormattedGameTime() .. '   Wave: ' .. player.spawnTimer .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills)
+                            'Time: ' .. GetFormattedGameTime() .. '   Wave: ' .. math.floor(player.spawnTimer) .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills)
 
                     local item = MultiboardGetItem(player.multiboard, row, col - 1)
                     if isPlayerInTeam(playerName, team.players) then
