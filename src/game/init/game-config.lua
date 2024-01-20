@@ -2,28 +2,28 @@ Debug.beginFile('game-config.lua')
 function initGameConfig()
     game_config = {
         economy = {
-            startGold = ui_config.startGold,
-            startIncomePerSec = ui_config.baseIncome / 60,
-            incomeBoost = ui_config.incomeBoost / 60,
-            firstMinePrice = ui_config.firstMinePrice,
-            nextMineDiffPrice = ui_config.nextMineDiffPrice,
-            goldByTower = ui_config.goldByTower,
-            incomeForCenter = ui_config.incomeForCenter / 60
+            startGold = nil,
+            startIncomePerSec = nil,
+            incomeBoost = nil,
+            firstMinePrice = nil,
+            nextMineDiffPrice = nil,
+            goldByTower = nil,
+            incomeForCenter = nil
         },
         units = {
             range = 1,
-            lifetime = ui_config.lifetime,
-            isUnitsMirror = ui_config.isUnitsMirror,
-            isHeroesMirror = ui_config.isHeroesMirror,
-            maxHeroes = ui_config.maxHeroes,
-            itemCapacity = ui_config.itemCapacity,
-            baseHP = ui_config.baseHP,
-            towerHP = ui_config.towerHP,
-            countForSelect = ui_config.countForSelect
+            lifetime = nil,
+            isUnitsMirror = nil,
+            isHeroesMirror = nil,
+            maxHeroes = nil,
+            itemCapacity = nil,
+            baseHP = nil,
+            towerHP = nil,
+            countForSelect = nil
         },
         spawnPolicy = {
-            interval = ui_config.spawnInterval,
-            dif = ui_config.spawnDif
+            interval = nil,
+            dif = nil
         },
         playerPosition = { 1, 2, 3, 4, 5 },
         isOpenAllMap = false

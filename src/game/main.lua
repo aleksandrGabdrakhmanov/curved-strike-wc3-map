@@ -1,6 +1,7 @@
 Debug.beginFile('main.lua')
 OnInit(function()
     initGlobalVariables()
+    initStartGameUI()
     startGameUI()
     configShop()
 end)

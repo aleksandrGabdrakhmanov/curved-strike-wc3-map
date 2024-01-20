@@ -5951,28 +5951,28 @@ Debug.beginFile('game-config.lua')
 function initGameConfig()
     game_config = {
         economy = {
-            startGold = ui_config.startGold,
-            startIncomePerSec = ui_config.baseIncome / 60,
-            incomeBoost = ui_config.incomeBoost / 60,
-            firstMinePrice = ui_config.firstMinePrice,
-            nextMineDiffPrice = ui_config.nextMineDiffPrice,
-            goldByTower = ui_config.goldByTower,
-            incomeForCenter = ui_config.incomeForCenter / 60
+            startGold = nil,
+            startIncomePerSec = nil,
+            incomeBoost = nil,
+            firstMinePrice = nil,
+            nextMineDiffPrice = nil,
+            goldByTower = nil,
+            incomeForCenter = nil
         },
         units = {
             range = 1,
-            lifetime = ui_config.lifetime,
-            isUnitsMirror = ui_config.isUnitsMirror,
-            isHeroesMirror = ui_config.isHeroesMirror,
-            maxHeroes = ui_config.maxHeroes,
-            itemCapacity = ui_config.itemCapacity,
-            baseHP = ui_config.baseHP,
-            towerHP = ui_config.towerHP,
-            countForSelect = ui_config.countForSelect
+            lifetime = nil,
+            isUnitsMirror = nil,
+            isHeroesMirror = nil,
+            maxHeroes = nil,
+            itemCapacity = nil,
+            baseHP = nil,
+            towerHP = nil,
+            countForSelect = nil
         },
         spawnPolicy = {
-            interval = ui_config.spawnInterval,
-            dif = ui_config.spawnDif
+            interval = nil,
+            dif = nil
         },
         playerPosition = { 1, 2, 3, 4, 5 },
         isOpenAllMap = false
@@ -6445,7 +6445,6 @@ Debug.endFile()
 Debug.beginFile('main-init.lua')
 function initMain()
     initRegions()
-    initGameConfig()
     initGame()
 end
 Debug.endFile()
@@ -6701,6 +6700,7 @@ Debug.endFile()
 Debug.beginFile('main.lua')
 OnInit(function()
     initGlobalVariables()
+    initStartGameUI()
     startGameUI()
     configShop()
 end)
@@ -8194,15 +8194,16 @@ function isPlayerIsWinner(loseTeam)
 end
 Debug.endFile()
 Debug.beginFile('element-check-box.lua')
-function checkBox(text, parentFrame, checkedFunc, uncheckedFunc)
+function createCheckBox(parentPage, lastElement, element)
 
-    local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", parentFrame, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetText(frameText, text)
-    BlzFrameSetSize(frameText, ui_params.lengthString, ui_params.widthString)
-    BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
+    local checkFrame = BlzCreateFrameByType("TEXT", "", parentPage, "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(checkFrame, element.text)
+    BlzFrameSetSize(checkFrame, ui_params.lengthString, ui_params.widthString)
+    BlzFrameSetEnable(checkFrame, GetLocalPlayer() == getMainPlayer())
+    BlzFrameSetPoint(checkFrame, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
 
-    local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentFrame, 0, 0)
-    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
+    local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentPage, 0, 0)
+    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, checkFrame, FRAMEPOINT_RIGHT, 0, 0)
     BlzFrameSetScale(frameCheckBox, 1.5)
     BlzFrameSetEnable(frameCheckBox, GetLocalPlayer() == getMainPlayer())
 
@@ -8211,30 +8212,31 @@ function checkBox(text, parentFrame, checkedFunc, uncheckedFunc)
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_UNCHECKED)
     TriggerAddAction(trigger, function()
         if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
-            checkedFunc()
+            element.value = true
         else
-            uncheckedFunc()
+            element.value = false
         end
     end)
-    return frameText
+    return checkFrame
 end
 Debug.endFile()
 Debug.beginFile('element-check-box.lua')
-function createEditBox(parentPage, text, minValue, maxValue, initValue, action)
+function createEditBox(parentPage, lastElement, element)
     local frameText = BlzCreateFrameByType("TEXT", "TextFrame", parentPage, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetText(frameText, text)
+    BlzFrameSetText(frameText, element.text)
     BlzFrameSetSize(frameText, ui_params.lengthString, ui_params.widthString)
     BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
+    BlzFrameSetPoint(frameText, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
 
     local editBox = BlzCreateFrame("EscMenuEditBoxTemplate", parentPage, 0, 0) --create the box
     BlzFrameSetPoint(editBox, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
     BlzFrameSetSize(editBox, 0.1, 0.03)
-    BlzFrameSetText(editBox, initValue)
+    BlzFrameSetText(editBox, element.defValue)
     BlzFrameSetEnable(editBox, GetLocalPlayer() == getMainPlayer())
 
     local label = BlzCreateFrame("EscMenuLabelTextTemplate", parentPage, 0, 0)
     BlzFrameSetPoint(label, FRAMEPOINT_LEFT, editBox, FRAMEPOINT_RIGHT, 0, 0)
-    BlzFrameSetText(label, '= ' .. initValue)
+    BlzFrameSetText(label, '= ' .. element.defValue)
     BlzFrameSetEnable(label, GetLocalPlayer() == getMainPlayer())
 
     local trig = CreateTrigger()
@@ -8244,10 +8246,10 @@ function createEditBox(parentPage, text, minValue, maxValue, initValue, action)
 
         local newValue
         if value ~= nil then
-            if value <= minValue then
-                newValue = minValue
-            elseif value >= maxValue then
-                newValue = maxValue
+            if value <= element.min then
+                newValue = element.min
+            elseif value >= element.max then
+                newValue = element.max
             else
                 newValue = value
             end
@@ -8256,7 +8258,7 @@ function createEditBox(parentPage, text, minValue, maxValue, initValue, action)
         end
 
         if (newValue ~= nil) then
-            action(newValue)
+            element.value = value
             BlzFrameSetText(label, '= ' .. newValue)
         end
     end)
@@ -8270,61 +8272,298 @@ end
 Debug.endFile()
 
 Debug.beginFile('element-slider.lua')
-function createSlider(parentPage, text, minValue, maxValue, initValue, step, func)
+function createSlider(parentPage, lastElement, element)
     local frameText = BlzCreateFrameByType("TEXT", "TextCountHeroes", parentPage, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetText(frameText, text)
+    BlzFrameSetText(frameText, element.text)
     BlzFrameSetSize(frameText, ui_params.lengthString, ui_params.widthString)
     BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
+    BlzFrameSetPoint(frameText, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
 
     local slider = BlzCreateFrame("EscMenuSliderTemplate", parentPage, 0, 0)
     BlzFrameSetPoint(slider, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
-    BlzFrameSetMinMaxValue(slider, minValue, maxValue)
-    BlzFrameSetValue(slider, initValue)
-    BlzFrameSetStepSize(slider, step)
+    BlzFrameSetMinMaxValue(slider, element.min, element.max)
+    BlzFrameSetValue(slider, element.defValue)
+    BlzFrameSetStepSize(slider, element.step)
     BlzFrameSetEnable(slider, GetLocalPlayer() == getMainPlayer())
 
     local label = BlzCreateFrame("EscMenuLabelTextTemplate", slider, 0, 0)
     BlzFrameSetPoint(label, FRAMEPOINT_LEFT, slider, FRAMEPOINT_RIGHT, 0, 0)
-    BlzFrameSetText(label, initValue)
+    BlzFrameSetText(label, element.defValue)
     BlzFrameSetEnable(label, GetLocalPlayer() == getMainPlayer())
 
     local sliderTrigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(sliderTrigger, slider, FRAMEEVENT_SLIDER_VALUE_CHANGED)
     TriggerAddAction(sliderTrigger, function()
         local value = BlzGetTriggerFrameValue()
-        func(value)
+        element.value = value
         BlzFrameSetText(label, math.floor(value))
     end)
     return frameText
 end
 Debug.endFile()
-Debug.beginFile('main-start-game.lua')
-function startGameUI()
+Debug.beginFile('init-start-game-ui.lua')
+function initStartGameUI()
     ui_params = {
         lengthString = 0.2,
         widthString = 0.02,
         indent = 0.015,
-        width = 0.4
+        width = 0.4,
+        betweenElement = 0.028
     }
-    ui_config = {
-        isUnitsMirror = false,
-        isHeroesMirror = false,
-        maxHeroes = 3,
-        startGold = 300,
-        baseIncome = 300,
-        incomeBoost = 30,
-        firstMinePrice = 150,
-        nextMineDiffPrice = 75,
-        incomeForCenter = 30,
-        goldByTower = 125,
-        spawnInterval = 35,
-        spawnDif = 0,
-        lifetime = 2,
-        itemCapacity = 4,
-        baseHP = 4000,
-        towerHP = 1200,
-        countForSelect = 3
+
+    elementType = {
+        SLIDER = 'slider',
+        EDIT_BOX = 'editBox',
+        CHECK_BOX = 'checkBox'
     }
+
+    page = {
+        GENERAL = 'general',
+        ECONOMY = 'economy',
+        HEROES = 'heroes',
+        UNITS = 'units'
+    }
+
+    ui_elements = {
+        -- GENERAL
+        {
+            page = page.GENERAL,
+            type = elementType.SLIDER,
+            text = 'Wave interval each players',
+            tooltip = "tooltip",
+            defValue = 35,
+            value = 35,
+            max = 120,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.spawnPolicy.interval = self.value
+            end
+        },
+        {
+            page = page.GENERAL,
+            type = elementType.SLIDER,
+            text = 'Wave interval all players',
+            tooltip = "tooltip",
+            defValue = 0,
+            value = 0,
+            max = 120,
+            min = 0,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.spawnPolicy.dif = self.value
+            end
+        },
+        {
+            page = page.GENERAL,
+            type = elementType.EDIT_BOX,
+            text = 'Base HP',
+            tooltip = "tooltip",
+            defValue = 4000,
+            value = 4000,
+            max = 999999,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.baseHP = self.value
+            end
+        },
+        {
+            page = page.GENERAL,
+            type = elementType.EDIT_BOX,
+            text = 'Tower HP',
+            tooltip = "tooltip",
+            defValue = 4000,
+            value = 4000,
+            max = 999999,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.towerHP = self.value
+            end
+        },
+        -- ECONOMY
+        {
+            page = page.ECONOMY,
+            type = elementType.EDIT_BOX,
+            text = 'Start gold',
+            tooltip = "tooltip",
+            defValue = 300,
+            value = 300,
+            max = 999999,
+            min = 0,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.economy.startGold = self.value
+            end
+        },
+        {
+            page = page.ECONOMY,
+            type = elementType.SLIDER,
+            text = 'Base income/min',
+            tooltip = "tooltip",
+            defValue = 300,
+            value = 300,
+            max = 3000,
+            min = 60,
+            step = 30,
+            initConfigValue = function(self)
+                game_config.economy.startIncomePerSec = self.value / 60
+            end
+        },
+        {
+            page = page.ECONOMY,
+            type = elementType.SLIDER,
+            text = 'Added inc for each mine',
+            tooltip = "tooltip",
+            defValue = 30,
+            value = 30,
+            max = 300,
+            min = 30,
+            step = 30,
+            initConfigValue = function(self)
+                game_config.economy.incomeBoost = self.value / 60
+            end
+        },
+        {
+            page = page.ECONOMY,
+            type = elementType.SLIDER,
+            text = 'Added inc for controlling center',
+            tooltip = "tooltip",
+            defValue = 30,
+            value = 30,
+            max = 300,
+            min = 0,
+            step = 30,
+            initConfigValue = function(self)
+                game_config.economy.incomeForCenter = self.value / 60
+            end
+        },
+        {
+            page = page.ECONOMY,
+            type = elementType.SLIDER,
+            text = 'Price first mine',
+            tooltip = "tooltip",
+            defValue = 150,
+            value = 150,
+            max = 1500,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.economy.firstMinePrice = self.value
+            end
+        },
+        {
+            page = page.ECONOMY,
+            type = elementType.SLIDER,
+            text = 'Price diff for each next mine',
+            tooltip = "tooltip",
+            defValue = 75,
+            value = 75,
+            max = 300,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.economy.nextMineDiffPrice = self.value
+            end
+        },
+        {
+            page = page.ECONOMY,
+            type = elementType.SLIDER,
+            text = 'Gold for killing the tower',
+            tooltip = "tooltip",
+            defValue = 125,
+            value = 125,
+            max = 1500,
+            min = 0,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.economy.goldByTower = self.value
+            end
+        },
+        -- UNITS
+        {
+            page = page.UNITS,
+            type = elementType.CHECK_BOX,
+            text = 'Mirror units',
+            tooltip = "tooltip",
+            value = false,
+            initConfigValue = function(self)
+                game_config.units.isUnitsMirror = self.value
+            end
+        },
+        {
+            page = page.UNITS,
+            type = elementType.SLIDER,
+            text = 'Max lifespan of unit in waves',
+            tooltip = "tooltip",
+            defValue = 2,
+            value = 2,
+            max = 15,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.lifetime = self.value
+            end
+        },
+        -- HEROES
+        {
+            page = page.HEROES,
+            type = elementType.CHECK_BOX,
+            text = 'Mirror heroes',
+            tooltip = "tooltip",
+            value = false,
+            initConfigValue = function(self)
+                game_config.units.isHeroesMirror = self.value
+            end
+        },
+        {
+            page = page.HEROES,
+            type = elementType.SLIDER,
+            text = 'Max heroes',
+            tooltip = "tooltip",
+            defValue = 3,
+            value = 3,
+            max = 7,
+            min = 0,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.maxHeroes = self.value
+            end
+        },
+        {
+            page = page.HEROES,
+            type = elementType.SLIDER,
+            text = 'Selectable hero count',
+            tooltip = "tooltip",
+            defValue = 2,
+            value = 2,
+            max = 11,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.countForSelect = self.value
+            end
+        },
+        {
+            page = page.HEROES,
+            type = elementType.SLIDER,
+            text = 'Item capacity',
+            tooltip = "tooltip",
+            defValue = 4,
+            value = 4,
+            max = 6,
+            min = 0,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.itemCapacity = self.value
+            end
+        }
+    }
+end
+Debug.endFile()
+Debug.beginFile('main-start-game.lua')
+function startGameUI()
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
     local preConfigGameModes = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "QuestButtonBackdropTemplate", 0)
@@ -8338,17 +8577,48 @@ function startGameUI()
     BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
 
     local allPages = {}
-    buttonGeneral, pageGeneral = createPageGeneral(preConfigGameModes, allPages)
+    local buttonGeneral, pageGeneral, lastElementGeneral = configPage("General", preConfigGameModes, allPages, 0.02)
     BlzFrameSetPoint(buttonGeneral, FRAMEPOINT_TOPLEFT, preConfigGameModes, FRAMEPOINT_BOTTOMLEFT, 0, 0)
 
-    buttonEconomy = createPageEconomy(preConfigGameModes, allPages)
+    local buttonEconomy, pageEconomy, lastElementEconomy = configPage("Economy", preConfigGameModes, allPages, 0.02)
     BlzFrameSetPoint(buttonEconomy, FRAMEPOINT_LEFT, buttonGeneral, FRAMEPOINT_RIGHT, -0.005, 0)
 
-    buttonUnits = createPageUnits(preConfigGameModes, allPages)
+    local buttonUnits, pageUnits, lastElementUnits = configPage("Units", preConfigGameModes, allPages, 0.13)
     BlzFrameSetPoint(buttonUnits, FRAMEPOINT_LEFT, buttonEconomy, FRAMEPOINT_RIGHT, -0.005, 0)
+    local availableUnitsTextFrame = BlzCreateFrameByType('TEXT', 'availableUnitsTextFrame', pageUnits, 'EscMenuSaveDialogTextTemplate', 0)
+    BlzFrameSetText(availableUnitsTextFrame, 'Available units:')
+    BlzFrameSetPoint(availableUnitsTextFrame, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, availableUnitsTextFrame, units_for_build, 5)
+    end
+    for _, unit in ipairs(units_for_build) do
+        initUnitAvailableButton(unit, availableUnitsTextFrame)
+    end
 
-    buttonHeroes = createPageHeroes(preConfigGameModes, allPages)
+    local buttonHeroes, pageHeroes, lastElementHeroes = configPage("Heroes", preConfigGameModes, allPages, 0.16)
     BlzFrameSetPoint(buttonHeroes, FRAMEPOINT_LEFT, buttonUnits, FRAMEPOINT_RIGHT, -0.005, 0)
+    local availableHeroesTextFrame = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', pageHeroes, 'EscMenuSaveDialogTextTemplate', 0)
+    BlzFrameSetText(availableHeroesTextFrame, 'Available heroes:')
+    BlzFrameSetPoint(availableHeroesTextFrame, FRAMEPOINT_TOPLEFT, pageHeroes, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, availableHeroesTextFrame, heroes_for_build, 6)
+    end
+    for _, hero in ipairs(heroes_for_build) do
+        initUnitAvailableButton(hero, availableHeroesTextFrame)
+    end
+
+    initGameConfig()
+    for _, element in ipairs(ui_elements) do
+        if element.page == page.GENERAL then
+            lastElementGeneral = createElement(element, pageGeneral, lastElementGeneral)
+        elseif element.page == page.ECONOMY then
+            lastElementEconomy = createElement(element, pageEconomy, lastElementEconomy)
+        elseif element.page == page.UNITS then
+            lastElementUnits = createElement(element, pageUnits, lastElementUnits)
+        elseif element.page == page.HEROES then
+            lastElementHeroes = createElement(element, pageHeroes, lastElementHeroes)
+        end
+    end
 
     for number, page in ipairs(allPages) do
         if number == 1 then
@@ -8357,7 +8627,6 @@ function startGameUI()
             BlzFrameSetVisible(page, false)
         end
     end
-
     local startGameButton = BlzCreateFrame('StartGameButton', preConfigGameModes, 0, 0)
     BlzFrameSetLevel(startGameButton, 99)
     BlzFrameSetText(startGameButton, 'START')
@@ -8368,13 +8637,27 @@ function startGameUI()
     BlzTriggerRegisterFrameEvent(trig1, startGameButton, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig1, function()
         BlzFrameSetVisible(preConfigGameModes, FALSE)
+        for _, element in ipairs(ui_elements) do
+            element.initConfigValue(element)
+        end
         startGame()
     end)
 
-    local selectingText = BlzCreateFrame("GreenText", preConfigGameModes, 0, 0)
-    BlzFrameSetParent(selectingText, preConfigGameModes)
-    BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
-    BlzFrameSetPoint(selectingText, FRAMEPOINT_BOTTOM, preConfigGameModes, FRAMEPOINT_TOP, 0, 0)
+        local selectingText = BlzCreateFrame("GreenText", preConfigGameModes, 0, 0)
+        BlzFrameSetParent(selectingText, preConfigGameModes)
+        BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
+        BlzFrameSetPoint(selectingText, FRAMEPOINT_BOTTOM, preConfigGameModes, FRAMEPOINT_TOP, 0, 0)
+end
+
+function createElement(element, page, lastElement)
+    if element.type == elementType.SLIDER then
+        return createSlider(page, lastElement, element)
+    elseif element.type == elementType.EDIT_BOX then
+        return createEditBox(page, lastElement, element)
+    elseif element.type == elementType.CHECK_BOX then
+        return createCheckBox(page, lastElement, element)
+    end
+
 end
 
 function buttonWithAction(text, parentFrame, action)
@@ -8388,7 +8671,7 @@ function buttonWithAction(text, parentFrame, action)
     return button
 end
 
-function configPage(text, parent, allPages)
+function configPage(text, parent, allPages, dif)
     local configButton = BlzCreateFrame('ConfigPageButton', parent, 0, 0)
     BlzFrameSetLevel(configButton, 99)
     BlzFrameSetText(configButton, text)
@@ -8400,6 +8683,11 @@ function configPage(text, parent, allPages)
     BlzFrameSetEnable(pageFrame, GetLocalPlayer() == getMainPlayer())
     table.insert(allPages, pageFrame)
 
+    local emptyFrame = BlzCreateFrameByType("FRAME", "", parent, "", 0)
+    BlzFrameSetSize(emptyFrame, ui_params.lengthString, 0.001)
+
+    BlzFrameSetPoint(emptyFrame, FRAMEPOINT_TOPLEFT, pageFrame, FRAMEPOINT_TOPLEFT, ui_params.indent, -dif)
+
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, configButton, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
@@ -8408,7 +8696,7 @@ function configPage(text, parent, allPages)
         end
         BlzFrameSetVisible(pageFrame, true)
     end)
-    return configButton, pageFrame
+    return configButton, pageFrame, emptyFrame
 end
 
 function initRaceAvailableButton(race, position, frame, unitContainer, max)
@@ -8478,145 +8766,6 @@ end
 function replaceTexture(inputString)
     local replacedString = inputString:gsub("ReplaceableTextures\\CommandButtons\\(.-)%.blp", "ReplaceableTextures\\CommandButtonsDisabled\\DIS%1.blp")
     return replacedString
-end
-Debug.endFile()
-Debug.beginFile('page-economy.lua')
-function createPageEconomy(parentFrame, allPages)
-    local buttonEconomy, pageEconomy = configPage("Economy", parentFrame, allPages)
-    local startGoldEditBox = createEditBox(pageEconomy, 'Start gold', 0, 999999, ui_config.startGold, function(value)
-        ui_config.startGold = value
-    end)
-    BlzFrameSetPoint(startGoldEditBox, FRAMEPOINT_TOPLEFT, pageEconomy, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
-
-    local baseIncomeSlider = createSlider(pageEconomy, 'Base income/min', 60, 3000, ui_config.baseIncome, 30, function(value)
-        ui_config.baseIncome = value
-    end)
-    BlzFrameSetPoint(baseIncomeSlider, FRAMEPOINT_TOPLEFT, startGoldEditBox, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-
-    local incomeForEachMineSlider = createSlider(pageEconomy, 'Added inc for each mine', 30, 300, ui_config.incomeBoost, 30, function(value)
-        ui_config.incomeBoost = value
-    end)
-    BlzFrameSetPoint(incomeForEachMineSlider, FRAMEPOINT_TOPLEFT, baseIncomeSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-
-    local incomeForCenterControl = createSlider(pageEconomy, 'Added inc for controlling center', 0, 300, ui_config.incomeForCenter, 30, function(value)
-        ui_config.incomeForCenter = value
-    end)
-    BlzFrameSetPoint(incomeForCenterControl, FRAMEPOINT_TOPLEFT, incomeForEachMineSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-
-    local firstMinePriceSlider = createSlider(pageEconomy, 'Price first mine', 1, 1500, ui_config.firstMinePrice, 1, function(value)
-        ui_config.firstMinePrice = value
-    end)
-    BlzFrameSetPoint(firstMinePriceSlider, FRAMEPOINT_TOPLEFT, incomeForCenterControl, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-
-    local nextMinePriceSlider = createSlider(pageEconomy, 'Price diff for each next mine', 1, 300, ui_config.nextMineDiffPrice, 1, function(value)
-        ui_config.nextMineDiffPrice = value
-    end)
-    BlzFrameSetPoint(nextMinePriceSlider, FRAMEPOINT_TOPLEFT, firstMinePriceSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-
-    local goldByTowerSlider = createSlider(pageEconomy, 'Gold for killing the tower', 0, 1500, ui_config.goldByTower, 1, function(value)
-        ui_config.goldByTower = value
-    end)
-    BlzFrameSetPoint(goldByTowerSlider, FRAMEPOINT_TOPLEFT, nextMinePriceSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-    return buttonEconomy
-end
-Debug.endFile()
-Debug.beginFile('page-general.lua')
-function createPageGeneral(parentFrame, allPages)
-    local buttonGeneral, pageGeneral = configPage("General", parentFrame, allPages)
-
-    local spawnIntervalSlider = createSlider(pageGeneral, 'Wave interval each players', 1, 120, ui_config.spawnInterval, 1, function(value)
-        ui_config.spawnInterval = value
-    end)
-    BlzFrameSetPoint(spawnIntervalSlider, FRAMEPOINT_TOPLEFT, pageGeneral, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
-
-    local spawnDifSlider = createSlider(pageGeneral, 'Wave interval all players', 0, 120, ui_config.spawnDif, 1, function(value)
-        ui_config.spawnDif = value
-    end)
-    BlzFrameSetPoint(spawnDifSlider, FRAMEPOINT_TOPLEFT, spawnIntervalSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-
-    local baseHPEditBox = createEditBox(pageGeneral, 'Base HP', 1, 999999, ui_config.baseHP, function(value)
-        ui_config.baseHP = value
-    end)
-    BlzFrameSetPoint(baseHPEditBox, FRAMEPOINT_TOPLEFT, spawnDifSlider, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-
-    local towerHPEditBox = createEditBox(pageGeneral, 'Tower HP', 1, 999999, ui_config.towerHP, function(value)
-        ui_config.towerHP = value
-    end)
-    BlzFrameSetPoint(towerHPEditBox, FRAMEPOINT_TOPLEFT, baseHPEditBox, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-
-    return buttonGeneral, pageGeneral
-end
-Debug.endFile()
-Debug.beginFile('page-heroes.lua')
-function createPageHeroes(parentFrame, allPages)
-    local buttonHeroes, pageHeroes = configPage("Heroes", parentFrame, allPages)
-    local availableHeroesTextFrame = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', pageHeroes, 'EscMenuSaveDialogTextTemplate', 0)
-    BlzFrameSetText(availableHeroesTextFrame, 'Available heroes:')
-    BlzFrameSetPoint(availableHeroesTextFrame, FRAMEPOINT_TOPLEFT, pageHeroes, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
-    for i, race in ipairs(main_race) do
-        initRaceAvailableButton(race, i, availableHeroesTextFrame, heroes_for_build, 6)
-    end
-    for _, hero in ipairs(heroes_for_build) do
-        initUnitAvailableButton(hero, availableHeroesTextFrame)
-    end
-    local checkBoxHeroes = checkBox('Mirror heroes', pageHeroes,
-            function()
-                ui_config.isHeroesMirror = true
-            end,
-            function()
-                ui_config.isHeroesMirror = false
-            end
-    )
-    BlzFrameSetPoint(checkBoxHeroes, FRAMEPOINT_TOPLEFT, pageHeroes, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.2)
-
-    local sliderMaxHeroes = createSlider(pageHeroes, "Max heroes", 0, 7, ui_config.maxHeroes, 1,
-            function(value)
-                ui_config.maxHeroes = value
-            end)
-    BlzFrameSetPoint(sliderMaxHeroes, FRAMEPOINT_TOPLEFT, checkBoxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
-
-    local sliderHeroForSelect = createSlider(pageHeroes, "Selectable hero count", 1, 11, ui_config.countForSelect, 1,
-            function(value)
-                ui_config.countForSelect = value
-            end)
-    BlzFrameSetPoint(sliderHeroForSelect, FRAMEPOINT_TOPLEFT, sliderMaxHeroes, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
-
-    local sliderItemCapacity = createSlider(pageHeroes, "Item capacity", 0, 6, ui_config.itemCapacity, 1,
-            function(value)
-                ui_config.itemCapacity = value
-            end)
-    BlzFrameSetPoint(sliderItemCapacity, FRAMEPOINT_TOPLEFT, sliderHeroForSelect, FRAMEPOINT_BOTTOMLEFT, 0, -0.005)
-    return buttonHeroes
-end
-Debug.endFile()
-Debug.beginFile('page-units.lua')
-function createPageUnits(parentFrame, allPages)
-    local buttonUnits, pageUnits = configPage("Units", parentFrame, allPages)
-    local availableUnitsTextFrame = BlzCreateFrameByType('TEXT', 'availableUnitsTextFrame', pageUnits, 'EscMenuSaveDialogTextTemplate', 0)
-    BlzFrameSetText(availableUnitsTextFrame, 'Available units:')
-    BlzFrameSetPoint(availableUnitsTextFrame, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
-    for i, race in ipairs(main_race) do
-        initRaceAvailableButton(race, i, availableUnitsTextFrame, units_for_build, 5)
-    end
-    for _, unit in ipairs(units_for_build) do
-        initUnitAvailableButton(unit, availableUnitsTextFrame)
-    end
-    local checkBoxUnits = checkBox('Mirror units', pageUnits,
-            function()
-                ui_config.isUnitsMirror = true
-            end,
-            function()
-                ui_config.isUnitsMirror = false
-            end
-    )
-    BlzFrameSetPoint(checkBoxUnits, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.17)
-
-    local lifetimeSlider = createSlider(pageUnits, 'Max lifespan of unit in waves', 1, 10, ui_config.lifetime, 1, function(value)
-        ui_config.lifetime = value
-    end)
-    BlzFrameSetPoint(lifetimeSlider, FRAMEPOINT_TOPLEFT, checkBoxUnits, FRAMEPOINT_BOTTOMLEFT, 0, -0.01)
-
-    return buttonUnits
 end
 Debug.endFile()
 Debug.beginFile('status-panel.lua')
@@ -8874,7 +9023,7 @@ ForcePlayerStartLocation(Player(1), 1)
 SetPlayerColor(Player(1), ConvertPlayerColor(1))
 SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
 SetPlayerRaceSelectable(Player(1), false)
-SetPlayerController(Player(1), MAP_CONTROL_USER)
+SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(2), 2)
 ForcePlayerStartLocation(Player(2), 2)
 SetPlayerColor(Player(2), ConvertPlayerColor(2))
@@ -9119,16 +9268,15 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(0, 9)
-SetStartLocPrio(0, 0, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 8, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(0, 8)
+SetStartLocPrio(0, 0, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 1, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 2, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 3, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 4, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 5, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 6, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 7, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(1, 9)
 SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_HIGH)
@@ -9139,86 +9287,78 @@ SetStartLocPrio(1, 5, 6, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 6, 7, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 7, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(2, 9)
+SetStartLocPrioCount(2, 8)
 SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(2, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(3, 9)
+SetStartLocPrio(2, 1, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 2, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 3, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 4, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 5, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 6, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(2, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(3, 8)
 SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(3, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(4, 9)
+SetStartLocPrio(3, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 2, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 3, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 4, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 5, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 6, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(3, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(4, 8)
 SetStartLocPrio(4, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(4, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(5, 9)
+SetStartLocPrio(4, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 3, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 4, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 5, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 6, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(4, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(5, 8)
 SetStartLocPrio(5, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(5, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(6, 9)
+SetStartLocPrio(5, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 4, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 5, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 6, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(5, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(6, 8)
 SetStartLocPrio(6, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 5, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(6, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(7, 9)
+SetStartLocPrio(6, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 5, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 6, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(6, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(7, 8)
 SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 5, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 6, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(7, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(8, 9)
+SetStartLocPrio(7, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 6, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(7, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(8, 8)
 SetStartLocPrio(8, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 5, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 6, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 7, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(8, 8, 9, MAP_LOC_PRIO_HIGH)
-SetStartLocPrioCount(9, 9)
+SetStartLocPrio(8, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(8, 7, 9, MAP_LOC_PRIO_HIGH)
+SetStartLocPrioCount(9, 8)
 SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 1, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 2, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 3, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 4, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 5, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 6, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 7, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(9, 8, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(9, 7, 8, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(10, 3)
 SetStartLocPrio(10, 0, 4, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(10, 1, 17, MAP_LOC_PRIO_HIGH)

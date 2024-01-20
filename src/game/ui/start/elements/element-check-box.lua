@@ -1,13 +1,14 @@
 Debug.beginFile('element-check-box.lua')
-function checkBox(text, parentFrame, checkedFunc, uncheckedFunc)
+function createCheckBox(parentPage, lastElement, element)
 
-    local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", parentFrame, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetText(frameText, text)
-    BlzFrameSetSize(frameText, ui_params.lengthString, ui_params.widthString)
-    BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
+    local checkFrame = BlzCreateFrameByType("TEXT", "", parentPage, "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(checkFrame, element.text)
+    BlzFrameSetSize(checkFrame, ui_params.lengthString, ui_params.widthString)
+    BlzFrameSetEnable(checkFrame, GetLocalPlayer() == getMainPlayer())
+    BlzFrameSetPoint(checkFrame, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
 
-    local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentFrame, 0, 0)
-    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
+    local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentPage, 0, 0)
+    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, checkFrame, FRAMEPOINT_RIGHT, 0, 0)
     BlzFrameSetScale(frameCheckBox, 1.5)
     BlzFrameSetEnable(frameCheckBox, GetLocalPlayer() == getMainPlayer())
 
@@ -16,11 +17,11 @@ function checkBox(text, parentFrame, checkedFunc, uncheckedFunc)
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_UNCHECKED)
     TriggerAddAction(trigger, function()
         if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
-            checkedFunc()
+            element.value = true
         else
-            uncheckedFunc()
+            element.value = false
         end
     end)
-    return frameText
+    return checkFrame
 end
 Debug.endFile()

@@ -1,30 +1,5 @@
 Debug.beginFile('main-start-game.lua')
 function startGameUI()
-    ui_params = {
-        lengthString = 0.2,
-        widthString = 0.02,
-        indent = 0.015,
-        width = 0.4
-    }
-    ui_config = {
-        isUnitsMirror = false,
-        isHeroesMirror = false,
-        maxHeroes = 3,
-        startGold = 300,
-        baseIncome = 300,
-        incomeBoost = 30,
-        firstMinePrice = 150,
-        nextMineDiffPrice = 75,
-        incomeForCenter = 30,
-        goldByTower = 125,
-        spawnInterval = 35,
-        spawnDif = 0,
-        lifetime = 2,
-        itemCapacity = 4,
-        baseHP = 4000,
-        towerHP = 1200,
-        countForSelect = 3
-    }
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
     local preConfigGameModes = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "QuestButtonBackdropTemplate", 0)
@@ -38,17 +13,48 @@ function startGameUI()
     BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
 
     local allPages = {}
-    buttonGeneral, pageGeneral = createPageGeneral(preConfigGameModes, allPages)
+    local buttonGeneral, pageGeneral, lastElementGeneral = configPage("General", preConfigGameModes, allPages, 0.02)
     BlzFrameSetPoint(buttonGeneral, FRAMEPOINT_TOPLEFT, preConfigGameModes, FRAMEPOINT_BOTTOMLEFT, 0, 0)
 
-    buttonEconomy = createPageEconomy(preConfigGameModes, allPages)
+    local buttonEconomy, pageEconomy, lastElementEconomy = configPage("Economy", preConfigGameModes, allPages, 0.02)
     BlzFrameSetPoint(buttonEconomy, FRAMEPOINT_LEFT, buttonGeneral, FRAMEPOINT_RIGHT, -0.005, 0)
 
-    buttonUnits = createPageUnits(preConfigGameModes, allPages)
+    local buttonUnits, pageUnits, lastElementUnits = configPage("Units", preConfigGameModes, allPages, 0.13)
     BlzFrameSetPoint(buttonUnits, FRAMEPOINT_LEFT, buttonEconomy, FRAMEPOINT_RIGHT, -0.005, 0)
+    local availableUnitsTextFrame = BlzCreateFrameByType('TEXT', 'availableUnitsTextFrame', pageUnits, 'EscMenuSaveDialogTextTemplate', 0)
+    BlzFrameSetText(availableUnitsTextFrame, 'Available units:')
+    BlzFrameSetPoint(availableUnitsTextFrame, FRAMEPOINT_TOPLEFT, pageUnits, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, availableUnitsTextFrame, units_for_build, 5)
+    end
+    for _, unit in ipairs(units_for_build) do
+        initUnitAvailableButton(unit, availableUnitsTextFrame)
+    end
 
-    buttonHeroes = createPageHeroes(preConfigGameModes, allPages)
+    local buttonHeroes, pageHeroes, lastElementHeroes = configPage("Heroes", preConfigGameModes, allPages, 0.16)
     BlzFrameSetPoint(buttonHeroes, FRAMEPOINT_LEFT, buttonUnits, FRAMEPOINT_RIGHT, -0.005, 0)
+    local availableHeroesTextFrame = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', pageHeroes, 'EscMenuSaveDialogTextTemplate', 0)
+    BlzFrameSetText(availableHeroesTextFrame, 'Available heroes:')
+    BlzFrameSetPoint(availableHeroesTextFrame, FRAMEPOINT_TOPLEFT, pageHeroes, FRAMEPOINT_TOPLEFT, ui_params.indent, -0.04)
+    for i, race in ipairs(main_race) do
+        initRaceAvailableButton(race, i, availableHeroesTextFrame, heroes_for_build, 6)
+    end
+    for _, hero in ipairs(heroes_for_build) do
+        initUnitAvailableButton(hero, availableHeroesTextFrame)
+    end
+
+    initGameConfig()
+    for _, element in ipairs(ui_elements) do
+        if element.page == page.GENERAL then
+            lastElementGeneral = createElement(element, pageGeneral, lastElementGeneral)
+        elseif element.page == page.ECONOMY then
+            lastElementEconomy = createElement(element, pageEconomy, lastElementEconomy)
+        elseif element.page == page.UNITS then
+            lastElementUnits = createElement(element, pageUnits, lastElementUnits)
+        elseif element.page == page.HEROES then
+            lastElementHeroes = createElement(element, pageHeroes, lastElementHeroes)
+        end
+    end
 
     for number, page in ipairs(allPages) do
         if number == 1 then
@@ -57,7 +63,6 @@ function startGameUI()
             BlzFrameSetVisible(page, false)
         end
     end
-
     local startGameButton = BlzCreateFrame('StartGameButton', preConfigGameModes, 0, 0)
     BlzFrameSetLevel(startGameButton, 99)
     BlzFrameSetText(startGameButton, 'START')
@@ -68,13 +73,27 @@ function startGameUI()
     BlzTriggerRegisterFrameEvent(trig1, startGameButton, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig1, function()
         BlzFrameSetVisible(preConfigGameModes, FALSE)
+        for _, element in ipairs(ui_elements) do
+            element.initConfigValue(element)
+        end
         startGame()
     end)
 
-    local selectingText = BlzCreateFrame("GreenText", preConfigGameModes, 0, 0)
-    BlzFrameSetParent(selectingText, preConfigGameModes)
-    BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
-    BlzFrameSetPoint(selectingText, FRAMEPOINT_BOTTOM, preConfigGameModes, FRAMEPOINT_TOP, 0, 0)
+        local selectingText = BlzCreateFrame("GreenText", preConfigGameModes, 0, 0)
+        BlzFrameSetParent(selectingText, preConfigGameModes)
+        BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
+        BlzFrameSetPoint(selectingText, FRAMEPOINT_BOTTOM, preConfigGameModes, FRAMEPOINT_TOP, 0, 0)
+end
+
+function createElement(element, page, lastElement)
+    if element.type == elementType.SLIDER then
+        return createSlider(page, lastElement, element)
+    elseif element.type == elementType.EDIT_BOX then
+        return createEditBox(page, lastElement, element)
+    elseif element.type == elementType.CHECK_BOX then
+        return createCheckBox(page, lastElement, element)
+    end
+
 end
 
 function buttonWithAction(text, parentFrame, action)
@@ -88,7 +107,7 @@ function buttonWithAction(text, parentFrame, action)
     return button
 end
 
-function configPage(text, parent, allPages)
+function configPage(text, parent, allPages, dif)
     local configButton = BlzCreateFrame('ConfigPageButton', parent, 0, 0)
     BlzFrameSetLevel(configButton, 99)
     BlzFrameSetText(configButton, text)
@@ -100,6 +119,11 @@ function configPage(text, parent, allPages)
     BlzFrameSetEnable(pageFrame, GetLocalPlayer() == getMainPlayer())
     table.insert(allPages, pageFrame)
 
+    local emptyFrame = BlzCreateFrameByType("FRAME", "", parent, "", 0)
+    BlzFrameSetSize(emptyFrame, ui_params.lengthString, 0.001)
+
+    BlzFrameSetPoint(emptyFrame, FRAMEPOINT_TOPLEFT, pageFrame, FRAMEPOINT_TOPLEFT, ui_params.indent, -dif)
+
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, configButton, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
@@ -108,7 +132,7 @@ function configPage(text, parent, allPages)
         end
         BlzFrameSetVisible(pageFrame, true)
     end)
-    return configButton, pageFrame
+    return configButton, pageFrame, emptyFrame
 end
 
 function initRaceAvailableButton(race, position, frame, unitContainer, max)
