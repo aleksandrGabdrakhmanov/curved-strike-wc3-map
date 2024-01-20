@@ -59,6 +59,14 @@ Frame "BACKDROP" "ConfigPageBackdrop" {
     BackdropBackgroundInsets 0.005 0.005 0.005 0.005,
     BackdropEdgeFile  "UI\Widgets\EscMenu\Orc\orc-cinematic-border.blp",
 }
+Frame "BACKDROP" "TooltipBackdrop" {
+    BackdropBlendAll,
+    BackdropBackground  "war3mapImported\tooltip3.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.0125,
+    BackdropBackgroundInsets 0.005 0.005 0.005 0.005,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\Orc\orc-cinematic-border.blp",
+}
 Frame "BACKDROP" "FinishGameBackdrop" {
     BackdropBackground  "war3mapImported\finishGame1.tga",
     BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",

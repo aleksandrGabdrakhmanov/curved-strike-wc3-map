@@ -1,14 +1,18 @@
 Debug.beginFile('element-check-box.lua')
 function createCheckBox(parentPage, lastElement, element)
 
-    local checkFrame = BlzCreateFrameByType("TEXT", "", parentPage, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetText(checkFrame, element.text)
-    BlzFrameSetSize(checkFrame, ui_params.lengthString, ui_params.widthString)
-    BlzFrameSetEnable(checkFrame, GetLocalPlayer() == getMainPlayer())
-    BlzFrameSetPoint(checkFrame, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
+    local label = BlzCreateFrameByType("TEXT", "", parentPage, "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(label, element.text)
+    BlzFrameSetSize(label, ui_params.lengthString, ui_params.widthString)
+    BlzFrameSetEnable(label, GetLocalPlayer() == getMainPlayer())
+    BlzFrameSetPoint(label, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
+
+    local tooltipFrame, tooltipLabel = createTooltip(parentPage)
+    BlzFrameSetTooltip(label, tooltipFrame)
+    BlzFrameSetText(tooltipLabel, element.tooltip)
 
     local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentPage, 0, 0)
-    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, checkFrame, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, label, FRAMEPOINT_RIGHT, 0, 0)
     BlzFrameSetScale(frameCheckBox, 1.5)
     BlzFrameSetEnable(frameCheckBox, GetLocalPlayer() == getMainPlayer())
 
@@ -22,6 +26,6 @@ function createCheckBox(parentPage, lastElement, element)
             element.value = false
         end
     end)
-    return checkFrame
+    return label
 end
 Debug.endFile()

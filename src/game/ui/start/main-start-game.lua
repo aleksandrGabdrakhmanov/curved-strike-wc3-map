@@ -2,24 +2,20 @@ Debug.beginFile('main-start-game.lua')
 function startGameUI()
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
-    local preConfigGameModes = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "QuestButtonBackdropTemplate", 0)
-    BlzFrameSetAbsPoint(preConfigGameModes, FRAMEPOINT_CENTER, 0.4, 0.45)
-    BlzFrameSetSize(preConfigGameModes, ui_params.width, 0.08)
-    BlzFrameSetEnable(preConfigGameModes, GetLocalPlayer() == getMainPlayer())
-
-    local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", preConfigGameModes, "EscMenuTitleTextTemplate", 0)
-    BlzFrameSetText(frameText, "Pre-configured game modes")
-    BlzFrameSetPoint(frameText, FRAMEPOINT_TOP, preConfigGameModes, FRAMEPOINT_TOP, 0, -ui_params.indent)
-    BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
+    local parent = BlzCreateFrame("GreenText", BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
+    BlzFrameSetParent(parent, preConfigGameModes)
+    BlzFrameSetText(parent, GetPlayerName(getMainPlayer()) .. " is selecting...")
+    BlzFrameSetAbsPoint(parent, FRAMEPOINT_CENTER, 0.4, 0.55)
+    BlzFrameSetSize(parent, ui_params.width, 0.02)
 
     local allPages = {}
-    local buttonGeneral, pageGeneral, lastElementGeneral = configPage("General", preConfigGameModes, allPages, 0.02)
-    BlzFrameSetPoint(buttonGeneral, FRAMEPOINT_TOPLEFT, preConfigGameModes, FRAMEPOINT_BOTTOMLEFT, 0, 0)
+    local buttonGeneral, pageGeneral, lastElementGeneral = configPage("General", parent, allPages, 0.02)
+    BlzFrameSetPoint(buttonGeneral, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_BOTTOMLEFT, 0, 0)
 
-    local buttonEconomy, pageEconomy, lastElementEconomy = configPage("Economy", preConfigGameModes, allPages, 0.02)
+    local buttonEconomy, pageEconomy, lastElementEconomy = configPage("Economy", parent, allPages, 0.02)
     BlzFrameSetPoint(buttonEconomy, FRAMEPOINT_LEFT, buttonGeneral, FRAMEPOINT_RIGHT, -0.005, 0)
 
-    local buttonUnits, pageUnits, lastElementUnits = configPage("Units", preConfigGameModes, allPages, 0.13)
+    local buttonUnits, pageUnits, lastElementUnits = configPage("Units", parent, allPages, 0.13)
     BlzFrameSetPoint(buttonUnits, FRAMEPOINT_LEFT, buttonEconomy, FRAMEPOINT_RIGHT, -0.005, 0)
     local availableUnitsTextFrame = BlzCreateFrameByType('TEXT', 'availableUnitsTextFrame', pageUnits, 'EscMenuSaveDialogTextTemplate', 0)
     BlzFrameSetText(availableUnitsTextFrame, 'Available units:')
@@ -31,7 +27,7 @@ function startGameUI()
         initUnitAvailableButton(unit, availableUnitsTextFrame)
     end
 
-    local buttonHeroes, pageHeroes, lastElementHeroes = configPage("Heroes", preConfigGameModes, allPages, 0.16)
+    local buttonHeroes, pageHeroes, lastElementHeroes = configPage("Heroes", parent, allPages, 0.16)
     BlzFrameSetPoint(buttonHeroes, FRAMEPOINT_LEFT, buttonUnits, FRAMEPOINT_RIGHT, -0.005, 0)
     local availableHeroesTextFrame = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', pageHeroes, 'EscMenuSaveDialogTextTemplate', 0)
     BlzFrameSetText(availableHeroesTextFrame, 'Available heroes:')
@@ -63,7 +59,7 @@ function startGameUI()
             BlzFrameSetVisible(page, false)
         end
     end
-    local startGameButton = BlzCreateFrame('StartGameButton', preConfigGameModes, 0, 0)
+    local startGameButton = BlzCreateFrame('StartGameButton', parent, 0, 0)
     BlzFrameSetLevel(startGameButton, 99)
     BlzFrameSetText(startGameButton, 'START')
     BlzFrameSetPoint(startGameButton, FRAMEPOINT_BOTTOMRIGHT, pageGeneral, FRAMEPOINT_BOTTOMRIGHT, -ui_params.indent, ui_params.indent)
@@ -72,17 +68,24 @@ function startGameUI()
     local trig1 = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig1, startGameButton, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig1, function()
-        BlzFrameSetVisible(preConfigGameModes, FALSE)
+        BlzFrameSetVisible(parent, FALSE)
         for _, element in ipairs(ui_elements) do
             element.initConfigValue(element)
         end
         startGame()
     end)
+end
 
-        local selectingText = BlzCreateFrame("GreenText", preConfigGameModes, 0, 0)
-        BlzFrameSetParent(selectingText, preConfigGameModes)
-        BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
-        BlzFrameSetPoint(selectingText, FRAMEPOINT_BOTTOM, preConfigGameModes, FRAMEPOINT_TOP, 0, 0)
+function createTooltip(owner)
+    local tooltipFrame = BlzCreateFrame('TooltipBackdrop', owner, 0, 0)
+    BlzFrameSetPoint(tooltipFrame, FRAMEPOINT_LEFT, owner, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetSize(tooltipFrame, 0.26, 0.26)
+    local tooltipLabel = BlzCreateFrameByType("TEXT", "", tooltipFrame, "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetSize(tooltipLabel, 0.24, 0.24)
+    BlzFrameSetTextAlignment(tooltipLabel, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_MIDDLE)
+    BlzFrameSetPoint(tooltipLabel, FRAMEPOINT_CENTER, tooltipFrame, FRAMEPOINT_CENTER, 0, 0)
+    BlzFrameSetParent(tooltipLabel, tooltipFrame)
+    return tooltipFrame, tooltipLabel
 end
 
 function createElement(element, page, lastElement)

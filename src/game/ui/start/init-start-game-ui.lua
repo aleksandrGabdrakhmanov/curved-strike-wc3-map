@@ -27,7 +27,14 @@ function initStartGameUI()
             page = page.GENERAL,
             type = elementType.SLIDER,
             text = 'Wave interval each players',
-            tooltip = "tooltip",
+            tooltip = 'Wave release interval between players. The total interval for each player between their' ..
+                    ' turns will be the product of the number of players and the interval.\n\nThe default value of this' ..
+                    ' parameter varies depending on the number of players:\n' ..
+                    '[1x1] 35 sec * 1 = 35 total\n' ..
+                    '[2x2] 35 sec * 2 = 70 total\n' ..
+                    '[3x3] 35 sec * 3 = 105 total\n' ..
+                    '[4x4] 30 sec * 4 = 120 total\n' ..
+                    '[5x5] 25 sec * 4 = 125 total\n',
             defValue = 35,
             value = 35,
             max = 120,
@@ -41,7 +48,7 @@ function initStartGameUI()
             page = page.GENERAL,
             type = elementType.SLIDER,
             text = 'Wave interval all players',
-            tooltip = "tooltip",
+            tooltip = 'The interval for the next wave after all players have launched waves and a full cycle has passed for the team',
             defValue = 0,
             value = 0,
             max = 120,
@@ -55,7 +62,7 @@ function initStartGameUI()
             page = page.GENERAL,
             type = elementType.EDIT_BOX,
             text = 'Base HP',
-            tooltip = "tooltip",
+            tooltip = "Maximum health capacity of the team's main base",
             defValue = 4000,
             value = 4000,
             max = 999999,
@@ -69,7 +76,7 @@ function initStartGameUI()
             page = page.GENERAL,
             type = elementType.EDIT_BOX,
             text = 'Tower HP',
-            tooltip = "tooltip",
+            tooltip = "Maximum health capacity of the team's tower",
             defValue = 4000,
             value = 4000,
             max = 999999,
@@ -84,7 +91,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.EDIT_BOX,
             text = 'Start gold',
-            tooltip = "tooltip",
+            tooltip = "Initial amount of gold with which players start the game",
             defValue = 300,
             value = 300,
             max = 999999,
@@ -98,7 +105,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Base income/min',
-            tooltip = "tooltip",
+            tooltip = "Starting amount of income",
             defValue = 300,
             value = 300,
             max = 3000,
@@ -112,7 +119,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Added inc for each mine',
-            tooltip = "tooltip",
+            tooltip = "Additional income awarded to the player for each mine upgrade",
             defValue = 30,
             value = 30,
             max = 300,
@@ -126,7 +133,8 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Added inc for controlling center',
-            tooltip = "tooltip",
+            tooltip = "Additional income for team control of the center.\nThis income is granted to the team that" ..
+                    " first crosses the center of the map, until another team crosses the center",
             defValue = 30,
             value = 30,
             max = 300,
@@ -140,7 +148,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Price first mine',
-            tooltip = "tooltip",
+            tooltip = "Cost of the first upgrade for the mine",
             defValue = 150,
             value = 150,
             max = 1500,
@@ -154,7 +162,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Price diff for each next mine',
-            tooltip = "tooltip",
+            tooltip = "Price increase for each subsequent mine upgrade",
             defValue = 75,
             value = 75,
             max = 300,
@@ -168,7 +176,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Gold for killing the tower',
-            tooltip = "tooltip",
+            tooltip = "Amount of gold awarded to each team member for destroying an enemy tower",
             defValue = 125,
             value = 125,
             max = 1500,
@@ -183,7 +191,8 @@ function initStartGameUI()
             page = page.UNITS,
             type = elementType.CHECK_BOX,
             text = 'Mirror units',
-            tooltip = "tooltip",
+            tooltip = "Distribute identical random units to players of opposing teams in corresponding positions.\n" ..
+                    "For example, player 1 from team 1 will have the same set of units as player 1 from team 2, and so on",
             value = false,
             initConfigValue = function(self)
                 game_config.units.isUnitsMirror = self.value
@@ -193,7 +202,9 @@ function initStartGameUI()
             page = page.UNITS,
             type = elementType.SLIDER,
             text = 'Max lifespan of unit in waves',
-            tooltip = "tooltip",
+            tooltip = "Number of waves after a unit's deployment, upon which the unit will disappear.\n" ..
+                    "For example, if the parameter value is 2, then the unit will vanish after two more waves are" ..
+                    " released by the player who owns that unit.",
             defValue = 2,
             value = 2,
             max = 15,
@@ -208,7 +219,8 @@ function initStartGameUI()
             page = page.HEROES,
             type = elementType.CHECK_BOX,
             text = 'Mirror heroes',
-            tooltip = "tooltip",
+            tooltip = "Assign identical random heroes to players of opposing teams in the same positions.\n" ..
+                    "For instance, player 1 from team 1 will have the same hero as player 1 from team 2, and so forth",
             value = false,
             initConfigValue = function(self)
                 game_config.units.isHeroesMirror = self.value
@@ -218,7 +230,7 @@ function initStartGameUI()
             page = page.HEROES,
             type = elementType.SLIDER,
             text = 'Max heroes',
-            tooltip = "tooltip",
+            tooltip = "Maximum possible number of heroes for each player",
             defValue = 3,
             value = 3,
             max = 7,
@@ -232,7 +244,9 @@ function initStartGameUI()
             page = page.HEROES,
             type = elementType.SLIDER,
             text = 'Selectable hero count',
-            tooltip = "tooltip",
+            tooltip = "Number of random heroes available for a player to choose from when summoning each subsequent hero.\n"
+            .. " For example, if the parameter value is 3, then upon constructing a hero, the player will have a " ..
+                    "choice among 3 randomly generated hero options.",
             defValue = 2,
             value = 2,
             max = 11,
@@ -246,7 +260,7 @@ function initStartGameUI()
             page = page.HEROES,
             type = elementType.SLIDER,
             text = 'Item capacity',
-            tooltip = "tooltip",
+            tooltip = "Maximum number of items that a hero can carry",
             defValue = 4,
             value = 4,
             max = 6,

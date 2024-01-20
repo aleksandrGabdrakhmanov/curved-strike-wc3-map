@@ -8196,14 +8196,18 @@ Debug.endFile()
 Debug.beginFile('element-check-box.lua')
 function createCheckBox(parentPage, lastElement, element)
 
-    local checkFrame = BlzCreateFrameByType("TEXT", "", parentPage, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetText(checkFrame, element.text)
-    BlzFrameSetSize(checkFrame, ui_params.lengthString, ui_params.widthString)
-    BlzFrameSetEnable(checkFrame, GetLocalPlayer() == getMainPlayer())
-    BlzFrameSetPoint(checkFrame, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
+    local label = BlzCreateFrameByType("TEXT", "", parentPage, "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetText(label, element.text)
+    BlzFrameSetSize(label, ui_params.lengthString, ui_params.widthString)
+    BlzFrameSetEnable(label, GetLocalPlayer() == getMainPlayer())
+    BlzFrameSetPoint(label, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
+
+    local tooltipFrame, tooltipLabel = createTooltip(parentPage)
+    BlzFrameSetTooltip(label, tooltipFrame)
+    BlzFrameSetText(tooltipLabel, element.tooltip)
 
     local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentPage, 0, 0)
-    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, checkFrame, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, label, FRAMEPOINT_RIGHT, 0, 0)
     BlzFrameSetScale(frameCheckBox, 1.5)
     BlzFrameSetEnable(frameCheckBox, GetLocalPlayer() == getMainPlayer())
 
@@ -8217,7 +8221,7 @@ function createCheckBox(parentPage, lastElement, element)
             element.value = false
         end
     end)
-    return checkFrame
+    return label
 end
 Debug.endFile()
 Debug.beginFile('element-check-box.lua')
@@ -8227,6 +8231,10 @@ function createEditBox(parentPage, lastElement, element)
     BlzFrameSetSize(frameText, ui_params.lengthString, ui_params.widthString)
     BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
     BlzFrameSetPoint(frameText, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
+
+    local tooltipFrame, tooltipLabel = createTooltip(parentPage)
+    BlzFrameSetTooltip(frameText, tooltipFrame)
+    BlzFrameSetText(tooltipLabel, element.tooltip)
 
     local editBox = BlzCreateFrame("EscMenuEditBoxTemplate", parentPage, 0, 0) --create the box
     BlzFrameSetPoint(editBox, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
@@ -8279,6 +8287,10 @@ function createSlider(parentPage, lastElement, element)
     BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
     BlzFrameSetPoint(frameText, FRAMEPOINT_TOPLEFT, lastElement, FRAMEPOINT_TOPLEFT, 0, -ui_params.betweenElement)
 
+    local tooltipFrame, tooltipLabel = createTooltip(parentPage)
+    BlzFrameSetTooltip(frameText, tooltipFrame)
+    BlzFrameSetText(tooltipLabel, element.tooltip)
+
     local slider = BlzCreateFrame("EscMenuSliderTemplate", parentPage, 0, 0)
     BlzFrameSetPoint(slider, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
     BlzFrameSetMinMaxValue(slider, element.min, element.max)
@@ -8330,7 +8342,14 @@ function initStartGameUI()
             page = page.GENERAL,
             type = elementType.SLIDER,
             text = 'Wave interval each players',
-            tooltip = "tooltip",
+            tooltip = 'Wave release interval between players. The total interval for each player between their' ..
+                    ' turns will be the product of the number of players and the interval.\n\nThe default value of this' ..
+                    ' parameter varies depending on the number of players:\n' ..
+                    '[1x1] 35 sec * 1 = 35 total\n' ..
+                    '[2x2] 35 sec * 2 = 70 total\n' ..
+                    '[3x3] 35 sec * 3 = 105 total\n' ..
+                    '[4x4] 30 sec * 4 = 120 total\n' ..
+                    '[5x5] 25 sec * 4 = 125 total\n',
             defValue = 35,
             value = 35,
             max = 120,
@@ -8344,7 +8363,7 @@ function initStartGameUI()
             page = page.GENERAL,
             type = elementType.SLIDER,
             text = 'Wave interval all players',
-            tooltip = "tooltip",
+            tooltip = 'The interval for the next wave after all players have launched waves and a full cycle has passed for the team',
             defValue = 0,
             value = 0,
             max = 120,
@@ -8358,7 +8377,7 @@ function initStartGameUI()
             page = page.GENERAL,
             type = elementType.EDIT_BOX,
             text = 'Base HP',
-            tooltip = "tooltip",
+            tooltip = "Maximum health capacity of the team's main base",
             defValue = 4000,
             value = 4000,
             max = 999999,
@@ -8372,7 +8391,7 @@ function initStartGameUI()
             page = page.GENERAL,
             type = elementType.EDIT_BOX,
             text = 'Tower HP',
-            tooltip = "tooltip",
+            tooltip = "Maximum health capacity of the team's tower",
             defValue = 4000,
             value = 4000,
             max = 999999,
@@ -8387,7 +8406,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.EDIT_BOX,
             text = 'Start gold',
-            tooltip = "tooltip",
+            tooltip = "Initial amount of gold with which players start the game",
             defValue = 300,
             value = 300,
             max = 999999,
@@ -8401,7 +8420,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Base income/min',
-            tooltip = "tooltip",
+            tooltip = "Starting amount of income",
             defValue = 300,
             value = 300,
             max = 3000,
@@ -8415,7 +8434,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Added inc for each mine',
-            tooltip = "tooltip",
+            tooltip = "Additional income awarded to the player for each mine upgrade",
             defValue = 30,
             value = 30,
             max = 300,
@@ -8429,7 +8448,8 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Added inc for controlling center',
-            tooltip = "tooltip",
+            tooltip = "Additional income for team control of the center.\nThis income is granted to the team that" ..
+                    " first crosses the center of the map, until another team crosses the center",
             defValue = 30,
             value = 30,
             max = 300,
@@ -8443,7 +8463,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Price first mine',
-            tooltip = "tooltip",
+            tooltip = "Cost of the first upgrade for the mine",
             defValue = 150,
             value = 150,
             max = 1500,
@@ -8457,7 +8477,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Price diff for each next mine',
-            tooltip = "tooltip",
+            tooltip = "Price increase for each subsequent mine upgrade",
             defValue = 75,
             value = 75,
             max = 300,
@@ -8471,7 +8491,7 @@ function initStartGameUI()
             page = page.ECONOMY,
             type = elementType.SLIDER,
             text = 'Gold for killing the tower',
-            tooltip = "tooltip",
+            tooltip = "Amount of gold awarded to each team member for destroying an enemy tower",
             defValue = 125,
             value = 125,
             max = 1500,
@@ -8486,7 +8506,8 @@ function initStartGameUI()
             page = page.UNITS,
             type = elementType.CHECK_BOX,
             text = 'Mirror units',
-            tooltip = "tooltip",
+            tooltip = "Distribute identical random units to players of opposing teams in corresponding positions.\n" ..
+                    "For example, player 1 from team 1 will have the same set of units as player 1 from team 2, and so on",
             value = false,
             initConfigValue = function(self)
                 game_config.units.isUnitsMirror = self.value
@@ -8496,7 +8517,9 @@ function initStartGameUI()
             page = page.UNITS,
             type = elementType.SLIDER,
             text = 'Max lifespan of unit in waves',
-            tooltip = "tooltip",
+            tooltip = "Number of waves after a unit's deployment, upon which the unit will disappear.\n" ..
+                    "For example, if the parameter value is 2, then the unit will vanish after two more waves are" ..
+                    " released by the player who owns that unit.",
             defValue = 2,
             value = 2,
             max = 15,
@@ -8511,7 +8534,8 @@ function initStartGameUI()
             page = page.HEROES,
             type = elementType.CHECK_BOX,
             text = 'Mirror heroes',
-            tooltip = "tooltip",
+            tooltip = "Assign identical random heroes to players of opposing teams in the same positions.\n" ..
+                    "For instance, player 1 from team 1 will have the same hero as player 1 from team 2, and so forth",
             value = false,
             initConfigValue = function(self)
                 game_config.units.isHeroesMirror = self.value
@@ -8521,7 +8545,7 @@ function initStartGameUI()
             page = page.HEROES,
             type = elementType.SLIDER,
             text = 'Max heroes',
-            tooltip = "tooltip",
+            tooltip = "Maximum possible number of heroes for each player",
             defValue = 3,
             value = 3,
             max = 7,
@@ -8535,7 +8559,9 @@ function initStartGameUI()
             page = page.HEROES,
             type = elementType.SLIDER,
             text = 'Selectable hero count',
-            tooltip = "tooltip",
+            tooltip = "Number of random heroes available for a player to choose from when summoning each subsequent hero.\n"
+            .. " For example, if the parameter value is 3, then upon constructing a hero, the player will have a " ..
+                    "choice among 3 randomly generated hero options.",
             defValue = 2,
             value = 2,
             max = 11,
@@ -8549,7 +8575,7 @@ function initStartGameUI()
             page = page.HEROES,
             type = elementType.SLIDER,
             text = 'Item capacity',
-            tooltip = "tooltip",
+            tooltip = "Maximum number of items that a hero can carry",
             defValue = 4,
             value = 4,
             max = 6,
@@ -8566,24 +8592,20 @@ Debug.beginFile('main-start-game.lua')
 function startGameUI()
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
-    local preConfigGameModes = BlzCreateFrameByType('BACKDROP', 'PreConfigGameModes', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "QuestButtonBackdropTemplate", 0)
-    BlzFrameSetAbsPoint(preConfigGameModes, FRAMEPOINT_CENTER, 0.4, 0.45)
-    BlzFrameSetSize(preConfigGameModes, ui_params.width, 0.08)
-    BlzFrameSetEnable(preConfigGameModes, GetLocalPlayer() == getMainPlayer())
-
-    local frameText = BlzCreateFrameByType("TEXT", "MyTextFrame", preConfigGameModes, "EscMenuTitleTextTemplate", 0)
-    BlzFrameSetText(frameText, "Pre-configured game modes")
-    BlzFrameSetPoint(frameText, FRAMEPOINT_TOP, preConfigGameModes, FRAMEPOINT_TOP, 0, -ui_params.indent)
-    BlzFrameSetEnable(frameText, GetLocalPlayer() == getMainPlayer())
+    local parent = BlzCreateFrame("GreenText", BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
+    BlzFrameSetParent(parent, preConfigGameModes)
+    BlzFrameSetText(parent, GetPlayerName(getMainPlayer()) .. " is selecting...")
+    BlzFrameSetAbsPoint(parent, FRAMEPOINT_CENTER, 0.4, 0.55)
+    BlzFrameSetSize(parent, ui_params.width, 0.02)
 
     local allPages = {}
-    local buttonGeneral, pageGeneral, lastElementGeneral = configPage("General", preConfigGameModes, allPages, 0.02)
-    BlzFrameSetPoint(buttonGeneral, FRAMEPOINT_TOPLEFT, preConfigGameModes, FRAMEPOINT_BOTTOMLEFT, 0, 0)
+    local buttonGeneral, pageGeneral, lastElementGeneral = configPage("General", parent, allPages, 0.02)
+    BlzFrameSetPoint(buttonGeneral, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_BOTTOMLEFT, 0, 0)
 
-    local buttonEconomy, pageEconomy, lastElementEconomy = configPage("Economy", preConfigGameModes, allPages, 0.02)
+    local buttonEconomy, pageEconomy, lastElementEconomy = configPage("Economy", parent, allPages, 0.02)
     BlzFrameSetPoint(buttonEconomy, FRAMEPOINT_LEFT, buttonGeneral, FRAMEPOINT_RIGHT, -0.005, 0)
 
-    local buttonUnits, pageUnits, lastElementUnits = configPage("Units", preConfigGameModes, allPages, 0.13)
+    local buttonUnits, pageUnits, lastElementUnits = configPage("Units", parent, allPages, 0.13)
     BlzFrameSetPoint(buttonUnits, FRAMEPOINT_LEFT, buttonEconomy, FRAMEPOINT_RIGHT, -0.005, 0)
     local availableUnitsTextFrame = BlzCreateFrameByType('TEXT', 'availableUnitsTextFrame', pageUnits, 'EscMenuSaveDialogTextTemplate', 0)
     BlzFrameSetText(availableUnitsTextFrame, 'Available units:')
@@ -8595,7 +8617,7 @@ function startGameUI()
         initUnitAvailableButton(unit, availableUnitsTextFrame)
     end
 
-    local buttonHeroes, pageHeroes, lastElementHeroes = configPage("Heroes", preConfigGameModes, allPages, 0.16)
+    local buttonHeroes, pageHeroes, lastElementHeroes = configPage("Heroes", parent, allPages, 0.16)
     BlzFrameSetPoint(buttonHeroes, FRAMEPOINT_LEFT, buttonUnits, FRAMEPOINT_RIGHT, -0.005, 0)
     local availableHeroesTextFrame = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', pageHeroes, 'EscMenuSaveDialogTextTemplate', 0)
     BlzFrameSetText(availableHeroesTextFrame, 'Available heroes:')
@@ -8627,7 +8649,7 @@ function startGameUI()
             BlzFrameSetVisible(page, false)
         end
     end
-    local startGameButton = BlzCreateFrame('StartGameButton', preConfigGameModes, 0, 0)
+    local startGameButton = BlzCreateFrame('StartGameButton', parent, 0, 0)
     BlzFrameSetLevel(startGameButton, 99)
     BlzFrameSetText(startGameButton, 'START')
     BlzFrameSetPoint(startGameButton, FRAMEPOINT_BOTTOMRIGHT, pageGeneral, FRAMEPOINT_BOTTOMRIGHT, -ui_params.indent, ui_params.indent)
@@ -8636,17 +8658,24 @@ function startGameUI()
     local trig1 = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig1, startGameButton, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig1, function()
-        BlzFrameSetVisible(preConfigGameModes, FALSE)
+        BlzFrameSetVisible(parent, FALSE)
         for _, element in ipairs(ui_elements) do
             element.initConfigValue(element)
         end
         startGame()
     end)
+end
 
-        local selectingText = BlzCreateFrame("GreenText", preConfigGameModes, 0, 0)
-        BlzFrameSetParent(selectingText, preConfigGameModes)
-        BlzFrameSetText(selectingText, GetPlayerName(getMainPlayer()) .. " is selecting...")
-        BlzFrameSetPoint(selectingText, FRAMEPOINT_BOTTOM, preConfigGameModes, FRAMEPOINT_TOP, 0, 0)
+function createTooltip(owner)
+    local tooltipFrame = BlzCreateFrame('TooltipBackdrop', owner, 0, 0)
+    BlzFrameSetPoint(tooltipFrame, FRAMEPOINT_LEFT, owner, FRAMEPOINT_RIGHT, 0, 0)
+    BlzFrameSetSize(tooltipFrame, 0.26, 0.26)
+    local tooltipLabel = BlzCreateFrameByType("TEXT", "", tooltipFrame, "EscMenuSaveDialogTextTemplate", 0)
+    BlzFrameSetSize(tooltipLabel, 0.24, 0.24)
+    BlzFrameSetTextAlignment(tooltipLabel, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_MIDDLE)
+    BlzFrameSetPoint(tooltipLabel, FRAMEPOINT_CENTER, tooltipFrame, FRAMEPOINT_CENTER, 0, 0)
+    BlzFrameSetParent(tooltipLabel, tooltipFrame)
+    return tooltipFrame, tooltipLabel
 end
 
 function createElement(element, page, lastElement)
