@@ -26,8 +26,27 @@ function initGameConfig()
             dif = nil
         },
         playerPosition = { 1, 2, 3, 4, 5 },
-        isOpenAllMap = false
+        isOpenAllMap = false,
+        playersCount = getPlayersCount()
     }
+
+    local count = 0
+    for i = 0, 9 do
+        if (GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING) then
+            count = count + 1
+        end
+    end
+
+end
+
+function getPlayersCount()
+    local count = 0
+    for i = 0, 9 do
+        if (GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING) then
+            count = count + 1
+        end
+    end
+    return count
 end
 
 function initGlobalVariables()

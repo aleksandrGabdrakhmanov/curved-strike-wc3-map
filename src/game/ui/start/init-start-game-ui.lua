@@ -35,8 +35,18 @@ function initStartGameUI()
                     '[3x3] 35 sec * 3 = 105 total\n' ..
                     '[4x4] 30 sec * 4 = 120 total\n' ..
                     '[5x5] 25 sec * 4 = 125 total\n',
-            defValue = 35,
-            value = 35,
+            defValue = {
+                [1] = 35,
+                [2] = 35,
+                [3] = 35,
+                [4] = 35,
+                [5] = 35,
+                [6] = 35,
+                [7] = 30,
+                [8] = 30,
+                [9] = 25,
+                [10] = 25
+            },
             max = 120,
             min = 1,
             step = 1,
@@ -50,7 +60,6 @@ function initStartGameUI()
             text = 'Wave interval all players',
             tooltip = 'The interval for the next wave after all players have launched waves and a full cycle has passed for the team',
             defValue = 0,
-            value = 0,
             max = 120,
             min = 0,
             step = 1,
@@ -64,7 +73,6 @@ function initStartGameUI()
             text = 'Base HP',
             tooltip = "Maximum health capacity of the team's main base",
             defValue = 4000,
-            value = 4000,
             max = 999999,
             min = 1,
             step = 1,
@@ -78,7 +86,6 @@ function initStartGameUI()
             text = 'Tower HP',
             tooltip = "Maximum health capacity of the team's tower",
             defValue = 4000,
-            value = 4000,
             max = 999999,
             min = 1,
             step = 1,
@@ -93,7 +100,6 @@ function initStartGameUI()
             text = 'Start gold',
             tooltip = "Initial amount of gold with which players start the game",
             defValue = 300,
-            value = 300,
             max = 999999,
             min = 0,
             step = 1,
@@ -107,7 +113,6 @@ function initStartGameUI()
             text = 'Base income/min',
             tooltip = "Starting amount of income",
             defValue = 300,
-            value = 300,
             max = 3000,
             min = 60,
             step = 30,
@@ -121,7 +126,6 @@ function initStartGameUI()
             text = 'Added inc for each mine',
             tooltip = "Additional income awarded to the player for each mine upgrade",
             defValue = 30,
-            value = 30,
             max = 300,
             min = 30,
             step = 30,
@@ -136,7 +140,6 @@ function initStartGameUI()
             tooltip = "Additional income for team control of the center.\nThis income is granted to the team that" ..
                     " first crosses the center of the map, until another team crosses the center",
             defValue = 30,
-            value = 30,
             max = 300,
             min = 0,
             step = 30,
@@ -150,7 +153,6 @@ function initStartGameUI()
             text = 'Price first mine',
             tooltip = "Cost of the first upgrade for the mine",
             defValue = 150,
-            value = 150,
             max = 1500,
             min = 1,
             step = 1,
@@ -164,7 +166,6 @@ function initStartGameUI()
             text = 'Price diff for each next mine',
             tooltip = "Price increase for each subsequent mine upgrade",
             defValue = 75,
-            value = 75,
             max = 300,
             min = 1,
             step = 1,
@@ -178,7 +179,6 @@ function initStartGameUI()
             text = 'Gold for killing the tower',
             tooltip = "Amount of gold awarded to each team member for destroying an enemy tower",
             defValue = 125,
-            value = 125,
             max = 1500,
             min = 0,
             step = 1,
@@ -193,7 +193,7 @@ function initStartGameUI()
             text = 'Mirror units',
             tooltip = "Distribute identical random units to players of opposing teams in corresponding positions.\n" ..
                     "For example, player 1 from team 1 will have the same set of units as player 1 from team 2, and so on",
-            value = false,
+            defValue = false,
             initConfigValue = function(self)
                 game_config.units.isUnitsMirror = self.value
             end
@@ -206,7 +206,6 @@ function initStartGameUI()
                     "For example, if the parameter value is 2, then the unit will vanish after two more waves are" ..
                     " released by the player who owns that unit.",
             defValue = 2,
-            value = 2,
             max = 15,
             min = 1,
             step = 1,
@@ -221,7 +220,7 @@ function initStartGameUI()
             text = 'Mirror heroes',
             tooltip = "Assign identical random heroes to players of opposing teams in the same positions.\n" ..
                     "For instance, player 1 from team 1 will have the same hero as player 1 from team 2, and so forth",
-            value = false,
+            defValue = false,
             initConfigValue = function(self)
                 game_config.units.isHeroesMirror = self.value
             end
@@ -232,7 +231,6 @@ function initStartGameUI()
             text = 'Max heroes',
             tooltip = "Maximum possible number of heroes for each player",
             defValue = 3,
-            value = 3,
             max = 7,
             min = 0,
             step = 1,
@@ -248,7 +246,6 @@ function initStartGameUI()
             .. " For example, if the parameter value is 3, then upon constructing a hero, the player will have a " ..
                     "choice among 3 randomly generated hero options.",
             defValue = 2,
-            value = 2,
             max = 11,
             min = 1,
             step = 1,
@@ -262,7 +259,6 @@ function initStartGameUI()
             text = 'Item capacity',
             tooltip = "Maximum number of items that a hero can carry",
             defValue = 4,
-            value = 4,
             max = 6,
             min = 0,
             step = 1,

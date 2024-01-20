@@ -40,7 +40,16 @@ function startGameUI()
     end
 
     initGameConfig()
+
     for _, element in ipairs(ui_elements) do
+        if type(element.defValue) == 'table' then
+            element.defValue = element.defValue[game_config.playersCount]
+        end
+
+
+        element.value = element.defValue
+
+
         if element.page == page.GENERAL then
             lastElementGeneral = createElement(element, pageGeneral, lastElementGeneral)
         elseif element.page == page.ECONOMY then
