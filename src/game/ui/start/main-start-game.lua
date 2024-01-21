@@ -5,7 +5,7 @@ function startGameUI()
     local parent = BlzCreateFrame("GreenText", BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
     BlzFrameSetParent(parent, preConfigGameModes)
     BlzFrameSetText(parent, GetPlayerName(getMainPlayer()) .. " is selecting...")
-    BlzFrameSetAbsPoint(parent, FRAMEPOINT_CENTER, 0.4, 0.55)
+    BlzFrameSetAbsPoint(parent, FRAMEPOINT_CENTER, 0.4, 0.56)
     BlzFrameSetSize(parent, ui_params.width, 0.02)
 
     local allPages = {}
@@ -127,7 +127,7 @@ function configPage(text, parent, allPages, dif)
 
     local pageFrame = BlzCreateFrame('ConfigPageBackdrop', parent, 0, 0)
     BlzFrameSetPoint(pageFrame, FRAMEPOINT_TOP, parent, FRAMEPOINT_BOTTOM, 0, 0)
-    BlzFrameSetSize(pageFrame, ui_params.width, 0.35)
+    BlzFrameSetSize(pageFrame, ui_params.width, 0.4)
     BlzFrameSetEnable(pageFrame, GetLocalPlayer() == getMainPlayer())
     table.insert(allPages, pageFrame)
 
