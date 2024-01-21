@@ -66,8 +66,8 @@ function initTeams()
             towerRect = nil
         }
     }
-    all_teams[1].base.player = all_teams[1].players[1].spawnPlayerId
-    all_teams[2].base.player = all_teams[2].players[1].spawnPlayerId
+    all_teams[1].base.player = Player(20)
+    all_teams[2].base.player = Player(21)
 end
 
 function getCountPlayers()

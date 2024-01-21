@@ -6206,8 +6206,8 @@ function initTeams()
             towerRect = nil
         }
     }
-    all_teams[1].base.player = all_teams[1].players[1].spawnPlayerId
-    all_teams[2].base.player = all_teams[2].players[1].spawnPlayerId
+    all_teams[1].base.player = Player(20)
+    all_teams[2].base.player = Player(21)
 end
 
 function getCountPlayers()
@@ -6474,8 +6474,8 @@ Debug.endFile()
 Debug.beginFile('players-init.lua')
 function setAllianceBetweenSpawnPlayers()
     for _, team in ipairs(all_teams) do
-        for _, player in ipairs(getAllSpawnPlayers(team)) do
-            for _, anotherPlayer in ipairs(getAllSpawnPlayers(team)) do
+        for _, player in ipairs(sumArrayAndElement(getAllSpawnPlayers(team), team.base.player)) do
+            for _, anotherPlayer in ipairs(sumArrayAndElement(getAllSpawnPlayers(team), team.base.player)) do
                 if player ~= anotherPlayer then
                     SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_ALLIED_VISION)
                     SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_ALLIED_VISION)
@@ -6526,9 +6526,9 @@ function setAllianceBetweenPlayers()
 end
 
 function setAllianceBetweenPlayersAndSpawnPlayers()
-    for _, team in ipairs(all_teams) do
+    for teamNumber, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            for _, spawnPlayer in ipairs(getAllSpawnPlayers(team)) do
+            for _, spawnPlayer in ipairs(sumArrayAndElement(getAllSpawnPlayers(team), team.base.player)) do
                 SetPlayerName(spawnPlayer, GetPlayerName(player.id))
                 SetPlayerColor(spawnPlayer, GetPlayerColor(player.id))
                 SetPlayerAlliance(spawnPlayer, player.id, ALLIANCE_SHARED_VISION, TRUE)
@@ -6536,7 +6536,18 @@ function setAllianceBetweenPlayersAndSpawnPlayers()
                 SetPlayerAllianceStateBJ(spawnPlayer, player.id, bj_ALLIANCE_ALLIED_VISION)
             end
         end
+        SetPlayerName(team.base.player, 'Team ' .. teamNumber)
+        SetPlayerColor(team.base.player, GetPlayerColor(Player(teamNumber - 1)))
     end
+end
+
+function sumArrayAndElement(array, element)
+    local resultArray = {}
+    for i = 1, #array do
+        table.insert(resultArray, array[i])
+    end
+    table.insert(resultArray, element)
+    return resultArray
 end
 
 function changeColorAndNameSpawnPlayers()
