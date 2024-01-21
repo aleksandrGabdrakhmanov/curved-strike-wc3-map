@@ -7270,6 +7270,9 @@ function incomeTrigger()
                 player.economy.roundUp = not player.economy.roundUp
 
                 local income = player.economy.income + player.economy.incomeForCenter
+                if (income == 0) then
+                    return
+                end
                 local roundedIncome
 
                 if player.economy.roundUp then
@@ -8526,7 +8529,7 @@ function initStartGameUI()
             tooltip = "Starting amount of income",
             defValue = 300,
             max = 3000,
-            min = 60,
+            min = 0,
             step = 30,
             initConfigValue = function(self)
                 game_config.economy.startIncomePerSec = self.value / 60

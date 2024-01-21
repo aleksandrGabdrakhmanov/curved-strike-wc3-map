@@ -114,7 +114,7 @@ function initStartGameUI()
             tooltip = "Starting amount of income",
             defValue = 300,
             max = 3000,
-            min = 60,
+            min = 0,
             step = 30,
             initConfigValue = function(self)
                 game_config.economy.startIncomePerSec = self.value / 60

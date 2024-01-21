@@ -9,6 +9,9 @@ function incomeTrigger()
                 player.economy.roundUp = not player.economy.roundUp
 
                 local income = player.economy.income + player.economy.incomeForCenter
+                if (income == 0) then
+                    return
+                end
                 local roundedIncome
 
                 if player.economy.roundUp then
