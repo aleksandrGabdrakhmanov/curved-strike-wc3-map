@@ -16,7 +16,9 @@ function heroConstructTrigger()
                     else
                         UnitAddAbility(GetTriggerUnit(), FourCC(abilities.inventory[game_config.units.itemCapacity]))
                     end
-                    SetHeroLevel(GetTriggerUnit(), game_config.units.heroStartLevel, false)
+                    if (game_config.units.heroStartLevel > 1) then
+                        SetHeroLevel(GetTriggerUnit(), game_config.units.heroStartLevel, false)
+                    end
                     table.insert(player.heroes, {
                         status = "new",
                         building = GetTriggerUnit(),

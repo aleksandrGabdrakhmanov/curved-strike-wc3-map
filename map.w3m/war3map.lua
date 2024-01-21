@@ -7064,7 +7064,9 @@ function heroConstructTrigger()
                     else
                         UnitAddAbility(GetTriggerUnit(), FourCC(abilities.inventory[game_config.units.itemCapacity]))
                     end
-                    SetHeroLevel(GetTriggerUnit(), game_config.units.heroStartLevel, false)
+                    if (game_config.units.heroStartLevel > 1) then
+                        SetHeroLevel(GetTriggerUnit(), game_config.units.heroStartLevel, false)
+                    end
                     table.insert(player.heroes, {
                         status = "new",
                         building = GetTriggerUnit(),
@@ -7615,7 +7617,9 @@ function handleHeroSpawn(player, unit, x, y)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
-        SetHeroLevel(unit, game_config.units.heroStartLevel, false)
+        if (game_config.units.heroStartLevel > 1) then
+            SetHeroLevel(unit, game_config.units.heroStartLevel, false)
+        end
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         hero.status = "alive"
         hero.unit = unit
