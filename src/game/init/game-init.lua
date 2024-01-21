@@ -122,6 +122,7 @@ function addPlayersInTeam(players)
                     mineLevel = 0,
                     mineTextTag = nil,
                     totalGold = game_config.economy.startGold,
+                    totalGoldForKills = 0,
                     roundUp = false
                 },
                 buildRect = nil,

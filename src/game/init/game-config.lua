@@ -8,7 +8,8 @@ function initGameConfig()
             firstMinePrice = nil,
             nextMineDiffPrice = nil,
             goldByTower = nil,
-            incomeForCenter = nil
+            incomeForCenter = nil,
+            goldForKill = nil
         },
         units = {
             range = 1,
@@ -19,7 +20,8 @@ function initGameConfig()
             itemCapacity = nil,
             baseHP = nil,
             towerHP = nil,
-            countForSelect = nil
+            countForSelect = nil,
+            heroCost = 500
         },
         spawnPolicy = {
             interval = nil,
@@ -82,12 +84,12 @@ function initGlobalVariables()
 
         { id = 'E00N', parentId = 'Ekee', race = 'elf', line = 4, position = 1, name = 'Keeper of the Grove', abilities = { { id = 'AEer' }, { id = 'AEah' }, { id = 'A002' }, { id = 'AEtq' } } },
         { id = 'E00O', parentId = 'Emoo', race = 'elf', line = 4, position = 2, name = 'Priestess of the Moon', abilities = { { id = 'AHfa' }, { id = 'ANsi' }, { id = 'AEar' }, { id = 'AEsf' } } },
-        { id = 'E00P', parentId = 'Edem', race = 'elf', line = 4, position = 3, name = 'Demon Hunter', abilities = { { id = 'AEmb' }, { id = 'AEim' }, { id = 'AEev' }, { id = 'AEme' } } },
+        { id = 'E00P', parentId = 'Edem', race = 'elf', line = 4, position = 3, name = 'Demon Hunter', abilities = { { id = 'AEmb' }, { id = 'AEim' }, { id = 'AEev' }, { id = 'AEme' } }, otherForm = {'Edmm'} },
         { id = 'E00Q', parentId = 'Ewar', race = 'elf', line = 4, position = 4, name = 'Warden', abilities = { { id = 'AEbl' }, { id = 'AEfk' }, { id = 'AEsh' }, { id = 'AEsv' } } },
 
-        { id = 'N000', parentId = 'Nalc', race = 'other', line = 5, position = 1, name = 'Alchemist', abilities = { { id = 'ANhs' }, { id = 'ANab' }, { id = 'ANcr' }, { id = 'ANtm' } } },
+        { id = 'N000', parentId = 'Nalc', race = 'other', line = 5, position = 1, name = 'Alchemist', abilities = { { id = 'ANhs' }, { id = 'ANab' }, { id = 'ANcr' }, { id = 'ANtm' } }, otherForm = {'Nalm', 'Nal2', 'Nal3'}},
         { id = 'N001', parentId = 'Nngs', race = 'other', line = 5, position = 2, name = 'Sea Witch', abilities = { { id = 'ANfl' }, { id = 'ANfa' }, { id = 'ANms' }, { id = 'ANto' } } },
-        { id = 'N002', parentId = 'Ntin', race = 'other', line = 5, position = 3, name = 'Tinker', abilities = { { id = 'ANsy' }, { id = 'ANcs' }, { id = 'ANeg' }, { id = 'ANrg' } } },
+        { id = 'N002', parentId = 'Ntin', race = 'other', line = 5, position = 3, name = 'Tinker', abilities = { { id = 'ANsy' }, { id = 'ANcs' }, { id = 'ANeg' }, { id = 'ANrg' } }, otherForm = {'Nrob'} },
         { id = 'N003', parentId = 'Nbst', race = 'other', line = 5, position = 4, name = 'Beastmaster', abilities = { { id = 'ANsg' }, { id = 'ANsq' }, { id = 'ANsw' }, { id = 'ANst' } } },
         { id = 'N004', parentId = 'Npbm', race = 'other', line = 5, position = 5, name = 'Brewmaster', abilities = { { id = 'ANbf' }, { id = 'ANdh' }, { id = 'ANdb' }, { id = 'ANef' } } },
         { id = 'N005', parentId = 'Nbrn', race = 'other', line = 5, position = 6, name = 'Dark Ranger', abilities = { { id = 'ANse' }, { id = 'ANba' }, { id = 'ANdr' }, { id = 'ANch' } } },
@@ -104,15 +106,15 @@ function initGlobalVariables()
         { id = 'h000', parentId = 'h00F', tier = 2, race = 'human', line = 1, position = 7, food = 1, name = 'Flying Machine', upgrades = { 'Rhgb', 'Rhfc' } },
         { id = 'h009', parentId = 'h00L', tier = 3, race = 'human', line = 1, position = 8, food = 3, name = 'Dragonhawk Rider', upgrades = { 'Rhan' } },
         { id = 'h002', parentId = 'h00B', tier = 3, race = 'human', line = 1, position = 9, food = 4, name = 'Knight', upgrades = { 'Rhan' } },
-        { id = 'h005', parentId = 'h00J', tier = 3, race = 'human', line = 1, position = 10, food = 3, name = 'Siege Engine', upgrades = { 'Rhrt' } },
+        { id = 'h005', parentId = 'h00J', tier = 3, race = 'human', line = 1, position = 10, food = 3, name = 'Siege Engine', upgrades = { 'Rhrt' }, otherForm = {'hrtt'} },
         { id = 'h001', parentId = 'h00G', tier = 2, race = 'human', line = 1, position = 11, food = 4, name = 'Gryphon Rider', upgrades = { 'Rhhb', 'Rhan' } },
 
         { id = 'h00P', parentId = 'o003', tier = 1, race = 'orc', line = 2, position = 1, food = 3, name = 'Grunt', upgrades = { 'Robs' } },
-        { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', line = 2, position = 2, food = 2, name = 'Headhunter', upgrades = { 'Robk', 'Rotr' } },
+        { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', line = 2, position = 2, food = 2, name = 'Headhunter', upgrades = { 'Robk', 'Rotr' }, otherForm = {'otbk'} },
         { id = 'h00T', parentId = 'o00C', tier = 1, race = 'orc', line = 2, position = 3, food = 2, name = 'Shaman', upgrades = { 'Rost' }, abilities = { { id = 'Ablo' }, { id = 'Alsh' }, { id = 'Aprg' } } },
         { id = 'h00S', parentId = 'o004', tier = 2, race = 'orc', line = 2, position = 4, food = 3, name = 'Raider', upgrades = { 'Roen', 'Ropg' }, abilities = { { id = 'Aens' } } },
         { id = 'h00X', parentId = 'o00B', tier = 2, race = 'orc', line = 2, position = 5, food = 2, name = 'Witch Doctor', upgrades = { 'Rowd', 'Rotr' }, abilities = { { id = 'Aeye' }, { id = 'Ahwd' }, { id = 'Asta' } } },
-        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', line = 2, position = 6, food = 3, name = 'Spirit Walker', upgrades = { 'Rowt' }, abilities = { { id = 'Aspl' }, { id = 'Adcn' }, { id = 'Aast' } } },
+        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', line = 2, position = 6, food = 3, name = 'Spirit Walker', upgrades = { 'Rowt' }, abilities = { { id = 'Aspl' }, { id = 'Adcn' }, { id = 'Aast' } }, otherForm = {'ospm'} },
         { id = 'h00N', parentId = 'o00A', tier = 2, race = 'orc', line = 2, position = 7, food = 2, name = 'Batrider', upgrades = { 'Rotr' } },
         { id = 'h00R', parentId = 'o008', tier = 2, race = 'orc', line = 2, position = 8, food = 4, name = 'Kodo Beast', upgrades = { 'Rwdm' } },
         { id = 'h00V', parentId = 'o005', tier = 3, race = 'orc', line = 2, position = 9, food = 5, name = 'Tauren', upgrades = { 'Rows' } },
@@ -120,10 +122,10 @@ function initGlobalVariables()
         { id = 'h00W', parentId = 'o009', tier = 3, race = 'orc', line = 2, position = 11, food = 4, name = 'Wind Rider', upgrades = { 'Rovs' } },
 
         { id = 'h014', parentId = 'u001', tier = 1, race = 'undead', line = 3, position = 1, food = 2, name = 'Ghoul', upgrades = { 'Rugf' } },
-        { id = 'h010', parentId = 'u004', tier = 1, race = 'undead', line = 3, position = 2, food = 3, name = 'Crypt Fiend', upgrades = { 'Ruwb', 'Rubu' }, abilities = { { id = 'Aweb' }, { id = 'Abur' } } },
+        { id = 'h010', parentId = 'u004', tier = 1, race = 'undead', line = 3, position = 2, food = 3, name = 'Crypt Fiend', upgrades = { 'Ruwb', 'Rubu' }, abilities = { { id = 'Aweb' }, { id = 'Abur' } }, otherForm = {'ucrm'} },
         { id = 'h00Z', parentId = 'u006', tier = 1, race = 'undead', line = 3, position = 3, food = 2, name = 'Banshee', upgrades = { 'Ruba' }, abilities = { { id = 'Aams' }, { id = 'Acrs' }, { id = 'Aps2' } } },
         { id = 'h017', parentId = 'u008', tier = 2, race = 'undead', line = 3, position = 4, food = 3, name = 'Obsidian Statue', upgrades = {}, abilities = { { id = 'Arpl' }, { id = 'Arpm' } } },
-        { id = 'h013', parentId = 'u005', tier = 2, race = 'undead', line = 3, position = 5, food = 2, name = 'Gargoyle', upgrades = { 'Rusf' }, abilities = { { id = 'Astn' }, { id = 'Aatp' } } },
+        { id = 'h013', parentId = 'u005', tier = 2, race = 'undead', line = 3, position = 5, food = 2, name = 'Gargoyle', upgrades = { 'Rusf' }, abilities = { { id = 'Astn' }, { id = 'Aatp' } }, otherForm = {'ugrm'} },
         { id = 'h016', parentId = 'u007', tier = 2, race = 'undead', line = 3, position = 6, food = 2, name = 'Necromancer', upgrades = { 'Rusl', 'Rune', 'Rusm' }, abilities = { { id = 'Acri' }, { id = 'Arai' }, { id = 'Auhf' } } },
         { id = 'h015', parentId = 'u003', tier = 2, race = 'undead', line = 3, position = 7, food = 4, name = 'Meat Wagon', upgrades = { 'Rupc' } },
         { id = 'h018', parentId = 'u000', tier = 2, race = 'undead', line = 3, position = 8, food = 1, name = 'Shade', upgrades = {} },
@@ -136,8 +138,8 @@ function initGlobalVariables()
         { id = 'e004', parentId = 'e00D', tier = 1, race = 'elf', line = 4, position = 3, food = 3, name = 'Dryad', upgrades = { 'Resi' } },
         { id = 'e006', parentId = 'e00E', tier = 2, race = 'elf', line = 4, position = 4, food = 3, name = 'Glaive Thower', upgrades = {} },
         { id = 'e007', parentId = 'e00F', tier = 2, race = 'elf', line = 4, position = 5, food = 2, name = 'Hippogryph', upgrades = {} },
-        { id = 'e002', parentId = 'e00J', tier = 2, race = 'elf', line = 4, position = 6, food = 4, name = 'Druid of the Claw', upgrades = { 'Redc' }, abilities = { { id = 'Abrf' }, { id = 'Arej' }, { id = 'Aroa' } } },
-        { id = 'e003', parentId = 'e00I', tier = 2, race = 'elf', line = 4, position = 7, food = 2, name = 'Druid of the Talon', upgrades = { 'Redt' }, abilities = { { id = 'Acyc' }, { id = 'Arav' }, { id = 'Afae' } } },
+        { id = 'e002', parentId = 'e00J', tier = 2, race = 'elf', line = 4, position = 6, food = 4, name = 'Druid of the Claw', upgrades = { 'Redc' }, abilities = { { id = 'Abrf' }, { id = 'Arej' }, { id = 'Aroa' } }, otherForm = {'edcm'} },
+        { id = 'e003', parentId = 'e00I', tier = 2, race = 'elf', line = 4, position = 7, food = 2, name = 'Druid of the Talon', upgrades = { 'Redt' }, abilities = { { id = 'Acyc' }, { id = 'Arav' }, { id = 'Afae' } }, otherForm = {'edtm'} },
         { id = 'e005', parentId = 'e00L', tier = 2, race = 'elf', line = 4, position = 8, food = 2, name = 'Faerie Dragon', upgrades = {}, abilities = { { id = 'Amfl' } } },
         { id = 'e00A', parentId = 'e00K', tier = 3, race = 'elf', line = 4, position = 9, food = 7, name = 'Mountain Giant', upgrades = { 'Rers', 'Rehs' }, abilities = { { id = 'Atau' } } },
         { id = 'e008', parentId = 'e00G', tier = 3, race = 'elf', line = 4, position = 10, food = 4, name = 'Hippogryph Rider', upgrades = {} },

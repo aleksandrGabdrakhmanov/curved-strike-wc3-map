@@ -1,23 +1,27 @@
 Debug.beginFile('status-panel.lua')
 function getTableInfo(teamId)
     local tableInfo = {}
-    tableInfo.header = {
-        { text = 'Name', weight = 0.085, isFinish = true },
-        { text = 'Wave', weight = 0.04 },
-        { text = 'Inc/min', weight = 0.07 },
-        { text = 'Gold', weight = 0.045, isFinish = true },
-        { text = 'Kills', weight = 0.05, isFinish = true },
-        { text = 'Damage', weight = 0.06, isFinish = true },
-        { text = 'Tier', weight = 0.04, isFinish = true },
-        { text = 'Army', weight = 0.04, isFinish = true },
-        { text = 'Heroes', weight = 0.06, isFinish = true },
-        { },
-        { },
-        { },
-        { },
-        { },
-        { },
-    }
+    tableInfo.header = {}
+    table.insert(tableInfo.header, { text = 'Name', weight = 0.085, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Wave', weight = 0.04 })
+    table.insert(tableInfo.header, { text = 'Inc/min', weight = 0.07 })
+    table.insert(tableInfo.header, { text = 'Gold total', weight = 0.045, isFinish = true })
+
+    if game_config.economy.goldForKill > 0 then
+        table.insert(tableInfo.header, { text = 'Gold kill', weight = 0.045, isFinish = true })
+    end
+
+    table.insert(tableInfo.header, { text = 'Kills', weight = 0.05, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Damage', weight = 0.06, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Tier', weight = 0.04, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Army', weight = 0.04, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Heroes', weight = 0.06, isFinish = true })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
     tableInfo.body = {}
 
     local teams
@@ -29,98 +33,108 @@ function getTableInfo(teamId)
 
     for _, team in ipairs(teams) do
         for _, player in ipairs(team.players) do
-            table.insert(tableInfo.body, {
-                {
-                    text = getClearName(player),
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = false
-                },
-                {
-                    text = math.floor(player.spawnTimer),
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = false
-                },
-                {
-                    text = getIncome(player),
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    text = player.economy.totalGold,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    text = player.totalKills,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = false
-                },
-                {
-                    text = player.totalDamage,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = false
-                },
-                {
-                    text = player.tier,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    text = player.food,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[1] and player.heroes[1].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[2] and player.heroes[2].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[3] and player.heroes[3].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[4] and player.heroes[4].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[5] and player.heroes[5].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[6] and player.heroes[6].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[7] and player.heroes[7].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                }
+            local row = {}
+            table.insert(row, {
+                text = getClearName(player),
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = false
             })
+            table.insert(row, {
+                text = math.floor(player.spawnTimer),
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = false
+            })
+            table.insert(row, {
+                text = getIncome(player),
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                text = player.economy.totalGold,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+
+            if game_config.economy.goldForKill  > 0 then
+                table.insert(row, {
+                    text = player.economy.totalGoldForKills,
+                    color = player.color,
+                    integerColor = player.integerColor,
+                    isSensitive = true
+                })
+            end
+
+            table.insert(row, {
+                text = player.totalKills,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = false
+            })
+            table.insert(row, {
+                text = player.totalDamage,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = false
+            })
+            table.insert(row, {
+                text = player.tier,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                text = player.food,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[1] and player.heroes[1].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[2] and player.heroes[2].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[3] and player.heroes[3].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[4] and player.heroes[4].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[5] and player.heroes[5].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[6] and player.heroes[6].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[7] and player.heroes[7].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(tableInfo.body, row)
         end
     end
     return tableInfo

@@ -186,6 +186,21 @@ function initStartGameUI()
                 game_config.economy.goldByTower = self.value
             end
         },
+        {
+            page = page.ECONOMY,
+            type = elementType.SLIDER,
+            text = 'Gold for killing units',
+            tooltip = "Amount of gold earned for killing enemy units, calculated as a percentage of their cost. \n" ..
+                    "For example, if the parameter value is 10%, the player receives 10% of the cost of the defeated unit. \n"..
+                    "Players do not receive gold for killing summoned units",
+            defValue = 0,
+            max = 100,
+            min = 0,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.economy.goldForKill = self.value
+            end
+        },
         -- UNITS
         {
             page = page.UNITS,

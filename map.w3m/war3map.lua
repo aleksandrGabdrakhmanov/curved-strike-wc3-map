@@ -5957,7 +5957,8 @@ function initGameConfig()
             firstMinePrice = nil,
             nextMineDiffPrice = nil,
             goldByTower = nil,
-            incomeForCenter = nil
+            incomeForCenter = nil,
+            goldForKill = nil
         },
         units = {
             range = 1,
@@ -5968,7 +5969,8 @@ function initGameConfig()
             itemCapacity = nil,
             baseHP = nil,
             towerHP = nil,
-            countForSelect = nil
+            countForSelect = nil,
+            heroCost = 500
         },
         spawnPolicy = {
             interval = nil,
@@ -6031,7 +6033,7 @@ function initGlobalVariables()
 
         { id = 'E00N', parentId = 'Ekee', race = 'elf', line = 4, position = 1, name = 'Keeper of the Grove', abilities = { { id = 'AEer' }, { id = 'AEah' }, { id = 'A002' }, { id = 'AEtq' } } },
         { id = 'E00O', parentId = 'Emoo', race = 'elf', line = 4, position = 2, name = 'Priestess of the Moon', abilities = { { id = 'AHfa' }, { id = 'ANsi' }, { id = 'AEar' }, { id = 'AEsf' } } },
-        { id = 'E00P', parentId = 'Edem', race = 'elf', line = 4, position = 3, name = 'Demon Hunter', abilities = { { id = 'AEmb' }, { id = 'AEim' }, { id = 'AEev' }, { id = 'AEme' } } },
+        { id = 'E00P', parentId = 'Edem', race = 'elf', line = 4, position = 3, name = 'Demon Hunter', abilities = { { id = 'AEmb' }, { id = 'AEim' }, { id = 'AEev' }, { id = 'AEme' } }, otherForm = {'Edmm'} },
         { id = 'E00Q', parentId = 'Ewar', race = 'elf', line = 4, position = 4, name = 'Warden', abilities = { { id = 'AEbl' }, { id = 'AEfk' }, { id = 'AEsh' }, { id = 'AEsv' } } },
 
         { id = 'N000', parentId = 'Nalc', race = 'other', line = 5, position = 1, name = 'Alchemist', abilities = { { id = 'ANhs' }, { id = 'ANab' }, { id = 'ANcr' }, { id = 'ANtm' } } },
@@ -6053,15 +6055,15 @@ function initGlobalVariables()
         { id = 'h000', parentId = 'h00F', tier = 2, race = 'human', line = 1, position = 7, food = 1, name = 'Flying Machine', upgrades = { 'Rhgb', 'Rhfc' } },
         { id = 'h009', parentId = 'h00L', tier = 3, race = 'human', line = 1, position = 8, food = 3, name = 'Dragonhawk Rider', upgrades = { 'Rhan' } },
         { id = 'h002', parentId = 'h00B', tier = 3, race = 'human', line = 1, position = 9, food = 4, name = 'Knight', upgrades = { 'Rhan' } },
-        { id = 'h005', parentId = 'h00J', tier = 3, race = 'human', line = 1, position = 10, food = 3, name = 'Siege Engine', upgrades = { 'Rhrt' } },
+        { id = 'h005', parentId = 'h00J', tier = 3, race = 'human', line = 1, position = 10, food = 3, name = 'Siege Engine', upgrades = { 'Rhrt' }, otherForm = {'hrtt'} },
         { id = 'h001', parentId = 'h00G', tier = 2, race = 'human', line = 1, position = 11, food = 4, name = 'Gryphon Rider', upgrades = { 'Rhhb', 'Rhan' } },
 
         { id = 'h00P', parentId = 'o003', tier = 1, race = 'orc', line = 2, position = 1, food = 3, name = 'Grunt', upgrades = { 'Robs' } },
-        { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', line = 2, position = 2, food = 2, name = 'Headhunter', upgrades = { 'Robk', 'Rotr' } },
+        { id = 'h00Q', parentId = 'o006', tier = 1, race = 'orc', line = 2, position = 2, food = 2, name = 'Headhunter', upgrades = { 'Robk', 'Rotr' }, otherForm = {'otbk'} },
         { id = 'h00T', parentId = 'o00C', tier = 1, race = 'orc', line = 2, position = 3, food = 2, name = 'Shaman', upgrades = { 'Rost' }, abilities = { { id = 'Ablo' }, { id = 'Alsh' }, { id = 'Aprg' } } },
         { id = 'h00S', parentId = 'o004', tier = 2, race = 'orc', line = 2, position = 4, food = 3, name = 'Raider', upgrades = { 'Roen', 'Ropg' }, abilities = { { id = 'Aens' } } },
         { id = 'h00X', parentId = 'o00B', tier = 2, race = 'orc', line = 2, position = 5, food = 2, name = 'Witch Doctor', upgrades = { 'Rowd', 'Rotr' }, abilities = { { id = 'Aeye' }, { id = 'Ahwd' }, { id = 'Asta' } } },
-        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', line = 2, position = 6, food = 3, name = 'Spirit Walker', upgrades = { 'Rowt' }, abilities = { { id = 'Aspl' }, { id = 'Adcn' }, { id = 'Aast' } } },
+        { id = 'h00U', parentId = 'o00D', tier = 2, race = 'orc', line = 2, position = 6, food = 3, name = 'Spirit Walker', upgrades = { 'Rowt' }, abilities = { { id = 'Aspl' }, { id = 'Adcn' }, { id = 'Aast' } }, otherForm = {'ospm'} },
         { id = 'h00N', parentId = 'o00A', tier = 2, race = 'orc', line = 2, position = 7, food = 2, name = 'Batrider', upgrades = { 'Rotr' } },
         { id = 'h00R', parentId = 'o008', tier = 2, race = 'orc', line = 2, position = 8, food = 4, name = 'Kodo Beast', upgrades = { 'Rwdm' } },
         { id = 'h00V', parentId = 'o005', tier = 3, race = 'orc', line = 2, position = 9, food = 5, name = 'Tauren', upgrades = { 'Rows' } },
@@ -6069,10 +6071,10 @@ function initGlobalVariables()
         { id = 'h00W', parentId = 'o009', tier = 3, race = 'orc', line = 2, position = 11, food = 4, name = 'Wind Rider', upgrades = { 'Rovs' } },
 
         { id = 'h014', parentId = 'u001', tier = 1, race = 'undead', line = 3, position = 1, food = 2, name = 'Ghoul', upgrades = { 'Rugf' } },
-        { id = 'h010', parentId = 'u004', tier = 1, race = 'undead', line = 3, position = 2, food = 3, name = 'Crypt Fiend', upgrades = { 'Ruwb', 'Rubu' }, abilities = { { id = 'Aweb' }, { id = 'Abur' } } },
+        { id = 'h010', parentId = 'u004', tier = 1, race = 'undead', line = 3, position = 2, food = 3, name = 'Crypt Fiend', upgrades = { 'Ruwb', 'Rubu' }, abilities = { { id = 'Aweb' }, { id = 'Abur' } }, otherForm = {'ucrm'} },
         { id = 'h00Z', parentId = 'u006', tier = 1, race = 'undead', line = 3, position = 3, food = 2, name = 'Banshee', upgrades = { 'Ruba' }, abilities = { { id = 'Aams' }, { id = 'Acrs' }, { id = 'Aps2' } } },
         { id = 'h017', parentId = 'u008', tier = 2, race = 'undead', line = 3, position = 4, food = 3, name = 'Obsidian Statue', upgrades = {}, abilities = { { id = 'Arpl' }, { id = 'Arpm' } } },
-        { id = 'h013', parentId = 'u005', tier = 2, race = 'undead', line = 3, position = 5, food = 2, name = 'Gargoyle', upgrades = { 'Rusf' }, abilities = { { id = 'Astn' }, { id = 'Aatp' } } },
+        { id = 'h013', parentId = 'u005', tier = 2, race = 'undead', line = 3, position = 5, food = 2, name = 'Gargoyle', upgrades = { 'Rusf' }, abilities = { { id = 'Astn' }, { id = 'Aatp' } }, otherForm = {'ugrm'} },
         { id = 'h016', parentId = 'u007', tier = 2, race = 'undead', line = 3, position = 6, food = 2, name = 'Necromancer', upgrades = { 'Rusl', 'Rune', 'Rusm' }, abilities = { { id = 'Acri' }, { id = 'Arai' }, { id = 'Auhf' } } },
         { id = 'h015', parentId = 'u003', tier = 2, race = 'undead', line = 3, position = 7, food = 4, name = 'Meat Wagon', upgrades = { 'Rupc' } },
         { id = 'h018', parentId = 'u000', tier = 2, race = 'undead', line = 3, position = 8, food = 1, name = 'Shade', upgrades = {} },
@@ -6085,8 +6087,8 @@ function initGlobalVariables()
         { id = 'e004', parentId = 'e00D', tier = 1, race = 'elf', line = 4, position = 3, food = 3, name = 'Dryad', upgrades = { 'Resi' } },
         { id = 'e006', parentId = 'e00E', tier = 2, race = 'elf', line = 4, position = 4, food = 3, name = 'Glaive Thower', upgrades = {} },
         { id = 'e007', parentId = 'e00F', tier = 2, race = 'elf', line = 4, position = 5, food = 2, name = 'Hippogryph', upgrades = {} },
-        { id = 'e002', parentId = 'e00J', tier = 2, race = 'elf', line = 4, position = 6, food = 4, name = 'Druid of the Claw', upgrades = { 'Redc' }, abilities = { { id = 'Abrf' }, { id = 'Arej' }, { id = 'Aroa' } } },
-        { id = 'e003', parentId = 'e00I', tier = 2, race = 'elf', line = 4, position = 7, food = 2, name = 'Druid of the Talon', upgrades = { 'Redt' }, abilities = { { id = 'Acyc' }, { id = 'Arav' }, { id = 'Afae' } } },
+        { id = 'e002', parentId = 'e00J', tier = 2, race = 'elf', line = 4, position = 6, food = 4, name = 'Druid of the Claw', upgrades = { 'Redc' }, abilities = { { id = 'Abrf' }, { id = 'Arej' }, { id = 'Aroa' } }, otherForm = {'edcm'} },
+        { id = 'e003', parentId = 'e00I', tier = 2, race = 'elf', line = 4, position = 7, food = 2, name = 'Druid of the Talon', upgrades = { 'Redt' }, abilities = { { id = 'Acyc' }, { id = 'Arav' }, { id = 'Afae' } }, otherForm = {'edtm'} },
         { id = 'e005', parentId = 'e00L', tier = 2, race = 'elf', line = 4, position = 8, food = 2, name = 'Faerie Dragon', upgrades = {}, abilities = { { id = 'Amfl' } } },
         { id = 'e00A', parentId = 'e00K', tier = 3, race = 'elf', line = 4, position = 9, food = 7, name = 'Mountain Giant', upgrades = { 'Rers', 'Rehs' }, abilities = { { id = 'Atau' } } },
         { id = 'e008', parentId = 'e00G', tier = 3, race = 'elf', line = 4, position = 10, food = 4, name = 'Hippogryph Rider', upgrades = {} },
@@ -6259,6 +6261,7 @@ function addPlayersInTeam(players)
                     mineLevel = 0,
                     mineTextTag = nil,
                     totalGold = game_config.economy.startGold,
+                    totalGoldForKills = 0,
                     roundUp = false
                 },
                 buildRect = nil,
@@ -7386,6 +7389,7 @@ function initTriggers()
     centerControlTrigger()
     tierDetectTrigger()
     lifetimeLimitTrigger()
+    goldForKillTrigger()
     debugTrigger()
     debugTriggerGold()
     debugTriggerFinish()
@@ -7719,6 +7723,62 @@ function tierDetectTrigger()
             end)
         end
     end
+end
+Debug.endFile()
+Debug.beginFile('gold-for-kill-trigger.lua')
+function goldForKillTrigger()
+    if game_config.economy.goldForKill == 0 then
+        return
+    end
+
+    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DEATH)
+    TriggerAddAction(trig, function()
+        local killerUnit = GetKillingUnit()
+
+        local cost = getBuildingCost(('>I4'):pack(GetUnitTypeId(GetTriggerUnit())))
+        if cost > 0 then
+            local gold = math.floor((game_config.economy.goldForKill/100) * cost)
+            local sourcePlayer = GetOwningPlayer(killerUnit)
+            for _, team in ipairs(all_teams) do
+                for _, player in ipairs(team.players) do
+                    if sourcePlayer == player.spawnPlayerId then
+                        player.economy.totalGoldForKills = player.economy.totalGoldForKills + gold
+                        addGold(player, gold)
+                        return
+                    end
+                end
+            end
+        end
+    end)
+end
+
+function getBuildingCost(id)
+    for _, unit in ipairs(units_for_build) do
+        if unit.parentId == id then
+            return GetUnitGoldCost(FourCC(unit.id))
+        end
+        if unit.otherForm then
+            for _, form in ipairs(unit.otherForm) do
+                if form == id then
+                    return GetUnitGoldCost(FourCC(unit.id))
+                end
+            end
+        end
+    end
+    for _, hero in ipairs(heroes_for_build) do
+        if hero.parentId == id then
+            return game_config.units.heroCost
+        end
+        if hero.otherForm then
+            for _, form in ipairs(hero.otherForm) do
+                if form == id then
+                    return game_config.units.heroCost
+                end
+            end
+        end
+    end
+    return 0
 end
 Debug.endFile()
 Debug.beginFile('kodo-trigger.lua')
@@ -8520,6 +8580,21 @@ function initStartGameUI()
                 game_config.economy.goldByTower = self.value
             end
         },
+        {
+            page = page.ECONOMY,
+            type = elementType.SLIDER,
+            text = 'Gold for killing units',
+            tooltip = "Amount of gold earned for killing enemy units, calculated as a percentage of their cost. \n" ..
+                    "For example, if the parameter value is 10%, the player receives 10% of the cost of the defeated unit. \n"..
+                    "Players do not receive gold for killing summoned units",
+            defValue = 0,
+            max = 100,
+            min = 0,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.economy.goldForKill = self.value
+            end
+        },
         -- UNITS
         {
             page = page.UNITS,
@@ -8824,23 +8899,27 @@ Debug.endFile()
 Debug.beginFile('status-panel.lua')
 function getTableInfo(teamId)
     local tableInfo = {}
-    tableInfo.header = {
-        { text = 'Name', weight = 0.085, isFinish = true },
-        { text = 'Wave', weight = 0.04 },
-        { text = 'Inc/min', weight = 0.07 },
-        { text = 'Gold', weight = 0.045, isFinish = true },
-        { text = 'Kills', weight = 0.05, isFinish = true },
-        { text = 'Damage', weight = 0.06, isFinish = true },
-        { text = 'Tier', weight = 0.04, isFinish = true },
-        { text = 'Army', weight = 0.04, isFinish = true },
-        { text = 'Heroes', weight = 0.06, isFinish = true },
-        { },
-        { },
-        { },
-        { },
-        { },
-        { },
-    }
+    tableInfo.header = {}
+    table.insert(tableInfo.header, { text = 'Name', weight = 0.085, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Wave', weight = 0.04 })
+    table.insert(tableInfo.header, { text = 'Inc/min', weight = 0.07 })
+    table.insert(tableInfo.header, { text = 'Gold total', weight = 0.045, isFinish = true })
+
+    if game_config.economy.goldForKill > 0 then
+        table.insert(tableInfo.header, { text = 'Gold kill', weight = 0.045, isFinish = true })
+    end
+
+    table.insert(tableInfo.header, { text = 'Kills', weight = 0.05, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Damage', weight = 0.06, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Tier', weight = 0.04, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Army', weight = 0.04, isFinish = true })
+    table.insert(tableInfo.header, { text = 'Heroes', weight = 0.06, isFinish = true })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
+    table.insert(tableInfo.header, { })
     tableInfo.body = {}
 
     local teams
@@ -8852,98 +8931,108 @@ function getTableInfo(teamId)
 
     for _, team in ipairs(teams) do
         for _, player in ipairs(team.players) do
-            table.insert(tableInfo.body, {
-                {
-                    text = getClearName(player),
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = false
-                },
-                {
-                    text = math.floor(player.spawnTimer),
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = false
-                },
-                {
-                    text = getIncome(player),
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    text = player.economy.totalGold,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    text = player.totalKills,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = false
-                },
-                {
-                    text = player.totalDamage,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = false
-                },
-                {
-                    text = player.tier,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    text = player.food,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[1] and player.heroes[1].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[2] and player.heroes[2].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[3] and player.heroes[3].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[4] and player.heroes[4].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[5] and player.heroes[5].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[6] and player.heroes[6].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                },
-                {
-                    icon = player.heroes[7] and player.heroes[7].icon or nil,
-                    color = player.color,
-                    integerColor = player.integerColor,
-                    isSensitive = true
-                }
+            local row = {}
+            table.insert(row, {
+                text = getClearName(player),
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = false
             })
+            table.insert(row, {
+                text = math.floor(player.spawnTimer),
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = false
+            })
+            table.insert(row, {
+                text = getIncome(player),
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                text = player.economy.totalGold,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+
+            if game_config.economy.goldForKill  > 0 then
+                table.insert(row, {
+                    text = player.economy.totalGoldForKills,
+                    color = player.color,
+                    integerColor = player.integerColor,
+                    isSensitive = true
+                })
+            end
+
+            table.insert(row, {
+                text = player.totalKills,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = false
+            })
+            table.insert(row, {
+                text = player.totalDamage,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = false
+            })
+            table.insert(row, {
+                text = player.tier,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                text = player.food,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[1] and player.heroes[1].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[2] and player.heroes[2].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[3] and player.heroes[3].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[4] and player.heroes[4].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[5] and player.heroes[5].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[6] and player.heroes[6].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(row, {
+                icon = player.heroes[7] and player.heroes[7].icon or nil,
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            table.insert(tableInfo.body, row)
         end
     end
     return tableInfo
