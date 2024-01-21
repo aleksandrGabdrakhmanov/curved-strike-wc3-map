@@ -5970,7 +5970,8 @@ function initGameConfig()
             baseHP = nil,
             towerHP = nil,
             countForSelect = nil,
-            heroCost = 500
+            heroCost = 500,
+            heroStartLevel = nil
         },
         spawnPolicy = {
             interval = nil,
@@ -6036,9 +6037,9 @@ function initGlobalVariables()
         { id = 'E00P', parentId = 'Edem', race = 'elf', line = 4, position = 3, name = 'Demon Hunter', abilities = { { id = 'AEmb' }, { id = 'AEim' }, { id = 'AEev' }, { id = 'AEme' } }, otherForm = {'Edmm'} },
         { id = 'E00Q', parentId = 'Ewar', race = 'elf', line = 4, position = 4, name = 'Warden', abilities = { { id = 'AEbl' }, { id = 'AEfk' }, { id = 'AEsh' }, { id = 'AEsv' } } },
 
-        { id = 'N000', parentId = 'Nalc', race = 'other', line = 5, position = 1, name = 'Alchemist', abilities = { { id = 'ANhs' }, { id = 'ANab' }, { id = 'ANcr' }, { id = 'ANtm' } } },
+        { id = 'N000', parentId = 'Nalc', race = 'other', line = 5, position = 1, name = 'Alchemist', abilities = { { id = 'ANhs' }, { id = 'ANab' }, { id = 'ANcr' }, { id = 'ANtm' } }, otherForm = {'Nalm', 'Nal2', 'Nal3'}},
         { id = 'N001', parentId = 'Nngs', race = 'other', line = 5, position = 2, name = 'Sea Witch', abilities = { { id = 'ANfl' }, { id = 'ANfa' }, { id = 'ANms' }, { id = 'ANto' } } },
-        { id = 'N002', parentId = 'Ntin', race = 'other', line = 5, position = 3, name = 'Tinker', abilities = { { id = 'ANsy' }, { id = 'ANcs' }, { id = 'ANeg' }, { id = 'ANrg' } } },
+        { id = 'N002', parentId = 'Ntin', race = 'other', line = 5, position = 3, name = 'Tinker', abilities = { { id = 'ANsy' }, { id = 'ANcs' }, { id = 'ANeg' }, { id = 'ANrg' } }, otherForm = {'Nrob'} },
         { id = 'N003', parentId = 'Nbst', race = 'other', line = 5, position = 4, name = 'Beastmaster', abilities = { { id = 'ANsg' }, { id = 'ANsq' }, { id = 'ANsw' }, { id = 'ANst' } } },
         { id = 'N004', parentId = 'Npbm', race = 'other', line = 5, position = 5, name = 'Brewmaster', abilities = { { id = 'ANbf' }, { id = 'ANdh' }, { id = 'ANdb' }, { id = 'ANef' } } },
         { id = 'N005', parentId = 'Nbrn', race = 'other', line = 5, position = 6, name = 'Dark Ranger', abilities = { { id = 'ANse' }, { id = 'ANba' }, { id = 'ANdr' }, { id = 'ANch' } } },
@@ -7052,6 +7053,7 @@ function heroConstructTrigger()
                     else
                         UnitAddAbility(GetTriggerUnit(), FourCC(abilities.inventory[game_config.units.itemCapacity]))
                     end
+                    SetHeroLevel(GetTriggerUnit(), game_config.units.heroStartLevel, false)
                     table.insert(player.heroes, {
                         status = "new",
                         building = GetTriggerUnit(),
@@ -7602,6 +7604,7 @@ function handleHeroSpawn(player, unit, x, y)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
+        SetHeroLevel(unit, game_config.units.heroStartLevel, false)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         hero.status = "alive"
         hero.unit = unit
@@ -8673,6 +8676,19 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.units.itemCapacity = self.value
+            end
+        },
+        {
+            page = page.HEROES,
+            type = elementType.SLIDER,
+            text = 'Start hero level',
+            tooltip = "The initial level of the hero after construction.",
+            defValue = 1,
+            max = 10,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.heroStartLevel = self.value
             end
         }
     }

@@ -31,6 +31,7 @@ function handleHeroSpawn(player, unit, x, y)
     local hero = getHero(player.heroes, unit)
     if hero.status == "new" then
         local unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
+        SetHeroLevel(unit, game_config.units.heroStartLevel, false)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         hero.status = "alive"
         hero.unit = unit

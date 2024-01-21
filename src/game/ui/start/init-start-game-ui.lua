@@ -280,6 +280,19 @@ function initStartGameUI()
             initConfigValue = function(self)
                 game_config.units.itemCapacity = self.value
             end
+        },
+        {
+            page = page.HEROES,
+            type = elementType.SLIDER,
+            text = 'Start hero level',
+            tooltip = "The initial level of the hero after construction.",
+            defValue = 1,
+            max = 10,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.heroStartLevel = self.value
+            end
         }
     }
 end
