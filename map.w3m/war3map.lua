@@ -5958,7 +5958,8 @@ function initGameConfig()
             nextMineDiffPrice = nil,
             goldByTower = nil,
             incomeForCenter = nil,
-            goldForKill = nil
+            goldForKill = nil,
+            upkeep = nil
         },
         units = {
             range = 1,
@@ -7269,22 +7270,45 @@ function incomeTrigger()
 
                 player.economy.roundUp = not player.economy.roundUp
 
-                local income = player.economy.income + player.economy.incomeForCenter
-                if (income == 0) then
+                local _, percent = getUpkeepTypeAndPercent(player)
+
+                local income = (player.economy.income + player.economy.incomeForCenter)/60
+                local incomeWithPercent = (income * percent) / 100
+                if (incomeWithPercent == 0) then
                     return
                 end
-                local roundedIncome
 
+                local roundedIncome
                 if player.economy.roundUp then
-                    roundedIncome = math.ceil(income)
+                    roundedIncome = math.ceil(incomeWithPercent)
                 else
-                    roundedIncome = math.floor(income)
+                    roundedIncome = math.floor(incomeWithPercent)
                 end
 
                 addGold(player, roundedIncome)
             end
         end
     end)
+end
+
+upkeepType = {
+    NO = 'NO',
+    LOW = 'LOW',
+    HIGH = 'HIGH'
+}
+
+function getUpkeepTypeAndPercent(player)
+
+    if game_config.economy.upkeep == true then
+        if player.food > 10 and player.food <= 100 then
+            return upkeepType.LOW, 80
+        elseif player.food > 100 then
+            return upkeepType.HIGH, 60
+        else
+            return upkeepType.NO, 100
+        end
+    end
+    return nil, 100
 end
 
 function addGold(player, gold)
@@ -8532,7 +8556,7 @@ function initStartGameUI()
             min = 0,
             step = 30,
             initConfigValue = function(self)
-                game_config.economy.startIncomePerSec = self.value / 60
+                game_config.economy.startIncomePerSec = self.value
             end
         },
         {
@@ -8545,7 +8569,7 @@ function initStartGameUI()
             min = 30,
             step = 30,
             initConfigValue = function(self)
-                game_config.economy.incomeBoost = self.value / 60
+                game_config.economy.incomeBoost = self.value
             end
         },
         {
@@ -8559,7 +8583,7 @@ function initStartGameUI()
             min = 0,
             step = 30,
             initConfigValue = function(self)
-                game_config.economy.incomeForCenter = self.value / 60
+                game_config.economy.incomeForCenter = self.value
             end
         },
         {
@@ -8614,6 +8638,18 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.economy.goldForKill = self.value
+            end
+        },
+        {
+            page = page.ECONOMY,
+            type = elementType.CHECK_BOX,
+            text = 'Upkeep',
+            tooltip = "No Upkeep (0-50 Food: 100% income)\n" ..
+                    "Low Upkeep (51-100 Food: 80% income)\n" ..
+                    "High Upkeep (101+ Food: 60% income)",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.economy.upkeep = self.value
             end
         },
         -- UNITS
@@ -8715,6 +8751,9 @@ Debug.endFile()
 Debug.beginFile('main-start-game.lua')
 function startGameUI()
     BlzLoadTOCFile("war3mapimported\\templates.toc")
+
+    local upkeepFrame = BlzGetFrameByName("ResourceBarUpkeepText", 0)
+    BlzFrameSetText(upkeepFrame, "alga")
 
     local parent = BlzCreateFrame("GreenText", BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
     BlzFrameSetParent(parent, preConfigGameModes)
@@ -9074,9 +9113,9 @@ end
 
 function getIncome(player)
     if player.economy.incomeForCenter == 0 then
-        return math.floor(player.economy.income * 60)
+        return math.floor(player.economy.income)
     else
-        return math.floor(player.economy.income * 60) .. '(+' .. math.floor(player.economy.incomeForCenter * 60) .. ')'
+        return math.floor(player.economy.income) .. '(+' .. math.floor(player.economy.incomeForCenter) .. ')'
     end
 end
 
@@ -9093,8 +9132,26 @@ function updatePanelForAllPlayers()
                 local playerName = bodyRow[1].text
                 for col, cell in ipairs(bodyRow) do
 
-                    MultiboardSetTitleText(player.multiboard,
-                            'Time: ' .. GetFormattedGameTime() .. '   Wave: ' .. math.floor(player.spawnTimer) .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills)
+                    local title = 'Time: ' .. GetFormattedGameTime() .. '   Wave: ' .. math.floor(player.spawnTimer) .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills
+
+                    local upkeep, _ = getUpkeepTypeAndPercent(player)
+
+                    if upkeep then
+                        local upkeepFrame = BlzGetFrameByName("ResourceBarUpkeepText", 0)
+                        BlzFrameSetText(upkeepFrame, "alga")
+                        local upkeepText
+                        if upkeep == upkeepType.NO then
+                            upkeepText = '  |cff00ff00No Upkeep|r'
+                        elseif upkeep == upkeepType.LOW then
+                            upkeepText = '  |cffffff00Low Upkeep(80)|r'
+                        elseif upkeep == upkeepType.HIGH then
+                            upkeepText = '  |cffff0000High Upkeep(60)|r'
+                        end
+                        title = title .. upkeepText
+
+                    end
+
+                    MultiboardSetTitleText(player.multiboard, title)
 
                     local item = MultiboardGetItem(player.multiboard, row, col - 1)
                     if isPlayerInTeam(playerName, team.players) then

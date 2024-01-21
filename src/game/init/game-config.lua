@@ -9,7 +9,8 @@ function initGameConfig()
             nextMineDiffPrice = nil,
             goldByTower = nil,
             incomeForCenter = nil,
-            goldForKill = nil
+            goldForKill = nil,
+            upkeep = nil
         },
         units = {
             range = 1,

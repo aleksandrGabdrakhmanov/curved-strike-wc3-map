@@ -117,7 +117,7 @@ function initStartGameUI()
             min = 0,
             step = 30,
             initConfigValue = function(self)
-                game_config.economy.startIncomePerSec = self.value / 60
+                game_config.economy.startIncomePerSec = self.value
             end
         },
         {
@@ -130,7 +130,7 @@ function initStartGameUI()
             min = 30,
             step = 30,
             initConfigValue = function(self)
-                game_config.economy.incomeBoost = self.value / 60
+                game_config.economy.incomeBoost = self.value
             end
         },
         {
@@ -144,7 +144,7 @@ function initStartGameUI()
             min = 0,
             step = 30,
             initConfigValue = function(self)
-                game_config.economy.incomeForCenter = self.value / 60
+                game_config.economy.incomeForCenter = self.value
             end
         },
         {
@@ -199,6 +199,18 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.economy.goldForKill = self.value
+            end
+        },
+        {
+            page = page.ECONOMY,
+            type = elementType.CHECK_BOX,
+            text = 'Upkeep',
+            tooltip = "No Upkeep (0-50 Food: 100% income)\n" ..
+                    "Low Upkeep (51-100 Food: 80% income)\n" ..
+                    "High Upkeep (101+ Food: 60% income)",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.economy.upkeep = self.value
             end
         },
         -- UNITS

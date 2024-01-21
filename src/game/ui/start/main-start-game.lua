@@ -2,6 +2,9 @@ Debug.beginFile('main-start-game.lua')
 function startGameUI()
     BlzLoadTOCFile("war3mapimported\\templates.toc")
 
+    local upkeepFrame = BlzGetFrameByName("ResourceBarUpkeepText", 0)
+    BlzFrameSetText(upkeepFrame, "alga")
+
     local parent = BlzCreateFrame("GreenText", BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
     BlzFrameSetParent(parent, preConfigGameModes)
     BlzFrameSetText(parent, GetPlayerName(getMainPlayer()) .. " is selecting...")

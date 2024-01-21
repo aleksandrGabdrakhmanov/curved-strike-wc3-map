@@ -142,9 +142,9 @@ end
 
 function getIncome(player)
     if player.economy.incomeForCenter == 0 then
-        return math.floor(player.economy.income * 60)
+        return math.floor(player.economy.income)
     else
-        return math.floor(player.economy.income * 60) .. '(+' .. math.floor(player.economy.incomeForCenter * 60) .. ')'
+        return math.floor(player.economy.income) .. '(+' .. math.floor(player.economy.incomeForCenter) .. ')'
     end
 end
 
@@ -161,8 +161,26 @@ function updatePanelForAllPlayers()
                 local playerName = bodyRow[1].text
                 for col, cell in ipairs(bodyRow) do
 
-                    MultiboardSetTitleText(player.multiboard,
-                            'Time: ' .. GetFormattedGameTime() .. '   Wave: ' .. math.floor(player.spawnTimer) .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills)
+                    local title = 'Time: ' .. GetFormattedGameTime() .. '   Wave: ' .. math.floor(player.spawnTimer) .. '   Inc/min: ' .. getIncome(player) .. '   Kills: ' .. player.totalKills
+
+                    local upkeep, _ = getUpkeepTypeAndPercent(player)
+
+                    if upkeep then
+                        local upkeepFrame = BlzGetFrameByName("ResourceBarUpkeepText", 0)
+                        BlzFrameSetText(upkeepFrame, "alga")
+                        local upkeepText
+                        if upkeep == upkeepType.NO then
+                            upkeepText = '  |cff00ff00No Upkeep|r'
+                        elseif upkeep == upkeepType.LOW then
+                            upkeepText = '  |cffffff00Low Upkeep(80)|r'
+                        elseif upkeep == upkeepType.HIGH then
+                            upkeepText = '  |cffff0000High Upkeep(60)|r'
+                        end
+                        title = title .. upkeepText
+
+                    end
+
+                    MultiboardSetTitleText(player.multiboard, title)
 
                     local item = MultiboardGetItem(player.multiboard, row, col - 1)
                     if isPlayerInTeam(playerName, team.players) then

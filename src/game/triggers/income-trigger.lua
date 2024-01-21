@@ -8,22 +8,45 @@ function incomeTrigger()
 
                 player.economy.roundUp = not player.economy.roundUp
 
-                local income = player.economy.income + player.economy.incomeForCenter
-                if (income == 0) then
+                local _, percent = getUpkeepTypeAndPercent(player)
+
+                local income = (player.economy.income + player.economy.incomeForCenter)/60
+                local incomeWithPercent = (income * percent) / 100
+                if (incomeWithPercent == 0) then
                     return
                 end
-                local roundedIncome
 
+                local roundedIncome
                 if player.economy.roundUp then
-                    roundedIncome = math.ceil(income)
+                    roundedIncome = math.ceil(incomeWithPercent)
                 else
-                    roundedIncome = math.floor(income)
+                    roundedIncome = math.floor(incomeWithPercent)
                 end
 
                 addGold(player, roundedIncome)
             end
         end
     end)
+end
+
+upkeepType = {
+    NO = 'NO',
+    LOW = 'LOW',
+    HIGH = 'HIGH'
+}
+
+function getUpkeepTypeAndPercent(player)
+
+    if game_config.economy.upkeep == true then
+        if player.food > 10 and player.food <= 100 then
+            return upkeepType.LOW, 80
+        elseif player.food > 100 then
+            return upkeepType.HIGH, 60
+        else
+            return upkeepType.NO, 100
+        end
+    end
+    return nil, 100
 end
 
 function addGold(player, gold)
