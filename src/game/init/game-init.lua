@@ -19,6 +19,7 @@ function initGame()
     createPictures()
     initPanelForAllPlayers()
     initAbilitiesPanel()
+    heroStatisticPanel()
 end
 
 function createPictures()

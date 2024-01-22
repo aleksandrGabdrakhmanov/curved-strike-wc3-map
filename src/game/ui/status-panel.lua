@@ -240,12 +240,12 @@ function initPanelForAllPlayers()
     local tableInfo = getTableInfo()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            local multiboard = CreateMultiboard()
-            MultiboardSetRowCount(multiboard, #tableInfo.body + 1)
-            MultiboardSetColumnCount(multiboard, #tableInfo.header)
+            player.multiboard = CreateMultiboardBJ( #tableInfo.header, #tableInfo.body + 1, "Board1" )
+            local multiFrame = BlzGetFrameByName("Multiboard",0)
+            player.multiFrame = multiFrame
 
             for i, header in ipairs(tableInfo.header) do
-                local title = MultiboardGetItem(multiboard, 0, i - 1)
+                local title = MultiboardGetItem(player.multiboard, 0, i - 1)
                 if header.text ~= nil then
                     MultiboardSetItemStyle(title, true, false)
                     MultiboardSetItemValue(title, header.text)
@@ -257,14 +257,12 @@ function initPanelForAllPlayers()
                 end
                 MultiboardReleaseItem(title)
             end
-
-            player.multiboard = multiboard
         end
     end
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             if GetLocalPlayer() == player.id then
-                MultiboardDisplay(player.multiboard, true)
+                BlzFrameSetVisible(player.multiFrame, true)
             end
         end
     end

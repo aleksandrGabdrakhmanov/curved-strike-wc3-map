@@ -5,7 +5,7 @@ function initStartGameUI()
         widthString = 0.02,
         indent = 0.015,
         width = 0.4,
-        betweenElement = 0.028
+        betweenElement = 0.029
     }
 
     elementType = {

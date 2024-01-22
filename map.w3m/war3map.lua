@@ -6160,6 +6160,7 @@ function initGame()
     createPictures()
     initPanelForAllPlayers()
     initAbilitiesPanel()
+    heroStatisticPanel()
 end
 
 function createPictures()
@@ -6795,7 +6796,7 @@ function initGameTimer()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if GetLocalPlayer() == player.id then
-                    MultiboardDisplay(player.multiboard, true)
+                    BlzFrameSetVisible(player.multiFrame, true)
                 end
             end
         end
@@ -6863,6 +6864,14 @@ function damageDetectTrigger()
             for _, player in ipairs(team.players) do
                 if sourcePlayer == player.spawnPlayerId then
                     player.totalDamage = math.floor(player.totalDamage + GetEventDamage())
+                    local userData = GetUnitUserData(source)
+                    if userData >= START_INDEX_HEROES then
+                        for _, hero in ipairs(player.heroes) do
+                            if hero.id == userData then
+                                hero.damage = math.floor(hero.damage + GetEventDamage())
+                            end
+                        end
+                    end
                     return
                 end
             end
@@ -6884,11 +6893,28 @@ function deadDetectTrigger()
             for _, player in ipairs(team.players) do
                 if sourcePlayer == player.spawnPlayerId then
                     player.totalKills = math.floor(player.totalKills + 1)
+                    local userData = GetUnitUserData(source)
+                    if userData >= START_INDEX_HEROES then
+                        for _, hero in ipairs(player.heroes) do
+                            if hero.id == userData then
+                                hero.kills = hero.kills + 1
+                            end
+                        end
+                    end
                     return
                 end
             end
         end
     end)
+end
+
+function isHeroOrSummon(id)
+    for _, hero in ipairs(heroes_for_build) do
+        if hero.id == id then
+            return true
+        end
+    end
+    return false
 end
 Debug.endFile()
 Debug.beginFile('debug-trigger.lua')
@@ -6931,6 +6957,8 @@ function debugTrigger()
         SetPlayerAlliance(Player(18), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(19), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(20), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        MultiboardDisplay(bj_lastCreatedMultiboard, false)
+        BlzFrameSetVisible(heroMultiboardFrame, true)
 
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
@@ -7048,7 +7076,9 @@ end
 
 Debug.endFile()
 Debug.beginFile('hero-construct-trigger.lua')
+START_INDEX_HEROES = 1000
 function heroConstructTrigger()
+    heroGlobalId = START_INDEX_HEROES
     for _, team in ipairs(all_teams) do
         for playerIndex, player in ipairs(team.players) do
             local trig = CreateTrigger()
@@ -7071,11 +7101,16 @@ function heroConstructTrigger()
                     table.insert(player.heroes, {
                         status = "new",
                         building = GetTriggerUnit(),
+                        name = GetHeroProperName(GetTriggerUnit()),
                         unit = nil,
+                        id = heroGlobalId,
                         newSkills = {},
                         unitConfig = getHeroUnitId(('>I4'):pack(unitId)),
-                        icon = BlzGetAbilityIcon(unitId)
+                        icon = BlzGetAbilityIcon(unitId),
+                        kills = 0,
+                        damage = 0
                     })
+                    heroGlobalId = heroGlobalId + 1
                     player.food = player.food + 5
                     if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
                         updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))
@@ -7168,6 +7203,7 @@ function initHeroTriggers()
     heroLearnAbility()
     heroNewSkill()
     wardenTrigger()
+    summonLabelTrigger()
 end
 Debug.endFile()
 Debug.beginFile('hero-new-skill.lua')
@@ -7233,6 +7269,15 @@ function heroTransferExp()
     end
 end
 Debug.endFile()
+Debug.beginFile('summon-label-trigger.lua')
+function summonLabelTrigger()
+    local trig = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_SUMMON)
+    TriggerAddAction(trig, function()
+        SetUnitUserData(GetSummonedUnit(), GetUnitUserData(GetSummoningUnit()))
+        immediatelyMoveUnit(GetSummonedUnit())
+    end)
+end
 Debug.beginFile('warden-trigger.lua')
 function wardenTrigger()
     local trig = CreateTrigger()
@@ -7647,6 +7692,8 @@ function handleHeroSpawn(player, unit, x, y)
         if (game_config.units.heroStartLevel > 1) then
             SetHeroLevel(unit, game_config.units.heroStartLevel, false)
         end
+        SetUnitUserData(unit, hero.id)
+        BlzSetHeroProperName(unit, hero.name)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         hero.status = "alive"
         hero.unit = unit
@@ -7739,6 +7786,7 @@ function statusPanelUpdateTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 1.00)
     TriggerAddAction(trig, function()
         updatePanelForAllPlayers()
+        updateStatisticPanel()
     end)
 end
 Debug.endFile()
@@ -8327,6 +8375,118 @@ function isPlayerIsWinner(loseTeam)
     return true
 end
 Debug.endFile()
+Debug.beginFile('hero-statistic-panel.lua')
+
+function heroStatisticPanel()
+    local tableInfo = getHeroInfo()
+    heroMultiboard = CreateMultiboardBJ( #tableInfo.header, 1, "Heroes statistics" )
+    heroMultiboardFrame = BlzGetFrameByName("Multiboard",0)
+    heroMultiContainer = BlzGetFrameByName("MultiboardListContainer",0)
+    heroMultiBackdrop = BlzGetFrameByName("MultiboardBackdrop",0)
+    for i, header in ipairs(tableInfo.header) do
+        local title = MultiboardGetItem(heroMultiboard, 0, i - 1)
+        if header.text ~= nil then
+            MultiboardSetItemStyle(title, true, false)
+            MultiboardSetItemValue(title, header.text)
+            MultiboardSetItemWidth(title, header.weight)
+        else
+            MultiboardSetItemStyle(title, false, false)
+            MultiboardSetItemWidth(title, 0.0001)
+        end
+        MultiboardReleaseItem(title)
+    end
+
+    BlzFrameClearAllPoints(heroMultiboardFrame)
+    BlzFrameSetAbsPoint(heroMultiboardFrame, FRAMEPOINT_LEFT, 0.19,0.55)
+    BlzFrameSetVisible(heroMultiboardFrame, true)
+    MultiboardMinimize(heroMultiboard, true)
+end
+
+function updateStatisticPanel()
+    local updatedTableInfo = getHeroInfo()
+
+
+    local function compareRows(row1, row2)
+        return row1[5].text > row2[5].text
+    end
+    table.sort(updatedTableInfo.body, compareRows)
+
+    MultiboardSetRowCount(heroMultiboard,  #updatedTableInfo.body + 1)
+    for row, bodyRow in ipairs(updatedTableInfo.body) do
+        for col, cell in ipairs(bodyRow) do
+
+            local item = MultiboardGetItem(heroMultiboard, row, col - 1)
+
+            if (col == 1) then
+                MultiboardSetItemStyle(item, true, false)
+                MultiboardSetItemValue(item, row)
+                MultiboardSetItemWidth(item, updatedTableInfo.header[col].weight)
+            elseif (cell.text) then
+                MultiboardSetItemStyle(item, true, false)
+                MultiboardSetItemValue(item, cell.text)
+                MultiboardSetItemValueColor(item, cell.color.r, cell.color.g, cell.color.b, cell.color.t)
+                MultiboardSetItemWidth(item, updatedTableInfo.header[col].weight)
+            elseif (cell.icon) then
+                MultiboardSetItemStyle(item, false, true)
+                MultiboardSetItemIcon(item, cell.icon)
+                MultiboardSetItemWidth(item, 0.01)
+            else
+                MultiboardSetItemStyle(item, true, false)
+                MultiboardSetItemValue(item, "")
+                MultiboardSetItemWidth(item, 0.01)
+            end
+            MultiboardReleaseItem(item)
+        end
+    end
+end
+
+function getHeroInfo()
+    local tableInfo = {}
+    tableInfo.header = {}
+    table.insert(tableInfo.header, { text = 'P', weight = 0.015})
+    table.insert(tableInfo.header, { text = '  ', weight = 0.015})
+    table.insert(tableInfo.header, { text = 'Name', weight = 0.09})
+    table.insert(tableInfo.header, { text = 'Kills', weight = 0.03})
+    table.insert(tableInfo.header, { text = 'Damage', weight = 0.05})
+    tableInfo.body = {}
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            for _, hero in ipairs(player.heroes) do
+                if hero.damage >= 1 then
+                    local row = {}
+                    table.insert(row, {})
+                    table.insert(row, {
+                        icon = hero.icon,
+                        color = player.color,
+                        integerColor = player.integerColor,
+                        isSensitive = false
+                    })
+                    table.insert(row, {
+                        text = hero.name,
+                        color = player.color,
+                        integerColor = player.integerColor,
+                        isSensitive = false
+                    })
+                    table.insert(row, {
+                        text = hero.kills,
+                        color = player.color,
+                        integerColor = player.integerColor,
+                        isSensitive = false
+                    })
+                    table.insert(row, {
+                        text = hero.damage,
+                        color = player.color,
+                        integerColor = player.integerColor,
+                        isSensitive = false
+                    })
+                    table.insert(tableInfo.body, row)
+                end
+            end
+        end
+    end
+    return tableInfo
+end
+Debug.endFile()
 Debug.beginFile('element-check-box.lua')
 function createCheckBox(parentPage, lastElement, element)
 
@@ -8454,7 +8614,7 @@ function initStartGameUI()
         widthString = 0.02,
         indent = 0.015,
         width = 0.4,
-        betweenElement = 0.028
+        betweenElement = 0.029
     }
 
     elementType = {
@@ -9221,12 +9381,12 @@ function initPanelForAllPlayers()
     local tableInfo = getTableInfo()
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
-            local multiboard = CreateMultiboard()
-            MultiboardSetRowCount(multiboard, #tableInfo.body + 1)
-            MultiboardSetColumnCount(multiboard, #tableInfo.header)
+            player.multiboard = CreateMultiboardBJ( #tableInfo.header, #tableInfo.body + 1, "Board1" )
+            local multiFrame = BlzGetFrameByName("Multiboard",0)
+            player.multiFrame = multiFrame
 
             for i, header in ipairs(tableInfo.header) do
-                local title = MultiboardGetItem(multiboard, 0, i - 1)
+                local title = MultiboardGetItem(player.multiboard, 0, i - 1)
                 if header.text ~= nil then
                     MultiboardSetItemStyle(title, true, false)
                     MultiboardSetItemValue(title, header.text)
@@ -9238,14 +9398,12 @@ function initPanelForAllPlayers()
                 end
                 MultiboardReleaseItem(title)
             end
-
-            player.multiboard = multiboard
         end
     end
     for _, team in ipairs(all_teams) do
         for _, player in ipairs(team.players) do
             if GetLocalPlayer() == player.id then
-                MultiboardDisplay(player.multiboard, true)
+                BlzFrameSetVisible(player.multiFrame, true)
             end
         end
     end

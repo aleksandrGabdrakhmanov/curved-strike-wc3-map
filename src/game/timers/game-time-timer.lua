@@ -6,7 +6,7 @@ function initGameTimer()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if GetLocalPlayer() == player.id then
-                    MultiboardDisplay(player.multiboard, true)
+                    BlzFrameSetVisible(player.multiFrame, true)
                 end
             end
         end

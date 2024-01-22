@@ -38,6 +38,8 @@ function debugTrigger()
         SetPlayerAlliance(Player(18), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(19), Player(0), ALLIANCE_SHARED_VISION, TRUE)
         SetPlayerAlliance(Player(20), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        MultiboardDisplay(bj_lastCreatedMultiboard, false)
+        BlzFrameSetVisible(heroMultiboardFrame, true)
 
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do

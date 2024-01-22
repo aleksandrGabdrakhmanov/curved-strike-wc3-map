@@ -4,6 +4,7 @@ function statusPanelUpdateTrigger()
     TriggerRegisterTimerEventPeriodic(trig, 1.00)
     TriggerAddAction(trig, function()
         updatePanelForAllPlayers()
+        updateStatisticPanel()
     end)
 end
 Debug.endFile()

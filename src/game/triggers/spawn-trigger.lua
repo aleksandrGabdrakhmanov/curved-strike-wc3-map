@@ -34,6 +34,8 @@ function handleHeroSpawn(player, unit, x, y)
         if (game_config.units.heroStartLevel > 1) then
             SetHeroLevel(unit, game_config.units.heroStartLevel, false)
         end
+        SetUnitUserData(unit, hero.id)
+        BlzSetHeroProperName(unit, hero.name)
         SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
         hero.status = "alive"
         hero.unit = unit

@@ -2669,7 +2669,7 @@ function DestroyTimer(whichTimer) end	-- (native)
 ---@param timeout number
 ---@param periodic boolean
 ---@param handlerFunc? function
-function TimerStart(whichTimer, timeout, periodic, handlerFunc) end	-- (native)
+function  TimerStart(whichTimer, timeout, periodic, handlerFunc) end	-- (native)
 
 ---@param whichTimer timer
 ---@return number

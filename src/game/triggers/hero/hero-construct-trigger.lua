@@ -1,5 +1,7 @@
 Debug.beginFile('hero-construct-trigger.lua')
+START_INDEX_HEROES = 1000
 function heroConstructTrigger()
+    heroGlobalId = START_INDEX_HEROES
     for _, team in ipairs(all_teams) do
         for playerIndex, player in ipairs(team.players) do
             local trig = CreateTrigger()
@@ -22,11 +24,16 @@ function heroConstructTrigger()
                     table.insert(player.heroes, {
                         status = "new",
                         building = GetTriggerUnit(),
+                        name = GetHeroProperName(GetTriggerUnit()),
                         unit = nil,
+                        id = heroGlobalId,
                         newSkills = {},
                         unitConfig = getHeroUnitId(('>I4'):pack(unitId)),
-                        icon = BlzGetAbilityIcon(unitId)
+                        icon = BlzGetAbilityIcon(unitId),
+                        kills = 0,
+                        damage = 0
                     })
+                    heroGlobalId = heroGlobalId + 1
                     player.food = player.food + 5
                     if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
                         updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))

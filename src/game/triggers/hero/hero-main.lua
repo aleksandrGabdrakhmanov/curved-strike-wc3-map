@@ -7,5 +7,6 @@ function initHeroTriggers()
     heroLearnAbility()
     heroNewSkill()
     wardenTrigger()
+    summonLabelTrigger()
 end
 Debug.endFile()
