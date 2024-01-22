@@ -7915,6 +7915,16 @@ custom_cast_ai_params = {
         }
     },
     {
+        unitId = 'Ofar',
+        order = 'firebolt',
+        radius = 500,
+        timeout = 5.00,
+        orderTarget = 'conditionUnit',
+        condition = {
+            target = 'enemy'
+        }
+    },
+    {
         unitId = 'e00I',
         order = 'ravenform',
         radius = 500,
