@@ -7366,7 +7366,7 @@ function lifetimeLimitTrigger()
                                 TimerStart(removeTimer, 0.5, true, function()
                                     tick = tick - 1
                                     if tick <= 0 then
-                                        local effect = AddSpecialEffectLocBJ( GetUnitLoc(unit), "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl" )
+                                        local effect = AddSpecialEffectLoc( "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl", GetUnitLoc(unit))
                                         BlzSetSpecialEffectScale( effect, ( 0.30 * I2R(GetUnitLevel(unit)) ) )
                                         DestroyEffect( effect )
                                         RemoveUnit(unit)
