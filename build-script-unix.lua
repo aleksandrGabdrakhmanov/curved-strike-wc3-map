@@ -267,7 +267,7 @@ return function(param)
 		local path   = ((param.project .. '/' .. param.src[i]):gsub("[//]+$", ""))
 		if not isFileExists(path) then return log(noFileError .. path .. color.reset) end
 
-		local dirPath = '/home/gabik/projects/curved-strike-wc3-map/src/'
+		local dirPath = '../curved-strike-wc3-map/src/'
 		-- add files from directory to pathlist
 		local ok, err = folderFileList(dirPath, pathlist)
 		if not ok then

@@ -1,4 +1,4 @@
-require 'build' {
+require 'build-script-unix' {
     game = nil,
     project = '../curved-strike-wc3-map',
     map = 'map.w3m',
