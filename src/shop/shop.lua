@@ -2637,11 +2637,6 @@ do
             BlzFrameSetSize(parent, (refButtonSize + refButtonGap) * refButtonCountUser + boxFrameBorderGap * 2, refButtonBoxSizeY)
 
             PlaceRefButtonBox(parent)
-            if refBoxUserPos then
-                PlaceRefButtonBoxFree(parent, refBoxUserPos, refBoxUserRelative, refBoxUserPosRelative, refBoxUserX, refBoxUserY, refBoxUserDirection)
-            else
-
-            end
             TasItemShopUI.Frames.BoxUser = parent
 
             frame = BlzCreateFrame("TasButtonTextTemplate", parent, 0, 0)
@@ -2659,7 +2654,6 @@ do
         end
 
         local frameObject = {}
-        frameObject.Index = int
 
         frameObject.Button = BlzCreateFrame("TasButton", TasItemShopUI.Frames.BoxSuper, 0, 0)
         CreateTasButtonTooltip(frameObject, TasItemShopUI.Frames.BoxSuper)
@@ -3383,13 +3377,7 @@ do
                     end
                 end
             end
-
             TasItemShopUI.Create()
-            -- Frame related code actions are not saved/Loaded, probably repeat them after Loading the game
-            if FrameLoaderAdd then
-                FrameLoaderAdd(TasItemShopUI.Create)
-            end
-
         end, print)
     end
 
