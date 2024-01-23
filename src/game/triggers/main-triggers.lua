@@ -23,9 +23,11 @@ function initTriggers()
     tierDetectTrigger()
     lifetimeLimitTrigger()
     goldForKillTrigger()
-    debugTrigger()
-    debugTriggerGold()
-    debugTriggerFinish()
-    debugTriggerFinish2()
+    if IS_DEBUG_TRIGGER_ON then
+        debugTrigger()
+        debugTriggerGold()
+        debugTriggerFinish()
+        debugTriggerFinish2()
+    end
 end
 Debug.endFile()

@@ -1,6 +1,9 @@
 Debug.beginFile('debug-trigger.lua')
+-- this file should be last in debug folder
+do
+    IS_DEBUG_TRIGGER_ON = true
+end
 function debugTrigger()
-
     local trig = CreateTrigger()
     TriggerRegisterPlayerChatEvent(trig, Player(0),"debug", true)
 

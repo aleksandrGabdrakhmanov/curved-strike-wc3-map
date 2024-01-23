@@ -263,11 +263,10 @@ return function(param)
 	local pathlist = {}
 	if type(param.src) == 'string' then param.src = { param.src } end
 	for i = 1, #param.src do
-		local suffix = param.src[i]:sub(-4):lower() == '.lua' and '' or '/*.lua'
 		local path   = ((param.project .. '/' .. param.src[i]):gsub("[//]+$", ""))
 		if not isFileExists(path) then return log(noFileError .. path .. color.reset) end
 
-		local dirPath = '../curved-strike-wc3-map/src/'
+		local dirPath = param.project .. param.src[i]
 		-- add files from directory to pathlist
 		local ok, err = folderFileList(dirPath, pathlist)
 		if not ok then
