@@ -78,3 +78,7 @@ To compile, run (details in [cheapack](https://github.com/nazarpunk/cheapack)):
 
 I have modified the [cheapack](https://github.com/nazarpunk/cheapack) scripts for Unix compatibility. If you need to compile on Windows, please contact me or make a pull request yourself.
 
+## Develop
+
+For development, I use IntelliJ IDEA with the EmmyLua plugin. All the logic is contained in the 'game' folder. There are no triggers in the map itself, allowing for easy modifications to the logic
+
