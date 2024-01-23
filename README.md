@@ -2,14 +2,19 @@
 
 ## General Information
 
-Curved Strike is a map inspired by the love for the Direct Strike map. It features a large number of configurable parameters at the start of the game and extensive statistics during gameplay. The game mode is Mix only.
+![](images/logo.png)
+
+Curved Strike is a map inspired by the love for the Direct Strike map. It features a large number of configurable parameters at the start of the game and extensive statistics during gameplay. The game mode is Mix only. Маx players - 10
 
 ## Configurable Parameters:
+![](images/general.png)
 - **Global**:
    - **Wave interval each players** - Wave release interval between players. The total interval for each player between their turns will be the product of the number of players and the interval)
    - **Wave interval all players** - The interval for the next wave after all players have launched waves and a full cycle has passed for the team
    - **Base HP** - Maximum health capacity of the team's main base
    - **Tower HP** - Maximum health capacity of the team's tower
+
+![](images/economy.png)
 - **Economy**
    - **Start gold** - Initial amount of gold with which players start the game
    - **Base income/min** - Starting amount of income
@@ -20,10 +25,14 @@ Curved Strike is a map inspired by the love for the Direct Strike map. It featur
    - **Gold for killing the tower** - Amount of gold awarded to each team member for destroying an enemy tower
    - **Gold for killing units** - Amount of gold earned for killing enemy units, calculated as a percentage of their cost
    - **Upkeep** - No Upkeep (0-50 Food: 100% income); Low Upkeep (51-100 Food: 80% income); High Upkeep (101+ Food: 60% income)
+
+![](images/units.png)
 - **Units**
    - **Available units** - Select units that will be available for random distribution among players
    - **Mirror units** - Distribute identical random units to players of opposing teams in corresponding positions
    - **Max lifespan of unit in waves** - Number of waves after a unit's deployment, upon which the unit will disappear
+
+![](images/heroes.png)
 - **Heroes**
    - **Available heroes** - Select heroes that will be available for random distribution among players
    - **Max heroes** - Maximum possible number of heroes for each player (0 - 7)
@@ -32,6 +41,7 @@ Curved Strike is a map inspired by the love for the Direct Strike map. It featur
    - **Start hero level** - The initial level of the hero after construction
  
 ## In-Game Real-Time Statistics:
+![](images/players_panel.png)
 - **Players statistic:**
    - **Name** - Player's name
    - **Wave** - Time until the player's wave is released
@@ -43,6 +53,8 @@ Curved Strike is a map inspired by the love for the Direct Strike map. It featur
    - **Tier** - Player's tier
    - **Army** - Size of the army
    - **Heroes** - Icons of built heroes
+
+![](images/heroes_panel.png)
 - **Heroes statistic:**
    - **P** - Hero's rank based on the damage dealt
    - **Name** - Hero's icon and name
