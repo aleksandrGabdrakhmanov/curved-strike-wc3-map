@@ -85,7 +85,7 @@ function initStartGameUI()
             type = elementType.EDIT_BOX,
             text = 'Tower HP',
             tooltip = "Maximum health capacity of the team's tower",
-            defValue = 4000,
+            defValue = 1200,
             max = 999999,
             min = 1,
             step = 1,
