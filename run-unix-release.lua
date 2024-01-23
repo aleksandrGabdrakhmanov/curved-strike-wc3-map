@@ -2,7 +2,7 @@ require 'build-script-unix' {
     game = nil,
     project = '../curved-strike-wc3-map',
     map = 'map.w3m',
-    src = {'/src/debugMock/', '/src/totalInit/', '/src/game/'},
+    src = {'/src/debugMock/', '/src/totalInit/', '/src/shop/', '/src/game/'},
     run = 'launch_nothing',
     syntaxCheck = false,
     options = {
