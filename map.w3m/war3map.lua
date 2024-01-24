@@ -6416,6 +6416,10 @@ function addPlayersInTeam(players)
                 heroes = {},
                 totalDamage = 0,
                 totalKills = 0,
+                totalSummonKills = 0,
+                totalHeroKills = 0,
+                damageToTowerBase = 0,
+                totalHeroLevels = 0,
                 availableUnits = {},
                 availableHeroes = {},
                 tier = 'T1',
@@ -7000,6 +7004,10 @@ function damageDetectTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if sourcePlayer == player.spawnPlayerId then
+                    if GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.tower) or GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.base) then
+                        player.damageToTowerBase = player.damageToTowerBase + GetEventDamage()
+                        return
+                    end
                     player.totalDamage = math.floor(player.totalDamage + GetEventDamage())
                     local userData = GetUnitUserData(source)
                     if userData >= START_INDEX_HEROES then
@@ -7030,6 +7038,14 @@ function deadDetectTrigger()
             for _, player in ipairs(team.players) do
                 if sourcePlayer == player.spawnPlayerId then
                     player.totalKills = math.floor(player.totalKills + 1)
+                    if IsUnitType(GetDyingUnit(), UNIT_TYPE_SUMMONED) then
+                        player.totalSummonKills = player.totalSummonKills + 1
+                    end
+                    local userDataDying = GetUnitUserData(GetDyingUnit())
+                    if userDataDying >= START_INDEX_HEROES then
+                        player.totalHeroKills = player.totalHeroKills + 1
+                    end
+
                     local userData = GetUnitUserData(source)
                     if userData >= START_INDEX_HEROES then
                         for _, hero in ipairs(player.heroes) do
@@ -7270,6 +7286,7 @@ function heroNewSkill()
                         for i = #hero.newSkills, 1, -1 do
                             SetPlayerAbilityAvailable(player.spawnPlayerId, hero.newSkills[i], true)
                             SelectHeroSkill(hero.unit, hero.newSkills[i])
+                            player.totalHeroLevels = player.totalHeroLevels + 1
                             table.remove(hero.newSkills, i)
                         end
                     end
@@ -8302,26 +8319,27 @@ panelType = {
     STATUS = 'STATUS'
 }
 
-function getTableInfo(teams, panelType)
+function getTableInfo(teams, panel)
     local tableInfo = {}
     tableInfo.header = {}
     local addedHeader = {}
     insertHeader(addedHeader, 'Name', tableInfo.header, { text = 'Name', weight = 0.085 })
-    insertHeader(addedHeader,'Wave', tableInfo.header, { text = 'Wave', weight = 0.04 }, panelType == panelType.STATUS)
-    insertHeader(addedHeader,'Income', tableInfo.header, { text = 'Inc/min', weight = 0.07 }, panelType == panelType.STATUS)
-    insertHeader(addedHeader,'GoldTotal', tableInfo.header, { text = 'Gold total', weight = 0.045 })
-    insertHeader(addedHeader,'GoldKill', tableInfo.header, { text = 'Gold kill', weight = 0.045 }, game_config.economy.goldForKill > 0)
-    insertHeader(addedHeader,'Kills', tableInfo.header, { text = 'Kills', weight = 0.05 })
-    insertHeader(addedHeader,'Damage', tableInfo.header, { text = 'Damage', weight = 0.06 })
-    insertHeader(addedHeader,'Tier', tableInfo.header, { text = 'Tier', weight = 0.04 })
-    insertHeader(addedHeader,'Army', tableInfo.header, { text = 'Army', weight = 0.04 })
-    insertHeader(addedHeader,'HeroesIcon1', tableInfo.header, { text = 'Heroes', weight = 0.06 })
-    insertHeader(addedHeader,'HeroesIcon2', tableInfo.header, { })
-    insertHeader(addedHeader,'HeroesIcon3', tableInfo.header, { })
-    insertHeader(addedHeader,'HeroesIcon4', tableInfo.header, { })
-    insertHeader(addedHeader,'HeroesIcon5', tableInfo.header, { })
-    insertHeader(addedHeader,'HeroesIcon6', tableInfo.header, { })
-    insertHeader(addedHeader,'HeroesIcon7', tableInfo.header, { })
+    insertHeader(addedHeader, 'Wave', tableInfo.header, { text = 'Wave', weight = 0.04 }, panel == panelType.STATUS)
+    insertHeader(addedHeader, 'Income', tableInfo.header, { text = 'Inc/min', weight = 0.07 }, panel == panelType.STATUS)
+    insertHeader(addedHeader, 'GoldTotal', tableInfo.header, { text = 'Gold total', weight = 0.045 })
+    insertHeader(addedHeader, 'GoldKill', tableInfo.header, { text = 'Gold kill', weight = 0.045 }, game_config.economy.goldForKill > 0)
+    insertHeader(addedHeader, 'Kills', tableInfo.header, { text = 'Kills', weight = 0.05 })
+    insertHeader(addedHeader, 'Damage', tableInfo.header, { text = 'Damage', weight = 0.06 })
+    insertHeader(addedHeader, 'Tier', tableInfo.header, { text = 'Tier', weight = 0.04 })
+    insertHeader(addedHeader, 'Army', tableInfo.header, { text = 'Army', weight = 0.04 })
+    insertHeader(addedHeader, 'Score', tableInfo.header, { text = 'Score', weight = 0.04 }, panel == panelType.FINISH)
+    insertHeader(addedHeader, 'HeroesIcon1', tableInfo.header, { text = 'Heroes', weight = 0.06 })
+    insertHeader(addedHeader, 'HeroesIcon2', tableInfo.header, { })
+    insertHeader(addedHeader, 'HeroesIcon3', tableInfo.header, { })
+    insertHeader(addedHeader, 'HeroesIcon4', tableInfo.header, { })
+    insertHeader(addedHeader, 'HeroesIcon5', tableInfo.header, { })
+    insertHeader(addedHeader, 'HeroesIcon6', tableInfo.header, { })
+    insertHeader(addedHeader, 'HeroesIcon7', tableInfo.header, { })
 
     tableInfo.body = {}
 
@@ -8329,97 +8347,103 @@ function getTableInfo(teams, panelType)
         for _, player in ipairs(team.players) do
             local row = {}
 
-            insertRow(addedHeader,'Name', row, {
+            insertRow(addedHeader, 'Name', row, {
                 text = getClearName(player),
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = false
             })
-            insertRow(addedHeader,'Wave', row, {
+            insertRow(addedHeader, 'Wave', row, {
                 text = math.floor(player.spawnTimer),
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = false
             })
-            insertRow(addedHeader,'Income', row, {
+            insertRow(addedHeader, 'Income', row, {
                 text = getIncome(player),
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'GoldTotal', row, {
+            insertRow(addedHeader, 'GoldTotal', row, {
                 text = player.economy.totalGold,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'GoldKill', row, {
+            insertRow(addedHeader, 'GoldKill', row, {
                 text = player.economy.totalGoldForKills,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'Kills', row, {
+            insertRow(addedHeader, 'Kills', row, {
                 text = player.totalKills,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = false
             })
-            insertRow(addedHeader,'Damage', row, {
+            insertRow(addedHeader, 'Damage', row, {
                 text = player.totalDamage,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = false
             })
-            insertRow(addedHeader,'Tier', row, {
+            insertRow(addedHeader, 'Tier', row, {
                 text = player.tier,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'Army', row, {
+            insertRow(addedHeader, 'Army', row, {
                 text = player.food,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'HeroesIcon1', row, {
+            insertRow(addedHeader, 'Score', row, {
+                text = getScore(player),
+                color = player.color,
+                integerColor = player.integerColor,
+                isSensitive = true
+            })
+            insertRow(addedHeader, 'HeroesIcon1', row, {
                 icon = player.heroes[1] and player.heroes[1].icon or nil,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'HeroesIcon2', row, {
+            insertRow(addedHeader, 'HeroesIcon2', row, {
                 icon = player.heroes[2] and player.heroes[2].icon or nil,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'HeroesIcon3', row, {
+            insertRow(addedHeader, 'HeroesIcon3', row, {
                 icon = player.heroes[3] and player.heroes[3].icon or nil,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'HeroesIcon4', row, {
+            insertRow(addedHeader, 'HeroesIcon4', row, {
                 icon = player.heroes[4] and player.heroes[4].icon or nil,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'HeroesIcon5', row, {
+            insertRow(addedHeader, 'HeroesIcon5', row, {
                 icon = player.heroes[5] and player.heroes[5].icon or nil,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'HeroesIcon6', row, {
+            insertRow(addedHeader, 'HeroesIcon6', row, {
                 icon = player.heroes[6] and player.heroes[6].icon or nil,
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
-            insertRow(addedHeader,'HeroesIcon7', row, {
+            insertRow(addedHeader, 'HeroesIcon7', row, {
                 icon = player.heroes[7] and player.heroes[7].icon or nil,
                 color = player.color,
                 integerColor = player.integerColor,
@@ -8431,11 +8455,29 @@ function getTableInfo(teams, panelType)
     return tableInfo
 end
 
+function getScore(player)
+    return math.floor(
+            player.food +
+            (player.economy.totalGold / 100) +
+            (player.totalSummonKills / 15) +
+            ((player.totalKills - player.totalSummonKills - player.totalHeroKills) / 10) +
+            (player.totalHeroKills) +
+            (player.damageToTowerBase / 15) +
+            (player.totalHeroLevels * 5)
+    )
+end
+
+function getScoreForHeroes(player)
+    for _, hero in ipairs(player.heroes) do
+
+    end
+end
+
 function insertHeader(addedHeader, name, tbl, value, condition)
     if condition == nil then
         condition = true
     end
-    if condition then
+    if condition == true then
         table.insert(addedHeader, name)
         table.insert(tbl, value)
     end
