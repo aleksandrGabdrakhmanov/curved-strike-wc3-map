@@ -18,7 +18,7 @@ function finishGame(loseTeam)
     local totalRows = 4
     for teamNumber, team in ipairs(all_teams) do
         totalWidth = 0
-        local tableInfo = getTableInfo(teamNumber)
+        local tableInfo = getTableInfo({ team }, panelType.FINISH)
 
         local teamLabel = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
         BlzFrameSetSize(teamLabel, 0.15, 0.02)
@@ -28,7 +28,7 @@ function finishGame(loseTeam)
         prevColumn = teamLabel
 
         for i, headerColumn in ipairs(tableInfo.header) do
-            if headerColumn.text and headerColumn.isFinish then
+            if headerColumn.text then
                 local header = BlzCreateFrame("HeaderTableText", mainBackdrop, 0, 0)
                 BlzFrameSetSize(header, headerColumn.weight * weightMultiplyForBigFont, heightFont)
                 totalWidth = totalWidth + (headerColumn.weight * weightMultiplyForBigFont)
@@ -48,7 +48,7 @@ function finishGame(loseTeam)
             local prevColumn
             totalRows = totalRows + 1
             for j, element in ipairs(row) do
-                if element.text and tableInfo.header[j].isFinish then
+                if element.text then
                     local column = BlzCreateFrame("RowTableText", mainBackdrop, 0, 0)
                     if j == 1 then
                         local line = BlzCreateSimpleFrame("FinishGameLine", mainBackdrop, 0)

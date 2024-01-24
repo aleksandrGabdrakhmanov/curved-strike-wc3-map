@@ -11,4 +11,14 @@ function calculateDif(buidRect, spawnRect, unit)
     local unitY = GetUnitY(unit)
     return spawnRectX - (buidRectX - unitX), spawnRectY - (buidRectY - unitY)
 end
+
+function isContain(table, element)
+    for _, value in ipairs(table) do
+        if value == element then
+            return true
+        end
+    end
+    return false
+end
+
 Debug.endFile()
