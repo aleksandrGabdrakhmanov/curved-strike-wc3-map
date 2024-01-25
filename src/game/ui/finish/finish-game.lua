@@ -40,6 +40,12 @@ function finishGame(loseTeam)
                 else
                     BlzFrameSetPoint(header, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0, 0)
                 end
+
+                if headerColumn.tooltipText then
+                    local tooltipFrame, tooltipLabel = createTooltip(mainBackdrop, 0.14, 0.26)
+                    BlzFrameSetTooltip(header, tooltipFrame)
+                    BlzFrameSetText(tooltipLabel, headerColumn.tooltipText)
+                end
                 prevColumn = header
             end
         end

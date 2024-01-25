@@ -8332,7 +8332,11 @@ function getTableInfo(teams, panel)
     insertHeader(addedHeader, 'Damage', tableInfo.header, { text = 'Damage', weight = 0.06 })
     insertHeader(addedHeader, 'Tier', tableInfo.header, { text = 'Tier', weight = 0.04 })
     insertHeader(addedHeader, 'Army', tableInfo.header, { text = 'Army', weight = 0.04 })
-    insertHeader(addedHeader, 'Score', tableInfo.header, { text = 'Score', weight = 0.04 }, panel == panelType.FINISH)
+
+    insertHeader(addedHeader, 'Score', tableInfo.header, { text = 'Score', weight = 0.04,
+tooltipText = '1 point for each army\n1 point - 100 earned gold\n1 point - 5 kills summon units\n1 point - 10 kills not summon units\n1 point - kill hero\n1 point - 15 damage to tower/base\n5 point for each hero level'
+    }, panel == panelType.FINISH)
+
     insertHeader(addedHeader, 'HeroesIcon1', tableInfo.header, { text = 'Heroes', weight = 0.06 })
     insertHeader(addedHeader, 'HeroesIcon2', tableInfo.header, { })
     insertHeader(addedHeader, 'HeroesIcon3', tableInfo.header, { })
@@ -8542,6 +8546,12 @@ function finishGame(loseTeam)
                     firstColumn = header
                 else
                     BlzFrameSetPoint(header, FRAMEPOINT_TOPLEFT, prevColumn, FRAMEPOINT_TOPRIGHT, 0, 0)
+                end
+
+                if headerColumn.tooltipText then
+                    local tooltipFrame, tooltipLabel = createTooltip(mainBackdrop, 0.14, 0.26)
+                    BlzFrameSetTooltip(header, tooltipFrame)
+                    BlzFrameSetText(tooltipLabel, headerColumn.tooltipText)
                 end
                 prevColumn = header
             end
@@ -9258,12 +9268,18 @@ function startGameUI()
     end)
 end
 
-function createTooltip(owner)
+function createTooltip(owner, width, height)
+    if not width then
+        width = 0.26
+    end
+    if not height then
+        height = 0.26
+    end
     local tooltipFrame = BlzCreateFrame('TooltipBackdrop', owner, 0, 0)
     BlzFrameSetPoint(tooltipFrame, FRAMEPOINT_LEFT, owner, FRAMEPOINT_RIGHT, 0, 0)
-    BlzFrameSetSize(tooltipFrame, 0.26, 0.26)
+    BlzFrameSetSize(tooltipFrame, width, height)
     local tooltipLabel = BlzCreateFrameByType("TEXT", "", tooltipFrame, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetSize(tooltipLabel, 0.24, 0.24)
+    BlzFrameSetSize(tooltipLabel, width - 0.02, height - 0.02)
     BlzFrameSetTextAlignment(tooltipLabel, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_MIDDLE)
     BlzFrameSetPoint(tooltipLabel, FRAMEPOINT_CENTER, tooltipFrame, FRAMEPOINT_CENTER, 0, 0)
     BlzFrameSetParent(tooltipLabel, tooltipFrame)

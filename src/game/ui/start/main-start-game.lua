@@ -88,12 +88,18 @@ function startGameUI()
     end)
 end
 
-function createTooltip(owner)
+function createTooltip(owner, width, height)
+    if not width then
+        width = 0.26
+    end
+    if not height then
+        height = 0.26
+    end
     local tooltipFrame = BlzCreateFrame('TooltipBackdrop', owner, 0, 0)
     BlzFrameSetPoint(tooltipFrame, FRAMEPOINT_LEFT, owner, FRAMEPOINT_RIGHT, 0, 0)
-    BlzFrameSetSize(tooltipFrame, 0.26, 0.26)
+    BlzFrameSetSize(tooltipFrame, width, height)
     local tooltipLabel = BlzCreateFrameByType("TEXT", "", tooltipFrame, "EscMenuSaveDialogTextTemplate", 0)
-    BlzFrameSetSize(tooltipLabel, 0.24, 0.24)
+    BlzFrameSetSize(tooltipLabel, width - 0.02, height - 0.02)
     BlzFrameSetTextAlignment(tooltipLabel, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_MIDDLE)
     BlzFrameSetPoint(tooltipLabel, FRAMEPOINT_CENTER, tooltipFrame, FRAMEPOINT_CENTER, 0, 0)
     BlzFrameSetParent(tooltipLabel, tooltipFrame)
