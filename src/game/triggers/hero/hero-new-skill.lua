@@ -10,6 +10,7 @@ function heroNewSkill()
                         for i = #hero.newSkills, 1, -1 do
                             SetPlayerAbilityAvailable(player.spawnPlayerId, hero.newSkills[i], true)
                             SelectHeroSkill(hero.unit, hero.newSkills[i])
+                            player.totalHeroLevels = player.totalHeroLevels + 1
                             table.remove(hero.newSkills, i)
                         end
                     end

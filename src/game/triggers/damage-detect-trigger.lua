@@ -11,6 +11,10 @@ function damageDetectTrigger()
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if sourcePlayer == player.spawnPlayerId then
+                    if GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.tower) or GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.base) then
+                        player.damageToTowerBase = player.damageToTowerBase + GetEventDamage()
+                        return
+                    end
                     player.totalDamage = math.floor(player.totalDamage + GetEventDamage())
                     local userData = GetUnitUserData(source)
                     if userData >= START_INDEX_HEROES then

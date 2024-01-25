@@ -64,15 +64,6 @@ function SynchronizeInventory(hero1, hero2)
     end
 end
 
-function table.contains(table, element)
-    for _, value in pairs(table) do
-        if value == element then
-            return true
-        end
-    end
-    return false
-end
-
 function getHero(heroes, unit)
     for _, hero in ipairs(heroes) do
         if hero.building == unit then

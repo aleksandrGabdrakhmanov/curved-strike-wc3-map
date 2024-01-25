@@ -12,6 +12,14 @@ function deadDetectTrigger()
             for _, player in ipairs(team.players) do
                 if sourcePlayer == player.spawnPlayerId then
                     player.totalKills = math.floor(player.totalKills + 1)
+                    if IsUnitType(GetDyingUnit(), UNIT_TYPE_SUMMONED) then
+                        player.totalSummonKills = player.totalSummonKills + 1
+                    end
+                    local userDataDying = GetUnitUserData(GetDyingUnit())
+                    if userDataDying >= START_INDEX_HEROES then
+                        player.totalHeroKills = player.totalHeroKills + 1
+                    end
+
                     local userData = GetUnitUserData(source)
                     if userData >= START_INDEX_HEROES then
                         for _, hero in ipairs(player.heroes) do
