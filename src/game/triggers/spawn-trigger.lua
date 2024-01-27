@@ -20,11 +20,17 @@ end
 function handleUnitSpawn(player, id, x, y)
     local parentId = getParentUnitId(('>I4'):pack(id))
     if parentId then
-        local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-        SetUnitUserData(unit, player.waveNumber)
-        SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
-        immediatelyMoveUnit(unit)
+        for _ = 1, game_config.units.multiplier do
+            spawnUnit(player, parentId, x, y)
+        end
     end
+end
+
+function spawnUnit(player, parentId, x, y)
+    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+    SetUnitUserData(unit, player.waveNumber)
+    SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+    immediatelyMoveUnit(unit)
 end
 
 function handleHeroSpawn(player, unit, x, y)

@@ -6109,7 +6109,8 @@ function initGameConfig()
             towerHP = nil,
             countForSelect = nil,
             heroCost = 500,
-            heroStartLevel = nil
+            heroStartLevel = nil,
+            multiplier = nil
         },
         spawnPolicy = {
             interval = nil,
@@ -7749,11 +7750,17 @@ end
 function handleUnitSpawn(player, id, x, y)
     local parentId = getParentUnitId(('>I4'):pack(id))
     if parentId then
-        local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
-        SetUnitUserData(unit, player.waveNumber)
-        SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
-        immediatelyMoveUnit(unit)
+        for _ = 1, game_config.units.multiplier do
+            spawnUnit(player, parentId, x, y)
+        end
     end
+end
+
+function spawnUnit(player, parentId, x, y)
+    local unit = CreateUnit(player.spawnPlayerId, FourCC(parentId), x, y, 270)
+    SetUnitUserData(unit, player.waveNumber)
+    SetUnitAcquireRangeBJ(unit, GetUnitAcquireRange(unit) * game_config.units.range)
+    immediatelyMoveUnit(unit)
 end
 
 function handleHeroSpawn(player, unit, x, y)
@@ -8334,7 +8341,7 @@ function getTableInfo(teams, panel)
     insertHeader(addedHeader, 'Army', tableInfo.header, { text = 'Army', weight = 0.04 })
 
     insertHeader(addedHeader, 'Score', tableInfo.header, { text = 'Score', weight = 0.04,
-tooltipText = '1 point for each army\n1 point - 100 earned gold\n1 point - 5 kills summon units\n1 point - 10 kills not summon units\n1 point - kill hero\n1 point - 15 damage to tower/base\n5 point for each hero level'
+tooltipText = '1 point for each army\n1 point - 100 earned gold\n1 point - 15 kills summon units\n1 point - 10 kills not summon units\n1 point - kill hero\n1 point - 15 damage to tower/base\n5 point for each hero level'
     }, panel == panelType.FINISH)
 
     insertHeader(addedHeader, 'HeroesIcon1', tableInfo.header, { text = 'Heroes', weight = 0.06 })
@@ -9107,6 +9114,19 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.units.lifetime = self.value
+            end
+        },
+        {
+            page = page.UNITS,
+            type = elementType.SLIDER,
+            text = 'Multiplier',
+            tooltip = "Multiplier of the number of outgoing units",
+            defValue = 1,
+            max = 3,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.multiplier = self.value
             end
         },
         -- HEROES

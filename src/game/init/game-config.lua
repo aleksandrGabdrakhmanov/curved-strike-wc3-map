@@ -23,7 +23,8 @@ function initGameConfig()
             towerHP = nil,
             countForSelect = nil,
             heroCost = 500,
-            heroStartLevel = nil
+            heroStartLevel = nil,
+            multiplier = nil
         },
         spawnPolicy = {
             interval = nil,
