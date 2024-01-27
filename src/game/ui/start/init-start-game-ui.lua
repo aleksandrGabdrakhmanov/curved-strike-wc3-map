@@ -240,6 +240,19 @@ function initStartGameUI()
                 game_config.units.lifetime = self.value
             end
         },
+        {
+            page = page.UNITS,
+            type = elementType.SLIDER,
+            text = 'Multiplier',
+            tooltip = "Multiplier of the number of outgoing units",
+            defValue = 1,
+            max = 3,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.multiplier = self.value
+            end
+        },
         -- HEROES
         {
             page = page.HEROES,
