@@ -236,6 +236,7 @@ function initRect()
         team.base.baseRect = regions['curved']['team'][team.i]['base']
         team.base.towerRect = regions['curved']['team'][team.i]['tower']
         team.base.addGoldRect = regions['curved']['team'][team.i]['addGold']
+        team.base.viewRect = regions['curved']['team'][team.i]['view']
     end
 
     for _, team in ipairs(all_teams) do
@@ -265,7 +266,7 @@ function createBaseAndTower()
     for _, team in ipairs(all_teams) do
         local base = CreateUnit(
                 team.base.player,
-                FourCC(units_special.base),
+                FourCC(units_special.base[team.i]),
                 GetRectCenterX(team.base.baseRect),
                 GetRectCenterY(team.base.baseRect),
                 0
@@ -276,7 +277,7 @@ function createBaseAndTower()
         if team.base.towerRect ~= nil then
             local tower = CreateUnit(
                     team.base.player,
-                    FourCC(units_special.tower),
+                    FourCC(units_special.tower[team.i]),
                     GetRectCenterX(team.base.towerRect),
                     GetRectCenterY(team.base.towerRect),
                     0
