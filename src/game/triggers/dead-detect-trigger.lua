@@ -4,7 +4,10 @@ function deadDetectTrigger()
     TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DEATH)
     TriggerAddAction(trig, function()
         local source = GetKillingUnit()
-        if GetUnitTypeId(source) == FourCC(units_special.tower) or GetUnitTypeId(source) == FourCC(units_special.base) then
+        if GetUnitTypeId(source) == FourCC(units_special.tower[1]) or GetUnitTypeId(source) == FourCC(units_special.base[1]) then
+            return
+        end
+        if GetUnitTypeId(source) == FourCC(units_special.tower[2]) or GetUnitTypeId(source) == FourCC(units_special.base[2]) then
             return
         end
         local sourcePlayer = GetOwningPlayer(source)

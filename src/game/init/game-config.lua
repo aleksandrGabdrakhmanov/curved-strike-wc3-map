@@ -150,8 +150,14 @@ function initGlobalVariables()
     }
     units_special = {
         builder = 'u00F',
-        tower = 'o001',
-        base = 'o002',
+        tower = {
+            [1] = 'o001',
+            [2] = 'o00J'
+        },
+        base = {
+            [1] = 'o002',
+            [2] = 'o00I'
+        },
         mine = 'ugol',
         main = 'htow',
         laboratory = 'nmgv',

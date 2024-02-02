@@ -1,6 +1,6 @@
 ﻿STRING 1
 {
-Curved Strike v0.13
+Curved Strike v0.2
 }
 
 STRING 2
@@ -2176,5 +2176,143 @@ STRING 406
 // Upgrades: Rhan (Animal War Training), Ubertip (Tooltip - Extended)
 {
 Increases the maximum hit points of Knights, Dragonhawk Riders, and Gryphon Riders by 30.
+}
+
+STRING 407
+// Doodads: D003 (Fountain: Wall), Name (Name)
+{
+Fountain: Wall
+}
+
+STRING 408
+// Doodads: D004 (Lighting: Magic Lamp), Name (Name)
+{
+Lighting: Magic Lamp
+}
+
+STRING 409
+// Doodads: D005 (Tile: Castle (1)), Name (Name)
+{
+Tile: Castle (1)
+}
+
+STRING 410
+// Doodads: D006 (Statue: Sword), Name (Name)
+{
+Statue: Sword
+}
+
+STRING 411
+// Doodads: D007 (Pav: Lantern), Name (Name)
+{
+Pav: Lantern
+}
+
+STRING 412
+// Doodads: D008 (Building: Elf House), Name (Name)
+{
+Building: Elf House
+}
+
+STRING 413
+// Doodads: D00A (Building: Cylinder Tower), Name (Name)
+{
+Building: Cylinder Tower
+}
+
+STRING 414
+// Doodads: D009 (Pav: Street Sign), Name (Name)
+{
+Pav: Street Sign
+}
+
+STRING 415
+// Doodads: D00C (Tree: Birch (1)), Name (Name)
+{
+Tree: Birch (1)
+}
+
+STRING 416
+// Doodads: D00B (Tile: Castle (5)), Name (Name)
+{
+Tile: Castle (5)
+}
+
+STRING 417
+// Doodads: D00D (Statue: Golden), Name (Name)
+{
+Statue: Golden
+}
+
+STRING 418
+// Doodads: D00E (Naboo: Archway (1)), Name (Name)
+{
+Naboo: Archway (1)
+}
+
+STRING 419
+// Doodads: D00F (Naboo: Flag), Name (Name)
+{
+Naboo: Flag
+}
+
+STRING 420
+// Doodads: D00G (Naboo: Building (1)), Name (Name)
+{
+Naboo: Building (1)
+}
+
+STRING 421
+// Doodads: D00H (Naboo: Building (2)), Name (Name)
+{
+Naboo: Building (2)
+}
+
+STRING 422
+// Doodads: D00I (Naboo: Building (4)), Name (Name)
+{
+Naboo: Building (4)
+}
+
+STRING 423
+// Doodads: D00J (Naboo: Fence), Name (Name)
+{
+Naboo: Fence
+}
+
+STRING 424
+// Doodads: D00K (Naboo: High Tower), Name (Name)
+{
+Naboo: High Tower
+}
+
+STRING 425
+// Doodads: D00L (Naboo: Structure (1)), Name (Name)
+{
+Naboo: Structure (1)
+}
+
+STRING 426
+// Doodads: D00M (Naboo: Structure (2)), Name (Name)
+{
+Naboo: Structure (2)
+}
+
+STRING 427
+// Doodads: D00N (Tree: Birch (1)), Name (Name)
+{
+Tree: Birch (1)
+}
+
+STRING 428
+// Doodads: D00O (Rockin Arthas), Name (Name)
+{
+Rockin Arthas
+}
+
+STRING 429
+// Doodads: D00P (Wall: Force), Name (Name)
+{
+Wall: Force
 }
 

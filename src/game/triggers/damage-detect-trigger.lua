@@ -4,14 +4,18 @@ function damageDetectTrigger()
     TriggerRegisterAnyUnitEventBJ(trig, EVENT_PLAYER_UNIT_DAMAGED)
     TriggerAddAction(trig, function()
         local source = GetEventDamageSource()
-        if GetUnitTypeId(source) == FourCC(units_special.tower) or GetUnitTypeId(source) == FourCC(units_special.base) then
+        if GetUnitTypeId(source) == FourCC(units_special.tower[1]) or GetUnitTypeId(source) == FourCC(units_special.base[1]) then
+            return
+        end
+        if GetUnitTypeId(source) == FourCC(units_special.tower[2]) or GetUnitTypeId(source) == FourCC(units_special.base[2]) then
             return
         end
         local sourcePlayer = GetOwningPlayer(source)
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
                 if sourcePlayer == player.spawnPlayerId then
-                    if GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.tower) or GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.base) then
+                    if GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.tower[1]) or GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.base[1])
+                    or GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.tower[2]) or GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.base[2]) then
                         player.damageToTowerBase = player.damageToTowerBase + GetEventDamage()
                         return
                     end
