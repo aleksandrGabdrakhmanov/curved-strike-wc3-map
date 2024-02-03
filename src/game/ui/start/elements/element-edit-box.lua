@@ -18,8 +18,12 @@ function createEditBox(parentPage, lastElement, element)
 
     local label = BlzCreateFrame("EscMenuLabelTextTemplate", parentPage, 0, 0)
     BlzFrameSetPoint(label, FRAMEPOINT_LEFT, editBox, FRAMEPOINT_RIGHT, 0, 0)
-    BlzFrameSetText(label, '= ' .. element.defValue)
+    BlzFrameSetText(label, element.defValue)
     BlzFrameSetEnable(label, GetLocalPlayer() == getMainPlayer())
+
+    element.frameText = frameText
+    element.editBox = editBox
+    element.label = label
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, editBox, FRAMEEVENT_EDITBOX_ENTER)

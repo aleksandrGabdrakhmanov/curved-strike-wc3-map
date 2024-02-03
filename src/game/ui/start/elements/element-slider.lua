@@ -23,6 +23,7 @@ function createSlider(parentPage, lastElement, element)
     BlzFrameSetEnable(label, GetLocalPlayer() == getMainPlayer())
 
     element.frameText = frameText
+    element.slider = slider
     element.label = label
     local sliderTrigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(sliderTrigger, slider, FRAMEEVENT_SLIDER_VALUE_CHANGED)

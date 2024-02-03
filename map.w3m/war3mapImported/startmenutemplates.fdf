@@ -59,6 +59,14 @@ Frame "BACKDROP" "ConfigPageBackdrop" {
     BackdropBackgroundInsets 0.005 0.005 0.005 0.005,
     BackdropEdgeFile  "UI\Widgets\EscMenu\Orc\orc-cinematic-border.blp",
 }
+Frame "BACKDROP" "ModePageBackdrop" {
+    BackdropBlendAll,
+    BackdropBackground  "war3mapImported\modes.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.0125,
+    BackdropBackgroundInsets 0.005 0.005 0.005 0.005,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\Orc\orc-cinematic-border.blp",
+}
 Frame "BACKDROP" "TooltipBackdrop" {
     BackdropBlendAll,
     BackdropBackground  "war3mapImported\tooltip3.tga",
@@ -83,5 +91,11 @@ Frame "SIMPLEFRAME" "FinishGameLine"{
         Texture "FinishGameLineTexture" {
         }
     }
+}
+
+Frame "GLUECHECKBOX" "QuestCheckBoxChecked" INHERITS WITHCHILDREN "EscMenuCheckBoxTemplate" {
+    Checked,
+    Width  0.012,
+    Height 0.012,
 }
 
