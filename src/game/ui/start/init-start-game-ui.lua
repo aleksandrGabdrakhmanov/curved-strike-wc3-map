@@ -20,6 +20,35 @@ function initStartGameUI()
         HEROES = 'heroes',
         UNITS = 'units'
     }
+    mode = {
+        DIRECT = 'DIRECT',
+        DIRECT_ADVANCED = 'DIRECT_ADVANCED',
+        UNITED = 'UNITED',
+        UNITED_ADVANCED = 'UNITED_ADVANCED'
+    }
+
+    ui_modes = {
+        {
+            id = mode.DIRECT,
+            name = 'Direct',
+            tooltip = 'Mode from Direct Strike Mix'
+        },
+        {
+            id = mode.DIRECT_ADVANCED,
+            name = 'Direct Advanced',
+            tooltip = 'Direct Strike with advanced params\n\nChanged params:'
+        },
+        {
+            id = mode.UNITED,
+            name = 'United',
+            tooltip = 'Units come out at the same time\n\nChanged params:'
+        },
+        {
+            id = mode.UNITED_ADVANCED,
+            name = 'United Advanced',
+            tooltip = 'Units come out at the same time with advanced params\n\nChanged params:'
+        }
+    }
 
     ui_elements = {
         -- GENERAL
@@ -34,7 +63,7 @@ function initStartGameUI()
                     '[2x2] 35 sec * 2 = 70 total\n' ..
                     '[3x3] 35 sec * 3 = 105 total\n' ..
                     '[4x4] 30 sec * 4 = 120 total\n' ..
-                    '[5x5] 25 sec * 4 = 125 total\n',
+                    '[5x5] 25 sec * 5 = 125 total\n',
             defValue = {
                 [1] = 35,
                 [2] = 35,
@@ -48,11 +77,21 @@ function initStartGameUI()
                 [10] = 25
             },
             max = 120,
-            min = 1,
+            min = 0,
             step = 1,
             initConfigValue = function(self)
                 game_config.spawnPolicy.interval = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.UNITED,
+                    value = 0
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = 0
+                }
+            }
         },
         {
             page = page.GENERAL,
@@ -65,7 +104,17 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.spawnPolicy.dif = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.UNITED,
+                    value = 30
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = 30
+                }
+            }
         },
         {
             page = page.GENERAL,
@@ -199,7 +248,17 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.economy.goldForKill = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = 10
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = 10
+                }
+            }
         },
         {
             page = page.ECONOMY,
@@ -211,7 +270,17 @@ function initStartGameUI()
             defValue = false,
             initConfigValue = function(self)
                 game_config.economy.upkeep = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = true
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = true
+                }
+            }
         },
         -- UNITS
         {
@@ -223,7 +292,17 @@ function initStartGameUI()
             defValue = false,
             initConfigValue = function(self)
                 game_config.units.isUnitsMirror = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = true
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = true
+                }
+            }
         },
         {
             page = page.UNITS,
@@ -263,7 +342,17 @@ function initStartGameUI()
             defValue = false,
             initConfigValue = function(self)
                 game_config.units.isHeroesMirror = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = true
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = true
+                }
+            }
         },
         {
             page = page.HEROES,
@@ -285,13 +374,23 @@ function initStartGameUI()
             tooltip = "Number of random heroes available for a player to choose from when summoning each subsequent hero.\n"
             .. " For example, if the parameter value is 3, then upon constructing a hero, the player will have a " ..
                     "choice among 3 randomly generated hero options.",
-            defValue = 2,
+            defValue = 1,
             max = 11,
             min = 1,
             step = 1,
             initConfigValue = function(self)
                 game_config.units.countForSelect = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = 2
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = 2
+                }
+            }
         },
         {
             page = page.HEROES,

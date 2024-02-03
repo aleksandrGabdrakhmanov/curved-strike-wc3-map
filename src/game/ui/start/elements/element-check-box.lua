@@ -11,15 +11,26 @@ function createCheckBox(parentPage, lastElement, element)
     BlzFrameSetTooltip(label, tooltipFrame)
     BlzFrameSetText(tooltipLabel, element.tooltip)
 
-    local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentPage, 0, 0)
+    createCheckBoxFrame(label, parentPage, element)
+    return label
+end
+function createCheckBoxFrame(label, parentPage, element)
+    local frameCheckBox
+    if element.value == true then
+        frameCheckBox = BlzCreateFrame("QuestCheckBoxChecked", parentPage, 0, 0)
+    else
+        frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentPage, 0, 0)
+    end
+
     BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, label, FRAMEPOINT_RIGHT, 0, 0)
     BlzFrameSetScale(frameCheckBox, 1.5)
     BlzFrameSetEnable(frameCheckBox, GetLocalPlayer() == getMainPlayer())
-
     local trigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_UNCHECKED)
-    element.label = label
+    element.frameText = label
+    element.checkBox = frameCheckBox
+    element.parentPage = parentPage
     TriggerAddAction(trigger, function()
         if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
             element.value = true
@@ -27,6 +38,5 @@ function createCheckBox(parentPage, lastElement, element)
             element.value = false
         end
     end)
-    return label
 end
 Debug.endFile()

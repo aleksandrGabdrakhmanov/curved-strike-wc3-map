@@ -8794,15 +8794,26 @@ function createCheckBox(parentPage, lastElement, element)
     BlzFrameSetTooltip(label, tooltipFrame)
     BlzFrameSetText(tooltipLabel, element.tooltip)
 
-    local frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentPage, 0, 0)
+    createCheckBoxFrame(label, parentPage, element)
+    return label
+end
+function createCheckBoxFrame(label, parentPage, element)
+    local frameCheckBox
+    if element.value == true then
+        frameCheckBox = BlzCreateFrame("QuestCheckBoxChecked", parentPage, 0, 0)
+    else
+        frameCheckBox = BlzCreateFrame("QuestCheckBox2", parentPage, 0, 0)
+    end
+
     BlzFrameSetPoint(frameCheckBox, FRAMEPOINT_LEFT, label, FRAMEPOINT_RIGHT, 0, 0)
     BlzFrameSetScale(frameCheckBox, 1.5)
     BlzFrameSetEnable(frameCheckBox, GetLocalPlayer() == getMainPlayer())
-
     local trigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_UNCHECKED)
-    element.label = label
+    element.frameText = label
+    element.checkBox = frameCheckBox
+    element.parentPage = parentPage
     TriggerAddAction(trigger, function()
         if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
             element.value = true
@@ -8810,7 +8821,6 @@ function createCheckBox(parentPage, lastElement, element)
             element.value = false
         end
     end)
-    return label
 end
 Debug.endFile()
 
@@ -8834,8 +8844,12 @@ function createEditBox(parentPage, lastElement, element)
 
     local label = BlzCreateFrame("EscMenuLabelTextTemplate", parentPage, 0, 0)
     BlzFrameSetPoint(label, FRAMEPOINT_LEFT, editBox, FRAMEPOINT_RIGHT, 0, 0)
-    BlzFrameSetText(label, '= ' .. element.defValue)
+    BlzFrameSetText(label, element.defValue)
     BlzFrameSetEnable(label, GetLocalPlayer() == getMainPlayer())
+
+    element.frameText = frameText
+    element.editBox = editBox
+    element.label = label
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig, editBox, FRAMEEVENT_EDITBOX_ENTER)
@@ -8894,6 +8908,7 @@ function createSlider(parentPage, lastElement, element)
     BlzFrameSetEnable(label, GetLocalPlayer() == getMainPlayer())
 
     element.frameText = frameText
+    element.slider = slider
     element.label = label
     local sliderTrigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(sliderTrigger, slider, FRAMEEVENT_SLIDER_VALUE_CHANGED)
@@ -8928,6 +8943,35 @@ function initStartGameUI()
         HEROES = 'heroes',
         UNITS = 'units'
     }
+    mode = {
+        DIRECT = 'DIRECT',
+        DIRECT_ADVANCED = 'DIRECT_ADVANCED',
+        UNITED = 'UNITED',
+        UNITED_ADVANCED = 'UNITED_ADVANCED'
+    }
+
+    ui_modes = {
+        {
+            id = mode.DIRECT,
+            name = 'Direct',
+            tooltip = 'Mode from Direct Strike Mix'
+        },
+        {
+            id = mode.DIRECT_ADVANCED,
+            name = 'Direct Advanced',
+            tooltip = 'Direct Strike with advanced params\n\nChanged params:'
+        },
+        {
+            id = mode.UNITED,
+            name = 'United',
+            tooltip = 'Units come out at the same time\n\nChanged params:'
+        },
+        {
+            id = mode.UNITED_ADVANCED,
+            name = 'United Advanced',
+            tooltip = 'Units come out at the same time with advanced params\n\nChanged params:'
+        }
+    }
 
     ui_elements = {
         -- GENERAL
@@ -8942,7 +8986,7 @@ function initStartGameUI()
                     '[2x2] 35 sec * 2 = 70 total\n' ..
                     '[3x3] 35 sec * 3 = 105 total\n' ..
                     '[4x4] 30 sec * 4 = 120 total\n' ..
-                    '[5x5] 25 sec * 4 = 125 total\n',
+                    '[5x5] 25 sec * 5 = 125 total\n',
             defValue = {
                 [1] = 35,
                 [2] = 35,
@@ -8956,11 +9000,21 @@ function initStartGameUI()
                 [10] = 25
             },
             max = 120,
-            min = 1,
+            min = 0,
             step = 1,
             initConfigValue = function(self)
                 game_config.spawnPolicy.interval = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.UNITED,
+                    value = 0
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = 0
+                }
+            }
         },
         {
             page = page.GENERAL,
@@ -8973,7 +9027,17 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.spawnPolicy.dif = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.UNITED,
+                    value = 30
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = 30
+                }
+            }
         },
         {
             page = page.GENERAL,
@@ -9107,7 +9171,17 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.economy.goldForKill = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = 10
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = 10
+                }
+            }
         },
         {
             page = page.ECONOMY,
@@ -9119,7 +9193,17 @@ function initStartGameUI()
             defValue = false,
             initConfigValue = function(self)
                 game_config.economy.upkeep = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = true
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = true
+                }
+            }
         },
         -- UNITS
         {
@@ -9131,7 +9215,17 @@ function initStartGameUI()
             defValue = false,
             initConfigValue = function(self)
                 game_config.units.isUnitsMirror = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = true
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = true
+                }
+            }
         },
         {
             page = page.UNITS,
@@ -9171,7 +9265,17 @@ function initStartGameUI()
             defValue = false,
             initConfigValue = function(self)
                 game_config.units.isHeroesMirror = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = true
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = true
+                }
+            }
         },
         {
             page = page.HEROES,
@@ -9193,13 +9297,23 @@ function initStartGameUI()
             tooltip = "Number of random heroes available for a player to choose from when summoning each subsequent hero.\n"
             .. " For example, if the parameter value is 3, then upon constructing a hero, the player will have a " ..
                     "choice among 3 randomly generated hero options.",
-            defValue = 2,
+            defValue = 1,
             max = 11,
             min = 1,
             step = 1,
             initConfigValue = function(self)
                 game_config.units.countForSelect = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = 2
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = 2
+                }
+            }
         },
         {
             page = page.HEROES,
@@ -9230,6 +9344,7 @@ function initStartGameUI()
     }
 end
 Debug.endFile()
+
 Debug.beginFile('main-start-game.lua')
 function startGameUI()
     BlzLoadTOCFile("war3mapimported\\templates.toc")
@@ -9281,11 +9396,7 @@ function startGameUI()
         if type(element.defValue) == 'table' then
             element.defValue = element.defValue[game_config.playersCount]
         end
-
-
         element.value = element.defValue
-
-
         if element.page == page.GENERAL then
             lastElementGeneral = createElement(element, pageGeneral, lastElementGeneral)
         elseif element.page == page.ECONOMY then
@@ -9309,7 +9420,6 @@ function startGameUI()
     BlzFrameSetText(startGameButton, 'START')
     BlzFrameSetPoint(startGameButton, FRAMEPOINT_BOTTOMRIGHT, pageGeneral, FRAMEPOINT_BOTTOMRIGHT, -ui_params.indent, ui_params.indent)
     BlzFrameSetEnable(startGameButton, GetLocalPlayer() == getMainPlayer())
-    BlzFrameSetEnable(startGameButton, GetLocalPlayer() == getMainPlayer())
     local trig1 = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trig1, startGameButton, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig1, function()
@@ -9319,7 +9429,96 @@ function startGameUI()
         end
         startGame()
     end)
+    modePage(allPages[1], parent)
 end
+
+function modePage(relative, parent)
+    local modeFrame = BlzCreateFrame('ModePageBackdrop', parent, 0, 0)
+    BlzFrameSetPoint(modeFrame, FRAMEPOINT_RIGHT, relative, FRAMEPOINT_LEFT, 0, 0)
+    BlzFrameSetSize(modeFrame, 0.2, 0.4)
+    BlzFrameSetEnable(modeFrame, GetLocalPlayer() == getMainPlayer())
+
+    local modeText = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', parent, 'EscMenuTitleTextTemplate', 0)
+    BlzFrameSetText(modeText, 'Pre-set game modes')
+    BlzFrameSetPoint(modeText, FRAMEPOINT_TOP, modeFrame, FRAMEPOINT_TOP, 0, -0.01)
+
+    local prev = modeText
+    for _, mode in ipairs(ui_modes) do
+        prev = addModeButton(prev, modeFrame, mode)
+    end
+end
+
+function addModeButton(prev, parent, mode)
+    local button = BlzCreateFrame("ScriptDialogButton", parent, 0, 0)
+    local buttonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
+    BlzFrameSetText(buttonText, mode.name)
+
+    BlzFrameSetPoint(button, FRAMEPOINT_TOP, prev, FRAMEPOINT_BOTTOM, 0, -0.01)
+    BlzFrameSetSize(button, 0.15, 0.04)
+    BlzFrameSetEnable(button, GetLocalPlayer() == getMainPlayer())
+
+    local tooltipFrame, tooltipLabel = createTooltip(parent)
+
+    BlzFrameClearAllPoints(tooltipFrame)
+    BlzFrameSetPoint(tooltipFrame, FRAMEPOINT_RIGHT, parent, FRAMEPOINT_LEFT, 0, 0)
+    BlzFrameSetTooltip(button, tooltipFrame)
+
+    local tooltip = mode.tooltip
+    for _, element in ipairs(ui_elements) do
+        if element.defByMode ~= nil then
+            for _, iMode in ipairs(element.defByMode) do
+                if iMode.mode == mode.id then
+                    tooltip = tooltip .. "\n" .. element.text .. ": " .. tostring(iMode.value)
+                end
+            end
+        end
+    end
+    BlzFrameSetText(tooltipLabel, tooltip)
+
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        for _, element in ipairs(ui_elements) do
+            setDefaultForElement(element, mode)
+        end
+    end)
+    return button
+end
+
+function setDefaultForElement(element, mode)
+
+    element.value = element.defValue
+    if element.defByMode ~= nil then
+        for _, iMode in ipairs(element.defByMode) do
+            if iMode.mode == mode.id then
+                element.value = iMode.value
+            end
+        end
+    end
+
+    if element.slider ~= nil then
+        BlzFrameSetValue(element.slider, element.value)
+    end
+
+    if element.label ~= nil then
+        BlzFrameSetText(element.label, tostring(element.value))
+    end
+
+    if element.editBox ~= nil then
+        BlzFrameSetText(element.editBox, element.value)
+    end
+
+    if element.checkBox ~= nil then
+        if element.value == false then
+            BlzDestroyFrame(element.checkBox)
+            createCheckBoxFrame(element.frameText, element.parentPage, element)
+        else
+            BlzDestroyFrame(element.checkBox)
+            createCheckBoxFrame(element.frameText, element.parentPage, element)
+        end
+    end
+end
+
 
 function createTooltip(owner, width, height)
     if not width then
@@ -9618,55 +9817,55 @@ ForcePlayerStartLocation(Player(1), 1)
 SetPlayerColor(Player(1), ConvertPlayerColor(1))
 SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
 SetPlayerRaceSelectable(Player(1), false)
-SetPlayerController(Player(1), MAP_CONTROL_USER)
+SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(2), 2)
 ForcePlayerStartLocation(Player(2), 2)
 SetPlayerColor(Player(2), ConvertPlayerColor(2))
 SetPlayerRacePreference(Player(2), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(2), false)
-SetPlayerController(Player(2), MAP_CONTROL_USER)
+SetPlayerController(Player(2), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(3), 3)
 ForcePlayerStartLocation(Player(3), 3)
 SetPlayerColor(Player(3), ConvertPlayerColor(3))
 SetPlayerRacePreference(Player(3), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(3), false)
-SetPlayerController(Player(3), MAP_CONTROL_USER)
+SetPlayerController(Player(3), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(4), 4)
 ForcePlayerStartLocation(Player(4), 4)
 SetPlayerColor(Player(4), ConvertPlayerColor(4))
 SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(4), false)
-SetPlayerController(Player(4), MAP_CONTROL_USER)
+SetPlayerController(Player(4), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(5), 5)
 ForcePlayerStartLocation(Player(5), 5)
 SetPlayerColor(Player(5), ConvertPlayerColor(5))
 SetPlayerRacePreference(Player(5), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(5), false)
-SetPlayerController(Player(5), MAP_CONTROL_USER)
+SetPlayerController(Player(5), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(6), 6)
 ForcePlayerStartLocation(Player(6), 6)
 SetPlayerColor(Player(6), ConvertPlayerColor(6))
 SetPlayerRacePreference(Player(6), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(6), false)
-SetPlayerController(Player(6), MAP_CONTROL_USER)
+SetPlayerController(Player(6), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(7), 7)
 ForcePlayerStartLocation(Player(7), 7)
 SetPlayerColor(Player(7), ConvertPlayerColor(7))
 SetPlayerRacePreference(Player(7), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(7), false)
-SetPlayerController(Player(7), MAP_CONTROL_USER)
+SetPlayerController(Player(7), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(8), 8)
 ForcePlayerStartLocation(Player(8), 8)
 SetPlayerColor(Player(8), ConvertPlayerColor(8))
 SetPlayerRacePreference(Player(8), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(8), false)
-SetPlayerController(Player(8), MAP_CONTROL_USER)
+SetPlayerController(Player(8), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(9), 9)
 ForcePlayerStartLocation(Player(9), 9)
 SetPlayerColor(Player(9), ConvertPlayerColor(9))
 SetPlayerRacePreference(Player(9), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(9), false)
-SetPlayerController(Player(9), MAP_CONTROL_USER)
+SetPlayerController(Player(9), MAP_CONTROL_COMPUTER)
 SetPlayerStartLocation(Player(10), 10)
 SetPlayerColor(Player(10), ConvertPlayerColor(10))
 SetPlayerRacePreference(Player(10), RACE_PREF_RANDOM)
@@ -9863,16 +10062,6 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
-SetStartLocPrioCount(0, 9)
-SetStartLocPrio(0, 0, 1, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 1, 2, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 2, 3, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 3, 4, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 4, 5, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 5, 6, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 6, 7, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 7, 8, MAP_LOC_PRIO_HIGH)
-SetStartLocPrio(0, 8, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(1, 9)
 SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_HIGH)
@@ -10042,7 +10231,7 @@ SetMapName("TRIGSTR_001")
 SetMapDescription("TRIGSTR_003")
 SetPlayers(20)
 SetTeams(20)
-SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
+SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
 DefineStartLocation(0, -15872.0, 11008.0)
 DefineStartLocation(1, -15872.0, 11008.0)
 DefineStartLocation(2, -15872.0, 11008.0)
