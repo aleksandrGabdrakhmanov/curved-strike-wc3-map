@@ -34,7 +34,7 @@ function initStartGameUI()
                     '[2x2] 35 sec * 2 = 70 total\n' ..
                     '[3x3] 35 sec * 3 = 105 total\n' ..
                     '[4x4] 30 sec * 4 = 120 total\n' ..
-                    '[5x5] 25 sec * 4 = 125 total\n',
+                    '[5x5] 25 sec * 5 = 125 total\n',
             defValue = {
                 [1] = 35,
                 [2] = 35,
