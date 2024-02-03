@@ -19,6 +19,7 @@ function createCheckBox(parentPage, lastElement, element)
     local trigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_CHECKED)
     BlzTriggerRegisterFrameEvent(trigger, frameCheckBox, FRAMEEVENT_CHECKBOX_UNCHECKED)
+    element.label = label
     TriggerAddAction(trigger, function()
         if BlzGetTriggerFrameEvent() == FRAMEEVENT_CHECKBOX_CHECKED then
             element.value = true

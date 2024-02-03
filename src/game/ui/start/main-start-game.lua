@@ -1,6 +1,7 @@
 Debug.beginFile('main-start-game.lua')
 function startGameUI()
     BlzLoadTOCFile("war3mapimported\\templates.toc")
+    timerCheckDefaultValue()
 
     local upkeepFrame = BlzGetFrameByName("ResourceBarUpkeepText", 0)
     BlzFrameSetText(upkeepFrame, "alga")
