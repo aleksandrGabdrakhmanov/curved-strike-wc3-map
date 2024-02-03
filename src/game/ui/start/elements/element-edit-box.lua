@@ -12,7 +12,7 @@ function createEditBox(parentPage, lastElement, element)
 
     local editBox = BlzCreateFrame("EscMenuEditBoxTemplate", parentPage, 0, 0) --create the box
     BlzFrameSetPoint(editBox, FRAMEPOINT_LEFT, frameText, FRAMEPOINT_RIGHT, 0, 0)
-    BlzFrameSetSize(editBox, 0.1, 0.03)
+    BlzFrameSetSize(editBox, 0.1, 0.033)
     BlzFrameSetText(editBox, element.defValue)
     BlzFrameSetEnable(editBox, GetLocalPlayer() == getMainPlayer())
 
