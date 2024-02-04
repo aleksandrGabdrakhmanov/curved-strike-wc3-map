@@ -20,35 +20,6 @@ function initStartGameUI()
         HEROES = 'heroes',
         UNITS = 'units'
     }
-    mode = {
-        DIRECT = 'DIRECT',
-        DIRECT_ADVANCED = 'DIRECT_ADVANCED',
-        UNITED = 'UNITED',
-        UNITED_ADVANCED = 'UNITED_ADVANCED'
-    }
-
-    ui_modes = {
-        {
-            id = mode.DIRECT,
-            name = 'Direct',
-            tooltip = 'Mode from Direct Strike Mix'
-        },
-        {
-            id = mode.DIRECT_ADVANCED,
-            name = 'Direct Advanced',
-            tooltip = 'Direct Strike with advanced params\n\nChanged params:'
-        },
-        {
-            id = mode.UNITED,
-            name = 'United',
-            tooltip = 'Units come out at the same time\n\nChanged params:'
-        },
-        {
-            id = mode.UNITED_ADVANCED,
-            name = 'United Advanced',
-            tooltip = 'Units come out at the same time with advanced params\n\nChanged params:'
-        }
-    }
 
     ui_elements = {
         -- GENERAL
@@ -90,6 +61,10 @@ function initStartGameUI()
                 {
                     mode = mode.UNITED_ADVANCED,
                     value = 0
+                },
+                {
+                    mode = mode.HERO_WAR,
+                    value = 0
                 }
             }
         },
@@ -113,6 +88,10 @@ function initStartGameUI()
                 {
                     mode = mode.UNITED_ADVANCED,
                     value = 30
+                },
+                {
+                    mode = mode.HERO_WAR,
+                    value = 30
                 }
             }
         },
@@ -127,7 +106,13 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.units.baseHP = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.HERO_WAR,
+                    value = 2000
+                }
+            }
         },
         {
             page = page.GENERAL,
@@ -140,7 +125,13 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.units.towerHP = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.HERO_WAR,
+                    value = 600
+                }
+            }
         },
         -- ECONOMY
         {
@@ -154,7 +145,13 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.economy.startGold = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.HERO_WAR,
+                    value = 500
+                }
+            }
         },
         {
             page = page.ECONOMY,
@@ -257,6 +254,10 @@ function initStartGameUI()
                 {
                     mode = mode.UNITED_ADVANCED,
                     value = 10
+                },
+                {
+                    mode = mode.HERO_WAR,
+                    value = 15
                 }
             }
         },
@@ -351,6 +352,10 @@ function initStartGameUI()
                 {
                     mode = mode.UNITED_ADVANCED,
                     value = true
+                },
+                {
+                    mode = mode.HERO_WAR,
+                    value = true
                 }
             }
         },
@@ -365,7 +370,13 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.units.maxHeroes = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.HERO_WAR,
+                    value = 7
+                }
+            }
         },
         {
             page = page.HEROES,
@@ -389,6 +400,10 @@ function initStartGameUI()
                 {
                     mode = mode.UNITED_ADVANCED,
                     value = 2
+                },
+                {
+                    mode = mode.HERO_WAR,
+                    value = 3
                 }
             }
         },
@@ -403,7 +418,13 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.units.itemCapacity = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.HERO_WAR,
+                    value = 6
+                }
+            }
         },
         {
             page = page.HEROES,
@@ -416,7 +437,13 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.units.heroStartLevel = self.value
-            end
+            end,
+            defByMode = {
+                {
+                    mode = mode.HERO_WAR,
+                    value = 3
+                }
+            }
         }
     }
 end
