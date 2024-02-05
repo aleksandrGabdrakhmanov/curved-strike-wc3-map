@@ -7164,10 +7164,11 @@ function goldExtractorTrigger()
 end
 
 function getMineTag(player)
-    return 'Level: ' .. player.economy.mineLevel .. ' (' .. player.economy.income * 60 .. '/m) next: ' .. (player.economy.income + game_config.economy.incomeBoost) * 60 .. '/m'
+    return 'Level: ' .. player.economy.mineLevel .. ' (' .. player.economy.income .. '/m) next: ' .. (player.economy.income + game_config.economy.incomeBoost) .. '/m'
 end
 
 Debug.endFile()
+
 Debug.beginFile('hero-construct-trigger.lua')
 START_INDEX_HEROES = 1000
 function heroConstructTrigger()
@@ -8927,7 +8928,7 @@ function initStartGameUI()
         lengthString = 0.2,
         widthString = 0.02,
         indent = 0.015,
-        width = 0.4,
+        width = 0.38,
         betweenElement = 0.029
     }
 
@@ -9383,7 +9384,7 @@ function startGameUI()
     local parent = BlzCreateFrame("GreenText", BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
     BlzFrameSetParent(parent, preConfigGameModes)
     BlzFrameSetText(parent, GetPlayerName(getMainPlayer()) .. " is selecting...")
-    BlzFrameSetAbsPoint(parent, FRAMEPOINT_CENTER, 0.4, 0.56)
+    BlzFrameSetAbsPoint(parent, FRAMEPOINT_CENTER, 0.48, 0.56)
     BlzFrameSetSize(parent, ui_params.width, 0.02)
 
     local allPages = {}
@@ -9461,7 +9462,7 @@ end
 
 function createTooltip(owner, width, height)
     if not width then
-        width = 0.26
+        width = 0.24
     end
     if not height then
         height = 0.26
@@ -9637,7 +9638,7 @@ function modePage(relative, parent)
 
     local modeFrame = BlzCreateFrame('ModePageBackdrop', parent, 0, 0)
     BlzFrameSetPoint(modeFrame, FRAMEPOINT_RIGHT, relative, FRAMEPOINT_LEFT, 0, 0)
-    BlzFrameSetSize(modeFrame, 0.2, 0.4)
+    BlzFrameSetSize(modeFrame, 0.18, 0.4)
     BlzFrameSetEnable(modeFrame, GetLocalPlayer() == getMainPlayer())
 
     local modeText = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', parent, 'EscMenuTitleTextTemplate', 0)
@@ -9928,55 +9929,55 @@ ForcePlayerStartLocation(Player(1), 1)
 SetPlayerColor(Player(1), ConvertPlayerColor(1))
 SetPlayerRacePreference(Player(1), RACE_PREF_ORC)
 SetPlayerRaceSelectable(Player(1), false)
-SetPlayerController(Player(1), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(1), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(2), 2)
 ForcePlayerStartLocation(Player(2), 2)
 SetPlayerColor(Player(2), ConvertPlayerColor(2))
 SetPlayerRacePreference(Player(2), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(2), false)
-SetPlayerController(Player(2), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(2), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(3), 3)
 ForcePlayerStartLocation(Player(3), 3)
 SetPlayerColor(Player(3), ConvertPlayerColor(3))
 SetPlayerRacePreference(Player(3), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(3), false)
-SetPlayerController(Player(3), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(3), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(4), 4)
 ForcePlayerStartLocation(Player(4), 4)
 SetPlayerColor(Player(4), ConvertPlayerColor(4))
 SetPlayerRacePreference(Player(4), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(4), false)
-SetPlayerController(Player(4), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(4), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(5), 5)
 ForcePlayerStartLocation(Player(5), 5)
 SetPlayerColor(Player(5), ConvertPlayerColor(5))
 SetPlayerRacePreference(Player(5), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(5), false)
-SetPlayerController(Player(5), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(5), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(6), 6)
 ForcePlayerStartLocation(Player(6), 6)
 SetPlayerColor(Player(6), ConvertPlayerColor(6))
 SetPlayerRacePreference(Player(6), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(6), false)
-SetPlayerController(Player(6), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(6), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(7), 7)
 ForcePlayerStartLocation(Player(7), 7)
 SetPlayerColor(Player(7), ConvertPlayerColor(7))
 SetPlayerRacePreference(Player(7), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(7), false)
-SetPlayerController(Player(7), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(7), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(8), 8)
 ForcePlayerStartLocation(Player(8), 8)
 SetPlayerColor(Player(8), ConvertPlayerColor(8))
 SetPlayerRacePreference(Player(8), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(8), false)
-SetPlayerController(Player(8), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(8), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(9), 9)
 ForcePlayerStartLocation(Player(9), 9)
 SetPlayerColor(Player(9), ConvertPlayerColor(9))
 SetPlayerRacePreference(Player(9), RACE_PREF_HUMAN)
 SetPlayerRaceSelectable(Player(9), false)
-SetPlayerController(Player(9), MAP_CONTROL_COMPUTER)
+SetPlayerController(Player(9), MAP_CONTROL_USER)
 SetPlayerStartLocation(Player(10), 10)
 SetPlayerColor(Player(10), ConvertPlayerColor(10))
 SetPlayerRacePreference(Player(10), RACE_PREF_RANDOM)
@@ -10173,6 +10174,16 @@ SetPlayerAllianceStateVisionBJ(Player(19), Player(18), true)
 end
 
 function InitAllyPriorities()
+SetStartLocPrioCount(0, 9)
+SetStartLocPrio(0, 0, 1, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 1, 2, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 2, 3, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 3, 4, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 4, 5, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 5, 6, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 6, 7, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 7, 8, MAP_LOC_PRIO_HIGH)
+SetStartLocPrio(0, 8, 9, MAP_LOC_PRIO_HIGH)
 SetStartLocPrioCount(1, 9)
 SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_HIGH)
 SetStartLocPrio(1, 1, 2, MAP_LOC_PRIO_HIGH)
@@ -10342,7 +10353,7 @@ SetMapName("TRIGSTR_001")
 SetMapDescription("TRIGSTR_003")
 SetPlayers(20)
 SetTeams(20)
-SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
 DefineStartLocation(0, -15872.0, 11008.0)
 DefineStartLocation(1, -15872.0, 11008.0)
 DefineStartLocation(2, -15872.0, 11008.0)
