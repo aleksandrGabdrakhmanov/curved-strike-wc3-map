@@ -9,7 +9,7 @@ function startGameUI()
     local parent = BlzCreateFrame("GreenText", BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
     BlzFrameSetParent(parent, preConfigGameModes)
     BlzFrameSetText(parent, GetPlayerName(getMainPlayer()) .. " is selecting...")
-    BlzFrameSetAbsPoint(parent, FRAMEPOINT_CENTER, 0.4, 0.56)
+    BlzFrameSetAbsPoint(parent, FRAMEPOINT_CENTER, 0.48, 0.56)
     BlzFrameSetSize(parent, ui_params.width, 0.02)
 
     local allPages = {}
@@ -87,7 +87,7 @@ end
 
 function createTooltip(owner, width, height)
     if not width then
-        width = 0.26
+        width = 0.24
     end
     if not height then
         height = 0.26

@@ -38,7 +38,7 @@ function modePage(relative, parent)
 
     local modeFrame = BlzCreateFrame('ModePageBackdrop', parent, 0, 0)
     BlzFrameSetPoint(modeFrame, FRAMEPOINT_RIGHT, relative, FRAMEPOINT_LEFT, 0, 0)
-    BlzFrameSetSize(modeFrame, 0.2, 0.4)
+    BlzFrameSetSize(modeFrame, 0.18, 0.4)
     BlzFrameSetEnable(modeFrame, GetLocalPlayer() == getMainPlayer())
 
     local modeText = BlzCreateFrameByType('TEXT', 'availableHeroesTextFrame', parent, 'EscMenuTitleTextTemplate', 0)

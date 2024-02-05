@@ -25,7 +25,7 @@ function goldExtractorTrigger()
 end
 
 function getMineTag(player)
-    return 'Level: ' .. player.economy.mineLevel .. ' (' .. player.economy.income * 60 .. '/m) next: ' .. (player.economy.income + game_config.economy.incomeBoost) * 60 .. '/m'
+    return 'Level: ' .. player.economy.mineLevel .. ' (' .. player.economy.income .. '/m) next: ' .. (player.economy.income + game_config.economy.incomeBoost) .. '/m'
 end
 
 Debug.endFile()
