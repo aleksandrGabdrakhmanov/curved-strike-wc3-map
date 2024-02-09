@@ -9,6 +9,9 @@ end
 
 function immediatelyMoveUnit(unit)
     local attackPointRect = getAttackPointRect(GetOwningPlayer(unit))
+    if attackPointRect == nil then
+        return
+    end
     for _, atPointRect in ipairs(attackPointRect) do
         if IsUnitInRect(atPointRect.rect, unit) then
             moveByLocation(atPointRect, unit)

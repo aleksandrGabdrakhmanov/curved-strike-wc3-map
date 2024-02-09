@@ -55,10 +55,6 @@ function initStartGameUI()
             end,
             defByMode = {
                 {
-                    mode = mode.UNITED,
-                    value = 0
-                },
-                {
                     mode = mode.UNITED_ADVANCED,
                     value = 0
                 },
@@ -81,10 +77,6 @@ function initStartGameUI()
                 game_config.spawnPolicy.dif = self.value
             end,
             defByMode = {
-                {
-                    mode = mode.UNITED,
-                    value = 30
-                },
                 {
                     mode = mode.UNITED_ADVANCED,
                     value = 30
@@ -444,7 +436,23 @@ function initStartGameUI()
                     value = 3
                 }
             }
-        }
+        },
+        {
+            page = page.HEROES,
+            type = elementType.CHECK_BOX,
+            text = 'Manual hero control',
+            tooltip = "The player themselves manage the heroes",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.units.isHeroManualControl = self.value
+            end,
+            defByMode = {
+                {
+                    mode = mode.DOTA,
+                    value = true
+                }
+            }
+        },
     }
 end
 Debug.endFile()
