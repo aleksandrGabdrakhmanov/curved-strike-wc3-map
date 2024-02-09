@@ -31,8 +31,7 @@ ui_modes = {
     {
         id = mode.DOTA,
         name = 'DOTA',
-        tooltip = 'The player controls the heroes themselves\n\nChanged params:',
-        isUnits = false
+        tooltip = 'The player controls the heroes themselves\n\nChanged params:'
     }
 }
 function modePage(relative, parent)
