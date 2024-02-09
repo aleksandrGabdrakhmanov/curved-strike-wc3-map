@@ -35,8 +35,17 @@ end
 
 function handleHeroSpawn(player, unit, x, y)
     local hero = getHero(player.heroes, unit)
+    handleHero(player, hero, x, y)
+    SynchronizeInventory(unit, hero.unit)
+end
+function handleHero(player, hero, x, y)
     if hero.status == "new" then
-        local unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
+        local unit
+        if game_config.units.isHeroManualControl == true then
+            unit = CreateUnit(player.id, FourCC(hero.unitConfig.parentId), x, y, 270)
+        else
+            unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
+        end
         if (game_config.units.heroStartLevel > 1) then
             SetHeroLevel(unit, game_config.units.heroStartLevel, false)
         end
@@ -52,7 +61,6 @@ function handleHeroSpawn(player, unit, x, y)
         SetUnitManaPercentBJ(hero.unit, 100)
         immediatelyMoveUnit(hero.unit)
     end
-    SynchronizeInventory(unit, hero.unit)
 end
 
 function SynchronizeInventory(hero1, hero2)
@@ -96,6 +104,11 @@ function processGroupForSpawn(player)
             end
         end)
         DestroyGroup(groupForBuild)
+        if game_config.units.isHeroManualControl == true then
+            for _, hero in ipairs(player.heroes) do
+                handleHero(player, hero, GetRectCenterX(player.spawnRect), GetRectCenterY(player.spawnRect))
+            end
+        end
     end
 
     processRect(player.buildRect, player.spawnRect)

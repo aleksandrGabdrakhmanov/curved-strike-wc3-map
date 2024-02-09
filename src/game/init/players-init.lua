@@ -23,6 +23,9 @@ function setEnemyBetweenPlayers()
             if player ~= anotherPlayer then
                 SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_UNALLIED)
                 SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_UNALLIED)
+
+                SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_UNALLIED)
+                SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_UNALLIED)
             end
         end
     end

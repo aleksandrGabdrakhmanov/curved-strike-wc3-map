@@ -55,13 +55,13 @@ tooltipText = '1 point for each army\n1 point - 100 earned gold\n1 point - 15 ki
                 isSensitive = true
             })
             insertRow(addedHeader, 'GoldTotal', row, {
-                text = player.economy.totalGold,
+                text = math.floor(player.economy.totalGold),
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
             insertRow(addedHeader, 'GoldKill', row, {
-                text = player.economy.totalGoldForKills,
+                text = math.floor(player.economy.totalGoldForKills),
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true

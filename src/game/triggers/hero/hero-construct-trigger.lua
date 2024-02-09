@@ -7,44 +7,53 @@ function heroConstructTrigger()
             local trig = CreateTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_CONSTRUCT_FINISH)
             TriggerAddAction(trig, function()
-                if isHero(('>I4'):pack(GetUnitTypeId(GetTriggerUnit()))) then
-                    local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
-                    KillUnit(GroupPickRandomUnit(group))
-                    DestroyGroup(group)
-                    local unitId = GetUnitTypeId(GetTriggerUnit())
-
-                    if game_config.units.itemCapacity == 0 then
-                        UnitRemoveAbility(GetTriggerUnit(), FourCC(abilities.inventory[6]))
-                    else
-                        UnitAddAbility(GetTriggerUnit(), FourCC(abilities.inventory[game_config.units.itemCapacity]))
+                local unit = GetTriggerUnit()
+                if isHero(('>I4'):pack(GetUnitTypeId(unit))) then
+                    constructHero(player, playerIndex, unit)
+                    if game_config.units.isHeroManualControl == true then
+                        handleHeroSpawn(player, unit, GetRectCenterX(player.spawnRect), GetRectCenterY(player.spawnRect))
+                        RemoveUnit(unit)
                     end
-                    if (game_config.units.heroStartLevel > 1) then
-                        SetHeroLevel(GetTriggerUnit(), game_config.units.heroStartLevel, false)
-                    end
-                    table.insert(player.heroes, {
-                        status = "new",
-                        building = GetTriggerUnit(),
-                        name = GetHeroProperName(GetTriggerUnit()),
-                        unit = nil,
-                        id = heroGlobalId,
-                        newSkills = {},
-                        unitConfig = getHeroUnitId(('>I4'):pack(unitId)),
-                        icon = BlzGetAbilityIcon(unitId),
-                        kills = 0,
-                        damage = 0
-                    })
-                    heroGlobalId = heroGlobalId + 1
-                    player.food = player.food + 5
-                    if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
-                        updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))
-                    end
-                    reRollHeroes(player, playerIndex, #player.heroes)
                 else
-                    player.food = player.food + getFoodCostUnit(('>I4'):pack(GetUnitTypeId(GetTriggerUnit())))
+                    player.food = player.food + getFoodCostUnit(('>I4'):pack(GetUnitTypeId(unit)))
                 end
-                end)
+            end)
         end
     end
+end
+
+function constructHero(player, playerIndex, unit)
+    local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
+    KillUnit(GroupPickRandomUnit(group))
+    DestroyGroup(group)
+    local unitId = GetUnitTypeId(unit)
+
+    if game_config.units.itemCapacity == 0 then
+        UnitRemoveAbility(unit, FourCC(abilities.inventory[6]))
+    else
+        UnitAddAbility(unit, FourCC(abilities.inventory[game_config.units.itemCapacity]))
+    end
+    if (game_config.units.heroStartLevel > 1) then
+        SetHeroLevel(unit, game_config.units.heroStartLevel, false)
+    end
+    table.insert(player.heroes, {
+        status = "new",
+        building = unit,
+        name = GetHeroProperName(unit),
+        unit = nil,
+        id = heroGlobalId,
+        newSkills = {},
+        unitConfig = getHeroUnitId(('>I4'):pack(unitId)),
+        icon = BlzGetAbilityIcon(unitId),
+        kills = 0,
+        damage = 0
+    })
+    heroGlobalId = heroGlobalId + 1
+    player.food = player.food + 5
+    if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
+        updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))
+    end
+    reRollHeroes(player, playerIndex, #player.heroes)
 end
 
 function isDuplicateHero(unitId, heroes)

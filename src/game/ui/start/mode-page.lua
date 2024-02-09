@@ -2,9 +2,9 @@ Debug.beginFile('mode-page.lua')
 mode = {
     DIRECT = 'DIRECT',
     DIRECT_ADVANCED = 'DIRECT_ADVANCED',
-    UNITED = 'UNITED',
     UNITED_ADVANCED = 'UNITED_ADVANCED',
-    HERO_WAR = 'HERO_WAR'
+    HERO_WAR = 'HERO_WAR',
+    DOTA = 'DOTA'
 }
 ui_modes = {
     {
@@ -18,19 +18,20 @@ ui_modes = {
         tooltip = 'Direct Strike with advanced params\n\nChanged params:'
     },
     {
-        id = mode.UNITED,
+        id = mode.UNITED_ADVANCED,
         name = 'United',
         tooltip = 'Units come out at the same time\n\nChanged params:'
-    },
-    {
-        id = mode.UNITED_ADVANCED,
-        name = 'United Advanced',
-        tooltip = 'Units come out at the same time with advanced params\n\nChanged params:'
     },
     {
         id = mode.HERO_WAR,
         name = 'Heroes war',
         tooltip = 'Only heroes, only hardcore\n\nChanged params:',
+        isUnits = false
+    },
+    {
+        id = mode.DOTA,
+        name = 'DOTA',
+        tooltip = 'The player controls the heroes themselves\n\nChanged params:',
         isUnits = false
     }
 }

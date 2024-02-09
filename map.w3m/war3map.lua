@@ -88,6 +88,8 @@ gg_rct_curved_team_1_addGold = nil
 gg_rct_curved_team_2_addGold = nil
 gg_rct_curved_team_1_view = nil
 gg_rct_curved_team_2_view = nil
+gg_rct_curved_team_1_shop = nil
+gg_rct_curved_team_2_shop = nil
 function InitGlobals()
 end
 
@@ -183,7 +185,9 @@ gg_rct_curved_2_5_image = Rect(-3456.0, 5504.0, -3232.0, 5728.0)
 gg_rct_curved_team_1_addGold = Rect(-6912.0, 3424.0, -2464.0, 8864.0)
 gg_rct_curved_team_2_addGold = Rect(-11552.0, 3424.0, -6912.0, 8864.0)
 gg_rct_curved_team_1_view = Rect(-16096.0, 1056.0, -3488.0, 11232.0)
-gg_rct_curved_team_2_view = Rect(-9952.0, 1024.0, 2656.0, 11200.0)
+gg_rct_curved_team_2_view = Rect(-10112.0, 736.0, 2496.0, 10912.0)
+gg_rct_curved_team_1_shop = Rect(-12864.0, 5344.0, -12736.0, 5472.0)
+gg_rct_curved_team_2_shop = Rect(-1184.0, 5376.0, -1056.0, 5504.0)
 end
 
 --CUSTOM_CODE
@@ -2120,29 +2124,31 @@ function debugTrigger()
         SetPlayerAllianceStateBJ(Player(8), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
         SetPlayerAllianceStateBJ(Player(9), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
 
-        SetPlayerAllianceStateBJ(Player(10), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(11), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(12), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(13), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(14), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(15), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(16), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(17), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(18), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(19), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
-        SetPlayerAllianceStateBJ(Player(20), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+        if game_config.units.isHeroManualControl == false then
+            SetPlayerAllianceStateBJ(Player(10), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(11), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(12), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(13), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(14), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(15), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(16), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(17), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(18), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(19), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
+            SetPlayerAllianceStateBJ(Player(20), Player(0), bj_ALLIANCE_ALLIED_ADVUNITS)
 
-        SetPlayerAlliance(Player(10), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(11), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(12), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(13), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(14), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(15), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(16), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(17), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(18), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(19), Player(0), ALLIANCE_SHARED_VISION, TRUE)
-        SetPlayerAlliance(Player(20), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(10), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(11), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(12), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(13), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(14), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(15), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(16), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(17), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(18), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(19), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+            SetPlayerAlliance(Player(20), Player(0), ALLIANCE_SHARED_VISION, TRUE)
+        end
         MultiboardDisplay(bj_lastCreatedMultiboard, false)
         BlzFrameSetVisible(heroMultiboardFrame, true)
 
@@ -2188,6 +2194,7 @@ function debugTriggerFinish2()
     end)
 end
 Debug.endFile()
+
 if Debug then Debug.beginFile 'TotalInitialization' end
 --[[——————————————————————————————————————————————————————
     Total Initialization version 5.3.1
@@ -6107,6 +6114,7 @@ function initGameConfig()
             lifetime = nil,
             isUnitsMirror = nil,
             isHeroesMirror = nil,
+            isHeroManualControl = nil,
             maxHeroes = nil,
             itemCapacity = nil,
             baseHP = nil,
@@ -6527,6 +6535,7 @@ function initRect()
         team.base.towerRect = regions['curved']['team'][team.i]['tower']
         team.base.addGoldRect = regions['curved']['team'][team.i]['addGold']
         team.base.viewRect = regions['curved']['team'][team.i]['view']
+        team.base.shopRect = regions['curved']['team'][team.i]['shop']
     end
 
     for _, team in ipairs(all_teams) do
@@ -6609,14 +6618,25 @@ function createBuildingsForPlayers()
                     GetRectCenterY(player.laboratoryRect),
                     0
             )
+
+            if game_config.units.isHeroManualControl == false then
+                CreateUnit(
+                        player.id,
+                        FourCC(units_special.shop),
+                        GetRectCenterX(player.shopRect),
+                        GetRectCenterY(player.shopRect),
+                        0
+                )
+            end
+        end
+        if game_config.units.isHeroManualControl == true then
             CreateUnit(
-                    player.id,
+                    team.base.player,
                     FourCC(units_special.shop),
-                    GetRectCenterX(player.shopRect),
-                    GetRectCenterY(player.shopRect),
+                    GetRectCenterX(team.base.shopRect),
+                    GetRectCenterY(team.base.shopRect),
                     0
             )
-
         end
     end
 end
@@ -6651,6 +6671,9 @@ function setEnemyBetweenPlayers()
     for _, player in ipairs(players) do
         for _, anotherPlayer in ipairs(players) do
             if player ~= anotherPlayer then
+                SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_UNALLIED)
+                SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_UNALLIED)
+
                 SetPlayerAllianceStateBJ(player, anotherPlayer, bj_ALLIANCE_UNALLIED)
                 SetPlayerAllianceStateBJ(anotherPlayer, player, bj_ALLIANCE_UNALLIED)
             end
@@ -7178,44 +7201,53 @@ function heroConstructTrigger()
             local trig = CreateTrigger()
             TriggerRegisterPlayerUnitEventSimple(trig, player.id, EVENT_PLAYER_UNIT_CONSTRUCT_FINISH)
             TriggerAddAction(trig, function()
-                if isHero(('>I4'):pack(GetUnitTypeId(GetTriggerUnit()))) then
-                    local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
-                    KillUnit(GroupPickRandomUnit(group))
-                    DestroyGroup(group)
-                    local unitId = GetUnitTypeId(GetTriggerUnit())
-
-                    if game_config.units.itemCapacity == 0 then
-                        UnitRemoveAbility(GetTriggerUnit(), FourCC(abilities.inventory[6]))
-                    else
-                        UnitAddAbility(GetTriggerUnit(), FourCC(abilities.inventory[game_config.units.itemCapacity]))
+                local unit = GetTriggerUnit()
+                if isHero(('>I4'):pack(GetUnitTypeId(unit))) then
+                    constructHero(player, playerIndex, unit)
+                    if game_config.units.isHeroManualControl == true then
+                        handleHeroSpawn(player, unit, GetRectCenterX(player.spawnRect), GetRectCenterY(player.spawnRect))
+                        RemoveUnit(unit)
                     end
-                    if (game_config.units.heroStartLevel > 1) then
-                        SetHeroLevel(GetTriggerUnit(), game_config.units.heroStartLevel, false)
-                    end
-                    table.insert(player.heroes, {
-                        status = "new",
-                        building = GetTriggerUnit(),
-                        name = GetHeroProperName(GetTriggerUnit()),
-                        unit = nil,
-                        id = heroGlobalId,
-                        newSkills = {},
-                        unitConfig = getHeroUnitId(('>I4'):pack(unitId)),
-                        icon = BlzGetAbilityIcon(unitId),
-                        kills = 0,
-                        damage = 0
-                    })
-                    heroGlobalId = heroGlobalId + 1
-                    player.food = player.food + 5
-                    if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
-                        updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))
-                    end
-                    reRollHeroes(player, playerIndex, #player.heroes)
                 else
-                    player.food = player.food + getFoodCostUnit(('>I4'):pack(GetUnitTypeId(GetTriggerUnit())))
+                    player.food = player.food + getFoodCostUnit(('>I4'):pack(GetUnitTypeId(unit)))
                 end
-                end)
+            end)
         end
     end
+end
+
+function constructHero(player, playerIndex, unit)
+    local group = GetUnitsOfPlayerAndTypeId(player.id, FourCC(units_special.heroBuilder))
+    KillUnit(GroupPickRandomUnit(group))
+    DestroyGroup(group)
+    local unitId = GetUnitTypeId(unit)
+
+    if game_config.units.itemCapacity == 0 then
+        UnitRemoveAbility(unit, FourCC(abilities.inventory[6]))
+    else
+        UnitAddAbility(unit, FourCC(abilities.inventory[game_config.units.itemCapacity]))
+    end
+    if (game_config.units.heroStartLevel > 1) then
+        SetHeroLevel(unit, game_config.units.heroStartLevel, false)
+    end
+    table.insert(player.heroes, {
+        status = "new",
+        building = unit,
+        name = GetHeroProperName(unit),
+        unit = nil,
+        id = heroGlobalId,
+        newSkills = {},
+        unitConfig = getHeroUnitId(('>I4'):pack(unitId)),
+        icon = BlzGetAbilityIcon(unitId),
+        kills = 0,
+        damage = 0
+    })
+    heroGlobalId = heroGlobalId + 1
+    player.food = player.food + 5
+    if isDuplicateHero(('>I4'):pack(unitId), player.heroes) == false then
+        updateAbilityPanel(player, getHeroUnitId(('>I4'):pack(unitId)))
+    end
+    reRollHeroes(player, playerIndex, #player.heroes)
 end
 
 function isDuplicateHero(unitId, heroes)
@@ -7793,8 +7825,17 @@ end
 
 function handleHeroSpawn(player, unit, x, y)
     local hero = getHero(player.heroes, unit)
+    handleHero(player, hero, x, y)
+    SynchronizeInventory(unit, hero.unit)
+end
+function handleHero(player, hero, x, y)
     if hero.status == "new" then
-        local unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
+        local unit
+        if game_config.units.isHeroManualControl == true then
+            unit = CreateUnit(player.id, FourCC(hero.unitConfig.parentId), x, y, 270)
+        else
+            unit = CreateUnit(player.spawnPlayerId, FourCC(hero.unitConfig.parentId), x, y, 270)
+        end
         if (game_config.units.heroStartLevel > 1) then
             SetHeroLevel(unit, game_config.units.heroStartLevel, false)
         end
@@ -7810,7 +7851,6 @@ function handleHeroSpawn(player, unit, x, y)
         SetUnitManaPercentBJ(hero.unit, 100)
         immediatelyMoveUnit(hero.unit)
     end
-    SynchronizeInventory(unit, hero.unit)
 end
 
 function SynchronizeInventory(hero1, hero2)
@@ -7854,6 +7894,11 @@ function processGroupForSpawn(player)
             end
         end)
         DestroyGroup(groupForBuild)
+        if game_config.units.isHeroManualControl == true then
+            for _, hero in ipairs(player.heroes) do
+                handleHero(player, hero, GetRectCenterX(player.spawnRect), GetRectCenterY(player.spawnRect))
+            end
+        end
     end
 
     processRect(player.buildRect, player.spawnRect)
@@ -7877,6 +7922,7 @@ function isHero(id)
     return false
 end
 Debug.endFile()
+
 Debug.beginFile('status-panel-update-trigger.lua')
 function statusPanelUpdateTrigger()
     local trig = CreateTrigger()
@@ -8223,6 +8269,9 @@ end
 
 function immediatelyMoveUnit(unit)
     local attackPointRect = getAttackPointRect(GetOwningPlayer(unit))
+    if attackPointRect == nil then
+        return
+    end
     for _, atPointRect in ipairs(attackPointRect) do
         if IsUnitInRect(atPointRect.rect, unit) then
             moveByLocation(atPointRect, unit)
@@ -8246,6 +8295,7 @@ function getAttackPointRect(castPlayer)
     end
 end
 Debug.endFile()
+
 Debug.beginFile('win-trigger.lua')
 function winTrigger()
     local trig = CreateTrigger()
@@ -8405,13 +8455,13 @@ tooltipText = '1 point for each army\n1 point - 100 earned gold\n1 point - 15 ki
                 isSensitive = true
             })
             insertRow(addedHeader, 'GoldTotal', row, {
-                text = player.economy.totalGold,
+                text = math.floor(player.economy.totalGold),
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
             })
             insertRow(addedHeader, 'GoldKill', row, {
-                text = player.economy.totalGoldForKills,
+                text = math.floor(player.economy.totalGoldForKills),
                 color = player.color,
                 integerColor = player.integerColor,
                 isSensitive = true
@@ -8540,6 +8590,7 @@ function getClearName(player)
     return string.gsub(GetPlayerName(player.id), "#.*", "")
 end
 Debug.endFile()
+
 Debug.beginFile('finish-game.lua')
 function finishGame(loseTeam)
     local mainBackdrop = BlzCreateFrame('FinishGameBackdrop', BlzGetFrameByName("ConsoleUIBackdrop", 0), 0, 0)
@@ -8979,10 +9030,6 @@ function initStartGameUI()
             end,
             defByMode = {
                 {
-                    mode = mode.UNITED,
-                    value = 0
-                },
-                {
                     mode = mode.UNITED_ADVANCED,
                     value = 0
                 },
@@ -9005,10 +9052,6 @@ function initStartGameUI()
                 game_config.spawnPolicy.dif = self.value
             end,
             defByMode = {
-                {
-                    mode = mode.UNITED,
-                    value = 30
-                },
                 {
                     mode = mode.UNITED_ADVANCED,
                     value = 30
@@ -9368,7 +9411,23 @@ function initStartGameUI()
                     value = 3
                 }
             }
-        }
+        },
+        {
+            page = page.HEROES,
+            type = elementType.CHECK_BOX,
+            text = 'Manual hero control',
+            tooltip = "The player themselves manage the heroes",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.units.isHeroManualControl = self.value
+            end,
+            defByMode = {
+                {
+                    mode = mode.DOTA,
+                    value = true
+                }
+            }
+        },
     }
 end
 Debug.endFile()
@@ -9602,9 +9661,9 @@ Debug.beginFile('mode-page.lua')
 mode = {
     DIRECT = 'DIRECT',
     DIRECT_ADVANCED = 'DIRECT_ADVANCED',
-    UNITED = 'UNITED',
     UNITED_ADVANCED = 'UNITED_ADVANCED',
-    HERO_WAR = 'HERO_WAR'
+    HERO_WAR = 'HERO_WAR',
+    DOTA = 'DOTA'
 }
 ui_modes = {
     {
@@ -9618,19 +9677,20 @@ ui_modes = {
         tooltip = 'Direct Strike with advanced params\n\nChanged params:'
     },
     {
-        id = mode.UNITED,
+        id = mode.UNITED_ADVANCED,
         name = 'United',
         tooltip = 'Units come out at the same time\n\nChanged params:'
-    },
-    {
-        id = mode.UNITED_ADVANCED,
-        name = 'United Advanced',
-        tooltip = 'Units come out at the same time with advanced params\n\nChanged params:'
     },
     {
         id = mode.HERO_WAR,
         name = 'Heroes war',
         tooltip = 'Only heroes, only hardcore\n\nChanged params:',
+        isUnits = false
+    },
+    {
+        id = mode.DOTA,
+        name = 'DOTA',
+        tooltip = 'The player controls the heroes themselves\n\nChanged params:',
         isUnits = false
     }
 }

@@ -17,6 +17,7 @@ function initGameConfig()
             lifetime = nil,
             isUnitsMirror = nil,
             isHeroesMirror = nil,
+            isHeroManualControl = nil,
             maxHeroes = nil,
             itemCapacity = nil,
             baseHP = nil,

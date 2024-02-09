@@ -237,6 +237,7 @@ function initRect()
         team.base.towerRect = regions['curved']['team'][team.i]['tower']
         team.base.addGoldRect = regions['curved']['team'][team.i]['addGold']
         team.base.viewRect = regions['curved']['team'][team.i]['view']
+        team.base.shopRect = regions['curved']['team'][team.i]['shop']
     end
 
     for _, team in ipairs(all_teams) do
@@ -319,14 +320,25 @@ function createBuildingsForPlayers()
                     GetRectCenterY(player.laboratoryRect),
                     0
             )
+
+            if game_config.units.isHeroManualControl == false then
+                CreateUnit(
+                        player.id,
+                        FourCC(units_special.shop),
+                        GetRectCenterX(player.shopRect),
+                        GetRectCenterY(player.shopRect),
+                        0
+                )
+            end
+        end
+        if game_config.units.isHeroManualControl == true then
             CreateUnit(
-                    player.id,
+                    team.base.player,
                     FourCC(units_special.shop),
-                    GetRectCenterX(player.shopRect),
-                    GetRectCenterY(player.shopRect),
+                    GetRectCenterX(team.base.shopRect),
+                    GetRectCenterY(team.base.shopRect),
                     0
             )
-
         end
     end
 end
