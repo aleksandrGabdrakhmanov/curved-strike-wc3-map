@@ -306,13 +306,17 @@ function createBuildingsForPlayers()
 
             player.economy.mineTextTag = CreateTextTagUnitBJ(getMineTag(player), unit, 0, 10, 204, 204, 0, 0)
 
-            CreateUnit(
+            local main = CreateUnit(
                     player.id,
                     FourCC(units_special.main),
                     GetRectCenterX(player.mainRect),
                     GetRectCenterY(player.mainRect),
                     0
             )
+
+            if game_config.units.reroll == true then
+                UnitAddAbility(main, FourCC(abilities.reroll))
+            end
             CreateUnit(
                     player.id,
                     FourCC(units_special.laboratory),

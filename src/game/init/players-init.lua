@@ -213,18 +213,23 @@ function getRandomUnits(units)
     local groupedUnits = {}
     local randomUnits = {}
 
-    for _, unit in ipairs(units) do
-        if not groupedUnits[unit.position] then
-            groupedUnits[unit.position] = {}
+    if game_config.units.fullRandom == true then
+        for _ = 1, game_config.units.countUnitsInSet do
+            table.insert(randomUnits, units[GetRandomInt(1, #units)])
         end
-        if (unit.active == true) then
-            table.insert(groupedUnits[unit.position], unit)
+    else
+        for _, unit in ipairs(units) do
+            if not groupedUnits[unit.position] then
+                groupedUnits[unit.position] = {}
+            end
+            if (unit.active == true) then
+                table.insert(groupedUnits[unit.position], unit)
+            end
         end
-    end
-
-    for _, groupedUnit in ipairs(groupedUnits) do
-        local randomIndex = GetRandomInt(1, #groupedUnit)
-        table.insert(randomUnits, groupedUnit[randomIndex])
+        for _, groupedUnit in ipairs(groupedUnits) do
+            local randomIndex = GetRandomInt(1, #groupedUnit)
+            table.insert(randomUnits, groupedUnit[randomIndex])
+        end
     end
 
     return randomUnits

@@ -2316,3 +2316,21 @@ STRING 429
 Wall: Force
 }
 
+STRING 430
+// Abilities: A00G (Reroll), Name (Name)
+{
+Reroll
+}
+
+STRING 431
+// Abilities: A00G (Reroll), Tip (Tooltip - Normal)
+{
+Reroll
+}
+
+STRING 432
+// Abilities: A00G (Reroll), Ubertip (Tooltip - Normal - Extended)
+{
+Reroll
+}
+

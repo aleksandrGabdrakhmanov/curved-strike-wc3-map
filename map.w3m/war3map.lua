@@ -6122,7 +6122,10 @@ function initGameConfig()
             countForSelect = nil,
             heroCost = 500,
             heroStartLevel = nil,
-            multiplier = nil
+            multiplier = nil,
+            reroll = nil,
+            rerollEveryWave = nil,
+            countUnitsInSet = nil
         },
         spawnPolicy = {
             interval = nil,
@@ -6267,6 +6270,7 @@ function initGlobalVariables()
     }
     abilities = {
         mine = 'A000',
+        reroll = 'A00G',
         sell100 = 'A003',
         sell75 = 'A004',
         moveLarge = 'A007',
@@ -6604,13 +6608,17 @@ function createBuildingsForPlayers()
 
             player.economy.mineTextTag = CreateTextTagUnitBJ(getMineTag(player), unit, 0, 10, 204, 204, 0, 0)
 
-            CreateUnit(
+            local main = CreateUnit(
                     player.id,
                     FourCC(units_special.main),
                     GetRectCenterX(player.mainRect),
                     GetRectCenterY(player.mainRect),
                     0
             )
+
+            if game_config.units.reroll == true then
+                UnitAddAbility(main, FourCC(abilities.reroll))
+            end
             CreateUnit(
                     player.id,
                     FourCC(units_special.laboratory),
@@ -6863,18 +6871,23 @@ function getRandomUnits(units)
     local groupedUnits = {}
     local randomUnits = {}
 
-    for _, unit in ipairs(units) do
-        if not groupedUnits[unit.position] then
-            groupedUnits[unit.position] = {}
+    if game_config.units.fullRandom == true then
+        for _ = 1, game_config.units.countUnitsInSet do
+            table.insert(randomUnits, units[GetRandomInt(1, #units)])
         end
-        if (unit.active == true) then
-            table.insert(groupedUnits[unit.position], unit)
+    else
+        for _, unit in ipairs(units) do
+            if not groupedUnits[unit.position] then
+                groupedUnits[unit.position] = {}
+            end
+            if (unit.active == true) then
+                table.insert(groupedUnits[unit.position], unit)
+            end
         end
-    end
-
-    for _, groupedUnit in ipairs(groupedUnits) do
-        local randomIndex = GetRandomInt(1, #groupedUnit)
-        table.insert(randomUnits, groupedUnit[randomIndex])
+        for _, groupedUnit in ipairs(groupedUnits) do
+            local randomIndex = GetRandomInt(1, #groupedUnit)
+            table.insert(randomUnits, groupedUnit[randomIndex])
+        end
     end
 
     return randomUnits
@@ -7603,6 +7616,7 @@ function initTriggers()
     KodoTrigger()
     deadDetectTrigger()
     killTowerTrigger()
+    rerollTrigger()
     centerControlTrigger()
     tierDetectTrigger()
     lifetimeLimitTrigger()
@@ -7615,6 +7629,7 @@ function initTriggers()
     end
 end
 Debug.endFile()
+
 Debug.beginFile('move-trigger.lua')
 additionalDir = 500
 function moveTrigger()
@@ -7737,6 +7752,34 @@ function replaceGroupCell(group)
     DestroyGroup(group)
 end
 Debug.endFile()
+Debug.beginFile('reroll-trigger.lua')
+function rerollTrigger()
+    for _, team in ipairs(all_teams) do
+        for _, player in ipairs(team.players) do
+            local trig = CreateTrigger()
+            TriggerRegisterPlayerUnitEvent(trig, player.id, EVENT_PLAYER_UNIT_SPELL_EFFECT)
+            TriggerAddCondition(trig, Condition(function()
+                return GetSpellAbilityId() == FourCC(abilities.reroll)
+            end))
+            TriggerAddAction(trig, function()
+                reroll(player)
+            end)
+        end
+    end
+end
+function reroll(player)
+    for _, unit in ipairs(units_for_build) do
+        SetPlayerUnitAvailableBJ(FourCC(unit.id), FALSE, player.id)
+    end
+    local randomUnits = getRandomUnits(units_for_build)
+    table.remove(player.availableUnits)
+    for _, unit in ipairs(randomUnits) do
+        table.insert(player.availableUnits, unit)
+        SetPlayerUnitAvailableBJ(FourCC(unit.id), TRUE, player.id)
+    end
+end
+Debug.endFile()
+
 Debug.beginFile('sell-trigger.lua')
 function sellTrigger()
     for _, team in ipairs(all_teams) do
@@ -7800,6 +7843,9 @@ function spawnTrigger()
                     processGroupForSpawn(player)
                     player.spawnTimer = game_config.spawnPolicy.interval * #team.players + game_config.spawnPolicy.dif
                     replaceCell(player)
+                    if game_config.units.rerollEveryWave == true then
+                        reroll(player)
+                    end
                 end
                 player.spawnTimer = player.spawnTimer - 1
             end
@@ -7950,9 +7996,15 @@ function tierDetectTrigger()
             TriggerRegisterPlayerUnitEventSimple( trig, player.id, EVENT_PLAYER_UNIT_UPGRADE_FINISH )
             TriggerAddAction(trig, function()
                 if (GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.t2)) then
+                    if game_config.units.reroll == true then
+                        UnitAddAbility(GetTriggerUnit(), FourCC(abilities.reroll))
+                    end
                     player.tier = 'T2'
                 end
                 if (GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.t3)) then
+                    if game_config.units.reroll == true then
+                        UnitAddAbility(GetTriggerUnit(), FourCC(abilities.reroll))
+                    end
                     player.tier = 'T3'
                 end
 
@@ -7961,6 +8013,7 @@ function tierDetectTrigger()
     end
 end
 Debug.endFile()
+
 Debug.beginFile('gold-for-kill-trigger.lua')
 function goldForKillTrigger()
     if game_config.economy.goldForKill == 0 then
@@ -9298,6 +9351,60 @@ function initStartGameUI()
             step = 1,
             initConfigValue = function(self)
                 game_config.units.multiplier = self.value
+            end
+        },
+        {
+            page = page.UNITS,
+            type = elementType.CHECK_BOX,
+            text = 'Reroll button',
+            tooltip = "The ability to change the set of units for gold",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.units.reroll = self.value
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = true
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = true
+                }
+            }
+        },
+        {
+            page = page.UNITS,
+            type = elementType.CHECK_BOX,
+            text = 'Reroll every wave',
+            tooltip = "New set of units every wave",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.units.rerollEveryWave = self.value
+            end
+        },
+        {
+            page = page.UNITS,
+            type = elementType.CHECK_BOX,
+            text = 'Full random',
+            tooltip = "Players are given any random units regardless of Tier 1, Tier 2, or Tier 3.",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.units.fullRandom = self.value
+            end
+        },
+        {
+            page = page.UNITS,
+            type = elementType.SLIDER,
+            text = 'Units in each set',
+            tooltip = "Max count units in each set (for full random only)",
+            defValue = false,
+            defValue = 11,
+            max = 11,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.countUnitsInSet = self.value
             end
         },
         -- HEROES
