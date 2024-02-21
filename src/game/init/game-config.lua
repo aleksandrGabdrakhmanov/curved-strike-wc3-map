@@ -25,7 +25,10 @@ function initGameConfig()
             countForSelect = nil,
             heroCost = 500,
             heroStartLevel = nil,
-            multiplier = nil
+            multiplier = nil,
+            reroll = nil,
+            rerollEveryWave = nil,
+            countUnitsInSet = nil
         },
         spawnPolicy = {
             interval = nil,
@@ -170,6 +173,7 @@ function initGlobalVariables()
     }
     abilities = {
         mine = 'A000',
+        reroll = 'A00G',
         sell100 = 'A003',
         sell75 = 'A004',
         moveLarge = 'A007',

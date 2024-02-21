@@ -325,6 +325,60 @@ function initStartGameUI()
                 game_config.units.multiplier = self.value
             end
         },
+        {
+            page = page.UNITS,
+            type = elementType.CHECK_BOX,
+            text = 'Reroll button',
+            tooltip = "The ability to change the set of units for gold",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.units.reroll = self.value
+            end,
+            defByMode = {
+                {
+                    mode = mode.DIRECT_ADVANCED,
+                    value = true
+                },
+                {
+                    mode = mode.UNITED_ADVANCED,
+                    value = true
+                }
+            }
+        },
+        {
+            page = page.UNITS,
+            type = elementType.CHECK_BOX,
+            text = 'Reroll every wave',
+            tooltip = "New set of units every wave",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.units.rerollEveryWave = self.value
+            end
+        },
+        {
+            page = page.UNITS,
+            type = elementType.CHECK_BOX,
+            text = 'Full random',
+            tooltip = "Players are given any random units regardless of Tier 1, Tier 2, or Tier 3.",
+            defValue = false,
+            initConfigValue = function(self)
+                game_config.units.fullRandom = self.value
+            end
+        },
+        {
+            page = page.UNITS,
+            type = elementType.SLIDER,
+            text = 'Units in each set',
+            tooltip = "Max count units in each set (for full random only)",
+            defValue = false,
+            defValue = 11,
+            max = 11,
+            min = 1,
+            step = 1,
+            initConfigValue = function(self)
+                game_config.units.countUnitsInSet = self.value
+            end
+        },
         -- HEROES
         {
             page = page.HEROES,

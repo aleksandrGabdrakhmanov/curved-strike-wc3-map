@@ -10,6 +10,9 @@ function spawnTrigger()
                     processGroupForSpawn(player)
                     player.spawnTimer = game_config.spawnPolicy.interval * #team.players + game_config.spawnPolicy.dif
                     replaceCell(player)
+                    if game_config.units.rerollEveryWave == true then
+                        reroll(player)
+                    end
                 end
                 player.spawnTimer = player.spawnTimer - 1
             end
