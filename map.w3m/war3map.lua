@@ -7022,7 +7022,7 @@ function centerControlTrigger()
             local trgPlayer = GetOwningPlayer(unit)
             local isAddGold = false
             for _, player in ipairs(team.players) do
-                if (player.spawnPlayerId == trgPlayer) then
+                if (player.spawnPlayerId == trgPlayer or player.id == trgPlayer) then
                     isAddGold = true
                 end
             end
@@ -7043,6 +7043,7 @@ function centerControlTrigger()
     end
 end
 Debug.endFile()
+
 Debug.beginFile('damage-detect-trigger.lua')
 function damageDetectTrigger()
     local trig = CreateTrigger()
@@ -7058,7 +7059,7 @@ function damageDetectTrigger()
         local sourcePlayer = GetOwningPlayer(source)
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                if sourcePlayer == player.spawnPlayerId then
+                if sourcePlayer == player.spawnPlayerId or sourcePlayer == player.id then
                     if GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.tower[1]) or GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.base[1])
                     or GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.tower[2]) or GetUnitTypeId(GetTriggerUnit()) == FourCC(units_special.base[2]) then
                         player.damageToTowerBase = player.damageToTowerBase + GetEventDamage()
@@ -7096,7 +7097,7 @@ function deadDetectTrigger()
         local sourcePlayer = GetOwningPlayer(source)
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                if sourcePlayer == player.spawnPlayerId then
+                if sourcePlayer == player.spawnPlayerId or sourcePlayer == player.id then
                     player.totalKills = math.floor(player.totalKills + 1)
                     if IsUnitType(GetDyingUnit(), UNIT_TYPE_SUMMONED) then
                         player.totalSummonKills = player.totalSummonKills + 1
@@ -7517,7 +7518,7 @@ function killTowerTrigger()
                     local killingPlayer = GetOwningPlayer(unit)
                     for _, otherTeam in ipairs(all_teams) do
                         for _, player in ipairs(otherTeam.players) do
-                            if player.spawnPlayerId == killingPlayer then
+                            if player.spawnPlayerId == killingPlayer or player.id == killingPlayer then
                                 for _, player in ipairs(otherTeam.players) do
                                     DisplayTextToPlayer(player.id, 100, 200, '+' .. game_config.economy.goldByTower .. ' gold for killing a tower. ')
                                     addGold(player, game_config.economy.goldByTower)
@@ -8031,7 +8032,7 @@ function goldForKillTrigger()
             local sourcePlayer = GetOwningPlayer(killerUnit)
             for _, team in ipairs(all_teams) do
                 for _, player in ipairs(team.players) do
-                    if sourcePlayer == player.spawnPlayerId then
+                    if sourcePlayer == player.spawnPlayerId or sourcePlayer == player.id then
                         player.economy.totalGoldForKills = player.economy.totalGoldForKills + gold
                         addGold(player, gold)
                         return
@@ -8070,6 +8071,7 @@ function getBuildingCost(id)
     return 0
 end
 Debug.endFile()
+
 Debug.beginFile('kodo-trigger.lua')
 function KodoTrigger()
     local trig = CreateTrigger()
@@ -8280,7 +8282,7 @@ end
 function isPlayerAlly(player, checkPlayer)
     for _, team in ipairs(all_teams) do
         for _, p in ipairs(team.players) do
-            if p.spawnPlayerId == player then
+            if p.spawnPlayerId == player or p.id == player then
                 for _, spawnP in ipairs(getAllSpawnPlayers(team)) do
                     if spawnP == checkPlayer then
                         return true
@@ -8295,7 +8297,7 @@ end
 function isPlayerEnemy(player, checkPlayer)
     for _, team in ipairs(all_teams) do
         for _, p in ipairs(team.players) do
-            if p.spawnPlayerId == player then
+            if p.spawnPlayerId == player or s.id == player then
                 for _, teamOther in ipairs(all_teams) do
                     if (teamOther ~= team) then
                         for _, spawnP in ipairs(getAllSpawnPlayers(teamOther)) do
@@ -8311,6 +8313,7 @@ function isPlayerEnemy(player, checkPlayer)
     return false
 end
 Debug.endFile()
+
 Debug.beginFile('spell-finish-trigger.lua')
 function spellFinishTrigger()
     local trig = CreateTrigger()

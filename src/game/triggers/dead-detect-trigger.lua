@@ -13,7 +13,7 @@ function deadDetectTrigger()
         local sourcePlayer = GetOwningPlayer(source)
         for _, team in ipairs(all_teams) do
             for _, player in ipairs(team.players) do
-                if sourcePlayer == player.spawnPlayerId then
+                if sourcePlayer == player.spawnPlayerId or sourcePlayer == player.id then
                     player.totalKills = math.floor(player.totalKills + 1)
                     if IsUnitType(GetDyingUnit(), UNIT_TYPE_SUMMONED) then
                         player.totalSummonKills = player.totalSummonKills + 1
