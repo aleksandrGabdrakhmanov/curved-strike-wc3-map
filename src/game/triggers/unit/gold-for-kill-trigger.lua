@@ -15,7 +15,7 @@ function goldForKillTrigger()
             local sourcePlayer = GetOwningPlayer(killerUnit)
             for _, team in ipairs(all_teams) do
                 for _, player in ipairs(team.players) do
-                    if sourcePlayer == player.spawnPlayerId then
+                    if sourcePlayer == player.spawnPlayerId or sourcePlayer == player.id then
                         player.economy.totalGoldForKills = player.economy.totalGoldForKills + gold
                         addGold(player, gold)
                         return

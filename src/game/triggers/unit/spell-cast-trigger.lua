@@ -195,7 +195,7 @@ end
 function isPlayerAlly(player, checkPlayer)
     for _, team in ipairs(all_teams) do
         for _, p in ipairs(team.players) do
-            if p.spawnPlayerId == player then
+            if p.spawnPlayerId == player or p.id == player then
                 for _, spawnP in ipairs(getAllSpawnPlayers(team)) do
                     if spawnP == checkPlayer then
                         return true
@@ -210,7 +210,7 @@ end
 function isPlayerEnemy(player, checkPlayer)
     for _, team in ipairs(all_teams) do
         for _, p in ipairs(team.players) do
-            if p.spawnPlayerId == player then
+            if p.spawnPlayerId == player or s.id == player then
                 for _, teamOther in ipairs(all_teams) do
                     if (teamOther ~= team) then
                         for _, spawnP in ipairs(getAllSpawnPlayers(teamOther)) do

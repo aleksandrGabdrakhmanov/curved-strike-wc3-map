@@ -8,7 +8,7 @@ function centerControlTrigger()
             local trgPlayer = GetOwningPlayer(unit)
             local isAddGold = false
             for _, player in ipairs(team.players) do
-                if (player.spawnPlayerId == trgPlayer) then
+                if (player.spawnPlayerId == trgPlayer or player.id == trgPlayer) then
                     isAddGold = true
                 end
             end

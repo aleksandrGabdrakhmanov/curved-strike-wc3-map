@@ -13,7 +13,7 @@ function killTowerTrigger()
                     local killingPlayer = GetOwningPlayer(unit)
                     for _, otherTeam in ipairs(all_teams) do
                         for _, player in ipairs(otherTeam.players) do
-                            if player.spawnPlayerId == killingPlayer then
+                            if player.spawnPlayerId == killingPlayer or player.id == killingPlayer then
                                 for _, player in ipairs(otherTeam.players) do
                                     DisplayTextToPlayer(player.id, 100, 200, '+' .. game_config.economy.goldByTower .. ' gold for killing a tower. ')
                                     addGold(player, game_config.economy.goldByTower)
